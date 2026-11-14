@@ -2136,10 +2136,52 @@ html.kiosk-on body{background:#0e0f12}
 .ki-exit.hold::after{transform:scaleX(1);transition:transform 1.5s linear}
 .ki-exit span{position:relative}
 .ki-kbd{position:absolute;left:-9999px}
+.ki-new{display:grid;gap:10px;justify-items:center;text-align:center;border:1px dashed #3a3c44;border-radius:16px;padding:16px}
+.ki-new>p{margin:0;color:var(--ki-dim)}.ki-new>p b{color:#fff}
+.ki-new-b{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%}
+.ki-new-b button{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:10px 14px;border-radius:14px;border:2px solid #3a3c44;background:#22242a;color:#fff;font:800 1.15rem/1.1 var(--display);text-transform:uppercase;cursor:pointer;touch-action:manipulation}
+.ki-new-b button span{font-size:1.3rem}
+.ki-new-b button:active{border-color:var(--red);background:#3a1517}
+.ki-alt{width:100%;min-height:58px;border:2px solid #3a3c44;border-radius:14px;background:transparent;color:#fff;font:800 1.2rem/1 var(--display);text-transform:uppercase;cursor:pointer}
+.ki-who{margin:0;font:700 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ff5a60}
+.ki-stars{display:flex;gap:clamp(4px,1.5vw,12px);justify-content:center}
+.ki-stars button{width:clamp(56px,15vw,84px);height:clamp(56px,15vw,84px);border:0;background:none;color:#3a3c44;cursor:pointer;touch-action:manipulation;transition:transform .1s;padding:2px}
+.ki-stars svg{width:100%;height:100%;display:block;fill:currentColor;stroke:currentColor;stroke-width:1;stroke-linejoin:round}
+.ki-stars button.on{color:#ffc53d}
+.ki-stars button:active{transform:scale(.9)}
+.ki-star-lbl{margin:-6px 0 0;min-height:1.3em;font:800 1.15rem/1.2 var(--display);text-transform:uppercase;color:#fff}
+.ki-note{display:grid;gap:6px;width:100%;text-align:left;font-weight:700;color:#fff}
+.ki-note small,.ki-in small{font-weight:500;color:var(--ki-dim)}
+.ki-note textarea,.ki-in input,.ki-racer input{width:100%;border:2px solid #3a3c44;background:#101116;color:#fff;border-radius:12px;padding:12px 14px;font:500 1.1rem/1.3 var(--body);resize:vertical}
+.ki-note textarea:focus,.ki-in input:focus,.ki-racer input:focus{outline:none;border-color:#fff}
+.ki-rate-foot{display:flex;justify-content:flex-end;width:100%;margin-top:-4px}
+.ki-skip{background:none;border:2px solid #3a3c44;color:var(--ki-dim);border-radius:12px;min-height:50px;padding:10px 20px;font:800 1.05rem/1 var(--display);text-transform:uppercase;cursor:pointer}
+.ki-skip:active{border-color:#fff;color:#fff}
+.ki-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%;text-align:left}
+.ki-form .full{grid-column:1/-1}
+.ki-in{display:grid;gap:6px;font-weight:700;color:#fff;min-width:0}
+.ki-hint{align-self:end;color:var(--ki-dim);font-size:.85rem;padding-bottom:12px}
+.ki-racers{border:0;margin:0;padding:0}.ki-racers legend{padding:0;margin-bottom:6px}
+.ki-racers>div{display:grid;gap:8px}
+.ki-racer{display:grid;grid-template-columns:minmax(0,1fr) 90px;gap:8px}
+.ki-add{justify-self:start;margin-top:8px;background:none;border:0;color:#ff7a7f;font:700 1rem/1 var(--body);cursor:pointer;padding:8px 0}
+.ki-counts{display:flex;flex-wrap:wrap;justify-content:space-around;gap:12px;padding:8px 0;border-block:1px solid var(--ki-line)}
+.ki-chk{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:2px solid #3a3c44;border-radius:12px;cursor:pointer;color:var(--ki-dim);font-size:.95rem}
+.ki-chk b{display:block;color:#fff;font-size:1.05rem}
+.ki-chk input{width:26px;height:26px;flex:none;margin:0;accent-color:var(--red)}
+.ki-chk:has(input:checked){border-color:var(--red);background:#2a1416}
+.ki-form .ki-msg{margin:0;text-align:center}
+.ki-guest{flex-direction:column;align-items:flex-start;justify-content:center}
+.ki-guest small{display:block;font:600 .9rem/1.2 var(--body);text-transform:none;color:var(--ki-dim);margin-top:4px}
+@media (max-width:560px){.ki-form{grid-template-columns:minmax(0,1fr)}.ki-new-b{grid-template-columns:minmax(0,1fr)}.ki-hint{padding:0}}
 @media (prefers-reduced-motion:reduce){.ki-dots.bad{animation:none}.ki-exit.hold::after{transition:none}}
 /* Workshop sign-in: kiosk link and headcount by event */
 .ws-kiosk{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#111216;color:#fff;border-radius:10px;padding:12px 14px;margin-bottom:14px}
-.ws-kiosk p{margin:0;font-size:.9rem;color:#c9cbd1;max-width:46ch}
+.ws-kiosk p{margin:0;font-size:.9rem;color:#c9cbd1;max-width:62ch}
+.ws-tag.guest{background:#fff4d6;color:#6b4b00}.ws-tag.out{background:#eef0f2;color:#4a4d54}
+.ws-contact{display:block;margin-top:2px}
+.ws-rev{display:block;margin-top:4px;font-size:.88rem;color:#2a2d33}.ws-rev b{color:#e0a100;letter-spacing:1px}.ws-rev b i{font-style:normal;color:#d5d7db}
+.ws-sum{margin:10px 0 0;font-size:.92rem;color:#4a4d55}.ws-sum b{color:#16181d}
 .ws-kiosk a{background:var(--red);color:#fff;border-radius:8px;padding:10px 14px;font:700 .92rem/1 var(--body);text-decoration:none;white-space:nowrap}
 .ws-tag{display:inline-block;font:700 .68rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;background:#111216;color:#fff;border-radius:4px;padding:3px 5px;margin-left:6px;vertical-align:2px}
 .ws-hc{width:100%;border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums}
@@ -6241,11 +6283,12 @@ window.FRB=(function(){
   /* ---------- Workshop check-in kiosk (#kiosk) ----------
      Runs on a tablet signed in as workshop staff. Families type their 4-digit family code, tap the kids who are here,
      and the screen goes back to the keypad. Each event day starts at zero; headcounts live in Workshop sign-in. */
-  var KI={code:"",step:"pad",fam:null,sel:{},adults:1,busy:false,lockUntil:0,idle:null,back:null,lock:null,count:null};
+  var KI={code:"",step:"pad",fam:null,sel:{},adults:1,busy:false,lockUntil:0,idle:null,back:null,lock:null,count:null,out:null,rate:0,guests:null,g:null};
   function kiEvent(){var d=todayISO(),ev=FR.EVENTS.filter(function(e){return e.d<=d&&(e.e||e.d)>=d});
     return ev.filter(function(e){return e.k==="workshop"})[0]||ev[0]||null}
-  function kiReset(){clearTimeout(KI.idle);clearTimeout(KI.back);KI.code="";KI.step="pad";KI.fam=null;KI.sel={};KI.adults=1;KI.busy=false;kiDraw()}
-  function kiIdle(){clearTimeout(KI.idle);KI.idle=setTimeout(function(){if(hashBase()==="kiosk"&&KI.step!=="pad")kiReset()},60000)}
+  function kiReset(){clearTimeout(KI.idle);clearTimeout(KI.back);KI.code="";KI.step="pad";KI.fam=null;KI.sel={};KI.adults=1;KI.busy=false;KI.out=null;KI.rate=0;KI.guests=null;KI.g=null;kiDraw()}
+  /* idle: back to the keypad after a minute. Someone who walked away from the rating screen is still checked out. */
+  function kiIdle(){clearTimeout(KI.idle);KI.idle=setTimeout(function(){if(hashBase()!=="kiosk"||KI.step==="pad")return;if(KI.step==="rate"&&!KI.busy)kiCheckout(true);else kiReset()},KI.step==="guest"||KI.step==="account"?120000:60000)}
   function kiWake(){try{if(navigator.wakeLock&&document.visibilityState==="visible")navigator.wakeLock.request("screen").then(function(l){KI.lock=l},function(){})}catch(e){}}
   function kiCount(){db.from("workshop_signins").select("kids,volunteers").eq("session_date",todayISO()).then(function(r){if(r.error)return;
     var k=0,a=0;(r.data||[]).forEach(function(x){k+=x.kids;a+=x.volunteers});KI.count={f:(r.data||[]).length,k:k,a:a};var el=$("#kiCount");if(el)el.innerHTML=kiCountHTML()})}
@@ -6264,10 +6307,55 @@ window.FRB=(function(){
         '<p class="ki-msg'+(KI.busy?' ok':'')+'" id="kiMsg" role="status">'+(locked?'Too many tries. Please wait a couple of minutes or ask a staff member.':KI.busy?'Checking…':'')+'</p>'+
         '<label class="ki-kbd" for="kiKbd">Family code</label><input class="ki-kbd" id="kiKbd" inputmode="numeric" autocomplete="off" maxlength="4" tabindex="-1">'+
         '<div class="ki-pad" role="group" aria-label="Number pad">'+["1","2","3","4","5","6","7","8","9"].map(function(n){return '<button type="button" data-kd="'+n+'"'+(locked||KI.busy?' disabled':'')+'>'+n+'</button>'}).join("")+
-        '<button type="button" class="ki-fn" data-kd="clear"'+(locked||KI.busy?' disabled':'')+'>Clear</button><button type="button" data-kd="0"'+(locked||KI.busy?' disabled':'')+'>0</button><button type="button" class="ki-fn" data-kd="back" aria-label="Delete last digit"'+(locked||KI.busy?' disabled':'')+'>⌫ Back</button></div></section>'}
+        '<button type="button" class="ki-fn" data-kd="clear"'+(locked||KI.busy?' disabled':'')+'>Clear</button><button type="button" data-kd="0"'+(locked||KI.busy?' disabled':'')+'>0</button><button type="button" class="ki-fn" data-kd="back" aria-label="Delete last digit"'+(locked||KI.busy?' disabled':'')+'>⌫ Back</button></div></section>'+
+        '<section class="ki-new" aria-label="Guests and new families"><p><b>No code?</b> New here or just visiting today.</p><div class="ki-new-b"><button type="button" data-kgo="guest"><span aria-hidden="true">👋</span>Guest sign in</button><button type="button" data-kgo="account"><span aria-hidden="true">＋</span>Create a family account</button></div>'+
+        '<button type="button" class="ki-back" data-kgo="glist">Guest checking out? Tap here</button></section>'}
+    else if(KI.step==="back"){var at=f.at?new Date(f.at).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"}):"";
+      body='<section class="ki-card" aria-labelledby="kiH"><h2 id="kiH">Welcome back, '+esc(f.family)+' family!</h2><p>You checked in'+(at?' at '+esc(at):'')+' with '+esc(kiNames(f.already))+'.</p>'+
+        '<button type="button" class="ki-go" id="kiOut">Check out</button><button type="button" class="ki-alt" id="kiUpd">Change who’s here</button>'+
+        '<button type="button" class="ki-back" id="kiBack">Not the '+esc(f.family)+' family? Start over</button></section>'}
+    else if(KI.step==="rate"){
+      body='<section class="ki-card ki-rate" aria-labelledby="kiH"><p class="ki-who">Checking out · '+esc(KI.out.name)+'</p><h2 id="kiH">How was your experience today?</h2>'+
+        '<div class="ki-stars" role="radiogroup" aria-label="Rating, 1 to 5 stars">'+[1,2,3,4,5].map(function(n){return '<button type="button" role="radio" data-star="'+n+'" aria-checked="'+(KI.rate===n)+'" aria-label="'+n+' star'+(n===1?'':'s')+'" class="'+(n<=KI.rate?'on':'')+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6 6.5.8-4.8 4.5 1.2 6.5L12 17.3l-5.8 3.1 1.2-6.5L2.6 9.4l6.5-.8z"/></svg></button>'}).join("")+'</div>'+
+        '<p class="ki-star-lbl" id="kiStarL" aria-live="polite">'+(["Tap a star","Not great","Could be better","Good","Great","Amazing!"][KI.rate])+'</p>'+
+        '<label class="ki-note" for="kiNote"><span>Leave a note <small>(optional)</small></span><textarea id="kiNote" maxlength="600" rows="3" placeholder="What did you enjoy? What could we do better?"></textarea></label>'+
+        '<p class="ki-msg" id="kiMsg" role="alert"></p>'+
+        '<button type="button" class="ki-go" id="kiRate"'+(KI.rate?'':' disabled')+'>'+(KI.rate?'Send and check out':'Tap a star first')+'</button>'+
+        '<div class="ki-rate-foot"><button type="button" class="ki-skip" id="kiSkip">Skip <span aria-hidden="true">›</span></button></div></section>'}
+    else if(KI.step==="bye"){
+      body='<section class="ki-card ki-done" aria-labelledby="kiH" role="status"><div class="ki-flag" aria-hidden="true">✓</div><h2 id="kiH">You’re checked out</h2><p class="ki-names">Have a great day!</p>'+
+        '<p>'+(KI.rate?'Thanks for the feedback. ':'')+'See you next time at Flint Racing.</p><button type="button" class="ki-back" id="kiBack">Back to the start</button></section>'}
+    else if(KI.step==="guest"||KI.step==="account"){var acc=KI.step==="account",g=KI.g||{};
+      body='<section class="ki-card ki-formcard" aria-labelledby="kiH"><h2 id="kiH">'+(acc?'Create a family account':'Guest sign in')+'</h2>'+
+        '<p>'+(acc?'Set it up once. After staff approve it, you’ll get a 4-digit code for quick check-in.':'Visiting today? Leave your name and a way to reach you.')+'</p>'+
+        '<form class="ki-form" id="kiForm" novalidate autocomplete="off">'+
+        '<label class="ki-in full">'+(acc?'Parent or guardian name':'Your name')+'<input type="text" name="name" maxlength="80" autocomplete="off" value="'+esc(g.name||"")+'" required></label>'+
+        '<label class="ki-in"><span>Email'+(acc?'':' <small>(or phone)</small>')+'</span><input type="email" name="email" maxlength="160" inputmode="email" autocapitalize="none" autocomplete="off" value="'+esc(g.email||"")+'"></label>'+
+        '<label class="ki-in"><span>Phone <small>(optional'+(acc?'':' if you gave an email')+')</small></span><input type="tel" name="phone" maxlength="40" inputmode="tel" autocomplete="off" value="'+esc(g.phone||"")+'"></label>'+
+        (acc?'<fieldset class="ki-in full ki-racers"><legend>Your racers</legend><div id="kiRacers">'+kiRacerRow()+'</div><button type="button" class="ki-add" id="kiAddKid">+ Add another racer</button></fieldset>'+
+          '<label class="ki-in">Choose a username<input type="text" name="user" maxlength="24" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>'+
+          '<span class="ki-hint">3 to 24 letters or numbers. You’ll use it with your passcode to sign in.</span>'+
+          '<label class="ki-in"><span>Passcode <small>(6+ characters)</small></span><input type="password" name="pass" maxlength="64" autocomplete="new-password"></label>'+
+          '<label class="ki-in">Type it again<input type="password" name="pass2" maxlength="64" autocomplete="new-password"></label>':'')+
+        '<div class="ki-counts full">'+(acc?'':'<div class="ki-adults"><span id="kiKdL">Kids with you</span><div class="ki-step" role="group" aria-labelledby="kiKdL"><button type="button" data-gs="kids" data-d="-1" aria-label="One fewer kid">−</button><b data-gv="kids" aria-live="polite">1</b><button type="button" data-gs="kids" data-d="1" aria-label="One more kid">+</button></div></div>')+
+          '<div class="ki-adults"><span id="kiGaL">Grown-ups with you</span><div class="ki-step" role="group" aria-labelledby="kiGaL"><button type="button" data-gs="adults" data-d="-1" aria-label="One fewer grown-up">−</button><b data-gv="adults" aria-live="polite">1</b><button type="button" data-gs="adults" data-d="1" aria-label="One more grown-up">+</button></div></div></div>'+
+        '<label class="ki-chk full"><input type="checkbox" name="updates"'+(g.updates?' checked':'')+'><span><b>Join our mailing list</b>Workshop dates, fun runs and race day news by email. Unsubscribe any time.</span></label>'+
+        '<p class="ki-msg full" id="kiMsg" role="alert"></p>'+
+        '<button type="submit" class="ki-go full" id="kiSend">'+(acc?'Create account and check in':'Sign in as a guest')+'</button></form>'+
+        (acc?'<button type="button" class="ki-back" data-kgo="guest">Just visiting? Sign in as a guest instead</button>':'<button type="button" class="ki-back" data-kgo="account">Coming back? Create a family account instead</button>')+
+        '<button type="button" class="ki-back" id="kiBack">Cancel</button></section>'}
+    else if(KI.step==="gdone"){var gd=KI.g||{};
+      body='<section class="ki-card ki-done" aria-labelledby="kiH" role="status"><div class="ki-flag" aria-hidden="true">✓</div><h2 id="kiH">Welcome, '+esc(String(gd.name||"").split(" ")[0])+'!</h2>'+
+        '<p>You’re signed in for today'+(gd.kids?' with '+gd.kids+' kid'+(gd.kids===1?'':'s'):'')+'. When you leave, tap <b>Guest checking out?</b> on the start screen.</p>'+
+        (gd.account?'<p>Your family account <b>@'+esc(gd.user)+'</b> is waiting for staff review. Once it’s approved, your 4-digit check-in code will be on your family dashboard.</p>':'')+
+        (gd.updates?'<p>You’re on our mailing list.</p>':'')+'<button type="button" class="ki-back" id="kiBack">Done · next family</button></section>'}
+    else if(KI.step==="glist"){var GL=KI.guests;
+      body='<section class="ki-card" aria-labelledby="kiH"><h2 id="kiH">Guest check out</h2>'+
+        (GL==null?'<p>Loading today’s guests…</p>':GL.length?'<p>Tap your name.</p><div class="ki-kids">'+GL.map(function(x,i){return '<button type="button" class="ki-kid ki-guest" data-kg="'+i+'"><span>'+esc(x.name)+'<small>'+x.kids+' kid'+(x.kids===1?'':'s')+' · '+x.adults+' grown-up'+(x.adults===1?'':'s')+'</small></span></button>'}).join("")+'</div>':'<p>No guests are signed in right now. Families with a code can check out by typing it on the start screen.</p>')+
+        '<button type="button" class="ki-back" id="kiBack">Back to the start</button></section>'}
     else if(KI.step==="pick"){var kids=f.kids||[],n=kids.filter(function(k){return KI.sel[k]}).length,again=(f.already||[]).length>0;
       body='<section class="ki-card" aria-labelledby="kiH"><h2 id="kiH">Hi, '+esc(f.family)+' family!</h2>'+
-        (kids.length?'<p>'+(again?'You already checked in today. Change who’s here and tap Update.':'Who’s here today? Tap each racer.')+'</p>'+
+        (kids.length?'<p>'+(again?'You’re checked in today. Change who’s here and tap Update.':'Who’s here today? Tap each racer.')+'</p>'+
           '<div class="ki-kids">'+kids.map(function(k,i){return '<button type="button" class="ki-kid" data-kk="'+i+'" aria-pressed="'+(!!KI.sel[k])+'"><i aria-hidden="true"></i>'+esc(k)+'</button>'}).join("")+'</div>'+
           '<div class="ki-adults"><span id="kiAdL">Grown-ups with you</span><div class="ki-step" role="group" aria-labelledby="kiAdL"><button type="button" data-ka="-1" aria-label="One fewer grown-up">−</button><b id="kiAd" aria-live="polite">'+KI.adults+'</b><button type="button" data-ka="1" aria-label="One more grown-up">+</button></div></div>'+
           '<button type="button" class="ki-go" id="kiGo"'+(n&&!KI.busy?'':' disabled')+'>'+(KI.busy?'Checking in…':n?(again?'Update: ':'Check in ')+n+' racer'+(n===1?'':'s'):'Tap a racer first')+'</button>'
@@ -6282,6 +6370,19 @@ window.FRB=(function(){
     $$("[data-ka]",box).forEach(function(b){b.onclick=function(){KI.adults=Math.max(0,Math.min(10,KI.adults+(+b.getAttribute("data-ka"))));kiIdle();kiDraw()}});
     var go=$("#kiGo");if(go)go.onclick=kiSubmit;
     var bk=$("#kiBack");if(bk)bk.onclick=kiReset;
+    $$("[data-kgo]",box).forEach(function(b){b.onclick=function(){var to=b.getAttribute("data-kgo"),fm=$("#kiForm");
+      if(fm)KI.g={name:fm.elements.name.value,email:fm.elements.email.value,phone:fm.elements.phone.value,updates:fm.elements.updates.checked};
+      KI.step=to;if(to==="glist"){KI.guests=null;db.rpc("kiosk_guests_today").then(function(r){KI.guests=r.error?[]:(r.data||[]);if(KI.step==="glist")kiDraw()},function(){KI.guests=[];if(KI.step==="glist")kiDraw()})}
+      kiIdle();kiDraw();var first=$("#kiForm input");if(first)first.focus()}});
+    if(KI.step==="back"){$("#kiOut").onclick=function(){KI.out={code:f.code,name:f.family+" family"};KI.rate=0;KI.step="rate";kiIdle();kiDraw()};
+      $("#kiUpd").onclick=function(){KI.step="pick";kiIdle();kiDraw()}}
+    $$("[data-kg]",box).forEach(function(b){b.onclick=function(){var x=KI.guests[+b.getAttribute("data-kg")];KI.out={id:x.id,name:x.name};KI.rate=0;KI.step="rate";kiIdle();kiDraw()}});
+    if(KI.step==="rate"){var stars=$$("[data-star]",box),lbl=$("#kiStarL"),send=$("#kiRate");
+      stars.forEach(function(b){b.onclick=function(){KI.rate=+b.getAttribute("data-star");kiIdle();
+        stars.forEach(function(x){var n=+x.getAttribute("data-star");x.classList.toggle("on",n<=KI.rate);x.setAttribute("aria-checked",String(n===KI.rate))});
+        lbl.textContent=["Tap a star","Not great","Could be better","Good","Great","Amazing!"][KI.rate];send.disabled=false;send.textContent="Send and check out"}});
+      $("#kiNote").oninput=kiIdle;send.onclick=function(){kiCheckout(false)};$("#kiSkip").onclick=function(){kiCheckout(true)}}
+    if(KI.step==="guest"||KI.step==="account")kiBindForm(box);
     var ex=$("#kiExit"),ht=null;
     ex.onpointerdown=function(e){ex.classList.add("hold");ht=setTimeout(function(){location.hash="#workshop-signin"},1500)};
     ex.onpointerup=ex.onpointerleave=ex.onpointercancel=function(){ex.classList.remove("hold");clearTimeout(ht)};
@@ -6298,12 +6399,45 @@ window.FRB=(function(){
       if(!x.ok){if(x.locked){KI.lockUntil=Date.now()+120000;setTimeout(function(){if(KI.step==="pad")kiDraw()},120500);kiBad("Too many tries. Please wait a couple of minutes or ask a staff member.")}
         else kiBad("That code didn’t match. Try again.");return}
       KI.busy=false;KI.fam={code:code,family:x.family||"",kids:(x.kids||[]).filter(Boolean),already:x.already||[]};KI.sel={};
-      (x.already||[]).forEach(function(k){KI.sel[k]=true});KI.adults=x.adults==null?1:Math.max(0,Math.min(10,+x.adults));
-      KI.step="pick";kiIdle();kiDraw()},function(){kiBad("No connection. Check the Wi-Fi and try again.")})}
+      (x.already||[]).forEach(function(k){KI.sel[k]=true});KI.adults=x.adults==null?1:Math.max(0,Math.min(10,+x.adults));KI.fam.at=x.at;
+      KI.step=(x.already||[]).length&&!x.out?"back":"pick";kiIdle();kiDraw()},function(){kiBad("No connection. Check the Wi-Fi and try again.")})}
   function kiSubmit(){var f=KI.fam,names=f.kids.filter(function(k){return KI.sel[k]});if(!names.length||KI.busy)return;KI.busy=true;kiDraw();var ev=kiEvent();
     db.rpc("kiosk_checkin",{p_code:f.code,p_event:ev&&ev.id&&/^[0-9a-f-]{36}$/.test(ev.id)?ev.id:null,p_kids:names,p_adults:KI.adults}).then(function(r){KI.busy=false;
       if(r.error){toast("Couldn’t check in: "+r.error.message);kiDraw();return}
       f.done=names;KI.step="done";clearTimeout(KI.idle);kiDraw();kiCount();KI.back=setTimeout(function(){if(KI.step==="done")kiReset()},6000)},function(){KI.busy=false;toast("No connection. Check the Wi-Fi and try again.");kiDraw()})}
+  function kiRacerRow(){return '<div class="ki-racer"><input type="text" maxlength="40" placeholder="Racer’s first and last name" aria-label="Racer’s name" autocomplete="off"><input type="number" min="3" max="25" inputmode="numeric" placeholder="Age" aria-label="Racer’s age"></div>'}
+  function kiCheckout(skip){if(KI.busy||!KI.out)return;KI.busy=true;var note=skip?"":(($("#kiNote")||{}).value||"").trim(),rate=skip?0:KI.rate,b=$("#kiRate"),sk=$("#kiSkip");if(b)b.disabled=true;if(sk)sk.disabled=true;
+    db.rpc("kiosk_checkout",{p_code:KI.out.code||null,p_id:KI.out.id||null,p_rating:rate||null,p_note:note||null}).then(function(r){KI.busy=false;
+      if(r.error){var m=$("#kiMsg");if(m)m.textContent="Couldn’t check out: "+r.error.message;if(b)b.disabled=!KI.rate;if(sk)sk.disabled=false;return}
+      if(skip)KI.rate=0;KI.step="bye";clearTimeout(KI.idle);kiDraw();kiCount();clearTimeout(KI.back);KI.back=setTimeout(function(){if(KI.step==="bye")kiReset()},8000)},
+      function(){KI.busy=false;var m=$("#kiMsg");if(m)m.textContent="No connection. Check the Wi-Fi and try again.";if(b)b.disabled=!KI.rate;if(sk)sk.disabled=false})}
+  function kiBindForm(box){var fm=$("#kiForm",box),acc=KI.step==="account",cnt={kids:1,adults:1},msg=$("#kiMsg",box);
+    fm.addEventListener("input",kiIdle);
+    $$("[data-gs]",box).forEach(function(b){b.onclick=function(){var k=b.getAttribute("data-gs");cnt[k]=Math.max(k==="adults"?0:0,Math.min(k==="kids"?20:10,cnt[k]+(+b.getAttribute("data-d"))));$('[data-gv="'+k+'"]',box).textContent=cnt[k];kiIdle()}});
+    var add=$("#kiAddKid",box);if(add)add.onclick=function(){var w=$("#kiRacers",box);if(w.children.length>=8)return;w.insertAdjacentHTML("beforeend",kiRacerRow());w.lastChild.querySelector("input").focus();if(w.children.length>=8)add.hidden=true;kiIdle()};
+    fm.onsubmit=function(e){e.preventDefault();if(KI.busy)return;var E=fm.elements,v=function(n){return E[n].value.trim()},name=v("name").replace(/\s+/g," "),email=v("email"),phone=v("phone"),upd=E.updates.checked,err="";
+      var kids=acc?$$(".ki-racer",fm).map(function(r){var i=$$("input",r);return{name:i[0].value.trim(),age:i[1].value.trim()}}).filter(function(k){return k.name}):[];
+      if(name.length<2)err=acc?"Add the parent or guardian’s name.":"Add your name.";
+      else if(email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))err="That email doesn’t look right.";
+      else if(acc&&!email)err="Add an email so we can reach you about your account.";
+      else if(!acc&&!email&&phone.replace(/\D/g,"").length<7)err="Add an email or a phone number.";
+      else if(upd&&!email)err="Add your email to join the mailing list.";
+      else if(acc&&!kids.length)err="Add at least one racer.";
+      else if(acc&&!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(v("user").toLowerCase()))err="Choose a username: 3 to 24 letters or numbers.";
+      else if(acc&&E.pass.value.length<6)err="Your passcode needs at least 6 characters.";
+      else if(acc&&E.pass.value!==E.pass2.value)err="The two passcodes don’t match.";
+      if(err){msg.textContent=err;return}
+      msg.textContent="";KI.busy=true;var btn=$("#kiSend",box);btn.disabled=true;btn.textContent=acc?"Creating your account…":"Signing you in…";
+      var ev=kiEvent(),evId=ev&&ev.id&&/^[0-9a-f-]{36}$/.test(ev.id)?ev.id:null,user=acc?v("user").toLowerCase():"";
+      var fail=function(m){KI.busy=false;btn.disabled=false;btn.textContent=acc?"Create account and check in":"Sign in as a guest";msg.textContent=m};
+      var guest=function(){return db.rpc("kiosk_guest_signin",{p_name:name,p_email:email,p_phone:phone,p_kids:acc?kids.length:cnt.kids,p_adults:cnt.adults,p_event:evId,p_updates:upd,p_account:acc,
+          p_note:acc?"New family account @"+user+" · "+kids.map(function(k){return k.name+(k.age?" ("+k.age+")":"")}).join(", "):null}).then(function(r){
+        if(r.error){fail(r.error.message);return}
+        KI.busy=false;KI.g={name:name,kids:acc?kids.length:cnt.kids,account:acc,user:user,updates:upd&&!!email};KI.step="gdone";clearTimeout(KI.idle);kiDraw();kiCount();
+        clearTimeout(KI.back);KI.back=setTimeout(function(){if(KI.step==="gdone")kiReset()},acc?15000:10000)},function(){fail("No connection. Check the Wi-Fi and try again.")})};
+      if(!acc){guest();return}
+      db.rpc("member_register",{p_username:user,p_passcode:E.pass.value,p_name:name,p_kind:"family",p_email:email,p_phone:phone,p_kids:kids,p_requested:["family"],p_about:"Registered at the workshop check-in kiosk."}).then(function(r){
+        if(r.error){fail(r.error.message);return}user=r.data||user;guest()},function(){fail("No connection. Check the Wi-Fi and try again.")})}}
   document.addEventListener("keydown",function(e){if(hashBase()!=="kiosk"||KI.step!=="pad"||e.ctrlKey||e.metaKey||e.altKey)return;
     if(/^[0-9]$/.test(e.key)){e.preventDefault();kiKey(e.key)}else if(e.key==="Backspace"){e.preventDefault();kiKey("back")}else if(e.key==="Escape"){kiKey("clear")}});
   document.addEventListener("visibilitychange",function(){if(hashBase()==="kiosk"&&document.visibilityState==="visible"){kiWake();kiCount()}});
@@ -6319,7 +6453,7 @@ window.FRB=(function(){
       var HC={};((r[2]&&r[2].data)||[]).forEach(function(x){var h=HC[x.session_date]=HC[x.session_date]||{f:0,k:0,a:0};h.f++;h.k+=x.kids;h.a+=x.volunteers});
       var hcDays=Object.keys(HC).sort().reverse(),evOn=function(day){var e=FR.EVENTS.filter(function(e){return e.d<=day&&(e.e||e.d)>=day});return (e.filter(function(x){return x.k==="workshop"})[0]||e[0]||{}).t||"—"};
       box.innerHTML=portalTop("Workshop sign-in","Building Workshops","Workshop staff")+
-        '<div class="ws-kiosk"><p><b>Check-in kiosk.</b> Set a tablet out by the door: families type their 4-digit code and tap the kids who are here. It counts into this page.</p><a href="#kiosk">Open the kiosk</a></div>'+
+        '<div class="ws-kiosk"><p><b>Check-in kiosk.</b> Set a tablet out by the door: families type their 4-digit code to check in and out, guests sign in with their name, and everyone can rate the day on the way out. It all counts into this page.</p><a href="#kiosk">Open the kiosk</a></div>'+
         '<div class="ws-grid"><section class="rk-card ws-form"><div class="ws-day"><label class="f" for="ws-date">Workshop day<input type="date" id="ws-date" value="'+d+'"></label><p>'+(wk?esc(wk.t):'No workshop on the calendar this day. Sign-ins still count.')+'</p></div>'+
           '<form id="wsForm" novalidate><div class="rk-form"><label class="f" for="ws-last">Family last name<input type="text" id="ws-last" maxlength="60" autocomplete="off" required></label><label class="f" for="ws-team">Team or car name<input type="text" id="ws-team" maxlength="80" list="wsTeams" autocomplete="off"></label></div>'+
           '<datalist id="wsTeams">'+rows.map(function(x){return x.team}).filter(function(v,i,a){return v&&a.indexOf(v)===i}).map(function(v){return '<option value="'+esc(v)+'">'}).join("")+'</datalist>'+
@@ -6328,7 +6462,11 @@ window.FRB=(function(){
           '<p class="ws-meals" id="wsMeals"></p><label class="f" for="ws-notes">Notes <small>(optional)</small><input type="text" id="ws-notes" maxlength="300" placeholder="Allergies, first visit, left early…"></label>'+
           '<button class="rk-go" type="submit">Sign them in</button></form></section>'+
         '<section class="rk-card"><div class="ws-totals"><div><b>'+rows.length+'</b><span>Families</span></div><div><b>'+kids+'</b><span>Kids</span></div><div><b>'+vols+'</b><span>Adults</span></div><div><b>'+(kids+vols)+'</b><span>Meals</span></div></div>'+
-          '<h3>Signed in on '+fmtDate(d)+'</h3>'+(rows.length?'<ol class="rk-list">'+rows.map(function(x){return '<li><div><b>'+esc(x.last_name)+'</b>'+(x.team?' <small>'+esc(x.team)+'</small>':'')+(x.source==="kiosk"?'<span class="ws-tag">Kiosk</span>':'')+'<br><small>'+(x.kid_names&&x.kid_names.length?esc(x.kid_names.join(", "))+' · ':x.kids+' kid'+(x.kids===1?'':'s')+' · ')+x.volunteers+' adult'+(x.volunteers===1?'':'s')+(x.notes?' · '+esc(x.notes):'')+'</small></div><button class="mini red" type="button" data-wdel="'+x.id+'">Remove</button></li>'}).join("")+'</ol>':'<p class="rk-fine">No one signed in yet for this day.</p>')+
+          (function(){var rv=rows.filter(function(x){return x.rating}),here=rows.filter(function(x){return !x.checked_out_at}).length,avg=rv.length?rv.reduce(function(n,x){return n+x.rating},0)/rv.length:0;
+            return '<p class="ws-sum">'+here+' still here · '+(rows.length-here)+' checked out'+(rv.length?' · <b>★ '+avg.toFixed(1)+'</b> average from '+rv.length+' review'+(rv.length===1?'':'s'):'')+'</p>'})()+
+          '<h3>Signed in on '+fmtDate(d)+'</h3>'+(rows.length?'<ol class="rk-list">'+rows.map(function(x){return '<li><div><b>'+esc(x.last_name)+'</b>'+(x.team?' <small>'+esc(x.team)+'</small>':'')+(x.source==="kiosk"?'<span class="ws-tag">Kiosk</span>':x.source==="guest"?'<span class="ws-tag guest">Guest</span>':'')+(x.wants_account?'<span class="ws-tag">New account</span>':'')+(x.checked_out_at?'<span class="ws-tag out">Out '+esc(fmtTime(x.checked_out_at))+'</span>':'')+'<br><small>'+(x.kid_names&&x.kid_names.length?esc(x.kid_names.join(", "))+' · ':x.kids+' kid'+(x.kids===1?'':'s')+' · ')+x.volunteers+' adult'+(x.volunteers===1?'':'s')+(x.notes?' · '+esc(x.notes):'')+'</small>'+
+            (x.guest_email||x.guest_phone?'<small class="ws-contact">'+[x.guest_email?'<a href="mailto:'+esc(x.guest_email)+'">'+esc(x.guest_email)+'</a>':'',x.guest_phone?esc(x.guest_phone):''].filter(Boolean).join(" · ")+'</small>':'')+
+            (x.rating||x.review?'<span class="ws-rev"><b aria-label="'+(x.rating||0)+' out of 5 stars">'+(x.rating?"★★★★★".slice(0,x.rating)+'<i>'+"★★★★★".slice(x.rating)+'</i>':'')+'</b>'+(x.review?' “'+esc(x.review)+'”':'')+'</span>':'')+'</div><button class="mini red" type="button" data-wdel="'+x.id+'">Remove</button></li>'}).join("")+'</ol>':'<p class="rk-fine">No one signed in yet for this day.</p>')+
           '<div class="row"><button class="mini" type="button" id="wsCsv">Download this day</button><button class="mini" type="button" id="wsCsvAll">Download the season</button></div>'+
           '<h3 style="margin-top:16px">Headcount by event</h3><p class="rk-fine">Each event day starts at zero. Pick a day to see who came, then download it.</p>'+
           (hcDays.length?'<div class="ws-hcwrap"><table class="ws-hc"><thead><tr><th>Day</th><th>Event</th><th>Families</th><th>Kids</th><th>Adults</th></tr></thead><tbody>'+hcDays.map(function(day){var h=HC[day];
@@ -6344,7 +6482,7 @@ window.FRB=(function(){
         if(!rec.last_name){toast("Add the family’s last name.");$("#ws-last").focus();return}
         db.from("workshop_signins").insert(rec).then(function(x){if(okToast(x,rec.last_name+" signed in · "+(rec.kids+rec.volunteers)+" meals")){renderWS();setTimeout(function(){var l=$("#ws-last");if(l)l.focus()},150)}})};
       $$("[data-wdel]",box).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm"){b.textContent="Confirm";return}db.from("workshop_signins").delete().eq("id",b.getAttribute("data-wdel")).then(function(x){if(okToast(x,"Removed"))renderWS()})}});
-      var head=["Date","Event","Last name","Team","Kids","Racers","Adults","Meals","Checked in at","Notes"],row=function(x){return [x.session_date,evOn(x.session_date),x.last_name,x.team,x.kids,(x.kid_names||[]).join(", "),x.volunteers,x.kids+x.volunteers,x.source==="kiosk"?"Kiosk":"Desk",x.notes]};
+      var head=["Date","Event","Last name","Team","Kids","Racers","Adults","Meals","Checked in at","Checked out","Rating","Review","Guest email","Guest phone","Wants account","Notes"],row=function(x){return [x.session_date,evOn(x.session_date),x.last_name,x.team,x.kids,(x.kid_names||[]).join(", "),x.volunteers,x.kids+x.volunteers,x.source==="kiosk"?"Kiosk":x.source==="guest"?"Kiosk (guest)":"Desk",x.checked_out_at?fmtTime(x.checked_out_at):"",x.rating||"",x.review||"",x.guest_email||"",x.guest_phone||"",x.wants_account?"Yes":"",x.notes]};
       $("#wsCsv").onclick=function(){csv([head].concat(rows.map(row)),"workshop-signins-"+d+".csv")};
       $("#wsCsvAll").onclick=function(){db.from("workshop_signins").select("*").order("session_date").then(function(x){if(okToast(x))csv([head].concat((x.data||[]).filter(function(y){return y.session_date.slice(0,4)===d.slice(0,4)}).map(row)),"workshop-signins-"+d.slice(0,4)+".csv")})};
     });

@@ -151,18 +151,30 @@
         return R({ok:true,username:mm.username,display_name:mm.display_name,roles:mm.roles})}
       if(fn==="member_signout"){var c0=curM();if(c0)mlog(c0.id,c0.username,"sign_out");if(user)delete T.msess[user.id];save();return R(null)}
       if(fn==="my_member"){var c1=curM();return R(c1?{id:c1.id,username:c1.username,display_name:c1.display_name,kind:c1.kind,roles:c1.roles,first_year:c1.first_year,family_code:c1.family_code||null}:null)}
+      if(fn==="kiosk_guest_signin"||fn==="kiosk_guests_today"||fn==="kiosk_checkout"){var td=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+        if(fn==="kiosk_guest_signin"){var gn=String(args.p_name||"").trim().replace(/\s+/g," "),ge=String(args.p_email||"").trim(),gp=String(args.p_phone||"").trim();
+          if(gn.length<2)return R(null,"Add your name");if(ge&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ge))return R(null,"That email doesn’t look right");
+          if(!ge&&gp.replace(/\D/g,"").length<7)return R(null,"Add an email or a phone number");
+          var gid="wsg"+Date.now();T.workshop_signins.push({id:gid,created_at:new Date().toISOString(),session_date:td,event_id:args.p_event||null,team:null,last_name:gn,kids:Math.max(0,Math.min(20,args.p_kids|0)),volunteers:Math.max(0,Math.min(10,args.p_adults|0)),notes:args.p_note||null,member_id:null,kid_names:null,source:"guest",guest_email:ge||null,guest_phone:gp||null,wants_account:!!args.p_account});
+          if(args.p_updates&&ge){var sp=gn.lastIndexOf(" ");(T.inquiries=T.inquiries||[]).push({id:"iq"+Date.now(),created_at:new Date().toISOString(),first_name:sp>0?gn.slice(0,sp):gn,last_name:sp>0?gn.slice(sp+1):"",role:"Workshop guest",interests:"Email updates",youth_count:args.p_kids|0,message:"Joined the mailing list from the workshop check-in kiosk.",email:ge,phone:gp||null,contact_by:"Email",best_time:"Any time",email_updates:true,status:"new"})}
+          save();return R({ok:true,id:gid})}
+        if(fn==="kiosk_guests_today")return R(T.workshop_signins.filter(function(w){return w.session_date===td&&w.source==="guest"&&!w.checked_out_at}).map(function(w){var p=w.last_name.split(" ");return{id:w.id,name:p.length>1?p[0]+" "+p[p.length-1][0]+".":w.last_name,kids:w.kids,adults:w.volunteers}}));
+        var row;if(args.p_code){var fm2=T.members.filter(function(m){return m.family_code===args.p_code})[0];if(!fm2)return R(null,"That code didn’t match");row=T.workshop_signins.filter(function(w){return w.member_id===fm2.id&&w.session_date===td})[0]}
+        else row=T.workshop_signins.filter(function(w){return w.id===args.p_id&&w.session_date===td&&w.source==="guest"})[0];
+        if(!row)return R(null,"We couldn’t find today’s check-in");row.checked_out_at=new Date().toISOString();
+        if(args.p_rating>=1&&args.p_rating<=5)row.rating=args.p_rating;if(String(args.p_note||"").trim())row.review=String(args.p_note).trim().slice(0,600);if(row.rating||row.review)row.reviewed_at=new Date().toISOString();save();return R({ok:true})}
       if(fn==="kiosk_lookup"||fn==="kiosk_checkin"){var today=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
         var fm=T.members.filter(function(m){return m.family_code===args.p_code&&m.status==="approved"&&(m.roles||[]).indexOf("family")>=0})[0];
         var last=function(m){return String(m.display_name).trim().split(/\s+/).pop()};
         if(fn==="kiosk_lookup"){KFAIL=KFAIL.filter(function(x){return Date.now()-x<12e4});if(KFAIL.length>=5)return R({ok:false,locked:true});
           if(!fm){KFAIL.push(Date.now());return R({ok:false,locked:KFAIL.length>=5})}
           var s0=T.workshop_signins.filter(function(w){return w.member_id===fm.id&&w.session_date===today})[0];
-          return R({ok:true,family:last(fm),kids:(fm.kids||[]).map(function(k){return k.name}).filter(Boolean),already:s0?s0.kid_names||[]:[],adults:s0?s0.volunteers:null,at:s0?s0.created_at:null})}
+          return R({ok:true,family:last(fm),kids:(fm.kids||[]).map(function(k){return k.name}).filter(Boolean),already:s0?s0.kid_names||[]:[],adults:s0?s0.volunteers:null,at:s0?s0.created_at:null,out:s0?s0.checked_out_at||null:null})}
         if(!fm)return R(null,"That code didn’t match");
         var names=(fm.kids||[]).map(function(k){return k.name}).filter(function(n){return (args.p_kids||[]).indexOf(n)>=0});
         if(!names.length)return R(null,"Pick at least one racer");
         var ad=Math.max(0,Math.min(10,+args.p_adults||0)),ex=T.workshop_signins.filter(function(w){return w.member_id===fm.id&&w.session_date===today})[0];
-        if(ex){ex.kids=names.length;ex.kid_names=names;ex.volunteers=ad;ex.source="kiosk";if(args.p_event)ex.event_id=args.p_event}
+        if(ex){ex.kids=names.length;ex.kid_names=names;ex.volunteers=ad;ex.source="kiosk";ex.checked_out_at=null;if(args.p_event)ex.event_id=args.p_event}
         else T.workshop_signins.push({id:"ws"+Date.now(),created_at:new Date().toISOString(),session_date:today,event_id:args.p_event||null,team:null,last_name:last(fm),kids:names.length,volunteers:ad,notes:null,member_id:fm.id,kid_names:names,source:"kiosk"});
         save();return R({ok:true,kids:names})}
       if(fn==="admin_new_family_code"){var tm=T.members.filter(function(m){return m.id===args.p_id})[0];if(!tm)return R(null,"Profile not found");
