@@ -2141,6 +2141,12 @@ html.kiosk-on body{background:#0e0f12}
 .ki-new-b{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%}
 .ki-new-b button{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:10px 14px;border-radius:14px;border:2px solid #3a3c44;background:#22242a;color:#fff;font:800 1.15rem/1.1 var(--display);text-transform:uppercase;cursor:pointer;touch-action:manipulation}
 .ki-new-b button span{font-size:1.3rem}
+.ki-new-b button.main{border-color:var(--red);background:#3a1517}
+.ki-k{margin:0;font-weight:700;color:#fff}.ki-k small{font-weight:500;color:var(--ki-dim)}
+.ki-prefs,.ki-codebox{display:grid;gap:8px}
+.ki-codebox{padding:14px;border:2px solid #3a3c44;border-radius:12px}.ki-codebox .ki-hint{padding:0;margin:0}
+.ki-code2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ki-pin{font:800 1.8rem/1 var(--display)!important;letter-spacing:.5em;text-align:center}
 .ki-new-b button:active{border-color:var(--red);background:#3a1517}
 .ki-alt{width:100%;min-height:58px;border:2px solid #3a3c44;border-radius:14px;background:transparent;color:#fff;font:800 1.2rem/1 var(--display);text-transform:uppercase;cursor:pointer}
 .ki-who{margin:0;font:700 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ff5a60}
@@ -2168,6 +2174,9 @@ html.kiosk-on body{background:#0e0f12}
 .ki-counts{display:flex;flex-wrap:wrap;justify-content:space-around;gap:12px;padding:8px 0;border-block:1px solid var(--ki-line)}
 .ki-chk{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:2px solid #3a3c44;border-radius:12px;cursor:pointer;color:var(--ki-dim);font-size:.95rem}
 .ki-chk b{display:block;color:#fff;font-size:1.05rem}
+.ki-chk small{display:block;font-size:.92rem;color:var(--ki-dim)}
+.me-pref small{display:block;font-size:.86rem;color:#5a5d64}
+.reg-checks label b{display:block}
 .ki-chk input{width:26px;height:26px;flex:none;margin:0;accent-color:var(--red)}
 .ki-chk:has(input:checked){border-color:var(--red);background:#2a1416}
 .ki-form .ki-msg{margin:0;text-align:center}
@@ -2195,6 +2204,11 @@ html.kiosk-on body{background:#0e0f12}
 .me-code .me-digits{display:flex;gap:6px}
 .me-code .me-digits span{width:46px;height:58px;border-radius:8px;background:#111216;color:#fff;display:grid;place-items:center;font:800 2.1rem/1 var(--display)}
 .me-code p{margin:0;max-width:46ch}
+.me-prefs{display:grid;gap:8px}
+.me-pref{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid #e1e3e6;border-radius:8px;cursor:pointer;font-size:.9rem;color:#4a4d54}
+.me-pref b{display:block;color:var(--ink);font-size:.96rem}.me-pref input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--red);flex:none}
+.reg-pin{font:800 1.4rem/1 var(--body);letter-spacing:.4em;max-width:160px}
+.reg-pwd{margin-top:6px}.reg-pwd summary{cursor:pointer;font-weight:700;color:var(--red-deep)}.reg-pwd summary small{color:#6d7077;font-weight:500}
 .mb-code b{font:800 1.15rem/1 var(--display);letter-spacing:.12em;margin-right:8px}
 
 /* breadcrumb bar sits flush under the site header, lined up with the page title */
@@ -4746,8 +4760,8 @@ body.rw-tv .rw-fol{display:none}
   /* ---- Sign in: 3D car select (hand-built WebGL, no libraries) ---- */
   (function(){var root=document.getElementById("carSelect");if(!root)return;
     var CARS=[
-      {paint:"#c0141b",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Username + passcode",stats:[["Young racers reached","kids"],["Years racing (since 2019)","years"],["Cars in the build","cars"]]},
-      {paint:"#f2b01e",trim:"#111113",helmet:"#d2141c",num:"12",label:"Crew",neon:"#ffc233",key:"Username + passcode",stats:[["Volunteers this year","volunteers_this_year"],["Meals served","meals"],["Participants served","participants"]]},
+      {paint:"#c0141b",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Email + 4-digit code",stats:[["Young racers reached","kids"],["Years racing (since 2019)","years"],["Cars in the build","cars"]]},
+      {paint:"#f2b01e",trim:"#111113",helmet:"#d2141c",num:"12",label:"Crew",neon:"#ffc233",key:"Email + 4-digit code",stats:[["Volunteers this year","volunteers_this_year"],["Meals served","meals"],["Participants served","participants"]]},
       {paint:"checker",trim:"#d2141c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"Just cheer!",stats:[["Top speed","speed"],["Engines","engines"],["Days to race day","countdown"]]},
       {paint:"#16171c",trim:"#d2141c",helmet:"#d2141c",num:"6",label:"Staff",neon:"#d2141c",key:"Username or admin email",stats:[["Events this season","events"],["Paths to participate","paths"],["Historic home track","track"]]}];
     var LIVE={};
@@ -5734,7 +5748,7 @@ window.FRB=(function(){
             (have.length?'<ul class="rt-list">'+have.map(function(m){return '<li><span><b>'+esc(m.display_name)+'</b> <small>@'+esc(m.username)+'</small></span><button class="mini red" type="button" data-rm="'+m.id+'" data-role="'+role+'">Remove</button></li>'}).join("")+'</ul>':'')+
             (c?'<ul class="rt-list"><li><span><b>'+esc(c.email)+'</b> <small>older email assignment</small></span><button class="mini red" type="button" data-clear="'+role+'">Remove</button></li></ul>':'')+
             (rest.length?'<div class="team-add"><label class="sr" for="rt-'+role+'">Give this role to</label><select id="rt-'+role+'"><option value="">Give this role to…</option>'+rest.map(function(m){return '<option value="'+m.id+'">'+esc(m.display_name)+' (@'+esc(m.username)+')</option>'}).join("")+'</select><button class="mini solid" type="button" data-add="'+role+'">Add</button></div>':'<p class="rk-fine">Everyone approved already has this role, or no one is approved yet.</p>')+'</div>'};
-        body='<p style="color:#4a4d55;max-width:72ch">Pick people from your approved members. They sign in on the Staff Garage card with their username and passcode and land on their screen. Admins can always use both screens. <button class="mini" type="button" id="rtMem">Open Members</button></p>'+
+        body='<p style="color:#4a4d55;max-width:72ch">Pick people from your approved members. They sign in on the Staff Garage card with their email and 4-digit code and land on their screen. Admins can always use both screens. <button class="mini" type="button" id="rtMem">Open Members</button></p>'+
           card("controller","Race controller","build the brackets on race morning (bingo draw and byes), set the running order, go live, run the starting lights, enter run times, post and fix results, and post announcements.","edit racers, sponsors, ads or the website, or approve shout-outs.")+
           card("track","Track operations","approve or hide shout-outs, spotlight one, run intermissions, feature sponsor ads, set “brought to you by” sponsors for heats, send hype moments and fun facts.","change brackets, heats, times or results, or edit the website.")+
           card("volunteers","Race-day volunteer lists","see and sort volunteer sign-ups, place people on the event or track list, make crew links and check people in.","run the race or edit the website.");
@@ -5803,8 +5817,8 @@ window.FRB=(function(){
   /* ---------- Shared pieces for the two race-day screens ---------- */
   function gate(box,px,title,ok){
     if(ok){logView(title.toLowerCase().replace(/[^a-z0-9]+/g,"-"));return true}
-    if(ME){box.innerHTML='<div class="rk-card rk-sign"><h2>'+esc(title)+' isn’t on your profile</h2><p>You’re signed in as <b>'+esc(ME.display_name)+'</b> (@'+esc(ME.username)+'). Ask Kendall or Kevin to add <b>'+esc(title)+'</b> to your profile in Admin → Members, then sign in again.</p><div class="row"><a class="mini" href="#my-dashboard">My dashboard</a><button class="mini" type="button" data-out="1">Sign out</button></div></div>';$("[data-out]",box).onclick=signOut;return false}
-    if(USER&&!USER.is_anonymous){box.innerHTML='<div class="rk-card rk-sign"><h2>Not set up for '+esc(title.toLowerCase())+'</h2><p>You’re signed in as <b>'+esc(crewName())+'</b>, but this account doesn’t have access. Crew sign in with a username instead.</p><div class="row"><button class="mini" type="button" data-out="1">Sign out</button></div></div>';$("[data-out]",box).onclick=signOut;return false}
+    if(ME){box.innerHTML='<div class="rk-card rk-sign"><h2>'+esc(title)+' isn’t on your profile</h2><p>You’re signed in as <b>'+esc(ME.display_name)+'</b>. Ask Kendall or Kevin to add <b>'+esc(title)+'</b> to your profile in Admin → Members, then sign in again.</p><div class="row"><a class="mini" href="#my-dashboard">My dashboard</a><button class="mini" type="button" data-out="1">Sign out</button></div></div>';$("[data-out]",box).onclick=signOut;return false}
+    if(USER&&!USER.is_anonymous){box.innerHTML='<div class="rk-card rk-sign"><h2>Not set up for '+esc(title.toLowerCase())+'</h2><p>You’re signed in as <b>'+esc(crewName())+'</b>, but this account doesn’t have access. Crew sign in with their email and 4-digit code instead.</p><div class="row"><button class="mini" type="button" data-out="1">Sign out</button></div></div>';$("[data-out]",box).onclick=signOut;return false}
     if(box.querySelector("#"+px+"mMem"))return false;
     box.innerHTML='<div class="rk-card rk-sign">'+memHTML(px+"m",{kicker:title,title:"Sign in to "+title.toLowerCase(),sub:"Use your Flint Racing username and passcode.",kind:"crew"})+'</div>'+
       '<details class="rk-card rk-sign gate-acct"><summary>Kendall or Kevin? Admin sign in</summary>'+signInHTML(px)+'</details>';
@@ -6163,7 +6177,7 @@ window.FRB=(function(){
   var rl=$("#resLanes"); if(rl) rl.innerHTML=lanesHTML();
   function renderPD(){var box=$("#pdBox");if(!box)return;
     if(!PD.data){
-      if(!ME&&!IS_ADMIN){if(!box.querySelector("#pdMem")){box.innerHTML='<div class="pd-gate">'+memHTML("pd",{kicker:"Families and crew",title:"Sign in to see dates, times and places",sub:"Use the username and passcode you registered with.",kind:"family"})+'</div>';bindMem("pd",function(){})}return}
+      if(!ME&&!IS_ADMIN){if(!box.querySelector("#pdMem")){box.innerHTML='<div class="pd-gate">'+memHTML("pd",{kicker:"Families and crew",title:"Sign in to see dates, times and places",sub:"Use your email and the 4-digit code you picked when you registered.",kind:"family"})+'</div>';bindMem("pd",function(){})}return}
       if(!PD.loading){PD.loading=true;box.innerHTML='<p class="pd-loading">Opening your dashboard…</p>';
         db.rpc("program_dashboard_member").then(function(r){PD.loading=false;if(r.error){box.innerHTML='<p class="pd-loading">Couldn’t open the dashboard. Refresh to try again.</p>';return}PD.data=r.data||{events:[]};renderPD()})}
       return}
@@ -6302,13 +6316,13 @@ window.FRB=(function(){
   function kiDraw(){var box=$("#kioskBox");if(!box||hashBase()!=="kiosk")return;var ev=kiEvent(),f=KI.fam,body="";
     var head='<header class="ki-head"><div><p>Flint Racing &amp; STEM · Check-in</p><h1>'+esc(ev?ev.t:"Workshop day")+'</h1></div><p class="ki-date">'+esc(fmtDate(todayISO(),{weekday:"long",month:"long",day:"numeric"}))+'</p></header>';
     if(KI.step==="pad"){var locked=Date.now()<KI.lockUntil;
-      body='<section class="ki-card" aria-labelledby="kiH"><h2 id="kiH">Enter your family code</h2><p>Your 4-digit code is on your family dashboard. A staff member can look it up for you.</p>'+
+      body='<section class="ki-card" aria-labelledby="kiH"><h2 id="kiH">Enter your family code</h2><p>Type the 4-digit code you picked when you registered. Forgot it? A staff member can look it up for you.</p>'+
         '<div class="ki-dots" id="kiDots" aria-hidden="true">'+[0,1,2,3].map(function(i){return '<span class="'+(i<KI.code.length?'on':'')+'"></span>'}).join("")+'</div>'+
         '<p class="ki-msg'+(KI.busy?' ok':'')+'" id="kiMsg" role="status">'+(locked?'Too many tries. Please wait a couple of minutes or ask a staff member.':KI.busy?'Checking…':'')+'</p>'+
         '<label class="ki-kbd" for="kiKbd">Family code</label><input class="ki-kbd" id="kiKbd" inputmode="numeric" autocomplete="off" maxlength="4" tabindex="-1">'+
         '<div class="ki-pad" role="group" aria-label="Number pad">'+["1","2","3","4","5","6","7","8","9"].map(function(n){return '<button type="button" data-kd="'+n+'"'+(locked||KI.busy?' disabled':'')+'>'+n+'</button>'}).join("")+
         '<button type="button" class="ki-fn" data-kd="clear"'+(locked||KI.busy?' disabled':'')+'>Clear</button><button type="button" data-kd="0"'+(locked||KI.busy?' disabled':'')+'>0</button><button type="button" class="ki-fn" data-kd="back" aria-label="Delete last digit"'+(locked||KI.busy?' disabled':'')+'>⌫ Back</button></div></section>'+
-        '<section class="ki-new" aria-label="Guests and new families"><p><b>No code?</b> New here or just visiting today.</p><div class="ki-new-b"><button type="button" data-kgo="guest"><span aria-hidden="true">👋</span>Guest sign in</button><button type="button" data-kgo="account"><span aria-hidden="true">＋</span>Create a family account</button></div>'+
+        '<section class="ki-new" aria-label="Guests and new families"><p><b>First time here?</b> Create your family account and pick your code, or sign in as a guest.</p><div class="ki-new-b"><button type="button" data-kgo="account" class="main"><span aria-hidden="true">＋</span>Create a family account</button><button type="button" data-kgo="guest"><span aria-hidden="true">👋</span>Guest sign in</button></div>'+
         '<button type="button" class="ki-back" data-kgo="glist">Guest checking out? Tap here</button></section>'}
     else if(KI.step==="back"){var at=f.at?new Date(f.at).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"}):"";
       body='<section class="ki-card" aria-labelledby="kiH"><h2 id="kiH">Welcome back, '+esc(f.family)+' family!</h2><p>You checked in'+(at?' at '+esc(at):'')+' with '+esc(kiNames(f.already))+'.</p>'+
@@ -6327,28 +6341,29 @@ window.FRB=(function(){
         '<p>'+(KI.rate?'Thanks for the feedback. ':'')+'See you next time at Flint Racing.</p><button type="button" class="ki-back" id="kiBack">Back to the start</button></section>'}
     else if(KI.step==="guest"||KI.step==="account"){var acc=KI.step==="account",g=KI.g||{};
       body='<section class="ki-card ki-formcard" aria-labelledby="kiH"><h2 id="kiH">'+(acc?'Create a family account':'Guest sign in')+'</h2>'+
-        '<p>'+(acc?'Set it up once. After staff approve it, you’ll get a 4-digit code for quick check-in.':'Visiting today? Leave your name and a way to reach you.')+'</p>'+
+        '<p>'+(acc?'Set it up once and pick a 4-digit code. From then on, that code checks you in and out.':'Visiting today? Leave your name and a way to reach you.')+'</p>'+
         '<form class="ki-form" id="kiForm" novalidate autocomplete="off">'+
         '<label class="ki-in full">'+(acc?'Parent or guardian name':'Your name')+'<input type="text" name="name" maxlength="80" autocomplete="off" value="'+esc(g.name||"")+'" required></label>'+
         '<label class="ki-in"><span>Email'+(acc?'':' <small>(or phone)</small>')+'</span><input type="email" name="email" maxlength="160" inputmode="email" autocapitalize="none" autocomplete="off" value="'+esc(g.email||"")+'"></label>'+
         '<label class="ki-in"><span>Phone <small>(optional'+(acc?'':' if you gave an email')+')</small></span><input type="tel" name="phone" maxlength="40" inputmode="tel" autocomplete="off" value="'+esc(g.phone||"")+'"></label>'+
         (acc?'<fieldset class="ki-in full ki-racers"><legend>Your racers</legend><div id="kiRacers">'+kiRacerRow()+'</div><button type="button" class="ki-add" id="kiAddKid">+ Add another racer</button></fieldset>'+
-          '<label class="ki-in">Choose a username<input type="text" name="user" maxlength="24" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>'+
-          '<span class="ki-hint">3 to 24 letters or numbers. You’ll use it with your passcode to sign in.</span>'+
-          '<label class="ki-in"><span>Passcode <small>(6+ characters)</small></span><input type="password" name="pass" maxlength="64" autocomplete="new-password"></label>'+
-          '<label class="ki-in">Type it again<input type="password" name="pass2" maxlength="64" autocomplete="new-password"></label>':'')+
+          '<div class="full ki-codebox"><p class="ki-k">Choose your 4-digit code</p><p class="ki-hint">You’ll type it here to check in and out, and use it with your email to sign in on our website. Pick 4 digits that aren’t easy to guess.</p>'+
+          '<div class="ki-code2"><label class="ki-in">Your code<input type="password" name="code" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" class="ki-pin"></label><label class="ki-in">Type it again<input type="password" name="code2" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" class="ki-pin"></label></div></div>':'')+
         '<div class="ki-counts full">'+(acc?'':'<div class="ki-adults"><span id="kiKdL">Kids with you</span><div class="ki-step" role="group" aria-labelledby="kiKdL"><button type="button" data-gs="kids" data-d="-1" aria-label="One fewer kid">−</button><b data-gv="kids" aria-live="polite">1</b><button type="button" data-gs="kids" data-d="1" aria-label="One more kid">+</button></div></div>')+
           '<div class="ki-adults"><span id="kiGaL">Grown-ups with you</span><div class="ki-step" role="group" aria-labelledby="kiGaL"><button type="button" data-gs="adults" data-d="-1" aria-label="One fewer grown-up">−</button><b data-gv="adults" aria-live="polite">1</b><button type="button" data-gs="adults" data-d="1" aria-label="One more grown-up">+</button></div></div></div>'+
-        '<label class="ki-chk full"><input type="checkbox" name="updates"'+(g.updates?' checked':'')+'><span><b>Join our mailing list</b>Workshop dates, fun runs and race day news by email. Unsubscribe any time.</span></label>'+
+        '<div class="full ki-prefs"><p class="ki-k">Want emails from us? <small>(optional, needs an email)</small></p>'+prefsHTML("ki-chk",g.prefs)+'</div>'+
         '<p class="ki-msg full" id="kiMsg" role="alert"></p>'+
         '<button type="submit" class="ki-go full" id="kiSend">'+(acc?'Create account and check in':'Sign in as a guest')+'</button></form>'+
-        (acc?'<button type="button" class="ki-back" data-kgo="guest">Just visiting? Sign in as a guest instead</button>':'<button type="button" class="ki-back" data-kgo="account">Coming back? Create a family account instead</button>')+
+        (acc?'<button type="button" class="ki-back" data-kgo="guest">Just visiting today? Sign in as a guest instead</button>':'<button type="button" class="ki-back" data-kgo="account">Coming back? Create a family account instead</button>')+
         '<button type="button" class="ki-back" id="kiBack">Cancel</button></section>'}
     else if(KI.step==="gdone"){var gd=KI.g||{};
-      body='<section class="ki-card ki-done" aria-labelledby="kiH" role="status"><div class="ki-flag" aria-hidden="true">✓</div><h2 id="kiH">Welcome, '+esc(String(gd.name||"").split(" ")[0])+'!</h2>'+
+      body=gd.account?'<section class="ki-card ki-done" aria-labelledby="kiH" role="status"><div class="ki-flag" aria-hidden="true">✓</div><h2 id="kiH">Welcome to Flint Racing!</h2>'+
+          '<p class="ki-names">'+esc(kiNames(gd.names||[]))+'</p><p>You’re checked in. When you leave, type your 4-digit code to check out.</p>'+
+          '<p>Your code also signs you in on our website with your email. That’s where you’ll find workshop dates, times and your family dashboard.</p>'+
+          (gd.updates?'<p>We’ll email you the updates you picked.</p>':'')+'<button type="button" class="ki-back" id="kiBack">Done · next family</button></section>':
+        '<section class="ki-card ki-done" aria-labelledby="kiH" role="status"><div class="ki-flag" aria-hidden="true">✓</div><h2 id="kiH">Welcome, '+esc(String(gd.name||"").split(" ")[0])+'!</h2>'+
         '<p>You’re signed in for today'+(gd.kids?' with '+gd.kids+' kid'+(gd.kids===1?'':'s'):'')+'. When you leave, tap <b>Guest checking out?</b> on the start screen.</p>'+
-        (gd.account?'<p>Your family account <b>@'+esc(gd.user)+'</b> is waiting for staff review. Once it’s approved, your 4-digit check-in code will be on your family dashboard.</p>':'')+
-        (gd.updates?'<p>You’re on our mailing list.</p>':'')+'<button type="button" class="ki-back" id="kiBack">Done · next family</button></section>'}
+        (gd.updates?'<p>We’ll email you the updates you picked.</p>':'')+'<button type="button" class="ki-back" id="kiBack">Done · next family</button></section>'}
     else if(KI.step==="glist"){var GL=KI.guests;
       body='<section class="ki-card" aria-labelledby="kiH"><h2 id="kiH">Guest check out</h2>'+
         (GL==null?'<p>Loading today’s guests…</p>':GL.length?'<p>Tap your name.</p><div class="ki-kids">'+GL.map(function(x,i){return '<button type="button" class="ki-kid ki-guest" data-kg="'+i+'"><span>'+esc(x.name)+'<small>'+x.kids+' kid'+(x.kids===1?'':'s')+' · '+x.adults+' grown-up'+(x.adults===1?'':'s')+'</small></span></button>'}).join("")+'</div>':'<p>No guests are signed in right now. Families with a code can check out by typing it on the start screen.</p>')+
@@ -6371,7 +6386,7 @@ window.FRB=(function(){
     var go=$("#kiGo");if(go)go.onclick=kiSubmit;
     var bk=$("#kiBack");if(bk)bk.onclick=kiReset;
     $$("[data-kgo]",box).forEach(function(b){b.onclick=function(){var to=b.getAttribute("data-kgo"),fm=$("#kiForm");
-      if(fm)KI.g={name:fm.elements.name.value,email:fm.elements.email.value,phone:fm.elements.phone.value,updates:fm.elements.updates.checked};
+      if(fm)KI.g={name:fm.elements.name.value,email:fm.elements.email.value,phone:fm.elements.phone.value,prefs:prefsOf(fm)};
       KI.step=to;if(to==="glist"){KI.guests=null;db.rpc("kiosk_guests_today").then(function(r){KI.guests=r.error?[]:(r.data||[]);if(KI.step==="glist")kiDraw()},function(){KI.guests=[];if(KI.step==="glist")kiDraw()})}
       kiIdle();kiDraw();var first=$("#kiForm input");if(first)first.focus()}});
     if(KI.step==="back"){$("#kiOut").onclick=function(){KI.out={code:f.code,name:f.family+" family"};KI.rate=0;KI.step="rate";kiIdle();kiDraw()};
@@ -6405,39 +6420,35 @@ window.FRB=(function(){
     db.rpc("kiosk_checkin",{p_code:f.code,p_event:ev&&ev.id&&/^[0-9a-f-]{36}$/.test(ev.id)?ev.id:null,p_kids:names,p_adults:KI.adults}).then(function(r){KI.busy=false;
       if(r.error){toast("Couldn’t check in: "+r.error.message);kiDraw();return}
       f.done=names;KI.step="done";clearTimeout(KI.idle);kiDraw();kiCount();KI.back=setTimeout(function(){if(KI.step==="done")kiReset()},6000)},function(){KI.busy=false;toast("No connection. Check the Wi-Fi and try again.");kiDraw()})}
-  function kiRacerRow(){return '<div class="ki-racer"><input type="text" maxlength="40" placeholder="Racer’s first and last name" aria-label="Racer’s name" autocomplete="off"><input type="number" min="3" max="25" inputmode="numeric" placeholder="Age" aria-label="Racer’s age"></div>'}
+  function kiRacerRow(){return '<div class="ki-racer"><input type="text" maxlength="40" placeholder="First name and last initial (Maya R.)" aria-label="Racer’s first name and last initial" autocomplete="off"><input type="number" min="3" max="25" inputmode="numeric" placeholder="Age" aria-label="Racer’s age"></div>'}
   function kiCheckout(skip){if(KI.busy||!KI.out)return;KI.busy=true;var note=skip?"":(($("#kiNote")||{}).value||"").trim(),rate=skip?0:KI.rate,b=$("#kiRate"),sk=$("#kiSkip");if(b)b.disabled=true;if(sk)sk.disabled=true;
     db.rpc("kiosk_checkout",{p_code:KI.out.code||null,p_id:KI.out.id||null,p_rating:rate||null,p_note:note||null}).then(function(r){KI.busy=false;
       if(r.error){var m=$("#kiMsg");if(m)m.textContent="Couldn’t check out: "+r.error.message;if(b)b.disabled=!KI.rate;if(sk)sk.disabled=false;return}
       if(skip)KI.rate=0;KI.step="bye";clearTimeout(KI.idle);kiDraw();kiCount();clearTimeout(KI.back);KI.back=setTimeout(function(){if(KI.step==="bye")kiReset()},8000)},
       function(){KI.busy=false;var m=$("#kiMsg");if(m)m.textContent="No connection. Check the Wi-Fi and try again.";if(b)b.disabled=!KI.rate;if(sk)sk.disabled=false})}
   function kiBindForm(box){var fm=$("#kiForm",box),acc=KI.step==="account",cnt={kids:1,adults:1},msg=$("#kiMsg",box);
-    fm.addEventListener("input",kiIdle);
+    fm.addEventListener("input",kiIdle);$$(".ki-pin",fm).forEach(function(i){i.oninput=function(){i.value=i.value.replace(/\D/g,"").slice(0,4)}});
     $$("[data-gs]",box).forEach(function(b){b.onclick=function(){var k=b.getAttribute("data-gs");cnt[k]=Math.max(k==="adults"?0:0,Math.min(k==="kids"?20:10,cnt[k]+(+b.getAttribute("data-d"))));$('[data-gv="'+k+'"]',box).textContent=cnt[k];kiIdle()}});
     var add=$("#kiAddKid",box);if(add)add.onclick=function(){var w=$("#kiRacers",box);if(w.children.length>=8)return;w.insertAdjacentHTML("beforeend",kiRacerRow());w.lastChild.querySelector("input").focus();if(w.children.length>=8)add.hidden=true;kiIdle()};
-    fm.onsubmit=function(e){e.preventDefault();if(KI.busy)return;var E=fm.elements,v=function(n){return E[n].value.trim()},name=v("name").replace(/\s+/g," "),email=v("email"),phone=v("phone"),upd=E.updates.checked,err="";
+    fm.onsubmit=function(e){e.preventDefault();if(KI.busy)return;var E=fm.elements,v=function(n){return E[n].value.trim()},name=v("name").replace(/\s+/g," "),email=v("email"),phone=v("phone"),prefs=prefsOf(fm),upd=prefs.length>0,err="";
       var kids=acc?$$(".ki-racer",fm).map(function(r){var i=$$("input",r);return{name:i[0].value.trim(),age:i[1].value.trim()}}).filter(function(k){return k.name}):[];
       if(name.length<2)err=acc?"Add the parent or guardian’s name.":"Add your name.";
       else if(email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))err="That email doesn’t look right.";
       else if(acc&&!email)err="Add an email so we can reach you about your account.";
       else if(!acc&&!email&&phone.replace(/\D/g,"").length<7)err="Add an email or a phone number.";
-      else if(upd&&!email)err="Add your email to join the mailing list.";
+      else if(upd&&!email)err="Add your email to get emails from us.";
       else if(acc&&!kids.length)err="Add at least one racer.";
-      else if(acc&&!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(v("user").toLowerCase()))err="Choose a username: 3 to 24 letters or numbers.";
-      else if(acc&&E.pass.value.length<6)err="Your passcode needs at least 6 characters.";
-      else if(acc&&E.pass.value!==E.pass2.value)err="The two passcodes don’t match.";
+      else if(acc)err=codeErr(E.code.value,E.code2.value);
       if(err){msg.textContent=err;return}
       msg.textContent="";KI.busy=true;var btn=$("#kiSend",box);btn.disabled=true;btn.textContent=acc?"Creating your account…":"Signing you in…";
-      var ev=kiEvent(),evId=ev&&ev.id&&/^[0-9a-f-]{36}$/.test(ev.id)?ev.id:null,user=acc?v("user").toLowerCase():"";
+      var ev=kiEvent(),evId=ev&&ev.id&&/^[0-9a-f-]{36}$/.test(ev.id)?ev.id:null;
       var fail=function(m){KI.busy=false;btn.disabled=false;btn.textContent=acc?"Create account and check in":"Sign in as a guest";msg.textContent=m};
-      var guest=function(){return db.rpc("kiosk_guest_signin",{p_name:name,p_email:email,p_phone:phone,p_kids:acc?kids.length:cnt.kids,p_adults:cnt.adults,p_event:evId,p_updates:upd,p_account:acc,
-          p_note:acc?"New family account @"+user+" · "+kids.map(function(k){return k.name+(k.age?" ("+k.age+")":"")}).join(", "):null}).then(function(r){
-        if(r.error){fail(r.error.message);return}
-        KI.busy=false;KI.g={name:name,kids:acc?kids.length:cnt.kids,account:acc,user:user,updates:upd&&!!email};KI.step="gdone";clearTimeout(KI.idle);kiDraw();kiCount();
-        clearTimeout(KI.back);KI.back=setTimeout(function(){if(KI.step==="gdone")kiReset()},acc?15000:10000)},function(){fail("No connection. Check the Wi-Fi and try again.")})};
-      if(!acc){guest();return}
-      db.rpc("member_register",{p_username:user,p_passcode:E.pass.value,p_name:name,p_kind:"family",p_email:email,p_phone:phone,p_kids:kids,p_requested:["family"],p_about:"Registered at the workshop check-in kiosk."}).then(function(r){
-        if(r.error){fail(r.error.message);return}user=r.data||user;guest()},function(){fail("No connection. Check the Wi-Fi and try again.")})}}
+      var fin=function(r,extra){if(r.error){fail(r.error.message);return}
+        KI.busy=false;KI.g=Object.assign({name:name,kids:acc?kids.length:cnt.kids,account:acc,updates:upd&&!!email},extra||{});KI.step="gdone";clearTimeout(KI.idle);kiDraw();kiCount();
+        clearTimeout(KI.back);KI.back=setTimeout(function(){if(KI.step==="gdone")kiReset()},acc?15000:10000)},
+        off=function(){fail("No connection. Check the Wi-Fi and try again.")};
+      if(acc)db.rpc("kiosk_register_family",{p_name:name,p_email:email,p_phone:phone,p_kids:kids,p_code:E.code.value,p_adults:cnt.adults,p_event:evId,p_prefs:prefs}).then(function(r){fin(r,r.data?{family:r.data.family,names:r.data.kids||[]}:{})},off);
+      else db.rpc("kiosk_guest_signin",{p_name:name,p_email:email,p_phone:phone,p_kids:cnt.kids,p_adults:cnt.adults,p_event:evId,p_prefs:prefs}).then(function(r){fin(r)},off)}}
   document.addEventListener("keydown",function(e){if(hashBase()!=="kiosk"||KI.step!=="pad"||e.ctrlKey||e.metaKey||e.altKey)return;
     if(/^[0-9]$/.test(e.key)){e.preventDefault();kiKey(e.key)}else if(e.key==="Backspace"){e.preventDefault();kiKey("back")}else if(e.key==="Escape"){kiKey("clear")}});
   document.addEventListener("visibilitychange",function(){if(hashBase()==="kiosk"&&document.visibilityState==="visible"){kiWake();kiCount()}});
@@ -6453,7 +6464,7 @@ window.FRB=(function(){
       var HC={};((r[2]&&r[2].data)||[]).forEach(function(x){var h=HC[x.session_date]=HC[x.session_date]||{f:0,k:0,a:0};h.f++;h.k+=x.kids;h.a+=x.volunteers});
       var hcDays=Object.keys(HC).sort().reverse(),evOn=function(day){var e=FR.EVENTS.filter(function(e){return e.d<=day&&(e.e||e.d)>=day});return (e.filter(function(x){return x.k==="workshop"})[0]||e[0]||{}).t||"—"};
       box.innerHTML=portalTop("Workshop sign-in","Building Workshops","Workshop staff")+
-        '<div class="ws-kiosk"><p><b>Check-in kiosk.</b> Set a tablet out by the door: families type their 4-digit code to check in and out, guests sign in with their name, and everyone can rate the day on the way out. It all counts into this page.</p><a href="#kiosk">Open the kiosk</a></div>'+
+        '<div class="ws-kiosk"><p><b>Check-in kiosk.</b> Set a tablet out by the door: new families create their account and pick a 4-digit code on day one, then use that code to check in and out. Guests sign in with their name, and everyone can rate the day on the way out. It all counts into this page.</p><a href="#kiosk">Open the kiosk</a></div>'+
         '<div class="ws-grid"><section class="rk-card ws-form"><div class="ws-day"><label class="f" for="ws-date">Workshop day<input type="date" id="ws-date" value="'+d+'"></label><p>'+(wk?esc(wk.t):'No workshop on the calendar this day. Sign-ins still count.')+'</p></div>'+
           '<form id="wsForm" novalidate><div class="rk-form"><label class="f" for="ws-last">Family last name<input type="text" id="ws-last" maxlength="60" autocomplete="off" required></label><label class="f" for="ws-team">Team or car name<input type="text" id="ws-team" maxlength="80" list="wsTeams" autocomplete="off"></label></div>'+
           '<datalist id="wsTeams">'+rows.map(function(x){return x.team}).filter(function(v,i,a){return v&&a.indexOf(v)===i}).map(function(v){return '<option value="'+esc(v)+'">'}).join("")+'</datalist>'+
@@ -6829,11 +6840,11 @@ window.FRB=(function(){
 
   function memHTML(px,o){o=o||{};
     return '<form class="mem'+(o.dark?' mem-dark':'')+'" id="'+px+'Mem" novalidate>'+(o.kicker?'<p class="mem-k">'+esc(o.kicker)+'</p>':'')+(o.title?'<h2 class="mem-h">'+esc(o.title)+'</h2>':'')+(o.sub?'<p class="mem-sub">'+o.sub+'</p>':'')+
-      '<label class="mem-f" for="'+px+'-u">'+(o.staff?'Username or admin email':'Username')+'<input type="text" id="'+px+'-u" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="'+(o.staff?160:24)+'"></label>'+
-      '<label class="mem-f" for="'+px+'-p">'+(o.staff?'Passcode or password':'Passcode')+'<span class="mem-pw"><input type="password" id="'+px+'-p" autocomplete="current-password" maxlength="64"><button type="button" class="mem-eye" aria-label="Show passcode" aria-pressed="false">Show</button></span></label>'+
+      '<label class="mem-f" for="'+px+'-u">Email or username<input type="text" id="'+px+'-u" autocomplete="username" inputmode="email" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="160"></label>'+
+      '<label class="mem-f" for="'+px+'-p">4-digit code or password<span class="mem-pw"><input type="password" id="'+px+'-p" autocomplete="current-password" maxlength="64"><button type="button" class="mem-eye" aria-label="Show code" aria-pressed="false">Show</button></span></label>'+
       '<label class="mem-keep"><input type="checkbox" id="'+px+'-k"><span>Keep me signed in on this device<small>Leave this off on shared tablets and phones.</small></span></label>'+
       '<button class="cs-go mem-go" type="submit">'+esc(o.go||"Start engine")+'</button><p class="t-msg mem-msg" role="status"></p>'+
-      '<p class="mem-links"><a href="mailto:info@flintsoapbox.org?subject=Forgot%20my%20Flint%20Racing%20passcode">Forgot your username or passcode?</a>'+(o.staff?'<span>·</span><button type="button" class="mem-lnk" data-staffui="forgot">Admin password reset</button>':'')+'</p>'+
+      '<p class="mem-links"><a href="mailto:info@flintsoapbox.org?subject=Forgot%20my%20Flint%20Racing%20code">Forgot your code?</a>'+(o.staff?'<span>·</span><button type="button" class="mem-lnk" data-staffui="forgot">Admin password reset</button>':'')+'</p>'+
       (o.staff?'<div class="mem-new"><span>New here?</span><span><a href="#new-profile" data-regkind="crew">Register as staff →</a> <button type="button" class="mem-lnk" data-staffui="up">New admin account</button></span></div>':
       '<div class="mem-new"><span>First time here?</span><a href="#new-profile" data-regkind="'+(o.kind||"")+'">Register once →</a></div>')+'</form>'}
   function memOnHTML(px,dark){var r=(ME.roles||[]).map(function(k){return MROLES[k]?MROLES[k][0]:k});
@@ -6846,27 +6857,32 @@ window.FRB=(function(){
       return db.rpc("member_signin",{p_username:u,p_passcode:p,p_keep:!!keep})}).then(function(x){if(x.error)throw new Error(x.error.message);
       var d=x.data||{ok:false};if(!d.ok)return d;
       return db.auth.getSession().then(function(s){return setUser(s.data&&s.data.session?s.data.session.user:null)}).then(function(){return d})})}
+  /* 4-digit codes: everyone picks one at registration. It checks families in at the kiosk and signs everyone in on the site. */
+  var WEAK_CODES=["1234","4321","0123","3210","9876","6789","2580","1212","6969"];
+  function codeErr(c,c2){return !/^\d{4}$/.test(c)?"Your code needs to be exactly 4 digits.":/^(\d)\1{3}$/.test(c)||WEAK_CODES.indexOf(c)>=0?"Pick a code that isn’t easy to guess (not 1234 or 1111).":c2!=null&&c!==c2?"The two codes don’t match.":""}
+  var PREFS=[["workshops","Seasonal workshops","Workshop, camp and fun run dates as they’re set"],["council","Leadership Council updates & promotions","Council news, opportunities and special offers"]];
+  function prefsHTML(cls,on){on=on||[];return PREFS.map(function(x){return '<label class="'+cls+'"><input type="checkbox" name="pref" value="'+x[0]+'"'+(on.indexOf(x[0])>=0?' checked':'')+'><span><b>'+esc(x[1])+'</b><small>'+esc(x[2])+'</small></span></label>'}).join("")}
+  function prefsOf(root){return $$('input[name="pref"]:checked',root).map(function(i){return i.value})}
   function bindMem(px,after){var f=$("#"+px+"Mem");if(!f)return;
     var eye=$(".mem-eye",f),pw=$("#"+px+"-p");eye.onclick=function(){var on=pw.type==="password";pw.type=on?"text":"password";eye.textContent=on?"Hide":"Show";eye.setAttribute("aria-pressed",String(on))};
     f.onsubmit=function(e){e.preventDefault();var u=$("#"+px+"-u").value.trim().toLowerCase(),p=pw.value,k=$("#"+px+"-k").checked,m=$(".mem-msg",f),b=$(".mem-go",f);
-      if(!u||!p){m.textContent="Enter your username and passcode.";return}
+      if(!u||!p){m.textContent="Enter your email and your 4-digit code or password.";return}
       b.disabled=true;m.textContent="Checking…";
-      if(u.indexOf("@")>0){
-        db.auth.signInWithPassword({email:u,password:p}).then(function(r){
-          if(r.error){b.disabled=false;m.textContent=/confirm/i.test(r.error.message||"")?"Confirm your email first: open the link we sent you.":"That email and password don’t match. Admin password reset is just below.";pw.value="";return}
-          return db.auth.getSession().then(function(s){return setUser(s.data&&s.data.session?s.data.session.user:null)}).then(function(){b.disabled=false;m.textContent="";
-            if(!IS_ADMIN){toast("Signed in. This account isn’t an admin yet.");return}toast("Welcome back!");location.hash="#admin"})})
-        .catch(function(err){b.disabled=false;m.textContent=err.message||"Couldn’t sign in. Try again."});return}
-      memSignIn(u,p,k).then(function(d){b.disabled=false;
+      /* an email with a longer password may be an admin account: try that first, then the member profile */
+      var tryAdmin=u.indexOf("@")>0&&!/^\d{4}$/.test(p)?db.auth.signInWithPassword({email:u,password:p}).then(function(r){return r.error?null:r},function(){return null}):Promise.resolve(null);
+      tryAdmin.then(function(r){if(!r)return false;
+          return db.auth.getSession().then(function(s){return setUser(s.data&&s.data.session?s.data.session.user:null)}).then(function(){if(!IS_ADMIN)return false;
+            b.disabled=false;m.textContent="";toast("Welcome back!");location.hash="#admin";return true})})
+      .then(function(done){if(done)return;return memSignIn(u,p,k).then(function(d){b.disabled=false;
         if(!d.ok){m.textContent=d.status==="pending"?"Thanks for registering! Kendall or Kevin still need to approve your profile. We’ll email you when it’s ready.":
           d.status==="paused"?"This profile is paused. Email info@flintsoapbox.org to turn it back on.":d.status==="declined"?"This profile wasn’t approved. Email info@flintsoapbox.org with any questions.":
-          d.locked?"Too many wrong tries. Wait 15 minutes, then try again.":"That username and passcode don’t match. Check the spelling and try again.";pw.value="";pw.focus();return}
-        m.textContent="";toast("Welcome, "+firstName(d.display_name)+"!");if(after)after();else location.hash=landing()[0]})
+          d.locked?"Too many wrong tries. Wait "+(d.mins>90?Math.round(d.mins/60)+" hours":(d.mins||15)+" minutes")+", then try again, or email info@flintsoapbox.org for help.":"That email and code don’t match. Check them and try again.";pw.value="";pw.focus();return}
+        m.textContent="";toast("Welcome, "+firstName(d.display_name)+"!");if(after)after();else location.hash=landing()[0]})})
       .catch(function(err){b.disabled=false;m.textContent=err.message||"Couldn’t sign in. Try again."})}}
   function renderMemCards(){$$("a.util.dash").forEach(function(a){a.setAttribute("href",ME?"#my-dashboard":"#program-signin")});$$(".mem-in[data-mem]").forEach(function(box){var px="mi"+box.getAttribute("data-mem");
     if(ME){box.innerHTML=memOnHTML(px,true);$(".mem-out",box).onclick=signOut;return}
     if(box.querySelector("form.mem"))return;
-    box.innerHTML=memHTML(px,{dark:true,kind:box.getAttribute("data-kind"),kicker:(box.getAttribute("data-kind")==="family"?"Family Pass":"Crew Pass")+" sign in",sub:"One username works on both the Family and Crew Pass."});bindMem(px)})}
+    box.innerHTML=memHTML(px,{dark:true,kind:box.getAttribute("data-kind"),kicker:(box.getAttribute("data-kind")==="family"?"Family Pass":"Crew Pass")+" sign in",sub:"One email and 4-digit code work on both the Family and Crew Pass."});bindMem(px)})}
   document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-regkind]");if(a&&a.getAttribute("data-regkind"))REG.kind=a.getAttribute("data-regkind")});
   function crewName(){if(ME)return ME.display_name;if(!USER)return "";if(USER.is_anonymous)return "Guest";return (USER.user_metadata&&USER.user_metadata.full_name)||USER.email}
 
@@ -6877,10 +6893,10 @@ window.FRB=(function(){
   function kidRow(k){k=k||{};return '<div class="reg-kid"><input type="text" maxlength="40" placeholder="First name and last initial (Maya R.)" aria-label="Racer’s first name and last initial" value="'+esc(k.name||"")+'"><input type="text" maxlength="10" inputmode="numeric" placeholder="Age" aria-label="Age" value="'+esc(k.age||"")+'"><button type="button" aria-label="Remove this racer">×</button></div>'}
   function renderReg(){var box=$("#regBox");if(!box||hashBase()!=="new-profile")return;
     if(REG.done){var d=REG.done;box.innerHTML='<div class="reg-card"><p class="me-k">You’re on the roster</p><h2>Thanks, '+esc(firstName(d.name))+'!</h2>'+
-        '<p>Your username is</p><p><span class="reg-uname">'+esc(d.username)+'</span></p><p class="reg-hint">Write it down with your passcode. You’ll use both every time you sign in.</p>'+
-        '<ol class="reg-steps"><li class="done"><span><b>Profile created.</b></span></li><li><span><b>Kendall or Kevin review it</b>, usually within a few days, and turn on what you need'+(d.kind==="family"?'':' for your crew role')+'. We’ll email you when it’s ready.</span></li><li><span><b>Sign in</b> on the '+(d.kind==="family"?'Family Pass':'Crew Pass')+' with your username and passcode.</span></li></ol>'+
+        '<p>You’ll sign in with your email</p><p><span class="reg-uname">'+esc(d.email)+'</span></p><p class="reg-hint">and the 4-digit code you just picked. '+(d.kind==="family"?'The same code checks your family in and out at workshops.':'Keep it to yourself.')+'</p>'+
+        '<ol class="reg-steps"><li class="done"><span><b>Profile created.</b></span></li><li><span><b>Kendall or Kevin review it</b>, usually within a few days, and turn on what you need'+(d.kind==="family"?'':' for your crew role')+'. We’ll email you when it’s ready.</span></li><li><span><b>Sign in</b> on the '+(d.kind==="family"?'Family Pass':'Crew Pass')+' with your email and 4-digit code.</span></li></ol>'+
         '<div class="reg-go"><a class="btn deep" href="#access">Go to Sign in</a><a href="#home">Back to the homepage</a></div></div>';return}
-    if(ME){box.innerHTML='<div class="reg-card"><h2>You’re already registered</h2><p>You’re signed in as <b>'+esc(ME.display_name)+'</b> (@'+esc(ME.username)+'). Registering another person? Sign out first.</p><div class="reg-go"><a class="btn deep" href="#my-dashboard">My dashboard</a><button class="mini" type="button" id="regOut">Sign out</button></div></div>';$("#regOut").onclick=signOut;return}
+    if(ME){box.innerHTML='<div class="reg-card"><h2>You’re already registered</h2><p>You’re signed in as <b>'+esc(ME.display_name)+'</b>. Registering another person? Sign out first.</p><div class="reg-go"><a class="btn deep" href="#my-dashboard">My dashboard</a><button class="mini" type="button" id="regOut">Sign out</button></div></div>';$("#regOut").onclick=signOut;return}
     if(box.querySelector("#regForm")){setKind();return}
     box.innerHTML='<form class="reg-card" id="regForm" novalidate>'+
       '<fieldset class="reg-kind"><legend>I’m registering as</legend>'+
@@ -6891,9 +6907,10 @@ window.FRB=(function(){
         '<div class="reg-2"><label class="f" for="rg-email">Email<input type="email" id="rg-email" autocomplete="email" maxlength="160"></label><label class="f" for="rg-phone">Phone <small>(optional)</small><input type="tel" id="rg-phone" autocomplete="tel" maxlength="40"></label></div></div>'+
       '<div class="reg-sec" id="rgFam"><h3><i>2</i>Your racers</h3><p class="reg-hint">First name and last initial only. We keep kids’ full names off the website.</p><div id="rgKids" style="display:grid;gap:8px">'+kidRow()+'</div><button type="button" class="mini" id="rgAddKid" style="justify-self:start">+ Add another racer</button></div>'+
       '<div class="reg-sec" id="rgCrew" hidden><h3><i>2</i>How you’d like to help</h3><div class="reg-checks">'+REG_HELP.map(function(h){return '<label><input type="checkbox" value="'+h[0]+'"><span>'+esc(h[1])+'<small>'+esc(h[2])+'</small></span></label>'}).join("")+'</div><p class="reg-hint">Pick any that fit. Kendall or Kevin confirm your roles when they approve you.</p></div>'+
-      '<div class="reg-sec"><h3><i>3</i>Your sign-in</h3>'+
-        '<label class="f" for="rg-user">Choose a username <small>3 to 24 letters or numbers, no spaces. Please don’t use a child’s full name.</small><input type="text" id="rg-user" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="24" placeholder="e.g. taylorfamily"></label><p class="reg-user" id="rgUserMsg" aria-live="polite"></p>'+
-        '<div class="reg-2"><label class="f" for="rg-pass">Choose a passcode <small>At least 6 characters you’ll remember</small><input type="password" id="rg-pass" autocomplete="new-password" maxlength="64"></label><label class="f" for="rg-pass2">Type it again<input type="password" id="rg-pass2" autocomplete="new-password" maxlength="64"></label></div></div>'+
+      '<div class="reg-sec"><h3><i>3</i>Your 4-digit code</h3><p class="reg-hint">This is how you sign in here, with your email. Families also use it to check in and out at workshops. Pick 4 digits you’ll remember that aren’t easy to guess.</p>'+
+        '<div class="reg-2"><label class="f" for="rg-code">Choose your code<input type="password" id="rg-code" inputmode="numeric" pattern="[0-9]*" autocomplete="new-password" maxlength="4" class="reg-pin"></label><label class="f" for="rg-code2">Type it again<input type="password" id="rg-code2" inputmode="numeric" pattern="[0-9]*" autocomplete="new-password" maxlength="4" class="reg-pin"></label></div>'+
+        '<details class="reg-pwd"><summary>Prefer a password too? <small>(optional)</small></summary><p class="reg-hint">You can sign in with either one. At least 6 characters.</p><div class="reg-2"><label class="f" for="rg-pass">Password<input type="password" id="rg-pass" autocomplete="new-password" maxlength="64"></label><label class="f" for="rg-pass2">Type it again<input type="password" id="rg-pass2" autocomplete="new-password" maxlength="64"></label></div></details></div>'+
+      '<div class="reg-sec"><h3><i>4</i>Emails from us</h3><p class="reg-hint">Pick what you’d like to hear about. You can change this any time on your dashboard.</p><div class="reg-checks">'+prefsHTML("")+'</div></div>'+
       '<label class="f" for="rg-about">Anything we should know? <small>(optional)</small><textarea id="rg-about" maxlength="600" placeholder="Team name, school, allergies or how you heard about us"></textarea></label>'+
       '<label class="reg-ok"><input type="checkbox" id="rg-ok"><span>I understand an admin reviews every profile before it can see program dates, times and places, and that Flint Racing logs sign-ins to keep families safe.</span></label>'+
       '<div class="reg-go"><button class="btn deep" type="submit" id="rgGo">Register</button><span class="reg-hint">Already registered? <a href="#access">Sign in</a></span></div><p class="t-msg" id="rgMsg" role="status"></p></form>';
@@ -6902,21 +6919,18 @@ window.FRB=(function(){
     $$('input[name=rgk]',f).forEach(function(r){r.onchange=function(){REG.kind=r.value;setKind()}});setKind();
     function bindKids(){$$("#rgKids .reg-kid button").forEach(function(b){b.onclick=function(){if($$("#rgKids .reg-kid").length>1)b.parentNode.remove();else $$("input",b.parentNode).forEach(function(i){i.value=""})}})}
     bindKids();$("#rgAddKid").onclick=function(){if($$("#rgKids .reg-kid").length>=8){toast("That’s the most we can add here. Email us about more.");return}$("#rgKids").insertAdjacentHTML("beforeend",kidRow());bindKids();$$("#rgKids .reg-kid input").slice(-2)[0].focus()};
-    var um=$("#rgUserMsg"),uin=$("#rg-user");
-    uin.oninput=function(){uin.value=uin.value.toLowerCase().replace(/\s/g,"");um.textContent="";um.className="reg-user"};
-    uin.onblur=function(){var u=uin.value.trim();if(!u)return;if(!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(u)){um.textContent="Use 3 to 24 letters or numbers (dots, dashes and underscores are OK).";um.className="reg-user no";return}
-      db.rpc("member_username_free",{p_username:u}).then(function(x){if(x.error||uin.value.trim()!==u)return;um.textContent=x.data?"✓ "+u+" is available":"That username is taken. Try another.";um.className="reg-user "+(x.data?"ok":"no")})};
-    f.onsubmit=function(e){e.preventDefault();var m=$("#rgMsg"),fam=REG.kind!=="crew",u=uin.value.trim(),p1=$("#rg-pass").value,p2=$("#rg-pass2").value;
+    $$(".reg-pin",f).forEach(function(i){i.oninput=function(){i.value=i.value.replace(/\D/g,"").slice(0,4)}});
+    f.onsubmit=function(e){e.preventDefault();var m=$("#rgMsg"),fam=REG.kind!=="crew",c1=$("#rg-code").value,c2=$("#rg-code2").value,p1=$("#rg-pass").value,p2=$("#rg-pass2").value;
       var kids=fam?$$("#rgKids .reg-kid").map(function(r){var i=$$("input",r);return{name:i[0].value.trim(),age:i[1].value.trim()}}).filter(function(k){return k.name}):[];
       var req=fam?["family"]:$$("#rgCrew input:checked").map(function(i){return i.value});
       var err=$("#rg-name").value.trim().length<2?"Add your full name.":!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($("#rg-email").value.trim())?"Add an email address so we can reach you.":
-        fam&&!kids.length?"Add at least one racer.":!fam&&!req.length?"Pick at least one way you’d like to help.":!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(u)?"Choose a username: 3 to 24 letters or numbers.":
-        p1.length<6?"Your passcode needs at least 6 characters.":p1!==p2?"The two passcodes don’t match.":!$("#rg-ok").checked?"Check the box to confirm you understand the review.":"";
+        fam&&!kids.length?"Add at least one racer.":!fam&&!req.length?"Pick at least one way you’d like to help.":codeErr(c1,c2)||
+        (p1&&p1.length<6?"Your password needs at least 6 characters, or leave it blank.":p1!==p2?"The two passwords don’t match.":!$("#rg-ok").checked?"Check the box to confirm you understand the review.":"");
       if(err){m.textContent=err;return}
       var b=$("#rgGo");b.disabled=true;m.textContent="Saving your profile…";
-      db.rpc("member_register",{p_username:u,p_passcode:p1,p_name:$("#rg-name").value.trim(),p_kind:fam?"family":"crew",p_email:$("#rg-email").value.trim(),p_phone:$("#rg-phone").value.trim(),p_kids:kids,p_requested:req,p_about:$("#rg-about").value.trim()}).then(function(x){b.disabled=false;
+      db.rpc("member_register",{p_name:$("#rg-name").value.trim(),p_kind:fam?"family":"crew",p_email:$("#rg-email").value.trim(),p_phone:$("#rg-phone").value.trim(),p_kids:kids,p_requested:req,p_about:$("#rg-about").value.trim(),p_code:c1,p_passcode:p1||null,p_prefs:prefsOf(f)}).then(function(x){b.disabled=false;
         if(x.error){m.textContent=x.error.message;return}
-        REG.done={name:$("#rg-name").value.trim(),username:x.data||u,kind:fam?"family":"crew"};renderReg();scrollTo(0,0)})};
+        REG.done={name:$("#rg-name").value.trim(),email:$("#rg-email").value.trim().toLowerCase(),kind:fam?"family":"crew"};renderReg();scrollTo(0,0)})};
   }
 
   /* ---------- My dashboard (#my-dashboard): role-based spaces + personal profile ---------- */
@@ -6928,7 +6942,7 @@ window.FRB=(function(){
       box.__pv=null;
       if(USER&&!USER.is_anonymous){box.innerHTML='<div class="me-gate"><p class="me-k">Admin account</p><h2 class="mem-h">You’re signed in as an admin</h2><p class="mem-sub" style="margin:8px 0 14px">Admins work from the Admin portal. Personal dashboards are for families and crew who sign in with a username.</p><a class="btn deep" href="#admin">Open Admin</a></div>';return}
       if(box.querySelector("#meMem"))return;
-      box.innerHTML='<div class="me-gate">'+memHTML("me",{kicker:"My dashboard",title:"Sign in with your username",sub:"Families and crew: use the username and passcode you registered with."})+'</div>';bindMem("me",function(){});return}
+      box.innerHTML='<div class="me-gate">'+memHTML("me",{kicker:"My dashboard",title:"Sign in",sub:"Families and crew: use your email and your 4-digit code."})+'</div>';bindMem("me",function(){});return}
     if(box.__busy)return;box.__busy=true;
     db.rpc("my_profile").then(function(r){box.__busy=false;if(r.error||!r.data){box.innerHTML='<div class="me-gate"><p>Couldn’t load your profile. Refresh to try again.</p></div>';return}drawMe(box,r.data);logView("my-dashboard")});
   }
@@ -6944,15 +6958,18 @@ window.FRB=(function(){
     box.innerHTML='<section class="me-hero"><div class="me-av" aria-hidden="true">'+esc((m.display_name||"?").charAt(0).toUpperCase())+'</div><div><p class="me-k">'+(fam?"Family Pass":"Crew Pass")+' · Since '+esc(m.first_year)+'</p><h1>'+esc(m.display_name)+'</h1><p class="me-u">@'+esc(m.username)+'</p>'+
         '<div class="me-chips">'+(roles.length?roles.map(function(r){return '<span>'+esc(MROLES[r]?MROLES[r][0]:r)+'</span>'}).join(""):'<span>No roles yet</span>')+'</div></div><div class="row"><button class="mini" type="button" id="meOut">Sign out</button></div></section>'+
       '<div class="me-stats">'+tiles.map(function(t){return '<div><b>'+esc(t[0])+'</b><span>'+esc(t[1])+'</span></div>'}).join("")+'</div>'+
-      (fam&&ME&&ME.family_code?'<div class="me-card me-code"><div><p class="me-k">Workshop check-in</p><h2>Your kiosk code</h2></div><div class="me-digits" aria-label="Kiosk code '+esc(ME.family_code.split("").join(" "))+'">'+ME.family_code.split("").map(function(n){return '<span aria-hidden="true">'+esc(n)+'</span>'}).join("")+'</div><p>Type this on the check-in tablet by the door on workshop day, then tap your racers who are there. Keep it in the family.</p></div>':'')+
+      (m.family_code?'<div class="me-card me-code"><div><p class="me-k">Sign-in'+(fam?' and workshop check-in':'')+'</p><h2>Your 4-digit code</h2></div><div class="me-digits" id="meDigits" data-c="'+esc(m.family_code)+'">'+[0,1,2,3].map(function(){return '<span aria-hidden="true">•</span>'}).join("")+'</div><button class="mini" type="button" id="meShow" aria-pressed="false">Show</button>'+
+        '<p>'+(fam?'Sign in here with your email and this code, and type it on the check-in tablet on workshop day. Keep it in the family.':'Sign in here with your email and this code. Keep it to yourself.')+'</p></div>':'')+
       '<div class="me-grid"><div class="me-col"><div class="me-card"><p class="me-k">Your dashboard</p><h2>Where to next</h2><div class="me-sp">'+sp.map(function(s){return '<a href="'+s[0]+'"'+(s[4]?' class="main"':'')+'><b>'+esc(s[1])+'</b><span>'+esc(s[2])+'</span></a>'}).join("")+'</div>'+
           (roles.length<=1&&!fam?'<p class="me-fine">Need another space, like Race control or Photographer? Ask Kendall or Kevin to add it to your profile.</p>':'')+'</div>'+
         '<div class="me-card"><p class="me-k">Your history</p><h2>Recent check-ins</h2>'+(recent?'<ul class="me-list">'+recent+'</ul>':'<p class="me-empty">Nothing yet. Check in the next time you’re at the shop or the track.</p>')+'</div></div>'+
         '<div class="me-col">'+clock+
           (fam?'<div class="me-card"><p class="me-k">Your household</p><h2>Racers</h2>'+(kids?'<div class="me-kids">'+kids+'</div>':'<p class="me-empty">No racers listed.</p>')+'<p class="me-fine">Adding a racer or changing details? Email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>':'')+
           '<div class="me-card"><p class="me-k">Your profile</p><h2>Account</h2><ul class="me-list"><li><span>Email<small>'+esc(m.email||"—")+'</small></span></li><li><span>Phone<small>'+esc(m.phone||"—")+'</small></span></li></ul>'+
-            '<details><summary>Change my passcode</summary><form class="me-pw" id="mePw" novalidate><label class="f">Current passcode<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New passcode<input type="password" autocomplete="new-password" maxlength="64"></label><label class="f">Type the new one again<input type="password" autocomplete="new-password" maxlength="64"></label><button class="btn deep" type="submit" style="justify-self:start">Save new passcode</button><p class="t-msg" role="status"></p></form></details>'+
-            '<p class="me-fine">To change your name, email or roles, email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div></div></div>';
+            '<details><summary>Change my 4-digit code</summary><form class="me-pw" id="meCode" novalidate><label class="f">Current code or password<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New 4-digit code<input type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label><label class="f">Type the new code again<input type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label><button class="btn deep" type="submit" style="justify-self:start">Save new code</button><p class="t-msg" role="status"></p></form></details>'+
+            '<details><summary>'+(P.member.has_password?'Change my password':'Add a password (optional)')+'</summary><form class="me-pw" id="mePw" novalidate><label class="f">Current code or password<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New password <small>(6+ characters)</small><input type="password" autocomplete="new-password" maxlength="64"></label><label class="f">Type it again<input type="password" autocomplete="new-password" maxlength="64"></label><button class="btn deep" type="submit" style="justify-self:start">Save password</button><p class="t-msg" role="status"></p></form></details>'+
+            '<p class="me-fine">To change your name, email or roles, email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>'+
+          '<div class="me-card"><p class="me-k">Emails from us</p><h2>What you hear about</h2><form id="mePrefs" class="me-prefs">'+prefsHTML("me-pref",m.email_prefs||[])+'</form><p class="t-msg" id="mePrefMsg" role="status"></p></div></div></div>';
     if(preview){box.insertAdjacentHTML("afterbegin",'<div class="pv-banner"><div><b>Admin preview · sample '+(fam?"family":"crew member")+'</b><span>This is what '+(fam?"a family":"a crew member with every role")+' sees. The names and numbers are made up; buttons here don’t save anything.</span></div><div class="pv-sw"><a href="#my-dashboard/family"'+(fam?' aria-current="true"':'')+'>Family</a><a href="#my-dashboard/crew"'+(!fam?' aria-current="true"':'')+'>Crew</a></div></div>');
       $$("button,input",box).forEach(function(el){if(!el.closest(".pv-banner")){el.disabled=true}});$("#meOut").onclick=null;return}
     $("#meOut").onclick=signOut;
@@ -6960,13 +6977,19 @@ window.FRB=(function(){
       db.rpc("member_clock",{p_kind:k||"other"}).then(function(x){b.disabled=false;if(x.error){toast(x.error.message);return}
         toast(x.data&&x.data.clocked==="in"?"You’re checked in. Have fun!":"Checked out"+(x.data&&x.data.hours!=null?" · "+fmtHrs(Math.round(x.data.hours*10)/10)+" hours":"")+". Thank you!");renderMe()})};
     var pf=$("#mePw");pf.onsubmit=function(e){e.preventDefault();var i=$$("input",pf),msg=$(".t-msg",pf);
-      if(i[1].value.length<6){msg.textContent="Use at least 6 characters.";return}if(i[1].value!==i[2].value){msg.textContent="The new passcodes don’t match.";return}
-      db.rpc("member_set_passcode",{p_old:i[0].value,p_new:i[1].value}).then(function(x){if(x.error){msg.textContent=x.error.message;return}i.forEach(function(n){n.value=""});msg.textContent="";toast("New passcode saved.");pf.closest("details").open=false})};
+      if(i[1].value.length<6){msg.textContent="Use at least 6 characters.";return}if(i[1].value!==i[2].value){msg.textContent="The new passwords don’t match.";return}
+      db.rpc("member_set_passcode",{p_old:i[0].value,p_new:i[1].value}).then(function(x){if(x.error){msg.textContent=x.error.message;return}i.forEach(function(n){n.value=""});msg.textContent="";toast("Password saved. You can sign in with it or your code.");pf.closest("details").open=false})};
+    var cf=$("#meCode");if(cf){$$("input",cf).slice(1).forEach(function(n){n.oninput=function(){n.value=n.value.replace(/\D/g,"").slice(0,4)}});
+      cf.onsubmit=function(e){e.preventDefault();var i=$$("input",cf),msg=$(".t-msg",cf),er=codeErr(i[1].value,i[2].value);if(er){msg.textContent=er;return}
+        db.rpc("member_set_code",{p_current:i[0].value,p_new:i[1].value}).then(function(x){if(x.error){msg.textContent=x.error.message;return}i.forEach(function(n){n.value=""});msg.textContent="";if(ME)ME.family_code=null;toast("New code saved. Use it next time you sign in"+(fam?" or check in":"")+".");renderMe()})}}
+    var sh=$("#meShow");if(sh)sh.onclick=function(){var d=$("#meDigits"),on=sh.getAttribute("aria-pressed")!=="true",c=d.getAttribute("data-c");
+      d.innerHTML=c.split("").map(function(n){return '<span aria-hidden="true">'+(on?esc(n):"•")+'</span>'}).join("");d.setAttribute("aria-label",on?"Your code: "+c.split("").join(" "):"");sh.setAttribute("aria-pressed",String(on));sh.textContent=on?"Hide":"Show"};
+    var pr=$("#mePrefs");if(pr)pr.onchange=function(){var msg=$("#mePrefMsg");db.rpc("member_set_prefs",{p_prefs:prefsOf(pr)}).then(function(x){if(x.error){msg.textContent=x.error.message;return}msg.textContent="Saved.";setTimeout(function(){msg.textContent=""},2000)})};
   }
 
   /* ---------- Admin → Members: approvals, roles, hours and the sign-in log ---------- */
   var MSUB="people", MFIND={q:"",f:"all"}, MOPEN={};
-  var LOGACT={sign_in:"Signed in",sign_out:"Signed out",signin_failed:"Wrong username or passcode",signin_blocked:"Tried to sign in before approval",register:"Registered",clock_in:"Checked in",clock_out:"Checked out",
+  var LOGACT={sign_in:"Signed in",sign_out:"Signed out",signin_failed:"Wrong email, code or password",code_changed:"Changed their 4-digit code",signin_blocked:"Tried to sign in before approval",register:"Registered",clock_in:"Checked in",clock_out:"Checked out",
     passcode_changed:"Changed their passcode",admin_update:"Admin updated profile",admin_reset_passcode:"Admin reset passcode","view:dates":"Viewed program dates, times and places","view:my-dashboard":"Opened their dashboard"};
   function logLabel(a){if(LOGACT[a])return LOGACT[a];if(a.indexOf("view:")===0)return "Opened "+a.slice(5).replace(/-/g," ");return a}
   function tabMembers(){var P=$("#admPanel");
@@ -6978,7 +7001,7 @@ window.FRB=(function(){
       var sub='<div class="mb-sub" role="tablist">'+[["people","Profiles",pend.length],["log","Who’s been in",0]].map(function(t){return '<button type="button" role="tab" data-msub="'+t[0]+'" aria-selected="'+(MSUB===t[0])+'">'+t[1]+(t[2]?'<em>'+t[2]+'</em>':'')+'</button>'}).join("")+'</div>';
       function chips(m,pre){var on=pre||m.roles||[],req=m.requested||[];return '<div class="mb-roles" aria-label="Roles">'+Object.keys(MROLES).map(function(k){return '<label class="'+(req.indexOf(k)>=0?"req":"")+'" title="'+esc(MROLES[k][1])+'"><input type="checkbox" value="'+k+'"'+(on.indexOf(k)>=0?' checked':'')+'>'+esc(MROLES[k][0])+'</label>'}).join("")+'</div>'}
       function info(m){return '<div class="mb-info"><span><b>Email</b>'+(m.email?'<a href="mailto:'+esc(m.email)+'">'+esc(m.email)+'</a>':'—')+'</span><span><b>Phone</b>'+esc(m.phone||"—")+'</span>'+
-        (m.kind==="family"?'<span><b>Racers</b>'+esc((m.kids||[]).map(function(k){return k.name+(k.age?" ("+k.age+")":"")}).join(", ")||"—")+'</span><span class="mb-code"><b>Kiosk code</b>'+(m.family_code?'<b data-code>'+esc(m.family_code)+'</b><button class="mini" type="button" data-ma="code">New code</button>':'<small>Given automatically when they’re approved as a family.</small>')+'</span>':'<span><b>Asked for</b>'+esc((m.requested||[]).map(function(k){return MROLES[k]?MROLES[k][0]:k}).join(", ")||"—")+'</span>')+
+        (m.kind==="family"?'<span><b>Racers</b>'+esc((m.kids||[]).map(function(k){return k.name+(k.age?" ("+k.age+")":"")}).join(", ")||"—")+'</span><span class="mb-code"><b>4-digit code</b>'+(m.family_code?'<b data-code>'+esc(m.family_code)+'</b><button class="mini" type="button" data-ma="code">New code</button>':'<small>Given automatically when they’re approved as a family.</small>')+'</span>':'<span><b>Asked for</b>'+esc((m.requested||[]).map(function(k){return MROLES[k]?MROLES[k][0]:k}).join(", ")||"—")+'</span>')+
         (m.about?'<span style="grid-column:1/-1"><b>Note from them</b>'+esc(m.about)+'</span>':'')+'</div>'}
       function card(m){var st=m.status,h=HM[m.id]||{hrs:0,list:[]},pending=st==="pending";
         return '<div class="mb'+(pending?' pend':'')+'" data-id="'+m.id+'"><div class="mb-top"><div><b>'+esc(m.display_name)+'</b> <small>@'+esc(m.username)+'</small><span class="mb-st st-'+st+'">'+esc(st)+'</span><br><small>'+(m.kind==="family"?"Family":"Crew")+' · registered '+fmtDate(String(m.created_at).slice(0,10),{month:"short",day:"numeric",year:"numeric"})+(m.last_seen_at?' · last seen '+new Date(m.last_seen_at).toLocaleDateString([],{month:"short",day:"numeric"}):' · never signed in')+'</small></div>'+
@@ -6987,15 +7010,20 @@ window.FRB=(function(){
           chips(m,pending?(m.requested&&m.requested.length?m.requested:[]).concat(m.kind==="family"?["family"]:[]):null)+
           '<div class="row" style="margin:0">'+(pending?'<button class="mini solid" type="button" data-ma="approve">Approve with these roles</button><button class="mini red" type="button" data-ma="decline">Decline</button>':
             '<button class="mini solid" type="button" data-ma="save">Save roles</button>'+(st==="approved"?'<button class="mini" type="button" data-ma="pause">Pause</button>':'<button class="mini" type="button" data-ma="activate">Approve</button>')+
-            '<button class="mini" type="button" data-ma="hours">Hours ('+h.list.length+')</button><button class="mini" type="button" data-ma="reset">Reset passcode</button><button class="mini red" type="button" data-ma="del">Delete</button>')+'</div>'+
+            '<button class="mini" type="button" data-ma="hours">Hours ('+h.list.length+')</button><button class="mini" type="button" data-ma="reset">Set password</button><button class="mini red" type="button" data-ma="del">Delete</button>')+'</div>'+
           '<div class="mb-more" hidden></div></div>'}
       if(MSUB==="people"){
-        P.innerHTML=sub+'<p style="color:#4a4d55;max-width:78ch">Every approved family gets a 4-digit kiosk code for workshop check-in. <button class="mini" type="button" id="mbCodes">Download kiosk codes</button></p><p style="color:#4a4d55;max-width:78ch">Everyone registers once with a username and passcode. Approve them here and tick their roles: roles decide what their dashboard opens. Families get the Program Dashboard; crew roles open Workshop sign-in, Teacher, Photographer, Race control, Track operations or Volunteer lists.</p>'+
+        P.innerHTML=sub+'<p style="color:#4a4d55;max-width:78ch">Each person picks their own 4-digit code when they register. It signs them in here and checks families in at the kiosk. <button class="mini" type="button" id="mbCodes">Download family codes</button> <button class="mini" type="button" id="mbMail">Download email list</button></p><p style="color:#4a4d55;max-width:78ch">Everyone registers once with their email and a 4-digit code they choose (the code also checks families in at the kiosk). Families who register at the kiosk are approved on the spot. Approve the rest here and tick their roles: roles decide what their dashboard opens. Families get the Program Dashboard; crew roles open Workshop sign-in, Teacher, Photographer, Race control, Track operations or Volunteer lists.</p>'+
           (pend.length?'<h3 class="ov-h">Waiting for approval ('+pend.length+')</h3>'+pend.map(card).join(""):'<p class="rk-fine">No one is waiting for approval.</p>')+
           '<h3 class="ov-h">Everyone</h3><div class="mb-find"><input type="search" id="mbQ" placeholder="Search name, username or email" aria-label="Search profiles" value="'+esc(MFIND.q)+'"><select id="mbF" aria-label="Show">'+[["all","Everyone"],["family","Families"],["crew","Crew"],["approved","Approved"],["paused","Paused"],["declined","Declined"]].map(function(o){return '<option value="'+o[0]+'"'+(MFIND.f===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join("")+'</select><button class="mini" type="button" id="mbCsv">Download (.csv)</button></div><div id="mbList"></div>';
         $("#mbCodes").onclick=function(){var fam=M.filter(function(m){return m.status==="approved"&&m.family_code}).sort(function(a,b){return a.display_name>b.display_name?1:-1});
           if(!fam.length){toast("No approved families with codes yet.");return}
-          csv([["Family","Username","Kiosk code","Racers"]].concat(fam.map(function(m){return [m.display_name,m.username,m.family_code,(m.kids||[]).map(function(k){return k.name}).join(", ")]})),"kiosk-codes.csv")};
+          csv([["Family","Email","4-digit code","Racers"]].concat(fam.map(function(m){return [m.display_name,m.email,m.family_code,(m.kids||[]).map(function(k){return k.name}).join(", ")]})),"family-codes.csv")};
+        $("#mbMail").onclick=function(){db.from("inquiries").select("first_name,last_name,email,interests,created_at").eq("email_updates",true).then(function(q){
+          var rows=[["Name","Email","Seasonal workshops","Leadership Council","Source"]],seen={};
+          M.filter(function(m){return m.email&&(m.email_prefs||[]).length}).forEach(function(m){seen[m.email.toLowerCase()]=1;rows.push([m.display_name,m.email,(m.email_prefs||[]).indexOf("workshops")>=0?"Yes":"",(m.email_prefs||[]).indexOf("council")>=0?"Yes":"",m.kind==="family"?"Family profile":"Crew profile"])});
+          ((q&&q.data)||[]).forEach(function(i){var e=(i.email||"").toLowerCase();if(!e||seen[e])return;seen[e]=1;var t=i.interests||"";rows.push([(i.first_name+" "+(i.last_name||"")).trim(),i.email,/workshop/i.test(t)||!/council/i.test(t)?"Yes":"",/council/i.test(t)?"Yes":"","Inquiry or kiosk guest"])});
+          if(rows.length<2){toast("No one has asked for emails yet.");return}csv(rows,"email-list-"+todayISO()+".csv")})};
         var list=$("#mbList");
         function drawList(){var q=MFIND.q.toLowerCase(),rows=M.filter(function(m){if(m.status==="pending")return false;var f=MFIND.f;
             if(f==="family"||f==="crew"){if(m.kind!==f)return false}else if(f!=="all"&&m.status!==f)return false;
@@ -7024,12 +7052,12 @@ window.FRB=(function(){
           if(a==="approve"){if(!roles().length){toast("Tick at least one role first.");return}upd("approved",m.display_name+" is approved. Let them know they can sign in.");return}
           if(a==="decline"){if(b.textContent!=="Confirm decline"){b.textContent="Confirm decline";return}upd("declined","Declined");return}
           if(a==="save"){upd(m.status,"Roles saved");return}
-          if(a==="code"){if(b.textContent!=="Confirm new code"){b.textContent="Confirm new code";return}db.rpc("admin_new_family_code",{p_id:m.id}).then(function(x){if(okToast(x,m.display_name+"’s new kiosk code is "+x.data+". Let them know.")){m.family_code=x.data;$$("[data-code]",c).forEach(function(e){e.textContent=x.data});b.textContent="New code"}});return}
+          if(a==="code"){if(b.textContent!=="Confirm new code"){b.textContent="Confirm new code";return}db.rpc("admin_new_family_code",{p_id:m.id}).then(function(x){if(okToast(x,m.display_name+"’s new 4-digit code is "+x.data+". Let them know: it’s also how they sign in.")){m.family_code=x.data;$$("[data-code]",c).forEach(function(e){e.textContent=x.data});b.textContent="New code"}});return}
           if(a==="pause"){upd("paused","Paused. They’re signed out everywhere.");return}
           if(a==="activate"){upd("approved","Approved");return}
           if(a==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}db.from("members").delete().eq("id",id).then(function(x){if(okToast(x,"Profile deleted"))tabMembers()});return}
-          if(a==="reset"){more.hidden=false;more.innerHTML='<form novalidate><b>New passcode for @'+esc(m.username)+'</b><input type="text" maxlength="64" placeholder="6+ characters" aria-label="New passcode" autocomplete="off"><button class="mini solid" type="submit">Save</button></form><small style="color:#5a5d64">Share it with them privately. They can change it on their dashboard. Saving signs them out everywhere.</small>';
-            $("form",more).onsubmit=function(e){e.preventDefault();var v=$("input",more).value;db.rpc("admin_reset_passcode",{p_id:id,p_new:v}).then(function(x){if(okToast(x,"New passcode saved for @"+m.username)){more.hidden=true;more.innerHTML=""}})};$("input",more).focus();return}
+          if(a==="reset"){more.hidden=false;more.innerHTML='<form novalidate><b>New password for '+esc(m.email||m.username)+'</b><input type="text" maxlength="64" placeholder="6+ characters" aria-label="New password" autocomplete="off"><button class="mini solid" type="submit">Save</button></form><small style="color:#5a5d64">Share it with them privately. They can change it on their dashboard. Saving signs them out everywhere.</small>';
+            $("form",more).onsubmit=function(e){e.preventDefault();var v=$("input",more).value;db.rpc("admin_reset_passcode",{p_id:id,p_new:v}).then(function(x){if(okToast(x,"New password saved for "+(m.email||m.username))){more.hidden=true;more.innerHTML=""}})};$("input",more).focus();return}
           if(a==="hours"){var h=(HM[id]||{list:[]}).list,t=todayISO();more.hidden=false;
             more.innerHTML='<b>Check-ins and hours</b>'+(h.length?'<ul class="me-list">'+h.map(function(x){var hr=x.ended_at?(new Date(x.ended_at)-new Date(x.started_at))/36e5:null;return '<li><span>'+esc(MKIND[x.kind]||x.kind)+'<small>'+new Date(x.started_at).toLocaleString([],{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"})+(x.added_by==="admin"?' · added by admin':'')+(x.note?' · '+esc(x.note):'')+'</small></span><em>'+(hr==null?'open':fmtHrs(Math.round(hr*10)/10)+' h')+' <button class="mini red" type="button" data-hdel="'+x.id+'">Remove</button></em></li>'}).join("")+'</ul>':'<p class="rk-fine">No check-ins yet.</p>')+
               '<form novalidate><input type="date" value="'+t+'" aria-label="Date"><select aria-label="Type">'+Object.keys(MKIND).map(function(k){return '<option value="'+k+'">'+esc(MKIND[k])+'</option>'}).join("")+'</select><input type="number" min="0" max="24" step="0.25" value="2" style="width:80px" aria-label="Hours"> hours <input type="text" maxlength="300" placeholder="Note (optional)" aria-label="Note"><button class="mini solid" type="submit">Add hours</button></form>';

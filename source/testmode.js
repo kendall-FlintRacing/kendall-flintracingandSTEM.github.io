@@ -138,17 +138,32 @@
       function curM(){var s=user&&T.msess[user.id];if(!s||s.exp<Date.now())return null;var m=T.members.filter(function(x){return x.id===s.mid})[0];return m&&m.status==="approved"?m:null}
       function weak(p){return !p||p.length<6||/^(.)\1*$/.test(p)||["123456","654321","password","123123","qwerty"].indexOf(p.toLowerCase())>=0}
       if(fn==="member_username_free")return R(!T.members.some(function(m){return m.username===String(args.p_username||"").trim().toLowerCase()}));
-      if(fn==="member_register"){var u=String(args.p_username||"").trim().toLowerCase();
-        if(!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(u))return R(null,"Usernames are 3 to 24 letters or numbers (dots, dashes and underscores are OK).");
-        if(T.members.some(function(m){return m.username===u}))return R(null,"That username is taken. Try another.");
-        if(weak(args.p_passcode))return R(null,"Pick a passcode of at least 6 characters that isn’t easy to guess.");
-        var id="m"+rid();T.members.unshift({id:id,username:u,display_name:args.p_name,kind:args.p_kind,email:args.p_email,phone:args.p_phone||null,kids:args.p_kids||[],requested:(args.p_requested||[]).filter(function(r){return ROLES.indexOf(r)>=0}),roles:[],status:"pending",about:args.p_about||null,admin_note:null,first_year:new Date().getFullYear(),created_at:new Date().toISOString(),approved_at:null,last_seen_at:null});
-        T.mpass[id]=args.p_passcode;mlog(id,u,"register",args.p_kind);save();return R(u)}
-      if(fn==="member_signin"){var un=String(args.p_username||"").trim().toLowerCase(),mm=T.members.filter(function(m){return m.username===un})[0];
-        if(!mm||T.mpass[mm.id]!==args.p_passcode){mlog(mm?mm.id:null,un,"signin_failed",mm?"wrong passcode":"unknown username");save();return R({ok:false})}
+      var proof=function(m,p){return (/^\d{4}$/.test(p||"")&&m.family_code===p)||(T.mpass[m.id]&&T.mpass[m.id]===p)};
+      var wcode=function(c){return !/^\d{4}$/.test(c||"")||/^(\d)\1{3}$/.test(c)||["1234","4321","0123","3210","9876","6789","2580","1212","6969"].indexOf(c)>=0};
+      var newMem=function(a,status,roles){var em=String(a.p_email||"").trim().toLowerCase();
+        if(String(a.p_name||"").trim().length<2)return {e:"Add your name."};if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em))return {e:"Add an email address so we can reach you."};
+        if(T.members.some(function(m){return (m.email||"").toLowerCase()===em}))return {e:"That email already has a profile. Sign in with it, or email info@flintsoapbox.org if you forgot your code."};
+        if(wcode(a.p_code))return {e:"Pick a 4-digit code that isn’t easy to guess (not 1234 or 1111)."};
+        if(T.members.some(function(m){return m.family_code===a.p_code}))return {e:"That code is already in use. Pick a different 4 digits."};
+        if(a.p_passcode&&weak(a.p_passcode))return {e:"Pick a password of at least 6 characters that isn’t easy to guess, or leave it blank."};
+        var kids=(a.p_kids||[]).filter(function(k){return k&&String(k.name||"").trim()}).slice(0,8);if(a.p_kind==="family"&&!kids.length)return {e:"Add at least one racer."};
+        var b=em.split("@")[0].replace(/[^a-z0-9._-]/g,"").replace(/^[._-]+/,"");if(b.length<3)b+="family";b=b.slice(0,20);var u=b,i=1;while(T.members.some(function(m){return m.username===u})){i++;u=b+i}
+        var id="m"+rid(),m={id:id,username:u,display_name:String(a.p_name).trim(),kind:a.p_kind,email:em,phone:a.p_phone||null,kids:kids,requested:(a.p_requested||[]).filter(function(r){return ROLES.indexOf(r)>=0}),roles:roles,status:status,about:a.p_about||null,admin_note:null,first_year:new Date().getFullYear(),created_at:new Date().toISOString(),approved_at:status==="approved"?new Date().toISOString():null,last_seen_at:null,family_code:a.p_code,email_prefs:(a.p_prefs||[]).filter(function(x){return x==="workshops"||x==="council"})};
+        T.members.unshift(m);if(a.p_passcode)T.mpass[id]=a.p_passcode;mlog(id,u,"register",a.p_kind);save();return {m:m}};
+      if(fn==="member_register"){var nm0=newMem(args,"pending",[]);return nm0.e?R(null,nm0.e):R({ok:true,username:nm0.m.username})}
+      if(fn==="kiosk_register_family"){var td0=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10),nm1=newMem(Object.assign({},args,{p_kind:"family",p_requested:["family"],p_about:"Registered at the workshop check-in kiosk."}),"approved",["family"]);
+        if(nm1.e)return R(null,nm1.e);var mm1=nm1.m,kn=mm1.kids.map(function(k){return k.name}),ln=mm1.display_name.trim().split(/\s+/).pop();
+        T.workshop_signins.push({id:"ws"+Date.now(),created_at:new Date().toISOString(),session_date:td0,event_id:args.p_event||null,team:null,last_name:ln,kids:kn.length,volunteers:Math.max(0,Math.min(10,args.p_adults|0)),notes:"New family · registered at the kiosk",member_id:mm1.id,kid_names:kn,source:"kiosk"});save();
+        return R({ok:true,family:ln,kids:kn})}
+      if(fn==="member_signin"){var un=String(args.p_username||"").trim().toLowerCase(),mm=T.members.filter(function(m){return un.indexOf("@")>0?(m.email||"").toLowerCase()===un:m.username===un})[0];
+        if(!mm||!proof(mm,args.p_passcode)){mlog(mm?mm.id:null,un,"signin_failed",mm?"wrong code or password":"unknown account");save();return R({ok:false})}
         if(mm.status!=="approved"){mlog(mm.id,un,"signin_blocked",mm.status);save();return R({ok:false,status:mm.status})}
         T.msess[user.id]={mid:mm.id,exp:Date.now()+(args.p_keep?30*864e5:12*36e5)};mm.last_seen_at=new Date().toISOString();mlog(mm.id,un,"sign_in",args.p_keep?"kept signed in":"this visit");save();
         return R({ok:true,username:mm.username,display_name:mm.display_name,roles:mm.roles})}
+      if(fn==="member_set_code"){var c9=curM();if(!c9)return R(null,"Sign in first.");if(!proof(c9,args.p_current))return R(null,"Your current code or password isn’t right.");
+        if(wcode(args.p_new))return R(null,"Pick a 4-digit code that isn’t easy to guess (not 1234 or 1111).");if(T.members.some(function(m){return m.family_code===args.p_new&&m.id!==c9.id}))return R(null,"That code is already in use. Pick a different 4 digits.");
+        c9.family_code=args.p_new;mlog(c9.id,c9.username,"code_changed");save();return R(null)}
+      if(fn==="member_set_prefs"){var c10=curM();if(!c10)return R(null,"Sign in first.");c10.email_prefs=(args.p_prefs||[]).filter(function(x){return x==="workshops"||x==="council"});save();return R(c10.email_prefs)}
       if(fn==="member_signout"){var c0=curM();if(c0)mlog(c0.id,c0.username,"sign_out");if(user)delete T.msess[user.id];save();return R(null)}
       if(fn==="my_member"){var c1=curM();return R(c1?{id:c1.id,username:c1.username,display_name:c1.display_name,kind:c1.kind,roles:c1.roles,first_year:c1.first_year,family_code:c1.family_code||null}:null)}
       if(fn==="kiosk_guest_signin"||fn==="kiosk_guests_today"||fn==="kiosk_checkout"){var td=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
@@ -156,7 +171,7 @@
           if(gn.length<2)return R(null,"Add your name");if(ge&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ge))return R(null,"That email doesn’t look right");
           if(!ge&&gp.replace(/\D/g,"").length<7)return R(null,"Add an email or a phone number");
           var gid="wsg"+Date.now();T.workshop_signins.push({id:gid,created_at:new Date().toISOString(),session_date:td,event_id:args.p_event||null,team:null,last_name:gn,kids:Math.max(0,Math.min(20,args.p_kids|0)),volunteers:Math.max(0,Math.min(10,args.p_adults|0)),notes:args.p_note||null,member_id:null,kid_names:null,source:"guest",guest_email:ge||null,guest_phone:gp||null,wants_account:!!args.p_account});
-          if(args.p_updates&&ge){var sp=gn.lastIndexOf(" ");(T.inquiries=T.inquiries||[]).push({id:"iq"+Date.now(),created_at:new Date().toISOString(),first_name:sp>0?gn.slice(0,sp):gn,last_name:sp>0?gn.slice(sp+1):"",role:"Workshop guest",interests:"Email updates",youth_count:args.p_kids|0,message:"Joined the mailing list from the workshop check-in kiosk.",email:ge,phone:gp||null,contact_by:"Email",best_time:"Any time",email_updates:true,status:"new"})}
+          if((args.p_prefs||[]).length&&ge){var sp=gn.lastIndexOf(" ");(T.inquiries=T.inquiries||[]).push({id:"iq"+Date.now(),created_at:new Date().toISOString(),first_name:sp>0?gn.slice(0,sp):gn,last_name:sp>0?gn.slice(sp+1):"",role:"Workshop guest",interests:"Email updates: "+args.p_prefs.map(function(x){return x==="workshops"?"Seasonal workshops":"Leadership Council"}).join(", "),youth_count:args.p_kids|0,message:"Joined the mailing list from the workshop check-in kiosk.",email:ge,phone:gp||null,contact_by:"Email",best_time:"Any time",email_updates:true,status:"new"})}
           save();return R({ok:true,id:gid})}
         if(fn==="kiosk_guests_today")return R(T.workshop_signins.filter(function(w){return w.session_date===td&&w.source==="guest"&&!w.checked_out_at}).map(function(w){var p=w.last_name.split(" ");return{id:w.id,name:p.length>1?p[0]+" "+p[p.length-1][0]+".":w.last_name,kids:w.kids,adults:w.volunteers}}));
         var row;if(args.p_code){var fm2=T.members.filter(function(m){return m.family_code===args.p_code})[0];if(!fm2)return R(null,"That code didn’t match");row=T.workshop_signins.filter(function(w){return w.member_id===fm2.id&&w.session_date===td})[0]}
@@ -182,13 +197,13 @@
       if(fn==="my_profile"){var c2=curM();if(!c2)return R(null);var hs=T.member_hours.filter(function(h){return h.member_id===c2.id}).sort(function(a,b){return a.started_at<b.started_at?1:-1});
         var days=function(k){var o={};hs.forEach(function(h){if(k.indexOf(h.kind)>=0)o[h.started_at.slice(0,10)]=1});return Object.keys(o).length},yrs={};yrs[c2.first_year]=1;hs.forEach(function(h){yrs[h.started_at.slice(0,4)]=1});
         var op=hs.filter(function(h){return !h.ended_at&&Date.now()-new Date(h.started_at)<16*36e5})[0];
-        return R({member:{username:c2.username,display_name:c2.display_name,kind:c2.kind,roles:c2.roles,first_year:c2.first_year,email:c2.email,phone:c2.phone,kids:c2.kids,since:c2.created_at},
+        return R({member:{username:c2.username,display_name:c2.display_name,kind:c2.kind,roles:c2.roles,first_year:c2.first_year,email:c2.email,phone:c2.phone,kids:c2.kids,since:c2.created_at,family_code:c2.family_code||null,email_prefs:c2.email_prefs||[],has_password:!!T.mpass[c2.id]},
           hours:Math.round(hs.reduce(function(a,h){return a+(h.ended_at?(new Date(h.ended_at)-new Date(h.started_at))/36e5:0)},0)*10)/10,workshops:days(["workshop"]),race_days:days(["race_day"]),events:days(["event","other"]),years:Object.keys(yrs).length,
           open:op?{id:op.id,kind:op.kind,started_at:op.started_at}:null,recent:hs.slice(0,12).map(function(h){return{kind:h.kind,started_at:h.started_at,ended_at:h.ended_at,note:h.note}})})}
       if(fn==="member_clock"){var c3=curM();if(!c3)return R(null,"Sign in first.");var o3=T.member_hours.filter(function(h){return h.member_id===c3.id&&!h.ended_at})[0];
         if(o3){o3.ended_at=new Date().toISOString();mlog(c3.id,c3.username,"clock_out",o3.kind);save();return R({clocked:"out",hours:(new Date(o3.ended_at)-new Date(o3.started_at))/36e5})}
         T.member_hours.push({id:rid(),member_id:c3.id,kind:args.p_kind,started_at:new Date().toISOString(),ended_at:null,note:null,added_by:"self"});mlog(c3.id,c3.username,"clock_in",args.p_kind);save();return R({clocked:"in"})}
-      if(fn==="member_set_passcode"){var c4=curM();if(!c4)return R(null,"Sign in first.");if(T.mpass[c4.id]!==args.p_old)return R(null,"Your current passcode isn’t right.");if(weak(args.p_new))return R(null,"Pick a passcode of at least 6 characters that isn’t easy to guess.");T.mpass[c4.id]=args.p_new;mlog(c4.id,c4.username,"passcode_changed");save();return R(null)}
+      if(fn==="member_set_passcode"){var c4=curM();if(!c4)return R(null,"Sign in first.");if(!proof(c4,args.p_old))return R(null,"Your current code or password isn’t right.");if(weak(args.p_new))return R(null,"Pick a passcode of at least 6 characters that isn’t easy to guess.");T.mpass[c4.id]=args.p_new;mlog(c4.id,c4.username,"passcode_changed");save();return R(null)}
       if(fn==="log_view"){var c5=curM(),w5=c5?c5.username:(user&&!user.is_anonymous?user.email:null);if(w5){mlog(c5?c5.id:null,w5,"view:"+String(args.p_what||"").replace(/[^a-z0-9_-]/g,"").slice(0,40));save()}return R(null)}
       if(fn==="program_dashboard_member"){var c6=curM();if(!c6&&!(user&&user.id==="test-admin"))return R(null);mlog(c6?c6.id:null,c6?c6.username:user.email,"view:dates");save();
         var t6=new Date().toISOString().slice(0,10),D6={};T.event_details.forEach(function(x){D6[x.event_id]=x});
