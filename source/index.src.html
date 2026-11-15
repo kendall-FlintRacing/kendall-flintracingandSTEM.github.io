@@ -3139,6 +3139,14 @@ body.rw-tv .rw-fol{display:none}
 #coBox .cx .co-tasks li>.co-fa{display:flex;align-items:center;gap:8px}
 #coBox .cx .co-tbl td{color:#eceef2}
 #coBox .cx .co-tbl .rk-radio{display:inline-flex;gap:8px;align-items:center;border:0;padding:0;font:500 .86rem/1.2 var(--body)}
+
+#coBox .cx .co-del{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px;margin-bottom:10px}
+#coBox .cx .co-del input,#coBox .cx #coRW textarea,#coBox .cx #coRN textarea{display:block;width:100%;margin-top:6px;padding:10px 12px;font:400 1rem/1.4 var(--body)}
+#coBox .cx .co-rev{margin:12px 0 0;padding-top:12px;border-top:1px solid rgba(255,255,255,.08)}
+#coBox .cx .co-repli{flex-wrap:wrap}#coBox .cx .co-repli>span:first-child{flex:1}#coBox .cx .co-repli .co-rev{flex-basis:100%}
+#coBox .cx .co-links{margin:6px 0 0 18px;display:grid;gap:4px;color:#cfd3da;font-size:.92rem}#coBox .cx .co-links b{color:#fff}
+#coBox .cx .rk-ordhead .co-ss{flex:none}
+@media (max-width:700px){#coBox .cx .co-del{grid-template-columns:minmax(0,1fr)}}
 </style>
 
 <header class="site-nav">
@@ -8580,7 +8588,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function coAddDays(iso,n){var x=new Date(+iso.slice(0,4),+iso.slice(5,7)-1,+iso.slice(8,10));x.setDate(x.getDate()+n);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")}
   function coMoney(n){n=+n||0;return "$"+n.toLocaleString(undefined,{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2})}
   function coAgo(t){if(!t)return "";var s=(Date.now()-new Date(t).getTime())/1000;if(s<60)return "just now";if(s<3600)return Math.floor(s/60)+" min ago";if(s<86400)return Math.floor(s/3600)+" hr ago";if(s<86400*7)return Math.floor(s/86400)+" day"+(s<172800?"":"s")+" ago";return fmtDate(String(t).slice(0,10))}
-  function coLoad(){var T=["council_meetings","council_attendance","council_race","events","council_officers","council_roles","council_projects","council_tasks","council_materials","council_funding","council_bulletins","council_files","council_social","council_threads","council_replies"];
+  function coLoad(){var T=["council_reports","council_meetings","council_attendance","council_race","events","council_officers","council_roles","council_projects","council_tasks","council_materials","council_funding","council_bulletins","council_files","council_social","council_threads","council_replies"];
     return Promise.all(T.map(function(t){return db.from(t).select("*")}).concat([db.rpc("council_roster")])).then(function(rs){
       var bad=rs.filter(function(r,i){return r&&r.error&&T[i]!=="events"})[0];if(bad)throw bad.error;var D={};T.forEach(function(t,i){D[t.replace("council_","")]=(rs[i].error&&t==="events")?[]:rs[i].data||[]});
       var ro=rs[T.length].data||{};D.roster=ro.members||[];D.me=ro.me||(ME&&ME.id)||null;D.M={};D.roster.forEach(function(m){D.M[m.id]=m});
@@ -8657,7 +8665,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         '<div class="cx-read" aria-label="At a glance">'+(D.me?'<div><b>'+coH(coHrs(D.me).v)+'</b><span>Service hours</span></div>':'')+'<div><b>'+D.projects.filter(function(p){return p.status!=="done"}).length+'</b><span>Projects in motion</span></div>'+(days!=null?'<div><b>'+days+'</b><span>Days to race day</span></div>':'')+'</div>'+
         '<div class="cx-acts">'+(IS_ADMIN?'<label class="adm-jump"><span class="sr">Open another portal</span><select data-jump="1"><option value="">Open a portal…</option>'+ADM_PORTALS.filter(function(p){return p[0]!==here}).map(function(p){return '<option value="'+p[0]+'">'+esc(p[1])+'</option>'}).join("")+'</select></label>':'')+
         '<a class="mini" href="'+(ME?"#my-dashboard":"#admin")+'">'+(ME?"My dashboard":"Admin")+'</a><button class="mini" type="button" data-out="1">Sign out</button></div></div></header>'+
-      '<nav class="co-tabs" aria-label="Council sections">'+CO_TABS.map(function(t){var n=t[0]==="social"?D.social.filter(function(s){return IS_ADMIN?s.status==="ready":coMedia()&&s.status==="idea"}).length:t[0]==="team"&&coPres()?D.roles.filter(function(r){return r.status==="pending"}).length:t[0]==="hours"?(IS_ADMIN?D.attendance.filter(function(a){return a.status==="pending"}).length:coTodo().length):0;
+      '<nav class="co-tabs" aria-label="Council sections">'+CO_TABS.map(function(t){var n=t[0]==="social"?D.social.filter(function(s){return IS_ADMIN?s.status==="ready":coMedia()&&s.status==="idea"}).length:t[0]==="team"&&coPres()?D.roles.filter(function(r){return r.status==="pending"}).length:t[0]==="week"?(IS_ADMIN?D.reports.filter(function(r){return r.status==="submitted"}).length:D.reports.filter(function(r){return r.status==="returned"&&(r.kind==="weekly"?r.member_id===D.me:coOwn(r))}).length):t[0]==="hours"?(IS_ADMIN?D.attendance.filter(function(a){return a.status==="pending"}).length:coTodo().length):0;
         return '<a href="#council'+(t[0]==="home"?"":"/"+t[0])+'"'+(tab===t[0]?' aria-current="page"':'')+'><svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+CO_ICON[t[0]]+'"/></svg><span>'+esc(t[1])+'</span>'+(n?'<i>'+n+'</i>':'')+'</a>'}).join("")+'</nav><div id="coMain"></div></div>';
     box.innerHTML=html;bindTop(box);var M=$("#coMain",box);
     ({hours:coHours,home:coHome,projects:coProjects,events:coEvents,project:coProject,week:coWeek,bulletins:coBulletins,files:coFiles,social:coSocial,board:coBoard,thread:coThread,team:coTeam}[v]||coHome)(M)}
@@ -8669,8 +8677,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       evs=D.projects.filter(function(p){return p.kind==="event"&&p.event_date&&p.event_date>=today}).sort(function(a,b){return a.event_date>b.event_date?1:-1}).slice(0,3),
       th=D.threads.filter(function(t){return t.kind==="discussion"}).sort(function(a,b){return a.last_reply_at<b.last_reply_at?1:-1}).slice(0,4);
     var wd=weekly.filter(function(t){return t.done}).length;
-    var todo=coTodo();
-    M.innerHTML='<div class="co-grid">'+(todo.length?'<section class="rk-card co-span co-alert"><div class="rk-ordhead"><h3>Were you there? · '+todo.length+'</h3><a class="mini" href="#council/hours">Your hours</a></div><p class="rk-fine">Confirm each one so your service hours count.</p>'+coConfirmHTML(todo.slice(0,4))+'</section>':'')+
+    var todo=coTodo(),wait=IS_ADMIN?[[D.reports.filter(function(r){return r.status==="submitted"}).length,"Weekly notes and task lists to approve","#council/week"],[D.social.filter(function(x){return x.status==="ready"}).length,"Social posts to approve","#council/social"],[D.attendance.filter(function(a){return a.status==="pending"}).length,"Attendance to verify","#council/hours"]].filter(function(x){return x[0]}):[];
+    M.innerHTML='<div class="co-grid">'+(IS_ADMIN?'<section class="rk-card co-span co-alert"><div class="rk-ordhead"><h3>Waiting on you'+(wait.length?' · '+wait.reduce(function(a,x){return a+x[0]},0):'')+'</h3><a class="mini solid" href="#council/projects">Create a project</a></div>'+(wait.length?'<ol class="rk-list">'+wait.map(function(x){return '<li><div><b>'+esc(x[1])+': '+x[0]+'</b></div><a class="mini" href="'+x[2]+'">Review</a></li>'}).join("")+'</ol>':'<p class="rk-fine">Nothing needs your approval right now.</p>')+'</section>':'')+(todo.length?'<section class="rk-card co-span co-alert"><div class="rk-ordhead"><h3>Were you there? · '+todo.length+'</h3><a class="mini" href="#council/hours">Your hours</a></div><p class="rk-fine">Confirm each one so your service hours count.</p>'+coConfirmHTML(todo.slice(0,4))+'</section>':'')+
       '<section class="rk-card co-span"><div class="rk-ordhead"><h3>This week · '+fmtDate(wk,{month:"short",day:"numeric"})+'</h3><a class="mini" href="#council/week">Open the week</a></div>'+
         (weekly.length?'<p class="co-wk"><b>'+wd+' of '+weekly.length+'</b> weekly tasks checked off</p><div class="co-track"><i class="'+(wd===weekly.length?"done":"hi")+'" style="width:'+Math.round(wd/weekly.length*100)+'%"></i></div>'+coTaskList(weekly.slice(0,6),true):'<p class="rk-fine">No weekly tasks yet. Add them on This week.</p>')+'</section>'+
       '<section class="rk-card"><div class="rk-ordhead"><h3>Projects in motion</h3><a class="mini" href="#council/projects">All projects</a></div>'+(act.length?act.slice(0,5).map(function(p){return '<a class="co-pmini" href="#council/project/'+p.id+'"><span><b>'+esc(p.title)+'</b><small>'+esc(CO_KIND[p.kind])+(p.lead_member?' · '+esc(coName(p.lead_member)):'')+'</small></span>'+coBar(coProgress(p))+'</a>'}).join(""):'<p class="rk-fine">No projects yet.</p>')+'</section>'+
@@ -8696,10 +8704,10 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
 
   /* ----- Projects ----- */
   function coProjForm(kind){var ev=kind==="event";
-    return '<details class="rk-card co-new"'+(CO.D.projects.length?'':' open')+'><summary>'+(ev?"+ Plan a new event":"+ Start a project")+'</summary><form id="coPNew" novalidate><div class="rk-form">'+
+    return '<details class="rk-card co-new"'+(CO.D.projects.length?'':' open')+'><summary>'+(IS_ADMIN?(ev?"+ Create an event for the council":"+ Create a project for the council"):(ev?"+ Plan a new event":"+ Start a project"))+'</summary><form id="coPNew" novalidate><div class="rk-form">'+
       '<label class="f">'+(ev?"Event name":"Project name")+'<input type="text" maxlength="100" data-k="title" placeholder="'+(ev?"Spring Kickoff Night":"How to align your axles (video)")+'"></label>'+
       (ev?'<input type="hidden" data-k="kind" value="event">':'<label class="f">Kind<select data-k="kind">'+Object.keys(CO_KIND).filter(function(k){return k!=="event"}).map(function(k){return '<option value="'+k+'">'+CO_KIND[k]+'</option>'}).join("")+'</select></label>')+
-      '<label class="f">'+(ev?"Managed by":"Project lead")+'<select data-k="lead_member">'+coWhoOpts(CO.D.me,"Choose…")+'</select></label>'+
+      '<label class="f">'+(IS_ADMIN?(ev?"Assign to (manages the event)":"Assign to (project lead)"):(ev?"Managed by":"Project lead"))+'<select data-k="lead_member">'+coWhoOpts(CO.D.me,"Choose…")+'</select></label>'+
       (ev?'<label class="f">Event date<input type="date" data-k="event_date"></label><label class="f">Time<input type="text" maxlength="60" data-k="event_time" placeholder="6–8 pm"></label><label class="f">Location<input type="text" maxlength="200" data-k="location"></label>':
         '<label class="f">Planning due<input type="date" data-k="due_date"></label>')+
       '<label class="f">Funding goal ($)<input type="number" min="0" step="1" data-k="funding_goal" placeholder="0"></label></div>'+
@@ -8780,9 +8788,9 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       (list.length?'<p class="co-wk"><b>'+done+' of '+list.length+'</b> checked off'+(done===list.length?' · great week!':'')+'</p><div class="co-track"><i class="'+(done===list.length?"done":"hi")+'" style="width:'+Math.round(done/list.length*100)+'%"></i></div>':'')+
       coTaskForm("coWF")+(list.length?coTaskList(list):'<p class="rk-fine">No weekly tasks for this week yet. Add the jobs everyone should check off: meeting prep, posting, outreach…</p>')+
       (list.length?'':D.tasks.some(function(t){return !t.project_id&&t.week_of===coAddDays(wk,-7)})?'<button class="mini" type="button" id="coCopy">Copy last week’s tasks</button>':'')+'</section>'+
-      '<section class="rk-card"><h3>Project tasks due this week</h3>'+(due.length?coTaskList(due,false,true):'<p class="rk-fine">Nothing from projects is due this week.</p>')+'</section>';
+      '<section class="rk-card"><h3>Project tasks due this week</h3>'+(due.length?coTaskList(due,false,true):'<p class="rk-fine">Nothing from projects is due this week.</p>')+'</section>'+coReportsHTML(wk);
     $$("[data-wk]",M).forEach(function(b){b.onclick=function(){var n=+b.getAttribute("data-wk");CO.week=n?coAddDays(wk,n):null;coDraw($("#coBox"))}});
-    coBindTasks(M);coBindTaskForm($("#coWF",M),{week_of:wk,project_id:null});
+    coBindTasks(M);coBindTaskForm($("#coWF",M),{week_of:wk,project_id:null});coBindReports(M,wk);
     var cp=$("#coCopy",M);if(cp)cp.onclick=function(){var prev=D.tasks.filter(function(t){return !t.project_id&&t.week_of===coAddDays(wk,-7)});
       db.from("council_tasks").insert(prev.map(function(t,i){return Object.assign({title:t.title,assignee_member:t.assignee_member,week_of:wk,done:false,sort_order:i},coStamp())})).then(function(x){coDone(x,prev.length+" tasks copied")})}}
 
@@ -8829,6 +8837,41 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     $$("[data-mtd]",M).forEach(function(b){b.onclick=function(){if(!coConfirm(b))return;db.from("council_meetings").delete().eq("id",b.getAttribute("data-mtd")).then(function(x){coDone(x,"Meeting removed")})}});
     $$("[data-rm]",M).forEach(function(tr){$$("[data-rk]",tr).forEach(function(i){i.onchange=function(){var s=$('[data-rk="racing"]',tr).value;if(s===""){toast("Choose Racing or Not racing.");return}
       db.rpc("council_race_admin",{p_member:tr.getAttribute("data-rm"),p_racing:s==="1",p_half:$('[data-rk="half"]',tr).checked}).then(function(x){coDone(x,"Saved")})}})})}
+
+  /* ----- Weekly reports: meeting notes (Note keeper), delegated roles (President), each member's tasks. Admins approve. ----- */
+  var CO_RS={submitted:["Waiting for admin","x-ready"],approved:["Approved","x-approved"],returned:["Needs changes","x-returned"]};
+  var CO_RK={notes:"Meeting notes",delegations:"Delegated roles",weekly:"Weekly tasks"};
+  function coRep(kind,wk,mid){return CO.D.reports.filter(function(r){return r.kind===kind&&r.week_of===wk&&(kind!=="weekly"||r.member_id===mid)})[0]}
+  function coRepChip(r){return r?'<span class="co-ss '+CO_RS[r.status][1]+'">'+CO_RS[r.status][0]+'</span>':''}
+  function coRepNote(r){return r&&r.review_note&&r.status==="returned"?'<p class="auth-note">Admin note: '+esc(r.review_note)+'</p>':''}
+  function coRepAdmin(r){return IS_ADMIN&&r?'<div class="co-add co-rev" data-rev="'+r.id+'"><input type="text" maxlength="600" placeholder="Note for them if sending back" aria-label="Note">'+(r.status!=="approved"?'<button class="mini solid" type="button" data-rv="approved">Approve</button>':'')+'<button class="mini red" type="button" data-rv="returned">Send back</button></div>':''}
+  function coRepItems(r){var D=CO.D;return (r.items||[]).length?'<ul class="co-links">'+r.items.map(function(i){return '<li>'+(i.member_id?'<b>'+esc(coName(i.member_id)||"Member")+':</b> ':'')+esc(i.text)+'</li>'}).join("")+'</ul>':''}
+  function coReportsHTML(wk){var D=CO.D,me=D.me,mineR=me&&coRep("weekly",wk,me),notes=coRep("notes",wk),del=coRep("delegations",wk),
+      canNotes=IS_ADMIN||coPos("note_keeper")||coPos("secretary")||coPos("president"),canDel=IS_ADMIN||coPos("president"),
+      all=D.reports.filter(function(r){return r.kind==="weekly"&&r.week_of===wk}),seeAll=IS_ADMIN||coPos("president");
+    function locked(r){return r&&r.status==="approved"&&!IS_ADMIN}
+    return (me?'<section class="rk-card"><div class="rk-ordhead"><h3>Your tasks for this week</h3>'+coRepChip(mineR)+'</div>'+coRepNote(mineR)+
+        (locked(mineR)?coRepItems(mineR):'<form id="coRW" novalidate><label class="f">What you’re getting done before the next meeting <small>(one task per line)</small><textarea rows="4" maxlength="3000" placeholder="Draft the sign-up sheet&#10;Call the snack sponsor">'+esc(mineR?(mineR.items||[]).map(function(i){return i.text}).join("\n"):"")+'</textarea></label><div class="row"><button class="mini solid" type="submit">'+(mineR?"Update and resubmit":"Submit for approval")+'</button></div></form>')+'</section>':'')+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Meeting notes</h3>'+coRepChip(notes)+'</div>'+coRepNote(notes)+
+        (canNotes&&!locked(notes)?'<form id="coRN" novalidate><label class="f">Notes from the meeting<textarea rows="6" maxlength="8000" placeholder="Who was there, what we decided, what’s next.">'+esc(notes?notes.body||"":"")+'</textarea></label><div class="row"><button class="mini solid" type="submit">'+(notes?"Update and resubmit":"Submit for approval")+'</button></div></form>':
+          notes?'<div class="co-body">'+coText(notes.body)+'</div><p class="rk-fine">Submitted by '+esc(notes.author_name||"")+'</p>':'<p class="rk-fine">The Note keeper submits notes after the meeting.</p>')+coRepAdmin(notes)+'</section>'+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Delegated roles</h3>'+coRepChip(del)+'</div>'+coRepNote(del)+
+        (canDel&&!locked(del)?'<form id="coRD" novalidate><p class="rk-fine">Who is responsible for what before the next meeting. Leave a line blank to skip someone. Once an admin approves, each line becomes that person’s weekly task.</p><div class="co-del">'+D.roster.map(function(m){var it=del&&(del.items||[]).filter(function(i){return i.member_id===m.id})[0];return '<label class="f">'+esc(m.name)+'<input type="text" maxlength="200" data-dm="'+m.id+'" value="'+esc(it?it.text:"")+'" placeholder="Their job this round"></label>'}).join("")+'</div><div class="row"><button class="mini solid" type="submit">'+(del?"Update and resubmit":"Submit for approval")+'</button></div></form>':
+          del?coRepItems(del)+'<p class="rk-fine">Submitted by '+esc(del.author_name||"")+'</p>':'<p class="rk-fine">The President submits who’s doing what after the meeting.</p>')+coRepAdmin(del)+'</section>'+
+      (seeAll?'<section class="rk-card"><h3>Everyone’s tasks this week · '+all.length+' of '+D.roster.length+' in</h3>'+(D.roster.length?'<ul class="co-tasks">'+D.roster.map(function(m){var r=coRep("weekly",wk,m.id);
+          return '<li class="co-repli"><span><b>'+esc(m.name)+'</b>'+(r?coRepItems(r):'<small>Not submitted yet</small>')+(r?coRepNote(r):'')+'</span><span class="co-fa">'+coRepChip(r)+'</span>'+coRepAdmin(r)+'</li>'}).join("")+'</ul>':'<p class="rk-fine">No council members yet.</p>')+'</section>':'')}
+  function coBindReports(M,wk){var D=CO.D;
+    function save(kind,body,items,mid){var ex=coRep(kind,wk,mid),q=ex?db.from("council_reports").update({body:body,items:items,status:"submitted",review_note:null}).eq("id",ex.id):db.from("council_reports").insert(Object.assign({kind:kind,week_of:wk,member_id:mid||null,body:body,items:items,status:"submitted"},coStamp()));
+      q.then(function(x){coDone(x,"Submitted for approval")})}
+    var w=$("#coRW",M);if(w)w.onsubmit=function(e){e.preventDefault();var it=$("textarea",w).value.split(/\n/).map(function(l){return l.trim()}).filter(Boolean).slice(0,30).map(function(l){return{text:l.slice(0,200)}});if(!it.length){toast("Add at least one task.");return}save("weekly",null,it,D.me)};
+    var n=$("#coRN",M);if(n)n.onsubmit=function(e){e.preventDefault();var b=$("textarea",n).value.trim();if(b.length<2){toast("Write the notes first.");return}save("notes",b,[],null)};
+    var d=$("#coRD",M);if(d)d.onsubmit=function(e){e.preventDefault();var it=$$("[data-dm]",d).map(function(i){return{member_id:i.getAttribute("data-dm"),text:i.value.trim()}}).filter(function(i){return i.text});if(!it.length){toast("Give at least one person a job.");return}save("delegations",null,it,null)};
+    $$("[data-rev]",M).forEach(function(box){var id=box.getAttribute("data-rev"),r=D.reports.filter(function(x){return x.id===id})[0];$$("[data-rv]",box).forEach(function(b){b.onclick=function(){var st=b.getAttribute("data-rv"),note=$("input",box).value.trim();
+      if(st==="returned"&&!note){toast("Type a note saying what to change, then tap Send back.");$("input",box).focus();return}
+      db.from("council_reports").update({status:st,review_note:st==="returned"?note:null,reviewed_by:crewName(),reviewed_at:new Date().toISOString()}).eq("id",id).then(function(x){
+        if(x&&!x.error&&st==="approved"&&r.kind==="delegations"&&r.status!=="approved"&&(r.items||[]).length)
+          return db.from("council_tasks").insert(r.items.map(function(i,k){return Object.assign({title:i.text,assignee_member:i.member_id,week_of:wk,project_id:null,done:false,sort_order:k},coStamp())})).then(function(){return x});
+        return x}).then(function(x){coDone(x,st==="approved"?(r.kind==="delegations"?"Approved · tasks assigned":"Approved"):"Sent back")})}})})}
 
   /* ----- Bulletins ----- */
   function coBulletins(M){var D=CO.D,can=coBull(),list=D.bulletins.slice().sort(function(a,b){return a.week_of<b.week_of?1:a.week_of>b.week_of?-1:(a.created_at<b.created_at?1:-1)}),ed=CO.id&&list.filter(function(b){return b.id===CO.id})[0];

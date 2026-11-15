@@ -13,7 +13,7 @@
        inquiries:[{id:"inq-sample",created_at:new Date().toISOString(),first_name:"Sample",last_name:"Family",role:"Parent or guardian",organization:null,
          interests:"Building Workshops",youth_count:2,youth_ages:"9 and 12",message:"This is a sample inquiry so you can see how they look.",email:"sample@example.com",
          phone:null,contact_by:"Email",best_time:"Evening",email_updates:true,status:"new"}]};
-    race(); members(); council(); hoursSeed(); save();
+    race(); members(); council(); hoursSeed(); T.council_reports=[]; save();
   }
   /* Demo race day so the live race page and its controls can be tried.
      Two brackets alternate: Super Stock (double elimination, 6 cars + 2 byes) and Masters (single elimination, 5 cars + 3 byes). */
@@ -103,6 +103,7 @@
   if(T&&!T.members){members();save();}
   if(T&&!T.council_officers){council();save();}
   if(T&&!T.council_meetings){hoursSeed();save();}
+  if(T&&!T.council_reports){T.council_reports=[];save();}
   addEventListener("storage",function(e){if(e.key===KEY)load()});
   var user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}}, listeners=[];
   function rid(){return Math.random().toString(36).slice(2,10)}
