@@ -190,6 +190,10 @@
         c9.family_code=args.p_new;mlog(c9.id,c9.username,"code_changed");save();return R(null)}
       if(fn==="member_set_prefs"){var c10=curM();if(!c10)return R(null,"Sign in first.");c10.email_prefs=(args.p_prefs||[]).filter(function(x){return x==="workshops"||x==="council"});save();return R(c10.email_prefs)}
       if(fn==="member_signout"){var c0=curM();if(c0)mlog(c0.id,c0.username,"sign_out");if(user)delete T.msess[user.id];save();return R(null)}
+      if(fn==="admin_member_session"){if(!user||user.id!=="test-admin")return R(null,"Admins only");var am=T.members.filter(function(m){return (m.email||"")==="test-admin@flintracing.org"})[0];
+        if(!am){am={id:"madmin",username:"testadmin",display_name:"Test Admin",kind:"crew",email:"test-admin@flintracing.org",phone:null,kids:[],requested:[],roles:[],status:"approved",about:"Admin’s own participant profile",admin_note:null,first_year:2026,created_at:new Date().toISOString(),approved_at:new Date().toISOString(),last_seen_at:null};T.members.push(am)}
+        if(args&&args.p_role&&am.roles.indexOf(args.p_role)<0)am.roles.push(args.p_role);T.msess[user.id]={mid:am.id,exp:Date.now()+30*864e5};save();
+        return R({id:am.id,username:am.username,display_name:am.display_name,kind:am.kind,roles:am.roles,first_year:am.first_year,family_code:null})}
       if(fn==="council_roster"){var me=curM(),isA=user&&user.id==="test-admin";if(!isA&&!(me&&(me.roles||[]).indexOf("council")>=0))return R(null,"Council members only");
         return R({me:me?me.id:null,admin:isA,members:T.members.filter(function(m){return m.status==="approved"&&(m.roles||[]).indexOf("council")>=0}).map(function(m){return{id:m.id,name:m.display_name,
           positions:(T.council_officers||[]).filter(function(o){return o.member_id===m.id}).map(function(o){return o.position}),titles:(T.council_roles||[]).filter(function(r){return r.member_id===m.id&&r.status==="approved"}).map(function(r){return r.title})}}).sort(function(a,b){return a.name>b.name?1:-1})})}

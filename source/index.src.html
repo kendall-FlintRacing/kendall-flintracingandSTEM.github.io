@@ -2747,6 +2747,10 @@ body.rw-tv .rw-fol{display:none}
 .co-o b{font:800 1.05rem/1.2 var(--body)}.co-o small{color:#5a5d64;font-size:.8rem}.co-o select,.co-o input{width:100%}
 .co-chip{border:1px solid #c9ccd1;background:#fff;border-radius:99px;padding:5px 10px;font:600 .8rem/1 var(--body);cursor:pointer}
 .co-chip:hover{border-color:var(--red-deep);color:var(--red-deep)}
+.fr-mode{position:fixed;left:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:4px;background:#111216;color:#c9cbd0;border-radius:999px;padding:5px 5px 5px 14px;box-shadow:0 8px 24px rgba(0,0,0,.3);font:600 .8rem/1 var(--body)}
+.fr-mode button{border:0;background:transparent;color:#fff;font:700 .82rem/1 var(--body);padding:9px 12px;border-radius:999px;cursor:pointer}
+.fr-mode.up{bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+.fr-mode button[aria-pressed="true"]{background:#fff;color:var(--red-deep)}
 .adm-jump{display:flex;gap:6px;align-items:center}
 .adm-jump select{font:600 .82rem/1 var(--body);padding:7px 8px;border:1.5px solid var(--ink);border-radius:4px;background:#fff;max-width:200px}
 @media (max-width:900px){.co-off{grid-template-columns:repeat(2,minmax(0,1fr))}.co-money{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -6693,6 +6697,24 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
 
   /* ---------- Auth + admin ---------- */
   var USER=null, IS_ADMIN=false, IS_CTRL=false, IS_TRACK=false;
+  /* Admin modes. ADMIN_REAL = this account is an admin. On portal pages an admin is either in
+     "member" (Participant view: their own profile, exactly what users see) or "admin" (Admin tools).
+     Signing in on a portal's own form picks Participant view; Staff Garage and Admin pick Admin tools. */
+  var ADMIN_REAL=false, MODE="admin", PENDING_MODE=null, MODE_BUSY=false, MODE_TRIED="";
+  try{MODE=localStorage.getItem("fr-admin-mode")==="member"?"member":"admin"}catch(e){}
+  var PORTAL_PAGES={council:1,teacher:1,photographer:1,"workshop-signin":1,kiosk:1,"race-control":1,"track-manager":1,volunteers:1,"my-dashboard":1,"program-signin":1};
+  function onPortal(){return !!PORTAL_PAGES[(location.hash||"").replace(/^#/,"").split("/")[0]]}
+  function applyMode(){IS_ADMIN=ADMIN_REAL&&!(MODE==="member"&&onPortal())}
+  function setMode(m){MODE=m==="member"?"member":"admin";try{localStorage.setItem("fr-admin-mode",MODE)}catch(e){}}
+  window.addEventListener("hashchange",function(){applyMode();modeChip()});
+  function modeChip(){var c=$(".fr-mode"),show=ADMIN_REAL&&onPortal()&&hashBase()!=="kiosk";
+    if(!show){if(c)c.hidden=true;return}
+    if(!c){c=document.createElement("div");c.className="fr-mode";c.setAttribute("role","group");c.setAttribute("aria-label","Viewing mode");document.body.appendChild(c)}
+    c.hidden=false;c.classList.toggle("up",MODE!=="member");c.innerHTML='<span>Viewing as</span><button type="button" data-mode="member" aria-pressed="'+(MODE==="member")+'">Participant</button><button type="button" data-mode="admin" aria-pressed="'+(MODE!=="member")+'">Admin tools</button>';
+    $$("[data-mode]",c).forEach(function(b){b.onclick=function(){switchMode(b.getAttribute("data-mode"))}})}
+  function switchMode(m,role){if(MODE_BUSY)return Promise.resolve();if(m===MODE&&!role)return Promise.resolve();setMode(m);applyMode();MODE_BUSY=true;CO.sig="";
+    var q=m==="member"?db.rpc("admin_member_session",role?{p_role:role}:{}):db.rpc("member_signout");
+    return q.then(function(x){MODE_BUSY=false;if(x&&x.error)toast("Couldn’t switch: "+x.error.message);else toast(m==="member"?(role?"Added to your profile · Participant view":"Participant view: what users see"):"Admin tools on");return setUser(USER)},function(){MODE_BUSY=false})}
   function initAuth(){
     db.auth.getSession().then(function(r){handleAuthLink();setUser(r.data&&r.data.session?r.data.session.user:null)});
     db.auth.onAuthStateChange(function(ev,session){
@@ -6704,13 +6726,18 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     renderAdmin();
   }
   function setUser(u){USER=u;
-    if(!u){IS_ADMIN=false;IS_CTRL=false;IS_TRACK=false;IS_VOLS=false;CODE_ROLES={};STAFF={};ME=null;PD.data=null;setEditing(false);updatePill();renderAdmin();renderRK(true);renderTM(true);renderAccess();renderMemCards();renderPortals();return Promise.resolve()}
+    if(!u){IS_ADMIN=false;ADMIN_REAL=false;modeChip();IS_CTRL=false;IS_TRACK=false;IS_VOLS=false;CODE_ROLES={};STAFF={};ME=null;PD.data=null;setEditing(false);updatePill();renderAdmin();renderRK(true);renderTM(true);renderAccess();renderMemCards();renderPortals();return Promise.resolve()}
     return Promise.all([db.from("admins").select("user_id").eq("user_id",u.id).maybeSingle(),db.from("race_roles").select("role").eq("user_id",u.id),db.from("staff").select("role").eq("user_id",u.id),db.rpc("my_member")]).then(function(rr){
       if(!USER||USER.id!==u.id)return;
-      var r=rr[0],ro=(rr[1].data||[]).map(function(x){return x.role}),was=ME&&ME.id;IS_ADMIN=!!(r.data);STAFF={};(rr[2].data||[]).forEach(function(x){STAFF[x.role]=1});
+      var r=rr[0],ro=(rr[1].data||[]).map(function(x){return x.role}),was=ME&&ME.id;ADMIN_REAL=!!(r.data);if(PENDING_MODE&&ADMIN_REAL){setMode(PENDING_MODE)}PENDING_MODE=null;applyMode();STAFF={};(rr[2].data||[]).forEach(function(x){STAFF[x.role]=1});
       ME=(rr[3]&&!rr[3].error&&rr[3].data)||null;if((ME&&ME.id)!==was)PD.data=null;var mr=ME?ME.roles||[]:[];
       ["workshop","teacher","photographer","council"].forEach(function(k){if(mr.indexOf(k)>=0)STAFF[k]=1});
       IS_CTRL=ro.indexOf("controller")>=0||mr.indexOf("controller")>=0;IS_TRACK=ro.indexOf("track")>=0||mr.indexOf("track")>=0;IS_VOLS=mr.indexOf("volunteers")>=0;
+      modeChip();
+      /* keep the participant session in step with the mode */
+      if(ADMIN_REAL&&!MODE_BUSY){var key=u.id+MODE;
+        if(MODE==="member"&&!ME&&MODE_TRIED!==key){MODE_TRIED=key;MODE_BUSY=true;db.rpc("admin_member_session").then(function(){MODE_BUSY=false;setUser(USER)},function(){MODE_BUSY=false});}
+        else if(MODE!=="member"&&ME&&MODE_TRIED!==key){MODE_TRIED=key;MODE_BUSY=true;db.rpc("member_signout").then(function(){MODE_BUSY=false;setUser(USER)},function(){MODE_BUSY=false});}}
       updatePill();renderAdmin();renderRK(true);renderTM(true);renderAccess();renderMemCards();renderPortals();
       if(IS_ADMIN) loadEvents().then(function(){FR.refresh()});});
   }
@@ -6979,6 +7006,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       if((m==="up"||m==="reset")&&p2&&p2.value!==pass){say("The two passwords don’t match.");p2.focus();return}
       if(m==="up"&&nm&&!nm.value.trim()){say("Add your name so admins know who you are.");nm.focus();return}
       busy(true);
+      if(m==="in"){PENDING_MODE="admin";if(USER&&ME)db.rpc("member_signout").then(function(){},function(){})}
       if(m==="in") db.auth.signInWithPassword({email:email,password:pass}).then(function(r){busy(false);if(r.error){if(/confirm/i.test(r.error.message||"")){st.mode="sent";authDraw(px);return}say(friendly(r.error))}});
       else if(m==="up") db.auth.signUp({email:email,password:pass,options:{emailRedirectTo:base()+"?auth=confirmed",data:{full_name:nm.value.trim()}}}).then(function(r){busy(false);
         if(r.error){say(friendly(r.error));return}
@@ -7245,13 +7273,19 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   }
 
   /* ---------- Shared pieces for the two race-day screens ---------- */
+  var GATE_ROLE={"Race control":"controller","Track operations":"track","Workshop sign-in":"workshop","Volunteer lists":"volunteers","Photographer":"photographer","Teacher":"teacher","Leadership Council":"council"};
   function gate(box,px,title,ok){
     if(ok){logView(title.toLowerCase().replace(/[^a-z0-9]+/g,"-"));return true}
+    if(ADMIN_REAL&&MODE==="member"){var gr=GATE_ROLE[title];
+      box.innerHTML='<div class="rk-card rk-sign"><p class="rk-k">Participant view</p><h2>'+esc(title)+' isn’t on your participant profile</h2><p>You’re seeing this page the way '+(ME?'<b>'+esc(ME.display_name)+'</b>':'your profile')+' would. Add '+esc(title)+' to your own profile to take part here, or switch to Admin tools to manage it.</p><div class="row">'+
+        (gr?'<button class="mini solid" type="button" data-addrole="'+gr+'">Add '+esc(title)+' to my profile</button>':'')+'<button class="mini" type="button" data-toadm="1">Switch to Admin tools</button></div></div>';
+      var ar=$("[data-addrole]",box);if(ar)ar.onclick=function(){ar.disabled=true;switchMode("member",gr)};
+      $("[data-toadm]",box).onclick=function(){switchMode("admin")};return false}
     if(ME){box.innerHTML='<div class="rk-card rk-sign"><h2>'+esc(title)+' isn’t on your profile</h2><p>You’re signed in as <b>'+esc(ME.display_name)+'</b>. Ask Kendall or Kevin to add <b>'+esc(title)+'</b> to your profile in Admin → Members, then sign in again.</p><div class="row"><a class="mini" href="#my-dashboard">My dashboard</a><button class="mini" type="button" data-out="1">Sign out</button></div></div>';$("[data-out]",box).onclick=signOut;return false}
     if(USER&&!USER.is_anonymous){box.innerHTML='<div class="rk-card rk-sign"><h2>Not set up for '+esc(title.toLowerCase())+'</h2><p>You’re signed in as <b>'+esc(crewName())+'</b>, but this account doesn’t have access. Crew sign in with their email and 4-digit code instead.</p><div class="row"><button class="mini" type="button" data-out="1">Sign out</button></div></div>';$("[data-out]",box).onclick=signOut;return false}
     if(box.querySelector("#"+px+"mMem"))return false;
     box.innerHTML='<div class="rk-card rk-sign">'+memHTML(px+"m",{kicker:title,title:"Sign in to "+title.toLowerCase(),sub:"Use your Flint Racing username and passcode.",kind:"crew"})+'</div>'+
-      '<details class="rk-card rk-sign gate-acct"><summary>Kendall or Kevin? Admin sign in</summary>'+signInHTML(px)+'</details>';
+      '<details class="rk-card rk-sign gate-acct"><summary>Admin? Sign in with admin tools</summary>'+signInHTML(px)+'</details>';
     bindMem(px+"m",function(){});bindSignIn(px);return false}
   function preview(el){if(!el||el.querySelector("iframe")) return;
     var src=location.href.split("#")[0]+"#race-watch";
@@ -8182,7 +8216,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function coMedia(){return IS_ADMIN||coPos("media_manager")||coPos("president")}
   function coOwn(x){var D=CO.D;return x.created_by_member?x.created_by_member===D.me:(x.created_by_user===(USER&&USER.id))}
   function coName(id){var m=id&&CO.D.M[id];return m?m.name:""}
-  function coStamp(){return{author_name:crewName(),created_by_member:CO.D.me||null,created_by_user:USER?USER.id:null}}
+  function coStamp(){return{author_name:crewName()+(IS_ADMIN&&!CO.D.me?" (Admin)":""),created_by_member:CO.D.me||null,created_by_user:USER?USER.id:null}}
   function coProgress(p){var D=CO.D,t=D.tasks.filter(function(x){return x.project_id===p.id}),m=D.materials.filter(function(x){return x.project_id===p.id}),f=D.funding.filter(function(x){return x.project_id===p.id});
     var td=t.filter(function(x){return x.done}).length,mh=m.filter(function(x){return x.status==="have"}).length,goal=+p.funding_goal||0,
       rec=f.filter(function(x){return x.kind==="received"}).reduce(function(a,x){return a+(+x.amount||0)},0),pl=f.filter(function(x){return x.kind==="pledged"}).reduce(function(a,x){return a+(+x.amount||0)},0),
@@ -8212,8 +8246,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function coDone(x,msg){if(okToast(x,msg)){renderCO(true);return true}return false}
 
   function renderCO(force){var box=$("#coBox");if(!box||hashBase()!=="council")return;
-    if(!gate(box,"cos","Leadership Council",IS_ADMIN||hasRole("council")))return;
-    coRoute();var sig=(USER?USER.id:"")+"|"+location.hash;if(!force&&CO.sig===sig&&CO.D)return;CO.sig=sig;
+    if(!gate(box,"cos","Leadership Council",IS_ADMIN||hasRole("council"))){CO.sig="";CO.D=null;return}
+    coRoute();var sig=(USER?USER.id:"")+"|"+IS_ADMIN+"|"+(ME?ME.id:"")+"|"+location.hash;if(!force&&CO.sig===sig&&CO.D)return;CO.sig=sig;
     if(!CO.D)box.innerHTML='<div class="rk-card"><p>Loading the council…</p></div>';
     coLoad().then(function(){coDraw(box)},function(e){box.innerHTML='<div class="rk-card"><p>Couldn’t load the council: '+esc(e.message||e)+'</p><button class="mini" type="button" id="coRetry">Try again</button></div>';$("#coRetry").onclick=function(){renderCO(true)}})}
   function coDraw(box){var D=CO.D,v=CO.view,mine=D.me&&D.M[D.me],tab=v==="project"?(CO.D.projects.filter(function(p){return p.id===CO.id})[0]||{}).kind==="event"?"events":"projects":v==="thread"?"board":v;
@@ -8686,7 +8720,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     ["#volunteers","Volunteer lists","Race-day crew and check-in",function(){return hasRole("volunteers")||hasRole("controller")||hasRole("track")}],
     ["#race-watch","Live Race","Follow every heat on race day",function(){return true}]];
   var PORTALS=[["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["workshop","#workshop-signin","Workshop sign-in"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["council","#council","Leadership Council"],["volunteers","#volunteers","Volunteer lists"]];
-  function landing(){if(IS_ADMIN)return ["#admin","Admin"];if(!ME)return ["#access","Sign in"];
+  function landing(){if(ADMIN_REAL&&MODE!=="member")return ["#admin","Admin"];if(!ME)return ["#access","Sign in"];
     var st=PORTALS.filter(function(x){return hasRole(x[0])});return st.length===1?[st[0][1],st[0][2]]:["#my-dashboard","my dashboard"]}
   function firstName(n){return String(n||"").trim().split(/\s+/)[0]}
   function logView(k){if(!USER||!(ME||!USER.is_anonymous))return;if(LOGGED[k]&&Date.now()-LOGGED[k]<6e5)return;LOGGED[k]=Date.now();
@@ -8725,8 +8759,12 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       /* an email with a longer password may be an admin account: try that first, then the member profile */
       var tryAdmin=u.indexOf("@")>0&&!/^\d{4}$/.test(p)?db.auth.signInWithPassword({email:u,password:p}).then(function(r){return r.error?null:r},function(){return null}):Promise.resolve(null);
       tryAdmin.then(function(r){if(!r)return false;
-          return db.auth.getSession().then(function(s){return setUser(s.data&&s.data.session?s.data.session.user:null)}).then(function(){if(!IS_ADMIN)return false;
-            b.disabled=false;m.textContent="";toast("Welcome back!");location.hash=px==="micouncil"?"#council":"#admin";return true})})
+          return db.auth.getSession().then(function(s){return setUser(s.data&&s.data.session?s.data.session.user:null)}).then(function(){if(!ADMIN_REAL)return false;
+            b.disabled=false;m.textContent="";
+            /* Staff Garage = Admin tools. Every other sign-in form = that portal, as a participant */
+            if(px==="staff"){switchMode("admin");toast("Welcome back!");location.hash="#admin";return true}
+            setMode("member");applyMode();MODE_BUSY=true;
+            return db.rpc("admin_member_session",{p_keep:!!k}).then(function(){MODE_BUSY=false;return setUser(USER)}).then(function(){toast("Welcome back! Participant view");if(after)after();else location.hash=landing()[0];return true})})})
       .then(function(done){if(done)return;return memSignIn(u,p,k).then(function(d){b.disabled=false;
         if(!d.ok){m.textContent=d.status==="pending"?"Thanks for registering! Kendall or Kevin still need to approve your profile. We’ll email you when it’s ready.":
           d.status==="paused"?"This profile is paused. Email info@flintsoapbox.org to turn it back on.":d.status==="declined"?"This profile wasn’t approved. Email info@flintsoapbox.org with any questions.":
@@ -8737,7 +8775,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     if(ME){box.innerHTML=memOnHTML(px,true);$(".mem-out",box).onclick=signOut;return}
     if(box.querySelector("form.mem"))return;
     box.innerHTML=memHTML(px,{dark:true,kind:box.getAttribute("data-kind"),kicker:(box.getAttribute("data-mem")==="council"?"Leadership Council":box.getAttribute("data-kind")==="family"?"Family Pass":"Crew Pass")+" sign in",sub:box.getAttribute("data-mem")==="council"?"Use the same email and 4-digit code as your Crew Pass. Admins: your email and password open the council too.":"One email and 4-digit code work on both the Family and Crew Pass."});
-    bindMem(px,box.getAttribute("data-mem")==="council"?function(){location.hash=hasRole("council")?"#council":landing()[0]}:undefined)})}
+    bindMem(px,box.getAttribute("data-mem")==="council"?function(){location.hash=hasRole("council")||ADMIN_REAL?"#council":landing()[0]}:undefined)})}
   document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-regkind]");if(a&&a.getAttribute("data-regkind"))REG.kind=a.getAttribute("data-regkind")});
   function crewName(){if(ME)return ME.display_name;if(!USER)return "";if(USER.is_anonymous)return "Guest";return (USER.user_metadata&&USER.user_metadata.full_name)||USER.email}
 
