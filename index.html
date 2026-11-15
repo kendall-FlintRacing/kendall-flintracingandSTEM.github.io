@@ -2637,6 +2637,123 @@ body.rw-tv .rw-name{font-size:clamp(2rem,3.6vw,3rem)}
 body.rw-tv .rw-av{width:96px;height:96px;font-size:2.6rem}
 body.rw-tv .rw-run{font-size:1.6rem}
 body.rw-tv .rw-fol{display:none}
+/* ===== Student Leadership Council portal (#council) ===== */
+.co-tabs{display:flex;gap:4px;overflow-x:auto;background:#d4d6da;padding:4px;border-radius:8px;margin-bottom:14px;scrollbar-width:thin}
+.co-tabs a{flex:none;text-decoration:none;color:#2a2d33;font:800 .92rem/1 var(--body);padding:12px 14px;border-radius:6px;white-space:nowrap;display:flex;gap:6px;align-items:center}
+.co-tabs a:hover{background:#e6e8eb}
+.co-tabs a[aria-current="page"]{background:#fff;color:var(--red-deep);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.co-tabs i,.co-sub i{font-style:normal;background:var(--red);color:#fff;border-radius:99px;font:800 .7rem/1 var(--body);padding:3px 6px}
+.co-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.co-grid .rk-card{margin:0}.co-span{grid-column:1/-1}
+.co-meter{display:grid;gap:6px;margin-top:8px}
+.co-mt{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.co-mt b{font:900 1.15rem/1 var(--display);color:var(--ink)}
+.co-mt span{font-size:.86rem;color:#4a4d55}
+.co-meter.big .co-mt b{font-size:2.4rem}
+.co-meter.big .co-mt span{font-size:1rem;font-weight:600;color:#2a2d33}
+.co-track{height:12px;background:#e3e5e9;border-radius:99px;overflow:hidden}
+.co-meter.big .co-track{height:18px}
+.co-track i{display:block;height:100%;border-radius:99px;transition:width .4s ease}
+.co-track i.lo{background:#d2141c}.co-track i.mid{background:#f5a524}.co-track i.hi{background:#2f6fde}.co-track i.done{background:#1d8a46}
+.co-parts{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.9rem;color:#4a4d55}.co-parts b{color:var(--ink)}
+.co-wk{margin:4px 0 6px;font-size:.95rem;color:#2a2d33}
+.co-pmini{display:block;text-decoration:none;color:inherit;padding:10px 0;border-bottom:1px solid #eef0f2}
+.co-pmini:hover b{color:var(--red-deep)}
+.co-pmini>span{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.co-pmini small{color:#5a5d64}
+.co-date{font:800 .74rem/1.2 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#5a5d64;margin:0}
+.co-h{font:800 1.15rem/1.3 var(--body);margin:4px 0 6px;color:var(--ink)}.co-h a{color:inherit}
+.co-body{color:#2a2d33;line-height:1.55;overflow-wrap:anywhere}.co-body a{color:var(--red-deep)}
+.co-clip{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.co-tasks{list-style:none;margin:8px 0 0;padding:0}
+.co-tasks li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eef0f2}
+.co-tasks label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;flex:1;min-width:0}
+.co-tasks input[type=checkbox]{width:22px;height:22px;flex:none;margin-top:1px;accent-color:#1d8a46}
+.co-tasks li>span,.co-tasks label>span{display:grid;gap:2px;min-width:0}.co-tasks b{font-weight:700;overflow-wrap:anywhere}
+.co-tasks small{color:#5a5d64;font-size:.84rem}.co-tasks small a{color:var(--red-deep)}
+.co-tasks li.done b{text-decoration:line-through;color:#7a7d84}
+.co-late{color:var(--red-deep);font-weight:700}
+.co-x{border:0;background:#f1f2f4;color:#4a4d55;width:32px;height:32px;border-radius:50%;font:700 1.1rem/1 var(--body);cursor:pointer;flex:none}
+.co-x:hover{background:#fde3e6;color:var(--red-deep)}
+.co-add{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.co-add input,.co-add select,.co-post input,.co-post textarea,.co-post select,.co-cap,.co-tbl select,.co-tbl input,.co-off select,.co-off input,.co-inl input,.co-inl select{font:400 .95rem/1.4 var(--body);border:1.5px solid #c9ccd1;border-radius:4px;padding:9px 10px;background:#fff;color:var(--ink);min-width:0}
+.co-add input[type=text],.co-add input[type=url]{flex:1 1 200px}
+.co-add .co-sm,.co-inl .co-sm{flex:0 1 120px;width:120px}
+.co-inl{display:inline-flex;gap:8px;align-items:center;font-weight:600}
+.co-post{display:grid;gap:8px;margin-bottom:14px}.co-post .row{display:flex;gap:8px;flex-wrap:wrap;margin:0}
+.co-cap{width:100%;margin:8px 0}
+.co-new summary{cursor:pointer;font:800 1rem/1.2 var(--body);color:var(--red-deep);list-style:none}
+.co-new summary::-webkit-details-marker{display:none}
+.co-new[open] summary{margin-bottom:12px}
+.co-new .f,.co-subbody .f,#coPE .f,#coBF .f,#coSF .f{display:block;font:600 .9rem/1.3 var(--body);color:var(--ink);margin-top:8px}
+.co-new .f input,.co-new .f select,.co-new .f textarea,#coPE .f input,#coPE .f select,#coPE .f textarea,#coBF .f input,#coBF .f textarea{display:block;width:100%;margin-top:6px;font:400 1rem/1.4 var(--body);border:1.5px solid #c9ccd1;border-radius:4px;padding:10px 12px;background:#fff;color:var(--ink)}
+.co-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:14px}
+.co-card{display:block;background:#fff;border:1px solid #d4d6da;border-radius:8px;padding:16px;text-decoration:none;color:inherit;transition:box-shadow .15s,transform .15s}
+.co-card:hover{box-shadow:0 6px 18px rgba(0,0,0,.08);transform:translateY(-2px)}
+.co-card h4{font:800 1.12rem/1.25 var(--body);margin:8px 0 4px;color:var(--ink)}
+.co-ct{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.co-tag,.co-st,.co-lock,.co-ss,.co-ms{font:800 .68rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;border-radius:4px;padding:5px 7px;background:#eceef1;color:#2a2d33}
+.co-tag.k-event{background:#111216;color:#fff}.co-tag.k-video{background:#e7eefc;color:#1c4bb0}.co-tag.k-instructional{background:#e8f6ee;color:#17803d}.co-tag.k-fundraiser{background:#fff3d6;color:#7a5600}.co-tag.k-outreach{background:#fde8ea;color:var(--red-deep)}
+.co-st.s-done{background:#e3f6ea;color:#17803d}.co-st.s-paused{background:#eceef1;color:#6a6d74}.co-st.s-active{background:#e7eefc;color:#1c4bb0}
+.co-lock{background:#fff;border:1px solid #c9ccd1}
+.co-ss.x-idea{background:#eceef1}.co-ss.x-ready{background:#fff0c7;color:#7a5600}.co-ss.x-approved{background:#e3f6ea;color:#17803d}.co-ss.x-returned{background:#fde3e6;color:var(--red-deep)}.co-ss.x-posted{background:#111216;color:#fff}
+.co-ms.m-have{background:#e3f6ea;color:#17803d}.co-ms.m-requested{background:#fff0c7;color:#7a5600}
+.co-meta{color:#5a5d64;font-size:.88rem;margin:4px 0 0}.co-meta a{color:var(--red-deep)}
+.co-sec{font:800 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#4a4d55;margin:18px 0 10px}
+.co-phead{border-top:5px solid #2f6fde}.co-phead h2{margin:10px 0 2px}
+.co-phead .co-body{margin-top:14px;padding-top:12px;border-top:1px solid #eef0f2}
+.co-sub{display:flex;gap:4px;flex-wrap:wrap;border-bottom:2px solid #e3e5e9;margin-bottom:12px}
+.co-sub button{border:0;background:none;font:800 .95rem/1 var(--body);padding:12px 12px 10px;cursor:pointer;color:#4a4d55;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;gap:6px;align-items:center}
+.co-sub button[aria-selected="true"]{color:var(--red-deep);border-bottom-color:var(--red-deep)}
+.co-donebox{margin-top:10px}.co-donebox summary{cursor:pointer;font-weight:700;color:#4a4d55}
+.co-tbl{width:100%;border-collapse:collapse;font-size:.92rem}
+.co-tbl th{font:800 .7rem/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#5a5d64;text-align:left;padding:8px 6px;border-bottom:2px solid #e3e5e9}
+.co-tbl td{padding:8px 6px;border-bottom:1px solid #eef0f2;vertical-align:middle}
+.co-tbl input{width:100%;min-width:140px}
+.co-money{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:10px}
+.co-money div{background:#f3f4f6;border-radius:6px;padding:12px 8px;text-align:center;display:grid;gap:4px}
+.co-money b{font:900 1.35rem/1 var(--display);color:var(--ink)}.co-money span{font:700 .68rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#5a5d64}
+.co-money div:last-child{background:var(--ink)}.co-money div:last-child b{color:#fff}.co-money div:last-child span{color:#c9cbd0}
+.co-weekbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}.co-weekbar h3{margin:0;flex:1;text-align:center}
+.co-now{background:#2f6fde;color:#fff;border-radius:4px;padding:3px 6px;font-size:.66rem;letter-spacing:.08em;vertical-align:2px;margin-left:6px}
+.co-note{margin:0 0 12px}
+.co-bul .co-links{margin:10px 0 0 18px;display:grid;gap:4px}.co-bul .co-links a{color:var(--red-deep);font-weight:700}
+.co-fadd{display:grid;gap:4px;margin:4px 0 12px;justify-items:start}.co-fadd .co-add{width:100%;margin:6px 0 0}
+.co-media{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:10px 0}
+.co-media figure{margin:0;background:#f3f4f6;border-radius:6px;overflow:hidden;display:grid}
+.co-media img,.co-media video{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#d4d6da}
+.co-media figcaption{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:6px 8px;font-size:.82rem}
+.co-media figcaption>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.co-fa{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.co-files a{color:var(--red-deep)}
+.co-plat{border:0;padding:0;margin:10px 0;display:flex;flex-wrap:wrap;gap:6px}.co-plat legend{font:600 .9rem/1.3 var(--body);margin-bottom:6px;width:100%}
+.co-rel{margin:8px 0;line-height:1.4}
+.co-soc{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;align-items:start}.co-soc .rk-card{margin:0}
+.co-sp .co-body{margin:10px 0}.co-sp .row{display:flex;gap:6px;flex-wrap:wrap}
+.co-smedia{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;margin-top:10px}
+.co-smedia img,.co-smedia video{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;background:#d4d6da}
+.co-postc{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid #eef0f2}
+.co-postc.pin{background:#fffaf0;margin:0 -12px;padding:14px 12px;border-radius:6px}
+.co-av{width:40px;height:40px;border-radius:50%;background:#2f6fde;color:#fff;display:grid;place-items:center;font:800 1.05rem/1 var(--body)}
+.co-av.sm{width:32px;height:32px;font-size:.9rem;background:#4a4d55}
+.co-by{margin:0;font-size:.86rem;color:#5a5d64}.co-by b{color:var(--ink)}
+.co-pin{color:#7a5600;font-weight:700}
+.co-pa{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.co-replies{margin:6px 0 12px 52px;display:grid;gap:12px}
+.co-reply{display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px}
+.co-lnk{border:0;background:none;padding:0;font:inherit;color:var(--red-deep);text-decoration:underline;cursor:pointer}
+.co-off{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.co-o{background:#f3f4f6;border-radius:8px;padding:12px;display:grid;gap:6px;align-content:start;border-top:4px solid #2f6fde}
+.co-o:first-child{border-top-color:#f5b82e}
+.co-ot{font:800 .72rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--red-deep);margin:0}
+.co-o b{font:800 1.05rem/1.2 var(--body)}.co-o small{color:#5a5d64;font-size:.8rem}.co-o select,.co-o input{width:100%}
+.co-chip{border:1px solid #c9ccd1;background:#fff;border-radius:99px;padding:5px 10px;font:600 .8rem/1 var(--body);cursor:pointer}
+.co-chip:hover{border-color:var(--red-deep);color:var(--red-deep)}
+.adm-jump{display:flex;gap:6px;align-items:center}
+.adm-jump select{font:600 .82rem/1 var(--body);padding:7px 8px;border:1.5px solid var(--ink);border-radius:4px;background:#fff;max-width:200px}
+@media (max-width:900px){.co-off{grid-template-columns:repeat(2,minmax(0,1fr))}.co-money{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:720px){.co-grid{grid-template-columns:minmax(0,1fr)}.co-replies{margin-left:0}.co-money{grid-template-columns:repeat(2,minmax(0,1fr))}.co-money div:last-child{grid-column:1/-1}
+  .co-add>*{flex:1 1 100%!important;width:100%!important}.co-add button{flex:0 0 auto!important;width:auto!important}.co-soc{grid-template-columns:minmax(0,1fr)}.co-weekbar h3{flex-basis:100%;order:-1;text-align:left}}
+@media (max-width:420px){.co-off{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -3778,10 +3895,11 @@ body.rw-tv .rw-fol{display:none}
           <div class="mem-in" data-mem="crew" data-kind="crew"></div>
           <p class="cs-fine">Only want one race-day shift? <a href="#race-volunteer">Sign up to volunteer</a>. No profile needed.</p>
         </article>
-        <article class="cs-card" data-card="2" aria-label="Race Fan" hidden>
-          <h2>Race Fan</h2>
-          <p class="cs-desc">Follow every heat live on race day: the starting lights, run times, brackets and winners. Send a shout-out from the stands.</p>
-          <div class="cs-acts"><a class="cs-go" href="#race-watch">Watch race day live</a></div>
+        <article class="cs-card" data-card="2" aria-label="Leadership Council" hidden>
+          <h2>Leadership Council</h2>
+          <p class="cs-desc">For Student Leadership Council members. Plan projects and events, check off weekly tasks, post bulletins, share media and suggest social posts.</p>
+          <div class="mem-in" data-mem="council" data-kind="crew"></div>
+          <p class="cs-fine">Not on the council yet? <a href="#leadership-council">Learn about the council</a>.</p>
         </article>
         <article class="cs-card" data-card="3" aria-label="Staff Garage" hidden>
           <h2>Staff Garage</h2>
@@ -3938,6 +4056,7 @@ body.rw-tv .rw-fol{display:none}
 <div class="page rk-page" data-page="volunteers" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="volunteers"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="volBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 <div class="page rk-page" data-page="photographer" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="photographer"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="phBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 <div class="page kiosk-page" data-page="kiosk" hidden><div id="kioskBox" class="ki-box"><p class="ki-load">Loading the check-in kiosk…</p></div></div>
+<div class="page rk-page" data-page="council" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="council"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="coBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 <div class="page rk-page" data-page="teacher" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="teacher"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="teBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 
 <!-- ======================= ADMIN PORTAL ======================= -->
@@ -4077,7 +4196,7 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","council":"Leadership Council","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
@@ -4087,7 +4206,7 @@ body.rw-tv .rw-fol{display:none}
   var pendingNote=null;
   document.addEventListener("click",function(e){var a=e.target.closest("a[data-interest]");if(a){pendingInterest=a.getAttribute("data-interest");pendingNote=a.getAttribute("data-note")}});
   function route(){
-    var h=(location.hash||"#home").slice(1); if(h.indexOf("crew/")===0) h="crew"; if(h.indexOf("my-dashboard/")===0) h="my-dashboard";
+    var h=(location.hash||"#home").slice(1); if(h.indexOf("crew/")===0) h="crew"; if(h.indexOf("my-dashboard/")===0) h="my-dashboard"; if(h.indexOf("council/")===0) h="council";
     if(ALIAS[h]){pendingInterest=pendingInterest||ALIAS[h];h="participate"}
     var anchor=null; if(PAGE_ANCHORS[h]){anchor=h;h=PAGE_ANCHORS[h]}
     var real=document.querySelector('[data-page="'+h+'"]');
@@ -4795,7 +4914,7 @@ body.rw-tv .rw-fol{display:none}
     var CARS=[
       {paint:"#c0141b",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Email + 4-digit code",stats:[["Young racers reached","kids"],["Years racing (since 2019)","years"],["Cars in the build","cars"]]},
       {paint:"#f2b01e",trim:"#111113",helmet:"#d2141c",num:"12",label:"Crew",neon:"#ffc233",key:"Email + 4-digit code",stats:[["Volunteers this year","volunteers_this_year"],["Meals served","meals"],["Participants served","participants"]]},
-      {paint:"checker",trim:"#d2141c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"Just cheer!",stats:[["Top speed","speed"],["Engines","engines"],["Days to race day","countdown"]]},
+      {paint:"#1f4fd1",trim:"#f5b82e",helmet:"#f4f4f4",num:"16",label:"Council",neon:"#7fb2ff",key:"Email + 4-digit code",stats:[["Council members","council_members"],["Projects underway","council_projects"],["Days to race day","countdown"]]},
       {paint:"#16171c",trim:"#d2141c",helmet:"#d2141c",num:"6",label:"Staff",neon:"#d2141c",key:"Username or admin email",stats:[["Events this season","events"],["Paths to participate","paths"],["Historic home track","track"]]}];
     var LIVE={};
     function impact(i){var el=document.querySelectorAll(".impact .stat strong")[i];return el?el.textContent.trim():""}
@@ -4811,6 +4930,8 @@ body.rw-tv .rw-fol{display:none}
       if(k==="volunteers_this_year")return LIVE.volunteers_this_year>0?String(LIVE.volunteers_this_year):"Season starting";
       if(k==="years")return String(new Date().getFullYear()-2019);
       if(k==="engines")return "0 (gravity!)";
+      if(k==="council_members")return LIVE.council_members>0?String(LIVE.council_members):"Now forming";
+      if(k==="council_projects")return LIVE.council_projects>0?String(LIVE.council_projects):"First ones soon";
       if(k==="countdown"){var r=EVENTS.filter(function(e){return e.k==="racing"&&e.d>=iso})[0];if(!r)return "Soon";var d=Math.round((new Date(r.d+"T00:00:00")-t)/864e5);return d===0?"Today!":d+" days"}
       if(LIVE[k]>0)return LIVE[k].toLocaleString();return "Tally starts soon"}
     window.FR_gxLive=function(d){Object.keys(d||{}).forEach(function(k){LIVE[k]=d[k]});show(cur,0)};
@@ -6552,7 +6673,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   var started=false;
   function startUp(){if(started)return;started=true;window.FR_DB=db;if(window.FR_TEST)testChip();initAuth();applyStats();renderPortals();renderSpirit();
     db.rpc("public_stats",{p_year:null}).then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});
-    db.rpc("public_member_counts").then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});}
+    db.rpc("public_member_counts").then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});
+    db.rpc("public_council_counts").then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});}
   Promise.all([loadEvents(),loadNotes(),loadContent()]).then(function(){
     FR.refresh(); var n=$("#qNote"); if(n) n.hidden=true; startUp();
   }).catch(function(e){ if(window.console)console.warn("Live content didn’t load; showing built-in content.",e); startUp(); });
@@ -6582,7 +6704,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       if(!USER||USER.id!==u.id)return;
       var r=rr[0],ro=(rr[1].data||[]).map(function(x){return x.role}),was=ME&&ME.id;IS_ADMIN=!!(r.data);STAFF={};(rr[2].data||[]).forEach(function(x){STAFF[x.role]=1});
       ME=(rr[3]&&!rr[3].error&&rr[3].data)||null;if((ME&&ME.id)!==was)PD.data=null;var mr=ME?ME.roles||[]:[];
-      ["workshop","teacher","photographer"].forEach(function(k){if(mr.indexOf(k)>=0)STAFF[k]=1});
+      ["workshop","teacher","photographer","council"].forEach(function(k){if(mr.indexOf(k)>=0)STAFF[k]=1});
       IS_CTRL=ro.indexOf("controller")>=0||mr.indexOf("controller")>=0;IS_TRACK=ro.indexOf("track")>=0||mr.indexOf("track")>=0;IS_VOLS=mr.indexOf("volunteers")>=0;
       updatePill();renderAdmin();renderRK(true);renderTM(true);renderAccess();renderMemCards();renderPortals();
       if(IS_ADMIN) loadEvents().then(function(){FR.refresh()});});
@@ -6672,7 +6794,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     if(opt.q!=null){MFIND.q=opt.q;MFIND.f="all"}TAB=k;ADMNAV=false;renderAdmin(true);var b=$("#admBox");if(b&&b.getBoundingClientRect().top<0)scrollTo(0,b.getBoundingClientRect().top+scrollY-80)}
 
   /* ---------- Breadcrumbs for signed-in screens: follow who is signed in ---------- */
-  var CRUMB_PAGES={"race-control":["Race control","race"],"track-manager":["Track operations","race"],"volunteers":["Volunteer lists","race"],
+  var CRUMB_PAGES={"council":["Leadership Council",""],"race-control":["Race control","race"],"track-manager":["Track operations","race"],"volunteers":["Volunteer lists","race"],
     "workshop-signin":["Workshop sign-in",""],"photographer":["Photographer",""],"teacher":["Teacher planning",""],"program-signin":["Program Dashboard",""]};
   function setCrumbs(){$$("nav[data-crumbs]").forEach(function(n){var p=n.getAttribute("data-crumbs"),w=$(".wrap",n),sep='<span aria-hidden="true">/</span>',
       out=['<a href="#home">Home</a>'],cur=function(t){out.push('<span aria-current="page">'+esc(t)+'</span>')},
@@ -6868,12 +6990,12 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     if(/network|fetch/i.test(t)) return "Couldn’t reach the server. Check your internet connection.";
     if(/same password|different from the old/i.test(t)) return "Choose a password you haven’t used here before.";
     return "Something went wrong: "+t}
-  function authMainPx(){var h=location.hash;return h==="#admin"?"adm":h==="#race-control"?"rks":h==="#track-manager"?"tms":h==="#workshop-signin"?"wss":h==="#kiosk"?"kis":h==="#volunteers"?"vos":h==="#photographer"?"phs":h==="#teacher"?"tes":"acc"}
+  function authMainPx(){var h=location.hash;return h==="#admin"?"adm":h==="#race-control"?"rks":h==="#track-manager"?"tms":h==="#workshop-signin"?"wss":h==="#kiosk"?"kis":h==="#volunteers"?"vos":h==="#photographer"?"phs":h==="#teacher"?"tes":h.indexOf("#council")===0?"cos":"acc"}
   function signOut(){setEditing(false);var was=ME;ME=null;PD.data=null;LOGGED={};
     (was?db.rpc("member_signout").then(function(){},function(){}):Promise.resolve()).then(function(){return db.auth.signOut()}).then(function(){toast("Signed out")})}
 
   /* ---------- Sign in page (#access): your account and your spaces ---------- */
-  var SPACES=[["admin","#admin","Admin"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["workshop","#workshop-signin","Workshop sign-in"],
+  var SPACES=[["admin","#admin","Admin"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["council","#council","Leadership Council"],["workshop","#workshop-signin","Workshop sign-in"],
     ["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["volunteers","#volunteers","Race-day volunteers"]];
   var STAFF={};
   function canSpace(k){if(IS_ADMIN)return true;if(k==="controller")return IS_CTRL;if(k==="track")return IS_TRACK;if(k==="volunteers")return IS_CTRL||IS_TRACK||IS_VOLS;return !!STAFF[k]}
@@ -7579,9 +7701,14 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       var b=$("#crewIn");if(b)b.onclick=function(){b.disabled=true;db.rpc("crew_checkin",{p_token:tok}).then(function(x){if(x.error){b.disabled=false;toast("Couldn’t check in. Try again.");return}toast("You’re checked in. Thank you!");renderCrew()})}})}
 
   /* ---------- Shared bits for staff portals ---------- */
-  function portalTop(title,kicker,role){var name=crewName();
-    return '<div class="rk-top"><div class="rk-tt"><p class="rk-k">'+esc(kicker)+'</p><h1>'+esc(title)+'</h1></div><div class="rk-who"><span>'+esc(name)+' · '+esc(IS_ADMIN?"Admin":role)+'</span><a class="mini" href="'+(ME?"#my-dashboard":"#admin")+'">'+(ME?"My dashboard":"Admin")+'</a><button class="mini" type="button" data-out="1">Sign out</button></div></div>'}
-  function bindTop(box){var o=$("[data-out]",box);if(o)o.onclick=signOut}
+  /* Admins can open every portal with their own sign-in: a jump list on every portal's top bar */
+  var ADM_PORTALS=[["#admin","Admin"],["#council","Leadership Council"],["#teacher","Teacher planning"],["#photographer","Photographer"],["#workshop-signin","Workshop sign-in"],["#kiosk","Check-in kiosk"],
+    ["#race-control","Race control"],["#track-manager","Track operations"],["#volunteers","Volunteer lists"],["#my-dashboard/crew","My dashboard (sample crew)"],["#my-dashboard/family","My dashboard (sample family)"],["#program-signin","Program Dashboard"],["#race-watch","Live race"]];
+  function portalTop(title,kicker,role){var name=crewName(),here=location.hash.split("/")[0];
+    return '<div class="rk-top"><div class="rk-tt"><p class="rk-k">'+esc(kicker)+'</p><h1>'+esc(title)+'</h1></div><div class="rk-who"><span>'+esc(name)+' · '+esc(IS_ADMIN?"Admin":role)+'</span>'+
+      (IS_ADMIN?'<label class="adm-jump"><span class="sr">Open another portal</span><select data-jump="1"><option value="">Open a portal…</option>'+ADM_PORTALS.filter(function(p){return p[0]!==here}).map(function(p){return '<option value="'+p[0]+'">'+esc(p[1])+'</option>'}).join("")+'</select></label>':'')+
+      '<a class="mini" href="'+(ME?"#my-dashboard":"#admin")+'">'+(ME?"My dashboard":"Admin")+'</a><button class="mini" type="button" data-out="1">Sign out</button></div></div>'}
+  function bindTop(box){var o=$("[data-out]",box);if(o)o.onclick=signOut;var j=$("[data-jump]",box);if(j)j.onchange=function(){if(j.value)location.hash=j.value}}
 
 
 
@@ -8012,10 +8139,347 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     db.rpc("public_stats",{p_year:new Date().getFullYear()}).then(function(r){if(r.error||!r.data)return;
       $$(".impact .stat strong").forEach(function(el,i){var k=c[i];if(k&&k!=="manual"&&r.data[k]>0)el.textContent=Number(r.data[k]).toLocaleString()})})}
 
+  /* ---------- Student Leadership Council (#council) ----------
+     Older students: projects with a progress meter, events, weekly tasks, bulletins, files and forms,
+     social media suggestions, a discussion board and the team (officers + roles the president approves).
+     Admins see and manage everything. Permissions are enforced in the database (RLS); the page mirrors them. */
+  var CO={view:"home",id:null,D:null,week:null,folder:"all",proj:"tasks",busy:false,sig:""};
+  var CO_POS=[["president","President","Leads the council and approves team roles"],["secretary","Secretary","Keeps records and posts weekly bulletins"],["treasurer","Treasurer","Tracks funding on every project"],
+    ["note_keeper","Note keeper","Takes meeting notes and posts bulletins"],["media_manager","Media manager","Reviews social posts before they go to the admins"]];
+  var CO_KIND={event:"Event",video:"Video",instructional:"Instructional",fundraiser:"Fundraiser",outreach:"Outreach",other:"Project"};
+  var CO_STAT={planning:"Planning",active:"In progress",done:"Done",paused:"Paused"};
+  var CO_SOC={idea:"Idea",ready:"Waiting for admin",approved:"Approved",returned:"Needs changes",posted:"Posted"};
+  var CO_PLAT=["Instagram","Facebook","TikTok","YouTube","LinkedIn"];
+  var CO_FOLD=[["forms","Forms"],["photos","Photos"],["videos","Videos"],["links","Links"],["docs","Documents"]];
+  var CO_TABS=[["home","Home"],["projects","Projects"],["events","Events"],["week","This week"],["bulletins","Bulletins"],["files","Files & forms"],["social","Social media"],["board","Discussion"],["team","Team"]];
+  function coRoute(){var p=(location.hash||"").replace(/^#council\/?/,"").split("/"),was=CO.id;CO.view=p[0]||"home";CO.id=p[1]||null;if(CO.view==="project"&&CO.id!==was)CO.proj="tasks";
+    if(CO.view==="project"&&!CO.id)CO.view="projects";if(CO.view==="board"&&CO.id)CO.view="thread"}
+  function coMonday(d){var x=d?new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10)):new Date();x.setHours(0,0,0,0);var w=(x.getDay()+6)%7;x.setDate(x.getDate()-w);
+    return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")}
+  function coAddDays(iso,n){var x=new Date(+iso.slice(0,4),+iso.slice(5,7)-1,+iso.slice(8,10));x.setDate(x.getDate()+n);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")}
+  function coMoney(n){n=+n||0;return "$"+n.toLocaleString(undefined,{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2})}
+  function coAgo(t){if(!t)return "";var s=(Date.now()-new Date(t).getTime())/1000;if(s<60)return "just now";if(s<3600)return Math.floor(s/60)+" min ago";if(s<86400)return Math.floor(s/3600)+" hr ago";if(s<86400*7)return Math.floor(s/86400)+" day"+(s<172800?"":"s")+" ago";return fmtDate(String(t).slice(0,10))}
+  function coLoad(){var T=["council_officers","council_roles","council_projects","council_tasks","council_materials","council_funding","council_bulletins","council_files","council_social","council_threads","council_replies"];
+    return Promise.all(T.map(function(t){return db.from(t).select("*")}).concat([db.rpc("council_roster")])).then(function(rs){
+      var bad=rs.filter(function(r){return r&&r.error})[0];if(bad)throw bad.error;var D={};T.forEach(function(t,i){D[t.replace("council_","")]=rs[i].data||[]});
+      var ro=rs[T.length].data||{};D.roster=ro.members||[];D.me=ro.me||(ME&&ME.id)||null;D.M={};D.roster.forEach(function(m){D.M[m.id]=m});
+      D.O={};D.officers.forEach(function(o){D.O[o.position]=o.member_id});CO.D=D;return D})}
+  /* permissions (the database checks the same rules) */
+  function coPos(p){var D=CO.D;return !!(D&&D.me&&D.O[p]===D.me)}
+  function coPres(){return IS_ADMIN||coPos("president")}
+  function coEditP(p){var D=CO.D;return coPres()||(!!D.me&&p.lead_member===D.me)||!p.lead_only}
+  function coFund(p){return coEditP(p)||coPos("treasurer")}
+  function coBull(){return coPres()||coPos("secretary")||coPos("note_keeper")}
+  function coMedia(){return IS_ADMIN||coPos("media_manager")||coPos("president")}
+  function coOwn(x){var D=CO.D;return x.created_by_member?x.created_by_member===D.me:(x.created_by_user===(USER&&USER.id))}
+  function coName(id){var m=id&&CO.D.M[id];return m?m.name:""}
+  function coStamp(){return{author_name:crewName(),created_by_member:CO.D.me||null,created_by_user:USER?USER.id:null}}
+  function coProgress(p){var D=CO.D,t=D.tasks.filter(function(x){return x.project_id===p.id}),m=D.materials.filter(function(x){return x.project_id===p.id}),f=D.funding.filter(function(x){return x.project_id===p.id});
+    var td=t.filter(function(x){return x.done}).length,mh=m.filter(function(x){return x.status==="have"}).length,goal=+p.funding_goal||0,
+      rec=f.filter(function(x){return x.kind==="received"}).reduce(function(a,x){return a+(+x.amount||0)},0),pl=f.filter(function(x){return x.kind==="pledged"}).reduce(function(a,x){return a+(+x.amount||0)},0),
+      sp=f.filter(function(x){return x.kind==="spent"}).reduce(function(a,x){return a+(+x.amount||0)},0),need=m.filter(function(x){return x.status!=="have"}).reduce(function(a,x){return a+(+x.est_cost||0)},0),parts=[];
+    if(t.length)parts.push(td/t.length);if(m.length)parts.push(mh/m.length);if(goal>0)parts.push(Math.min(1,rec/goal));
+    var pct=p.status==="done"?100:parts.length?Math.round(parts.reduce(function(a,x){return a+x},0)/parts.length*100):0;
+    return{pct:pct,tasks:t,td:td,mats:m,mh:mh,goal:goal,rec:rec,pledged:pl,spent:sp,matCost:m.reduce(function(a,x){return a+(+x.est_cost||0)},0),need:need}}
+  function coBar(pr,big){var left=[];if(pr.tasks.length-pr.td)left.push((pr.tasks.length-pr.td)+" task"+(pr.tasks.length-pr.td===1?"":"s"));
+    if(pr.mats.length-pr.mh)left.push((pr.mats.length-pr.mh)+" material"+(pr.mats.length-pr.mh===1?"":"s"));if(pr.goal>pr.rec)left.push(coMoney(pr.goal-pr.rec)+" to raise");
+    var tone=pr.pct>=100?"done":pr.pct>=60?"hi":pr.pct>=25?"mid":"lo";
+    return '<div class="co-meter'+(big?' big':'')+'"><div class="co-mt"><b>'+pr.pct+'%</b><span>'+(pr.pct>=100?"Planning complete":left.length?"Left: "+esc(left.join(" · ")):"Add tasks, materials or a funding goal to track progress")+'</span></div>'+
+      '<div class="co-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pr.pct+'" aria-label="Planning progress"><i class="'+tone+'" style="width:'+pr.pct+'%"></i></div>'+
+      (big?'<div class="co-parts"><span><b>'+pr.td+'/'+pr.tasks.length+'</b> tasks done</span><span><b>'+pr.mh+'/'+pr.mats.length+'</b> materials in hand</span><span><b>'+coMoney(pr.rec)+'</b>'+(pr.goal?' of '+coMoney(pr.goal):'')+' raised</span></div>':'')+'</div>'}
+  function coWhoOpts(sel,blank){return (blank?'<option value="">'+esc(blank)+'</option>':'')+CO.D.roster.map(function(m){return '<option value="'+m.id+'"'+(m.id===sel?' selected':'')+'>'+esc(m.name)+'</option>'}).join("")}
+  function coLinks(text){return String(text||"").split(/\n/).map(function(l){var m=l.split("|"),u=(m.length>1?m.slice(1).join("|"):m[0]).trim(),t=m.length>1?m[0].trim():"";return /^https:\/\//i.test(u)?{title:t||u.replace(/^https:\/\/(www\.)?/i,"").slice(0,60),url:u}:null}).filter(Boolean)}
+  function coText(s){return esc(s||"").replace(/(https:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>').replace(/\n/g,"<br>")}
+  function coSigned(paths){return signedIn("council-files",paths)}
+  function signedIn(bucket,paths){paths=paths.filter(Boolean);if(!paths.length)return Promise.resolve({});var S=db.storage.from(bucket);
+    return Promise.all(paths.map(function(p){return S.createSignedUrl(p,3600).then(function(r){return [p,r&&r.data?r.data.signedUrl:""]},function(){return [p,""]})})).then(function(a){var m={};a.forEach(function(x){m[x[0]]=x[1]});return m})}
+  function coUpload(files,prefix){var out=[],bad=0;
+    return files.reduce(function(pr,file,i){return pr.then(function(){if(file.size>50*1024*1024){bad++;return}
+      var ext=(file.name.split(".").pop()||"bin").toLowerCase().replace(/[^a-z0-9]/g,"").slice(0,6),path=prefix+"/"+Date.now()+"-"+i+"."+ext;
+      return db.storage.from("council-files").upload(path,file,{contentType:file.type||"application/octet-stream",upsert:false}).then(function(u){if(u.error){bad++;return}out.push({path:path,mime:file.type||"",name:file.name.slice(0,140),size:file.size})})})},Promise.resolve())
+      .then(function(){if(bad)toast(bad+" file"+(bad===1?"":"s")+" couldn’t upload (50 MB limit: share long videos as a link)");return out})}
+  function coPick(accept,multi,cb){var f=document.createElement("input");f.type="file";f.multiple=!!multi;if(accept)f.accept=accept;f.onchange=function(){var a=Array.prototype.slice.call(f.files||[]);if(a.length)cb(a)};f.click()}
+  function coConfirm(b){if(b.getAttribute("data-sure")){return true}b.setAttribute("data-sure","1");b.__t=b.textContent;b.textContent="Sure? Tap again";setTimeout(function(){if(b.isConnected){b.removeAttribute("data-sure");b.textContent=b.__t}},3500);return false}
+  function coDone(x,msg){if(okToast(x,msg)){renderCO(true);return true}return false}
+
+  function renderCO(force){var box=$("#coBox");if(!box||hashBase()!=="council")return;
+    if(!gate(box,"cos","Leadership Council",IS_ADMIN||hasRole("council")))return;
+    coRoute();var sig=(USER?USER.id:"")+"|"+location.hash;if(!force&&CO.sig===sig&&CO.D)return;CO.sig=sig;
+    if(!CO.D)box.innerHTML='<div class="rk-card"><p>Loading the council…</p></div>';
+    coLoad().then(function(){coDraw(box)},function(e){box.innerHTML='<div class="rk-card"><p>Couldn’t load the council: '+esc(e.message||e)+'</p><button class="mini" type="button" id="coRetry">Try again</button></div>';$("#coRetry").onclick=function(){renderCO(true)}})}
+  function coDraw(box){var D=CO.D,v=CO.view,mine=D.me&&D.M[D.me],tab=v==="project"?(CO.D.projects.filter(function(p){return p.id===CO.id})[0]||{}).kind==="event"?"events":"projects":v==="thread"?"board":v;
+    var who=mine?mine.positions.map(function(p){return (CO_POS.filter(function(x){return x[0]===p})[0]||[0,p])[1]}).concat(mine.titles).join(" · "):"";
+    var html=portalTop("Leadership Council","Student Leadership Council",IS_ADMIN?"Admin":(who||"Council member"))+
+      '<nav class="co-tabs" aria-label="Council sections">'+CO_TABS.map(function(t){var n=t[0]==="social"?D.social.filter(function(s){return IS_ADMIN?s.status==="ready":coMedia()&&s.status==="idea"}).length:t[0]==="team"&&coPres()?D.roles.filter(function(r){return r.status==="pending"}).length:0;
+        return '<a href="#council'+(t[0]==="home"?"":"/"+t[0])+'"'+(tab===t[0]?' aria-current="page"':'')+'>'+esc(t[1])+(n?'<i>'+n+'</i>':'')+'</a>'}).join("")+'</nav><div id="coMain"></div>';
+    box.innerHTML=html;bindTop(box);var M=$("#coMain",box);
+    ({home:coHome,projects:coProjects,events:coEvents,project:coProject,week:coWeek,bulletins:coBulletins,files:coFiles,social:coSocial,board:coBoard,thread:coThread,team:coTeam}[v]||coHome)(M)}
+
+  /* ----- Home ----- */
+  function coHome(M){var D=CO.D,wk=coMonday(),me=D.me,today=todayISO(),act=D.projects.filter(function(p){return p.status!=="done"});
+    var weekly=D.tasks.filter(function(t){return !t.project_id&&t.week_of===wk}),mytasks=D.tasks.filter(function(t){return t.project_id&&!t.done&&me&&t.assignee_member===me}),
+      bul=D.bulletins.slice().sort(function(a,b){return a.week_of<b.week_of?1:a.week_of>b.week_of?-1:(a.created_at<b.created_at?1:-1)})[0],
+      evs=D.projects.filter(function(p){return p.kind==="event"&&p.event_date&&p.event_date>=today}).sort(function(a,b){return a.event_date>b.event_date?1:-1}).slice(0,3),
+      th=D.threads.filter(function(t){return t.kind==="discussion"}).sort(function(a,b){return a.last_reply_at<b.last_reply_at?1:-1}).slice(0,4);
+    var wd=weekly.filter(function(t){return t.done}).length;
+    M.innerHTML='<div class="co-grid">'+
+      '<section class="rk-card co-span"><div class="rk-ordhead"><h3>This week · '+fmtDate(wk,{month:"short",day:"numeric"})+'</h3><a class="mini" href="#council/week">Open the week</a></div>'+
+        (weekly.length?'<p class="co-wk"><b>'+wd+' of '+weekly.length+'</b> weekly tasks checked off</p><div class="co-track"><i class="'+(wd===weekly.length?"done":"hi")+'" style="width:'+Math.round(wd/weekly.length*100)+'%"></i></div>'+coTaskList(weekly.slice(0,6),true):'<p class="rk-fine">No weekly tasks yet. Add them on This week.</p>')+'</section>'+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Projects in motion</h3><a class="mini" href="#council/projects">All projects</a></div>'+(act.length?act.slice(0,5).map(function(p){return '<a class="co-pmini" href="#council/project/'+p.id+'"><span><b>'+esc(p.title)+'</b><small>'+esc(CO_KIND[p.kind])+(p.lead_member?' · '+esc(coName(p.lead_member)):'')+'</small></span>'+coBar(coProgress(p))+'</a>'}).join(""):'<p class="rk-fine">No projects yet.</p>')+'</section>'+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Latest bulletin</h3><a class="mini" href="#council/bulletins">All bulletins</a></div>'+(bul?'<p class="co-date">Week of '+fmtDate(bul.week_of,{month:"long",day:"numeric"})+'</p><h4 class="co-h">'+esc(bul.title)+'</h4><div class="co-body co-clip">'+coText(bul.body)+'</div>':'<p class="rk-fine">No bulletins yet.</p>')+'</section>'+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Your tasks</h3></div>'+(mytasks.length?coTaskList(mytasks.slice(0,8),true,true):'<p class="rk-fine">'+(me?"Nothing assigned to you right now.":"Admins aren’t assigned tasks. You can still check any off.")+'</p>')+'</section>'+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Coming up</h3><a class="mini" href="#council/events">Events</a></div>'+(evs.length?'<ol class="rk-list">'+evs.map(function(p){return '<li><div><b>'+esc(p.title)+'</b><br><small>'+fmtDate(p.event_date,{weekday:"short",month:"short",day:"numeric"})+(p.event_time?' · '+esc(p.event_time):'')+(p.lead_member?' · Managed by '+esc(coName(p.lead_member)):'')+'</small></div><a class="mini" href="#council/project/'+p.id+'">Plan</a></li>'}).join("")+'</ol>':'<p class="rk-fine">No upcoming events planned.</p>')+'</section>'+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Discussion</h3><a class="mini" href="#council/board">Open the board</a></div>'+(th.length?'<ol class="rk-list">'+th.map(function(t){var n=D.replies.filter(function(r){return r.thread_id===t.id}).length;return '<li><div><b>'+esc(t.title||t.body.slice(0,60))+'</b><br><small>'+esc(t.author_name||"")+' · '+n+' repl'+(n===1?"y":"ies")+' · '+coAgo(t.last_reply_at)+'</small></div><a class="mini" href="#council/board/'+t.id+'">Read</a></li>'}).join("")+'</ol>':'<p class="rk-fine">Start the first conversation.</p>')+'</section>'+
+      '</div>';coBindTasks(M)}
+
+  /* ----- Tasks (shared) ----- */
+  function coTaskList(list,compact,showProj){var D=CO.D;
+    return '<ul class="co-tasks">'+list.map(function(t){var p=t.project_id&&D.projects.filter(function(x){return x.id===t.project_id})[0],
+        can=!t.project_id||(p&&(coEditP(p)||(D.me&&t.assignee_member===D.me))),del=!t.project_id?(coPres()||coOwn(t)):p&&coEditP(p),late=!t.done&&t.due_date&&t.due_date<todayISO();
+      return '<li class="'+(t.done?"done":"")+'" data-task="'+t.id+'"><label><input type="checkbox"'+(t.done?" checked":"")+(can?"":" disabled")+' aria-label="Done: '+esc(t.title)+'"><span><b>'+esc(t.title)+'</b><small>'+
+        [t.assignee_member?esc(coName(t.assignee_member)):"Anyone",t.due_date?'<span class="'+(late?"co-late":"")+'">Due '+fmtDate(t.due_date)+'</span>':"",showProj&&p?'<a href="#council/project/'+p.id+'">'+esc(p.title)+'</a>':"",t.done&&t.done_by?"✓ "+esc(t.done_by):""].filter(Boolean).join(" · ")+'</small></span></label>'+
+        (!compact&&del?'<button class="co-x" type="button" data-tdel="'+t.id+'" aria-label="Delete task">×</button>':'')+'</li>'}).join("")+'</ul>'}
+  function coBindTasks(M){$$("[data-task] input[type=checkbox]",M).forEach(function(c){c.onchange=function(){var id=c.closest("[data-task]").getAttribute("data-task");
+      db.from("council_tasks").update({done:c.checked,done_at:c.checked?new Date().toISOString():null,done_by:c.checked?crewName():null}).eq("id",id).then(function(x){coDone(x,c.checked?"Checked off":"Unchecked")})}});
+    $$("[data-tdel]",M).forEach(function(b){b.onclick=function(){if(!coConfirm(b))return;db.from("council_tasks").delete().eq("id",b.getAttribute("data-tdel")).then(function(x){coDone(x,"Task removed")})}})}
+  function coTaskForm(id,extra){return '<form class="co-add" id="'+id+'" novalidate><input type="text" maxlength="200" placeholder="Add a task" aria-label="New task"><select aria-label="Who">'+coWhoOpts(null,"Anyone")+'</select><input type="date" aria-label="Due date (optional)"><button class="mini solid" type="submit">Add</button></form>'}
+  function coBindTaskForm(f,base){if(!f)return;f.onsubmit=function(e){e.preventDefault();var i=$$("input,select",f),t=i[0].value.trim();if(!t){toast("Type the task first.");return}
+    db.from("council_tasks").insert(Object.assign({title:t,assignee_member:i[1].value||null,due_date:i[2].value||null,done:false,sort_order:Date.now()%1e9},base,coStamp())).then(function(x){coDone(x,"Task added")})}}
+
+  /* ----- Projects ----- */
+  function coProjForm(kind){var ev=kind==="event";
+    return '<details class="rk-card co-new"'+(CO.D.projects.length?'':' open')+'><summary>'+(ev?"+ Plan a new event":"+ Start a project")+'</summary><form id="coPNew" novalidate><div class="rk-form">'+
+      '<label class="f">'+(ev?"Event name":"Project name")+'<input type="text" maxlength="100" data-k="title" placeholder="'+(ev?"Spring Kickoff Night":"How to align your axles (video)")+'"></label>'+
+      (ev?'<input type="hidden" data-k="kind" value="event">':'<label class="f">Kind<select data-k="kind">'+Object.keys(CO_KIND).filter(function(k){return k!=="event"}).map(function(k){return '<option value="'+k+'">'+CO_KIND[k]+'</option>'}).join("")+'</select></label>')+
+      '<label class="f">'+(ev?"Managed by":"Project lead")+'<select data-k="lead_member">'+coWhoOpts(CO.D.me,"Choose…")+'</select></label>'+
+      (ev?'<label class="f">Event date<input type="date" data-k="event_date"></label><label class="f">Time<input type="text" maxlength="60" data-k="event_time" placeholder="6–8 pm"></label><label class="f">Location<input type="text" maxlength="200" data-k="location"></label>':
+        '<label class="f">Planning due<input type="date" data-k="due_date"></label>')+
+      '<label class="f">Funding goal ($)<input type="number" min="0" step="1" data-k="funding_goal" placeholder="0"></label></div>'+
+      '<label class="f">What is it?<textarea maxlength="3000" rows="3" data-k="description" placeholder="'+(ev?"Who it’s for, what happens, what we need.":"What we’re making, who it’s for and how it shows our skills.")+'"></textarea></label>'+
+      (ev?'<p class="rk-fine">Everyone on the council sees the event. Only the person managing it (plus the president and admins) can change its plan.</p>':'<label class="rk-radio"><input type="checkbox" data-k="lead_only"> Only the lead can edit (everyone can still see it)</label>')+
+      '<button class="rk-go" type="submit">'+(ev?"Create event plan":"Create project")+'</button></form></details>'}
+  function coBindProjForm(M){var f=$("#coPNew",M);if(!f)return;f.onsubmit=function(e){e.preventDefault();var r={};$$("[data-k]",f).forEach(function(i){r[i.getAttribute("data-k")]=i.type==="checkbox"?i.checked:i.value.trim()||null});
+    if(!r.title||r.title.length<2){toast("Give it a name.");return}r.funding_goal=+r.funding_goal||0;r.lead_only=r.kind==="event"?true:!!r.lead_only;r.status="planning";r.id=FRB.uid();
+    db.from("council_projects").insert(Object.assign(r,coStamp())).then(function(x){if(okToast(x,"Created")){location.hash="#council/project/"+r.id}})}}
+  function coCard(p){var pr=coProgress(p);return '<a class="co-card" href="#council/project/'+p.id+'"><div class="co-ct"><span class="co-tag k-'+p.kind+'">'+esc(CO_KIND[p.kind])+'</span><span class="co-st s-'+p.status+'">'+esc(CO_STAT[p.status])+'</span></div><h4>'+esc(p.title)+'</h4>'+
+    '<p class="co-meta">'+(p.lead_member?(p.kind==="event"?"Managed by ":"Lead: ")+esc(coName(p.lead_member)):"No lead yet")+(p.event_date?' · '+fmtDate(p.event_date):p.due_date?' · Due '+fmtDate(p.due_date):'')+'</p>'+coBar(pr)+'</a>'}
+  function coProjects(M){var D=CO.D,ps=D.projects.filter(function(p){return p.kind!=="event"}).sort(function(a,b){return (a.status==="done")-(b.status==="done")||(a.updated_at<b.updated_at?1:-1)});
+    M.innerHTML=coProjForm("project")+'<div class="co-cards">'+(ps.length?ps.map(coCard).join(""):'<p class="rk-card rk-fine">No projects yet. Start one above: a video, an instructional, a fundraiser or anything else the council is building.</p>')+'</div>';coBindProjForm(M)}
+  function coEvents(M){var D=CO.D,t=todayISO(),ev=D.projects.filter(function(p){return p.kind==="event"}),up=ev.filter(function(p){return !p.event_date||p.event_date>=t}).sort(function(a,b){return (a.event_date||"9")>(b.event_date||"9")?1:-1}),past=ev.filter(function(p){return p.event_date&&p.event_date<t}).sort(function(a,b){return a.event_date<b.event_date?1:-1});
+    M.innerHTML=coProjForm("event")+'<h3 class="co-sec">Upcoming events</h3><div class="co-cards">'+(up.length?up.map(coCard).join(""):'<p class="rk-card rk-fine">No events planned yet.</p>')+'</div>'+(past.length?'<h3 class="co-sec">Past events</h3><div class="co-cards">'+past.map(coCard).join("")+'</div>':'');coBindProjForm(M)}
+
+  function coProject(M){var D=CO.D,p=D.projects.filter(function(x){return x.id===CO.id})[0];if(!p){M.innerHTML='<div class="rk-card"><p>That project was deleted or the link is wrong.</p><a class="mini" href="#council/projects">All projects</a></div>';return}
+    var pr=coProgress(p),ed=coEditP(p),fd=coFund(p),ev=p.kind==="event",sec=CO.proj,
+      ups=D.threads.filter(function(t){return t.project_id===p.id}).sort(function(a,b){return a.created_at<b.created_at?1:-1}),files=D.files.filter(function(f){return f.project_id===p.id}),
+      canDel=coPres()||coOwn(p)||(D.me&&p.lead_member===D.me);
+    var head='<section class="rk-card co-phead"><div class="co-ct"><span class="co-tag k-'+p.kind+'">'+esc(CO_KIND[p.kind])+'</span><span class="co-st s-'+p.status+'">'+esc(CO_STAT[p.status])+'</span>'+(p.lead_only?'<span class="co-lock">'+(ev?"Managed":"Lead edits only")+'</span>':'')+'</div>'+
+      '<h2>'+esc(p.title)+'</h2><p class="co-meta">'+(p.lead_member?(ev?"Managed by ":"Lead: ")+'<b>'+esc(coName(p.lead_member))+'</b>':"No lead yet")+(p.event_date?' · '+fmtDate(p.event_date,{weekday:"long",month:"long",day:"numeric"}):'')+(p.event_time?' · '+esc(p.event_time):'')+(p.location?' · '+esc(p.location):'')+(p.due_date?' · Planning due '+fmtDate(p.due_date):'')+'</p>'+
+      coBar(pr,true)+(p.description?'<div class="co-body">'+coText(p.description)+'</div>':'')+(ed?'':'<p class="rk-fine">'+(ev?"This event is managed by "+esc(coName(p.lead_member)||"its manager")+". You can follow the plan, post updates and check off tasks assigned to you.":"Only the lead can change this project.")+'</p>')+'</section>';
+    var tabs=[["tasks","Tasks",pr.tasks.length-pr.td],["materials","Materials",pr.mats.length-pr.mh],["funding","Funding",0],["updates","Updates",ups.length],["files","Files",files.length]].concat(ed?[["details","Edit details",0]]:[]);
+    var body="";
+    if(sec==="tasks"){var open=pr.tasks.filter(function(t){return !t.done}).sort(function(a,b){return (a.due_date||"9")>(b.due_date||"9")?1:-1}),dn=pr.tasks.filter(function(t){return t.done});
+      body=(ed?coTaskForm("coTF"):'')+(open.length?coTaskList(open):'<p class="rk-fine">'+(pr.tasks.length?"Every task is done.":"No tasks yet.")+'</p>')+(dn.length?'<details class="co-donebox"><summary>Done ('+dn.length+')</summary>'+coTaskList(dn)+'</details>':'')}
+    else if(sec==="materials"){body=(ed?'<form class="co-add" id="coMF" novalidate><input type="text" maxlength="120" placeholder="Item" aria-label="Item"><input type="text" maxlength="40" placeholder="How many" aria-label="Quantity" class="co-sm"><input type="number" min="0" step="0.01" placeholder="Est. cost $" aria-label="Estimated cost" class="co-sm"><button class="mini solid" type="submit">Add</button></form>':'')+
+      (pr.mats.length?'<div class="adm-scroll"><table class="co-tbl"><thead><tr><th>Item</th><th>Qty</th><th>Est. cost</th><th>Status</th><th>Where from</th>'+(ed?'<th></th>':'')+'</tr></thead><tbody>'+pr.mats.map(function(m){return '<tr data-mat="'+m.id+'"><td>'+esc(m.item)+'</td><td>'+esc(m.qty||"")+'</td><td>'+(+m.est_cost?coMoney(m.est_cost):"")+'</td><td>'+
+        (ed?'<select data-mk="status" aria-label="Status"><option value="needed"'+(m.status==="needed"?" selected":"")+'>Needed</option><option value="requested"'+(m.status==="requested"?" selected":"")+'>Requested</option><option value="have"'+(m.status==="have"?" selected":"")+'>Have it ✓</option></select>':'<span class="co-ms m-'+m.status+'">'+({needed:"Needed",requested:"Requested",have:"Have it ✓"})[m.status]+'</span>')+'</td><td>'+
+        (ed?'<input type="text" maxlength="200" data-mk="source" value="'+esc(m.source||"")+'" placeholder="Donated, store, sponsor…" aria-label="Where from">':esc(m.source||""))+'</td>'+(ed?'<td><button class="co-x" type="button" data-mdel aria-label="Remove">×</button></td>':'')+'</tr>'}).join("")+
+        '</tbody></table></div><p class="rk-fine">Materials still needed: <b>'+(pr.mats.length-pr.mh)+'</b> · estimated cost still to cover: <b>'+coMoney(pr.need)+'</b> (all materials: '+coMoney(pr.matCost)+')</p>':'<p class="rk-fine">No materials listed yet.</p>')}
+    else if(sec==="funding"){var f=D.funding.filter(function(x){return x.project_id===p.id}).sort(function(a,b){return a.created_at<b.created_at?1:-1});
+      body='<div class="co-money"><div><b>'+coMoney(pr.goal)+'</b><span>Goal</span></div><div><b>'+coMoney(pr.rec)+'</b><span>Received</span></div><div><b>'+coMoney(pr.pledged)+'</b><span>Pledged</span></div><div><b>'+coMoney(pr.spent)+'</b><span>Spent</span></div><div><b>'+coMoney(Math.max(0,pr.goal-pr.rec))+'</b><span>Still to raise</span></div></div>'+
+        (fd?'<form class="co-add" id="coGoal" novalidate><label class="co-inl">Funding goal $<input type="number" min="0" step="1" value="'+(+p.funding_goal||0)+'" class="co-sm" aria-label="Funding goal"></label><button class="mini" type="submit">Save goal</button>'+(pr.matCost?'<button class="mini" type="button" id="coGoalMat">Use materials total ('+coMoney(pr.matCost)+')</button>':'')+'</form>'+
+          '<form class="co-add" id="coFF" novalidate><input type="text" maxlength="120" placeholder="Source or what it was for" aria-label="Source"><input type="number" min="0" step="0.01" placeholder="Amount $" aria-label="Amount" class="co-sm"><select aria-label="Kind"><option value="pledged">Pledged</option><option value="received">Received</option><option value="spent">Spent</option></select><button class="mini solid" type="submit">Add</button></form>':'<p class="rk-fine">The project lead and the Treasurer update funding.</p>')+
+        (f.length?'<ul class="co-tasks">'+f.map(function(x){return '<li><span><b>'+coMoney(x.amount)+' · '+esc(x.source)+'</b><small>'+({pledged:"Pledged",received:"Received",spent:"Spent"})[x.kind]+' · '+esc(x.author_name||"")+' · '+coAgo(x.created_at)+'</small></span>'+(fd?'<button class="co-x" type="button" data-fdel="'+x.id+'" aria-label="Remove">×</button>':'')+'</li>'}).join("")+'</ul>':'<p class="rk-fine">No funding recorded yet.</p>')}
+    else if(sec==="updates"){body='<form class="co-post" id="coUF" novalidate><textarea maxlength="4000" rows="3" placeholder="Post an update: what got done, what’s next, what you need." aria-label="Update"></textarea><button class="mini solid" type="submit">Post update</button></form>'+
+      (ups.length?ups.map(function(t){return coPostHTML(t)}).join(""):'<p class="rk-fine">No updates yet.</p>')}
+    else if(sec==="files"){body=coFileAdd("pf",false)+'<div id="coPF">'+coFileGrid(files)+'</div>'}
+    else if(sec==="details"&&ed){body='<form id="coPE" novalidate><div class="rk-form"><label class="f">Name<input type="text" maxlength="100" data-k="title" value="'+esc(p.title)+'"></label>'+
+      '<label class="f">Kind<select data-k="kind">'+Object.keys(CO_KIND).map(function(k){return '<option value="'+k+'"'+(p.kind===k?" selected":"")+'>'+CO_KIND[k]+'</option>'}).join("")+'</select></label>'+
+      '<label class="f">Status<select data-k="status">'+Object.keys(CO_STAT).map(function(k){return '<option value="'+k+'"'+(p.status===k?" selected":"")+'>'+CO_STAT[k]+'</option>'}).join("")+'</select></label>'+
+      '<label class="f">'+(ev?"Managed by":"Lead")+'<select data-k="lead_member"'+(coPres()||!p.lead_member||p.lead_member===D.me?"":" disabled")+'>'+coWhoOpts(p.lead_member,"No lead")+'</select></label>'+
+      '<label class="f">Planning due<input type="date" data-k="due_date" value="'+esc(p.due_date||"")+'"></label><label class="f">Event date<input type="date" data-k="event_date" value="'+esc(p.event_date||"")+'"></label>'+
+      '<label class="f">Time<input type="text" maxlength="60" data-k="event_time" value="'+esc(p.event_time||"")+'"></label><label class="f">Location<input type="text" maxlength="200" data-k="location" value="'+esc(p.location||"")+'"></label></div>'+
+      '<label class="f">Description<textarea maxlength="3000" rows="4" data-k="description">'+esc(p.description||"")+'</textarea></label>'+
+      (ev?'':'<label class="rk-radio"><input type="checkbox" data-k="lead_only"'+(p.lead_only?" checked":"")+'> Only the lead can edit</label>')+
+      '<div class="row"><button class="mini solid" type="submit">Save changes</button>'+(canDel?'<button class="mini red" type="button" id="coPDel">Delete '+(ev?"event":"project")+'</button>':'')+'</div></form>'}
+    M.innerHTML=head+'<section class="rk-card"><div class="co-sub" role="tablist">'+tabs.map(function(t){return '<button type="button" role="tab" data-ps="'+t[0]+'" aria-selected="'+(sec===t[0])+'">'+esc(t[1])+(t[2]?' <i>'+t[2]+'</i>':'')+'</button>'}).join("")+'</div><div class="co-subbody">'+body+'</div></section>'+
+      '<p><a class="mini" href="#council/'+(ev?"events":"projects")+'">← All '+(ev?"events":"projects")+'</a></p>';
+    $$("[data-ps]",M).forEach(function(b){b.onclick=function(){CO.proj=b.getAttribute("data-ps");coDraw($("#coBox"))}});
+    coBindTasks(M);coBindTaskForm($("#coTF",M),{project_id:p.id});
+    var mf=$("#coMF",M);if(mf)mf.onsubmit=function(e){e.preventDefault();var i=$$("input",mf);if(!i[0].value.trim()){toast("Name the item.");return}
+      db.from("council_materials").insert(Object.assign({project_id:p.id,item:i[0].value.trim(),qty:i[1].value.trim()||null,est_cost:+i[2].value||0,status:"needed"},coStamp())).then(function(x){coDone(x,"Added")})};
+    $$("[data-mat]",M).forEach(function(tr){var id=tr.getAttribute("data-mat");$$("[data-mk]",tr).forEach(function(i){i.onchange=function(){var r={};r[i.getAttribute("data-mk")]=i.value.trim()||null;if(r.status===null)r.status="needed";
+        db.from("council_materials").update(r).eq("id",id).then(function(x){coDone(x,"Saved")})}});
+      var d=$("[data-mdel]",tr);if(d)d.onclick=function(){if(!coConfirm(d))return;db.from("council_materials").delete().eq("id",id).then(function(x){coDone(x,"Removed")})}});
+    var gf=$("#coGoal",M);if(gf){gf.onsubmit=function(e){e.preventDefault();db.from("council_projects").update({funding_goal:Math.max(0,+$("input",gf).value||0),updated_at:new Date().toISOString()}).eq("id",p.id).then(function(x){coDone(x,"Goal saved")})};
+      var gm=$("#coGoalMat",M);if(gm)gm.onclick=function(){db.from("council_projects").update({funding_goal:Math.ceil(pr.matCost),updated_at:new Date().toISOString()}).eq("id",p.id).then(function(x){coDone(x,"Goal set from materials")})}}
+    var ff=$("#coFF",M);if(ff)ff.onsubmit=function(e){e.preventDefault();var i=$$("input,select",ff);if(!i[0].value.trim()||!(+i[1].value>0)){toast("Add a source and an amount.");return}
+      db.from("council_funding").insert(Object.assign({project_id:p.id,source:i[0].value.trim(),amount:+i[1].value,kind:i[2].value},coStamp())).then(function(x){coDone(x,"Recorded")})};
+    $$("[data-fdel]",M).forEach(function(b){b.onclick=function(){if(!coConfirm(b))return;db.from("council_funding").delete().eq("id",b.getAttribute("data-fdel")).then(function(x){coDone(x,"Removed")})}});
+    var uf=$("#coUF",M);if(uf)uf.onsubmit=function(e){e.preventDefault();var t=$("textarea",uf).value.trim();if(!t){toast("Write the update first.");return}
+      db.from("council_threads").insert(Object.assign({project_id:p.id,kind:"update",body:t,title:null},coStamp())).then(function(x){coDone(x,"Update posted")})};
+    coBindPosts(M);
+    if(sec==="files"){coBindFileAdd(M,"pf",{project_id:p.id});coSignGrid(M,files)}
+    var pe=$("#coPE",M);if(pe)pe.onsubmit=function(e){e.preventDefault();var r={updated_at:new Date().toISOString()};$$("[data-k]",pe).forEach(function(i){if(i.disabled)return;r[i.getAttribute("data-k")]=i.type==="checkbox"?i.checked:i.value.trim()||null});
+      if(!r.title||r.title.length<2){toast("Give it a name.");return}if(r.kind==="event")r.lead_only=true;
+      db.from("council_projects").update(r).eq("id",p.id).then(function(x){if(okToast(x,"Saved")){CO.proj="tasks";renderCO(true)}})};
+    var pd=$("#coPDel",M);if(pd)pd.onclick=function(){if(!coConfirm(pd))return;db.from("council_projects").delete().eq("id",p.id).then(function(x){if(okToast(x,"Deleted")){CO.proj="tasks";location.hash="#council/"+(ev?"events":"projects")}})};
+  }
+
+  /* ----- This week ----- */
+  function coWeek(M){var D=CO.D,wk=CO.week||coMonday(),end=coAddDays(wk,6),list=D.tasks.filter(function(t){return !t.project_id&&t.week_of===wk}),
+      due=D.tasks.filter(function(t){return t.project_id&&!t.done&&t.due_date&&t.due_date>=wk&&t.due_date<=end}),done=list.filter(function(t){return t.done}).length,cur=wk===coMonday();
+    M.innerHTML='<section class="rk-card"><div class="co-weekbar"><button class="mini" type="button" data-wk="-7" aria-label="Previous week">◀</button><h3>Week of '+fmtDate(wk,{month:"long",day:"numeric"})+(cur?' <span class="co-now">This week</span>':'')+'</h3><button class="mini" type="button" data-wk="7" aria-label="Next week">▶</button>'+(cur?'':'<button class="mini" type="button" data-wk="0">Today</button>')+'</div>'+
+      (list.length?'<p class="co-wk"><b>'+done+' of '+list.length+'</b> checked off'+(done===list.length?' · great week!':'')+'</p><div class="co-track"><i class="'+(done===list.length?"done":"hi")+'" style="width:'+Math.round(done/list.length*100)+'%"></i></div>':'')+
+      coTaskForm("coWF")+(list.length?coTaskList(list):'<p class="rk-fine">No weekly tasks for this week yet. Add the jobs everyone should check off: meeting prep, posting, outreach…</p>')+
+      (list.length?'':D.tasks.some(function(t){return !t.project_id&&t.week_of===coAddDays(wk,-7)})?'<button class="mini" type="button" id="coCopy">Copy last week’s tasks</button>':'')+'</section>'+
+      '<section class="rk-card"><h3>Project tasks due this week</h3>'+(due.length?coTaskList(due,false,true):'<p class="rk-fine">Nothing from projects is due this week.</p>')+'</section>';
+    $$("[data-wk]",M).forEach(function(b){b.onclick=function(){var n=+b.getAttribute("data-wk");CO.week=n?coAddDays(wk,n):null;coDraw($("#coBox"))}});
+    coBindTasks(M);coBindTaskForm($("#coWF",M),{week_of:wk,project_id:null});
+    var cp=$("#coCopy",M);if(cp)cp.onclick=function(){var prev=D.tasks.filter(function(t){return !t.project_id&&t.week_of===coAddDays(wk,-7)});
+      db.from("council_tasks").insert(prev.map(function(t,i){return Object.assign({title:t.title,assignee_member:t.assignee_member,week_of:wk,done:false,sort_order:i},coStamp())})).then(function(x){coDone(x,prev.length+" tasks copied")})}}
+
+  /* ----- Bulletins ----- */
+  function coBulletins(M){var D=CO.D,can=coBull(),list=D.bulletins.slice().sort(function(a,b){return a.week_of<b.week_of?1:a.week_of>b.week_of?-1:(a.created_at<b.created_at?1:-1)}),ed=CO.id&&list.filter(function(b){return b.id===CO.id})[0];
+    function form(b){b=b||{};return '<form class="rk-card" id="coBF" novalidate><h3>'+(b.id?"Edit bulletin":"Post this week’s bulletin")+'</h3><div class="rk-form"><label class="f">Week of<input type="date" data-k="week_of" value="'+esc(b.week_of||coMonday())+'"></label><label class="f">Title<input type="text" maxlength="120" data-k="title" value="'+esc(b.title||"")+'" placeholder="Meeting recap + what’s next"></label></div>'+
+      '<label class="f">Bulletin<textarea maxlength="6000" rows="6" data-k="body" placeholder="Wins this week, decisions, reminders, shout-outs…">'+esc(b.body||"")+'</textarea></label>'+
+      '<label class="f">Links <small>(one per line: Title | https://…)</small><textarea maxlength="2000" rows="2" data-k="links" placeholder="Sign-up sheet | https://docs.google.com/…">'+esc((b.links||[]).map(function(l){return l.title+" | "+l.url}).join("\n"))+'</textarea></label>'+
+      '<div class="row"><button class="mini solid" type="submit">'+(b.id?"Save":"Post bulletin")+'</button>'+(b.id?'<a class="mini" href="#council/bulletins">Cancel</a>':'')+'</div></form>'}
+    M.innerHTML=(can?(ed?form(ed):'<details class="co-new rk-card"'+(list.length?'':' open')+'><summary>+ Post a bulletin</summary>'+form().replace('class="rk-card" ','')+'</details>'):'<p class="rk-fine co-note">The Secretary, Note keeper and President post bulletins.</p>')+
+      (list.length?list.map(function(b){return '<article class="rk-card co-bul"><p class="co-date">Week of '+fmtDate(b.week_of,{month:"long",day:"numeric",year:"numeric"})+'</p><h4 class="co-h">'+esc(b.title)+'</h4><div class="co-body">'+coText(b.body)+'</div>'+
+        ((b.links||[]).length?'<ul class="co-links">'+b.links.map(function(l){return '<li><a href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(l.title)+' ↗</a></li>'}).join("")+'</ul>':'')+
+        '<p class="rk-fine">Posted by '+esc(b.author_name||"")+' · '+coAgo(b.created_at)+'</p>'+(can?'<div class="row"><a class="mini" href="#council/bulletins/'+b.id+'">Edit</a><button class="mini red" type="button" data-bdel="'+b.id+'">Delete</button></div>':'')+'</article>'}).join(""):'<p class="rk-card rk-fine">No bulletins yet.</p>');
+    var f=$("#coBF",M);if(f)f.onsubmit=function(e){e.preventDefault();var r={};$$("[data-k]",f).forEach(function(i){r[i.getAttribute("data-k")]=i.value.trim()});r.links=coLinks(r.links);r.body=r.body||null;
+      if(!r.week_of||r.title.length<2){toast("Add the week and a title.");return}
+      var q=ed?db.from("council_bulletins").update(Object.assign(r,{updated_at:new Date().toISOString()})).eq("id",ed.id):db.from("council_bulletins").insert(Object.assign(r,coStamp()));
+      q.then(function(x){if(okToast(x,ed?"Saved":"Bulletin posted")){if(ed)location.hash="#council/bulletins";else renderCO(true)}})};
+    $$("[data-bdel]",M).forEach(function(b){b.onclick=function(){if(!coConfirm(b))return;db.from("council_bulletins").delete().eq("id",b.getAttribute("data-bdel")).then(function(x){coDone(x,"Deleted")})}})}
+
+  /* ----- Files & forms ----- */
+  function coIsImg(f){return /^image\//.test(f.mime||"")}
+  function coIsVid(f){return /^video\//.test(f.mime||"")}
+  function coFileAdd(px,folders){var forms=coPres()||coPos("secretary");
+    return '<div class="co-fadd">'+(folders?'<label class="co-inl">Folder<select id="'+px+'Fold">'+CO_FOLD.filter(function(f){return f[0]!=="forms"||forms}).map(function(f){return '<option value="'+f[0]+'"'+(CO.folder===f[0]?" selected":"")+'>'+f[1]+'</option>'}).join("")+'</select></label>':'')+
+      '<button class="mini solid" type="button" id="'+px+'Up">Upload photos, videos or files</button><form class="co-add" id="'+px+'Ln" novalidate><input type="text" maxlength="140" placeholder="Link title" aria-label="Link title"><input type="url" placeholder="https://…" aria-label="Link"><button class="mini" type="submit">Add link</button></form>'+
+      '<p class="rk-fine">Up to 50 MB per file. For longer videos, upload to YouTube or Google Drive and add the link.</p></div>'}
+  function coBindFileAdd(M,px,base){var up=$("#"+px+"Up",M),ln=$("#"+px+"Ln",M),fold=function(){var s=$("#"+px+"Fold",M);return s?s.value:null};
+    if(up)up.onclick=function(){coPick(null,true,function(files){toast("Uploading "+files.length+" file"+(files.length===1?"":"s")+"…");
+      coUpload(files,"files/"+(base.project_id||fold()||"docs")).then(function(done){if(!done.length)return;
+        db.from("council_files").insert(done.map(function(u){var fo=fold()||(/^image\//.test(u.mime)?"photos":/^video\//.test(u.mime)?"videos":"docs");
+          if(fo==="docs"&&/^image\//.test(u.mime))fo="photos";if(fo==="docs"&&/^video\//.test(u.mime))fo="videos";
+          return Object.assign({folder:fo,title:u.name,path:u.path,mime:u.mime,size:u.size,url:null},base,coStamp())})).then(function(x){coDone(x,done.length+" uploaded")})})})};
+    if(ln)ln.onsubmit=function(e){e.preventDefault();var i=$$("input",ln),u=i[1].value.trim();if(!/^https:\/\//i.test(u)){toast("Links need to start with https://");return}
+      db.from("council_files").insert(Object.assign({folder:fold()&&fold()!=="photos"&&fold()!=="videos"?fold():"links",title:i[0].value.trim()||u.replace(/^https:\/\/(www\.)?/i,"").slice(0,80),url:u,path:null},base,coStamp())).then(function(x){coDone(x,"Link added")})}}
+  function coFileGrid(list){var D=CO.D;if(!list.length)return '<p class="rk-fine">Nothing here yet.</p>';
+    list=list.slice().sort(function(a,b){return a.created_at<b.created_at?1:-1});
+    var media=list.filter(function(f){return f.path&&(coIsImg(f)||coIsVid(f))}),other=list.filter(function(f){return media.indexOf(f)<0});
+    function canDel(f){var p=f.project_id&&D.projects.filter(function(x){return x.id===f.project_id})[0];return coPres()||coOwn(f)||(p&&coEditP(p))}
+    return (media.length?'<div class="co-media">'+media.map(function(f){return '<figure data-file="'+f.id+'">'+(coIsImg(f)?'<img data-src="'+esc(f.path)+'" alt="'+esc(f.title)+'" loading="lazy">':'<video data-src="'+esc(f.path)+'" controls preload="metadata"></video>')+
+        '<figcaption><span>'+esc(f.title)+'</span><span class="co-fa"><button class="mini" type="button" data-fget="'+f.id+'">Download</button>'+(canDel(f)?'<button class="co-x" type="button" data-fdl="'+f.id+'" aria-label="Delete">×</button>':'')+'</span></figcaption></figure>'}).join("")+'</div>':'')+
+      (other.length?'<ul class="co-tasks co-files">'+other.map(function(f){var fo=(CO_FOLD.filter(function(x){return x[0]===f.folder})[0]||[0,""])[1];
+        return '<li data-file="'+f.id+'"><span><b>'+(f.url?'<a href="'+esc(f.url)+'" target="_blank" rel="noopener">'+esc(f.title)+' ↗</a>':esc(f.title))+'</b><small>'+esc(fo)+(f.size?' · '+(f.size/1048576).toFixed(1)+' MB':'')+' · '+esc(f.author_name||"")+' · '+coAgo(f.created_at)+'</small></span><span class="co-fa">'+(f.path?'<button class="mini" type="button" data-fget="'+f.id+'">Download</button>':'')+(canDel(f)?'<button class="co-x" type="button" data-fdl="'+f.id+'" aria-label="Delete">×</button>':'')+'</span></li>'}).join("")+'</ul>':'')}
+  function coSignGrid(M,list){coSigned($$("[data-src]",M).map(function(e){return e.getAttribute("data-src")})).then(function(U){$$("[data-src]",M).forEach(function(e){var u=U[e.getAttribute("data-src")];if(u)e.src=u})});
+    $$("[data-fget]",M).forEach(function(b){b.onclick=function(){var f=CO.D.files.filter(function(x){return x.id===b.getAttribute("data-fget")})[0];if(!f)return;
+      db.storage.from("council-files").createSignedUrl(f.path,600,{download:f.title}).then(function(r){var u=r&&r.data&&r.data.signedUrl;if(!u){toast("Couldn’t get that file.");return}var a=document.createElement("a");a.href=u;a.download=f.title;a.target="_blank";a.rel="noopener";document.body.appendChild(a);a.click();a.remove()})}});
+    $$("[data-fdl]",M).forEach(function(b){b.onclick=function(){if(!coConfirm(b))return;var f=CO.D.files.filter(function(x){return x.id===b.getAttribute("data-fdl")})[0];if(!f)return;
+      db.from("council_files").delete().eq("id",f.id).then(function(x){if(okToast(x,"Deleted")){if(f.path)db.storage.from("council-files").remove([f.path]).then(function(){},function(){});renderCO(true)}})}})}
+  function coFiles(M){var D=CO.D,fo=CO.folder,list=D.files.filter(function(f){return fo==="all"||f.folder===fo});
+    M.innerHTML='<section class="rk-card"><div class="co-sub">'+[["all","Everything"]].concat(CO_FOLD).map(function(f){var n=f[0]==="all"?D.files.length:D.files.filter(function(x){return x.folder===f[0]}).length;return '<button type="button" data-fo="'+f[0]+'" aria-selected="'+(fo===f[0])+'">'+esc(f[1])+(n?' <i>'+n+'</i>':'')+'</button>'}).join("")+'</div>'+
+      (fo==="forms"?'<p class="rk-fine">Forms the council needs: permission slips, sign-up sheets, release forms. Public flyers and registration forms are also on <a href="#printables">Flyers &amp; Forms</a>.</p>':'')+
+      coFileAdd("cf",true)+'<div>'+coFileGrid(list)+'</div></section>';
+    $$("[data-fo]",M).forEach(function(b){b.onclick=function(){CO.folder=b.getAttribute("data-fo");coDraw($("#coBox"))}});
+    coBindFileAdd(M,"cf",{project_id:null});coSignGrid(M,list)}
+
+  /* ----- Social media ----- */
+  function coSocial(M){var D=CO.D,media=coMedia(),order={ready:0,returned:1,idea:2,approved:3,posted:4},list=D.social.slice().sort(function(a,b){return (order[a.status]-order[b.status])||(a.created_at<b.created_at?1:-1)});
+    var form='<details class="rk-card co-new"'+(list.length?'':' open')+'><summary>+ Suggest a post</summary><form id="coSF" novalidate>'+
+      '<label class="f">Caption<textarea maxlength="2200" rows="4" data-k="caption" placeholder="What should the post say? Add hashtags and who to tag."></textarea></label>'+
+      '<fieldset class="co-plat"><legend>Where?</legend>'+CO_PLAT.map(function(p){return '<label class="rk-radio"><input type="checkbox" value="'+p+'"'+(p==="Instagram"||p==="Facebook"?" checked":"")+'> '+p+'</label>'}).join("")+'</fieldset>'+
+      '<div class="rk-form"><label class="f">Post on (suggested)<input type="date" data-k="post_on"></label><label class="f">About a project <small>(optional)</small><select data-k="project_id"><option value="">None</option>'+D.projects.map(function(p){return '<option value="'+p.id+'">'+esc(p.title)+'</option>'}).join("")+'</select></label>'+
+      '<label class="f">Link <small>(optional)</small><input type="url" data-k="link" placeholder="https://…"></label></div>'+
+      '<div class="row"><button class="mini" type="button" id="coSMedia">Add photos or video</button><span class="rk-fine" id="coSMn"></span></div>'+
+      '<label class="rk-radio co-rel"><input type="checkbox" id="coSRel"> Everyone recognizable in these photos or videos has a photo release on file.</label>'+
+      '<div class="row"><button class="mini" type="submit" data-to="idea">Save as idea</button><button class="mini solid" type="submit" data-to="ready">Send to admins for approval</button></div>'+
+      '<p class="rk-fine">How it works: anyone can suggest a post. The Media manager polishes ideas and sends them on. An admin approves, then the Media manager posts it and marks it posted.</p></form></details>';
+    M.innerHTML=form+'<div class="co-soc">'+(list.length?list.map(function(s){var own=coOwn(s),open=s.status==="idea"||s.status==="returned",p=s.project_id&&D.projects.filter(function(x){return x.id===s.project_id})[0];
+      var acts=[];if(open&&(own||media))acts.push('<button class="mini solid" type="button" data-sa="ready">Send to admins</button>');
+      if(IS_ADMIN&&s.status==="ready")acts.push('<button class="mini solid" type="button" data-sa="approved">Approve</button>');
+      if((IS_ADMIN||coMedia())&&(s.status==="ready"||s.status==="idea"||s.status==="approved"))acts.push('<button class="mini red" type="button" data-sa="returned">Send back</button>');
+      if((IS_ADMIN||coMedia())&&s.status==="approved")acts.push('<button class="mini solid" type="button" data-sa="posted">Mark posted</button>');
+      acts.push('<button class="mini" type="button" data-sa="copy">Copy caption</button>');
+      if((open&&own)||coPres()||coPos("media_manager"))acts.push('<button class="mini red" type="button" data-sa="del">Delete</button>');
+      return '<article class="rk-card co-sp" data-soc="'+s.id+'"><div class="co-ct"><span class="co-ss x-'+s.status+'">'+esc(CO_SOC[s.status])+'</span>'+(s.platforms||[]).map(function(x){return '<span class="co-tag">'+esc(x)+'</span>'}).join("")+(s.post_on?'<span class="co-meta">Post on '+fmtDate(s.post_on)+'</span>':'')+'</div>'+
+        ((s.media||[]).length?'<div class="co-smedia">'+s.media.map(function(m){return /^video\//.test(m.mime)?'<video data-src="'+esc(m.path)+'" controls preload="metadata"></video>':'<img data-src="'+esc(m.path)+'" alt="" loading="lazy">'}).join("")+'</div>':'')+
+        (open&&own?'<textarea class="co-cap" maxlength="2200" rows="3" aria-label="Caption">'+esc(s.caption)+'</textarea>':'<p class="co-body">'+coText(s.caption)+'</p>')+
+        (s.link?'<p><a href="'+esc(s.link)+'" target="_blank" rel="noopener">'+esc(s.link)+'</a></p>':'')+(p?'<p class="co-meta">Project: <a href="#council/project/'+p.id+'">'+esc(p.title)+'</a></p>':'')+
+        (s.review_note?'<p class="auth-note">Note: '+esc(s.review_note)+'</p>':'')+(s.posted_url?'<p class="co-meta">Live: <a href="'+esc(s.posted_url)+'" target="_blank" rel="noopener">'+esc(s.posted_url)+'</a></p>':'')+
+        '<p class="rk-fine">Suggested by '+esc(s.author_name||"")+' · '+coAgo(s.created_at)+'</p><div class="row">'+acts.join("")+'</div></article>'}).join(""):'<p class="rk-card rk-fine">No post ideas yet. Suggest the first one!</p>')+'</div>';
+    var picked=[];var mb=$("#coSMedia",M);if(mb)mb.onclick=function(){coPick("image/*,video/*",true,function(a){picked=picked.concat(a).slice(0,10);$("#coSMn",M).textContent=picked.length+" file"+(picked.length===1?"":"s")+" ready: "+picked.map(function(f){return f.name}).join(", ")})};
+    var f=$("#coSF",M);if(f){var to="idea";$$("button[data-to]",f).forEach(function(b){b.onclick=function(){to=b.getAttribute("data-to")}});
+      f.onsubmit=function(e){e.preventDefault();var r={};$$("[data-k]",f).forEach(function(i){r[i.getAttribute("data-k")]=i.value.trim()||null});r.platforms=$$(".co-plat input:checked",f).map(function(i){return i.value});
+        if(!r.caption||r.caption.length<2){toast("Write a caption first.");return}if(r.link&&!/^https:\/\//i.test(r.link)){toast("Links need to start with https://");return}
+        if(picked.length&&!$("#coSRel",f).checked){toast("Check the photo release box first.");return}
+        r.status=to;toast(picked.length?"Uploading…":"Saving…");coUpload(picked,"social").then(function(up){r.media=up;return db.from("council_social").insert(Object.assign(r,coStamp()))}).then(function(x){coDone(x,to==="ready"?"Sent to the admins":"Saved as an idea")})}}
+    coSigned($$("[data-src]",M).map(function(e){return e.getAttribute("data-src")})).then(function(U){$$("[data-src]",M).forEach(function(e){var u=U[e.getAttribute("data-src")];if(u)e.src=u})});
+    $$("[data-soc]",M).forEach(function(card){var id=card.getAttribute("data-soc"),s=D.social.filter(function(x){return x.id===id})[0],cap=$(".co-cap",card);
+      if(cap)cap.onchange=function(){var v=cap.value.trim();if(v.length<2)return;db.from("council_social").update({caption:v}).eq("id",id).then(function(x){okToast(x,"Caption saved")})};
+      $$("[data-sa]",card).forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-sa");
+        if(a==="copy"){var t=cap?cap.value:s.caption;try{navigator.clipboard.writeText(t).then(function(){toast("Caption copied")},function(){prompt("Copy the caption",t)})}catch(e){prompt("Copy the caption",t)}return}
+        if(a==="del"){if(!coConfirm(b))return;db.from("council_social").delete().eq("id",id).then(function(x){if(okToast(x,"Deleted")){var paths=(s.media||[]).map(function(m){return m.path});if(paths.length)db.storage.from("council-files").remove(paths).then(function(){},function(){});renderCO(true)}});return}
+        var r={status:a};if(a==="returned"){var n=prompt("What should change? (shown on the post)","");if(n===null)return;r.review_note=n.trim().slice(0,600)||null}
+        if(a==="posted"){var u=prompt("Paste the link to the live post (optional)","https://");if(u===null)return;u=u.trim();r.posted_url=/^https:\/\/\S+\.\S+/.test(u)?u:null}
+        if(a==="ready"&&cap)r.caption=cap.value.trim();if(a==="ready"||a==="approved")r.review_note=null;
+        db.from("council_social").update(r).eq("id",id).then(function(x){coDone(x,{ready:"Sent to the admins",approved:"Approved",returned:"Sent back",posted:"Marked posted"}[a])})}})})}
+
+  /* ----- Discussion board ----- */
+  function coPostHTML(t,full){var D=CO.D,can=coPres()||coOwn(t),n=D.replies.filter(function(r){return r.thread_id===t.id}).length;
+    return '<article class="co-postc'+(t.pinned?' pin':'')+'" data-th="'+t.id+'"><div class="co-av" aria-hidden="true">'+esc((t.author_name||"?").trim().charAt(0).toUpperCase())+'</div><div><p class="co-by"><b>'+esc(t.author_name||"")+'</b> · '+coAgo(t.created_at)+(t.pinned?' · <span class="co-pin">📌 Pinned</span>':'')+'</p>'+
+      (t.title?'<h4 class="co-h">'+(full?esc(t.title):'<a href="#council/board/'+t.id+'">'+esc(t.title)+'</a>')+'</h4>':'')+'<div class="co-body'+(full?'':' co-clip')+'">'+coText(t.body)+'</div>'+
+      '<div class="row co-pa">'+(t.kind==="discussion"&&!full?'<a class="mini" href="#council/board/'+t.id+'">'+(n?n+" repl"+(n===1?"y":"ies"):"Reply")+'</a>':'')+(coPres()&&t.kind==="discussion"?'<button class="mini" type="button" data-pin>'+(t.pinned?"Unpin":"Pin")+'</button>':'')+(can?'<button class="mini red" type="button" data-tdl>Delete</button>':'')+'</div></div></article>'}
+  function coBindPosts(M){$$("[data-th]",M).forEach(function(a){var id=a.getAttribute("data-th"),t=CO.D.threads.filter(function(x){return x.id===id})[0];
+    var pn=$("[data-pin]",a);if(pn)pn.onclick=function(){db.from("council_threads").update({pinned:!t.pinned}).eq("id",id).then(function(x){coDone(x,t.pinned?"Unpinned":"Pinned")})};
+    var dl=$("[data-tdl]",a);if(dl)dl.onclick=function(){if(!coConfirm(dl))return;db.from("council_threads").delete().eq("id",id).then(function(x){if(okToast(x,"Deleted")){if(CO.view==="thread")location.hash="#council/board";else renderCO(true)}})}})}
+  function coBoard(M){var D=CO.D,list=D.threads.filter(function(t){return t.kind==="discussion"}).sort(function(a,b){return (b.pinned-a.pinned)||(a.last_reply_at<b.last_reply_at?1:-1)});
+    M.innerHTML='<section class="rk-card"><form class="co-post" id="coNT" novalidate><h3>Start a conversation</h3><input type="text" maxlength="140" placeholder="Topic" aria-label="Topic"><textarea maxlength="4000" rows="3" placeholder="Ideas, questions, plans…" aria-label="Message"></textarea>'+
+      '<div class="row"><select aria-label="About a project (optional)"><option value="">General</option>'+D.projects.map(function(p){return '<option value="'+p.id+'">'+esc(p.title)+'</option>'}).join("")+'</select><button class="mini solid" type="submit">Post</button></div></form></section>'+
+      '<section class="rk-card">'+(list.length?list.map(function(t){return coPostHTML(t)}).join(""):'<p class="rk-fine">No conversations yet.</p>')+'</section>';
+    var f=$("#coNT",M);f.onsubmit=function(e){e.preventDefault();var i=$$("input,textarea,select",f);if(!i[1].value.trim()){toast("Write a message first.");return}
+      db.from("council_threads").insert(Object.assign({kind:"discussion",title:i[0].value.trim()||null,body:i[1].value.trim(),project_id:i[2].value||null,pinned:false,last_reply_at:new Date().toISOString()},coStamp())).then(function(x){coDone(x,"Posted")})};
+    coBindPosts(M)}
+  function coThread(M){var D=CO.D,t=D.threads.filter(function(x){return x.id===CO.id})[0];if(!t){M.innerHTML='<div class="rk-card"><p>That conversation was deleted.</p><a class="mini" href="#council/board">Back to the board</a></div>';return}
+    var rs=D.replies.filter(function(r){return r.thread_id===t.id}).sort(function(a,b){return a.created_at>b.created_at?1:-1}),p=t.project_id&&D.projects.filter(function(x){return x.id===t.project_id})[0];
+    M.innerHTML='<section class="rk-card">'+(p?'<p class="co-meta">About <a href="#council/project/'+p.id+'">'+esc(p.title)+'</a></p>':'')+coPostHTML(t,true)+'<div class="co-replies">'+rs.map(function(r){var can=coPres()||coOwn(r);
+        return '<div class="co-reply"><div class="co-av sm" aria-hidden="true">'+esc((r.author_name||"?").trim().charAt(0).toUpperCase())+'</div><div><p class="co-by"><b>'+esc(r.author_name||"")+'</b> · '+coAgo(r.created_at)+(can?' · <button class="co-lnk" type="button" data-rdl="'+r.id+'">Delete</button>':'')+'</p><div class="co-body">'+coText(r.body)+'</div></div></div>'}).join("")+'</div>'+
+      '<form class="co-post" id="coRF" novalidate><textarea maxlength="2000" rows="2" placeholder="Write a reply" aria-label="Reply"></textarea><button class="mini solid" type="submit">Reply</button></form></section><p><a class="mini" href="#council/board">← All conversations</a></p>';
+    coBindPosts(M);$("#coRF",M).onsubmit=function(e){e.preventDefault();var v=$("textarea",this).value.trim();if(!v)return;
+      db.from("council_replies").insert(Object.assign({thread_id:t.id,body:v},coStamp())).then(function(x){if(!x.error&&window.FR_TEST)db.from("council_threads").update({last_reply_at:new Date().toISOString()}).eq("id",t.id);coDone(x,"Replied")})};
+    $$("[data-rdl]",M).forEach(function(b){b.onclick=function(){if(!coConfirm(b))return;db.from("council_replies").delete().eq("id",b.getAttribute("data-rdl")).then(function(x){coDone(x,"Deleted")})}})}
+
+  /* ----- Team: officers (elected; set by admins) and roles (approved by the president) ----- */
+  function coTeam(M){var D=CO.D,pres=coPres(),pend=D.roles.filter(function(r){return r.status==="pending"}),appr=D.roles.filter(function(r){return r.status==="approved"});
+    M.innerHTML='<section class="rk-card"><h3>Elected officers</h3><div class="co-off">'+CO_POS.map(function(o){var id=D.O[o[0]],rec=D.officers.filter(function(x){return x.position===o[0]})[0]||{};
+        return '<div class="co-o"><p class="co-ot">'+esc(o[1])+'</p>'+(IS_ADMIN?'<select data-off="'+o[0]+'" aria-label="'+esc(o[1])+'">'+coWhoOpts(id,"Not elected yet")+'</select><input type="date" data-offd="'+o[0]+'" value="'+esc(rec.elected_on||"")+'" aria-label="Elected on">':'<b>'+(id?esc(coName(id)):'<i>Not elected yet</i>')+'</b>'+(rec.elected_on?'<small>Elected '+fmtDate(rec.elected_on,{month:"short",year:"numeric"})+'</small>':''))+'<small>'+esc(o[2])+'</small></div>'}).join("")+'</div>'+
+      (IS_ADMIN?'<p class="rk-fine">Admins record election results here. Add students to the council in <a href="#admin" data-admtab="members">Admin → Members</a> (role: Student Leadership Council).</p>':'<p class="rk-fine">Officers are elected by the council. Admins record the results.</p>')+'</section>'+
+      (pres?'<section class="rk-card"><h3>Role requests'+(pend.length?' · '+pend.length:'')+'</h3>'+(pend.length?'<ul class="co-tasks">'+pend.map(function(r){return '<li data-role="'+r.id+'"><span><b>'+esc(coName(r.member_id)||"Member")+' → '+esc(r.title)+'</b><small>'+(r.about?esc(r.about)+' · ':'')+coAgo(r.created_at)+'</small></span><span class="co-fa"><button class="mini solid" type="button" data-ra="approved">Approve</button><button class="mini red" type="button" data-ra="declined">Decline</button></span></li>'}).join("")+'</ul>':'<p class="rk-fine">No requests waiting.</p>')+
+        '<form class="co-add" id="coRA" novalidate><select aria-label="Member">'+coWhoOpts(null,"Give a role to…")+'</select><input type="text" maxlength="60" placeholder="Role (Event lead, Video editor…)" aria-label="Role"><button class="mini solid" type="submit">Assign</button></form></section>':'')+
+      '<section class="rk-card"><h3>Council members</h3><ul class="co-tasks">'+D.roster.map(function(m){var mine=appr.filter(function(r){return r.member_id===m.id});
+        return '<li><span><b>'+esc(m.name)+(m.id===D.me?' (you)':'')+'</b><small>'+(m.positions.map(function(p){return (CO_POS.filter(function(x){return x[0]===p})[0]||[0,p])[1]}).concat(mine.map(function(r){return r.title})).map(esc).join(" · ")||"Member")+'</small></span>'+
+          (pres&&mine.length?'<span class="co-fa">'+mine.map(function(r){return '<button class="co-chip" type="button" data-rdel="'+r.id+'" title="Remove this role">'+esc(r.title)+' ×</button>'}).join("")+'</span>':'')+'</li>'}).join("")+'</ul>'+(D.roster.length?'':'<p class="rk-fine">No one has the council role yet.</p>')+'</section>'+
+      (D.me?'<section class="rk-card"><h3>Ask for a role</h3><p class="rk-fine">Want to lead something? Ask the President. Roles show next to your name once approved.</p><form class="co-add" id="coRR" novalidate><input type="text" maxlength="60" placeholder="Role you’d like" aria-label="Role"><input type="text" maxlength="400" placeholder="Why you’d be great at it (optional)" aria-label="Why"><button class="mini solid" type="submit">Send request</button></form>'+
+        (D.roles.filter(function(r){return r.member_id===D.me&&r.status!=="approved"}).map(function(r){return '<p class="rk-fine">'+esc(r.title)+': <b>'+(r.status==="pending"?"waiting for the President":"declined")+'</b></p>'}).join(""))+'</section>':'');
+    $$("[data-off]",M).forEach(function(s){s.onchange=function(){var pos=s.getAttribute("data-off");db.from("council_officers").update({member_id:s.value||null,elected_on:s.value?($('[data-offd="'+pos+'"]',M).value||todayISO()):null,updated_at:new Date().toISOString()}).eq("position",pos).then(function(x){coDone(x,"Officer saved")})}});
+    $$("[data-offd]",M).forEach(function(s){s.onchange=function(){db.from("council_officers").update({elected_on:s.value||null}).eq("position",s.getAttribute("data-offd")).then(function(x){okToast(x,"Date saved")})}});
+    $$("[data-role]",M).forEach(function(li){$$("[data-ra]",li).forEach(function(b){b.onclick=function(){db.from("council_roles").update({status:b.getAttribute("data-ra"),decided_by:crewName(),decided_at:new Date().toISOString()}).eq("id",li.getAttribute("data-role")).then(function(x){coDone(x,b.getAttribute("data-ra")==="approved"?"Role approved":"Declined")})}})});
+    $$("[data-rdel]",M).forEach(function(b){b.onclick=function(){if(!coConfirm(b))return;db.from("council_roles").delete().eq("id",b.getAttribute("data-rdel")).then(function(x){coDone(x,"Role removed")})}});
+    var ra=$("#coRA",M);if(ra)ra.onsubmit=function(e){e.preventDefault();var i=$$("select,input",ra);if(!i[0].value||i[1].value.trim().length<2){toast("Pick someone and name the role.");return}
+      db.from("council_roles").insert(Object.assign({member_id:i[0].value,title:i[1].value.trim(),status:"approved",decided_by:crewName(),decided_at:new Date().toISOString()},coStamp())).then(function(x){coDone(x,"Role given")})};
+    var rr=$("#coRR",M);if(rr)rr.onsubmit=function(e){e.preventDefault();var i=$$("input",rr);if(i[0].value.trim().length<2){toast("Name the role.");return}
+      db.from("council_roles").insert(Object.assign({member_id:D.me,title:i[0].value.trim(),about:i[1].value.trim()||null,status:"pending"},coStamp())).then(function(x){coDone(x,"Request sent to the President")})}}
+
+
   /* ---------- Route the new pages ---------- */
   function renderPortals(){var h=hashBase();
     if(h==="program-signin")renderPD(); if(h==="printables")renderPrintables(); if(h==="my-dashboard")renderMe(); if(h==="new-profile")renderReg(); if(RES_MAP[h])renderRes(); if(h==="crew")renderCrew(); if(h==="news-page")renderNews();
-    renderKiosk();renderCamps();renderWS();renderVol();renderPH();renderTE();}
+    renderKiosk();renderCamps();renderWS();renderVol();renderPH();renderTE();renderCO();}
   window.addEventListener("hashchange",renderPortals);
   /* ---------- Admin → Families: private times and places ---------- */
   function famKind(e){return (e.kind||"")+"|"+String(e.title||"").split("·")[0].replace(/\s+/g," ").trim().toLowerCase()}
@@ -8190,7 +8654,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   /* ---------- Member profiles: register once, sign in with username + passcode ---------- */
   var IS_VOLS=false, CODE_ROLES={}, ME=null, LOGGED={};
   var MROLES={family:["Family","Program Dashboard: dates, times and places"],volunteer:["Volunteer","Dates, times and check-in for helping out"],
-    workshop:["Workshop sign-in desk","Signs families in and counts meals"],teacher:["Teacher","Suggest events and list materials"],photographer:["Photographer","Upload photo albums"],
+    workshop:["Workshop sign-in desk","Signs families in and counts meals"],teacher:["Teacher","Suggest events and list materials"],photographer:["Photographer","Upload photo albums"],council:["Student Leadership Council","Council projects, events, bulletins and discussion"],
     controller:["Race control","Runs the live race feed"],track:["Track operations","Shout-outs, intermissions and sponsor ads"],volunteers:["Race-day volunteer lists","Volunteer lists and check-in"]};
   var MKIND={workshop:"Building workshop",race_day:"Race day",event:"Event or camp",other:"Something else"};
   var PREVROLES=null;
@@ -8198,18 +8662,19 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function sampleProfile(kind){var d=function(days,h){return new Date(Date.now()-days*864e5+(h||0)*36e5).toISOString()},fam=kind!=="crew";
     return fam?{member:{username:"taylorfamily",display_name:"Jordan Taylor",kind:"family",roles:["family"],first_year:2025,email:"family@example.com",phone:"810-555-0100",kids:[{name:"Maya T.",age:"11"},{name:"Eli T.",age:"8"}]},
         hours:14,workshops:6,race_days:1,events:2,years:2,open:null,recent:[{kind:"workshop",started_at:d(9,-2),ended_at:d(9,1)},{kind:"workshop",started_at:d(23,-2),ended_at:d(23,1)},{kind:"event",started_at:d(40,-3),ended_at:d(40,0)},{kind:"race_day",started_at:d(160,-5),ended_at:d(160,3)}]}:
-      {member:{username:"samrivera",display_name:"Sam Rivera",kind:"crew",roles:["volunteer","workshop","teacher","photographer","controller","track","volunteers"],first_year:2024,email:"crew@example.com",phone:null,kids:[]},
+      {member:{username:"samrivera",display_name:"Sam Rivera",kind:"crew",roles:["volunteer","workshop","teacher","photographer","council","controller","track","volunteers"],first_year:2024,email:"crew@example.com",phone:null,kids:[]},
         hours:62.5,workshops:18,race_days:2,events:4,years:3,open:null,recent:[{kind:"workshop",started_at:d(2,-3),ended_at:d(2,1)},{kind:"event",started_at:d(12,-4),ended_at:d(12,0)},{kind:"workshop",started_at:d(16,-3),ended_at:d(16,1)}]}}
   var MSPACES=[["#program-signin","Program Dashboard","Dates, times, places and the bulletin",function(){return true},1],
     ["#workshop-signin","Workshop sign-in","Sign families in and count meals",function(){return hasRole("workshop")}],
     ["#kiosk","Check-in kiosk","Set out a tablet so families check themselves in",function(){return hasRole("workshop")}],
     ["#teacher","Teacher planning","Suggest events and list materials",function(){return hasRole("teacher")}],
     ["#photographer","Photographer","Upload photo albums for review",function(){return hasRole("photographer")}],
+    ["#council","Leadership Council","Projects, events, weekly tasks and discussion",function(){return hasRole("council")}],
     ["#race-control","Race control","Brackets, lights and run times",function(){return hasRole("controller")}],
     ["#track-manager","Track operations","Shout-outs, intermissions and ads",function(){return hasRole("track")}],
     ["#volunteers","Volunteer lists","Race-day crew and check-in",function(){return hasRole("volunteers")||hasRole("controller")||hasRole("track")}],
     ["#race-watch","Live Race","Follow every heat on race day",function(){return true}]];
-  var PORTALS=[["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["workshop","#workshop-signin","Workshop sign-in"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["volunteers","#volunteers","Volunteer lists"]];
+  var PORTALS=[["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["workshop","#workshop-signin","Workshop sign-in"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["council","#council","Leadership Council"],["volunteers","#volunteers","Volunteer lists"]];
   function landing(){if(IS_ADMIN)return ["#admin","Admin"];if(!ME)return ["#access","Sign in"];
     var st=PORTALS.filter(function(x){return hasRole(x[0])});return st.length===1?[st[0][1],st[0][2]]:["#my-dashboard","my dashboard"]}
   function firstName(n){return String(n||"").trim().split(/\s+/)[0]}
@@ -8250,7 +8715,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       var tryAdmin=u.indexOf("@")>0&&!/^\d{4}$/.test(p)?db.auth.signInWithPassword({email:u,password:p}).then(function(r){return r.error?null:r},function(){return null}):Promise.resolve(null);
       tryAdmin.then(function(r){if(!r)return false;
           return db.auth.getSession().then(function(s){return setUser(s.data&&s.data.session?s.data.session.user:null)}).then(function(){if(!IS_ADMIN)return false;
-            b.disabled=false;m.textContent="";toast("Welcome back!");location.hash="#admin";return true})})
+            b.disabled=false;m.textContent="";toast("Welcome back!");location.hash=px==="micouncil"?"#council":"#admin";return true})})
       .then(function(done){if(done)return;return memSignIn(u,p,k).then(function(d){b.disabled=false;
         if(!d.ok){m.textContent=d.status==="pending"?"Thanks for registering! Kendall or Kevin still need to approve your profile. We’ll email you when it’s ready.":
           d.status==="paused"?"This profile is paused. Email info@flintsoapbox.org to turn it back on.":d.status==="declined"?"This profile wasn’t approved. Email info@flintsoapbox.org with any questions.":
@@ -8260,14 +8725,15 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function renderMemCards(){$$("a.util.dash").forEach(function(a){a.setAttribute("href",ME?"#my-dashboard":"#program-signin")});$$(".mem-in[data-mem]").forEach(function(box){var px="mi"+box.getAttribute("data-mem");
     if(ME){box.innerHTML=memOnHTML(px,true);$(".mem-out",box).onclick=signOut;return}
     if(box.querySelector("form.mem"))return;
-    box.innerHTML=memHTML(px,{dark:true,kind:box.getAttribute("data-kind"),kicker:(box.getAttribute("data-kind")==="family"?"Family Pass":"Crew Pass")+" sign in",sub:"One email and 4-digit code work on both the Family and Crew Pass."});bindMem(px)})}
+    box.innerHTML=memHTML(px,{dark:true,kind:box.getAttribute("data-kind"),kicker:(box.getAttribute("data-mem")==="council"?"Leadership Council":box.getAttribute("data-kind")==="family"?"Family Pass":"Crew Pass")+" sign in",sub:box.getAttribute("data-mem")==="council"?"Use the same email and 4-digit code as your Crew Pass. Admins: your email and password open the council too.":"One email and 4-digit code work on both the Family and Crew Pass."});
+    bindMem(px,box.getAttribute("data-mem")==="council"?function(){location.hash=hasRole("council")?"#council":landing()[0]}:undefined)})}
   document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-regkind]");if(a&&a.getAttribute("data-regkind"))REG.kind=a.getAttribute("data-regkind")});
   function crewName(){if(ME)return ME.display_name;if(!USER)return "";if(USER.is_anonymous)return "Guest";return (USER.user_metadata&&USER.user_metadata.full_name)||USER.email}
 
   /* ---------- Register a profile (#new-profile) ---------- */
   var REG={kind:"family",done:null};
   var REG_HELP=[["volunteer","Building workshops & events","Help kids build, test and race"],["workshop","Workshop sign-in desk","Sign families in, count meals"],["teacher","Teaching","Lead a lesson or seasonal workshop"],
-    ["photographer","Photography","Shoot workshops and race day"],["controller","Race control","Run the live race feed on race day"],["track","Track operations","Shout-outs, intermissions, sponsor ads"],["volunteers","Organizing volunteers","Race-day crew lists and check-in"]];
+    ["photographer","Photography","Shoot workshops and race day"],["council","Student Leadership Council","Older students: lead projects, events and media"],["controller","Race control","Run the live race feed on race day"],["track","Track operations","Shout-outs, intermissions, sponsor ads"],["volunteers","Organizing volunteers","Race-day crew lists and check-in"]];
   function kidRow(k){k=k||{};return '<div class="reg-kid"><input type="text" maxlength="40" placeholder="First name and last initial (Maya R.)" aria-label="Racer’s first name and last initial" value="'+esc(k.name||"")+'"><input type="text" maxlength="10" inputmode="numeric" placeholder="Age" aria-label="Age" value="'+esc(k.age||"")+'"><button type="button" aria-label="Remove this racer">×</button></div>'}
   function renderReg(){var box=$("#regBox");if(!box||hashBase()!=="new-profile")return;
     if(REG.done){var d=REG.done;box.innerHTML='<div class="reg-card"><p class="me-k">You’re on the roster</p><h2>Thanks, '+esc(firstName(d.name))+'!</h2>'+
@@ -8527,7 +8993,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         $$("button",fl).forEach(function(b){b.onclick=function(){var f=b.getAttribute("data-f");$$("button",fl).forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});$$("#spGrid .sp-item").forEach(function(it){it.hidden=!!f&&it.getAttribute("data-cat")!==f})}})}})}
   var EDSUB="previews", PVPATH=0, PVSEL=null, PVW=390;
   var PVPAGES=[["Families","users","Register, sign in, and the family dashboards",[["#new-profile","Register","The one-time sign-up form"],["#access","Sign in","The car select page"],["#my-dashboard/family","My dashboard","Profile, stats and check-in (sample family)"],["#program-signin","Program Dashboard","Dates, times, places and the bulletin"],["#printables","Flyers & forms","Printables to download"]]],
-    ["Crew & staff","check","Volunteers, workshop crew, teachers and photographers",[["#my-dashboard/crew","My dashboard","Profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#kiosk","Check-in kiosk","Families type their 4-digit code"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],["#crew/sample","Volunteer crew pass","A race-day volunteer’s link (sample)"],["#volunteers","Volunteer lists","Race-day crew and check-in"]]],
+    ["Crew & staff","check","Volunteers, workshop crew, teachers and photographers",[["#my-dashboard/crew","My dashboard","Profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#kiosk","Check-in kiosk","Families type their 4-digit code"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],["#council","Leadership Council","Student council projects, events and posts"],["#crew/sample","Volunteer crew pass","A race-day volunteer’s link (sample)"],["#volunteers","Volunteer lists","Race-day crew and check-in"]]],
     ["Race day","flag","Everything that runs the track on race day",[["#race-control","Race control","Brackets, lights and run times"],["#track-manager","Track operations","Shout-outs, intermissions and ads"],["#race-watch","Live race","What spectators see"]]],
     ["Public site","layout","Pages anyone can visit",[["#home","Homepage","The front door"],["#calendar","Calendar","Dates for the year"],["#donate","Donate","Stripe checkout"],["#printables","Flyers & forms","Printables to download"],["#spirit","Spirit Shop","Shirts and hats"]]]];
   function tabEdits(){var P=$("#admPanel");

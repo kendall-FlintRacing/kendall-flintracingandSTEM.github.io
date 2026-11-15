@@ -13,7 +13,7 @@
        inquiries:[{id:"inq-sample",created_at:new Date().toISOString(),first_name:"Sample",last_name:"Family",role:"Parent or guardian",organization:null,
          interests:"Building Workshops",youth_count:2,youth_ages:"9 and 12",message:"This is a sample inquiry so you can see how they look.",email:"sample@example.com",
          phone:null,contact_by:"Email",best_time:"Evening",email_updates:true,status:"new"}]};
-    race(); members(); save();
+    race(); members(); council(); save();
   }
   /* Demo race day so the live race page and its controls can be tried.
      Two brackets alternate: Super Stock (double elimination, 6 cars + 2 byes) and Masters (single elimination, 5 cars + 3 byes). */
@@ -69,9 +69,34 @@
       {id:"l3",at:d(2,1),member_id:"m1",who:"taylorfamily",action:"view:dates",detail:null},{id:"l4",at:d(2),member_id:"m1",who:"taylorfamily",action:"sign_in",detail:"kept signed in"},
       {id:"l5",at:d(3),member_id:null,who:"taylorfam",action:"signin_failed",detail:"unknown username"},{id:"l6",at:d(5),member_id:"m2",who:"samrivera",action:"sign_in",detail:"this visit"}];
   }
+  /* Demo Student Leadership Council: 4 students (passcode racing26), officers, projects, weekly tasks, a bulletin and posts */
+  function council(){var now=Date.now(),d=function(days){return new Date(now-days*864e5).toISOString()},day=function(n){var x=new Date(now+n*864e5);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")},
+      mon=function(){var x=new Date();x.setHours(0,0,0,0);x.setDate(x.getDate()-((x.getDay()+6)%7));return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")}();
+    T.members=T.members||[];T.mpass=T.mpass||{};
+    [["m5","avaj","Ava Johnson"],["m6","marcusl","Marcus Lee"],["m7","priyas","Priya Shah"],["m8","dantet","Dante Torres"]].forEach(function(x,i){if(T.members.some(function(m){return m.id===x[0]}))return;
+      T.members.push({id:x[0],username:x[1],display_name:x[2],kind:"crew",email:x[1]+"@example.com",phone:null,kids:[],requested:["council"],roles:["council","volunteer"],status:"approved",about:"Racer since middle school.",admin_note:null,first_year:2023,created_at:d(200),approved_at:d(199),last_seen_at:d(i)});T.mpass[x[0]]="racing26"});
+    var st=function(who){var m=T.members.filter(function(x){return x.id===who})[0];return{created_by_member:who,created_by_user:"anon-"+who,author_name:m?m.display_name:"Admin"}};
+    T.council_officers=[{position:"president",member_id:"m5",elected_on:day(-60)},{position:"secretary",member_id:"m6",elected_on:day(-60)},{position:"treasurer",member_id:"m7",elected_on:day(-60)},{position:"note_keeper",member_id:"m6",elected_on:day(-60)},{position:"media_manager",member_id:"m8",elected_on:day(-60)}];
+    T.council_roles=[Object.assign({id:"cr1",member_id:"m7",title:"Video editor",about:null,status:"approved",decided_by:"Ava Johnson",created_at:d(30)},st("m7")),Object.assign({id:"cr2",member_id:"m8",title:"Event lead",about:"I ran the bake sale last year.",status:"pending",created_at:d(1)},st("m8"))];
+    T.council_projects=[Object.assign({id:"cp1",title:"Spring Kickoff Night",kind:"event",description:"An open house for new families: car display, a short video and sign-ups for building workshops.",lead_member:"m5",lead_only:true,status:"active",due_date:null,event_date:day(24),event_time:"6–8 pm",location:"Flint Racing garage",funding_goal:300,created_at:d(20),updated_at:d(1)},st("m5")),
+      Object.assign({id:"cp2",title:"How to align your axles (video)",kind:"instructional",description:"A 3-minute how-to video for first-year racers.",lead_member:"m7",lead_only:false,status:"planning",due_date:day(14),event_date:null,funding_goal:0,created_at:d(10),updated_at:d(2)},st("m7"))];
+    var t=function(id,pid,title,who,due,done,wk){return Object.assign({id:id,project_id:pid,week_of:wk||null,title:title,assignee_member:who,due_date:due,done:!!done,done_by:done?"Ava Johnson":null,done_at:done?d(1):null,sort_order:0,created_at:d(5)},st("m5"))};
+    T.council_tasks=[t("ct1","cp1","Book the garage",  "m5",day(-3),true),t("ct2","cp1","Make the sign-up sheet","m6",day(4)),t("ct3","cp1","Order snacks","m7",day(10)),t("ct4","cp1","Cut a 60-second promo video","m8",day(12)),
+      t("ct5","cp2","Write the script","m7",day(3),true),t("ct6","cp2","Film the steps","m8",day(8)),
+      t("ct7",null,"Post meeting notes","m6",null,true,mon),t("ct8",null,"Share one workshop photo","m8",null,false,mon),t("ct9",null,"Check in with your project team",null,null,false,mon)];
+    T.council_materials=[Object.assign({id:"cm1",project_id:"cp1",item:"Snacks and juice",qty:"for 60",est_cost:120,status:"needed",source:null,created_at:d(4)},st("m5")),Object.assign({id:"cm2",project_id:"cp1",item:"Poster board",qty:"6",est_cost:30,status:"have",source:"Donated",created_at:d(4)},st("m5")),
+      Object.assign({id:"cm3",project_id:"cp2",item:"Phone tripod",qty:"1",est_cost:25,status:"requested",source:"Ask Kevin",created_at:d(3)},st("m7"))];
+    T.council_funding=[Object.assign({id:"cf1",project_id:"cp1",source:"Bake sale",amount:140,kind:"received",note:null,created_at:d(6)},st("m7")),Object.assign({id:"cf2",project_id:"cp1",source:"Goyette Mechanical",amount:100,kind:"pledged",note:null,created_at:d(3)},st("m7"))];
+    T.council_bulletins=[Object.assign({id:"cb1",week_of:mon,title:"Kickoff planning + video crew",body:"Great meeting! We picked a date for Spring Kickoff Night and split into two teams.\n\nReminder: bring your photo release forms next week.",links:[{title:"Meeting agenda",url:"https://example.com/agenda"}],created_at:d(1),updated_at:d(1)},st("m6"))];
+    T.council_files=[];T.council_social=[Object.assign({id:"cs1",caption:"Our racers are building! 🏁 Building workshops run every Saturday. #FlintRacing #STEM",platforms:["Instagram","Facebook"],post_on:day(3),project_id:null,media:[],link:null,status:"ready",review_note:null,posted_url:null,created_at:d(1),updated_at:d(1)},st("m8"))];
+    T.council_threads=[Object.assign({id:"th1",project_id:null,kind:"discussion",title:"Ideas for our next instructional?",body:"After the axle video, what should we teach next? I was thinking brakes or weight placement.",pinned:false,created_at:d(2),last_reply_at:d(1)},st("m7")),
+      Object.assign({id:"th2",project_id:"cp1",kind:"update",title:null,body:"Garage is booked! Next up: sign-up sheet and snacks.",pinned:false,created_at:d(1),last_reply_at:d(1)},st("m5"))];
+    T.council_replies=[Object.assign({id:"rp1",thread_id:"th1",body:"Weight placement! Everyone asks about it.",created_at:d(1)},st("m8"))];
+  }
   load();
   if(T&&(!T.race_show||!T.staff||!T.crew_codes)){race();save();}
   if(T&&!T.members){members();save();}
+  if(T&&!T.council_officers){council();save();}
   addEventListener("storage",function(e){if(e.key===KEY)load()});
   var user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}}, listeners=[];
   function rid(){return Math.random().toString(36).slice(2,10)}
@@ -133,7 +158,7 @@
       if(fn==="redeem_crew_code"){var role=Object.keys(T.crew_codes).filter(function(k){return T.crew_codes[k].code===args.p_code})[0];if(!role)return R(null);
         T.code_sessions=T.code_sessions.filter(function(x){return !(x.user_id===user.id&&x.role===role)});T.code_sessions.push({user_id:user.id,role:role,expires_at:new Date(Date.now()+16*36e5).toISOString()});save();return R(role)}
       T.members=T.members||[];T.member_hours=T.member_hours||[];T.access_log=T.access_log||[];T.mpass=T.mpass||{};T.msess=T.msess||{};
-      var ROLES=["family","volunteer","workshop","teacher","photographer","controller","track","volunteers"];
+      var ROLES=["family","volunteer","workshop","teacher","photographer","controller","track","volunteers","council"];
       function mlog(m,w,a,d){T.access_log.unshift({id:rid(),at:new Date().toISOString(),member_id:m,who:w,action:a,detail:d||null});T.access_log=T.access_log.slice(0,600)}
       function curM(){var s=user&&T.msess[user.id];if(!s||s.exp<Date.now())return null;var m=T.members.filter(function(x){return x.id===s.mid})[0];return m&&m.status==="approved"?m:null}
       function weak(p){return !p||p.length<6||/^(.)\1*$/.test(p)||["123456","654321","password","123123","qwerty"].indexOf(p.toLowerCase())>=0}
@@ -165,6 +190,10 @@
         c9.family_code=args.p_new;mlog(c9.id,c9.username,"code_changed");save();return R(null)}
       if(fn==="member_set_prefs"){var c10=curM();if(!c10)return R(null,"Sign in first.");c10.email_prefs=(args.p_prefs||[]).filter(function(x){return x==="workshops"||x==="council"});save();return R(c10.email_prefs)}
       if(fn==="member_signout"){var c0=curM();if(c0)mlog(c0.id,c0.username,"sign_out");if(user)delete T.msess[user.id];save();return R(null)}
+      if(fn==="council_roster"){var me=curM(),isA=user&&user.id==="test-admin";if(!isA&&!(me&&(me.roles||[]).indexOf("council")>=0))return R(null,"Council members only");
+        return R({me:me?me.id:null,admin:isA,members:T.members.filter(function(m){return m.status==="approved"&&(m.roles||[]).indexOf("council")>=0}).map(function(m){return{id:m.id,name:m.display_name,
+          positions:(T.council_officers||[]).filter(function(o){return o.member_id===m.id}).map(function(o){return o.position}),titles:(T.council_roles||[]).filter(function(r){return r.member_id===m.id&&r.status==="approved"}).map(function(r){return r.title})}}).sort(function(a,b){return a.name>b.name?1:-1})})}
+      if(fn==="public_council_counts")return R({council_members:T.members.filter(function(m){return m.status==="approved"&&(m.roles||[]).indexOf("council")>=0}).length,council_projects:(T.council_projects||[]).filter(function(p){return p.status==="planning"||p.status==="active"}).length});
       if(fn==="my_member"){var c1=curM();return R(c1?{id:c1.id,username:c1.username,display_name:c1.display_name,kind:c1.kind,roles:c1.roles,first_year:c1.first_year,family_code:c1.family_code||null}:null)}
       if(fn==="kiosk_guest_signin"||fn==="kiosk_guests_today"||fn==="kiosk_checkout"){var td=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
         if(fn==="kiosk_guest_signin"){var gn=String(args.p_name||"").trim().replace(/\s+/g," "),ge=String(args.p_email||"").trim(),gp=String(args.p_phone||"").trim();
