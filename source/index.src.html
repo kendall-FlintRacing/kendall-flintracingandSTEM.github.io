@@ -2722,6 +2722,7 @@ body.rw-tv .rw-fol{display:none}
 .co-plat{border:0;padding:0;margin:10px 0;display:flex;flex-wrap:wrap;gap:6px}.co-plat legend{font:600 .9rem/1.3 var(--body);margin-bottom:6px;width:100%}
 .co-rel{margin:8px 0;line-height:1.4}
 .co-soc{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;align-items:start}.co-soc .rk-card{margin:0}
+.co-snote{width:100%;margin:6px 0 8px;font:400 .92rem/1.4 var(--body);border:1.5px solid #c9ccd1;border-radius:4px;padding:8px 10px}
 .co-sp .co-body{margin:10px 0}.co-sp .row{display:flex;gap:6px;flex-wrap:wrap}
 .co-smedia{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;margin-top:10px}
 .co-smedia img,.co-smedia video{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;background:#d4d6da}
@@ -8398,12 +8399,13 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       if((IS_ADMIN||coMedia())&&s.status==="approved")acts.push('<button class="mini solid" type="button" data-sa="posted">Mark posted</button>');
       acts.push('<button class="mini" type="button" data-sa="copy">Copy caption</button>');
       if((open&&own)||coPres()||coPos("media_manager"))acts.push('<button class="mini red" type="button" data-sa="del">Delete</button>');
+      var noteIn=(IS_ADMIN||coMedia())&&s.status!=="posted"?'<input type="text" class="co-snote" maxlength="600" data-sn="1" placeholder="'+(s.status==="approved"?"Link to the live post (optional), or a note if sending back":"Note for the student if sending back")+'" aria-label="Note or live link">':'';
       return '<article class="rk-card co-sp" data-soc="'+s.id+'"><div class="co-ct"><span class="co-ss x-'+s.status+'">'+esc(CO_SOC[s.status])+'</span>'+(s.platforms||[]).map(function(x){return '<span class="co-tag">'+esc(x)+'</span>'}).join("")+(s.post_on?'<span class="co-meta">Post on '+fmtDate(s.post_on)+'</span>':'')+'</div>'+
         ((s.media||[]).length?'<div class="co-smedia">'+s.media.map(function(m){return /^video\//.test(m.mime)?'<video data-src="'+esc(m.path)+'" controls preload="metadata"></video>':'<img data-src="'+esc(m.path)+'" alt="" loading="lazy">'}).join("")+'</div>':'')+
         (open&&own?'<textarea class="co-cap" maxlength="2200" rows="3" aria-label="Caption">'+esc(s.caption)+'</textarea>':'<p class="co-body">'+coText(s.caption)+'</p>')+
         (s.link?'<p><a href="'+esc(s.link)+'" target="_blank" rel="noopener">'+esc(s.link)+'</a></p>':'')+(p?'<p class="co-meta">Project: <a href="#council/project/'+p.id+'">'+esc(p.title)+'</a></p>':'')+
         (s.review_note?'<p class="auth-note">Note: '+esc(s.review_note)+'</p>':'')+(s.posted_url?'<p class="co-meta">Live: <a href="'+esc(s.posted_url)+'" target="_blank" rel="noopener">'+esc(s.posted_url)+'</a></p>':'')+
-        '<p class="rk-fine">Suggested by '+esc(s.author_name||"")+' · '+coAgo(s.created_at)+'</p><div class="row">'+acts.join("")+'</div></article>'}).join(""):'<p class="rk-card rk-fine">No post ideas yet. Suggest the first one!</p>')+'</div>';
+        '<p class="rk-fine">Suggested by '+esc(s.author_name||"")+' · '+coAgo(s.created_at)+'</p>'+noteIn+'<div class="row">'+acts.join("")+'</div></article>'}).join(""):'<p class="rk-card rk-fine">No post ideas yet. Suggest the first one!</p>')+'</div>';
     var picked=[];var mb=$("#coSMedia",M);if(mb)mb.onclick=function(){coPick("image/*,video/*",true,function(a){picked=picked.concat(a).slice(0,10);$("#coSMn",M).textContent=picked.length+" file"+(picked.length===1?"":"s")+" ready: "+picked.map(function(f){return f.name}).join(", ")})};
     var f=$("#coSF",M);if(f){var to="idea";$$("button[data-to]",f).forEach(function(b){b.onclick=function(){to=b.getAttribute("data-to")}});
       f.onsubmit=function(e){e.preventDefault();var r={};$$("[data-k]",f).forEach(function(i){r[i.getAttribute("data-k")]=i.value.trim()||null});r.platforms=$$(".co-plat input:checked",f).map(function(i){return i.value});
@@ -8414,10 +8416,11 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     $$("[data-soc]",M).forEach(function(card){var id=card.getAttribute("data-soc"),s=D.social.filter(function(x){return x.id===id})[0],cap=$(".co-cap",card);
       if(cap)cap.onchange=function(){var v=cap.value.trim();if(v.length<2)return;db.from("council_social").update({caption:v}).eq("id",id).then(function(x){okToast(x,"Caption saved")})};
       $$("[data-sa]",card).forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-sa");
-        if(a==="copy"){var t=cap?cap.value:s.caption;try{navigator.clipboard.writeText(t).then(function(){toast("Caption copied")},function(){prompt("Copy the caption",t)})}catch(e){prompt("Copy the caption",t)}return}
+        if(a==="copy"){var t=cap?cap.value:s.caption;try{navigator.clipboard.writeText(t).then(function(){toast("Caption copied")},function(){toast("Couldn’t copy: select the caption and copy it")})}catch(e){toast("Couldn’t copy: select the caption and copy it")}return}
         if(a==="del"){if(!coConfirm(b))return;db.from("council_social").delete().eq("id",id).then(function(x){if(okToast(x,"Deleted")){var paths=(s.media||[]).map(function(m){return m.path});if(paths.length)db.storage.from("council-files").remove(paths).then(function(){},function(){});renderCO(true)}});return}
-        var r={status:a};if(a==="returned"){var n=prompt("What should change? (shown on the post)","");if(n===null)return;r.review_note=n.trim().slice(0,600)||null}
-        if(a==="posted"){var u=prompt("Paste the link to the live post (optional)","https://");if(u===null)return;u=u.trim();r.posted_url=/^https:\/\/\S+\.\S+/.test(u)?u:null}
+        var r={status:a},ni=$("[data-sn]",card),nv=ni?ni.value.trim():"";
+        if(a==="returned"){if(!nv){toast("Type a note saying what should change, then tap Send back.");if(ni)ni.focus();return}r.review_note=nv.slice(0,600)}
+        if(a==="posted"){if(nv&&!/^https:\/\/\S+\.\S+/.test(nv)){toast("The live link needs to start with https://");return}r.posted_url=nv||null}
         if(a==="ready"&&cap)r.caption=cap.value.trim();if(a==="ready"||a==="approved")r.review_note=null;
         db.from("council_social").update(r).eq("id",id).then(function(x){coDone(x,{ready:"Sent to the admins",approved:"Approved",returned:"Sent back",posted:"Marked posted"}[a])})}})})}
 
