@@ -1421,6 +1421,33 @@ a.ycell:hover{background:#fbe2e5}
 .adm-table td{padding:6px;border-bottom:1px solid #e6e7ea;vertical-align:middle}
 .adm-table td input[type=checkbox]{width:auto;display:inline;margin:0}
 .adm-scroll{overflow-x:auto}
+/* admin uses more of a wide screen */
+.adm-wrap{max-width:min(1480px,100%)}
+#admPanel{container-type:inline-size}
+/* Admin → Events: rows that fit the panel, no side scrolling */
+.ev-list{display:grid;gap:10px;margin-top:10px}
+.ev-head{display:none}
+.ev-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"title title" "start end" "kind kind" "tbc shown" "acts acts";gap:10px 12px;align-items:end;padding:12px;border:1px solid #e1e3e6;border-radius:8px;background:#fff}
+.ev-row.ev-new{border-style:dashed;border-color:#c9ccd1;background:#fafafb}
+.ev-f{display:grid;gap:4px;min-width:0}
+.ev-f>span{font:700 .68rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#5a5d64}.ev-f small{font-weight:500;letter-spacing:0;text-transform:none}
+.ev-f input,.ev-f select{width:100%;min-width:0;font:400 .95rem/1.3 var(--body);border:1.5px solid #c9ccd1;border-radius:4px;padding:8px 9px;color:var(--ink);background:#fff}
+.ev-start{grid-area:start}.ev-end{grid-area:end}.ev-title{grid-area:title}.ev-kind{grid-area:kind}
+.ev-chk{display:inline-flex;align-items:center;gap:6px;font:600 .88rem/1 var(--body);color:#2a2d33;cursor:pointer;padding-bottom:10px}.ev-chk input{width:18px;height:18px;margin:0;accent-color:var(--red-deep)}
+.ev-tbc{grid-area:tbc;justify-self:start}.ev-shown{grid-area:shown;justify-self:start}
+.ev-acts{grid-area:acts;display:flex;gap:8px;flex-wrap:wrap}
+@container (min-width:600px) and (max-width:899px){
+  .ev-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) auto auto;grid-template-areas:"title title title tbc shown" "start end kind acts acts"}
+  .ev-acts{justify-content:flex-end;flex-wrap:nowrap;padding-bottom:2px}
+}
+@container (min-width:900px){
+  .ev-head,.ev-row{grid-template-columns:150px 150px minmax(160px,1fr) 120px 52px 62px 150px;grid-template-areas:"start end title kind tbc shown acts"}
+  .ev-head{display:grid;gap:0 12px;padding:0 12px;font:700 .68rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#5a5d64}
+  .ev-row{align-items:center;padding:8px 12px}
+  .ev-f>span,.ev-chk span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .ev-tbc{grid-area:tbc;margin:0;padding:0}.ev-shown{grid-area:shown;margin:0;padding:0}
+  .ev-acts{justify-content:flex-end;flex-wrap:nowrap}
+}
 .mini{border:1.5px solid var(--ink);background:#fff;color:var(--ink);font:600 .8rem/1 var(--body);padding:8px 10px;border-radius:4px;cursor:pointer;white-space:nowrap}
 .mini.red{border-color:var(--red-deep);color:var(--red-deep)}
 .mini.solid{background:var(--ink);color:#fff}
@@ -3943,7 +3970,7 @@ body.rw-tv .rw-fol{display:none}
 <!-- ======================= ADMIN PORTAL ======================= -->
 <div class="page dark prog-page" data-page="admin" hidden>
   <nav class="crumbs" aria-label="Breadcrumb" data-crumbs="admin"><div class="wrap"><a href="#home">Home</a></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
+  <div class="wrap adm-wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <div class="adm" id="admBox"><p>The admin portal works on the published website (GitHub Pages). In this preview it can’t connect to the database.</p></div>
   </div></div>
 </div>
@@ -6903,9 +6930,17 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function tabEvents(){var P=$("#admPanel");
     db.from("events").select("*").order("start_date").then(function(r){if(r.error){P.textContent="Couldn’t load events.";return}
       var kinds=["workshop","camp","racing"];
-      function row(e){e=e||{};return '<tr data-id="'+(e.id||"")+'"><td><input type="date" value="'+(e.start_date||"")+'" aria-label="Start date"></td><td><input type="date" value="'+(e.end_date||"")+'" aria-label="End date (optional)"></td><td><input type="text" value="'+esc(e.title||"")+'" aria-label="Title"></td><td><select aria-label="Type">'+kinds.map(function(k){return '<option'+(e.kind===k?' selected':'')+'>'+k+'</option>'}).join("")+'</select></td><td><input type="checkbox"'+(e.to_be_confirmed?' checked':'')+' aria-label="To be confirmed"></td><td><input type="checkbox"'+(e.published!==false?' checked':'')+' aria-label="Shown on site"></td><td><button class="mini solid" type="button" data-act="save">Save</button> '+(e.id?'<button class="mini red" type="button" data-act="del">Delete</button>':'')+'</td></tr>'}
-      P.innerHTML='<p style="color:#4a4d55">Dates only appear publicly; times and locations stay in your emails.</p><div class="adm-scroll"><table class="adm-table"><thead><tr><th>Start</th><th>End</th><th>Title</th><th>Type</th><th>TBC</th><th>Shown</th><th></th></tr></thead><tbody>'+row(null)+r.data.map(row).join("")+'</tbody></table></div>';
-      $$("button[data-act]",P).forEach(function(b){b.onclick=function(){var tr=b.closest("tr"),id=tr.getAttribute("data-id"),f=$$("input,select",tr);
+      function row(e){e=e||{};var nid=e.id?"":"new";
+        return '<div class="ev-row'+(e.id?'':' ev-new')+'" data-id="'+(e.id||"")+'">'+
+          '<label class="ev-f ev-start"><span>Start</span><input type="date" value="'+(e.start_date||"")+'"></label>'+
+          '<label class="ev-f ev-end"><span>End <small>(optional)</small></span><input type="date" value="'+(e.end_date||"")+'"></label>'+
+          '<label class="ev-f ev-title"><span>Title</span><input type="text" value="'+esc(e.title||"")+'"'+(e.id?'':' placeholder="New event title"')+'></label>'+
+          '<label class="ev-f ev-kind"><span>Type</span><select>'+kinds.map(function(k){return '<option'+(e.kind===k?' selected':'')+'>'+k+'</option>'}).join("")+'</select></label>'+
+          '<label class="ev-chk ev-tbc"><input type="checkbox"'+(e.to_be_confirmed?' checked':'')+'><span>TBC</span></label>'+
+          '<label class="ev-chk ev-shown"><input type="checkbox"'+(e.published!==false?' checked':'')+'><span>Shown</span></label>'+
+          '<div class="ev-acts"><button class="mini solid" type="button" data-act="save">'+(e.id?'Save':'Add event')+'</button>'+(e.id?'<button class="mini red" type="button" data-act="del">Delete</button>':'')+'</div></div>'}
+      P.innerHTML='<p style="color:#4a4d55">Dates only appear publicly; times and locations stay in your emails.</p><div class="ev-list"><div class="ev-head" aria-hidden="true"><span>Start</span><span>End</span><span>Title</span><span>Type</span><span>TBC</span><span>Shown</span><span></span></div>'+row(null)+r.data.map(row).join("")+'</div>';
+      $$("button[data-act]",P).forEach(function(b){b.onclick=function(){var tr=b.closest(".ev-row"),id=tr.getAttribute("data-id"),f=$$("input,select",tr);
         if(b.getAttribute("data-act")==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
           db.from("events").delete().eq("id",id).then(function(x){toast(x.error?"Couldn’t delete":"Deleted");afterEvents()});return}
         var rec={start_date:f[0].value,end_date:f[1].value||null,title:f[2].value.trim(),kind:f[3].value,to_be_confirmed:f[4].checked,published:f[5].checked};
