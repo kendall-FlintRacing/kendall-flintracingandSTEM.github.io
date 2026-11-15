@@ -2135,6 +2135,10 @@ html.kiosk-on body{background:#0e0f12}
 .ki-flag{width:84px;height:84px;border-radius:50%;background:var(--ki-ok);display:grid;place-items:center;font:900 2.8rem/1 var(--body)}
 .ki-done h2{font-size:clamp(2rem,6vw,2.8rem)}
 .ki-names{font:800 1.5rem/1.2 var(--display);text-transform:uppercase;color:#fff;margin:0}
+.ki-photo{display:flex;gap:12px;align-items:flex-start;background:#1d1f25;border:1px solid #3a3c44;border-left:4px solid #f5b82e;border-radius:12px;padding:12px 14px;color:#d6d8dd;font-size:.92rem;line-height:1.45}
+.ki-photo b{display:block;color:#fff;font-weight:800;margin-bottom:2px}.ki-photo p{margin:0}
+.ki-cam{flex:none;width:34px;height:34px;border-radius:50%;background:#f5b82e;display:grid;place-items:center}.ki-cam svg{width:20px;height:20px;fill:#111216}
+.ki-photo-s{margin:0 0 10px;color:#d6d8dd;font-size:.88rem;line-height:1.4;text-align:center}
 .ki-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;color:var(--ki-dim);font-size:.92rem}
 .ki-foot b{color:#fff;font-variant-numeric:tabular-nums}
 .ki-exit{background:none;border:1px solid #3a3c44;color:#8a8d95;border-radius:8px;padding:9px 12px;font:600 .82rem/1 var(--body);cursor:pointer;position:relative;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
@@ -2755,6 +2759,15 @@ body.rw-tv .rw-fol{display:none}
 @media (max-width:720px){.co-grid{grid-template-columns:minmax(0,1fr)}.co-replies{margin-left:0}.co-money{grid-template-columns:repeat(2,minmax(0,1fr))}.co-money div:last-child{grid-column:1/-1}
   .co-add>*{flex:1 1 100%!important;width:100%!important}.co-add button{flex:0 0 auto!important;width:auto!important}.co-soc{grid-template-columns:minmax(0,1fr)}.co-weekbar h3{flex-basis:100%;order:-1;text-align:left}}
 @media (max-width:420px){.co-off{grid-template-columns:minmax(0,1fr)}}
+
+/* ===== Small-screen fixes (Nov 14 sweep: 320–1440px) ===== */
+@media (max-width:900px){.pd-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:900px){.adm.adm2{grid-template-columns:minmax(0,1fr)}.adm-side{min-width:0}}
+.adm-find,.adm-q{min-width:0;max-width:100%}
+.rk-chips .mini{white-space:normal;text-align:left;line-height:1.3;max-width:100%}
+.rk-tabs{overflow-x:auto;scrollbar-width:none}.rk-tabs button{flex:none}
+.pd-main{grid-template-columns:minmax(0,1fr)}@media (max-width:400px){.pd-short{grid-template-columns:repeat(2,minmax(0,1fr))!important}}.pd-tabs button{line-height:1.2;min-width:0}
+@media (max-width:600px){.rg-top{grid-template-columns:auto minmax(0,1fr)}.rg-top .rg-car{grid-column:1/-1;justify-self:start}}
 </style>
 </head>
 <body>
@@ -7739,6 +7752,10 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var k=0,a=0;(r.data||[]).forEach(function(x){k+=x.kids;a+=x.volunteers});KI.count={f:(r.data||[]).length,k:k,a:a};var el=$("#kiCount");if(el)el.innerHTML=kiCountHTML()})}
   function kiCountHTML(){var c=KI.count;return c?'Here today: <b>'+c.k+'</b> kid'+(c.k===1?'':'s')+' · <b>'+c.f+'</b> famil'+(c.f===1?'y':'ies'):'Here today: …'}
   function kiNames(a){return a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1]}
+  /* Photo and video notice: shown on every kiosk screen */
+  var KI_PHOTO='<aside class="ki-photo" aria-label="Photo and video notice"><span class="ki-cam" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1zm8 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></span>'+
+    '<p><b>Photo &amp; video notice</b>Photos and videos taken at workshops may be used on Flint Racing’s social media and in promotional materials. If photos are a concern for you or your family, please let a Flint Racing staff member know.</p></aside>';
+  var KI_PHOTO_SHORT='<p class="ki-photo-s"><span aria-hidden="true">📷</span> Workshop photos and videos may be used on our social media and promotional materials. Concerned? Let a staff member know.</p>';
   function renderKiosk(){var box=$("#kioskBox"),on=hashBase()==="kiosk";
     if(!on){document.documentElement.classList.remove("kiosk-on");clearTimeout(KI.idle);clearTimeout(KI.back);if(KI.lock){try{KI.lock.release()}catch(e){}KI.lock=null}return}
     if(!box)return;
@@ -7815,7 +7832,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<div class="ki-adults"><span id="kiGaL">Grown-ups with you</span><div class="ki-step" role="group" aria-labelledby="kiGaL"><button type="button" data-gs="adults" data-d="-1" aria-label="One fewer grown-up">−</button><b data-gv="adults" aria-live="polite">1</b><button type="button" data-gs="adults" data-d="1" aria-label="One more grown-up">+</button></div></div></div>'+
         '<div class="full ki-prefs"><p class="ki-k">Want emails from us? <small>(optional, needs an email)</small></p>'+prefsHTML("ki-chk",g.prefs)+'</div>'+
         '<p class="ki-msg full" id="kiMsg" role="alert"></p>'+
-        '<button type="submit" class="ki-go full" id="kiSend">'+(acc?'Create account and check in':'Sign in as a guest')+'</button></form>'+
+        '<div class="full">'+KI_PHOTO_SHORT+'</div><button type="submit" class="ki-go full" id="kiSend">'+(acc?'Create account and check in':'Sign in as a guest')+'</button></form>'+
         (acc?'<button type="button" class="ki-back" data-kgo="guest">Just visiting today? Sign in as a guest instead</button>':'<button type="button" class="ki-back" data-kgo="account">Coming back? Create a family account instead</button>')+
         '<button type="button" class="ki-back" id="kiBack">Cancel</button></section>'}
     else if(KI.step==="gdone"){var gd=KI.g||{};
@@ -7835,13 +7852,13 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         (kids.length?'<p>'+(again?'You’re checked in today. Change who’s here and tap Update.':'Who’s here today? Tap each racer.')+'</p>'+
           '<div class="ki-kids">'+kids.map(function(k,i){return '<button type="button" class="ki-kid" data-kk="'+i+'" aria-pressed="'+(!!KI.sel[k])+'"><i aria-hidden="true"></i>'+esc(k)+'</button>'}).join("")+'</div>'+
           '<div class="ki-adults"><span id="kiAdL">Grown-ups with you</span><div class="ki-step" role="group" aria-labelledby="kiAdL"><button type="button" data-ka="-1" aria-label="One fewer grown-up">−</button><b id="kiAd" aria-live="polite">'+KI.adults+'</b><button type="button" data-ka="1" aria-label="One more grown-up">+</button></div></div>'+
-          '<button type="button" class="ki-go" id="kiGo"'+(n&&!KI.busy?'':' disabled')+'>'+(KI.busy?'Checking in…':n?(again?'Update: ':'Check in ')+n+' racer'+(n===1?'':'s'):'Tap a racer first')+'</button>'
+          KI_PHOTO_SHORT+'<button type="button" class="ki-go" id="kiGo"'+(n&&!KI.busy?'':' disabled')+'>'+(KI.busy?'Checking in…':n?(again?'Update: ':'Check in ')+n+' racer'+(n===1?'':'s'):'Tap a racer first')+'</button>'
         :'<p>We don’t have any racers on your family profile yet. Please see a staff member and they’ll sign you in.</p>')+
         '<button type="button" class="ki-back" id="kiBack">Not the '+esc(f.family)+' family? Start over</button></section>'}
     else if(KI.step==="done"){
       body='<section class="ki-card ki-done" aria-labelledby="kiH" role="status"><div class="ki-flag" aria-hidden="true">✓</div><h2 id="kiH">You’re checked in!</h2><p class="ki-names">'+esc(kiNames(f.done||[]))+'</p>'+
         '<p>'+(KI.adults?KI.adults+' grown-up'+(KI.adults===1?'':'s')+' with you. ':'')+'Have a great build day.</p><button type="button" class="ki-back" id="kiBack">Done · next family</button></section>'}
-    box.innerHTML=head+body+'<footer class="ki-foot"><span id="kiCount">'+kiCountHTML()+'</span><button type="button" class="ki-exit" id="kiExit" title="Staff: press and hold to leave the kiosk"><span>Staff: hold to exit</span></button></footer>';
+    box.innerHTML=head+body+KI_PHOTO+'<footer class="ki-foot"><span id="kiCount">'+kiCountHTML()+'</span><button type="button" class="ki-exit" id="kiExit" title="Staff: press and hold to leave the kiosk"><span>Staff: hold to exit</span></button></footer>';
     $$("[data-kd]",box).forEach(function(b){b.onclick=function(){kiKey(b.getAttribute("data-kd"))}});
     $$("[data-kk]",box).forEach(function(b){b.onclick=function(){var k=f.kids[+b.getAttribute("data-kk")];KI.sel[k]=!KI.sel[k];kiIdle();kiDraw()}});
     $$("[data-ka]",box).forEach(function(b){b.onclick=function(){KI.adults=Math.max(0,Math.min(10,KI.adults+(+b.getAttribute("data-ka"))));kiIdle();kiDraw()}});
