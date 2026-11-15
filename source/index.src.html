@@ -2154,6 +2154,7 @@ html.kiosk-on body{background:#0e0f12}
 .ki-amts button[aria-checked="true"]{border-color:var(--red);background:#3a1517}
 .ki-other{width:min(320px,100%);text-align:left}
 .ki-dollar{display:flex;align-items:center;gap:8px;font:800 2rem/1 var(--display)}.ki-dollar input{font:800 1.8rem/1 var(--display)!important;text-align:left}
+.ki-tap{width:min(220px,60vw)}.ki-tap svg{display:block;width:100%;height:auto}
 .ki-qr{background:#fff;border-radius:16px;padding:10px;width:min(300px,70vw)}.ki-qr svg{display:block;width:100%;height:auto}
 .ki-fine{margin:0;color:var(--ki-dim);font-size:.85rem;max-width:44ch}
 .ki-k{margin:0;font-weight:700;color:#fff}.ki-k small{font-weight:500;color:var(--ki-dim)}
@@ -4054,6 +4055,15 @@ body.rw-tv .rw-fol{display:none}
   </div>
 </footer>
 
+<script>
+/* Square Point of Sale hands back here after a kiosk donation (?data=… on iPad/iPhone, ?com.squareup.pos.… on Android).
+   Keep the result for the kiosk and tidy the address bar before the router reads it. */
+(function(){try{var q=new URLSearchParams(location.search),d=q.get("data"),r=null;
+  if(d){var j=JSON.parse(d);r={ok:j.status==="ok",tx:j.transaction_id||j.client_transaction_id||"",err:j.error_code||"",state:j.state||""}}
+  else if(q.has("com.squareup.pos.CLIENT_TRANSACTION_ID")||q.has("com.squareup.pos.ERROR_CODE")){var e=q.get("com.squareup.pos.ERROR_CODE")||"";
+    r={ok:!e,tx:q.get("com.squareup.pos.SERVER_TRANSACTION_ID")||q.get("com.squareup.pos.CLIENT_TRANSACTION_ID")||"",err:e,state:q.get("com.squareup.pos.REQUEST_METADATA")||""}}
+  if(r&&/^kiosk_donation/.test(r.state||"kiosk_donation")){try{sessionStorage.setItem("fr_sq_result",JSON.stringify(r))}catch(x){}history.replaceState(null,"",location.pathname+"#kiosk")}}catch(e){}})();
+</script>
 <script>
 (function(){
   var $=function(s){return document.querySelector(s)};
@@ -6741,7 +6751,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function donateCfg(){try{return JSON.parse((CONTENT["data|donate"]||{}).value||"null")}catch(e){return null}}
   function tabDonate(){var P=$("#admPanel"),c=donateCfg()||{},live=!!c.link,test=/\/test_/.test(c.link||"");
     P.innerHTML='<div class="dn-status '+(live?(test?"warn":"on"):"off")+'">'+ico(live?"check":"heart")+'<div><b>'+(live?(test?"Connected in Stripe test mode":"Donations are live"):"Not connected yet")+'</b><span>'+
-        (live?(test?"This is a test link: no real cards are charged. Swap in your live link when you’re ready.":"The Donate page and the kiosk’s Donate button open Stripe’s secure checkout with the donor’s amount filled in. On the kiosk, donors can scan a code to pay on their own phone."):"Until you add a link, the Donate page and the kiosk’s Donate button collect pledges and send them to Inquiries.")+'</span></div>'+(live?'<a class="mini" href="#donate">View the Donate page</a>':'')+'</div>'+
+        (live?(test?"This is a test link: no real cards are charged. Swap in your live link when you’re ready.":"The Donate page opens Stripe’s secure checkout with the donor’s amount filled in. The kiosk uses it too unless Square tap to pay is set up below."):"Until you add a link, the Donate page and the kiosk’s Donate button collect pledges and send them to Inquiries.")+'</span></div>'+(live?'<a class="mini" href="#donate">View the Donate page</a>':'')+'</div>'+
       '<div class="dn-grid"><form class="dn-form" id="dnForm" novalidate>'+
         '<label class="f">Stripe donation link <small>From a Payment Link set to “Customers choose what to pay”. Starts with https://buy.stripe.com/ or https://donate.stripe.com/</small><input type="url" id="dn-link" value="'+esc(c.link||"")+'" placeholder="https://buy.stripe.com/…" autocomplete="off" spellcheck="false"></label>'+
         '<label class="f">Monthly giving link <small>(optional) A second Payment Link with a monthly price. Adds a One-time / Monthly choice.</small><input type="url" id="dn-monthly" value="'+esc(c.monthly||"")+'" placeholder="https://buy.stripe.com/…" autocomplete="off" spellcheck="false"></label>'+
@@ -6762,6 +6772,25 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       var amts=$("#dn-amts").value.split(/[,\s]+/).map(function(x){return Math.round(+x.replace(/[^0-9.]/g,""))}).filter(function(x){return x>0&&x<100000}).slice(0,6);
       var val=JSON.stringify({link:link,monthly:mon||null,amounts:amts.length?amts:[25,50,100,250]});
       db.from("site_content").upsert({key:"data|donate",kind:"text",value:val,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(okToast(x,"Saved. The Donate page now opens Stripe checkout.")){CONTENT["data|donate"]={key:"data|donate",kind:"text",value:val};applyDonate();tabDonate()}})};
+    var sq=sqCfg(),cbu=location.origin+location.pathname;
+    P.insertAdjacentHTML("beforeend",'<div class="dn-status '+(sq.app_id?"on":"off")+'" style="margin-top:22px">'+ico(sq.app_id?"check":"heart")+'<div><b>'+(sq.app_id?"Kiosk tap to pay is on":"Kiosk tap to pay: not set up")+'</b><span>'+(sq.app_id?"The kiosk’s Donate button opens Square on the tablet so donors tap their card on your Square reader.":"Add your Square application ID so donors can tap their card on your Square reader at the check-in kiosk.")+'</span></div></div>'+
+      '<div class="dn-grid"><form class="dn-form" id="sqForm" novalidate><label class="f">Square application ID <small>From developer.squareup.com → your application → Credentials (Production). Starts with sq0idp-</small><input type="text" id="sq-app" value="'+esc(sq.app_id||"")+'" placeholder="sq0idp-…" autocomplete="off" spellcheck="false"></label>'+
+        '<label class="f">Location ID <small>(optional) Only if you have more than one Square location</small><input type="text" id="sq-loc" value="'+esc(sq.location_id||"")+'" autocomplete="off" spellcheck="false"></label>'+
+        '<label class="f">Web callback URL <small>Copy this into Square exactly as shown</small><input type="text" readonly value="'+esc(cbu)+'" onclick="this.select()"></label>'+
+        '<div class="row"><button class="mini solid" type="submit">Save</button>'+(sq.app_id?'<button class="mini red" type="button" id="sqOff">Turn off</button>':'')+'</div></form>'+
+      '<aside class="dn-how"><p class="me-k">One-time setup for Square</p><ol>'+
+        '<li>Go to <b>developer.squareup.com</b>, sign in with your Square account and create an application (“Flint Racing kiosk”).</li>'+
+        '<li>Open <b>Point of Sale API</b> in the left menu. Under <b>Web</b>, paste the Web callback URL shown here and save.</li>'+
+        '<li>Open <b>Credentials</b>, switch to <b>Production</b>, copy the <b>Application ID</b> and paste it here.</li>'+
+        '<li>On the kiosk tablet, install <b>Square Point of Sale</b>, sign in, and pair your Square reader in its settings.</li>'+
+        '<li>Open the kiosk and try a $1 donation, then refund it in Square.</li></ol>'+
+        '<p class="me-fine">The application ID isn’t a secret, and no card details touch this website: Square’s app and reader handle the payment. Gifts show up in your Square Dashboard with the note “Donation · Flint Racing workshop kiosk”. Square sales tax is turned off for these.</p></aside></div>');
+    $("#sqForm").onsubmit=function(e){e.preventDefault();var a=$("#sq-app").value.trim(),l=$("#sq-loc").value.trim();
+      if(!/^sq0idp-[A-Za-z0-9_-]{10,}$/.test(a)){toast(/^sandbox-/.test(a)?"That’s a sandbox ID. Square’s app needs the Production application ID (sq0idp-…).":"Paste the Production application ID. It starts with sq0idp-");return}
+      var val=JSON.stringify({app_id:a,location_id:l||null});
+      db.from("site_content").upsert({key:"data|square",kind:"text",value:val,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(okToast(x,"Saved. The kiosk Donate button now uses your Square reader.")){CONTENT["data|square"]={key:"data|square",kind:"text",value:val};tabDonate()}})};
+    if($("#sqOff"))$("#sqOff").onclick=function(){var b=this;if(b.textContent!=="Confirm"){b.textContent="Confirm";return}
+      db.from("site_content").delete().eq("key","data|square").then(function(x){if(okToast(x,"Kiosk tap to pay is off.")){delete CONTENT["data|square"];tabDonate()}})};
     if($("#dnTry"))$("#dnTry").onclick=function(){window.open(c.link,"_blank","noopener")};
     if($("#dnOff"))$("#dnOff").onclick=function(){var b=this;if(b.textContent!=="Confirm disconnect"){b.textContent="Confirm disconnect";return}
       db.from("site_content").delete().eq("key","data|donate").then(function(x){if(okToast(x,"Disconnected. The Donate page is back to pledges.")){delete CONTENT["data|donate"];applyDonate();tabDonate()}})};
@@ -7577,7 +7606,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     if(!on){document.documentElement.classList.remove("kiosk-on");clearTimeout(KI.idle);clearTimeout(KI.back);if(KI.lock){try{KI.lock.release()}catch(e){}KI.lock=null}return}
     if(!box)return;
     if(!gate(box,"kis","Workshop sign-in",IS_ADMIN||STAFF.workshop)){document.documentElement.classList.remove("kiosk-on");return}
-    document.documentElement.classList.add("kiosk-on");kiWake();kiReset();kiCount()}
+    document.documentElement.classList.add("kiosk-on");kiWake();kiReset();kiSquareBack();kiCount()}
   function kiDraw(){var box=$("#kioskBox");if(!box||hashBase()!=="kiosk")return;var ev=kiEvent(),f=KI.fam,body="";
     var head='<header class="ki-head"><div><p>Flint Racing &amp; STEM · Check-in</p><h1>'+esc(ev?ev.t:"Workshop day")+'</h1></div><p class="ki-date">'+esc(fmtDate(todayISO(),{weekday:"long",month:"long",day:"numeric"}))+'</p></header>';
     if(KI.step==="pad"){var locked=Date.now()<KI.lockUntil;
@@ -7597,6 +7626,15 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         '<label class="ki-in ki-other" id="kiOther"'+(gv.other?'':' hidden')+'>Your amount<span class="ki-dollar"><span aria-hidden="true">$</span><input type="text" inputmode="decimal" maxlength="7" id="kiAmt" value="'+(gv.other&&gv.amt?gv.amt:'')+'" autocomplete="off" aria-label="Amount in dollars"></span></label>'+
         '<p class="ki-msg" id="kiMsg" role="alert"></p><button type="button" class="ki-go" id="kiGive"'+(gv.amt?'':' disabled')+'>'+(gv.amt?'Continue with $'+gv.amt:'Pick an amount')+'</button>'+
         '<button type="button" class="ki-back" id="kiBack">Back to the start</button></section>'}
+    else if(KI.step==="givetap"){var gt=KI.give;
+      body='<section class="ki-card ki-give" aria-labelledby="kiH"><p class="ki-who">Your gift · $'+esc(String(gt.amt))+'</p><h2 id="kiH">Tap or swipe your card to give</h2>'+
+        '<div class="ki-tap" aria-hidden="true"><svg viewBox="0 0 120 90"><rect x="18" y="20" width="62" height="58" rx="10" fill="#2a2c33" stroke="#6b6e77" stroke-width="3"/><rect x="34" y="34" width="30" height="20" rx="3" fill="#6b6e77"/><path d="M88 30c6 6 6 24 0 30M97 22c11 11 11 35 0 46M106 14c15 16 15 46 0 62" fill="none" stroke="#d2141c" stroke-width="5" stroke-linecap="round"/></svg></div>'+
+        '<p>Press the button, then tap, insert or swipe your card or phone on the Square reader. You can get a receipt by email or text.</p>'+
+        '<p class="ki-msg" id="kiMsg" role="alert">'+(gt.err?esc(gt.err):'')+'</p>'+
+        '<button type="button" class="ki-go" id="kiTap">Pay $'+esc(String(gt.amt))+' with card</button><button type="button" class="ki-back" data-kgo="give">Change the amount</button><button type="button" class="ki-back" id="kiBack">Cancel</button></section>'}
+    else if(KI.step==="givewait"){
+      body='<section class="ki-card ki-give" aria-labelledby="kiH" role="status"><div class="ki-heart" aria-hidden="true">♥</div><h2 id="kiH">Finish on the card reader</h2><p>Square will bring you back here when your $'+esc(String((KI.give||{}).amt||""))+' gift goes through.</p>'+
+        '<button type="button" class="ki-alt" id="kiTap">Open the card reader again</button><button type="button" class="ki-back" id="kiBack">Back to the start</button></section>'}
     else if(KI.step==="givepay"){var gp=KI.give,url=kiGiveUrl(gp.amt);
       body='<section class="ki-card ki-give" aria-labelledby="kiH"><p class="ki-who">Your gift · $'+esc(String(gp.amt))+'</p><h2 id="kiH">Scan to give with your phone</h2>'+
         '<p>Point your phone’s camera at the code. Pay with Apple Pay, Google Pay or a card on Stripe’s secure page, and get your receipt by email.</p>'+
@@ -7610,7 +7648,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         '<p class="ki-msg full" id="kiMsg" role="alert"></p><button type="submit" class="ki-go full" id="kiSend">Send my pledge</button></form><button type="button" class="ki-back" data-kgo="give">Change the amount</button><button type="button" class="ki-back" id="kiBack">Cancel</button></section>'}
     else if(KI.step==="givedone"){
       body='<section class="ki-card ki-done" aria-labelledby="kiH" role="status"><div class="ki-flag" aria-hidden="true">♥</div><h2 id="kiH">Thank you!</h2><p class="ki-names">Your support keeps kids racing.</p>'+
-        '<p>'+(KI.give&&KI.give.pledge?'We’ll email you about completing your $'+esc(String(KI.give.amt))+' gift.':'Your receipt comes by email from Stripe.')+'</p><button type="button" class="ki-back" id="kiBack">Back to the start</button></section>'}
+        '<p>'+(KI.give&&KI.give.pledge?'We’ll email you about completing your $'+esc(String(KI.give.amt))+' gift.':KI.give&&KI.give.square?'Your $'+esc(String(KI.give.amt||""))+' gift went through. Flint Racing and STEM thanks you!':'Your receipt comes by email from Stripe.')+'</p><button type="button" class="ki-back" id="kiBack">Back to the start</button></section>'}
     else if(KI.step==="back"){var at=f.at?new Date(f.at).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"}):"";
       body='<section class="ki-card" aria-labelledby="kiH"><h2 id="kiH">Welcome back, '+esc(f.family)+' family!</h2><p>You checked in'+(at?' at '+esc(at):'')+' with '+esc(kiNames(f.already))+'.</p>'+
         '<button type="button" class="ki-go" id="kiOut">Check out</button><button type="button" class="ki-alt" id="kiUpd">Change who’s here</button>'+
@@ -7691,7 +7729,9 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         if(a==="other"){oth.hidden=false;ai.focus();var v=kiAmt(ai.value);setAmt(v,true)}else{oth.hidden=true;setAmt(+a,false)}}});
       ai.oninput=function(){ai.value=ai.value.replace(/[^0-9.]/g,"");kiIdle();setAmt(kiAmt(ai.value),true)};
       gb.onclick=function(){var v=KI.give.amt;if(!(v>=1)){$("#kiMsg").textContent="Enter at least $1.";return}if(v>25000){$("#kiMsg").textContent="For gifts over $25,000, please talk with a staff member.";return}
-        KI.step=(donateCfg()||{}).link?"givepay":"givepledge";kiIdle();kiDraw();var f1=$("#kiPledge input");if(f1)f1.focus()}}
+        KI.step=sqCfg().app_id?"givetap":(donateCfg()||{}).link?"givepay":"givepledge";kiIdle();kiDraw();var f1=$("#kiPledge input");if(f1)f1.focus()}}
+    if(KI.step==="givetap"||KI.step==="givewait"){$("#kiTap").onclick=function(){var m=$("#kiMsg"),u=kiSquareUrl(KI.give.amt);if(!u.ok){if(m)m.textContent=u.err;return}
+        try{sessionStorage.setItem("fr_sq_give",JSON.stringify({amt:KI.give.amt,at:Date.now()}))}catch(x){}KI.give.err="";KI.step="givewait";kiDraw();location.href=u.url}}
     if(KI.step==="givepay"){$("#kiTablet").onclick=function(){var u=kiGiveUrl(KI.give.amt),w=null;try{w=window.open(u,"_blank","noopener")}catch(x){}if(!w){location.href=u;return}
         KI.step="givedone";kiDraw();clearTimeout(KI.back);KI.back=setTimeout(function(){if(KI.step==="givedone")kiReset()},8000)};
       $("#kiGiveDone").onclick=function(){KI.step="givedone";kiDraw();clearTimeout(KI.back);KI.back=setTimeout(function(){if(KI.step==="givedone")kiReset()},8000)}}
@@ -7723,6 +7763,28 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     db.rpc("kiosk_checkin",{p_code:f.code,p_event:ev&&ev.id&&/^[0-9a-f-]{36}$/.test(ev.id)?ev.id:null,p_kids:names,p_adults:KI.adults}).then(function(r){KI.busy=false;
       if(r.error){toast("Couldn’t check in: "+r.error.message);kiDraw();return}
       f.done=names;KI.step="done";clearTimeout(KI.idle);kiDraw();kiCount();KI.back=setTimeout(function(){if(KI.step==="done")kiReset()},6000)},function(){KI.busy=false;toast("No connection. Check the Wi-Fi and try again.");kiDraw()})}
+  function sqCfg(){try{return JSON.parse((CONTENT["data|square"]||{}).value||"null")||{}}catch(e){return {}}}
+  /* Square Point of Sale API (web): opens the Square app on this tablet with the amount filled in; the paired Square reader takes the tap. */
+  function kiSquareUrl(amt){var c=sqCfg(),cents=Math.round(amt*100),cb=location.origin+location.pathname,ua=navigator.userAgent||"";
+    var ios=/iPad|iPhone|iPod/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1),android=/Android/i.test(ua);
+    if(!c.app_id)return {ok:false,err:"Square isn’t connected yet. Ask a staff member."};
+    var note="Donation · Flint Racing workshop kiosk";
+    if(ios){var d={amount_money:{amount:String(cents),currency_code:"USD"},callback_url:cb,client_id:c.app_id,version:"1.3",notes:note,state:"kiosk_donation:"+amt,
+        options:{supported_tender_types:["CREDIT_CARD"],auto_return:true,clear_default_fees:true}};if(c.location_id)d.location_id=c.location_id;
+      return {ok:true,url:"square-commerce-v1://payment/create?data="+encodeURIComponent(JSON.stringify(d))}}
+    if(android){var x=["action=com.squareup.pos.action.CHARGE","package=com.squareup","S.browser_fallback_url="+encodeURIComponent(cb+"#kiosk"),"S.com.squareup.pos.WEB_CALLBACK_URI="+encodeURIComponent(cb),
+        "S.com.squareup.pos.CLIENT_ID="+encodeURIComponent(c.app_id),"S.com.squareup.pos.API_VERSION=v2.0","i.com.squareup.pos.TOTAL_AMOUNT="+cents,"S.com.squareup.pos.CURRENCY_CODE=USD",
+        "S.com.squareup.pos.TENDER_TYPES=com.squareup.pos.TENDER_CARD","S.com.squareup.pos.NOTE="+encodeURIComponent(note),"S.com.squareup.pos.REQUEST_METADATA=kiosk_donation:"+amt,"l.com.squareup.pos.AUTO_RETURN_TIMEOUT_MS=4000"];
+      if(c.location_id)x.push("S.com.squareup.pos.LOCATION_ID="+encodeURIComponent(c.location_id));
+      return {ok:true,url:"intent:#Intent;"+x.join(";")+";end"}}
+    return {ok:false,err:"Tap to pay works on the kiosk iPad or Android tablet with the Square Point of Sale app and reader."}}
+  /* back from Square: show thanks, or let them try again */
+  function kiSquareBack(){var r=null;try{r=JSON.parse(sessionStorage.getItem("fr_sq_result")||"null");sessionStorage.removeItem("fr_sq_result")}catch(e){}if(!r)return false;
+    var g=null;try{g=JSON.parse(sessionStorage.getItem("fr_sq_give")||"null");sessionStorage.removeItem("fr_sq_give")}catch(e){}
+    var amt=g&&g.amt||+(String(r.state).split(":")[1]||0)||0;
+    if(r.ok){KI.give={amt:amt,square:true};KI.step="givedone";kiDraw();clearTimeout(KI.back);KI.back=setTimeout(function(){if(KI.step==="givedone")kiReset()},8000);return true}
+    var canceled=/cancel/i.test(r.err||"");KI.give={amt:amt,err:canceled?"Payment canceled. Tap the button to try again.":"The card reader couldn’t finish ("+String(r.err||"unknown").replace(/_/g," ").toLowerCase()+"). Try again or ask a staff member."};
+    KI.step=amt?"givetap":"give";kiIdle();kiDraw();return true}
   function kiAmt(v){var n=parseFloat(String(v||"").replace(/[^0-9.]/g,""));return n>=1?Math.round(n*100)/100:0}
   function kiGiveUrl(amt){var c=donateCfg()||{},u=c.link||"";if(!u)return "";return u+(u.indexOf("?")<0?"?":"&")+"prefilled_amount="+Math.round(amt*100)+"&client_reference_id=kiosk_donation"}
   function kiQR(url){try{var m=window.FR_QR(url),n=m.length,q=4,d="";for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(m[r][c])d+="M"+(c+q)+" "+(r+q)+"h1v1h-1z";
