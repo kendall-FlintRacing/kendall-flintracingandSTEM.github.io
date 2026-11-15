@@ -13,7 +13,7 @@
        inquiries:[{id:"inq-sample",created_at:new Date().toISOString(),first_name:"Sample",last_name:"Family",role:"Parent or guardian",organization:null,
          interests:"Building Workshops",youth_count:2,youth_ages:"9 and 12",message:"This is a sample inquiry so you can see how they look.",email:"sample@example.com",
          phone:null,contact_by:"Email",best_time:"Evening",email_updates:true,status:"new"}]};
-    race(); members(); council(); save();
+    race(); members(); council(); hoursSeed(); save();
   }
   /* Demo race day so the live race page and its controls can be tried.
      Two brackets alternate: Super Stock (double elimination, 6 cars + 2 byes) and Masters (single elimination, 5 cars + 3 byes). */
@@ -69,6 +69,11 @@
       {id:"l3",at:d(2,1),member_id:"m1",who:"taylorfamily",action:"view:dates",detail:null},{id:"l4",at:d(2),member_id:"m1",who:"taylorfamily",action:"sign_in",detail:"kept signed in"},
       {id:"l5",at:d(3),member_id:null,who:"taylorfam",action:"signin_failed",detail:"unknown username"},{id:"l6",at:d(5),member_id:"m2",who:"samrivera",action:"sign_in",detail:"this visit"}];
   }
+  function hoursSeed(){var dd=function(n){var x=new Date(Date.now()-n*864e5);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")};
+    T.council_meetings=[{id:"mt1",meeting_date:dd(3),title:"Leadership meeting",hours:1,author_name:"Marcus Lee",created_by_member:"m6",created_at:new Date().toISOString()},{id:"mt2",meeting_date:dd(10),title:"Leadership meeting",hours:1,author_name:"Marcus Lee",created_by_member:"m6",created_at:new Date().toISOString()}];
+    T.council_attendance=[{id:"at1",member_id:"m5",source:"meeting",ref_id:"mt2",kind:"meeting",session_date:dd(10),title:"Leadership meeting",hours:1,status:"verified",verified_by:"Marcus Lee",created_at:new Date().toISOString()},
+      {id:"at2",member_id:"m8",source:"meeting",ref_id:"mt2",kind:"meeting",session_date:dd(10),title:"Leadership meeting",hours:1,status:"pending",verified_by:null,created_at:new Date().toISOString()}];
+    T.council_race=[];}
   /* Demo Student Leadership Council: 4 students (passcode racing26), officers, projects, weekly tasks, a bulletin and posts */
   function council(){var now=Date.now(),d=function(days){return new Date(now-days*864e5).toISOString()},day=function(n){var x=new Date(now+n*864e5);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")},
       mon=function(){var x=new Date();x.setHours(0,0,0,0);x.setDate(x.getDate()-((x.getDay()+6)%7));return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")}();
@@ -97,6 +102,7 @@
   if(T&&(!T.race_show||!T.staff||!T.crew_codes)){race();save();}
   if(T&&!T.members){members();save();}
   if(T&&!T.council_officers){council();save();}
+  if(T&&!T.council_meetings){hoursSeed();save();}
   addEventListener("storage",function(e){if(e.key===KEY)load()});
   var user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}}, listeners=[];
   function rid(){return Math.random().toString(36).slice(2,10)}
@@ -194,6 +200,15 @@
         if(!am){am={id:"madmin",username:"testadmin",display_name:"Test Admin",kind:"crew",email:"test-admin@flintracing.org",phone:null,kids:[],requested:[],roles:[],status:"approved",about:"Admin’s own participant profile",admin_note:null,first_year:2026,created_at:new Date().toISOString(),approved_at:new Date().toISOString(),last_seen_at:null};T.members.push(am)}
         if(args&&args.p_role&&am.roles.indexOf(args.p_role)<0)am.roles.push(args.p_role);T.msess[user.id]={mid:am.id,exp:Date.now()+30*864e5};save();
         return R({id:am.id,username:am.username,display_name:am.display_name,kind:am.kind,roles:am.roles,first_year:am.first_year,family_code:null})}
+      if(fn==="council_confirm"){var hx_cm=curM();if(!hx_cm||(hx_cm.roles||[]).indexOf("council")<0)return R(null,"Council members only");var hx_se=null;
+        if(args.p_source==="meeting"){var hx_mm=T.council_meetings.filter(function(x){return x.id===args.p_ref})[0];if(hx_mm)hx_se={d:hx_mm.meeting_date,t:hx_mm.title,h:+hx_mm.hours,k:"meeting"}}
+        else if(args.p_source==="site_event"){var hx_ee=T.events.filter(function(x){return x.id===args.p_ref})[0];if(hx_ee)hx_se={d:hx_ee.start_date,t:hx_ee.title,h:3,k:/^building workshop/i.test(hx_ee.title)?"building":"seasonal"}}
+        else{var hx_pp=T.council_projects.filter(function(x){return x.id===args.p_ref})[0];if(hx_pp)hx_se={d:hx_pp.event_date,t:hx_pp.title,h:2,k:"event"}}
+        if(!hx_se)return R(null,"That event wasn’t found.");T.council_attendance=T.council_attendance.filter(function(a){return !(a.member_id===hx_cm.id&&a.source===args.p_source&&a.ref_id===args.p_ref)});
+        T.council_attendance.push({id:"at"+Date.now(),member_id:hx_cm.id,source:args.p_source,ref_id:args.p_ref,kind:hx_se.k,session_date:hx_se.d,title:hx_se.t,hours:args.p_there?hx_se.h:0,status:args.p_there?"pending":"absent",verified_by:null,created_at:new Date().toISOString()});save();return R({status:args.p_there?"pending":"absent"})}
+      if(fn==="council_verify"){var hx_ar=T.council_attendance.filter(function(a){return a.id===args.p_id})[0];if(!hx_ar)return R(null,"Not found");hx_ar.status=args.p_ok?"verified":"rejected";if(args.p_ok)hx_ar.hours=args.p_hours;hx_ar.verified_by=(curM()||{display_name:"Test Admin (Admin)"}).display_name;save();return R(null)}
+      if(fn==="council_set_racing"||fn==="council_race_admin"){var hx_rid=fn==="council_set_racing"?(curM()||{}).id:args.p_member,hx_nd=new Date(),hx_ss=hx_nd.getMonth()>=7?hx_nd.getFullYear()+1:hx_nd.getFullYear(),hx_rr=T.council_race.filter(function(r){return r.member_id===hx_rid&&r.season===hx_ss})[0];
+        if(!hx_rr){hx_rr={member_id:hx_rid,season:hx_ss,racing:null,half_ok:false};T.council_race.push(hx_rr)}hx_rr.racing=args.p_racing;hx_rr.half_ok=fn==="council_race_admin"?!!(args.p_half&&args.p_racing):(args.p_racing?hx_rr.half_ok:false);save();return R(null)}
       if(fn==="council_roster"){var me=curM(),isA=user&&user.id==="test-admin";if(!isA&&!(me&&(me.roles||[]).indexOf("council")>=0))return R(null,"Council members only");
         return R({me:me?me.id:null,admin:isA,members:T.members.filter(function(m){return m.status==="approved"&&(m.roles||[]).indexOf("council")>=0}).map(function(m){return{id:m.id,name:m.display_name,
           positions:(T.council_officers||[]).filter(function(o){return o.member_id===m.id}).map(function(o){return o.position}),titles:(T.council_roles||[]).filter(function(r){return r.member_id===m.id&&r.status==="approved"}).map(function(r){return r.title})}}).sort(function(a,b){return a.name>b.name?1:-1})})}
