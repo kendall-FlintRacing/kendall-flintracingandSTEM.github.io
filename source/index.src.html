@@ -3904,12 +3904,16 @@ body.rw-tv .rw-fol{display:none}
           <div class="mem-in" data-mem="crew" data-kind="crew"></div>
           <p class="cs-fine">Only want one race-day shift? <a href="#race-volunteer">Sign up to volunteer</a>. No profile needed.</p>
         </article>
-        <article class="cs-card" data-card="2" aria-label="Leadership Council" hidden>
+[[COUNCIL]]        <article class="cs-card" data-card="2" aria-label="Leadership Council" hidden>
           <h2>Leadership Council</h2>
           <p class="cs-desc">For Student Leadership Council members. Plan projects and events, check off weekly tasks, post bulletins, share media and suggest social posts.</p>
           <div class="mem-in" data-mem="council" data-kind="crew"></div>
           <p class="cs-fine">Not on the council yet? <a href="#leadership-council">Learn about the council</a>.</p>
-        </article>
+        </article>[[ELSE]]        <article class="cs-card" data-card="2" aria-label="Race Fan" hidden>
+          <h2>Race Fan</h2>
+          <p class="cs-desc">Follow every heat live on race day: the starting lights, run times, brackets and winners. Send a shout-out from the stands.</p>
+          <div class="cs-acts"><a class="cs-go" href="#race-watch">Watch race day live</a></div>
+        </article>[[/COUNCIL]]
         <article class="cs-card" data-card="3" aria-label="Staff Garage" hidden>
           <h2>Staff Garage</h2>
           <p class="cs-desc">For Flint Racing staff: admins, teachers, photographers and race-day leads. Sign in once and you go straight to the portal you’re approved for.</p>
@@ -4065,7 +4069,7 @@ body.rw-tv .rw-fol{display:none}
 <div class="page rk-page" data-page="volunteers" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="volunteers"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="volBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 <div class="page rk-page" data-page="photographer" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="photographer"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="phBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 <div class="page kiosk-page" data-page="kiosk" hidden><div id="kioskBox" class="ki-box"><p class="ki-load">Loading the check-in kiosk…</p></div></div>
-<div class="page rk-page" data-page="council" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="council"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="coBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
+[[COUNCIL]]<div class="page rk-page" data-page="council" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="council"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="coBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>[[/COUNCIL]]
 <div class="page rk-page" data-page="teacher" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="teacher"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="teBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 
 <!-- ======================= ADMIN PORTAL ======================= -->
@@ -4205,7 +4209,7 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","council":"Leadership Council","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning",[[COUNCIL]]"council":"Leadership Council",[[/COUNCIL]]"team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
@@ -4923,7 +4927,7 @@ body.rw-tv .rw-fol{display:none}
     var CARS=[
       {paint:"#c0141b",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Email + 4-digit code",stats:[["Young racers reached","kids"],["Years racing (since 2019)","years"],["Cars in the build","cars"]]},
       {paint:"#f2b01e",trim:"#111113",helmet:"#d2141c",num:"12",label:"Crew",neon:"#ffc233",key:"Email + 4-digit code",stats:[["Volunteers this year","volunteers_this_year"],["Meals served","meals"],["Participants served","participants"]]},
-      {paint:"#1f4fd1",trim:"#f5b82e",helmet:"#f4f4f4",num:"16",label:"Council",neon:"#7fb2ff",key:"Email + 4-digit code",stats:[["Council members","council_members"],["Projects underway","council_projects"],["Days to race day","countdown"]]},
+      [[COUNCIL]]{paint:"#1f4fd1",trim:"#f5b82e",helmet:"#f4f4f4",num:"16",label:"Council",neon:"#7fb2ff",key:"Email + 4-digit code",stats:[["Council members","council_members"],["Projects underway","council_projects"],["Days to race day","countdown"]]},[[ELSE]]{paint:"checker",trim:"#d2141c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"Just cheer!",stats:[["Top speed","speed"],["Engines","engines"],["Days to race day","countdown"]]},[[/COUNCIL]]
       {paint:"#16171c",trim:"#d2141c",helmet:"#d2141c",num:"6",label:"Staff",neon:"#d2141c",key:"Username or admin email",stats:[["Events this season","events"],["Paths to participate","paths"],["Historic home track","track"]]}];
     var LIVE={};
     function impact(i){var el=document.querySelectorAll(".impact .stat strong")[i];return el?el.textContent.trim():""}
@@ -6683,7 +6687,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function startUp(){if(started)return;started=true;window.FR_DB=db;if(window.FR_TEST)testChip();initAuth();applyStats();renderPortals();renderSpirit();
     db.rpc("public_stats",{p_year:null}).then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});
     db.rpc("public_member_counts").then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});
-    db.rpc("public_council_counts").then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});}
+[[COUNCIL]]    db.rpc("public_council_counts").then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});[[/COUNCIL]]}
   Promise.all([loadEvents(),loadNotes(),loadContent()]).then(function(){
     FR.refresh(); var n=$("#qNote"); if(n) n.hidden=true; startUp();
   }).catch(function(e){ if(window.console)console.warn("Live content didn’t load; showing built-in content.",e); startUp(); });
@@ -7028,7 +7032,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     (was?db.rpc("member_signout").then(function(){},function(){}):Promise.resolve()).then(function(){return db.auth.signOut()}).then(function(){toast("Signed out")})}
 
   /* ---------- Sign in page (#access): your account and your spaces ---------- */
-  var SPACES=[["admin","#admin","Admin"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["council","#council","Leadership Council"],["workshop","#workshop-signin","Workshop sign-in"],
+  var SPACES=[["admin","#admin","Admin"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],[[COUNCIL]]["council","#council","Leadership Council"],["workshop","#workshop-signin","Workshop sign-in"],[[ELSE]]["workshop","#workshop-signin","Workshop sign-in"],[[/COUNCIL]]
     ["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["volunteers","#volunteers","Race-day volunteers"]];
   var STAFF={};
   function canSpace(k){if(IS_ADMIN)return true;if(k==="controller")return IS_CTRL;if(k==="track")return IS_TRACK;if(k==="volunteers")return IS_CTRL||IS_TRACK||IS_VOLS;return !!STAFF[k]}
@@ -7741,7 +7745,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
 
   /* ---------- Shared bits for staff portals ---------- */
   /* Admins can open every portal with their own sign-in: a jump list on every portal's top bar */
-  var ADM_PORTALS=[["#admin","Admin"],["#council","Leadership Council"],["#teacher","Teacher planning"],["#photographer","Photographer"],["#workshop-signin","Workshop sign-in"],["#kiosk","Check-in kiosk"],
+  var ADM_PORTALS=[["#admin","Admin"],[[COUNCIL]]["#council","Leadership Council"],["#teacher"[[ELSE]]["#teacher"[[/COUNCIL]],"Teacher planning"],["#photographer","Photographer"],["#workshop-signin","Workshop sign-in"],["#kiosk","Check-in kiosk"],
     ["#race-control","Race control"],["#track-manager","Track operations"],["#volunteers","Volunteer lists"],["#my-dashboard/crew","My dashboard (sample crew)"],["#my-dashboard/family","My dashboard (sample family)"],["#program-signin","Program Dashboard"],["#race-watch","Live race"]];
   function portalTop(title,kicker,role){var name=crewName(),here=location.hash.split("/")[0];
     return '<div class="rk-top"><div class="rk-tt"><p class="rk-k">'+esc(kicker)+'</p><h1>'+esc(title)+'</h1></div><div class="rk-who"><span>'+esc(name)+' · '+esc(IS_ADMIN?"Admin":role)+'</span>'+
@@ -8699,7 +8703,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   /* ---------- Member profiles: register once, sign in with username + passcode ---------- */
   var IS_VOLS=false, CODE_ROLES={}, ME=null, LOGGED={};
   var MROLES={family:["Family","Program Dashboard: dates, times and places"],volunteer:["Volunteer","Dates, times and check-in for helping out"],
-    workshop:["Workshop sign-in desk","Signs families in and counts meals"],teacher:["Teacher","Suggest events and list materials"],photographer:["Photographer","Upload photo albums"],council:["Student Leadership Council","Council projects, events, bulletins and discussion"],
+    workshop:["Workshop sign-in desk","Signs families in and counts meals"],teacher:["Teacher","Suggest events and list materials"],photographer:["Photographer","Upload photo albums"],[[COUNCIL]]council:["Student Leadership Council","Council projects, events, bulletins and discussion"],[[/COUNCIL]]
     controller:["Race control","Runs the live race feed"],track:["Track operations","Shout-outs, intermissions and sponsor ads"],volunteers:["Race-day volunteer lists","Volunteer lists and check-in"]};
   var MKIND={workshop:"Building workshop",race_day:"Race day",event:"Event or camp",other:"Something else"};
   var PREVROLES=null;
@@ -8707,19 +8711,19 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function sampleProfile(kind){var d=function(days,h){return new Date(Date.now()-days*864e5+(h||0)*36e5).toISOString()},fam=kind!=="crew";
     return fam?{member:{username:"taylorfamily",display_name:"Jordan Taylor",kind:"family",roles:["family"],first_year:2025,email:"family@example.com",phone:"810-555-0100",kids:[{name:"Maya T.",age:"11"},{name:"Eli T.",age:"8"}]},
         hours:14,workshops:6,race_days:1,events:2,years:2,open:null,recent:[{kind:"workshop",started_at:d(9,-2),ended_at:d(9,1)},{kind:"workshop",started_at:d(23,-2),ended_at:d(23,1)},{kind:"event",started_at:d(40,-3),ended_at:d(40,0)},{kind:"race_day",started_at:d(160,-5),ended_at:d(160,3)}]}:
-      {member:{username:"samrivera",display_name:"Sam Rivera",kind:"crew",roles:["volunteer","workshop","teacher","photographer","council","controller","track","volunteers"],first_year:2024,email:"crew@example.com",phone:null,kids:[]},
+      {member:{username:"samrivera",display_name:"Sam Rivera",kind:"crew",[[COUNCIL]]roles:["volunteer","workshop","teacher","photographer","council","controller","track","volunteers"][[ELSE]]roles:["volunteer","workshop","teacher","photographer","controller","track","volunteers"][[/COUNCIL]],first_year:2024,email:"crew@example.com",phone:null,kids:[]},
         hours:62.5,workshops:18,race_days:2,events:4,years:3,open:null,recent:[{kind:"workshop",started_at:d(2,-3),ended_at:d(2,1)},{kind:"event",started_at:d(12,-4),ended_at:d(12,0)},{kind:"workshop",started_at:d(16,-3),ended_at:d(16,1)}]}}
   var MSPACES=[["#program-signin","Program Dashboard","Dates, times, places and the bulletin",function(){return true},1],
     ["#workshop-signin","Workshop sign-in","Sign families in and count meals",function(){return hasRole("workshop")}],
     ["#kiosk","Check-in kiosk","Set out a tablet so families check themselves in",function(){return hasRole("workshop")}],
     ["#teacher","Teacher planning","Suggest events and list materials",function(){return hasRole("teacher")}],
     ["#photographer","Photographer","Upload photo albums for review",function(){return hasRole("photographer")}],
-    ["#council","Leadership Council","Projects, events, weekly tasks and discussion",function(){return hasRole("council")}],
-    ["#race-control","Race control","Brackets, lights and run times",function(){return hasRole("controller")}],
+[[COUNCIL]]    ["#council","Leadership Council","Projects, events, weekly tasks and discussion",function(){return hasRole("council")}],
+[[/COUNCIL]]    ["#race-control","Race control","Brackets, lights and run times",function(){return hasRole("controller")}],
     ["#track-manager","Track operations","Shout-outs, intermissions and ads",function(){return hasRole("track")}],
     ["#volunteers","Volunteer lists","Race-day crew and check-in",function(){return hasRole("volunteers")||hasRole("controller")||hasRole("track")}],
     ["#race-watch","Live Race","Follow every heat on race day",function(){return true}]];
-  var PORTALS=[["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["workshop","#workshop-signin","Workshop sign-in"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["council","#council","Leadership Council"],["volunteers","#volunteers","Volunteer lists"]];
+  var PORTALS=[["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["workshop","#workshop-signin","Workshop sign-in"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],[[COUNCIL]]["council","#council","Leadership Council"],["volunteers","#volunteers","Volunteer lists"]];[[ELSE]]["volunteers","#volunteers","Volunteer lists"]];[[/COUNCIL]]
   function landing(){if(ADMIN_REAL&&MODE!=="member")return ["#admin","Admin"];if(!ME)return ["#access","Sign in"];
     var st=PORTALS.filter(function(x){return hasRole(x[0])});return st.length===1?[st[0][1],st[0][2]]:["#my-dashboard","my dashboard"]}
   function firstName(n){return String(n||"").trim().split(/\s+/)[0]}
@@ -8782,7 +8786,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   /* ---------- Register a profile (#new-profile) ---------- */
   var REG={kind:"family",done:null};
   var REG_HELP=[["volunteer","Building workshops & events","Help kids build, test and race"],["workshop","Workshop sign-in desk","Sign families in, count meals"],["teacher","Teaching","Lead a lesson or seasonal workshop"],
-    ["photographer","Photography","Shoot workshops and race day"],["council","Student Leadership Council","Older students: lead projects, events and media"],["controller","Race control","Run the live race feed on race day"],["track","Track operations","Shout-outs, intermissions, sponsor ads"],["volunteers","Organizing volunteers","Race-day crew lists and check-in"]];
+    ["photographer","Photography","Shoot workshops and race day"],[[COUNCIL]]["council","Student Leadership Council","Older students: lead projects, events and media"],[[/COUNCIL]]["controller","Race control","Run the live race feed on race day"],["track","Track operations","Shout-outs, intermissions, sponsor ads"],["volunteers","Organizing volunteers","Race-day crew lists and check-in"]];
   function kidRow(k){k=k||{};return '<div class="reg-kid"><input type="text" maxlength="40" placeholder="First name and last initial (Maya R.)" aria-label="Racer’s first name and last initial" value="'+esc(k.name||"")+'"><input type="text" maxlength="10" inputmode="numeric" placeholder="Age" aria-label="Age" value="'+esc(k.age||"")+'"><button type="button" aria-label="Remove this racer">×</button></div>'}
   function renderReg(){var box=$("#regBox");if(!box||hashBase()!=="new-profile")return;
     if(REG.done){var d=REG.done;box.innerHTML='<div class="reg-card"><p class="me-k">You’re on the roster</p><h2>Thanks, '+esc(firstName(d.name))+'!</h2>'+
@@ -9042,7 +9046,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         $$("button",fl).forEach(function(b){b.onclick=function(){var f=b.getAttribute("data-f");$$("button",fl).forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});$$("#spGrid .sp-item").forEach(function(it){it.hidden=!!f&&it.getAttribute("data-cat")!==f})}})}})}
   var EDSUB="previews", PVPATH=0, PVSEL=null, PVW=390;
   var PVPAGES=[["Families","users","Register, sign in, and the family dashboards",[["#new-profile","Register","The one-time sign-up form"],["#access","Sign in","The car select page"],["#my-dashboard/family","My dashboard","Profile, stats and check-in (sample family)"],["#program-signin","Program Dashboard","Dates, times, places and the bulletin"],["#printables","Flyers & forms","Printables to download"]]],
-    ["Crew & staff","check","Volunteers, workshop crew, teachers and photographers",[["#my-dashboard/crew","My dashboard","Profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#kiosk","Check-in kiosk","Families type their 4-digit code"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],["#council","Leadership Council","Student council projects, events and posts"],["#crew/sample","Volunteer crew pass","A race-day volunteer’s link (sample)"],["#volunteers","Volunteer lists","Race-day crew and check-in"]]],
+    ["Crew & staff","check","Volunteers, workshop crew, teachers and photographers",[["#my-dashboard/crew","My dashboard","Profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#kiosk","Check-in kiosk","Families type their 4-digit code"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],[[COUNCIL]]["#council","Leadership Council","Student council projects, events and posts"],[[/COUNCIL]]["#crew/sample","Volunteer crew pass","A race-day volunteer’s link (sample)"],["#volunteers","Volunteer lists","Race-day crew and check-in"]]],
     ["Race day","flag","Everything that runs the track on race day",[["#race-control","Race control","Brackets, lights and run times"],["#track-manager","Track operations","Shout-outs, intermissions and ads"],["#race-watch","Live race","What spectators see"]]],
     ["Public site","layout","Pages anyone can visit",[["#home","Homepage","The front door"],["#calendar","Calendar","Dates for the year"],["#donate","Donate","Stripe checkout"],["#printables","Flyers & forms","Printables to download"],["#spirit","Spirit Shop","Shirts and hats"]]]];
   function tabEdits(){var P=$("#admPanel");

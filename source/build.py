@@ -46,8 +46,24 @@ def data_uri(path):
     return "data:image/%s;base64,%s" % (mime, base64.b64encode(open(path, "rb").read()).decode())
 
 
+# Leadership Council launch switch. Off = the live site keeps the Race Fan car and hides the council
+# (page, role, portal links). The Claude preview always shows it so it can be worked on.
+COUNCIL_LIVE = False
+
+
+def council(src, on):
+    """[[COUNCIL]]shown when on[[ELSE]]shown when off[[/COUNCIL]] (the ELSE part is optional)."""
+    def pick(m):
+        body = m.group(1)
+        on_txt, _, off_txt = body.partition("[[ELSE]]")
+        return on_txt if on else off_txt
+    out = re.sub(r"\[\[COUNCIL\]\](.*?)\[\[/COUNCIL\]\]", pick, src, flags=re.S)
+    assert "[[COUNCIL" not in out and "[[ELSE]]" not in out and "[[/COUNCIL" not in out
+    return out
+
+
 def build(embed):
-    src = open(os.path.join(HERE, "index.src.html")).read()
+    src = council(open(os.path.join(HERE, "index.src.html")).read(), embed or COUNCIL_LIVE)
     ref = (lambda p: data_uri(p)) if embed else (lambda p: os.path.relpath(p, HERE).replace(os.sep, "/"))
 
     logo = find("logo-dark")
