@@ -48,7 +48,7 @@ def data_uri(path):
 
 # Leadership Council launch switch. Off = the live site keeps the Race Fan car and hides the council
 # (page, role, portal links). The Claude preview always shows it so it can be worked on.
-COUNCIL_LIVE = False
+COUNCIL_LIVE = True
 
 
 def council(src, on):

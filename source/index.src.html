@@ -2941,6 +2941,78 @@ body.rw-tv .rw-fol{display:none}
 @media (max-width:980px){#coBox .cx-top{grid-template-columns:170px minmax(0,1fr)}#coBox .cx-side{grid-column:1/-1;justify-items:stretch;grid-template-columns:auto minmax(0,1fr);align-items:stretch}}
 @media (max-width:820px){#coBox .cx .co-tabs{display:flex;overflow-x:auto;padding-bottom:4px}#coBox .cx .co-tabs a{flex:none;width:86px}}
 @media (max-width:600px){#coBox .cx-top{grid-template-columns:minmax(0,1fr);padding:18px 16px}#coBox .cx-car{max-width:210px}#coBox .cx-side{grid-template-columns:minmax(0,1fr)}#coBox .cx-stages{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#coBox .cx-stages div::after{display:none}}
+/* ===== Council console (approved mockup, Nov 14): red notched frames, raised rows, checkered details ===== */
+.rk-page.co-page{position:relative;background:#05080d;background-image:radial-gradient(900px 500px at 24% 20%,#101827 0%,transparent 70%),radial-gradient(600px 400px at 6% 0%,rgba(255,59,59,.12),transparent 70%),linear-gradient(rgba(140,170,210,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(140,170,210,.05) 1px,transparent 1px);background-size:auto,auto,36px 36px,36px 36px}
+.rk-page.co-page::after{content:"";position:absolute;left:0;right:0;bottom:0;height:16px;background:repeating-conic-gradient(#f2f4f7 0 25%,#0a0e14 0 50%) 0 0/16px 16px;opacity:.55}
+#coBox .cx{--red:#ff3b3b;--dim:#8fa0b8;--pn:linear-gradient(160deg,#131a26 0%,#0b1019 55%,#080c13 100%);--row:linear-gradient(180deg,#141c29,#0d131d);--ck:repeating-conic-gradient(#f2f4f7 0 25%,#0a0e14 0 50%);
+  --n1:polygon(18px 0,calc(100% - 18px) 0,100% 18px,100% calc(100% - 18px),calc(100% - 18px) 100%,18px 100%,0 calc(100% - 18px),0 18px);
+  --n2:polygon(17px 0,calc(100% - 17px) 0,100% 17px,100% calc(100% - 17px),calc(100% - 17px) 100%,17px 100%,0 calc(100% - 17px),0 17px);
+  filter:drop-shadow(0 0 9px rgba(255,59,59,.3)) drop-shadow(0 22px 26px rgba(0,0,0,.55))}
+#coBox .cx .rk-card,#coBox .cx .co-card,#coBox .cx-top{position:relative;isolation:isolate;border:0;border-radius:0;box-shadow:none;background:var(--red);clip-path:var(--n1);overflow:visible}
+#coBox .cx .rk-card::before,#coBox .cx .co-card::before,#coBox .cx-top::before,#coBox .cx .co-phead::before{content:"";position:absolute;inset:2px;left:2px;right:2px;top:2px;height:auto;z-index:-2;clip-path:var(--n2);background:radial-gradient(600px 240px at 50% -10%,rgba(255,255,255,.07),transparent 70%),var(--pn)}
+#coBox .cx .rk-card::after,#coBox .cx .co-card::after{content:"";position:absolute;right:2px;top:2px;width:150px;height:70px;z-index:-1;background:var(--ck) 0 0/20px 20px;opacity:.12;-webkit-mask-image:linear-gradient(225deg,#000,transparent 75%);mask-image:linear-gradient(225deg,#000,transparent 75%);pointer-events:none}
+#coBox .cx .rk-card{padding:22px 24px}
+#coBox .cx .co-card{padding:18px 20px}
+#coBox .cx .co-card:hover{background:#ff6b6b;box-shadow:none}
+/* player strip */
+#coBox .cx-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 30px;align-items:center;padding:20px 30px;margin:4px 0 18px}
+#coBox .cx-top::after{content:"";position:absolute;inset:2px;z-index:-1;background:var(--ck) 0 0/32px 32px;opacity:.1;transform:skewX(-18deg);-webkit-mask-image:linear-gradient(90deg,transparent 22%,#000 60%,transparent 100%);mask-image:linear-gradient(90deg,transparent 22%,#000 60%,transparent 100%);pointer-events:none}
+#coBox .cx-id{display:grid;grid-template-columns:auto minmax(250px,330px);column-gap:30px;align-items:center;justify-content:start}
+#coBox .cx-k{grid-column:1;grid-row:1;margin:0;font:500 .78rem/1 var(--body)}
+#coBox .cx .co-track+.co-tasks{margin-top:14px}
+#coBox .cx-xp p{white-space:nowrap}
+#coBox .cx-k{margin-bottom:8px}
+@media (min-width:1100px){#coBox .cx-top h1{white-space:nowrap;font-size:clamp(1.8rem,3vw,2.6rem)}}
+#coBox .cx-top h1{grid-column:1;grid-row:2;font-size:clamp(2rem,3.6vw,3rem);text-shadow:0 0 26px rgba(255,255,255,.25)}
+#coBox .cx-seat{grid-column:2;grid-row:1;justify-self:start;align-self:end;margin:0 0 8px;padding:7px 12px;border:0;border-radius:99px;background:var(--red);box-shadow:0 0 14px rgba(255,59,59,.55);font:600 .78rem/1 var(--body)}
+#coBox .cx-xp{grid-column:2;grid-row:2;margin:0;max-width:none}
+#coBox .cx .cx-xp .co-track{background:var(--red)}
+#coBox .cx-side{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
+#coBox .cx-lights{border-radius:12px;background:#05080d;box-shadow:inset 0 2px 8px rgba(0,0,0,.8)}
+#coBox .cx-read{border:0;background:none;gap:10px;overflow:visible}
+#coBox .cx-read div,#coBox .cx-read div:first-child{border:1px solid rgba(255,255,255,.08);border-radius:12px;background:#080c13}
+#coBox .cx-acts{flex-basis:100%;justify-content:flex-end}
+/* section tiles */
+#coBox .cx .co-tabs a{height:86px;border-radius:12px;border-color:rgba(255,255,255,.09);background:linear-gradient(180deg,#1c2535,#111824);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 8px 14px rgba(0,0,0,.55);font-size:.82rem;align-content:center}
+#coBox .cx .co-tabs a:hover{background:linear-gradient(180deg,#222d40,#141c2a)}
+#coBox .cx .co-tabs a[aria-current="page"]{border-color:var(--red);background:linear-gradient(180deg,rgba(255,59,59,.22),rgba(255,59,59,.08));box-shadow:0 0 22px rgba(255,59,59,.45),inset 0 0 16px rgba(255,59,59,.2),0 8px 14px rgba(0,0,0,.55)}
+#coBox .cx .co-tabs a[aria-current="page"] svg{stroke:#fff}
+/* headings: glowing node + racing type */
+#coBox .cx .rk-card h3,#coBox .cx .co-sec{display:flex;align-items:center;gap:12px;font:italic 800 1.5rem/1 var(--display);text-transform:uppercase;color:#fff;margin-bottom:14px}
+#coBox .cx .rk-card h3::before,#coBox .cx .co-sec::before{content:"";flex:none;width:14px;height:14px;border-radius:50%;border:2px solid var(--red);background:#0a0f17;box-shadow:0 0 12px rgba(255,59,59,.8),inset 0 0 5px rgba(255,59,59,.6)}
+#coBox .cx .rk-card h3::after{content:"";flex:1;height:1px;min-width:10px;background:linear-gradient(90deg,var(--red),transparent)}
+#coBox .cx .rk-ordhead h3{flex:1;margin-bottom:0}#coBox .cx .rk-ordhead{margin-bottom:14px;flex-wrap:nowrap}
+#coBox .cx .co-weekbar h3{justify-content:center}#coBox .cx .co-weekbar h3::after{display:none}
+#coBox .cx .co-sec{color:#fff;margin:22px 0 12px}
+#coBox .cx .rk-card h2{text-shadow:0 0 22px rgba(255,255,255,.2)}
+/* raised rows */
+#coBox .cx .co-tasks,#coBox .cx .rk-list{display:grid;gap:9px}
+#coBox .cx .co-tasks li,#coBox .cx .rk-list li,#coBox .cx .co-pmini,#coBox .cx .co-postc,#coBox .cx .co-reply{padding:11px 12px;border:1px solid rgba(255,255,255,.07);border-radius:10px;background:var(--row);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 6px 10px rgba(0,0,0,.45)}
+#coBox .cx .co-pmini{margin-bottom:10px;padding:14px}#coBox .cx .co-postc{margin:0 0 10px}#coBox .cx .co-postc.pin{margin:0 0 10px;border-color:rgba(255,197,49,.5)}
+#coBox .cx .co-pmini b{font:italic 800 1.35rem/1 var(--display);text-transform:uppercase;color:#fff}
+#coBox .cx .co-tasks input[type=checkbox]:checked{box-shadow:0 0 12px rgba(47,211,107,.6)}
+#coBox .cx .co-tasks input[type=checkbox]{background:#080c13}
+/* meters: smooth, recessed, checkered finish line */
+#coBox .cx .co-track{border-radius:99px;box-shadow:inset 0 2px 4px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.06)}
+#coBox .cx .co-track i,#coBox .cx .co-track i.lo,#coBox .cx .co-track i.mid,#coBox .cx .co-track i.hi,#coBox .cx .co-track i.done{box-shadow:4000px 0 0 4000px #05080d}
+#coBox .cx .co-track::after{left:auto;right:0;width:20px;inset:0 0 0 auto;background:var(--ck) 0 0/10px 10px;opacity:.8}
+#coBox .cx .co-meter.big .co-track::after{width:32px;background-size:16px 16px}
+#coBox .cx .co-mt b{text-shadow:0 0 16px rgba(255,197,49,.45)}
+/* controls */
+#coBox .cx .mini{border-radius:99px;padding:9px 13px;border-color:rgba(255,255,255,.18)}
+#coBox .cx .mini.solid{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 0 14px rgba(255,59,59,.45)}
+#coBox .cx .rk-go{background:var(--red);color:#fff;box-shadow:0 0 18px rgba(255,59,59,.45)}#coBox .cx .rk-go:hover{background:#ff5a5a}
+#coBox .cx input:not([type=checkbox]):not([type=radio]),#coBox .cx select,#coBox .cx textarea{background:#080c13;border-radius:10px;box-shadow:inset 0 2px 6px rgba(0,0,0,.6)}
+#coBox .cx input:focus,#coBox .cx select:focus,#coBox .cx textarea:focus{box-shadow:0 0 0 3px rgba(255,59,59,.45)}
+#coBox .cx .co-sub button[aria-selected="true"]{border-bottom-color:var(--red)}
+#coBox .cx .co-av{background:#0a0f17;border:1.5px solid var(--red);box-shadow:0 0 10px rgba(255,59,59,.5)}
+#coBox .cx .co-o::before{background:var(--red)}
+#coBox .cx .co-money div,#coBox .cx .co-o,#coBox .cx-stages div{background:var(--row);border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 6px 10px rgba(0,0,0,.45)}
+#coBox .cx .co-money div:last-child{background:var(--red);border-color:var(--red)}#coBox .cx .co-money div:last-child b,#coBox .cx .co-money div:last-child span{color:#fff}
+#coBox .cx-stages div.was{border-color:rgba(47,211,107,.45)}#coBox .cx-stages div.now{border-color:var(--slow)}#coBox .cx-stages div.now.fin{border-color:var(--go)}
+#coBox .cx .co-tasks li:nth-child(n) .cx-pos{color:var(--dim)}#coBox .cx .co-tasks li:nth-child(1) .cx-pos{color:#fff;text-shadow:0 0 12px rgba(255,59,59,.9)}
+@media (max-width:980px){#coBox .cx-top{grid-template-columns:minmax(0,1fr)}#coBox .cx-side{justify-content:flex-start;display:flex}#coBox .cx-acts{justify-content:flex-start}}
+@media (max-width:700px){#coBox .cx-id{grid-template-columns:minmax(0,1fr)}#coBox .cx-top h1,#coBox .cx-k,#coBox .cx-seat,#coBox .cx-xp{grid-column:1;grid-row:auto}#coBox .cx-seat{margin:10px 0}#coBox .cx-top{padding:18px 16px}#coBox .cx .rk-card{padding:18px 16px}#coBox .cx .rk-ordhead{flex-wrap:wrap}#coBox .cx .rk-card h3{font-size:1.3rem}}
 </style>
 
 <header class="site-nav">
@@ -8452,7 +8524,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var wk0=coMonday(),wkT=D.tasks.filter(function(t){return !t.project_id&&t.week_of===wk0}),tdy=todayISO(),
       race=((window.FR&&FR.EVENTS)||[]).filter(function(e){return e.k==="racing"&&e.d>=tdy})[0],days=race?Math.round((new Date(race.d+"T00:00:00")-new Date(tdy+"T00:00:00"))/864e5):null,here=location.hash.split("/")[0];
     var nm=crewName(),xp=D.me?coXP(D.me,nm):0,lv=coLevel(xp),wd=wkT.filter(function(t){return t.done}).length,lit=wkT.length?Math.round(wd/wkT.length*5):0,allGo=wkT.length&&wd===wkT.length;
-    var html='<div class="cx"><header class="cx-top"><div class="cx-car">'+coCar(D.me||nm)+'</div><div class="cx-id"><p class="cx-k">Student Leadership Council</p><h1>'+esc(nm)+'</h1><p class="cx-seat">'+esc(IS_ADMIN?"Race director · Admin tools":(who||"Council member"))+'</p>'+
+    var html='<div class="cx"><header class="cx-top"><div class="cx-id"><p class="cx-k">Student Leadership Council</p><h1>'+esc(nm)+'</h1><p class="cx-seat">'+esc(IS_ADMIN?"Race director · Admin tools":(who||"Council member"))+'</p>'+
         (D.me?'<div class="cx-xp"><p><b>Level '+lv.n+' · '+esc(lv.rank)+'</b><span>'+xp+' XP · '+(100-lv.into)+' to level '+(lv.n+1)+'</span></p><div class="co-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+lv.into+'" aria-label="Progress to next level"><i style="width:'+lv.into+'%"></i></div></div>':'')+'</div>'+
       '<div class="cx-side"><div class="cx-lights" role="img" aria-label="This week: '+wd+' of '+wkT.length+' tasks done"><div>'+[0,1,2,3,4].map(function(i){return '<i class="'+(allGo?"g":i<lit?"r":"")+'"></i>'}).join("")+'</div><span>'+(allGo?"Green light! Week complete":"This week: "+wd+" of "+wkT.length+" done")+'</span></div>'+
         '<div class="cx-read" aria-label="At a glance"><div><b>'+D.projects.filter(function(p){return p.status!=="done"}).length+'</b><span>Projects in motion</span></div>'+(days!=null?'<div><b>'+days+'</b><span>Days to race day</span></div>':'')+'</div>'+

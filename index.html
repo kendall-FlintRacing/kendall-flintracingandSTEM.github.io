@@ -2772,6 +2772,253 @@ body.rw-tv .rw-fol{display:none}
 .rk-tabs{overflow-x:auto;scrollbar-width:none}.rk-tabs button{flex:none}
 .pd-main{grid-template-columns:minmax(0,1fr)}@media (max-width:400px){.pd-short{grid-template-columns:repeat(2,minmax(0,1fr))!important}}.pd-tabs button{line-height:1.2;min-width:0}
 @media (max-width:600px){.rg-top{grid-template-columns:auto minmax(0,1fr)}.rg-top .rg-car{grid-column:1/-1;justify-self:start}}
+/* ===== Leadership Council skin: carbon + Flint red + burnt-titanium heat tint ===== */
+.rk-page.co-page{background:#07080b;background-image:radial-gradient(900px 420px at 12% -8%,rgba(210,20,28,.20),transparent 62%),repeating-linear-gradient(45deg,rgba(255,255,255,.018) 0 2px,transparent 2px 6px);color:#eceef2}
+.co-page>.crumbs{background:transparent;border-bottom:1px solid rgba(255,255,255,.08);color:#9aa0ab}
+.co-page>.crumbs a{color:#eceef2}.co-page>.crumbs span{color:#9aa0ab}
+#coBox .cx{--c1:#0f1116;--c2:#171a21;--ln:rgba(255,255,255,.09);--tx:#eceef2;--dim:#9aa0ab;--hot:#ff4d55;
+  --ti:linear-gradient(90deg,#f5b82e 0%,#ff6a3c 24%,#d2141c 46%,#b0339a 70%,#4b6bff 100%);color:var(--tx);color-scheme:dark}
+#coBox .cx a{color:var(--tx);text-decoration-color:var(--hot);text-underline-offset:3px}
+#coBox .cx :focus-visible{outline:2px solid #fff;outline-offset:2px}
+/* top: who you are + pit-wall readouts */
+#coBox .cx-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 28px;align-items:end;padding:8px 0 22px}
+#coBox .cx-k{margin:0 0 6px;font:600 .9rem/1.2 var(--body);color:var(--dim)}
+#coBox .cx-top h1{margin:0;font:italic 800 clamp(2.8rem,8vw,5.2rem)/.86 var(--display);letter-spacing:-.01em;text-transform:uppercase;color:#fff}
+#coBox .cx-seat{display:inline-block;margin:14px 0 0;padding:6px 12px 6px 14px;font:700 .86rem/1 var(--body);color:#fff;border-left:3px solid transparent;border-image:var(--ti) 1;background:rgba(255,255,255,.06)}
+#coBox .cx-acts{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:flex-end;margin-top:-6px}
+#coBox .cx-read{display:flex;gap:0;border:1px solid var(--ln);border-radius:12px;background:rgba(15,17,22,.8);overflow:hidden}
+#coBox .cx-read div{padding:12px 18px;display:grid;gap:4px;border-left:1px solid var(--ln);min-width:104px}
+#coBox .cx-read div:first-child{border-left:0}
+#coBox .cx-read b{font:italic 800 1.9rem/1 var(--display);color:#fff;font-variant-numeric:tabular-nums}
+#coBox .cx-read span{font:500 .76rem/1.2 var(--body);color:var(--dim)}
+/* section nav */
+#coBox .cx .co-tabs{background:none;padding:0;border-radius:0;border-bottom:1px solid var(--ln);gap:2px;margin-bottom:20px;scrollbar-width:none}
+#coBox .cx .co-tabs a{color:var(--dim);font:600 .95rem/1 var(--body);padding:14px 14px 13px;border-radius:0;text-decoration:none;position:relative}
+#coBox .cx .co-tabs a:hover{background:none;color:#fff}
+#coBox .cx .co-tabs a[aria-current="page"]{background:none;box-shadow:none;color:#fff}
+#coBox .cx .co-tabs a[aria-current="page"]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:3px;background:var(--ti);border-radius:3px 3px 0 0}
+#coBox .cx .co-tabs i,#coBox .cx .co-sub i{background:var(--red);color:#fff}
+/* panels */
+#coBox .cx .rk-card{background:var(--c1);color:var(--tx);border:1px solid var(--ln);border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,.04) inset}
+#coBox .cx .rk-card h2{color:#fff;font:italic 800 clamp(2rem,4.6vw,3rem)/.95 var(--display);text-transform:uppercase}
+#coBox .cx .rk-card h3,#coBox .cx .co-sec{font:700 .98rem/1.2 var(--body);letter-spacing:0;text-transform:none;color:#fff}
+#coBox .cx .co-sec{color:var(--dim);margin:22px 0 10px}
+#coBox .cx .co-h{color:#fff}#coBox .cx .co-body{color:#cfd3da}#coBox .cx .co-body a{color:#fff}
+#coBox .cx .rk-fine,#coBox .cx .co-meta,#coBox .cx .co-date,#coBox .cx .co-by,#coBox .cx .co-wk,#coBox .cx small{color:var(--dim)}
+#coBox .cx .co-date{font:600 .8rem/1.2 var(--body);letter-spacing:0;text-transform:none}
+#coBox .cx .co-wk b,#coBox .cx .co-by b,#coBox .cx .co-meta b{color:#fff}
+#coBox .cx .rk-list li,#coBox .cx .co-tasks li,#coBox .cx .co-pmini,#coBox .cx .co-postc{border-bottom-color:var(--ln)}
+#coBox .cx .rk-list small{color:var(--dim)}
+#coBox .cx .co-phead{border-top:1px solid var(--ln);position:relative;overflow:hidden}
+#coBox .cx .co-phead::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--ti)}
+#coBox .cx .co-phead .co-body{border-top-color:var(--ln)}
+/* the meter: the one loud thing */
+#coBox .cx .co-mt b{font:italic 800 1.5rem/1 var(--display);color:#fff}
+#coBox .cx .co-meter.big .co-mt b{font-size:clamp(3.6rem,10vw,5.4rem);line-height:.8}
+#coBox .cx .co-mt span,#coBox .cx .co-meter.big .co-mt span{color:#cfd3da}
+#coBox .cx .co-parts{color:var(--dim)}#coBox .cx .co-parts b{color:#fff}
+#coBox .cx .co-track{position:relative;height:10px;border-radius:3px;background:var(--ti);overflow:hidden}
+#coBox .cx .co-meter.big .co-track{height:16px}
+#coBox .cx .co-track i,#coBox .cx .co-track i.lo,#coBox .cx .co-track i.mid,#coBox .cx .co-track i.hi,#coBox .cx .co-track i.done{background:transparent;border-radius:0;box-shadow:4000px 0 0 4000px #1b1e26}
+#coBox .cx .co-track::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(5% - 2px),#07080b calc(5% - 2px) 5%);pointer-events:none}
+#coBox .cx .co-track:has(i.done){box-shadow:0 0 18px rgba(255,90,60,.45)}
+#coBox .cx .co-track:has(i.done)::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.75) 50%,transparent 60%);transform:translateX(-100%);animation:cxsweep 1.1s ease-out .2s 1}
+@keyframes cxsweep{to{transform:translateX(100%)}}
+@media (prefers-reduced-motion:reduce){#coBox .cx .co-track:has(i.done)::before{animation:none;display:none}}
+/* project cards */
+#coBox .cx .co-card{background:var(--c1);border:1px solid var(--ln);border-radius:14px;color:var(--tx);text-decoration:none}
+#coBox .cx .co-card:hover{border-color:rgba(255,255,255,.28);box-shadow:none;transform:none;background:#13161c}
+#coBox .cx .co-card h4{color:#fff;font:italic 800 1.7rem/1 var(--display);text-transform:uppercase;margin:12px 0 4px}
+#coBox .cx .co-pmini{text-decoration:none}#coBox .cx .co-pmini:hover b{color:var(--hot)}
+/* tags and states */
+#coBox .cx .co-tag,#coBox .cx .co-st,#coBox .cx .co-lock,#coBox .cx .co-ss,#coBox .cx .co-ms{font:600 .74rem/1 var(--body);letter-spacing:0;text-transform:none;border-radius:99px;padding:5px 9px;background:rgba(255,255,255,.07);color:#d6d9df;border:0}
+#coBox .cx .co-tag.k-event{background:#fff;color:#07080b}
+#coBox .cx .co-tag.k-video{background:rgba(75,107,255,.2);color:#b7c4ff}#coBox .cx .co-tag.k-instructional{background:rgba(47,194,107,.16);color:#8fe3b3}
+#coBox .cx .co-tag.k-fundraiser{background:rgba(245,184,46,.16);color:#f7cf6f}#coBox .cx .co-tag.k-outreach{background:rgba(210,20,28,.22);color:#ff9aa0}
+#coBox .cx .co-st.s-done,#coBox .cx .co-ss.x-approved,#coBox .cx .co-ms.m-have{background:rgba(47,194,107,.16);color:#8fe3b3}
+#coBox .cx .co-st.s-active{background:rgba(75,107,255,.2);color:#b7c4ff}
+#coBox .cx .co-ss.x-ready,#coBox .cx .co-ms.m-requested{background:rgba(245,184,46,.16);color:#f7cf6f}
+#coBox .cx .co-ss.x-returned{background:rgba(210,20,28,.22);color:#ff9aa0}#coBox .cx .co-ss.x-posted{background:#fff;color:#07080b}
+#coBox .cx .co-late{color:var(--hot)}#coBox .cx .co-pin{color:#f7cf6f}
+#coBox .cx .co-now{background:#fff;color:#07080b;text-transform:none;letter-spacing:0;border-radius:99px;padding:4px 8px}
+#coBox .cx .auth-note{background:rgba(245,184,46,.1);color:#f7dc9a;border-left-color:#f5b82e}
+/* controls */
+#coBox .cx .mini{background:transparent;border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:8px;text-decoration:none;padding:9px 12px}
+#coBox .cx .mini:hover{border-color:#fff}
+#coBox .cx .mini.solid{background:#fff;border-color:#fff;color:#07080b}
+#coBox .cx .mini.red{border-color:rgba(255,77,85,.5);color:#ff8a90}
+#coBox .cx .rk-go{min-height:54px;border-radius:10px;background:var(--red);font:700 1.05rem/1.2 var(--body)}
+#coBox .cx .rk-go:hover{background:#e8262e}
+#coBox .cx input:not([type=checkbox]):not([type=radio]),#coBox .cx select,#coBox .cx textarea{background:var(--c2);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:8px}
+#coBox .cx input::placeholder,#coBox .cx textarea::placeholder{color:#737986}
+#coBox .cx input:focus,#coBox .cx select:focus,#coBox .cx textarea:focus{outline:0;border-color:#fff;box-shadow:0 0 0 3px rgba(210,20,28,.45)}
+#coBox .cx .f,#coBox .cx .co-inl,#coBox .cx legend{color:#d6d9df}
+#coBox .cx .rk-radio{border-color:rgba(255,255,255,.14);color:#d6d9df;border-radius:8px}
+#coBox .cx input[type=checkbox]{accent-color:#d2141c}
+#coBox .cx .co-tasks input[type=checkbox]{appearance:none;-webkit-appearance:none;width:24px;height:24px;border:2px solid rgba(255,255,255,.35);border-radius:7px;background:transparent;display:grid;place-items:center;cursor:pointer}
+#coBox .cx .co-tasks input[type=checkbox]:checked{border-color:transparent;background:var(--ti)}
+#coBox .cx .co-tasks input[type=checkbox]:checked::after{content:"";width:11px;height:6px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:translateY(-1px) rotate(-45deg)}
+#coBox .cx .co-tasks input[type=checkbox]:disabled{opacity:.35;cursor:not-allowed}
+#coBox .cx .co-tasks b{color:#fff}#coBox .cx .co-tasks li.done b{color:#737986}
+#coBox .cx .co-x{background:rgba(255,255,255,.07);color:#cfd3da}#coBox .cx .co-x:hover{background:rgba(210,20,28,.3);color:#fff}
+#coBox .cx .co-new summary{color:#fff}
+.rk-page.co-page{padding-bottom:7rem}
+#coBox .cx .co-sub{border-bottom-color:var(--ln)}
+#coBox .cx .co-sub button{color:var(--dim);font-weight:600}#coBox .cx .co-sub button[aria-selected="true"]{color:#fff;border-bottom-color:var(--red)}
+#coBox .cx .co-donebox summary{color:var(--dim)}
+#coBox .cx .co-tbl th{color:var(--dim);border-bottom-color:var(--ln);text-transform:none;letter-spacing:0;font:600 .8rem/1.2 var(--body)}
+#coBox .cx .co-tbl td{border-bottom-color:var(--ln)}
+#coBox .cx .co-money div{background:var(--c2);border-radius:10px}#coBox .cx .co-money b{font:italic 800 1.7rem/1 var(--display);color:#fff}
+#coBox .cx .co-money span{color:var(--dim);text-transform:none;letter-spacing:0;font:500 .76rem/1 var(--body)}
+#coBox .cx .co-money div:last-child{background:#fff}#coBox .cx .co-money div:last-child b{color:#07080b}#coBox .cx .co-money div:last-child span{color:#4a4d55}
+#coBox .cx .co-media figure{background:var(--c2);border-radius:10px}#coBox .cx .co-media img,#coBox .cx .co-media video,#coBox .cx .co-smedia img,#coBox .cx .co-smedia video{background:#1b1e26}
+#coBox .cx .co-postc.pin{background:rgba(245,184,46,.07)}
+#coBox .cx .co-av{background:#07080b;color:#fff;border:2px solid transparent;background:linear-gradient(#12141a,#12141a) padding-box,var(--ti) border-box;font:italic 800 1.15rem/1 var(--display)}
+#coBox .cx .co-av.sm{background:var(--c2);border:1px solid var(--ln);font-size:.95rem}
+#coBox .cx .co-lnk{color:#ff8a90}
+#coBox .cx .co-o{background:var(--c2);border-radius:12px;border-top:0;position:relative;overflow:hidden;padding-top:16px}
+#coBox .cx .co-o::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--ti)}
+#coBox .cx .co-ot{color:var(--dim);font:600 .8rem/1 var(--body);letter-spacing:0;text-transform:none}
+#coBox .cx .co-o b{font:italic 800 1.5rem/1 var(--display);text-transform:uppercase;color:#fff}#coBox .cx .co-o b i{color:#737986}
+#coBox .cx .co-chip{background:transparent;border-color:rgba(255,255,255,.22);color:#fff}
+#coBox .cx .adm-jump select{border-color:rgba(255,255,255,.22);padding:8px}
+@media (max-width:820px){#coBox .cx-top{grid-template-columns:minmax(0,1fr)}#coBox .cx-acts{justify-content:flex-start;margin-top:0}#coBox .cx-read{width:100%}#coBox .cx-read div{flex:1;min-width:0;padding:12px}}
+@media (max-width:420px){#coBox .cx-read b{font-size:1.5rem}#coBox .cx-read div{padding:10px 8px}}
+/* ===== Council game layer: HUD panels, icon tiles, player card, traffic-light colors ===== */
+.rk-page.co-page{background-image:radial-gradient(800px 380px at 8% -6%,rgba(255,59,59,.16),transparent 62%),radial-gradient(700px 360px at 96% 4%,rgba(47,211,107,.12),transparent 60%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:auto,auto,32px 32px,32px 32px}
+#coBox .cx{--go:#2fd36b;--slow:#ffc531;--stop:#ff3b3b;--hot:#ff6b6b;--ti:linear-gradient(90deg,#ff3b3b 0%,#ff8a2b 30%,#ffc531 55%,#b6dc45 78%,#2fd36b 100%)}
+#coBox .cx .rk-card,#coBox .cx .co-card{border-radius:4px;background:
+  linear-gradient(var(--go),var(--go)) left top/18px 2px no-repeat,linear-gradient(var(--go),var(--go)) left top/2px 18px no-repeat,
+  linear-gradient(var(--slow),var(--slow)) right bottom/18px 2px no-repeat,linear-gradient(var(--slow),var(--slow)) right bottom/2px 18px no-repeat,var(--c1)}
+#coBox .cx .co-card:hover{border-color:var(--go);box-shadow:0 0 22px rgba(47,211,107,.22);background-color:#13161c}
+/* player card */
+#coBox .cx-top{position:relative;display:grid;grid-template-columns:230px minmax(0,1fr) auto;gap:16px 26px;align-items:center;padding:22px 26px 20px;margin:4px 0 18px;background:linear-gradient(120deg,#12151b,#0b0d11);border:1px solid var(--ln);
+  clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,26px 100%,0 calc(100% - 26px))}
+#coBox .cx-top::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--ti)}
+#coBox .cx-car{position:relative;display:grid;place-items:center;aspect-ratio:23/15}
+#coBox .cx-car svg{width:100%;height:auto;position:relative;z-index:1;filter:drop-shadow(0 10px 10px rgba(0,0,0,.6))}
+#coBox .cx-car::after{content:"";position:absolute;left:6%;right:6%;bottom:6%;height:34%;border-radius:50%;border:2px solid var(--go);box-shadow:0 0 22px rgba(47,211,107,.55),inset 0 0 22px rgba(47,211,107,.3);background:radial-gradient(closest-side,rgba(47,211,107,.16),transparent)}
+#coBox .cx-top h1{font-size:clamp(2.4rem,6vw,4.2rem)}
+#coBox .cx-seat{margin-top:10px}
+#coBox .cx-xp{margin-top:14px;max-width:420px;display:grid;gap:6px}
+#coBox .cx-xp p{margin:0;display:flex;justify-content:space-between;gap:10px;font:600 .86rem/1.2 var(--body);color:var(--dim)}
+#coBox .cx-xp p b{color:#fff}
+#coBox .cx-side{display:grid;gap:12px;justify-items:end}
+#coBox .cx-lights{display:grid;gap:8px;justify-items:center;padding:12px 14px;background:#07080b;border:1px solid var(--ln);border-radius:6px}
+#coBox .cx-lights div{display:flex;gap:8px}
+#coBox .cx-lights i{width:22px;height:22px;border-radius:50%;background:#20232b;box-shadow:inset 0 2px 4px rgba(0,0,0,.7)}
+#coBox .cx-lights i.r{background:var(--stop);box-shadow:0 0 14px rgba(255,59,59,.8)}
+#coBox .cx-lights i.g{background:var(--go);box-shadow:0 0 14px rgba(47,211,107,.85)}
+#coBox .cx-lights span{font:600 .78rem/1 var(--body);color:var(--dim)}
+#coBox .cx-read{border-radius:6px}
+#coBox .cx-acts{margin-top:0}
+/* icon tile menu */
+#coBox .cx .co-tabs{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;border:0;margin-bottom:18px;overflow:visible}
+#coBox .cx .co-tabs a{display:grid;justify-items:center;gap:8px;padding:14px 4px 12px;background:var(--c2);border:1px solid var(--ln);border-radius:6px;font:600 .8rem/1.1 var(--body);white-space:normal;text-align:center;color:var(--dim)}
+#coBox .cx .co-tabs a svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#coBox .cx .co-tabs a:hover{border-color:rgba(255,255,255,.35);background:var(--c2)}
+#coBox .cx .co-tabs a[aria-current="page"]{background:rgba(47,211,107,.1);border-color:var(--go);color:#fff;box-shadow:0 0 18px rgba(47,211,107,.3),inset 0 0 14px rgba(47,211,107,.12)}
+#coBox .cx .co-tabs a[aria-current="page"] svg{stroke:var(--go)}
+#coBox .cx .co-tabs a[aria-current="page"]::after{display:none}
+#coBox .cx .co-tabs i{position:absolute;top:6px;right:6px;background:var(--stop)}
+/* traffic states */
+#coBox .cx .co-track:has(i.done){box-shadow:0 0 18px rgba(47,211,107,.55)}
+#coBox .cx .co-tasks input[type=checkbox]:checked{background:var(--go)}
+#coBox .cx .co-tasks input[type=checkbox]:checked::after{border-color:#07080b}
+#coBox .cx .co-sub button[aria-selected="true"]{border-bottom-color:var(--go)}
+#coBox .cx .rk-go{background:var(--go);color:#07080b}#coBox .cx .rk-go:hover{background:#4fe488}
+#coBox .cx input:focus,#coBox .cx select:focus,#coBox .cx textarea:focus{box-shadow:0 0 0 3px rgba(47,211,107,.4)}
+#coBox .cx .co-st.s-planning{background:rgba(255,59,59,.2);color:#ff9d9d}
+#coBox .cx .co-st.s-active{background:rgba(255,197,49,.18);color:#ffd970}
+#coBox .cx .co-st.s-done{background:rgba(47,211,107,.18);color:#8ff0b6}
+/* race stages */
+#coBox .cx-stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:16px}
+#coBox .cx-stages div{position:relative;padding:12px;background:var(--c2);border:1px solid var(--ln);border-radius:6px;display:grid;gap:4px;opacity:.55}
+#coBox .cx-stages div:not(:last-child)::after{content:"";position:absolute;right:-17px;top:50%;width:0;height:0;border:6px solid transparent;border-left:9px solid rgba(255,255,255,.3);transform:translateY(-50%)}
+#coBox .cx-stages b{font:italic 800 1.25rem/1 var(--display);text-transform:uppercase;color:#fff}
+#coBox .cx-stages span{font:500 .76rem/1.2 var(--body);color:var(--dim)}
+#coBox .cx-stages div.was{opacity:1;border-color:rgba(47,211,107,.45)}#coBox .cx-stages div.was b{color:var(--go)}
+#coBox .cx-stages div.now{opacity:1;border-color:var(--slow);box-shadow:0 0 18px rgba(255,197,49,.3)}#coBox .cx-stages div.now b{color:var(--slow)}
+#coBox .cx-stages div.now.fin{border-color:var(--go);box-shadow:0 0 22px rgba(47,211,107,.4);background:repeating-conic-gradient(rgba(255,255,255,.07) 0 25%,transparent 0 50%) 0 0/16px 16px,var(--c2)}#coBox .cx-stages div.now.fin b{color:var(--go)}
+/* starting grid */
+#coBox .cx-pos{flex:none;width:44px;font:italic 800 1.5rem/1 var(--display);color:var(--dim);font-style:italic}
+#coBox .cx .co-tasks li:nth-child(1) .cx-pos{color:var(--go)}#coBox .cx .co-tasks li:nth-child(2) .cx-pos{color:var(--slow)}#coBox .cx .co-tasks li:nth-child(3) .cx-pos{color:var(--hot)}
+#coBox .cx-pos+span{flex:1}
+@media (max-width:980px){#coBox .cx-top{grid-template-columns:170px minmax(0,1fr)}#coBox .cx-side{grid-column:1/-1;justify-items:stretch;grid-template-columns:auto minmax(0,1fr);align-items:stretch}}
+@media (max-width:820px){#coBox .cx .co-tabs{display:flex;overflow-x:auto;padding-bottom:4px}#coBox .cx .co-tabs a{flex:none;width:86px}}
+@media (max-width:600px){#coBox .cx-top{grid-template-columns:minmax(0,1fr);padding:18px 16px}#coBox .cx-car{max-width:210px}#coBox .cx-side{grid-template-columns:minmax(0,1fr)}#coBox .cx-stages{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#coBox .cx-stages div::after{display:none}}
+/* ===== Council console (approved mockup, Nov 14): red notched frames, raised rows, checkered details ===== */
+.rk-page.co-page{position:relative;background:#05080d;background-image:radial-gradient(900px 500px at 24% 20%,#101827 0%,transparent 70%),radial-gradient(600px 400px at 6% 0%,rgba(255,59,59,.12),transparent 70%),linear-gradient(rgba(140,170,210,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(140,170,210,.05) 1px,transparent 1px);background-size:auto,auto,36px 36px,36px 36px}
+.rk-page.co-page::after{content:"";position:absolute;left:0;right:0;bottom:0;height:16px;background:repeating-conic-gradient(#f2f4f7 0 25%,#0a0e14 0 50%) 0 0/16px 16px;opacity:.55}
+#coBox .cx{--red:#ff3b3b;--dim:#8fa0b8;--pn:linear-gradient(160deg,#131a26 0%,#0b1019 55%,#080c13 100%);--row:linear-gradient(180deg,#141c29,#0d131d);--ck:repeating-conic-gradient(#f2f4f7 0 25%,#0a0e14 0 50%);
+  --n1:polygon(18px 0,calc(100% - 18px) 0,100% 18px,100% calc(100% - 18px),calc(100% - 18px) 100%,18px 100%,0 calc(100% - 18px),0 18px);
+  --n2:polygon(17px 0,calc(100% - 17px) 0,100% 17px,100% calc(100% - 17px),calc(100% - 17px) 100%,17px 100%,0 calc(100% - 17px),0 17px);
+  filter:drop-shadow(0 0 9px rgba(255,59,59,.3)) drop-shadow(0 22px 26px rgba(0,0,0,.55))}
+#coBox .cx .rk-card,#coBox .cx .co-card,#coBox .cx-top{position:relative;isolation:isolate;border:0;border-radius:0;box-shadow:none;background:var(--red);clip-path:var(--n1);overflow:visible}
+#coBox .cx .rk-card::before,#coBox .cx .co-card::before,#coBox .cx-top::before,#coBox .cx .co-phead::before{content:"";position:absolute;inset:2px;left:2px;right:2px;top:2px;height:auto;z-index:-2;clip-path:var(--n2);background:radial-gradient(600px 240px at 50% -10%,rgba(255,255,255,.07),transparent 70%),var(--pn)}
+#coBox .cx .rk-card::after,#coBox .cx .co-card::after{content:"";position:absolute;right:2px;top:2px;width:150px;height:70px;z-index:-1;background:var(--ck) 0 0/20px 20px;opacity:.12;-webkit-mask-image:linear-gradient(225deg,#000,transparent 75%);mask-image:linear-gradient(225deg,#000,transparent 75%);pointer-events:none}
+#coBox .cx .rk-card{padding:22px 24px}
+#coBox .cx .co-card{padding:18px 20px}
+#coBox .cx .co-card:hover{background:#ff6b6b;box-shadow:none}
+/* player strip */
+#coBox .cx-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 30px;align-items:center;padding:20px 30px;margin:4px 0 18px}
+#coBox .cx-top::after{content:"";position:absolute;inset:2px;z-index:-1;background:var(--ck) 0 0/32px 32px;opacity:.1;transform:skewX(-18deg);-webkit-mask-image:linear-gradient(90deg,transparent 22%,#000 60%,transparent 100%);mask-image:linear-gradient(90deg,transparent 22%,#000 60%,transparent 100%);pointer-events:none}
+#coBox .cx-id{display:grid;grid-template-columns:auto minmax(250px,330px);column-gap:30px;align-items:center;justify-content:start}
+#coBox .cx-k{grid-column:1;grid-row:1;margin:0;font:500 .78rem/1 var(--body)}
+#coBox .cx .co-track+.co-tasks{margin-top:14px}
+#coBox .cx-xp p{white-space:nowrap}
+#coBox .cx-k{margin-bottom:8px}
+@media (min-width:1100px){#coBox .cx-top h1{white-space:nowrap;font-size:clamp(1.8rem,3vw,2.6rem)}}
+#coBox .cx-top h1{grid-column:1;grid-row:2;font-size:clamp(2rem,3.6vw,3rem);text-shadow:0 0 26px rgba(255,255,255,.25)}
+#coBox .cx-seat{grid-column:2;grid-row:1;justify-self:start;align-self:end;margin:0 0 8px;padding:7px 12px;border:0;border-radius:99px;background:var(--red);box-shadow:0 0 14px rgba(255,59,59,.55);font:600 .78rem/1 var(--body)}
+#coBox .cx-xp{grid-column:2;grid-row:2;margin:0;max-width:none}
+#coBox .cx .cx-xp .co-track{background:var(--red)}
+#coBox .cx-side{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
+#coBox .cx-lights{border-radius:12px;background:#05080d;box-shadow:inset 0 2px 8px rgba(0,0,0,.8)}
+#coBox .cx-read{border:0;background:none;gap:10px;overflow:visible}
+#coBox .cx-read div,#coBox .cx-read div:first-child{border:1px solid rgba(255,255,255,.08);border-radius:12px;background:#080c13}
+#coBox .cx-acts{flex-basis:100%;justify-content:flex-end}
+/* section tiles */
+#coBox .cx .co-tabs a{height:86px;border-radius:12px;border-color:rgba(255,255,255,.09);background:linear-gradient(180deg,#1c2535,#111824);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 8px 14px rgba(0,0,0,.55);font-size:.82rem;align-content:center}
+#coBox .cx .co-tabs a:hover{background:linear-gradient(180deg,#222d40,#141c2a)}
+#coBox .cx .co-tabs a[aria-current="page"]{border-color:var(--red);background:linear-gradient(180deg,rgba(255,59,59,.22),rgba(255,59,59,.08));box-shadow:0 0 22px rgba(255,59,59,.45),inset 0 0 16px rgba(255,59,59,.2),0 8px 14px rgba(0,0,0,.55)}
+#coBox .cx .co-tabs a[aria-current="page"] svg{stroke:#fff}
+/* headings: glowing node + racing type */
+#coBox .cx .rk-card h3,#coBox .cx .co-sec{display:flex;align-items:center;gap:12px;font:italic 800 1.5rem/1 var(--display);text-transform:uppercase;color:#fff;margin-bottom:14px}
+#coBox .cx .rk-card h3::before,#coBox .cx .co-sec::before{content:"";flex:none;width:14px;height:14px;border-radius:50%;border:2px solid var(--red);background:#0a0f17;box-shadow:0 0 12px rgba(255,59,59,.8),inset 0 0 5px rgba(255,59,59,.6)}
+#coBox .cx .rk-card h3::after{content:"";flex:1;height:1px;min-width:10px;background:linear-gradient(90deg,var(--red),transparent)}
+#coBox .cx .rk-ordhead h3{flex:1;margin-bottom:0}#coBox .cx .rk-ordhead{margin-bottom:14px;flex-wrap:nowrap}
+#coBox .cx .co-weekbar h3{justify-content:center}#coBox .cx .co-weekbar h3::after{display:none}
+#coBox .cx .co-sec{color:#fff;margin:22px 0 12px}
+#coBox .cx .rk-card h2{text-shadow:0 0 22px rgba(255,255,255,.2)}
+/* raised rows */
+#coBox .cx .co-tasks,#coBox .cx .rk-list{display:grid;gap:9px}
+#coBox .cx .co-tasks li,#coBox .cx .rk-list li,#coBox .cx .co-pmini,#coBox .cx .co-postc,#coBox .cx .co-reply{padding:11px 12px;border:1px solid rgba(255,255,255,.07);border-radius:10px;background:var(--row);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 6px 10px rgba(0,0,0,.45)}
+#coBox .cx .co-pmini{margin-bottom:10px;padding:14px}#coBox .cx .co-postc{margin:0 0 10px}#coBox .cx .co-postc.pin{margin:0 0 10px;border-color:rgba(255,197,49,.5)}
+#coBox .cx .co-pmini b{font:italic 800 1.35rem/1 var(--display);text-transform:uppercase;color:#fff}
+#coBox .cx .co-tasks input[type=checkbox]:checked{box-shadow:0 0 12px rgba(47,211,107,.6)}
+#coBox .cx .co-tasks input[type=checkbox]{background:#080c13}
+/* meters: smooth, recessed, checkered finish line */
+#coBox .cx .co-track{border-radius:99px;box-shadow:inset 0 2px 4px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.06)}
+#coBox .cx .co-track i,#coBox .cx .co-track i.lo,#coBox .cx .co-track i.mid,#coBox .cx .co-track i.hi,#coBox .cx .co-track i.done{box-shadow:4000px 0 0 4000px #05080d}
+#coBox .cx .co-track::after{left:auto;right:0;width:20px;inset:0 0 0 auto;background:var(--ck) 0 0/10px 10px;opacity:.8}
+#coBox .cx .co-meter.big .co-track::after{width:32px;background-size:16px 16px}
+#coBox .cx .co-mt b{text-shadow:0 0 16px rgba(255,197,49,.45)}
+/* controls */
+#coBox .cx .mini{border-radius:99px;padding:9px 13px;border-color:rgba(255,255,255,.18)}
+#coBox .cx .mini.solid{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 0 14px rgba(255,59,59,.45)}
+#coBox .cx .rk-go{background:var(--red);color:#fff;box-shadow:0 0 18px rgba(255,59,59,.45)}#coBox .cx .rk-go:hover{background:#ff5a5a}
+#coBox .cx input:not([type=checkbox]):not([type=radio]),#coBox .cx select,#coBox .cx textarea{background:#080c13;border-radius:10px;box-shadow:inset 0 2px 6px rgba(0,0,0,.6)}
+#coBox .cx input:focus,#coBox .cx select:focus,#coBox .cx textarea:focus{box-shadow:0 0 0 3px rgba(255,59,59,.45)}
+#coBox .cx .co-sub button[aria-selected="true"]{border-bottom-color:var(--red)}
+#coBox .cx .co-av{background:#0a0f17;border:1.5px solid var(--red);box-shadow:0 0 10px rgba(255,59,59,.5)}
+#coBox .cx .co-o::before{background:var(--red)}
+#coBox .cx .co-money div,#coBox .cx .co-o,#coBox .cx-stages div{background:var(--row);border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 6px 10px rgba(0,0,0,.45)}
+#coBox .cx .co-money div:last-child{background:var(--red);border-color:var(--red)}#coBox .cx .co-money div:last-child b,#coBox .cx .co-money div:last-child span{color:#fff}
+#coBox .cx-stages div.was{border-color:rgba(47,211,107,.45)}#coBox .cx-stages div.now{border-color:var(--slow)}#coBox .cx-stages div.now.fin{border-color:var(--go)}
+#coBox .cx .co-tasks li:nth-child(n) .cx-pos{color:var(--dim)}#coBox .cx .co-tasks li:nth-child(1) .cx-pos{color:#fff;text-shadow:0 0 12px rgba(255,59,59,.9)}
+@media (max-width:980px){#coBox .cx-top{grid-template-columns:minmax(0,1fr)}#coBox .cx-side{justify-content:flex-start;display:flex}#coBox .cx-acts{justify-content:flex-start}}
+@media (max-width:700px){#coBox .cx-id{grid-template-columns:minmax(0,1fr)}#coBox .cx-top h1,#coBox .cx-k,#coBox .cx-seat,#coBox .cx-xp{grid-column:1;grid-row:auto}#coBox .cx-seat{margin:10px 0}#coBox .cx-top{padding:18px 16px}#coBox .cx .rk-card{padding:18px 16px}#coBox .cx .rk-ordhead{flex-wrap:wrap}#coBox .cx .rk-card h3{font-size:1.3rem}}
 </style>
 </head>
 <body>
@@ -3913,10 +4160,11 @@ body.rw-tv .rw-fol{display:none}
           <div class="mem-in" data-mem="crew" data-kind="crew"></div>
           <p class="cs-fine">Only want one race-day shift? <a href="#race-volunteer">Sign up to volunteer</a>. No profile needed.</p>
         </article>
-        <article class="cs-card" data-card="2" aria-label="Race Fan" hidden>
-          <h2>Race Fan</h2>
-          <p class="cs-desc">Follow every heat live on race day: the starting lights, run times, brackets and winners. Send a shout-out from the stands.</p>
-          <div class="cs-acts"><a class="cs-go" href="#race-watch">Watch race day live</a></div>
+        <article class="cs-card" data-card="2" aria-label="Leadership Council" hidden>
+          <h2>Leadership Council</h2>
+          <p class="cs-desc">For Student Leadership Council members. Plan projects and events, check off weekly tasks, post bulletins, share media and suggest social posts.</p>
+          <div class="mem-in" data-mem="council" data-kind="crew"></div>
+          <p class="cs-fine">Not on the council yet? <a href="#leadership-council">Learn about the council</a>.</p>
         </article>
         <article class="cs-card" data-card="3" aria-label="Staff Garage" hidden>
           <h2>Staff Garage</h2>
@@ -4073,7 +4321,7 @@ body.rw-tv .rw-fol{display:none}
 <div class="page rk-page" data-page="volunteers" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="volunteers"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="volBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 <div class="page rk-page" data-page="photographer" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="photographer"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="phBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 <div class="page kiosk-page" data-page="kiosk" hidden><div id="kioskBox" class="ki-box"><p class="ki-load">Loading the check-in kiosk…</p></div></div>
-
+<div class="page rk-page co-page" data-page="council" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="council"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="coBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 <div class="page rk-page" data-page="teacher" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="teacher"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="teBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 
 <!-- ======================= ADMIN PORTAL ======================= -->
@@ -4213,7 +4461,7 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","council":"Leadership Council","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
@@ -4931,7 +5179,7 @@ body.rw-tv .rw-fol{display:none}
     var CARS=[
       {paint:"#c0141b",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Email + 4-digit code",stats:[["Young racers reached","kids"],["Years racing (since 2019)","years"],["Cars in the build","cars"]]},
       {paint:"#f2b01e",trim:"#111113",helmet:"#d2141c",num:"12",label:"Crew",neon:"#ffc233",key:"Email + 4-digit code",stats:[["Volunteers this year","volunteers_this_year"],["Meals served","meals"],["Participants served","participants"]]},
-      {paint:"checker",trim:"#d2141c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"Just cheer!",stats:[["Top speed","speed"],["Engines","engines"],["Days to race day","countdown"]]},
+      {paint:"#1f4fd1",trim:"#f5b82e",helmet:"#f4f4f4",num:"16",label:"Council",neon:"#7fb2ff",key:"Email + 4-digit code",stats:[["Council members","council_members"],["Projects underway","council_projects"],["Days to race day","countdown"]]},
       {paint:"#16171c",trim:"#d2141c",helmet:"#d2141c",num:"6",label:"Staff",neon:"#d2141c",key:"Username or admin email",stats:[["Events this season","events"],["Paths to participate","paths"],["Historic home track","track"]]}];
     var LIVE={};
     function impact(i){var el=document.querySelectorAll(".impact .stat strong")[i];return el?el.textContent.trim():""}
@@ -6691,7 +6939,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function startUp(){if(started)return;started=true;window.FR_DB=db;if(window.FR_TEST)testChip();initAuth();applyStats();renderPortals();renderSpirit();
     db.rpc("public_stats",{p_year:null}).then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});
     db.rpc("public_member_counts").then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});
-}
+    db.rpc("public_council_counts").then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});}
   Promise.all([loadEvents(),loadNotes(),loadContent()]).then(function(){
     FR.refresh(); var n=$("#qNote"); if(n) n.hidden=true; startUp();
   }).catch(function(e){ if(window.console)console.warn("Live content didn’t load; showing built-in content.",e); startUp(); });
@@ -7036,7 +7284,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     (was?db.rpc("member_signout").then(function(){},function(){}):Promise.resolve()).then(function(){return db.auth.signOut()}).then(function(){toast("Signed out")})}
 
   /* ---------- Sign in page (#access): your account and your spaces ---------- */
-  var SPACES=[["admin","#admin","Admin"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["workshop","#workshop-signin","Workshop sign-in"],
+  var SPACES=[["admin","#admin","Admin"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["council","#council","Leadership Council"],["workshop","#workshop-signin","Workshop sign-in"],
     ["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["volunteers","#volunteers","Race-day volunteers"]];
   var STAFF={};
   function canSpace(k){if(IS_ADMIN)return true;if(k==="controller")return IS_CTRL;if(k==="track")return IS_TRACK;if(k==="volunteers")return IS_CTRL||IS_TRACK||IS_VOLS;return !!STAFF[k]}
@@ -7749,7 +7997,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
 
   /* ---------- Shared bits for staff portals ---------- */
   /* Admins can open every portal with their own sign-in: a jump list on every portal's top bar */
-  var ADM_PORTALS=[["#admin","Admin"],["#teacher","Teacher planning"],["#photographer","Photographer"],["#workshop-signin","Workshop sign-in"],["#kiosk","Check-in kiosk"],
+  var ADM_PORTALS=[["#admin","Admin"],["#council","Leadership Council"],["#teacher","Teacher planning"],["#photographer","Photographer"],["#workshop-signin","Workshop sign-in"],["#kiosk","Check-in kiosk"],
     ["#race-control","Race control"],["#track-manager","Track operations"],["#volunteers","Volunteer lists"],["#my-dashboard/crew","My dashboard (sample crew)"],["#my-dashboard/family","My dashboard (sample family)"],["#program-signin","Program Dashboard"],["#race-watch","Live race"]];
   function portalTop(title,kicker,role){var name=crewName(),here=location.hash.split("/")[0];
     return '<div class="rk-top"><div class="rk-tt"><p class="rk-k">'+esc(kicker)+'</p><h1>'+esc(title)+'</h1></div><div class="rk-who"><span>'+esc(name)+' · '+esc(IS_ADMIN?"Admin":role)+'</span>'+
@@ -8258,11 +8506,37 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     coRoute();var sig=(USER?USER.id:"")+"|"+IS_ADMIN+"|"+(ME?ME.id:"")+"|"+location.hash;if(!force&&CO.sig===sig&&CO.D)return;CO.sig=sig;
     if(!CO.D)box.innerHTML='<div class="rk-card"><p>Loading the council…</p></div>';
     coLoad().then(function(){coDraw(box)},function(e){box.innerHTML='<div class="rk-card"><p>Couldn’t load the council: '+esc(e.message||e)+'</p><button class="mini" type="button" id="coRetry">Try again</button></div>';$("#coRetry").onclick=function(){renderCO(true)}})}
+  /* game layer: XP, levels, each member's car */
+  var CO_RANK=["Rookie","Pit crew","Driver","Crew chief","Team principal"];
+  var CO_ICON={home:"M3 11l9-8 9 8v10h-6v-6H9v6H3z",projects:"M4 4h7l2 3h7v13H4z",events:"M4 6h16v14H4zM4 10h16M8 3v5M16 3v5",week:"M4 12l5 5L20 6",bulletins:"M3 10v4h4l7 5V5L7 10zM17 9a4 4 0 0 1 0 6",
+    files:"M6 3h8l4 4v14H6zM14 3v4h4",social:"M4 8h3l2-3h6l2 3h3v11H4zM12 11a3 3 0 1 0 0 6 3 3 0 0 0 0-6",board:"M4 5h16v11H9l-5 4z",team:"M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 20c0-4 3-6 6-6s6 2 6 6M17 11a3 3 0 1 0 0-6M16 14c3 0 6 2 6 6"};
+  function coXP(id,name){var D=CO.D,by=function(x){return x.created_by_member===id},n=0;
+    n+=10*D.tasks.filter(function(t){return t.done&&(t.assignee_member===id||(!t.assignee_member&&t.done_by===name))}).length;
+    n+=5*(D.threads.filter(by).length+D.replies.filter(by).length+D.files.filter(by).length);
+    n+=15*D.social.filter(by).length+25*D.bulletins.filter(by).length+20*D.projects.filter(by).length;
+    n+=100*D.projects.filter(function(p){return p.status==="done"&&p.lead_member===id}).length;return n}
+  function coLevel(xp){var l=Math.floor(xp/100)+1;return{n:l,rank:CO_RANK[Math.min(l,CO_RANK.length)-1],into:xp%100}}
+  function coHash(t){var h=0;t=String(t||"x");for(var i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))>>>0;return h}
+  function coCar(key){var h=coHash(key),c=["#ff3b3b","#ffc531","#2fd36b","#f2f4f7"][h%4],t=["#ffc531","#07080b","#07080b","#ff3b3b"][h%4],num=h%98+1;
+    return '<svg viewBox="0 0 230 110" role="img" aria-label="Your car, number '+num+'"><path d="M12 78 L40 52 Q70 34 118 34 L150 34 Q196 40 220 70 L220 82 L12 82Z" fill="'+c+'"/><path d="M40 52 Q70 34 118 34 L150 34 Q170 37 186 46 L60 60Z" fill="rgba(255,255,255,.22)"/>'+
+      '<path d="M12 78 L220 78 L220 82 L12 82Z" fill="'+t+'"/><path d="M104 34 Q108 14 126 14 Q144 14 146 34Z" fill="#0b0d11"/><circle cx="125" cy="24" r="12" fill="#f2f4f7"/><path d="M119 22h17v6h-17z" fill="#0b0d11"/>'+
+      '<circle cx="158" cy="60" r="15" fill="#07080b" opacity=".9"/><text x="158" y="67" text-anchor="middle" font-family="Barlow Condensed,Impact,sans-serif" font-style="italic" font-weight="800" font-size="20" fill="#fff">'+num+'</text>'+
+      [52,190].map(function(x){return '<circle cx="'+x+'" cy="86" r="19" fill="#07080b"/><circle cx="'+x+'" cy="86" r="12" fill="#2a2e37"/><circle cx="'+x+'" cy="86" r="4" fill="#9aa0ab"/>'}).join("")+'</svg>'}
+  function coStages(pct){var st=[["Staging","Idea on the grid"],["Lights out","Planning under way"],["On track","Over halfway there"],["Checkered flag","Planning complete"]],cur=pct>=100?3:pct>=50?2:pct>0?1:0;
+    return '<div class="cx-stages" aria-label="Stage: '+st[cur][0]+'">'+st.map(function(x,i){return '<div class="'+(i<cur?"was":i===cur?"now"+(cur===3?" fin":""):"")+'"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'}).join("")+'</div>'}
   function coDraw(box){var D=CO.D,v=CO.view,mine=D.me&&D.M[D.me],tab=v==="project"?(CO.D.projects.filter(function(p){return p.id===CO.id})[0]||{}).kind==="event"?"events":"projects":v==="thread"?"board":v;
     var who=mine?mine.positions.map(function(p){return (CO_POS.filter(function(x){return x[0]===p})[0]||[0,p])[1]}).concat(mine.titles).join(" · "):"";
-    var html=portalTop("Leadership Council","Student Leadership Council",IS_ADMIN?"Admin":(who||"Council member"))+
+    var wk0=coMonday(),wkT=D.tasks.filter(function(t){return !t.project_id&&t.week_of===wk0}),tdy=todayISO(),
+      race=((window.FR&&FR.EVENTS)||[]).filter(function(e){return e.k==="racing"&&e.d>=tdy})[0],days=race?Math.round((new Date(race.d+"T00:00:00")-new Date(tdy+"T00:00:00"))/864e5):null,here=location.hash.split("/")[0];
+    var nm=crewName(),xp=D.me?coXP(D.me,nm):0,lv=coLevel(xp),wd=wkT.filter(function(t){return t.done}).length,lit=wkT.length?Math.round(wd/wkT.length*5):0,allGo=wkT.length&&wd===wkT.length;
+    var html='<div class="cx"><header class="cx-top"><div class="cx-id"><p class="cx-k">Student Leadership Council</p><h1>'+esc(nm)+'</h1><p class="cx-seat">'+esc(IS_ADMIN?"Race director · Admin tools":(who||"Council member"))+'</p>'+
+        (D.me?'<div class="cx-xp"><p><b>Level '+lv.n+' · '+esc(lv.rank)+'</b><span>'+xp+' XP · '+(100-lv.into)+' to level '+(lv.n+1)+'</span></p><div class="co-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+lv.into+'" aria-label="Progress to next level"><i style="width:'+lv.into+'%"></i></div></div>':'')+'</div>'+
+      '<div class="cx-side"><div class="cx-lights" role="img" aria-label="This week: '+wd+' of '+wkT.length+' tasks done"><div>'+[0,1,2,3,4].map(function(i){return '<i class="'+(allGo?"g":i<lit?"r":"")+'"></i>'}).join("")+'</div><span>'+(allGo?"Green light! Week complete":"This week: "+wd+" of "+wkT.length+" done")+'</span></div>'+
+        '<div class="cx-read" aria-label="At a glance"><div><b>'+D.projects.filter(function(p){return p.status!=="done"}).length+'</b><span>Projects in motion</span></div>'+(days!=null?'<div><b>'+days+'</b><span>Days to race day</span></div>':'')+'</div>'+
+        '<div class="cx-acts">'+(IS_ADMIN?'<label class="adm-jump"><span class="sr">Open another portal</span><select data-jump="1"><option value="">Open a portal…</option>'+ADM_PORTALS.filter(function(p){return p[0]!==here}).map(function(p){return '<option value="'+p[0]+'">'+esc(p[1])+'</option>'}).join("")+'</select></label>':'')+
+        '<a class="mini" href="'+(ME?"#my-dashboard":"#admin")+'">'+(ME?"My dashboard":"Admin")+'</a><button class="mini" type="button" data-out="1">Sign out</button></div></div></header>'+
       '<nav class="co-tabs" aria-label="Council sections">'+CO_TABS.map(function(t){var n=t[0]==="social"?D.social.filter(function(s){return IS_ADMIN?s.status==="ready":coMedia()&&s.status==="idea"}).length:t[0]==="team"&&coPres()?D.roles.filter(function(r){return r.status==="pending"}).length:0;
-        return '<a href="#council'+(t[0]==="home"?"":"/"+t[0])+'"'+(tab===t[0]?' aria-current="page"':'')+'>'+esc(t[1])+(n?'<i>'+n+'</i>':'')+'</a>'}).join("")+'</nav><div id="coMain"></div>';
+        return '<a href="#council'+(t[0]==="home"?"":"/"+t[0])+'"'+(tab===t[0]?' aria-current="page"':'')+'><svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+CO_ICON[t[0]]+'"/></svg><span>'+esc(t[1])+'</span>'+(n?'<i>'+n+'</i>':'')+'</a>'}).join("")+'</nav><div id="coMain"></div></div>';
     box.innerHTML=html;bindTop(box);var M=$("#coMain",box);
     ({home:coHome,projects:coProjects,events:coEvents,project:coProject,week:coWeek,bulletins:coBulletins,files:coFiles,social:coSocial,board:coBoard,thread:coThread,team:coTeam}[v]||coHome)(M)}
 
@@ -8291,7 +8565,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         [t.assignee_member?esc(coName(t.assignee_member)):"Anyone",t.due_date?'<span class="'+(late?"co-late":"")+'">Due '+fmtDate(t.due_date)+'</span>':"",showProj&&p?'<a href="#council/project/'+p.id+'">'+esc(p.title)+'</a>':"",t.done&&t.done_by?"✓ "+esc(t.done_by):""].filter(Boolean).join(" · ")+'</small></span></label>'+
         (!compact&&del?'<button class="co-x" type="button" data-tdel="'+t.id+'" aria-label="Delete task">×</button>':'')+'</li>'}).join("")+'</ul>'}
   function coBindTasks(M){$$("[data-task] input[type=checkbox]",M).forEach(function(c){c.onchange=function(){var id=c.closest("[data-task]").getAttribute("data-task");
-      db.from("council_tasks").update({done:c.checked,done_at:c.checked?new Date().toISOString():null,done_by:c.checked?crewName():null}).eq("id",id).then(function(x){coDone(x,c.checked?"Checked off":"Unchecked")})}});
+      db.from("council_tasks").update({done:c.checked,done_at:c.checked?new Date().toISOString():null,done_by:c.checked?crewName():null}).eq("id",id).then(function(x){coDone(x,c.checked?"Checked off · +10 XP":"Unchecked")})}});
     $$("[data-tdel]",M).forEach(function(b){b.onclick=function(){if(!coConfirm(b))return;db.from("council_tasks").delete().eq("id",b.getAttribute("data-tdel")).then(function(x){coDone(x,"Task removed")})}})}
   function coTaskForm(id,extra){return '<form class="co-add" id="'+id+'" novalidate><input type="text" maxlength="200" placeholder="Add a task" aria-label="New task"><select aria-label="Who">'+coWhoOpts(null,"Anyone")+'</select><input type="date" aria-label="Due date (optional)"><button class="mini solid" type="submit">Add</button></form>'}
   function coBindTaskForm(f,base){if(!f)return;f.onsubmit=function(e){e.preventDefault();var i=$$("input,select",f),t=i[0].value.trim();if(!t){toast("Type the task first.");return}
@@ -8325,7 +8599,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       canDel=coPres()||coOwn(p)||(D.me&&p.lead_member===D.me);
     var head='<section class="rk-card co-phead"><div class="co-ct"><span class="co-tag k-'+p.kind+'">'+esc(CO_KIND[p.kind])+'</span><span class="co-st s-'+p.status+'">'+esc(CO_STAT[p.status])+'</span>'+(p.lead_only?'<span class="co-lock">'+(ev?"Managed":"Lead edits only")+'</span>':'')+'</div>'+
       '<h2>'+esc(p.title)+'</h2><p class="co-meta">'+(p.lead_member?(ev?"Managed by ":"Lead: ")+'<b>'+esc(coName(p.lead_member))+'</b>':"No lead yet")+(p.event_date?' · '+fmtDate(p.event_date,{weekday:"long",month:"long",day:"numeric"}):'')+(p.event_time?' · '+esc(p.event_time):'')+(p.location?' · '+esc(p.location):'')+(p.due_date?' · Planning due '+fmtDate(p.due_date):'')+'</p>'+
-      coBar(pr,true)+(p.description?'<div class="co-body">'+coText(p.description)+'</div>':'')+(ed?'':'<p class="rk-fine">'+(ev?"This event is managed by "+esc(coName(p.lead_member)||"its manager")+". You can follow the plan, post updates and check off tasks assigned to you.":"Only the lead can change this project.")+'</p>')+'</section>';
+      coBar(pr,true)+coStages(pr.pct)+(p.description?'<div class="co-body">'+coText(p.description)+'</div>':'')+(ed?'':'<p class="rk-fine">'+(ev?"This event is managed by "+esc(coName(p.lead_member)||"its manager")+". You can follow the plan, post updates and check off tasks assigned to you.":"Only the lead can change this project.")+'</p>')+'</section>';
     var tabs=[["tasks","Tasks",pr.tasks.length-pr.td],["materials","Materials",pr.mats.length-pr.mh],["funding","Funding",0],["updates","Updates",ups.length],["files","Files",files.length]].concat(ed?[["details","Edit details",0]]:[]);
     var body="";
     if(sec==="tasks"){var open=pr.tasks.filter(function(t){return !t.done}).sort(function(a,b){return (a.due_date||"9")>(b.due_date||"9")?1:-1}),dn=pr.tasks.filter(function(t){return t.done});
@@ -8514,8 +8788,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       (IS_ADMIN?'<p class="rk-fine">Admins record election results here. Add students to the council in <a href="#admin" data-admtab="members">Admin → Members</a> (role: Student Leadership Council).</p>':'<p class="rk-fine">Officers are elected by the council. Admins record the results.</p>')+'</section>'+
       (pres?'<section class="rk-card"><h3>Role requests'+(pend.length?' · '+pend.length:'')+'</h3>'+(pend.length?'<ul class="co-tasks">'+pend.map(function(r){return '<li data-role="'+r.id+'"><span><b>'+esc(coName(r.member_id)||"Member")+' → '+esc(r.title)+'</b><small>'+(r.about?esc(r.about)+' · ':'')+coAgo(r.created_at)+'</small></span><span class="co-fa"><button class="mini solid" type="button" data-ra="approved">Approve</button><button class="mini red" type="button" data-ra="declined">Decline</button></span></li>'}).join("")+'</ul>':'<p class="rk-fine">No requests waiting.</p>')+
         '<form class="co-add" id="coRA" novalidate><select aria-label="Member">'+coWhoOpts(null,"Give a role to…")+'</select><input type="text" maxlength="60" placeholder="Role (Event lead, Video editor…)" aria-label="Role"><button class="mini solid" type="submit">Assign</button></form></section>':'')+
-      '<section class="rk-card"><h3>Council members</h3><ul class="co-tasks">'+D.roster.map(function(m){var mine=appr.filter(function(r){return r.member_id===m.id});
-        return '<li><span><b>'+esc(m.name)+(m.id===D.me?' (you)':'')+'</b><small>'+(m.positions.map(function(p){return (CO_POS.filter(function(x){return x[0]===p})[0]||[0,p])[1]}).concat(mine.map(function(r){return r.title})).map(esc).join(" · ")||"Member")+'</small></span>'+
+      '<section class="rk-card"><h3>Starting grid</h3><ul class="co-tasks">'+D.roster.slice().sort(function(a,b){return coXP(b.id,b.name)-coXP(a.id,a.name)}).map(function(m,gi){var mine=appr.filter(function(r){return r.member_id===m.id});
+        return '<li><em class="cx-pos">P'+(gi+1)+'</em><span><b>'+esc(m.name)+(m.id===D.me?' (you)':'')+'</b><small>'+coXP(m.id,m.name)+' XP · '+(m.positions.map(function(p){return (CO_POS.filter(function(x){return x[0]===p})[0]||[0,p])[1]}).concat(mine.map(function(r){return r.title})).map(esc).join(" · ")||"Member")+'</small></span>'+
           (pres&&mine.length?'<span class="co-fa">'+mine.map(function(r){return '<button class="co-chip" type="button" data-rdel="'+r.id+'" title="Remove this role">'+esc(r.title)+' ×</button>'}).join("")+'</span>':'')+'</li>'}).join("")+'</ul>'+(D.roster.length?'':'<p class="rk-fine">No one has the council role yet.</p>')+'</section>'+
       (D.me?'<section class="rk-card"><h3>Ask for a role</h3><p class="rk-fine">Want to lead something? Ask the President. Roles show next to your name once approved.</p><form class="co-add" id="coRR" novalidate><input type="text" maxlength="60" placeholder="Role you’d like" aria-label="Role"><input type="text" maxlength="400" placeholder="Why you’d be great at it (optional)" aria-label="Why"><button class="mini solid" type="submit">Send request</button></form>'+
         (D.roles.filter(function(r){return r.member_id===D.me&&r.status!=="approved"}).map(function(r){return '<p class="rk-fine">'+esc(r.title)+': <b>'+(r.status==="pending"?"waiting for the President":"declined")+'</b></p>'}).join(""))+'</section>':'');
@@ -8707,7 +8981,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   /* ---------- Member profiles: register once, sign in with username + passcode ---------- */
   var IS_VOLS=false, CODE_ROLES={}, ME=null, LOGGED={};
   var MROLES={family:["Family","Program Dashboard: dates, times and places"],volunteer:["Volunteer","Dates, times and check-in for helping out"],
-    workshop:["Workshop sign-in desk","Signs families in and counts meals"],teacher:["Teacher","Suggest events and list materials"],photographer:["Photographer","Upload photo albums"],
+    workshop:["Workshop sign-in desk","Signs families in and counts meals"],teacher:["Teacher","Suggest events and list materials"],photographer:["Photographer","Upload photo albums"],council:["Student Leadership Council","Council projects, events, bulletins and discussion"],
     controller:["Race control","Runs the live race feed"],track:["Track operations","Shout-outs, intermissions and sponsor ads"],volunteers:["Race-day volunteer lists","Volunteer lists and check-in"]};
   var MKIND={workshop:"Building workshop",race_day:"Race day",event:"Event or camp",other:"Something else"};
   var PREVROLES=null;
@@ -8715,18 +8989,19 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function sampleProfile(kind){var d=function(days,h){return new Date(Date.now()-days*864e5+(h||0)*36e5).toISOString()},fam=kind!=="crew";
     return fam?{member:{username:"taylorfamily",display_name:"Jordan Taylor",kind:"family",roles:["family"],first_year:2025,email:"family@example.com",phone:"810-555-0100",kids:[{name:"Maya T.",age:"11"},{name:"Eli T.",age:"8"}]},
         hours:14,workshops:6,race_days:1,events:2,years:2,open:null,recent:[{kind:"workshop",started_at:d(9,-2),ended_at:d(9,1)},{kind:"workshop",started_at:d(23,-2),ended_at:d(23,1)},{kind:"event",started_at:d(40,-3),ended_at:d(40,0)},{kind:"race_day",started_at:d(160,-5),ended_at:d(160,3)}]}:
-      {member:{username:"samrivera",display_name:"Sam Rivera",kind:"crew",roles:["volunteer","workshop","teacher","photographer","controller","track","volunteers"],first_year:2024,email:"crew@example.com",phone:null,kids:[]},
+      {member:{username:"samrivera",display_name:"Sam Rivera",kind:"crew",roles:["volunteer","workshop","teacher","photographer","council","controller","track","volunteers"],first_year:2024,email:"crew@example.com",phone:null,kids:[]},
         hours:62.5,workshops:18,race_days:2,events:4,years:3,open:null,recent:[{kind:"workshop",started_at:d(2,-3),ended_at:d(2,1)},{kind:"event",started_at:d(12,-4),ended_at:d(12,0)},{kind:"workshop",started_at:d(16,-3),ended_at:d(16,1)}]}}
   var MSPACES=[["#program-signin","Program Dashboard","Dates, times, places and the bulletin",function(){return true},1],
     ["#workshop-signin","Workshop sign-in","Sign families in and count meals",function(){return hasRole("workshop")}],
     ["#kiosk","Check-in kiosk","Set out a tablet so families check themselves in",function(){return hasRole("workshop")}],
     ["#teacher","Teacher planning","Suggest events and list materials",function(){return hasRole("teacher")}],
     ["#photographer","Photographer","Upload photo albums for review",function(){return hasRole("photographer")}],
+    ["#council","Leadership Council","Projects, events, weekly tasks and discussion",function(){return hasRole("council")}],
     ["#race-control","Race control","Brackets, lights and run times",function(){return hasRole("controller")}],
     ["#track-manager","Track operations","Shout-outs, intermissions and ads",function(){return hasRole("track")}],
     ["#volunteers","Volunteer lists","Race-day crew and check-in",function(){return hasRole("volunteers")||hasRole("controller")||hasRole("track")}],
     ["#race-watch","Live Race","Follow every heat on race day",function(){return true}]];
-  var PORTALS=[["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["workshop","#workshop-signin","Workshop sign-in"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["volunteers","#volunteers","Volunteer lists"]];
+  var PORTALS=[["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["workshop","#workshop-signin","Workshop sign-in"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["council","#council","Leadership Council"],["volunteers","#volunteers","Volunteer lists"]];
   function landing(){if(ADMIN_REAL&&MODE!=="member")return ["#admin","Admin"];if(!ME)return ["#access","Sign in"];
     var st=PORTALS.filter(function(x){return hasRole(x[0])});return st.length===1?[st[0][1],st[0][2]]:["#my-dashboard","my dashboard"]}
   function firstName(n){return String(n||"").trim().split(/\s+/)[0]}
@@ -8789,7 +9064,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   /* ---------- Register a profile (#new-profile) ---------- */
   var REG={kind:"family",done:null};
   var REG_HELP=[["volunteer","Building workshops & events","Help kids build, test and race"],["workshop","Workshop sign-in desk","Sign families in, count meals"],["teacher","Teaching","Lead a lesson or seasonal workshop"],
-    ["photographer","Photography","Shoot workshops and race day"],["controller","Race control","Run the live race feed on race day"],["track","Track operations","Shout-outs, intermissions, sponsor ads"],["volunteers","Organizing volunteers","Race-day crew lists and check-in"]];
+    ["photographer","Photography","Shoot workshops and race day"],["council","Student Leadership Council","Older students: lead projects, events and media"],["controller","Race control","Run the live race feed on race day"],["track","Track operations","Shout-outs, intermissions, sponsor ads"],["volunteers","Organizing volunteers","Race-day crew lists and check-in"]];
   function kidRow(k){k=k||{};return '<div class="reg-kid"><input type="text" maxlength="40" placeholder="First name and last initial (Maya R.)" aria-label="Racer’s first name and last initial" value="'+esc(k.name||"")+'"><input type="text" maxlength="10" inputmode="numeric" placeholder="Age" aria-label="Age" value="'+esc(k.age||"")+'"><button type="button" aria-label="Remove this racer">×</button></div>'}
   function renderReg(){var box=$("#regBox");if(!box||hashBase()!=="new-profile")return;
     if(REG.done){var d=REG.done;box.innerHTML='<div class="reg-card"><p class="me-k">You’re on the roster</p><h2>Thanks, '+esc(firstName(d.name))+'!</h2>'+
@@ -9049,7 +9324,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         $$("button",fl).forEach(function(b){b.onclick=function(){var f=b.getAttribute("data-f");$$("button",fl).forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});$$("#spGrid .sp-item").forEach(function(it){it.hidden=!!f&&it.getAttribute("data-cat")!==f})}})}})}
   var EDSUB="previews", PVPATH=0, PVSEL=null, PVW=390;
   var PVPAGES=[["Families","users","Register, sign in, and the family dashboards",[["#new-profile","Register","The one-time sign-up form"],["#access","Sign in","The car select page"],["#my-dashboard/family","My dashboard","Profile, stats and check-in (sample family)"],["#program-signin","Program Dashboard","Dates, times, places and the bulletin"],["#printables","Flyers & forms","Printables to download"]]],
-    ["Crew & staff","check","Volunteers, workshop crew, teachers and photographers",[["#my-dashboard/crew","My dashboard","Profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#kiosk","Check-in kiosk","Families type their 4-digit code"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],["#crew/sample","Volunteer crew pass","A race-day volunteer’s link (sample)"],["#volunteers","Volunteer lists","Race-day crew and check-in"]]],
+    ["Crew & staff","check","Volunteers, workshop crew, teachers and photographers",[["#my-dashboard/crew","My dashboard","Profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#kiosk","Check-in kiosk","Families type their 4-digit code"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],["#council","Leadership Council","Student council projects, events and posts"],["#crew/sample","Volunteer crew pass","A race-day volunteer’s link (sample)"],["#volunteers","Volunteer lists","Race-day crew and check-in"]]],
     ["Race day","flag","Everything that runs the track on race day",[["#race-control","Race control","Brackets, lights and run times"],["#track-manager","Track operations","Shout-outs, intermissions and ads"],["#race-watch","Live race","What spectators see"]]],
     ["Public site","layout","Pages anyone can visit",[["#home","Homepage","The front door"],["#calendar","Calendar","Dates for the year"],["#donate","Donate","Stripe checkout"],["#printables","Flyers & forms","Printables to download"],["#spirit","Spirit Shop","Shirts and hats"]]]];
   function tabEdits(){var P=$("#admPanel");
