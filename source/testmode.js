@@ -13,7 +13,7 @@
        inquiries:[{id:"inq-sample",created_at:new Date().toISOString(),first_name:"Sample",last_name:"Family",role:"Parent or guardian",organization:null,
          interests:"Building Workshops",youth_count:2,youth_ages:"9 and 12",message:"This is a sample inquiry so you can see how they look.",email:"sample@example.com",
          phone:null,contact_by:"Email",best_time:"Evening",email_updates:true,status:"new"}]};
-    race(); members(); council(); hoursSeed(); T.council_reports=[]; T.gallery_photos=[]; save();
+    race(); members(); council(); hoursSeed(); T.council_reports=[]; T.gallery_photos=[]; T.council_project_hours=[]; T.council_service_reports=[]; save();
   }
   /* Demo race day so the live race page and its controls can be tried.
      Two brackets alternate: Super Stock (double elimination, 6 cars + 2 byes) and Masters (single elimination, 5 cars + 3 byes). */
@@ -105,6 +105,7 @@
   if(T&&!T.council_meetings){hoursSeed();save();}
   if(T&&!T.council_reports){T.council_reports=[];save();}
   if(T&&!T.gallery_photos){T.gallery_photos=[];save();}
+  if(T&&!T.council_project_hours){T.council_project_hours=[];T.council_service_reports=[];save();}
   addEventListener("storage",function(e){if(e.key===KEY)load()});
   var user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}}, listeners=[];
   function rid(){return Math.random().toString(36).slice(2,10)}
@@ -213,6 +214,14 @@
         if(!hx_rr){hx_rr={member_id:hx_rid,season:hx_ss,racing:null,half_ok:false};T.council_race.push(hx_rr)}hx_rr.racing=args.p_racing;hx_rr.half_ok=fn==="council_race_admin"?!!(args.p_half&&args.p_racing):(args.p_racing?hx_rr.half_ok:false);save();return R(null)}
       if(fn==="poll_vote"){T.polls=T.polls||[];T.polls.push(args.p_answers);save();return R(null)}
       if(fn==="poll_results"){var pv=T.polls||[],pc=function(k){var o={};pv.forEach(function(v){[].concat(v[k]).forEach(function(x){o[x]=(o[x]||0)+1})});return o};return R({total:pv.length,join:pc("join"),season:pc("season"),nights:pc("nights")})}
+      if(fn==="council_hours_log"){var hm=curM();if(!hm)return R(null,"Council members only");T.council_project_hours=T.council_project_hours.filter(function(x){return !(x.member_id===hm.id&&x.project_id===args.p_project&&x.week_of===args.p_week)});
+        T.council_project_hours.push({id:"ph"+Date.now(),member_id:hm.id,project_id:args.p_project,week_of:args.p_week,hours:args.p_hours,note:args.p_note,status:"pending",confirmed_by:null,created_at:new Date().toISOString()});save();return R(null)}
+      if(fn==="council_hours_confirm"){var hl=(args.p_kind==="att"?T.council_attendance:T.council_project_hours).filter(function(x){return x.id===args.p_id})[0];if(!hl)return R(null,"Not found");
+        hl.status=args.p_ok?(args.p_kind==="att"?"pending":"confirmed"):"rejected";hl.confirmed_by=(curM()||{display_name:"Test Admin (Admin)"}).display_name;if(args.p_ok&&args.p_hours!=null)hl.hours=args.p_hours;save();return R(null)}
+      if(fn==="council_service_submit"){T.council_service_reports=T.council_service_reports.filter(function(r){return r.week_of!==args.p_week});T.council_service_reports.push({week_of:args.p_week,status:"submitted",submitted_by:(curM()||{display_name:"Test Admin (Admin)"}).display_name,submitted_at:new Date().toISOString(),review_note:null});save();return R(null)}
+      if(fn==="council_service_review"){var hr=T.council_service_reports.filter(function(r){return r.week_of===args.p_week})[0];if(!hr)return R(null,"That report hasn’t been submitted.");var hmon=function(d){var x=new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10));x.setDate(x.getDate()-((x.getDay()+6)%7));return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")};
+        if(args.p_ok){T.council_attendance.forEach(function(a){if(a.status==="pending"&&a.confirmed_by&&hmon(a.session_date)===args.p_week){a.status="verified";a.verified_by="Test Admin (Admin)"}});T.council_project_hours.forEach(function(x){if(x.status==="confirmed"&&x.week_of===args.p_week)x.status="verified"});hr.status="approved";hr.reviewed_by="Test Admin (Admin)"}
+        else{hr.status="returned";hr.review_note=args.p_note}save();return R(null)}
       if(fn==="council_roster"){var me=curM(),isA=user&&user.id==="test-admin";if(!isA&&!(me&&(me.roles||[]).indexOf("council")>=0))return R(null,"Council members only");
         return R({me:me?me.id:null,admin:isA,members:T.members.filter(function(m){return m.status==="approved"&&(m.roles||[]).indexOf("council")>=0}).map(function(m){return{id:m.id,name:m.display_name,
           positions:(T.council_officers||[]).filter(function(o){return o.member_id===m.id}).map(function(o){return o.position}),titles:(T.council_roles||[]).filter(function(r){return r.member_id===m.id&&r.status==="approved"}).map(function(r){return r.title})}}).sort(function(a,b){return a.name>b.name?1:-1})})}
