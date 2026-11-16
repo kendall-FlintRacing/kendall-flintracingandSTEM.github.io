@@ -3209,6 +3209,10 @@ body.rw-tv .rw-fol{display:none}
 .stem-poll .sp-col{min-width:0}
 @media (max-width:760px){.stem-poll #stemPollRes{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){.stem-poll .poll-opts span{transition:none}}
+
+/* Building Workshops: car schematic under "Who can join?" */
+.bw-left{display:grid;gap:22px;align-content:start;min-width:0}
+.bw-left .schematic{margin:0;border-radius:6px;border:0}
 </style>
 </head>
 <body>
@@ -3467,10 +3471,41 @@ body.rw-tv .rw-fol{display:none}
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
     <div class="panels">
+      <div class="bw-left">
       <section class="panel">
         <h2>Who can join?</h2>
         <p>Our youth program generally serves ages 8–18. Placement, driver eligibility and available space depend on the workshop and race division. Tell us the ages in your group so we can help find the right fit.</p>
       </section>
+      <figure class="schematic">
+      <svg viewBox="-20 -70 1260 720" role="img" aria-label="Line drawing of a soap box car. Labels show the shell, the cockpit, steering and brakes at the front of the car, and the wheelbase between the front and rear wheels.">
+        <image href="img/web/coloring-car.webp" x="0" y="0" width="996" height="512"/>
+        <g fill="none" stroke="#b01218" stroke-width="3" stroke-linecap="round">
+          <!-- shell -->
+          <path d="M640 118 L700 -10 L820 -10"/><circle cx="640" cy="118" r="7" fill="#b01218"/>
+          <!-- cockpit -->
+          <path d="M300 96 L250 -10 L130 -10"/><circle cx="300" cy="96" r="7" fill="#b01218"/>
+          <!-- steering: front axle at the front wheel -->
+          <path d="M618 383 L700 600 L1010 600"/><circle cx="618" cy="383" r="7" fill="#b01218"/>
+          <!-- brakes: front, under the nose -->
+          <path d="M772 344 L1010 470"/><circle cx="772" cy="344" r="7" fill="#b01218"/>
+          <!-- front direction arrow -->
+          <path d="M1010 120 L1190 120 M1165 100 L1190 120 L1165 140"/>
+          <!-- wheelbase -->
+          <path d="M77 300 L77 640 M618 400 L618 640" stroke-dasharray="6 8" stroke-width="2"/>
+          <path d="M77 625 L618 625 M97 610 L77 625 L97 640 M598 610 L618 625 L598 640"/>
+        </g>
+        <g font-family="ui-monospace,Menlo,Consolas,monospace" font-size="30" font-weight="700" fill="#b01218" letter-spacing="2">
+          <text x="828" y="0">SHELL DESIGN</text>
+          <text x="-10" y="0">COCKPIT</text>
+          <text x="1020" y="610">STEERING</text>
+          <text x="1020" y="480">BRAKES</text>
+          <text x="1020" y="104">FRONT</text>
+          <text x="347" y="600" text-anchor="middle">WHEELBASE</text>
+        </g>
+      </svg>
+      <figcaption class="mono"><span>FIG. 1 — GRAVITY CAR · STEERING &amp; BRAKES UP FRONT</span><span>NOT TO SCALE</span></figcaption>
+    </figure>
+      </div>
       <section class="panel">
         <h2>2027 build dates</h2>
         <p>Saturdays, starting the last Saturday of April. Times and locations are emailed to registered participants.</p>
@@ -3819,37 +3854,7 @@ body.rw-tv .rw-fol{display:none}
       <h1>STEM Programs</h1>
       <p class="lede">Keep building beyond race day with summer STEM Camps and the Student Leadership Council.</p>
     </div>
-    <div class="pic stem-pic">
-    <figure class="schematic" style="margin:0">
-      <svg viewBox="-20 -70 1260 720" role="img" aria-label="Line drawing of a soap box car. Labels show the shell, the cockpit, steering and brakes at the front of the car, and the wheelbase between the front and rear wheels.">
-        <image href="img/web/coloring-car.webp" x="0" y="0" width="996" height="512"/>
-        <g fill="none" stroke="#b01218" stroke-width="3" stroke-linecap="round">
-          <!-- shell -->
-          <path d="M640 118 L700 -10 L820 -10"/><circle cx="640" cy="118" r="7" fill="#b01218"/>
-          <!-- cockpit -->
-          <path d="M300 96 L250 -10 L130 -10"/><circle cx="300" cy="96" r="7" fill="#b01218"/>
-          <!-- steering: front axle at the front wheel -->
-          <path d="M618 383 L700 600 L1010 600"/><circle cx="618" cy="383" r="7" fill="#b01218"/>
-          <!-- brakes: front, under the nose -->
-          <path d="M772 344 L1010 470"/><circle cx="772" cy="344" r="7" fill="#b01218"/>
-          <!-- front direction arrow -->
-          <path d="M1010 120 L1190 120 M1165 100 L1190 120 L1165 140"/>
-          <!-- wheelbase -->
-          <path d="M77 300 L77 640 M618 400 L618 640" stroke-dasharray="6 8" stroke-width="2"/>
-          <path d="M77 625 L618 625 M97 610 L77 625 L97 640 M598 610 L618 625 L598 640"/>
-        </g>
-        <g font-family="ui-monospace,Menlo,Consolas,monospace" font-size="30" font-weight="700" fill="#b01218" letter-spacing="2">
-          <text x="828" y="0">SHELL DESIGN</text>
-          <text x="-10" y="0">COCKPIT</text>
-          <text x="1020" y="610">STEERING</text>
-          <text x="1020" y="480">BRAKES</text>
-          <text x="1020" y="104">FRONT</text>
-          <text x="347" y="600" text-anchor="middle">WHEELBASE</text>
-        </g>
-      </svg>
-      <figcaption class="mono"><span>FIG. 1 — GRAVITY CAR · STEERING &amp; BRAKES UP FRONT</span><span>NOT TO SCALE</span></figcaption>
-    </figure>
-    </div>
+    <div class="pic"><img src="img/web/2026-racers-group.webp" alt="Flint Racing students together at the track"></div>
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
