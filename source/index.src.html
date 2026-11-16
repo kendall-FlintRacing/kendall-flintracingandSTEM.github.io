@@ -3207,6 +3207,45 @@ body.rw-tv .rw-fol{display:none}
 /* Building Workshops: car schematic under "Who can join?" */
 .bw-left{display:grid;gap:22px;align-content:start;min-width:0}
 .bw-left .schematic{margin:0;border-radius:6px;border:0}
+
+/* Track & Racing (Nov 15): Building Workshops format */
+.tr2 .panels .panel{grid-template-rows:none}
+.tr2 .panel .cta-row{margin-top:auto}
+.tr-when{display:flex;align-items:center;gap:14px}
+.tr-tix{flex:none;width:68px;border-radius:6px;overflow:hidden;background:var(--red-deep);color:#fff;text-align:center;display:grid;padding:8px 0 7px;gap:2px}
+.tr-tix span{font:700 .68rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase}
+.tr-tix b{font:800 1.9rem/1 var(--display)}
+.tr-date{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:0;font:800 clamp(1.3rem,2.4vw,1.6rem)/1.1 var(--display);text-transform:uppercase;color:var(--ink)}
+.tr-date small{font:700 .72rem/1 var(--body);letter-spacing:.1em;color:#5a5d64}
+.tr-count{font:700 .72rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:#fff;border-radius:3px;padding:5px 7px}
+.tr-links{list-style:none!important;margin:0;padding:0!important;display:grid;gap:0!important}
+.tr-links li{border-bottom:1px dashed #d4d6da}.tr-links li:last-child{border-bottom:0}
+.tr-links a{display:grid;gap:3px;padding:12px 26px 12px 0;text-decoration:none;position:relative;color:var(--ink)}
+.tr-links a::after{content:"›";position:absolute;right:4px;top:50%;transform:translateY(-50%);font:800 1.5rem/1 var(--display);color:var(--red-deep)}
+.tr-links b{font:800 1.15rem/1.1 var(--display);text-transform:uppercase;color:var(--red-deep)}
+.tr-links a:hover b{text-decoration:underline}
+.tr-links small{color:#4a4d55;font-size:.92rem}
+.tr-sbd{display:flex;align-items:center;gap:14px}.tr-sbd img{width:84px;height:auto;flex:none}
+.tr2 .rx-next{margin:0}
+.tr2 .rx-next li{border-bottom:1px dashed #d4d6da;grid-template-columns:auto minmax(0,1fr);gap:16px;padding:12px 0}
+.tr2 .rx-next span{white-space:nowrap;min-width:128px}
+.tr2 .rx-next li:last-child{border-bottom:0}
+.tr2 .rx-next span{color:var(--red-deep);font-size:1.15rem}
+.tr2 .rx-next b{color:var(--ink);font:500 1rem/1.3 var(--body);text-transform:none;letter-spacing:0}
+.tr2 .rx-next em{color:#4a4d55;border-color:#9a9da3}
+.tr-lanes{display:grid;gap:0;border-top:1px dashed #d4d6da}
+.tr-lane{border-bottom:1px dashed #d4d6da}
+.tr-lane summary{display:grid;grid-template-columns:76px minmax(0,1fr) 24px;gap:14px;align-items:center;padding:14px 0;cursor:pointer;list-style:none}
+.tr-lane summary::-webkit-details-marker{display:none}
+.tr-lane .ln{font:800 .78rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--red-deep);border-radius:3px;padding:7px 6px;text-align:center}
+.tr-lane h3{font:800 1.25rem/1.1 var(--display);text-transform:uppercase;color:var(--ink);margin:0 0 3px}
+.tr-lane summary p{margin:0;color:#4a4d55;line-height:1.5}
+.tr-lane .go{font:800 1.7rem/1 var(--display);color:var(--red-deep);transition:transform .15s}
+.tr-lane[open] .go{transform:rotate(90deg)}
+.tr-lane .more{padding:0 0 16px 90px;display:grid;gap:12px;color:#3b3e45}.tr-lane .more p{margin:0}
+.tr-fine{font-size:.9rem;color:#5a5d64;margin:0}
+@media (max-width:600px){.tr-lane summary{grid-template-columns:minmax(0,1fr) 24px}.tr-lane .ln{grid-column:1/-1;justify-self:start}.tr-lane .more{padding-left:0}}
+@media (prefers-reduced-motion:reduce){.tr-lane .go{transition:none}}
 </style>
 
 <header class="site-nav">
@@ -3535,79 +3574,84 @@ body.rw-tv .rw-fol{display:none}
 </div>
 
 <!-- ======================= TRACK & RACING ======================= -->
-<div class="page dark prog-page" data-page="racing" hidden>
+<div class="page dark prog-page tr2" data-page="racing" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><span aria-current="page">Track &amp; Racing</span></div></nav>
-  <header class="rh3">
-    <img class="rh3-bg" src="{{IMG:img/hero.webp}}" alt="" aria-hidden="true">
-    <div class="wrap rh3-grid">
-      <div class="rh3-brand">
-        <img class="rh3-logo" src="{{IMG:img/cronin-derby-downs-logo-sticker.webp}}" alt="Cronin Derby Downs, established 1969" width="786" height="603">
-        <div><h1 class="rh3-h1">Track &amp; <em>Racing</em></h1><p class="rh3-lede">Home of the Annual Flint Soap Box Derby. Gravity-powered racing for school teams, community racers and families.</p></div>
-      </div>
-      <div class="rh3-main">
-        <p class="rh3-k"><span id="rhYear">2027</span> major events</p>
-        <article class="rh3-feat">
-          <img src="{{IMG:img/web/two-cars-track.webp}}" alt="Two soap box cars race side by side down the hill at Cronin Derby Downs as spectators watch from the tents">
-          <div class="rh3-tix" aria-hidden="true"><span id="rhDow">Sat</span><b id="rhDay">05</b><span id="rhMon">Jun</span></div>
-          <div class="rh3-body">
-            <p class="rh3-tag">The main event</p>
-            <h2>Annual Flint Soap Box Derby</h2>
-            <p class="rh3-date"><span id="rhDate">Saturday, June 5, 2027</span><span class="rh3-count" id="rhCount" hidden></span></p>
-            <p class="rh3-desc">Our building workshop teams and sanctioned racers take on the hill at Cronin Derby Downs. Free to race and free to eat.</p>
-            <div class="rh3-acts"><a class="btn white" href="#participate" data-interest="racing">Inquire about race day</a><a class="btn white-ghost" href="#sanctioned-racers">Sanctioned racers</a><a class="btn white-ghost" href="#race-watch">Live race page</a></div>
-          </div>
-        </article>
-        <ul class="rh3-links">
-          <li><a href="#track-schedule"><span class="rh3-ic" aria-hidden="true">☀</span><span><b>Seasonal Fun Runs</b><small id="rhFun">Summer and fall runs at the track</small></span></a></li>
-          <li><a href="#about"><span class="rh3-ic" aria-hidden="true">♥</span><span><b>About Cronin Derby Downs</b><small>Our family story</small></span></a></li>
-          <li><a href="#derby-racing"><span class="rh3-ic" aria-hidden="true">?</span><span><b>About Derby Racing</b><small>How-tos, race day &amp; terms</small></span></a></li>
-          <li><a href="#racing-get-involved"><span class="rh3-ic" aria-hidden="true">→</span><span><b>How to Get Involved</b><small>Steps to join and ways to take part</small></span></a></li>
-        </ul>
-      </div>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt">
+      <p class="eyebrow">Cronin Derby Downs.</p>
+      <h1>Track &amp; Racing</h1>
+      <p class="lede">Home of the Annual Flint Soap Box Derby. Gravity-powered racing for school teams, community racers and families.</p>
     </div>
-  </header>
+    <div class="pic"><img src="{{IMG:img/web/two-cars-track.webp}}" alt="Two soap box cars race side by side down the hill at Cronin Derby Downs as spectators watch from the tents"></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="rx-duo">
-      <section class="sbd sbd-card" id="sanctioned-racers" aria-labelledby="sbdH">
-          <div class="sbd-logo"><img src="{{IMG:img/flint-soap-box-derby.webp}}" alt="Flint, MI Soap Box Derby logo"></div>
-          <div>
-              <p class="sbd-k">Akron sanctioned racing</p>
-              <h2 id="sbdH">Looking for a local Derby?</h2>
-              <p class="sbd-date"><span id="sbdDate">Sat · Jun 05, 2027</span><small>Flint Soap Box Derby</small></p>
-              <p class="sbd-fee">Sanctioned racers are welcome at our local race. Send a quick inquiry and we’ll email you the forms and fees. Race day registration has a fee for racers not affiliated with our program.</p>
-          </div>
-          <button class="btn red" type="button" id="sbdOpen" aria-haspopup="dialog">Quick register →</button>
-        </section>
-      <section class="rx-cal" aria-labelledby="rxCalH">
-        <p class="sbd-k">Track calendar</p>
+    <div class="panels">
+      <section class="panel">
+        <p class="eyebrow"><span id="rhYear">2027</span> main event</p>
+        <h2>Annual Flint Soap Box Derby</h2>
+        <div class="tr-when"><div class="tr-tix" aria-hidden="true"><span id="rhDow">Sat</span><b id="rhDay">05</b><span id="rhMon">Jun</span></div>
+          <p class="tr-date"><span id="rhDate">Saturday, June 5, 2027</span><span class="tr-count" id="rhCount" hidden></span></p></div>
+        <p>Our building workshop teams and sanctioned racers take on the hill at Cronin Derby Downs. Free to race and free to eat.</p>
+        <div class="cta-row"><a class="btn deep" href="#participate" data-interest="racing">Inquire about race day</a><a class="btn outline-red" href="#race-watch">Live race page</a></div>
+      </section>
+      <section class="panel">
+        <h2>Around the track</h2>
+        <ul class="tr-links">
+          <li><a href="#track-schedule"><b>Seasonal Fun Runs</b><small id="rhFun">Summer and fall runs at the track</small></a></li>
+          <li><a href="#about"><b>About Cronin Derby Downs</b><small>Our family story</small></a></li>
+          <li><a href="#derby-racing"><b>About Derby Racing</b><small>How-tos, race day &amp; terms</small></a></li>
+          <li><a href="#racing-get-involved"><b>How to Get Involved</b><small>Steps to join and ways to take part</small></a></li>
+        </ul>
+      </section>
+      <section class="panel" id="sanctioned-racers" aria-labelledby="sbdH">
+        <p class="eyebrow">Akron sanctioned racing</p>
+        <h2 id="sbdH">Looking for a local Derby?</h2>
+        <div class="tr-sbd"><img src="{{IMG:img/flint-soap-box-derby.webp}}" alt="Flint, MI Soap Box Derby logo">
+          <p class="tr-date"><span id="sbdDate">Sat · Jun 05, 2027</span><small>Flint Soap Box Derby</small></p></div>
+        <p>Sanctioned racers are welcome at our local race. Send a quick inquiry and we’ll email you the forms and fees. Race day registration has a fee for racers not affiliated with our program.</p>
+        <div class="cta-row"><button class="btn deep" type="button" id="sbdOpen" aria-haspopup="dialog">Quick register</button></div>
+      </section>
+      <section class="panel" aria-labelledby="rxCalH">
+        <p class="eyebrow">Track calendar</p>
         <h2 id="rxCalH">Fun runs &amp; practice at the track</h2>
         <ul class="rx-next" id="rxNext"><li><span>Dates</span><b>Posted on the track schedule</b></li></ul>
-        <div class="rx-acts"><a class="btn red" href="#track-schedule">Track schedule →</a><a class="btn white-ghost" href="#school-practice">Schedule a school practice</a></div>
+        <div class="cta-row"><a class="btn deep" href="#track-schedule">Track schedule</a><a class="btn outline-red" href="#school-practice">Schedule a school practice</a></div>
+      </section>
+      <section class="panel wide">
+        <h2>Explore the racing formats</h2>
+        <p>Pick your lane. Tap one to see how it works and how to ask about it.</p>
+        <div class="tr-lanes">
+        <details class="tr-lane"><summary><span class="ln">Lane 1</span><span><h3>Community &amp; School Racing</h3><p>Celebrate the cars, teamwork and skills developed by our school and community building groups.</p></span><span class="go" aria-hidden="true">›</span></summary>
+          <div class="more"><p>School teams attend with their teacher or school chaperone. Families and outside groups provide their own chaperone.</p><div class="row"><a class="btn deep" href="#participate" data-interest="racing" data-topic="Community & school racing" data-note="Interested in: Community & School Racing">Inquire about Community &amp; School Racing</a></div></div></details>
+        <details class="tr-lane"><summary><span class="ln">Lane 2</span><span><h3>Sanctioned Soap Box Derby Racing</h3><p>Explore official race participation, division requirements and the local pathway toward Akron. Eligibility and qualification requirements are confirmed for each event.</p></span><span class="go" aria-hidden="true">›</span></summary>
+          <div class="more"><p>Ask staff about official division rules, local qualification and Akron coordination before making travel plans.</p><div class="row"><button class="btn deep" type="button" data-sbd-open aria-haspopup="dialog">Quick register for sanctioned racing</button></div></div></details>
+        <details class="tr-lane"><summary><span class="ln">Lane 3</span><span><h3>Masters Racing</h3><p>Learn about our Masters racing opportunities and the preparation required for that event.</p></span><span class="go" aria-hidden="true">›</span></summary>
+          <div class="more"><p>Contact staff to discuss the available Masters format and eligibility before beginning a build.</p><div class="row"><a class="btn deep" href="#participate" data-interest="racing" data-topic="Divisions: Stock, Super Stock & Masters" data-note="Interested in: Masters Racing">Inquire about Masters Racing</a></div></div></details>
+        <details class="tr-lane"><summary><span class="ln">Lane 4</span><span><h3>Rally &amp; Track Experiences</h3><p>Explore additional opportunities for track time and racing practice when scheduled. Availability and participation requirements vary by session.</p></span><span class="go" aria-hidden="true">›</span></summary>
+          <div class="more"><p>Ask about available practice or rally dates and the equipment needed before arriving at the track.</p><div class="row"><a class="btn deep" href="#participate" data-interest="racing" data-topic="Rally & track experiences" data-note="Interested in: Rally & Track Experiences">Inquire about Rally &amp; Track Experiences</a></div></div></details>
+        </div>
+        <p class="tr-fine">For every format: each published event provides its date, car and age requirements, preparation details and registration pathway. Staff confirm eligibility and next steps by email. Youth participants must know their assigned chaperone, with one chaperone per six to eight students, or have an arrangement confirmed with staff beforehand.</p>
+      </section>
+      <section class="panel" aria-labelledby="drtH">
+        <p class="eyebrow">New to derby racing?</p>
+        <h2 id="drtH">Start with About Derby Racing</h2>
+        <p>How a season comes together, what race day looks like at Cronin Derby Downs, how heats work, how to build a car and the terms you’ll hear at the track.</p>
+        <div class="cta-row"><a class="btn deep" href="#derby-racing">About Derby Racing</a><a class="btn outline-red" href="#participate" data-interest="building" data-scope="building">Inquire about building workshops</a></div>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">Parties, fundraisers and groups</p>
+        <h2>Plan a Racing Experience</h2>
+        <p>Bring your group to the track for a party, fundraiser or custom event. Tell us what you have in mind, and we’ll discuss activities, dates, supervision and what is possible at Cronin Derby Downs.</p>
+        <div class="cta-row"><a class="btn deep" href="#participate" data-interest="event">Start planning your track event</a></div>
       </section>
     </div>
 
-    <section class="dr-teaser" aria-labelledby="drtH">
-      <div><p class="hiw-k">New to derby racing?</p><h2 id="drtH">Start with About Derby Racing</h2>
-        <p>How a season comes together, what race day looks like at Cronin Derby Downs, how heats work, how to build a car and the terms you’ll hear at the track.</p></div>
-      <div class="dr-teaser-acts"><a class="btn white" href="#derby-racing">About Derby Racing →</a><a class="btn white-ghost" href="#participate" data-interest="building" data-scope="building">Inquire about building workshops</a></div>
+    <section class="panel wide" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
+      <h2>Ready to take the next step?</h2>
+      <p>Questions about race day or how we operate? Send an inquiry and staff will follow up by email. Once your place is confirmed, we’ll email you the official All-American Soap Box Derby registration form to complete and sign online. Inquiring does not confirm a place.</p>
+      <div class="row"><a class="btn deep" href="#participate" data-interest="racing">Inquire about race day</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
     </section>
-    <h2 class="sec-title"><small>Pick your lane</small>Explore the racing formats</h2>
-    <div class="lanes4">
-      <details class="lane4"><summary><span class="ln">Lane 1</span><span><h3>Community &amp; School Racing</h3><p>Celebrate the cars, teamwork and skills developed by our school and community building groups.</p></span><span class="go" aria-hidden="true">›</span></summary>
-        <div class="more"><p>School teams attend with their teacher or school chaperone. Families and outside groups provide their own chaperone.</p><div class="row"><a class="btn deep" href="#participate" data-interest="racing" data-topic="Community & school racing" data-note="Interested in: Community & School Racing">Inquire about Community &amp; School Racing</a></div></div></details>
-      <details class="lane4"><summary><span class="ln">Lane 2</span><span><h3>Sanctioned Soap Box Derby Racing</h3><p>Explore official race participation, division requirements and the local pathway toward Akron. Eligibility and qualification requirements are confirmed for each event.</p></span><span class="go" aria-hidden="true">›</span></summary>
-        <div class="more"><p>Ask staff about official division rules, local qualification and Akron coordination before making travel plans.</p><div class="row"><button class="btn deep" type="button" data-sbd-open aria-haspopup="dialog">Quick register for sanctioned racing →</button></div></div></details>
-      <details class="lane4"><summary><span class="ln">Lane 3</span><span><h3>Masters Racing</h3><p>Learn about our Masters racing opportunities and the preparation required for that event.</p></span><span class="go" aria-hidden="true">›</span></summary>
-        <div class="more"><p>Contact staff to discuss the available Masters format and eligibility before beginning a build.</p><div class="row"><a class="btn deep" href="#participate" data-interest="racing" data-topic="Divisions: Stock, Super Stock & Masters" data-note="Interested in: Masters Racing">Inquire about Masters Racing</a></div></div></details>
-      <details class="lane4"><summary><span class="ln">Lane 4</span><span><h3>Rally &amp; Track Experiences</h3><p>Explore additional opportunities for track time and racing practice when scheduled. Availability and participation requirements vary by session.</p></span><span class="go" aria-hidden="true">›</span></summary>
-        <div class="more"><p>Ask about available practice or rally dates and the equipment needed before arriving at the track.</p><div class="row"><a class="btn deep" href="#participate" data-interest="racing" data-topic="Rally & track experiences" data-note="Interested in: Rally & Track Experiences">Inquire about Rally &amp; Track Experiences</a></div></div></details>
-    </div>
-    <p style="color:#c9cbd0;font-size:.9rem;margin-top:14px;max-width:80ch">For every format: each published event provides its date, car and age requirements, preparation details and registration pathway. Staff confirm eligibility and next steps by email. Youth participants must know their assigned chaperone, with one chaperone per six to eight students, or have an arrangement confirmed with staff beforehand.</p>
-
-    <div class="race-plan" style="margin-top:clamp(2rem,4vw,2.6rem)">
-      <div><h2>Plan a Racing Experience</h2><p>Bring your group to the track for a party, fundraiser or custom event. Tell us what you have in mind, and we’ll discuss activities, dates, supervision and what is possible at Cronin Derby Downs.</p></div>
-      <a class="btn white" href="#participate" data-interest="event">Start planning your track event →</a>
-    </div>
   </div>
 </div>
 
