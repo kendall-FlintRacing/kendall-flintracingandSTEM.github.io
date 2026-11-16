@@ -3390,6 +3390,34 @@ body.rw-tv .rw-fol{display:none}
 .sp-photos img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
 @media (max-width:700px){.sp-photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .spx .give-strip{margin-top:clamp(2rem,4vw,3rem)}
+/* Race day v2: grouped menu, zones, program ad sizes */
+.rd-menu .sp-row h3{color:#ffb0b4}
+.rd-menu .rd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px;padding-bottom:0}
+.rd-menu .sp-grid .rd-pass{padding:26px 30px 14px 14px;min-height:96px;align-content:space-between}
+.rd-menu .sp-grid .rd-pass b{font-size:1.08rem;overflow-wrap:break-word;hyphens:auto}
+.rd-menu .sp-grid .rd-pass::after{top:20px;right:10px}
+.rd-menu .sp-row{padding:16px 0}
+.rd-menu .sp-bar{margin-top:6px}
+.rd-fine{color:#c9ccd2;font-size:.92rem;margin-top:12px}
+@media (max-width:560px){.rd-menu .sp-grid.rd-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.rd-menu .sp-grid .rd-pass{padding:24px 26px 12px 12px;min-height:92px}.rd-menu .sp-grid .rd-pass b{font-size:.98rem}}
+.rd-gn{display:inline-grid;place-items:center;min-width:2em;height:2em;padding:0 .4em;border-radius:999px;background:var(--red-deep);color:#fff;margin-right:6px;letter-spacing:0}
+.rd-group{margin-top:clamp(2.8rem,5vw,4rem)}
+.rd-group+.sp-tiers{margin-top:20px}
+.rd-zones{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:14px}
+.rd-zone{background:#fff;color:var(--ink);border-radius:8px;padding:28px 16px 16px;display:grid;gap:8px;grid-template-rows:auto auto 1fr auto;position:relative;overflow:hidden;min-width:0}
+.rd-zone::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/10px 10px}
+.rd-zone h3{font-size:1.3rem;line-height:1.02}
+.rd-zone .sp-price{font:800 1.6rem/1 var(--display);color:var(--red-deep)}
+.rd-zone p{color:#4a4d55;font-size:.92rem;line-height:1.5}
+.rd-zone .btn{justify-self:start;font-size:.85rem;padding:9px 12px}
+@media (max-width:1100px){.rd-zones{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){.rd-zones{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.rd-zones{grid-template-columns:minmax(0,1fr)}}
+.rd-sizes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.rd-sizes span{border:1.5px solid #d3d5da;border-radius:6px;padding:12px;display:grid;gap:4px;color:var(--red-deep);font:800 1.3rem/1 var(--display)}
+.rd-sizes b{color:var(--ink);font:700 .78rem/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase}
+@media (max-width:560px){.rd-sizes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.rd-kind .sp-chips a{background:#fff}
 /* ===== Race Day sponsor page (festive) ===== */
 .rd-hero{position:relative;isolation:isolate;overflow:hidden;background:#101114;color:#fff;text-align:center;padding:64px 0 56px}
 .rd-photo{position:absolute;inset:0;z-index:-4}.rd-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 60%}
@@ -4487,7 +4515,7 @@ body.rw-tv .rw-fol{display:none}
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#get-involved">Get Involved</a><span aria-hidden="true">/</span><span aria-current="page">Sponsors &amp; Partners</span></div></nav>
   <header class="prog-hero"><div class="wrap">
     <div class="txt"><p class="eyebrow">2027 Partnership Opportunities</p><h1>Sponsors &amp; Partners</h1><p class="lede">Our partners put tools in kids’ hands, cars on our track and opportunities at our doorstep. Here, kids don’t just watch STEM happen. They build it.</p>
-      <p class="sp-range"><b>$500 – $45,000</b> partnerships <span>·</span> <b>$100,000+</b> capital partnerships</p></div>
+      <p class="sp-range"><b>$500 – $45,000</b> partnerships <span>·</span> <b>$100,000+</b> capital partnerships <span>·</span> 3-year commitments</p></div>
     <div class="pic"><img src="{{IMG:img/web/two-cars-track.webp}}" alt="Two Soap Box Derby cars racing side by side down the track"></div>
   </div></header>
   <div class="tape" aria-hidden="true"></div>
@@ -4510,7 +4538,7 @@ body.rw-tv .rw-fol{display:none}
       <p class="eyebrow">Find your fit</p>
       <h2 id="spPathsH">Four ways to partner</h2>
       <div class="sp-paths">
-        <a class="sp-path" href="#race-day-sponsors"><span class="k">Race Day</span><b>Put our kids on the track.</b><span class="p">$100 – $45,000</span><span class="d">Signature Derby weekend partnerships: race operations, safety, the racer experience, race teams and program ads.</span><span class="go">See race day →</span></a>
+        <a class="sp-path" href="#race-day-sponsors"><span class="k">Race Day</span><b>Put our kids on the track.</b><span class="p">$100 – $15,000</span><span class="d">Division sponsors, event zones, local sponsors, live race ads, program ads and in-kind donations for the Flint Soap Box Derby.</span><span class="go">See race day →</span></a>
         <a class="sp-path" href="#sponsor-programs"><span class="k">Year-Round Programs</span><b>Racing is only the beginning.</b><span class="p">$5,500 – $45,000</span><span class="d">Workshops, camps, field trips, leadership and STEM programming all year long.</span><span class="go">See programs →</span></a>
         <a class="sp-path" href="#sponsor-community"><span class="k">Community Support</span><b>There’s a place for every partner.</b><span class="p">$500 – $2,500 + in-kind</span><span class="d">Flexible support for materials, meals, awards and areas of greatest need, plus goods and services.</span><span class="go">See community support →</span></a>
         <a class="sp-path" href="#sponsor-capital"><span class="k">Capital Partners</span><b>Building what comes next.</b><span class="p">$100,000+</span><span class="d">Help turn Cronin Derby Downs into a year-round home for racing, STEM and community.</span><span class="go">See capital partners →</span></a>
@@ -4521,14 +4549,14 @@ body.rw-tv .rw-fol{display:none}
       <p class="eyebrow">2027 updated menu</p>
       <h2 id="spMenuH">Build your partnership</h2>
       <p class="sub">Year-round programs, community support and the future of Cronin Derby Downs. Tap everything that interests you, then send your picks. We’ll follow up with details, availability and a partnership packet. Picking doesn’t commit you to anything.</p>
-      <div class="sp-rdteaser"><div><h3>Race day has its own menu</h3><p>Presenting, safety, VIP, race teams and program ads for the Flint Soap Box Derby, June 5, 2027.</p></div><a class="btn white" href="#race-day-menu">Open the race-day menu →</a></div>
+      <div class="sp-rdteaser"><div><h3>Race day has its own menu</h3><p>Division sponsors, event zones, local sponsors, live race ads, program ads and in-kind donations for the Flint Soap Box Derby, June 5, 2027.</p></div><a class="btn white" href="#race-day-menu">Open the race-day menu →</a></div>
       <div class="sp-menu" id="spMenu" data-prefix="Sponsor menu picks: " data-empty="Interested in: Sponsoring or partnering">
         <div class="sp-row"><h3>Programs</h3><div class="sp-grid">
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · Year-Round Presenting Partner ($45,000)"><b>Year-Round Presenting</b><small>$45,000 · Exclusive</small></button>
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · STEM Education &amp; Programming ($15,000)"><b>STEM Education &amp; Programming</b><small>$15,000 · Exclusive</small></button>
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · Youth Leadership &amp; Community Impact ($10,000)"><b>Youth Leadership &amp; Community Impact</b><small>$10,000 · Exclusive</small></button>
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · Direct Program Partner ($5,500)"><b>Direct Program Partner</b><small>$5,500 · Limited</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · Seasonal Programs Partner (winter, summer or fall)"><b>Seasonal Programs Partner</b><small>Winter · Summer · Fall</small></button>
+          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · Seasonal Programs Partner ($2,500 per season)"><b>Seasonal Programs Partner</b><small>$2,500 per season</small></button>
         </div></div>
         <div class="sp-row"><h3>Community</h3><div class="sp-grid">
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Community · Community Program Partner ($2,500)"><b>Community Program Partner</b><small>$2,500</small></button>
@@ -4538,12 +4566,12 @@ body.rw-tv .rw-fol{display:none}
         <div class="sp-row"><h3>Development</h3><div class="sp-grid">
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Founding Development Partner ($100,000+)"><b>Founding Development Partner</b><small>$100,000+</small></button>
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Transformative &amp; Naming Partnership"><b>Naming Partnership</b><small>By discussion</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Workshop technology"><b>Workshop Tech</b><small>Project</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Facility"><b>Facility</b><small>Project</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Track infrastructure"><b>Track Infrastructure</b><small>Project</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Park development"><b>Park Development</b><small>Project</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Transportation"><b>Transportation</b><small>Project</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Storage"><b>Storage</b><small>Project</small></button>
+          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Workshop technology ($5,000)"><b>Workshop Tech</b><small>$5,000</small></button>
+          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Facility ($25,000+)"><b>Facility</b><small>$25,000+</small></button>
+          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Track infrastructure ($25,000+)"><b>Track Infrastructure</b><small>$25,000+</small></button>
+          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Park development ($10,000+)"><b>Park Development</b><small>$10,000+</small></button>
+          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Transportation ($7,500)"><b>Transportation</b><small>$7,500</small></button>
+          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Storage ($5,000)"><b>Storage</b><small>$5,000</small></button>
         </div></div>
         <div class="sp-bar"><p class="spk-count" aria-live="polite">Nothing picked yet. Tap any tile above.</p><div class="cta-row"><button type="button" class="btn white-ghost spk-clear" hidden>Clear</button><a class="btn white spk-send" href="#participate" data-interest="sponsor" data-note="Interested in: Sponsoring or partnering">Send my picks →</a></div></div>
       </div>
@@ -4561,6 +4589,7 @@ body.rw-tv .rw-fol{display:none}
           <tr><th scope="row">Partner<small>$2,500</small></th><td>Yes</td><td>Yes</td><td>Yes</td><td>—</td></tr>
           <tr><th scope="row">Supporter &amp; Friend<small>$1,000 / $500</small></th><td>Yes</td><td>Annual recognition</td><td>Annual</td><td>—</td></tr>
         </tbody></table></div>
+      <p class="sp-fine"><b>Sponsorships are a 3-year commitment.</b> Ads and in-kind donations can be one-time.</p>
       <p class="sp-fine"><b>Goods &amp; services welcome.</b> We also accept qualifying in-kind support, including printing, food, transportation, rentals, equipment, security, media, professional services and construction materials. <a href="#sponsor-community">More on in-kind support →</a></p>
     </section>
 
@@ -4582,7 +4611,7 @@ body.rw-tv .rw-fol{display:none}
     <div class="wrap rd-inner">
       <p class="rd-date"><span class="rd-chk" aria-hidden="true"></span>Flint Soap Box Derby · Saturday, June 5, 2027<span class="rd-chk" aria-hidden="true"></span></p>
       <h1>Race Day<br>Sponsors</h1>
-      <p class="rd-lede">Put our kids on the track. Race-day partners power the cars, the crews and the cheering crowd, and their names ride along on the biggest day of our year.</p>
+      <p class="rd-lede">The Flint Soap Box Derby is presented by Flint Racing and STEM. Sponsor a division, a zone, a heat or an ad, and help make June 5 the best day of the year for our racers and their families.</p>
       <div class="rd-lights" role="img" aria-label="Starting lights"><span></span><span></span><span></span></div>
       <p class="rd-count"><b id="rdCount">—</b> <span id="rdCountLbl">days to race day</span></p>
       <div class="cta-row"><a class="btn white" href="#race-day-menu">Pick your race-day package ↓</a><a class="btn white-ghost" href="#participate" data-interest="sponsor" data-note="Question about race-day sponsorship">Ask a question</a></div>
@@ -4593,12 +4622,11 @@ body.rw-tv .rw-fol{display:none}
     <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#race-day-sponsors" aria-current="page">Race Day</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
 
     <section class="sp-sec" aria-labelledby="rdWkH">
-      <p class="eyebrow">Race weekend 2027</p>
-      <h2 id="rdWkH">One weekend, two races</h2>
-      <p class="sub">Race-day partners are part of both days.</p>
+      <p class="eyebrow">Race day 2027</p>
+      <h2 id="rdWkH">Race day at a glance</h2>
       <div class="rd-tickets">
-        <div class="rd-ticket"><div class="day"><b>Sat</b><span>June 5</span></div><div class="info"><h3>Community Race</h3><p>Our hometown race day for every Flint Racing family, crew and fan.</p></div></div>
-        <div class="rd-ticket"><div class="day"><b>Sun</b><span>June 6</span></div><div class="info"><h3>Sanctioned Derby Race</h3><p>Back on the hill the next day for our sanctioned Derby race.</p></div></div>
+        <div class="rd-ticket"><div class="day"><b>Sat</b><span>June 5</span></div><div class="info"><h3>Flint Soap Box Derby</h3><p>Presented by Flint Racing and STEM. One big day of racing for every family, crew and fan.</p></div></div>
+        <div class="rd-ticket"><div class="day"><b>2</b><span>Divisions</span></div><div class="info"><h3>Stock &amp; Masters</h3><p>Each division can carry a sponsor’s name from the first heat to the trophy presentation.</p></div></div>
       </div>
     </section>
 
@@ -4607,40 +4635,100 @@ body.rw-tv .rw-fol{display:none}
       <h2 id="rdMenuH">Pick your pit pass</h2>
       <p class="sub">Tap every race-day option that interests you, then send your picks. We’ll follow up with availability and details. Picking doesn’t commit you to anything.</p>
       <div class="sp-menu rd-menu" data-prefix="Race-day menu picks: " data-empty="Interested in: Race-day sponsorship">
-        <div class="rd-grid">
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · Presenting Partner ($45,000)"><span class="no">1</span><b>Presenting Partner</b><small>$45,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · Safety &amp; Infrastructure Partner ($15,000)"><span class="no">2</span><b>Safety &amp; Infrastructure</b><small>$15,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · VIP &amp; Participant Experience ($8,000)"><span class="no">3</span><b>VIP &amp; Participant Experience</b><small>$8,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · Sponsor a Race Team ($2,500)"><span class="no">4</span><b>Sponsor a Race Team</b><small>$2,500 · Limited spots</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · Race-Day Program Ad ($100–$1,000)"><span class="no">5</span><b>Race-Day Program Ad</b><small>$100 – $1,000</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · In-kind race-day support"><span class="no">6</span><b>In-Kind Race-Day Support</b><small>Tents, food, rentals &amp; more</small></button>
-        </div>
+        <div class="sp-row"><h3>Tournament</h3><div class="sp-grid rd-grid">
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Tournament · Stock Division Sponsor ($15,000)"><b>Stock Division Sponsor</b><small>$15,000 · Exclusive</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Tournament · Masters Division Sponsor ($10,000)"><b>Masters Division Sponsor</b><small>$10,000 · Exclusive</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Tournament · Sponsor a Race Team ($2,500)"><b>Sponsor a Race Team</b><small>$2,500 · Limited</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Tournament · Heat Sponsor ($250 per heat)"><b>Heat Sponsor</b><small>$250 per heat</small></button>
+        </div></div>
+        <div class="sp-row"><h3>Event</h3><div class="sp-grid rd-grid">
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Event Experience Partner ($12,000)"><b>Event Experience Partner</b><small>$12,000 · Exclusive</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Guest Tent &amp; Hospitality ($2,500)"><b>Guest Tent &amp; Hospitality</b><small>$2,500 · Zone</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Start Line Zone ($2,000)"><b>Start Line Zone</b><small>$2,000 · Zone</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Finish Line Zone ($2,000)"><b>Finish Line Zone</b><small>$2,000 · Zone</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Family Fun Zone ($2,000)"><b>Family Fun Zone</b><small>$2,000 · Zone</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Pit Row Zone ($1,500)"><b>Pit Row Zone</b><small>$1,500 · Zone</small></button>
+        </div></div>
+        <div class="sp-row"><h3>Local</h3><div class="sp-grid rd-grid">
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Local · Hometown Sponsor ($1,000)"><b>Hometown Sponsor</b><small>$1,000</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Local · Local Business Sponsor ($500)"><b>Local Business Sponsor</b><small>$500</small></button>
+        </div></div>
+        <div class="sp-row"><h3>Live Ads</h3><div class="sp-grid rd-grid">
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Live ads · Spotlight Ad ($750)"><b>Spotlight Ad</b><small>$750</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Live ads · Intermission Ad ($500)"><b>Intermission Ad</b><small>$500</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Live ads · Sponsor Strip Ad ($250)"><b>Sponsor Strip Ad</b><small>$250</small></button>
+        </div></div>
+        <div class="sp-row"><h3>Program</h3><div class="sp-grid rd-grid">
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Program ad · Full page ($1,000)"><b>Full Page</b><small>$1,000</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Program ad · Half page ($500)"><b>Half Page</b><small>$500</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Program ad · Quarter page ($250)"><b>Quarter Page</b><small>$250</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Program ad · Business card ($100)"><b>Business Card</b><small>$100</small></button>
+        </div></div>
+        <div class="sp-row"><h3>In-Kind</h3><div class="sp-grid rd-grid">
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Music &amp; DJ"><b>Music &amp; DJ</b><small>Donate</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Restrooms"><b>Restrooms</b><small>Donate</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Accessibility carts"><b>Accessibility Carts</b><small>Donate</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Photo booth"><b>Photo Booth</b><small>Donate</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Bounce house"><b>Bounce House</b><small>Donate</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Tents &amp; tables"><b>Tents &amp; Tables</b><small>Donate</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Decorations"><b>Decorations</b><small>Donate</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Food &amp; water"><b>Food &amp; Water</b><small>Donate</small></button>
+        </div></div>
         <div class="sp-bar"><p class="spk-count" aria-live="polite">Nothing picked yet. Tap any pass above.</p><div class="cta-row"><button type="button" class="btn white-ghost spk-clear" hidden>Clear</button><a class="btn white spk-send" href="#participate" data-interest="sponsor" data-note="Interested in: Race-day sponsorship">Send my picks →</a></div></div>
       </div>
+      <p class="rd-fine">Sponsorships are a 3-year commitment. Ads, heat sponsorships and in-kind donations can be one-time.</p>
     </section>
 
-    <section class="sp-sec" aria-labelledby="rdLineH">
-      <p class="eyebrow">The details</p>
-      <h2 id="rdLineH">The race-day lineup</h2>
-    </section>
+    <section class="sp-sec rd-group" aria-labelledby="rdG1"><p class="eyebrow"><span class="rd-gn">01</span> Tournament sponsors</p><h2 id="rdG1">Sponsor a division</h2><p class="sub">The race is presented by Flint Racing and STEM. Our top partners put their names on the divisions, the teams and the heats.</p></section>
     <div class="sp-tiers rd-tiers">
-      <article class="sp-tier top"><div class="sp-th"><h3><span class="no">1</span>Presenting Partner</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$45,000</p><p>Premier support for the whole Derby, from student and car preparation to race operations and the community experience.</p>
-        <ul class="sp-inc"><li>Event naming</li><li>Premier recognition</li><li>Major signage</li><li>Race-day presence</li><li>Digital recognition</li><li>Impact reporting</li></ul>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · Presenting Partner ($45,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3><span class="no">2</span>Safety &amp; Infrastructure Partner</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$15,000</p><p>Keeps race day safe and running: security, sanitation, tents, communications, safety equipment, signage and race operations.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · Safety &amp; Infrastructure Partner ($15,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3><span class="no">3</span>VIP &amp; Participant Experience</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$8,000</p><p>Makes race day unforgettable: participant recognition, awards, special race-day experiences, photography, presentation, hospitality and guest areas.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · VIP &amp; Participant Experience ($8,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3><span class="no">4</span>Sponsor a Race Team</h3><span class="sp-badge lim">Limited spots</span></div><p class="sp-price">$2,500</p><p>Provides the complete car, equipment, materials, hardware, weights, wraps and resources needed to put a Flint Racing team on the track.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · Sponsor a Race Team ($2,500)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3><span class="no">5</span>Race-Day Program Ad</h3><span class="sp-badge">Slots available</span></div><p class="sp-price">$100 – $1,000</p><p>Place an ad in our race-day program. Support Flint Racing, and we’ll support you.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · Race-Day Program Ad ($100–$1,000)">Ask about an ad</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3><span class="no">6</span>In-Kind Race-Day Support</h3><span class="sp-badge">Let’s talk</span></div><p class="sp-price">Goods &amp; services</p><p>Tents, food, rentals, security, transportation, printing, media and equipment all help race day run.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · In-kind race-day support">Offer in-kind support</a></article>
+      <article class="sp-tier top"><div class="sp-th"><h3>Stock Division Sponsor</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$15,000</p><p>Our top-tier partnership. Your name rides with the Stock Division all day, from the first heat to the trophy presentation.</p><ul class="sp-inc"><li>“Stock Division presented by …”</li><li>Name on every Stock heat and bracket</li><li>Trophy presentation</li><li>Finish-line banner</li><li>Live race page and big screen</li><li>Impact reporting</li></ul>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Tournament · Stock Division Sponsor ($15,000)">Ask about this</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3>Masters Division Sponsor</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$10,000</p><p>Put your name on the Masters Division, where our most experienced racers compete for the title.</p><ul class="sp-inc"><li>“Masters Division presented by …”</li><li>Name on every Masters heat and bracket</li><li>Trophy presentation</li><li>Track banner</li><li>Live race page and big screen</li></ul>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Tournament · Masters Division Sponsor ($10,000)">Ask about this</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3>Sponsor a Race Team</h3><span class="sp-badge lim">Limited spots</span></div><p class="sp-price">$2,500</p><p>Provides the complete car, equipment, materials, hardware, weights, wraps and resources needed to put a Flint Racing team on the track. Your logo goes on the car.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Tournament · Sponsor a Race Team ($2,500)">Ask about this</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3>Heat Sponsor</h3><span class="sp-badge">Per heat</span></div><p class="sp-price">$250</p><p>“Heat 7, brought to you by …” Your logo shows on the live race page and the big screen while your heat runs, and the announcer says your name.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Tournament · Heat Sponsor ($250 per heat)">Ask about this</a></article>
     </div>
+    <section class="sp-sec rd-group" aria-labelledby="rdG2"><p class="eyebrow"><span class="rd-gn">02</span> Event &amp; guest experience</p><h2 id="rdG2">Own the whole day, or pick a zone</h2><p class="sub">One Event Experience Partner can take the entire guest side of race day. If that spot is open, each zone can be sponsored on its own.</p></section>
+    <div class="sp-tiers rd-tiers">
+      <article class="sp-tier top"><div class="sp-th"><h3>Event Experience Partner</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$12,000</p><p>One partner for the whole guest side of race day: tents, seating, hospitality, guest areas and every zone below.</p><ul class="sp-inc"><li>All five zones</li><li>Tent and guest-area signage</li><li>Name on the event map</li><li>Live race page and big screen</li><li>Impact reporting</li></ul>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Event Experience Partner ($12,000)">Ask about this</a></article>
+    </div>
+    <div class="rd-zones">
+      <article class="rd-zone"><h3>Guest Tent &amp; Hospitality</h3><p class="sp-price">$2,500</p><p>Shade, seating and refreshments where families settle in for the day.</p><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Guest Tent &amp; Hospitality ($2,500)">Sponsor this zone</a></article>
+      <article class="rd-zone"><h3>Start Line Zone</h3><p class="sp-price">$2,000</p><p>The top of the hill, where every run begins and every racer gets a send-off.</p><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Start Line Zone ($2,000)">Sponsor this zone</a></article>
+      <article class="rd-zone"><h3>Finish Line Zone</h3><p class="sp-price">$2,000</p><p>The loudest spot on the track, with the timing board and the photo finish.</p><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Finish Line Zone ($2,000)">Sponsor this zone</a></article>
+      <article class="rd-zone"><h3>Family Fun Zone</h3><p class="sp-price">$2,000</p><p>Games, the photo booth and the bounce house for brothers, sisters and little fans.</p><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Family Fun Zone ($2,000)">Sponsor this zone</a></article>
+      <article class="rd-zone"><h3>Pit Row Zone</h3><p class="sp-price">$1,500</p><p>Where teams check cars, make repairs and get ready to race.</p><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Pit Row Zone ($1,500)">Sponsor this zone</a></article>
+    </div>
+    <section class="sp-sec rd-group" aria-labelledby="rdG3"><p class="eyebrow"><span class="rd-gn">03</span> Local sponsors</p><h2 id="rdG3">Hometown support</h2><p class="sub">For local businesses, organizations and families who want to be part of race day.</p></section>
+    <div class="sp-tiers rd-tiers">
+      <article class="sp-tier"><div class="sp-th"><h3>Hometown Sponsor</h3></div><p class="sp-price">$1,000</p><p>Your name on the race-day sponsor banner, in the race-day program and in the rotation on the live race page.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Local · Hometown Sponsor ($1,000)">Ask about this</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3>Local Business Sponsor</h3></div><p class="sp-price">$500</p><p>Your name on the race-day sponsor banner and in the race-day program. A great way to say: we support our kids.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Local · Local Business Sponsor ($500)">Ask about this</a></article>
+    </div>
+    <section class="sp-sec rd-group" aria-labelledby="rdG4"><p class="eyebrow"><span class="rd-gn">04</span> Live race ads</p><h2 id="rdG4">Ads on the live race page</h2><p class="sub">Fans follow every heat on the live race page, on their phones and on the big screen at the track. Your ad runs right alongside the racing.</p></section>
+    <div class="sp-tiers rd-tiers">
+      <article class="sp-tier"><div class="sp-th"><h3>Spotlight Ad</h3></div><p class="sp-price">$750</p><p>Your ad takes the featured spot for 20 seconds at a time, several times through the day, on every phone and the big screen.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Live ads · Spotlight Ad ($750)">Ask about this</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3>Intermission Ad</h3></div><p class="sp-price">$500</p><p>A full-screen ad in the intermission rotation, shown on the live race page and the big screen whenever racing pauses.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Live ads · Intermission Ad ($500)">Ask about this</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3>Sponsor Strip Ad</h3></div><p class="sp-price">$250</p><p>Your logo and tagline in the sponsor strip that scrolls under the racing all day.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Live ads · Sponsor Strip Ad ($250)">Ask about this</a></article>
+    </div>
+    <section class="sp-sec rd-group" aria-labelledby="rdG5"><p class="eyebrow"><span class="rd-gn">05</span> Program ads</p><h2 id="rdG5">Ads in the race-day program</h2><p class="sub">The printed race-day program goes home with every family. Support Flint Racing, and we’ll support you.</p></section>
+    <div class="sp-tiers rd-tiers">
+      <article class="sp-tier top"><div class="sp-th"><h3>Race-Day Program Ad</h3><span class="sp-badge">Slots available</span></div><p class="sp-price">$100 – $1,000</p><p>Choose a size below and send us your artwork, or let us know if you need help designing it.</p><div class="rd-sizes"><span><b>Business card</b>$100</span><span><b>Quarter page</b>$250</span><span><b>Half page</b>$500</span><span><b>Full page</b>$1,000</span></div>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Program ad (size to be chosen)">Ask about this</a></article>
+    </div>
+    <section class="sp-sec rd-group" aria-labelledby="rdG6"><p class="eyebrow"><span class="rd-gn">06</span> In-kind donations</p><h2 id="rdG6">Make race day feel like a festival</h2><p class="sub">Donate goods and services that decorate the hill and make the day more fun and more welcoming for every guest. Tap what you can offer.</p></section>
+    <section class="panel wide next-step rd-kind"><div class="sp-chips"><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Music &amp; DJ">Music &amp; DJ</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Restrooms">Restrooms</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Accessibility carts">Accessibility carts</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Photo booth">Photo booth</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Bounce house">Bounce house</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Tents &amp; tables">Tents &amp; tables</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Decorations">Decorations</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Food &amp; water">Food &amp; water</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Sound system">Sound system</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Golf carts">Golf carts</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Printing">Printing</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Volunteers’ meals">Volunteers’ meals</a></div><p class="sp-fine">In-kind donors are thanked on the race-day sponsor banner and the live race page.</p></section>
+
     <section class="panel wide next-step"><h2>Seen on race day</h2><p>Race-day partners show up where families and fans are looking.</p>
       <ul class="sp-seen"><li><b>Live race page</b><span>A rotating sponsor strip on the page fans follow on their phones.</span></li><li><b>“Brought to you by”</b><span>Your logo on a heat as it runs.</span></li><li><b>Intermission spotlight</b><span>A full-screen thank-you between races.</span></li><li><b>On the cars</b><span>Sponsor decals are part of every race car.</span></li></ul></section>
-    <section class="rd-finish" aria-labelledby="rdFinH"><div><h2 id="rdFinH">Ready to race?</h2><p>Send an inquiry and staff will follow up with availability and a partnership packet. Exclusive levels go to the first confirmed partner.</p></div>
+    <section class="rd-finish" aria-labelledby="rdFinH"><div><h2 id="rdFinH">Ready to race?</h2><p>Send an inquiry and staff will follow up with availability and a partnership packet. Exclusive spots go to the first confirmed partner.</p></div>
       <div class="cta-row"><a class="btn white" href="#participate" data-interest="sponsor" data-note="Interested in: Race-day sponsorship">Start a conversation</a><a class="btn white-ghost" href="#sponsor-menu">Program &amp; development menu</a></div></section>
   </div>
 </div>
@@ -4672,9 +4760,11 @@ body.rw-tv .rw-fol{display:none}
           <a href="#participate" data-interest="sponsor" data-note="Interested in: Direct Program Partner ($5,500) · Seasonal Workshops (winter, summer or fall)">Seasonal Workshops</a>
         </div></article>
     </div>
+    <div class="sp-tiers"><article class="sp-tier top"><div class="sp-th"><h3>Seasonal Programs Partner</h3><span class="sp-badge">Winter · Summer · Fall</span></div><p class="sp-price">$2,500 per season</p><p>Back one season of workshops and activities: winter, summer or fall. Your name goes on that season’s programs.</p>
+      <div class="sp-chips"><a href="#participate" data-interest="sponsor" data-note="Interested in: Seasonal Programs Partner ($2,500) · Winter">Winter</a><a href="#participate" data-interest="sponsor" data-note="Interested in: Seasonal Programs Partner ($2,500) · Summer">Summer</a><a href="#participate" data-interest="sponsor" data-note="Interested in: Seasonal Programs Partner ($2,500) · Fall">Fall</a></div></article></div>
     <section class="panel wide next-step"><h2>Programs your support reaches</h2><p>See what partners make possible.</p>
       <div class="sp-chips"><a href="#building-workshops">Building &amp; Workshops</a><a href="#steam-and-beyond">STEM Programs</a><a href="#seasonal-workshops">Seasonal Workshops</a><a href="#stem-camps">STEM Camps</a><a href="#leadership">Student Volunteers</a></div></section>
-    <section class="panel wide next-step"><h2>Ready to talk?</h2><p>Send an inquiry and staff will follow up with availability and a partnership packet.</p>
+    <section class="panel wide next-step"><h2>Ready to talk?</h2><p>Send an inquiry and staff will follow up with availability and a partnership packet. Sponsorships are a 3-year commitment.</p>
       <div class="cta-row"><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Year-round program partnership">Start a conversation</a><a class="btn outline-red" href="#sponsor-menu">Build a custom package</a></div></section>
   </div>
 </div>
@@ -4738,7 +4828,7 @@ body.rw-tv .rw-fol{display:none}
     </div>
     <section class="panel wide next-step"><h2>Projects ready for partners</h2><p>Have a specific project in mind? Tap one to start the conversation.</p>
       <div class="sp-chips">
-        <a href="#participate" data-interest="sponsor" data-note="Capital project: Workshop technology">Workshop technology</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Facility">Facility</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Track infrastructure">Track infrastructure</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Park development">Park development</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Transportation">Transportation</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Storage">Storage</a>
+        <a href="#participate" data-interest="sponsor" data-note="Capital project: Workshop technology ($5,000)">Workshop technology · $5,000</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Facility ($25,000+)">Facility · $25,000+</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Track infrastructure ($25,000+)">Track infrastructure · $25,000+</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Park development ($10,000+)">Park development · $10,000+</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Transportation ($7,500)">Transportation · $7,500</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Storage ($5,000)">Storage · $5,000</a>
       </div></section>
     <section class="panel wide next-step"><h2>Ready to talk?</h2><p>Capital partnerships start with a conversation with our leadership team.</p>
       <div class="cta-row"><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Capital partnership at Cronin Derby Downs">Start a conversation</a><a class="btn outline-red" href="#cronin-derby-downs">About Cronin Derby Downs</a></div></section>
