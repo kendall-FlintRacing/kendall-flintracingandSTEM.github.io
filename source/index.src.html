@@ -3390,6 +3390,69 @@ body.rw-tv .rw-fol{display:none}
 .sp-photos img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
 @media (max-width:700px){.sp-photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .spx .give-strip{margin-top:clamp(2rem,4vw,3rem)}
+/* ===== Race Day sponsor page (festive) ===== */
+.rd-hero{position:relative;isolation:isolate;overflow:hidden;background:#101114;color:#fff;text-align:center;padding:64px 0 56px}
+.rd-photo{position:absolute;inset:0;z-index:-4}.rd-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.rd-shade{position:absolute;inset:0;z-index:-3;background:radial-gradient(ellipse at 50% 40%,rgba(10,10,12,.55),rgba(10,10,12,.9) 75%)}
+.rd-hero .rd-flag{z-index:-2;width:48%;opacity:.9}
+.rd-hero .rd-flag+.rd-bunting{z-index:1}
+.rd-bunting{position:absolute;left:0;right:0;top:0;display:block;transform-origin:50% 0;animation:rdSway 5s ease-in-out infinite}
+@keyframes rdSway{50%{transform:translateY(3px) rotate(.25deg)}}
+.rd-inner{display:grid;justify-items:center;gap:16px;position:relative}
+.rd-date{display:inline-flex;align-items:center;gap:12px;font:700 .78rem/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;border:1.5px solid var(--red);background:rgba(17,17,19,.7);padding:10px 14px;border-radius:4px}
+.rd-chk{width:20px;height:14px;flex:none;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/7px 7px;border-radius:1px}
+.rd-hero h1{font:italic 900 clamp(3.4rem,10vw,7.4rem)/.88 var(--display);text-transform:uppercase;letter-spacing:.01em;color:#fff;text-shadow:5px 5px 0 var(--red-deep),0 0 40px rgba(0,0,0,.6)}
+.rd-lede{max-width:56ch;color:#e6e7ea;font-size:1.1rem;line-height:1.6}
+.rd-lights{display:flex;gap:12px;background:#0b0b0e;border:2px solid #2b2d33;border-radius:40px;padding:10px 16px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.rd-lights span{width:26px;height:26px;border-radius:50%;background:#2a1012;box-shadow:inset 0 0 6px rgba(0,0,0,.8)}
+.rd-lights span:nth-child(1){animation:rdL1 4s infinite}.rd-lights span:nth-child(2){animation:rdL2 4s infinite}.rd-lights span:nth-child(3){animation:rdL3 4s infinite}
+@keyframes rdL1{10%,55%{background:#ff2a3a;box-shadow:0 0 16px #ff2a3a}60%,100%{background:#2a1012}}
+@keyframes rdL2{0%,25%{background:#2a1012}30%,55%{background:#ffb020;box-shadow:0 0 16px #ffb020}60%,100%{background:#2a1012}}
+@keyframes rdL3{0%,55%{background:#0f2414}60%,92%{background:#2bff6a;box-shadow:0 0 18px #2bff6a}100%{background:#0f2414}}
+.rd-count{font:700 1rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#d5d8dd}
+.rd-count b{font:900 2.4rem/1 var(--display);color:#fff;letter-spacing:0;vertical-align:-4px;margin-right:4px}
+.rd-checkband{height:22px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/22px 22px;border-block:3px solid var(--red-deep)}
+.rd-tickets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:20px}
+.rd-ticket{display:grid;grid-template-columns:auto minmax(0,1fr);background:#fff;color:var(--ink);border-radius:10px;overflow:hidden;position:relative;-webkit-mask:radial-gradient(circle 12px at 118px 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 12px at 118px 100%,#0000 98%,#000) bottom/100% 51% no-repeat;mask:radial-gradient(circle 12px at 118px 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 12px at 118px 100%,#0000 98%,#000) bottom/100% 51% no-repeat}
+.rd-ticket .day{width:118px;display:grid;place-content:center;text-align:center;background:var(--red-deep);color:#fff;padding:18px 8px;border-right:3px dashed rgba(255,255,255,.6)}
+.rd-ticket .day b{font:italic 900 2.6rem/1 var(--display);text-transform:uppercase}
+.rd-ticket .day span{font:700 .8rem/1.2 var(--body);letter-spacing:.12em;text-transform:uppercase;margin-top:4px}
+.rd-ticket .info{padding:20px 22px;display:grid;gap:6px;align-content:center;background:linear-gradient(90deg,#fff 85%,#f3f4f6)}
+.rd-ticket h3{font-size:1.6rem}
+.rd-ticket p{color:#4a4d55;line-height:1.5}
+@media (max-width:760px){.rd-tickets{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:420px){.rd-ticket{-webkit-mask:none;mask:none}.rd-ticket .day{width:92px}}
+.rd-menu{background:linear-gradient(180deg,#2b2d32,#121316);padding-top:clamp(1.2rem,3vw,1.8rem)}
+.rd-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding-bottom:clamp(1rem,3vw,1.8rem)}
+@media (max-width:860px){.rd-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.rd-grid{grid-template-columns:minmax(0,1fr)}}
+.rd-menu .rd-pass{background:#fff;color:var(--ink);border:0;border-radius:10px;padding:30px 18px 18px 74px;min-height:118px;align-content:center;gap:6px;overflow:hidden;box-shadow:0 8px 0 #0004}
+.rd-menu .rd-pass::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/12px 12px}
+.rd-menu .rd-pass::after{top:22px;right:14px;border-color:#b9bcc2}
+.rd-menu .rd-pass .no{position:absolute;left:16px;top:50%;transform:translateY(-38%);width:44px;height:44px;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;font:italic 900 1.5rem/1 var(--display);background:#fff}
+.rd-menu .rd-pass b{font-size:1.25rem;color:var(--ink)}
+.rd-menu .rd-pass small{color:var(--red-deep);font-size:.85rem}
+.rd-menu .rd-pass:hover{background:#fff;transform:translateY(-3px);box-shadow:0 11px 0 #0004}
+.rd-menu .rd-pass[aria-pressed="true"]{background:var(--red-deep);transform:translateY(-3px) rotate(-.6deg)}
+.rd-menu .rd-pass[aria-pressed="true"]::before{background:repeating-conic-gradient(#111 0 25%,#ffd2d5 0 50%) 0 0/12px 12px}
+.rd-menu .rd-pass[aria-pressed="true"] b,.rd-menu .rd-pass[aria-pressed="true"] small{color:#fff}
+.rd-menu .rd-pass[aria-pressed="true"] .no{border-color:#fff;color:var(--red-deep)}
+.rd-menu .rd-pass[aria-pressed="true"]::after{border-color:#fff}
+.rd-tiers .sp-tier{border-top:0;position:relative;padding-top:calc(clamp(1.2rem,2.6vw,1.7rem) + 10px)}
+.rd-tiers .sp-tier::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/10px 10px;border-radius:8px 8px 0 0}
+.rd-tiers .sp-tier.top{border-left:8px solid var(--red-deep)}
+.rd-tiers h3 .no{display:inline-grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;background:var(--red-deep);color:#fff;font-size:.72em;margin-right:10px;vertical-align:3px}
+.rd-finish{margin-top:clamp(2.2rem,4vw,3rem);background:var(--red-deep);color:#fff;border-radius:10px;padding:calc(clamp(1.4rem,3vw,2rem) + 18px) clamp(1.2rem,3vw,2rem) clamp(1.4rem,3vw,2rem);display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+.rd-finish::before{content:"";position:absolute;left:0;right:0;top:0;height:16px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/16px 16px}
+.rd-finish h2{color:#fff;font:italic 900 clamp(2.2rem,4vw,3rem)/1 var(--display);text-transform:uppercase}
+.rd-finish p{color:#ffe3e5;max-width:60ch;margin-top:8px;line-height:1.55}
+.rd-finish>div:first-child{flex:1 1 320px;min-width:0}
+.sp-rdteaser{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;justify-content:space-between;margin-top:20px;background:var(--red-deep);color:#fff;border-radius:10px;padding:calc(clamp(1.1rem,2.6vw,1.5rem) + 12px) clamp(1.1rem,2.6vw,1.6rem) clamp(1.1rem,2.6vw,1.5rem);position:relative;overflow:hidden}
+.sp-rdteaser::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/12px 12px}
+.sp-rdteaser h3{font:italic 900 clamp(1.6rem,3vw,2.1rem)/1 var(--display);text-transform:uppercase;color:#fff}
+.sp-rdteaser p{color:#ffe3e5;margin-top:6px;line-height:1.5}
+.sp-rdteaser>div{flex:1 1 300px;min-width:0}
+@media (prefers-reduced-motion:reduce){.rd-bunting{animation:none}.rd-lights span{animation:none!important}.rd-lights span:nth-child(3){background:#2bff6a;box-shadow:0 0 18px #2bff6a}}
 </style>
 
 <header class="site-nav">
@@ -4428,7 +4491,7 @@ body.rw-tv .rw-fol{display:none}
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support" aria-current="page">Overview &amp; menu</a><a href="#sponsor-race-weekend">Race Weekend</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support" aria-current="page">Overview &amp; menu</a><a href="#race-day-sponsors">Race Day</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
 
     <section class="sp-sec" aria-labelledby="spLanesH">
       <p class="eyebrow">Where your support goes</p>
@@ -4446,7 +4509,7 @@ body.rw-tv .rw-fol{display:none}
       <p class="eyebrow">Find your fit</p>
       <h2 id="spPathsH">Four ways to partner</h2>
       <div class="sp-paths">
-        <a class="sp-path" href="#sponsor-race-weekend"><span class="k">Race Weekend</span><b>Put our kids on the track.</b><span class="p">$100 – $45,000</span><span class="d">Signature Derby weekend partnerships: race operations, safety, the racer experience, race teams and program ads.</span><span class="go">See race weekend →</span></a>
+        <a class="sp-path" href="#race-day-sponsors"><span class="k">Race Day</span><b>Put our kids on the track.</b><span class="p">$100 – $45,000</span><span class="d">Signature Derby weekend partnerships: race operations, safety, the racer experience, race teams and program ads.</span><span class="go">See race day →</span></a>
         <a class="sp-path" href="#sponsor-programs"><span class="k">Year-Round Programs</span><b>Racing is only the beginning.</b><span class="p">$5,500 – $45,000</span><span class="d">Workshops, camps, field trips, leadership and STEM programming all year long.</span><span class="go">See programs →</span></a>
         <a class="sp-path" href="#sponsor-community"><span class="k">Community Support</span><b>There’s a place for every partner.</b><span class="p">$500 – $2,500 + in-kind</span><span class="d">Flexible support for materials, meals, awards and areas of greatest need, plus goods and services.</span><span class="go">See community support →</span></a>
         <a class="sp-path" href="#sponsor-capital"><span class="k">Capital Partners</span><b>Building what comes next.</b><span class="p">$100,000+</span><span class="d">Help turn Cronin Derby Downs into a year-round home for racing, STEM and community.</span><span class="go">See capital partners →</span></a>
@@ -4456,16 +4519,9 @@ body.rw-tv .rw-fol{display:none}
     <section class="sp-sec" id="sponsor-menu" aria-labelledby="spMenuH">
       <p class="eyebrow">2027 updated menu</p>
       <h2 id="spMenuH">Build your partnership</h2>
-      <p class="sub">Tap everything that interests you, then send your picks. We’ll follow up with details, availability and a partnership packet. Picking doesn’t commit you to anything.</p>
-      <div class="sp-menu" id="spMenu">
-        <div class="sp-row"><h3>Race Weekend</h3><div class="sp-grid">
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Race Weekend · Presenting Partner ($45,000)"><b>Presenting Partner</b><small>$45,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Race Weekend · Safety &amp; Infrastructure ($15,000)"><b>Safety &amp; Infrastructure</b><small>$15,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Race Weekend · VIP &amp; Participant Experience ($8,000)"><b>VIP &amp; Participant Experience</b><small>$8,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Race Weekend · Sponsor a Race Team ($2,500)"><b>Sponsor a Race Team</b><small>$2,500 · Limited</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Race Weekend · Race-Day Program Ad ($100–$1,000)"><b>Race-Day Program Ad</b><small>$100 – $1,000</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Race Weekend · In-kind goods &amp; services"><b>In-Kind Goods &amp; Services</b><small>Let’s talk</small></button>
-        </div></div>
+      <p class="sub">Year-round programs, community support and the future of Cronin Derby Downs. Tap everything that interests you, then send your picks. We’ll follow up with details, availability and a partnership packet. Picking doesn’t commit you to anything.</p>
+      <div class="sp-rdteaser"><div><h3>Race day has its own menu</h3><p>Presenting, safety, VIP, race teams and program ads for the Flint Soap Box Derby, June 5, 2027.</p></div><a class="btn white" href="#race-day-menu">Open the race-day menu →</a></div>
+      <div class="sp-menu" id="spMenu" data-prefix="Sponsor menu picks: " data-empty="Interested in: Sponsoring or partnering">
         <div class="sp-row"><h3>Programs</h3><div class="sp-grid">
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · Year-Round Presenting Partner ($45,000)"><b>Year-Round Presenting</b><small>$45,000 · Exclusive</small></button>
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · STEM Education &amp; Programming ($15,000)"><b>STEM Education &amp; Programming</b><small>$15,000 · Exclusive</small></button>
@@ -4488,7 +4544,7 @@ body.rw-tv .rw-fol{display:none}
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Transportation"><b>Transportation</b><small>Project</small></button>
           <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Storage"><b>Storage</b><small>Project</small></button>
         </div></div>
-        <div class="sp-bar"><p id="spkCount" aria-live="polite">Nothing picked yet. Tap any tile above.</p><div class="cta-row"><button type="button" class="btn white-ghost" id="spkClear" hidden>Clear</button><a class="btn white" id="spkSend" href="#participate" data-interest="sponsor" data-note="Interested in: Sponsoring or partnering">Send my picks →</a></div></div>
+        <div class="sp-bar"><p class="spk-count" aria-live="polite">Nothing picked yet. Tap any tile above.</p><div class="cta-row"><button type="button" class="btn white-ghost spk-clear" hidden>Clear</button><a class="btn white spk-send" href="#participate" data-interest="sponsor" data-note="Interested in: Sponsoring or partnering">Send my picks →</a></div></div>
       </div>
     </section>
 
@@ -4514,34 +4570,77 @@ body.rw-tv .rw-fol{display:none}
   </div>
 </div>
 
-<!-- ======================= SPONSORS: RACE WEEKEND ======================= -->
-<div class="page dark prog-page serve2 spx" data-page="sponsor-race-weekend" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#support">Sponsors &amp; Partners</a><span aria-hidden="true">/</span><span aria-current="page">Race Weekend</span></div></nav>
-  <header class="prog-hero"><div class="wrap">
-    <div class="txt"><p class="eyebrow">Flint Soap Box Derby · June 2027</p><h1>Race Weekend Sponsors</h1><p class="lede">Put our kids on the track. Race-day partnerships connect your support directly to the teams, equipment and experience that make race day possible.</p></div>
-    <div class="pic"><img src="{{IMG:img/web/racer-down-track.webp}}" alt="A racer heads down the track at Cronin Derby Downs"></div>
-  </div></header>
-  <div class="tape" aria-hidden="true"></div>
-  <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#sponsor-race-weekend" aria-current="page">Race Weekend</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
-    <section class="panel wide next-step"><h2>A back-to-back racing weekend</h2><p>In 2027 Flint Racing and STEM hosts two days of racing: our community race on Saturday, June 5, followed by our sanctioned Derby race on Sunday. Race weekend partners are part of both days.</p></section>
-    <div class="sp-tiers">
-      <article class="sp-tier top"><div class="sp-th"><h3>Presenting Partner</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$45,000</p><p>Premier support for the whole Derby, from student and car preparation to race operations and the community experience.</p>
-        <ul class="sp-inc"><li>Event naming</li><li>Premier recognition</li><li>Major signage</li><li>Race-day presence</li><li>Digital recognition</li><li>Impact reporting</li></ul>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Weekend · Presenting Partner ($45,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Safety &amp; Infrastructure Partner</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$15,000</p><p>Keeps race day safe and running: security, sanitation, tents, communications, safety equipment, signage and race operations.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Weekend · Safety &amp; Infrastructure Partner ($15,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>VIP &amp; Participant Experience</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$8,000</p><p>Makes race day unforgettable: participant recognition, awards, special race-day experiences, photography, presentation, hospitality and guest areas.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Weekend · VIP &amp; Participant Experience ($8,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Sponsor a Race Team</h3><span class="sp-badge lim">Limited spots</span></div><p class="sp-price">$2,500</p><p>Provides the complete car, equipment, materials, hardware, weights, wraps and resources needed to put a Flint Racing team on the track.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Weekend · Sponsor a Race Team ($2,500)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Race-Day Program Ad</h3><span class="sp-badge">Slots available</span></div><p class="sp-price">$100 – $1,000</p><p>Place an ad in our race-day program. Support Flint Racing, and we’ll support you.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Weekend · Race-Day Program Ad ($100–$1,000)">Ask about an ad</a></article>
+<!-- ======================= SPONSORS: RACE DAY (festive) ======================= -->
+<div class="page dark prog-page serve2 spx rdx" data-page="race-day-sponsors" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#support">Sponsors &amp; Partners</a><span aria-hidden="true">/</span><span aria-current="page">Race Day Sponsors</span></div></nav>
+  <header class="rd-hero">
+    <div class="rd-photo"><img src="{{IMG:img/web/racer-down-track.webp}}" alt=""></div>
+    <div class="rd-shade"></div>
+    <canvas class="hero-flag rd-flag" aria-hidden="true"></canvas>
+    <svg class="rd-bunting" aria-hidden="true" width="100%" height="46"><defs><pattern id="rdFlags" width="96" height="46" patternUnits="userSpaceOnUse"><path d="M0 6Q48 14 96 6" fill="none" stroke="#e9e9ee" stroke-width="2"/><path d="M4 7h22l-11 26z" fill="#d2141c"/><path d="M28 9h22l-11 26z" fill="#fff"/><path d="M52 9h22l-11 26z" fill="#ff5a64"/><path d="M76 7h18l-9 24z" fill="#fff"/></pattern></defs><rect width="100%" height="46" fill="url(#rdFlags)"/></svg>
+    <div class="wrap rd-inner">
+      <p class="rd-date"><span class="rd-chk" aria-hidden="true"></span>Flint Soap Box Derby · Saturday, June 5, 2027<span class="rd-chk" aria-hidden="true"></span></p>
+      <h1>Race Day<br>Sponsors</h1>
+      <p class="rd-lede">Put our kids on the track. Race-day partners power the cars, the crews and the cheering crowd, and their names ride along on the biggest day of our year.</p>
+      <div class="rd-lights" role="img" aria-label="Starting lights"><span></span><span></span><span></span></div>
+      <p class="rd-count"><b id="rdCount">—</b> <span id="rdCountLbl">days to race day</span></p>
+      <div class="cta-row"><a class="btn white" href="#race-day-menu">Pick your race-day package ↓</a><a class="btn white-ghost" href="#participate" data-interest="sponsor" data-note="Question about race-day sponsorship">Ask a question</a></div>
     </div>
-    <section class="panel wide next-step"><h2>Seen on race day</h2><p>Race weekend partners show up where families and fans are looking.</p>
+  </header>
+  <div class="rd-checkband" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#race-day-sponsors" aria-current="page">Race Day</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
+
+    <section class="sp-sec" aria-labelledby="rdWkH">
+      <p class="eyebrow">Race weekend 2027</p>
+      <h2 id="rdWkH">One weekend, two races</h2>
+      <p class="sub">Race-day partners are part of both days.</p>
+      <div class="rd-tickets">
+        <div class="rd-ticket"><div class="day"><b>Sat</b><span>June 5</span></div><div class="info"><h3>Community Race</h3><p>Our hometown race day for every Flint Racing family, crew and fan.</p></div></div>
+        <div class="rd-ticket"><div class="day"><b>Sun</b><span>June 6</span></div><div class="info"><h3>Sanctioned Derby Race</h3><p>Back on the hill the next day for our sanctioned Derby race.</p></div></div>
+      </div>
+    </section>
+
+    <section class="sp-sec" id="race-day-menu" aria-labelledby="rdMenuH">
+      <p class="eyebrow">Race-day menu</p>
+      <h2 id="rdMenuH">Pick your pit pass</h2>
+      <p class="sub">Tap every race-day option that interests you, then send your picks. We’ll follow up with availability and details. Picking doesn’t commit you to anything.</p>
+      <div class="sp-menu rd-menu" data-prefix="Race-day menu picks: " data-empty="Interested in: Race-day sponsorship">
+        <div class="rd-grid">
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · Presenting Partner ($45,000)"><span class="no">1</span><b>Presenting Partner</b><small>$45,000 · Exclusive</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · Safety &amp; Infrastructure Partner ($15,000)"><span class="no">2</span><b>Safety &amp; Infrastructure</b><small>$15,000 · Exclusive</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · VIP &amp; Participant Experience ($8,000)"><span class="no">3</span><b>VIP &amp; Participant Experience</b><small>$8,000 · Exclusive</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · Sponsor a Race Team ($2,500)"><span class="no">4</span><b>Sponsor a Race Team</b><small>$2,500 · Limited spots</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · Race-Day Program Ad ($100–$1,000)"><span class="no">5</span><b>Race-Day Program Ad</b><small>$100 – $1,000</small></button>
+          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Race Day · In-kind race-day support"><span class="no">6</span><b>In-Kind Race-Day Support</b><small>Tents, food, rentals &amp; more</small></button>
+        </div>
+        <div class="sp-bar"><p class="spk-count" aria-live="polite">Nothing picked yet. Tap any pass above.</p><div class="cta-row"><button type="button" class="btn white-ghost spk-clear" hidden>Clear</button><a class="btn white spk-send" href="#participate" data-interest="sponsor" data-note="Interested in: Race-day sponsorship">Send my picks →</a></div></div>
+      </div>
+    </section>
+
+    <section class="sp-sec" aria-labelledby="rdLineH">
+      <p class="eyebrow">The details</p>
+      <h2 id="rdLineH">The race-day lineup</h2>
+    </section>
+    <div class="sp-tiers rd-tiers">
+      <article class="sp-tier top"><div class="sp-th"><h3><span class="no">1</span>Presenting Partner</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$45,000</p><p>Premier support for the whole Derby, from student and car preparation to race operations and the community experience.</p>
+        <ul class="sp-inc"><li>Event naming</li><li>Premier recognition</li><li>Major signage</li><li>Race-day presence</li><li>Digital recognition</li><li>Impact reporting</li></ul>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · Presenting Partner ($45,000)">Ask about this</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3><span class="no">2</span>Safety &amp; Infrastructure Partner</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$15,000</p><p>Keeps race day safe and running: security, sanitation, tents, communications, safety equipment, signage and race operations.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · Safety &amp; Infrastructure Partner ($15,000)">Ask about this</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3><span class="no">3</span>VIP &amp; Participant Experience</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$8,000</p><p>Makes race day unforgettable: participant recognition, awards, special race-day experiences, photography, presentation, hospitality and guest areas.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · VIP &amp; Participant Experience ($8,000)">Ask about this</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3><span class="no">4</span>Sponsor a Race Team</h3><span class="sp-badge lim">Limited spots</span></div><p class="sp-price">$2,500</p><p>Provides the complete car, equipment, materials, hardware, weights, wraps and resources needed to put a Flint Racing team on the track.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · Sponsor a Race Team ($2,500)">Ask about this</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3><span class="no">5</span>Race-Day Program Ad</h3><span class="sp-badge">Slots available</span></div><p class="sp-price">$100 – $1,000</p><p>Place an ad in our race-day program. Support Flint Racing, and we’ll support you.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · Race-Day Program Ad ($100–$1,000)">Ask about an ad</a></article>
+      <article class="sp-tier"><div class="sp-th"><h3><span class="no">6</span>In-Kind Race-Day Support</h3><span class="sp-badge">Let’s talk</span></div><p class="sp-price">Goods &amp; services</p><p>Tents, food, rentals, security, transportation, printing, media and equipment all help race day run.</p>
+        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day · In-kind race-day support">Offer in-kind support</a></article>
+    </div>
+    <section class="panel wide next-step"><h2>Seen on race day</h2><p>Race-day partners show up where families and fans are looking.</p>
       <ul class="sp-seen"><li><b>Live race page</b><span>A rotating sponsor strip on the page fans follow on their phones.</span></li><li><b>“Brought to you by”</b><span>Your logo on a heat as it runs.</span></li><li><b>Intermission spotlight</b><span>A full-screen thank-you between races.</span></li><li><b>On the cars</b><span>Sponsor decals are part of every race car.</span></li></ul></section>
-    <section class="panel wide next-step"><h2>Ready to talk?</h2><p>Send an inquiry and staff will follow up with availability and a partnership packet. Exclusive levels go to the first confirmed partner.</p>
-      <div class="cta-row"><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Race Weekend sponsorship">Start a conversation</a><a class="btn outline-red" href="#sponsor-menu">Build a custom package</a></div></section>
+    <section class="rd-finish" aria-labelledby="rdFinH"><div><h2 id="rdFinH">Ready to race?</h2><p>Send an inquiry and staff will follow up with availability and a partnership packet. Exclusive levels go to the first confirmed partner.</p></div>
+      <div class="cta-row"><a class="btn white" href="#participate" data-interest="sponsor" data-note="Interested in: Race-day sponsorship">Start a conversation</a><a class="btn white-ghost" href="#sponsor-menu">Program &amp; development menu</a></div></section>
   </div>
 </div>
 
@@ -4554,7 +4653,7 @@ body.rw-tv .rw-fol{display:none}
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#sponsor-race-weekend">Race Weekend</a><a href="#sponsor-programs" aria-current="page">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#race-day-sponsors">Race Day</a><a href="#sponsor-programs" aria-current="page">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
     <div class="sp-tiers">
       <article class="sp-tier top"><div class="sp-th"><h3>Year-Round Presenting Partner</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$45,000</p><p>Premier year-round support for workshops, camps, field trips, leadership, community programming and student experiences.</p>
         <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Programs · Year-Round Presenting Partner ($45,000)">Ask about this</a></article>
@@ -4588,7 +4687,7 @@ body.rw-tv .rw-fol{display:none}
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#sponsor-race-weekend">Race Weekend</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community" aria-current="page">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#race-day-sponsors">Race Day</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community" aria-current="page">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
     <div class="sp-tiers three">
       <article class="sp-tier"><div class="sp-th"><h3>Community Program Partner</h3></div><p class="sp-price">$2,500</p><p>Flexible support for programming, equipment, student materials, meals, activities and areas of greatest need.</p>
         <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Community · Community Program Partner ($2,500)">Ask about this</a></article>
@@ -4622,7 +4721,7 @@ body.rw-tv .rw-fol{display:none}
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#sponsor-race-weekend">Race Weekend</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital" aria-current="page">Capital Partners</a></nav>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#race-day-sponsors">Race Day</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital" aria-current="page">Capital Partners</a></nav>
     <section class="panel wide next-step"><h2>The plan for the park</h2><p>Four stages take Cronin Derby Downs from a race-day hill to a year-round destination.</p>
       <ol class="buildpath four">
         <li><span class="dot">1</span><span><b>Restore</b><span class="t">Track, grounds, landscaping, safety and spectator areas.</span></span></li>
@@ -5147,11 +5246,11 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning",[[COUNCIL]]"council":"Leadership Council",[[/COUNCIL]]"team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","sponsor-race-weekend":"Race Weekend Sponsors","sponsor-programs":"Program Partners","sponsor-community":"Community Support","sponsor-capital":"Capital Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning",[[COUNCIL]]"council":"Leadership Council",[[/COUNCIL]]"team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","race-day-sponsors":"Race Day Sponsors","sponsor-programs":"Program Partners","sponsor-community":"Community Support","sponsor-capital":"Capital Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
-  var PAGE_ANCHORS={"sponsor-menu":"support","school-practice":"track-schedule","how-racing":"derby-racing","dr-raceday":"derby-racing","dr-terms":"derby-racing","race-board":"track-schedule","sanctioned-racers":"racing","workshop-registration":"race-registration"};
+  var PAGE_ANCHORS={"sponsor-menu":"support","race-day-menu":"race-day-sponsors","school-practice":"track-schedule","how-racing":"derby-racing","dr-raceday":"derby-racing","dr-terms":"derby-racing","race-board":"track-schedule","sanctioned-racers":"racing","workshop-registration":"race-registration"};
   var ALIAS={"plan-event":"event","park-support":"park","park-inquiry":"park","register":"building"};
   var pendingInterest=null;
   var pendingNote=null;
@@ -5218,7 +5317,7 @@ body.rw-tv .rw-fol{display:none}
 
   /* ---- Waving checkered flag (hero) ---- */
   (function(){
-    var cv=document.getElementById("heroFlag"); if(!cv||!cv.getContext) return;
+    [].forEach.call(document.querySelectorAll("canvas.hero-flag"),function(cv){ if(!cv.getContext) return;
     var ctx=cv.getContext("2d"), still=matchMedia("(prefers-reduced-motion: reduce)").matches;
     var W=0,H=0,dpr=1,running=false,raf=0,t0=performance.now();
     function size(){var r=cv.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
@@ -5246,12 +5345,13 @@ body.rw-tv .rw-fol{display:none}
       }
     }
     function loop(now){draw(now-t0); if(running) raf=requestAnimationFrame(loop)}
-    function start(){if(running||still)return;running=true;raf=requestAnimationFrame(loop)}
+    function start(){if(cv.getBoundingClientRect().width!==W){size();if(still)draw(0)}if(running||still)return;running=true;raf=requestAnimationFrame(loop)}
     function stop(){running=false;cancelAnimationFrame(raf)}
     size(); draw(still?0:900);
     addEventListener("resize",function(){size();draw(still?0:performance.now()-t0)});
     if("IntersectionObserver" in window){new IntersectionObserver(function(es){es[0].isIntersecting?start():stop()}).observe(cv)} else start();
     document.addEventListener("visibilitychange",function(){document.hidden?stop():start()});
+    });
   })();
 
   /* ---- Events (public: dates only; times and locations go out by email) ---- */
@@ -5825,14 +5925,19 @@ body.rw-tv .rw-fol{display:none}
   function drawWall(){var all=[];PARTNERS.forEach(function(pg){pg.forEach(function(p){if(p.img)all.push(p)})});
     $("#partnerWall").innerHTML=all.map(function(p){return '<div><img src="'+esc(p.img)+'" alt="'+esc(p.name)+' logo" loading="lazy"></div>'}).join("")}
   drawWall();
-  /* ---- Sponsor menu: tap tiles, then "Send my picks" fills the questionnaire note ---- */
-  (function(){var box=document.getElementById("spMenu");if(!box)return;
-    var send=document.getElementById("spkSend"),cnt=document.getElementById("spkCount"),clr=document.getElementById("spkClear"),picks=[].slice.call(box.querySelectorAll(".sp-pick"));
+  /* ---- Sponsor menus (hub + race day): tap tiles, then "Send my picks" fills the questionnaire note ---- */
+  [].forEach.call(document.querySelectorAll(".sp-menu"),function(box){
+    var send=box.querySelector(".spk-send"),cnt=box.querySelector(".spk-count"),clr=box.querySelector(".spk-clear"),picks=[].slice.call(box.querySelectorAll(".sp-pick"));
+    if(!send||!cnt||!clr)return;var empty0=cnt.textContent;
     function sync(){var on=picks.filter(function(b){return b.getAttribute("aria-pressed")==="true"}).map(function(b){return b.getAttribute("data-pick")});
-      cnt.textContent=on.length?(on.length+(on.length===1?" pick: ":" picks: ")+on.map(function(x){return x.split(" · ")[1]||x}).join(", ")):"Nothing picked yet. Tap any tile above.";
-      send.setAttribute("data-note",on.length?"Sponsor menu picks: "+on.join("; "):"Interested in: Sponsoring or partnering");clr.hidden=!on.length}
+      cnt.textContent=on.length?(on.length+(on.length===1?" pick: ":" picks: ")+on.map(function(x){return x.split(" · ")[1]||x}).join(", ")):empty0;
+      send.setAttribute("data-note",on.length?(box.getAttribute("data-prefix")||"Picks: ")+on.join("; "):(box.getAttribute("data-empty")||"Interested in: Sponsoring or partnering"));clr.hidden=!on.length}
     picks.forEach(function(b){b.addEventListener("click",function(){if(document.body.classList.contains("fr-editing"))return;b.setAttribute("aria-pressed",String(b.getAttribute("aria-pressed")!=="true"));sync()})});
-    clr.addEventListener("click",function(){picks.forEach(function(b){b.setAttribute("aria-pressed","false")});sync()});sync()})();
+    clr.addEventListener("click",function(){picks.forEach(function(b){b.setAttribute("aria-pressed","false")});sync()});sync()});
+  /* ---- Race Day sponsor page: countdown to the Derby ---- */
+  (function(){var el=document.getElementById("rdCount");if(!el)return;
+    var t=new Date();t.setHours(0,0,0,0);var r=new Date("2027-06-05T00:00:00"),d=Math.round((r-t)/864e5),lbl=document.getElementById("rdCountLbl");
+    if(d>1){el.textContent=d}else if(d===1){el.textContent="1";lbl.textContent="day to race day"}else if(d===0){el.textContent="Today";lbl.textContent="is race day!"}else{el.textContent="See you";lbl.textContent="next race season"}})();
   /* ---- Donate: Stripe Payment Link when connected (Admin → Donations), otherwise a pledge to the questionnaire ---- */
   var DON=null;
   function donAmounts(list){var box=document.querySelector("#donForm .amounts");if(!box)return;var cur=(document.querySelector('input[name="amt"]:checked')||{}).value;
@@ -7548,7 +7653,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
     ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
   var DYN=["dialog.dr-dlg","#rgForm","#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#qsDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
-    "#yearGrid","#yearRange","#partnerWall","#spkCount","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
+    "#yearGrid","#yearRange","#partnerWall",".spk-count","#rdCount","#rdCountLbl","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
   var TAGGED=[], DEF={};
