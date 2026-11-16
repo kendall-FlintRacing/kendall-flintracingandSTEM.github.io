@@ -3291,6 +3291,22 @@ body.rw-tv .rw-fol{display:none}
 /* Four ways to support (Nov 16): same card rules as the program pages */
 .serve2 .panels .panel .cta-row{margin-top:auto}
 .serve2 .panel.wide.next-step{margin-top:clamp(2rem,4vw,3rem)}
+
+/* Seasonal Workshops (Nov 16): same header, ruler and white cards as the other program pages */
+.sw2 .panel.bulletin{background:#fff;border-top:0;gap:18px;align-content:start}
+.sw2 .bul-top h2{font-size:clamp(1.7rem,3vw,2.1rem)}
+.sw2 .note-card{background:#f3f4f6;box-shadow:none}
+.sw2 .panel.flow{padding:clamp(1.3rem,3vw,1.8rem) 0;align-content:start;overflow:hidden}
+.sw2 .panel.flow h2{padding-inline:clamp(1.3rem,3vw,1.8rem)}
+.sw2 .panel.year{background:#fff;color:var(--ink);padding:clamp(1.3rem,3vw,1.8rem);gap:6px}
+.sw2 .year-head h2{color:var(--ink);font-size:clamp(1.7rem,3vw,2.1rem)}
+.sw2 .year-head span{color:var(--red-deep)}
+.sw2 .year-grid{grid-template-columns:repeat(4,minmax(0,1fr));column-gap:12px}
+.sw2 .year-grid .ycell::before,.sw2 .year-grid .ycell:nth-child(n+4)::before,.sw2 .year-grid .ycell:nth-child(n+3)::before{display:none}
+.sw2 .ycell{margin-block:6px;background:#f3f4f6;border:1.5px solid transparent}
+.sw2 .ycell.has{background:#fff;border-color:var(--ink)}
+@media (max-width:900px){.sw2 .year-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.sw2 .year-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 
 <header class="site-nav">
@@ -4038,15 +4054,20 @@ body.rw-tv .rw-fol{display:none}
 </div>
 
 <!-- ======================= SEASONAL WORKSHOPS ======================= -->
-<div class="page sw-page" data-page="seasonal-workshops" hidden>
+<div class="page dark prog-page sw2" data-page="seasonal-workshops" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><span aria-current="page">Seasonal Workshops</span></div></nav>
-  <header class="sw-head"><div class="wrap">
-    <p class="eyebrow">Build something bigger.</p>
-    <h1>Seasonal Workshops</h1>
-    <p>One Saturday each month. A fresh hands-on project. A reason to build something together.</p>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt">
+      <p class="eyebrow">Build something bigger.</p>
+      <h1>Seasonal Workshops</h1>
+      <p class="lede">One Saturday each month. A fresh hands-on project. A reason to build something together.</p>
+    </div>
+    <div class="pic"><img src="{{IMG:img/web/header-placeholder.webp}}" alt=""></div>
   </div></header>
-  <div class="wrap sw-grid">
-    <aside class="bulletin" aria-labelledby="bulTitle">
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="panels">
+    <aside class="panel bulletin" aria-labelledby="bulTitle">
       <div class="bul-top">
         <h2 id="bulTitle">Monthly Bulletin</h2>
         <span class="bul-month" id="bulMonth"></span>
@@ -4071,9 +4092,8 @@ body.rw-tv .rw-fol{display:none}
         <div id="bulNotes"></div>
       </section>
     </aside>
-
-    <div class="sw-right">
-      <section class="flow" aria-roledescription="carousel" aria-label="Program photos">
+      <section class="panel flow" aria-roledescription="carousel" aria-label="Program photos">
+        <h2>Workshop photos</h2>
         <div class="flow-stage" id="flowStage">
           <figure class="fcard" data-i="0" role="group" aria-label="Photo 1 of 8"><img src="{{IMG:img/web/2026-racers-group.webp}}" alt="Racers ready for race day at Cronin Derby Downs" loading="lazy" style="object-position:50% 40%"><figcaption>Racers ready for race day at Cronin Derby Downs</figcaption></figure>
           <figure class="fcard" data-i="1" role="group" aria-label="Photo 2 of 8"><img src="{{IMG:img/web/two-cars-track.webp}}" alt="Two cars racing side by side down the hill" loading="lazy" style="object-position:50% 85%"><figcaption>Two cars racing side by side down the hill</figcaption></figure>
@@ -4090,12 +4110,23 @@ body.rw-tv .rw-fol{display:none}
           <button class="round" id="flowNext" aria-label="Next photo">→</button>
         </div>
       </section>
-      <section class="year" aria-labelledby="yearTitle">
+      <section class="panel wide year" aria-labelledby="yearTitle">
         <div class="year-head"><h2 id="yearTitle">The year at a glance</h2><span id="yearRange"></span></div>
         <div class="year-grid" id="yearGrid"></div>
       </section>
-      <div class="sw-camp"><div><b>Summer STEM Camps</b><p>A week of hands-on building, science and racing. See the sessions and sign up.</p></div><a class="btn deep" href="#stem-camps">See camp sessions →</a></div>
+      <section class="panel wide">
+        <p class="eyebrow">Summer</p>
+        <h2>Summer STEM Camps</h2>
+        <p>A week of hands-on building, science and racing. See the sessions and sign up.</p>
+        <div class="cta-row"><a class="btn deep" href="#stem-camps">See camp sessions</a></div>
+      </section>
     </div>
+
+    <section class="panel wide" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
+      <h2>Ready to take the next step?</h2>
+      <p>Send an inquiry and staff will follow up by email about the next workshop, availability and what to bring. Times and locations are emailed to registered participants. Inquiring does not confirm a place.</p>
+      <div class="row"><a class="btn deep" href="#participate" data-interest="steam">Ask about seasonal workshops</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
+    </section>
   </div>
 </div>
 
