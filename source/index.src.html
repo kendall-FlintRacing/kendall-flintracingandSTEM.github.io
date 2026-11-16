@@ -3145,6 +3145,17 @@ body.rw-tv .rw-fol{display:none}
 #coBox .cx .co-links{margin:6px 0 0 18px;display:grid;gap:4px;color:#cfd3da;font-size:.92rem}#coBox .cx .co-links b{color:#fff}
 #coBox .cx .rk-ordhead .co-ss{flex:none}
 @media (max-width:700px){#coBox .cx .co-del{grid-template-columns:minmax(0,1fr)}}
+
+/* STEM Programs (Nov 15): Building Workshops format, schematic car kept in the hero */
+.stem2 .prog-hero .pic.stem-pic{display:grid;place-items:center;margin-right:0;padding:clamp(1.2rem,3vw,2.2rem) clamp(16px,3vw,40px) clamp(1.2rem,3vw,2.2rem) 0;min-height:0}
+.stem2 .stem-pic .schematic{width:100%;max-width:620px}
+.panels.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.panels.three .panel h2{font-size:clamp(1.7rem,2.6vw,2.1rem)}
+.panels.three .cta-row{margin-top:auto}.panels.three .panel{grid-template-rows:auto auto auto auto 1fr}
+.stem2 .buildpath li{padding-right:14px}
+.stem-note{font-size:.9rem;color:#5a5d64;border-left:3px solid var(--red-deep);padding-left:10px}
+@media (max-width:1000px){.panels.three{grid-template-columns:minmax(0,1fr)}.panels.three .panel{grid-template-rows:none}}
+@media (max-width:760px){.stem2 .prog-hero .pic.stem-pic{padding:0 16px 1.4rem}}
 </style>
 
 <header class="site-nav">
@@ -3744,14 +3755,15 @@ body.rw-tv .rw-fol{display:none}
 </dialog>
 
 <!-- ======================= STEM PROGRAMS ======================= -->
-<div class="page stem-page prog-page" data-page="steam-and-beyond" hidden>
+<div class="page dark prog-page stem2" data-page="steam-and-beyond" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><span aria-current="page">STEM Programs</span></div></nav>
-  <header class="stem-hero"><div class="wrap">
-    <div>
-      <span class="tag mono">PROJECT FILE · STEM PROGRAMS</span>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt">
+      <p class="eyebrow">Explore, build, lead.</p>
       <h1>STEM Programs</h1>
-      <p>A weekday space to explore, build and solve problems together—beyond race day.</p>
+      <p class="lede">Three ways to keep building beyond race day: weeknight STEM Development Workshops, summer STEM Camps and the Student Leadership Council.</p>
     </div>
+    <div class="pic stem-pic">
     <figure class="schematic" style="margin:0">
       <svg viewBox="-20 -70 1260 720" role="img" aria-label="Line drawing of a soap box car. Labels show the shell, the cockpit, steering and brakes at the front of the car, and the wheelbase between the front and rear wheels.">
         <image href="{{IMG:img/web/coloring-car.webp}}" x="0" y="0" width="996" height="512"/>
@@ -3781,20 +3793,51 @@ body.rw-tv .rw-fol{display:none}
       </svg>
       <figcaption class="mono"><span>FIG. 1 — GRAVITY CAR · STEERING &amp; BRAKES UP FRONT</span><span>NOT TO SCALE</span></figcaption>
     </figure>
-  </div></header>
-  <div class="wrap">
-    <div class="specs">
-      <section class="spec status"><span class="no mono">SPEC 01</span><h2>Weekday open garage</h2><p>We are developing a standing Tuesday or Thursday evening open garage. The weekday, times, age groups and availability will be confirmed before sessions begin.</p></section>
-      <section class="spec"><span class="no mono">SPEC 02</span><h2>Choose your pace</h2>
-        <div class="pace"><div><b>Six-week program</b><small>Follow a project from idea to completion.</small></div><div><b>Three-meet session</b><small>Three meetings spread across the same six weeks, for a lighter schedule.</small></div></div>
-        <p>Ask us which option fits your student.</p></section>
-      <section class="spec"><span class="no mono">SPEC 03</span><h2>Learning by doing</h2><p>Students explore tools, design, engineering and problem-solving with adult guidance. Projects and participation requirements will be outlined for each session. For youth participation, tell us about the student’s age and accompanying adult when you inquire.</p>
-        <div class="chips2 mono"><span>TOOLS</span><span>DESIGN</span><span>ENGINEERING</span><span>PROBLEM-SOLVING</span></div></section>
     </div>
-    <section class="stem-cta">
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="panels three">
+      <section class="panel">
+        <p class="eyebrow">Weeknights</p>
+        <h2>STEM Development Workshops</h2>
+        <p>Our weeknight open workshops. We host different experiments and activities regularly, so there’s always something new to try. Build together with the group, or come up with a project of your own and keep working on it week after week.</p>
+        <ul class="feature-list"><li>New experiments and activities</li><li>Build together</li><li>Design your own project</li><li>Pick up where you left off each week</li></ul>
+        <p class="stem-note">The weeknight, times and ages will be posted here once they’re set.</p>
+        <div class="cta-row"><a class="btn deep" href="#participate" data-interest="weekday" data-note="Interested in: STEM Development Workshops">Ask about weeknight workshops</a></div>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">Summer</p>
+        <h2>STEM Camps</h2>
+        <p>A week of hands-on building, science and racing. Campers design, build and test, then see how their ideas hold up on the hill.</p>
+        <ul class="feature-list"><li>Design &amp; build</li><li>Gravity, friction &amp; speed</li><li>Test runs</li><li>Teamwork</li></ul>
+        <div class="cta-row"><a class="btn deep" href="#stem-camps">See camp sessions</a></div>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">Older students</p>
+        <h2>Student Leadership Council</h2>
+        <p>Students who help shape our programs. Council members lead their own projects, plan events, make videos and how-to guides, mentor younger racers and represent Flint Racing in the community, while gaining real-life experience and earning service hours.</p>
+        <ul class="feature-list"><li>Lead projects and events</li><li>Create videos and how-tos</li><li>Elected officers</li><li>Service hours</li></ul>
+        <div class="cta-row"><a class="btn deep" href="#participate" data-interest="other" data-note="Interested in: Student Leadership Council">Ask about the council</a>[[COUNCIL]]<a class="btn outline-red" href="#access">Council sign in</a>[[/COUNCIL]]</div>
+      </section>
+      <section class="panel wide">
+        <h2>From an idea to a finished project</h2>
+        <p>In the STEM Development Workshops, students can take a project of their own from the first idea to the finished build, one week at a time.</p>
+        <ol class="buildpath">
+          <li><span class="dot">1</span><span><b>Explore</b><span class="t">Try the week’s experiment or activity and see what sparks an idea.</span></span></li>
+          <li><span class="dot">2</span><span><b>Choose a project</b><span class="t">Join a group build, or come up with something you want to make yourself.</span></span></li>
+          <li><span class="dot">3</span><span><b>Plan</b><span class="t">Sketch it out and list the tools and materials you’ll need.</span></span></li>
+          <li><span class="dot">4</span><span><b>Build</b><span class="t">Work on it week after week, with adult guidance when you need it.</span></span></li>
+          <li><span class="dot">5</span><span><b>Test &amp; improve</b><span class="t">Try it out, find what to change and make it better.</span></span></li>
+          <li><span class="dot">6</span><span><b>Share</b><span class="t">Show the group what you built and what you learned.</span></span></li>
+        </ol>
+      </section>
+    </div>
+
+    <section class="panel wide" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
       <h2>Ready to take the next step?</h2>
-      <p>Your request goes to Flint Racing admin for review. Staff will follow up by email about availability, requirements and next steps, and organize the relevant email list. Sending a request does not confirm a place.</p>
-      <div class="row"><a class="btn red" href="#participate" data-interest="weekday">Ask about weekday STEM programs</a><a class="btn outline-light" href="#participate" data-interest="updates">Join email updates</a></div>
+      <p>Send an inquiry and staff will follow up by email about availability, requirements and next steps. For youth participation, tell us the student’s age and accompanying adult. Inquiring does not confirm a place.</p>
+      <div class="row"><a class="btn deep" href="#participate" data-interest="weekday">Ask about STEM programs</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
     </section>
   </div>
 </div>
