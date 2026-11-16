@@ -3156,6 +3156,25 @@ body.rw-tv .rw-fol{display:none}
 .stem-note{font-size:.9rem;color:#5a5d64;border-left:3px solid var(--red-deep);padding-left:10px}
 @media (max-width:1000px){.panels.three{grid-template-columns:minmax(0,1fr)}.panels.three .panel{grid-template-rows:none}}
 @media (max-width:760px){.stem2 .prog-hero .pic.stem-pic{padding:0 16px 1.4rem}}
+
+/* STEM club poll */
+.stem-poll fieldset{border:0;padding:0;margin:0 0 16px}
+.stem-poll legend{font:800 1.05rem/1.3 var(--body);color:var(--ink);margin-bottom:10px;padding:0}
+.stem-poll legend small{font-weight:500;color:#5a5d64;font-size:.86rem}
+.poll-opts{display:flex;flex-wrap:wrap;gap:10px}
+.poll-opts label{position:relative;cursor:pointer}
+.poll-opts input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.poll-opts span{display:block;min-width:96px;text-align:center;padding:12px 18px;border:2px solid var(--ink);border-radius:8px;font:700 1rem/1.2 var(--body);color:var(--ink);background:#fff}
+.poll-opts input:checked+span{background:var(--red-deep);border-color:var(--red-deep);color:#fff}
+.poll-opts input:focus-visible+span{outline:3px solid var(--ink);outline-offset:2px}
+#stemPollRes{border-top:2px dashed #c9ccd1;padding-top:14px;display:grid;gap:6px}
+#stemPollRes h3{font:800 1.1rem/1.2 var(--body);color:var(--ink)}#stemPollRes h3 small{font-weight:500;color:#5a5d64}
+.poll-q{font:700 .8rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#5a5d64;margin:8px 0 0}
+.poll-res{list-style:none;margin:0;padding:0!important;display:grid;gap:6px!important}
+.poll-res li{display:grid;grid-template-columns:130px minmax(0,1fr) 34px;gap:10px;align-items:center;font-size:.92rem;color:var(--ink)}
+.poll-res i{height:12px;background:#e3e5e9;border-radius:99px;overflow:hidden}.poll-res i b{display:block;height:100%;background:var(--red-deep);border-radius:99px}
+.poll-res em{font-style:normal;font-weight:700;text-align:right}
+@media (max-width:480px){.poll-opts span{min-width:0;padding:12px 14px}.poll-res li{grid-template-columns:96px minmax(0,1fr) 28px}}
 </style>
 
 <header class="site-nav">
@@ -3761,7 +3780,7 @@ body.rw-tv .rw-fol{display:none}
     <div class="txt">
       <p class="eyebrow">Explore, build, lead.</p>
       <h1>STEM Programs</h1>
-      <p class="lede">Three ways to keep building beyond race day: weeknight STEM Development Workshops, summer STEM Camps and the Student Leadership Council.</p>
+      <p class="lede">Keep building beyond race day with summer STEM Camps and the Student Leadership Council.</p>
     </div>
     <div class="pic stem-pic">
     <figure class="schematic" style="margin:0">
@@ -3797,8 +3816,9 @@ body.rw-tv .rw-fol{display:none}
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="panels three">
-      <section class="panel">
+    <div class="panels">
+      <!-- STEM Development Workshops: built, hidden until Kevin approves the program. Remove the "hidden" attributes (here and on the steps panel below) to show it. -->
+      <section class="panel" hidden>
         <p class="eyebrow">Weeknights</p>
         <h2>STEM Development Workshops</h2>
         <p>Our weeknight open workshops. We host different experiments and activities regularly, so there’s always something new to try. Build together with the group, or come up with a project of your own and keep working on it week after week.</p>
@@ -3820,7 +3840,7 @@ body.rw-tv .rw-fol{display:none}
         <ul class="feature-list"><li>Lead projects and events</li><li>Create videos and how-tos</li><li>Elected officers</li><li>Service hours</li></ul>
         <div class="cta-row"><a class="btn deep" href="#participate" data-interest="other" data-note="Interested in: Student Leadership Council">Ask about the council</a>[[COUNCIL]]<a class="btn outline-red" href="#access">Council sign in</a>[[/COUNCIL]]</div>
       </section>
-      <section class="panel wide">
+      <section class="panel wide" hidden>
         <h2>From an idea to a finished project</h2>
         <p>In the STEM Development Workshops, students can take a project of their own from the first idea to the finished build, one week at a time.</p>
         <ol class="buildpath">
@@ -3837,7 +3857,25 @@ body.rw-tv .rw-fol{display:none}
     <section class="panel wide" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
       <h2>Ready to take the next step?</h2>
       <p>Send an inquiry and staff will follow up by email about availability, requirements and next steps. For youth participation, tell us the student’s age and accompanying adult. Inquiring does not confirm a place.</p>
-      <div class="row"><a class="btn deep" href="#participate" data-interest="weekday">Ask about STEM programs</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
+      <div class="row"><a class="btn deep" href="#participate" data-interest="steam">Ask about STEM programs</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
+    </section>
+
+    <section class="panel wide stem-poll" id="stemPollBox" style="margin-top:22px" aria-labelledby="stemPollH">
+      <p class="eyebrow">Quick poll</p>
+      <h2 id="stemPollH">Would you join a weeknight STEM club?</h2>
+      <p>We’re thinking about a weeknight STEM club: experiments, activities and projects students build week after week. Three quick questions help us plan it. No name or email needed.</p>
+      <form id="stemPoll" novalidate>
+        <fieldset><legend>1. Would you or your student want to join?</legend>
+          <div class="poll-opts"><label><input type="radio" name="sp-join" value="yes"><span>Yes</span></label><label><input type="radio" name="sp-join" value="maybe"><span>Maybe</span></label><label><input type="radio" name="sp-join" value="no"><span>No</span></label></div></fieldset>
+        <fieldset><legend>2. How long should a season be?</legend>
+          <div class="poll-opts"><label><input type="radio" name="sp-season" value="4"><span>4 weeks</span></label><label><input type="radio" name="sp-season" value="6"><span>6 weeks</span></label><label><input type="radio" name="sp-season" value="8"><span>8 weeks</span></label><label><input type="radio" name="sp-season" value="year"><span>All school year</span></label></div></fieldset>
+        <fieldset><legend>3. Which nights would work? <small>Pick any that work.</small></legend>
+          <div class="poll-opts"><label><input type="checkbox" name="sp-night" value="mon"><span>Monday</span></label><label><input type="checkbox" name="sp-night" value="tue"><span>Tuesday</span></label><label><input type="checkbox" name="sp-night" value="wed"><span>Wednesday</span></label><label><input type="checkbox" name="sp-night" value="thu"><span>Thursday</span></label></div></fieldset>
+        <div class="row"><button class="btn deep" type="submit">Send my answers</button></div>
+        <p class="t-msg" id="stemPollMsg" role="status"></p>
+      </form>
+      <div id="stemPollDone" hidden><p><b>Thanks! Your answers are in.</b> We’ll share what we decide here.</p></div>
+      <div id="stemPollRes" hidden></div>
     </section>
   </div>
 </div>
@@ -9053,6 +9091,26 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var rr=$("#coRR",M);if(rr)rr.onsubmit=function(e){e.preventDefault();var i=$$("input",rr);if(i[0].value.trim().length<2){toast("Name the role.");return}
       db.from("council_roles").insert(Object.assign({member_id:D.me,title:i[0].value.trim(),about:i[1].value.trim()||null,status:"pending"},coStamp())).then(function(x){coDone(x,"Request sent to the President")})}}
 
+
+  /* ---------- STEM club interest poll (STEM Programs page) ---------- */
+  (function(){var f=$("#stemPoll");if(!f)return;var KEY="fr-poll-stem-club";
+    function voted(){try{return localStorage.getItem(KEY)==="1"}catch(e){return false}}
+    function show(){if(voted()){f.hidden=true;$("#stemPollDone").hidden=false}}
+    function results(){var box=$("#stemPollRes");if(!box)return;if(!IS_ADMIN||hashBase()!=="steam-and-beyond"){box.hidden=true;return}
+      db.rpc("poll_results",{p_poll:"stem-club"}).then(function(r){if(!r||r.error||!r.data)return;var d=r.data,t=d.total||0;
+        function rows(obj,labels){return labels.map(function(l){var n=(obj||{})[l[0]]||0,p=t?Math.round(n/t*100):0;return '<li><span>'+esc(l[1])+'</span><i><b style="width:'+p+'%"></b></i><em>'+n+'</em></li>'}).join("")}
+        box.hidden=false;box.innerHTML='<h3>Poll results so far · '+t+' answer'+(t===1?"":"s")+' <small>(only admins see this)</small></h3>'+
+          '<p class="poll-q">Would join</p><ul class="poll-res">'+rows(d.join,[["yes","Yes"],["maybe","Maybe"],["no","No"]])+'</ul>'+
+          '<p class="poll-q">Season length</p><ul class="poll-res">'+rows(d.season,[["4","4 weeks"],["6","6 weeks"],["8","8 weeks"],["year","All school year"]])+'</ul>'+
+          '<p class="poll-q">Nights that work</p><ul class="poll-res">'+rows(d.nights,[["mon","Monday"],["tue","Tuesday"],["wed","Wednesday"],["thu","Thursday"]])+'</ul>'},function(){})}
+    f.addEventListener("submit",function(e){e.preventDefault();var m=$("#stemPollMsg"),j=f.querySelector('[name="sp-join"]:checked'),se=f.querySelector('[name="sp-season"]:checked'),n=$$('[name="sp-night"]:checked',f).map(function(i){return i.value});
+      if(!j||!se||!n.length){m.textContent="Please answer all three questions.";return}
+      if(!db){m.textContent="The poll isn’t connected right now. Please try again later.";return}
+      var b=f.querySelector("button[type=submit]");b.disabled=true;m.textContent="Sending…";
+      db.rpc("poll_vote",{p_poll:"stem-club",p_answers:{join:j.value,season:se.value,nights:n}}).then(function(r){b.disabled=false;
+        if(r&&r.error){m.textContent=r.error.message||"That didn’t send. Please try again.";return}
+        try{localStorage.setItem(KEY,"1")}catch(e){}m.textContent="";show();results()},function(){b.disabled=false;m.textContent="That didn’t send. Please try again."})});
+    show();window.addEventListener("hashchange",function(){setTimeout(results,400)});setTimeout(results,2500)})();
 
   /* ---------- Route the new pages ---------- */
   function renderPortals(){var h=hashBase();
