@@ -3588,6 +3588,18 @@ body.spx-prices-on .spx-noprice{display:none}
 #coBox .cx section[data-fold]{transition:padding .28s ease}
 #coBox .cx section.is-shut[data-fold]{padding-top:14px;padding-bottom:14px}
 @media (prefers-reduced-motion:reduce){#coBox .cx .co-fb,#coBox .cx section[data-fold],#coBox .cx section[data-fold]>h3{transition:none}}
+/* ===== Council home: next up, quick actions, overview (Nov 16) ===== */
+#coBox .cx .co-nl li{display:flex;align-items:center;gap:12px}
+#coBox .cx .co-nl li>div{flex:1;min-width:0}
+#coBox .cx .co-nn{flex:none;display:grid;place-items:center;min-width:34px;height:34px;padding:0 6px;border-radius:9px;border:1px solid rgba(255,197,49,.55);background:rgba(255,197,49,.1);color:var(--slow);font:italic 800 1.15rem/1 var(--display);box-shadow:0 0 12px rgba(255,197,49,.25)}
+#coBox .cx .co-qa{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--ln)}
+#coBox .cx .co-next:not(.co-alert) .co-qa{margin-top:10px}
+#coBox .cx .co-hcols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+#coBox .cx .co-hcols .rk-card h3{font-size:1.12rem}
+#coBox .cx .co-sub{margin:14px 0 8px;font-size:.82rem;color:var(--dim)}
+#coBox .cx .co-clip2{max-height:4.6em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+@media (max-width:900px){#coBox .cx .co-hcols{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:480px){#coBox .cx .co-nl li{flex-wrap:wrap}#coBox .cx .co-nl li>.mini{margin-left:46px}}
 </style>
 </head>
 <body>
@@ -9464,22 +9476,43 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     ({hours:coHours,home:coHome,projects:coProjects,events:coEvents,project:coProject,week:coWeek,bulletins:coBulletins,files:coFiles,social:coSocial,board:coBoard,thread:coThread,team:coTeam}[v]||coHome)(M)}
 
   /* ----- Home ----- */
-  function coHome(M){var D=CO.D,wk=coMonday(),me=D.me,today=todayISO(),act=D.projects.filter(function(p){return p.status!=="done"});
-    var weekly=D.tasks.filter(function(t){return !t.project_id&&t.week_of===wk}),mytasks=D.tasks.filter(function(t){return t.project_id&&!t.done&&me&&t.assignee_member===me}),
+  function coHome(M){var D=CO.D,wk=coMonday(),me=D.me,today=todayISO(),act=D.projects.filter(function(p){return p.status!=="done"}),pl=function(n,w){return n+" "+w+(n===1?"":"s")};
+    var weekly=D.tasks.filter(function(t){return !t.project_id&&t.week_of===wk}),wd=weekly.filter(function(t){return t.done}).length,
+      myWk=weekly.filter(function(t){return !t.done&&me&&(!t.assignee_member||t.assignee_member===me)}),
+      mytasks=D.tasks.filter(function(t){return t.project_id&&!t.done&&me&&t.assignee_member===me}).sort(function(a,b){return (a.due_date||"9")>(b.due_date||"9")?1:-1}),
       bul=D.bulletins.slice().sort(function(a,b){return a.week_of<b.week_of?1:a.week_of>b.week_of?-1:(a.created_at<b.created_at?1:-1)})[0],
       evs=D.projects.filter(function(p){return p.kind==="event"&&p.event_date&&p.event_date>=today}).sort(function(a,b){return a.event_date>b.event_date?1:-1}).slice(0,3),
-      th=D.threads.filter(function(t){return t.kind==="discussion"}).sort(function(a,b){return a.last_reply_at<b.last_reply_at?1:-1}).slice(0,4);
-    var wd=weekly.filter(function(t){return t.done}).length;
-    var todo=coTodo(),wait=IS_ADMIN?[[D.reports.filter(function(r){return r.status==="submitted"}).length,"Weekly notes and task lists to approve","#council/week"],[D.social.filter(function(x){return x.status==="ready"}).length,"Social posts to approve","#council/social"],[D.service_reports.filter(function(r){return r.status==="submitted"}).length,"Weekly service reports to approve","#council/hours"]].filter(function(x){return x[0]}):[];
-    M.innerHTML='<div class="co-grid">'+(IS_ADMIN?'<section class="rk-card co-span co-alert"><div class="rk-ordhead"><h3>Waiting on you'+(wait.length?' · '+wait.reduce(function(a,x){return a+x[0]},0):'')+'</h3><a class="mini solid" href="#council/projects">Create a project</a></div>'+(wait.length?'<ol class="rk-list">'+wait.map(function(x){return '<li><div><b>'+esc(x[1])+': '+x[0]+'</b></div><a class="mini" href="'+x[2]+'">Review</a></li>'}).join("")+'</ol>':'<p class="rk-fine">Nothing needs your approval right now.</p>')+'</section>':'')+(todo.length?'<section class="rk-card co-span co-alert"><div class="rk-ordhead"><h3>Were you there? · '+todo.length+'</h3><a class="mini" href="#council/hours">Your hours</a></div><p class="rk-fine">Confirm each one so your service hours count.</p>'+coConfirmHTML(todo.slice(0,4))+'</section>':'')+
-      '<section class="rk-card co-span"><div class="rk-ordhead"><h3>This week · '+fmtDate(wk,{month:"short",day:"numeric"})+'</h3><a class="mini" href="#council/week">Open the week</a></div>'+
-        (weekly.length?'<p class="co-wk"><b>'+wd+' of '+weekly.length+'</b> weekly tasks checked off</p><div class="co-track"><i class="'+(wd===weekly.length?"done":"hi")+'" style="width:'+Math.round(wd/weekly.length*100)+'%"></i></div>'+coTaskList(weekly.slice(0,6),true):'<p class="rk-fine">No weekly tasks yet. Add them on This week.</p>')+'</section>'+
-      '<section class="rk-card"><div class="rk-ordhead"><h3>Projects in motion</h3><a class="mini" href="#council/projects">All projects</a></div>'+(act.length?act.slice(0,5).map(function(p){return '<a class="co-pmini" href="#council/project/'+p.id+'"><span><b>'+esc(p.title)+'</b><small>'+esc(CO_KIND[p.kind])+(p.lead_member?' · '+esc(coName(p.lead_member)):'')+'</small></span>'+coBar(coProgress(p))+'</a>'}).join(""):'<p class="rk-fine">No projects yet.</p>')+'</section>'+
-      '<section class="rk-card"><div class="rk-ordhead"><h3>Latest bulletin</h3><a class="mini" href="#council/bulletins">All bulletins</a></div>'+(bul?'<p class="co-date">Week of '+fmtDate(bul.week_of,{month:"long",day:"numeric"})+'</p><h4 class="co-h">'+esc(bul.title)+'</h4><div class="co-body co-clip">'+coText(bul.body)+'</div>':'<p class="rk-fine">No bulletins yet.</p>')+'</section>'+
-      '<section class="rk-card"><div class="rk-ordhead"><h3>Your tasks</h3></div>'+(mytasks.length?coTaskList(mytasks.slice(0,8),true,true):'<p class="rk-fine">'+(me?"Nothing assigned to you right now.":"Admins aren’t assigned tasks. You can still check any off.")+'</p>')+'</section>'+
-      '<section class="rk-card"><div class="rk-ordhead"><h3>Coming up</h3><a class="mini" href="#council/events">Events</a></div>'+(evs.length?'<ol class="rk-list">'+evs.map(function(p){return '<li><div><b>'+esc(p.title)+'</b><br><small>'+fmtDate(p.event_date,{weekday:"short",month:"short",day:"numeric"})+(p.event_time?' · '+esc(p.event_time):'')+(p.lead_member?' · Managed by '+esc(coName(p.lead_member)):'')+'</small></div><a class="mini" href="#council/project/'+p.id+'">Plan</a></li>'}).join("")+'</ol>':'<p class="rk-fine">No upcoming events planned.</p>')+'</section>'+
+      th=D.threads.filter(function(t){return t.kind==="discussion"}).sort(function(a,b){return a.last_reply_at<b.last_reply_at?1:-1}).slice(0,2),
+      todo=coTodo(),met=D.meetings.some(function(m){return m.meeting_date>=wk&&m.meeting_date<=today}),lines=me||IS_ADMIN?coLines():[],N=[];
+    /* what needs this person, most urgent first: [count, label, detail, button, link] */
+    if(IS_ADMIN){[[D.service_reports.filter(function(r){return r.status==="submitted"}).length,"Weekly service reports to approve","Hours are added once you approve","Review","#council/hours"],[D.reports.filter(function(r){return r.status==="submitted"}).length,"Weekly notes and task lists to approve","","Review","#council/week"],[D.social.filter(function(x){return x.status==="ready"}).length,"Social posts to approve","","Review","#council/social"]].forEach(function(x){if(x[0])N.push([x[0],x[1],x[2],x[3],x[4]])})}
+    if(me){var back=D.reports.filter(function(r){return r.status==="returned"&&(r.kind==="weekly"?r.member_id===me:coOwn(r))}).length,
+        hp=coPos("president")?lines.filter(function(l){return l.st==="pending"}).length:(coPos("secretary")||coPos("note_keeper"))?lines.filter(function(l){return l.t==="att"&&l.st==="pending"&&l.member_id!==me}).length:0,
+        rq=coPres()?D.roles.filter(function(r){return r.status==="pending"}).length:0,ideas=coMedia()?D.social.filter(function(x){return x.status==="idea"}).length:0;
+      if(todo.length)N.push([todo.length,"Confirm the event"+(todo.length===1?"":"s")+" you were at","So your service hours count","Confirm","#council/hours"]);
+      if(back)N.push([back,"Report"+(back===1?"":"s")+" sent back for changes","","Fix","#council/week"]);
+      if(hp)N.push([hp,"Hours entr"+(hp===1?"y":"ies")+" to confirm",coPos("president")?"Then send the weekly service report":"Attendance check","Review","#council/hours"]);
+      if(rq)N.push([rq,"Role request"+(rq===1?"":"s")+" to approve","","Review","#council/team"]);
+      if(ideas)N.push([ideas,"Post idea"+(ideas===1?"":"s")+" to look at","","Review","#council/social"]);
+      if(myWk.length)N.push([myWk.length,"Weekly task"+(myWk.length===1?"":"s")+" left this week","","Open the week","#council/week"]);
+      if(!coRep("weekly",wk,me))N.push([0,"Send your task list for this week","What you’ll get done before the next meeting","Write it","#council/week"]);
+      if(met&&(coPos("note_keeper")||coPos("secretary"))&&!coRep("notes",wk))N.push([0,"Post this week’s meeting notes","","Write them","#council/week"]);
+      if(met&&coPos("president")&&!coRep("delegations",wk))N.push([0,"Post this week’s delegated roles","","Write them","#council/week"])}
+    var QA=me?[["#council/hours","Log task hours"],["#council/social","Suggest a post"],["#council/files","Add a file or photo"],["#council/board","Start a discussion"]]:[];
+    if(coPres())QA.unshift(["#council/projects","New project"]);if(IS_ADMIN||coPos("president")||coPos("secretary"))QA.push(["#council/bulletins","Post a bulletin"]);
+    M.innerHTML='<section class="rk-card co-next'+(N.length?' co-alert':'')+'"><div class="rk-ordhead"><h3>'+(N.length?'Next up · '+N.length:'You’re all caught up')+'</h3></div>'+
+        (N.length?'<ol class="rk-list co-nl">'+N.map(function(x){return '<li><i class="co-nn">'+(x[0]||"!")+'</i><div><b>'+esc(x[1])+'</b>'+(x[2]?'<br><small>'+esc(x[2])+'</small>':'')+'</div><a class="mini solid" href="'+x[4]+'">'+esc(x[3])+'</a></li>'}).join("")+'</ol>':'<p class="rk-fine">Nothing is waiting on you. Check your projects or start something new.</p>')+
+        (QA.length?'<div class="co-qa" aria-label="Quick actions">'+QA.map(function(q){return '<a class="mini" href="'+q[0]+'">'+esc(q[1])+'</a>'}).join("")+'</div>':'')+'</section>'+
+      '<div class="co-cols co-hcols"><div class="co-col">'+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Your work</h3><a class="mini" href="#council/week">This week</a></div>'+
+        (weekly.length?'<p class="co-wk"><b>'+wd+' of '+weekly.length+'</b> weekly tasks checked off by the team</p><div class="co-track"><i class="'+(wd===weekly.length?"done":"hi")+'" style="width:'+Math.round(wd/weekly.length*100)+'%"></i></div>':'')+
+        (mytasks.length?'<h4 class="co-h co-sub">Assigned to you</h4>'+coTaskList(mytasks.slice(0,4),true,true)+(mytasks.length>4?'<p class="rk-fine">And '+(mytasks.length-4)+' more in your projects.</p>':''):'<p class="rk-fine">'+(me?"No project tasks are assigned to you right now.":"Admins aren’t assigned tasks.")+'</p>')+'</section>'+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Projects in motion</h3><a class="mini" href="#council/projects">All projects</a></div>'+(act.length?act.slice(0,3).map(function(p){return '<a class="co-pmini" href="#council/project/'+p.id+'"><span><b>'+esc(p.title)+'</b><small>'+esc(CO_KIND[p.kind])+(p.lead_member?' · '+esc(coName(p.lead_member)):'')+'</small></span>'+coBar(coProgress(p))+'</a>'}).join("")+(act.length>3?'<p class="rk-fine">And '+(act.length-3)+' more.</p>':''):'<p class="rk-fine">No projects yet.</p>')+'</section>'+
+      '</div><div class="co-col">'+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Coming up</h3><a class="mini" href="#council/events">All events</a></div>'+(evs.length?'<ol class="rk-list">'+evs.map(function(p){return '<li><div><b>'+esc(p.title)+'</b><br><small>'+fmtDate(p.event_date,{weekday:"short",month:"short",day:"numeric"})+(p.event_time?' · '+esc(p.event_time):'')+(p.lead_member?' · Managed by '+esc(coName(p.lead_member)):'')+'</small></div><a class="mini" href="#council/project/'+p.id+'">Plan</a></li>'}).join("")+'</ol>':'<p class="rk-fine">No upcoming events planned.</p>')+'</section>'+
+      '<section class="rk-card"><div class="rk-ordhead"><h3>Latest bulletin</h3><a class="mini" href="#council/bulletins">'+(bul?"Read it":"Bulletins")+'</a></div>'+(bul?'<p class="co-date">Week of '+fmtDate(bul.week_of,{month:"long",day:"numeric"})+'</p><h4 class="co-h">'+esc(bul.title)+'</h4><div class="co-body co-clip co-clip2">'+coText(bul.body)+'</div>':'<p class="rk-fine">No bulletins yet.</p>')+'</section>'+
       '<section class="rk-card"><div class="rk-ordhead"><h3>Discussion</h3><a class="mini" href="#council/board">Open the board</a></div>'+(th.length?'<ol class="rk-list">'+th.map(function(t){var n=D.replies.filter(function(r){return r.thread_id===t.id}).length;return '<li><div><b>'+esc(t.title||t.body.slice(0,60))+'</b><br><small>'+esc(t.author_name||"")+' · '+n+' repl'+(n===1?"y":"ies")+' · '+coAgo(t.last_reply_at)+'</small></div><a class="mini" href="#council/board/'+t.id+'">Read</a></li>'}).join("")+'</ol>':'<p class="rk-fine">Start the first conversation.</p>')+'</section>'+
-      '</div>';coBindTasks(M);coBindConfirm(M)}
+      '</div></div>';coBindTasks(M)}
 
   /* ----- Tasks (shared) ----- */
   function coTaskList(list,compact,showProj){var D=CO.D;
