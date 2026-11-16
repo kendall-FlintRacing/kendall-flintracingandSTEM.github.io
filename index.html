@@ -3487,6 +3487,56 @@ body.rw-tv .rw-fol{display:none}
 .sp-rdteaser p{color:#ffe3e5;margin-top:6px;line-height:1.5}
 .sp-rdteaser>div{flex:1 1 300px;min-width:0}
 @media (prefers-reduced-motion:reduce){.rd-bunting{animation:none}.rd-lights span{animation:none!important}.rd-lights span:nth-child(3){background:#2bff6a;box-shadow:0 0 18px #2bff6a}}
+.av-long .prog-hero h1{font-size:clamp(2.3rem,4.6vw,3.9rem);overflow-wrap:normal;word-break:normal}
+.av-path b{color:#fff}.buildpath.av-path .t{color:#d5d8dd!important}
+.av-photos img.light{background:#fff;object-fit:contain;padding:10px}
+/* ===== Sponsor avenues (Nov 16 pm) ===== */
+.av-out{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(1.4rem,4vw,3rem);align-items:center;margin-top:clamp(2.4rem,5vw,4rem);padding-top:clamp(2rem,4vw,3rem);border-top:1px dashed rgba(255,255,255,.2)}
+.av-out.flip .av-photos{order:2}
+.av-txt h2{color:#fff;font-size:clamp(2rem,3.8vw,2.9rem);margin-top:6px}
+.av-txt>p{color:#d5d8dd;line-height:1.65;margin-top:12px;max-width:60ch}
+.av-what{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px}
+.av-what li{color:#fff;font-weight:600;padding-left:22px;position:relative;line-height:1.4}
+.av-what li::before{content:"";position:absolute;left:0;top:.35em;width:12px;height:12px;background:repeating-conic-gradient(#fff 0 25%,var(--red-deep) 0 50%) 0 0/6px 6px;border-radius:2px}
+.av-range{color:#ffb0b4;font-weight:700;margin-top:16px}
+.av-txt .cta-row{margin-top:18px}
+.av-txt .sp-chips{margin-top:16px}.av-txt .sp-chips a{color:#fff;border-color:rgba(255,255,255,.6)}
+.av-photos{display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr 1fr;gap:12px;aspect-ratio:5/4;min-width:0}
+.av-photos img{width:100%;height:100%;object-fit:cover;border-radius:8px;display:block;box-shadow:0 12px 26px rgba(0,0,0,.4)}
+.av-photos img:first-child{grid-row:1/3}
+.av-path{margin-top:16px}
+@media (max-width:860px){.av-out{grid-template-columns:minmax(0,1fr)}.av-out.flip .av-photos{order:0}.av-photos{aspect-ratio:16/11}}
+@media (max-width:480px){.av-what{grid-template-columns:minmax(0,1fr)}}
+.av-menu{padding-bottom:0}
+.av-mh{color:#fff;font:800 clamp(1.3rem,2.2vw,1.6rem)/1.1 var(--display);text-transform:uppercase;margin-top:clamp(1.4rem,3vw,2rem)}
+.av-menu>.av-mh:first-child{margin-top:0}
+.av-ms{color:#c9ccd2;margin-top:6px;line-height:1.5;max-width:70ch}
+.av-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px}
+.av-menu .av-tier{background:#fff;color:var(--ink);border:0;border-radius:10px;padding:26px 18px 18px;min-height:0;display:flex;flex-direction:column;gap:8px;align-content:start;overflow:hidden;box-shadow:0 8px 0 #0004}
+.av-menu .av-tier::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/10px 10px}
+.av-menu .av-tier::after{top:20px;right:14px;border-color:#b9bcc2}
+.av-tn{font:800 1.45rem/1.02 var(--display);text-transform:uppercase;padding-right:28px}
+.av-badge{align-self:flex-start;font:700 .68rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:#fde8ea;color:var(--red-deep)}
+.av-tp{font:800 2rem/1 var(--display);color:var(--red-deep)}
+.av-tw{color:#4a4d55;line-height:1.5;font-size:.95rem}
+.av-perks{display:grid;gap:6px;margin-top:4px;padding-top:10px;border-top:1px solid #e3e5e9}
+.av-perks span{font-size:.88rem;color:#3b3e45;padding-left:20px;position:relative;line-height:1.4}
+.av-perks span::before{content:"✓";position:absolute;left:0;color:var(--red-deep);font-weight:800}
+.av-menu .av-tier:hover{transform:translateY(-3px);background:#fff}
+.av-menu .av-tier[aria-pressed="true"]{background:var(--red-deep);color:#fff;transform:translateY(-3px)}
+.av-menu .av-tier[aria-pressed="true"] .av-tp,.av-menu .av-tier[aria-pressed="true"] .av-tw,.av-menu .av-tier[aria-pressed="true"] .av-perks span,.av-menu .av-tier[aria-pressed="true"] .av-perks span::before{color:#fff}
+.av-menu .av-tier[aria-pressed="true"] .av-perks{border-color:rgba(255,255,255,.35)}
+.av-menu .av-tier[aria-pressed="true"]::before{background:repeating-conic-gradient(#111 0 25%,#ffd2d5 0 50%) 0 0/10px 10px}
+.av-menu .av-tier[aria-pressed="true"]::after{border-color:#fff}
+.av-menu>.sp-grid{margin-top:14px}
+.av-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.av-menu .av-chip{min-height:0;display:inline-flex;align-items:center;padding:10px 36px 10px 15px;border-radius:999px;font-weight:700;font-size:.92rem;line-height:1.2}
+.av-menu .av-chip::after{top:50%;transform:translateY(-50%);right:10px;width:14px;height:14px}
+.av-menu .av-chip[aria-pressed="true"]::after{font-size:10px;line-height:12px}
+.av-greater{margin-top:clamp(1.4rem,3vw,2rem);padding:clamp(1rem,2.6vw,1.4rem);border:1.5px dashed rgba(255,176,180,.6);border-radius:10px;background:rgba(210,20,28,.08)}
+.av-greater .av-mh{margin-top:0}
+.av-menu .sp-bar{margin-top:clamp(1.2rem,3vw,1.8rem)}
+@media (max-width:560px){.av-menu .sp-bar{position:static}}
 </style>
 </head>
 <body>
@@ -3995,7 +4045,7 @@ body.rw-tv .rw-fol{display:none}
         <h2>Support</h2>
         <ul class="tr-links">
           <li><a href="#support"><b>Sponsors &amp; Partners</b><small>Put your resources, relationships and expertise behind hands-on opportunities</small></a></li>
-          <li><a href="#race-day-sponsors"><b>Race Day Sponsors</b><small>Put your name on the Flint Soap Box Derby, June 5, 2027</small></a></li>
+          <li><a href="#track-development"><b>Race Day &amp; Track Sponsors</b><small>Put your name on the Flint Soap Box Derby, June 5, 2027</small></a></li>
           <li><a href="#donate"><b>Donate</b><small>Give directly to the program</small></a></li>
           <li><a href="#participate" data-interest="event"><b>Plan a track event</b><small>Bring your group to the track for a party, fundraiser or custom event</small></a></li>
           <li><a href="#spirit"><b>Spirit Shop</b><small>Wear the work</small></a></li>
@@ -4519,89 +4569,38 @@ body.rw-tv .rw-fol{display:none}
       <div class="cta-row"><a class="btn deep" href="#participate" data-interest="volunteer" data-note="Interested in: Community volunteering">Tell us how you would like to help</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div></section>
   </div>
 </div>
-<!-- ======================= SPONSORS & PARTNERS (menu hub) ======================= -->
+<!-- ======================= SPONSORS & PARTNERS (avenues) ======================= -->
 <div class="page dark prog-page serve2 spx" data-page="support" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#get-involved">Get Involved</a><span aria-hidden="true">/</span><span aria-current="page">Sponsors &amp; Partners</span></div></nav>
   <header class="prog-hero"><div class="wrap">
-    <div class="txt"><p class="eyebrow">2027 Partnership Opportunities</p><h1>Sponsors &amp; Partners</h1><p class="lede">Our partners put tools in kids’ hands, cars on our track and opportunities at our doorstep. Here, kids don’t just watch STEM happen. They build it.</p>
-      <p class="sp-range"><b>$500 – $45,000</b> partnerships <span>·</span> <b>$100,000+</b> capital partnerships</p></div>
+    <div class="txt"><p class="eyebrow">2027 Partnership Opportunities</p><h1>Sponsors &amp; Partners</h1><p class="lede">Our partners put tools in kids’ hands, cars on our track and opportunities at our doorstep. Choose the avenue that fits you, then open its sponsor menu.</p></div>
     <div class="pic"><img src="img/web/two-cars-track.webp" alt="Two Soap Box Derby cars racing side by side down the track"></div>
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support" aria-current="page">Overview &amp; menu</a><a href="#race-day-sponsors">Race Day</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
-
-    <section class="sp-sec" aria-labelledby="spLanesH">
-      <p class="eyebrow">Where your support goes</p>
-      <h2 id="spLanesH">Four lanes of support</h2>
-      <p class="sub">Every partnership moves kids forward in at least one of these lanes.</p>
-      <div class="sp-lanes">
-        <div class="sp-lane"><span class="n" aria-hidden="true">01</span><h3>STEM Education</h3><p>Hands-on learning through building, testing and problem-solving.</p></div>
-        <div class="sp-lane"><span class="n" aria-hidden="true">02</span><h3>Racing</h3><p>Cars, equipment, teams and unforgettable race experiences.</p></div>
-        <div class="sp-lane"><span class="n" aria-hidden="true">03</span><h3>Leadership</h3><p>A pathway from participant to volunteer, leader and mentor.</p></div>
-        <div class="sp-lane"><span class="n" aria-hidden="true">04</span><h3>Community</h3><p>Programs, service and a growing future at Cronin Derby Downs.</p></div>
-      </div>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support" aria-current="page">Overview</a><a href="#track-development">Track Development</a><a href="#program-facility-development">Program &amp; Facility</a><a href="#park-community-development">Park &amp; Community</a></nav>
+    <section class="sp-sec" aria-labelledby="avIntroH"><p class="eyebrow">Three avenues of support</p><h2 id="avIntroH">Build something bigger</h2><p class="sub">Every avenue has its own sponsor menu and tiers. Greater sponsorship opportunities are available by inquiry.</p></section>
+    <section class="av-out" aria-labelledby="avO1">
+      <div class="av-photos" aria-hidden="true"><img src="img/web/racer-down-track.webp" alt=""><img src="img/web/two-cars-track.webp" alt=""><img src="img/web/checkered-flag-finish-bw.webp" alt=""></div>
+      <div class="av-txt"><p class="eyebrow"><span class="rd-gn">01</span> Track Development</p><h2 id="avO1">Race day and the track</h2><p>Everything that happens on the hill at Cronin Derby Downs: the Flint Soap Box Derby, the racers and their cars, the crowd and the track itself. The race is presented by Flint Racing and STEM.</p>
+        <ul class="av-what"><li>Race teams and cars</li><li>Race-day guest experience</li><li>The live race page and race-day program</li><li>Track infrastructure</li></ul>
+        <p class="av-range">Tiers from $250 to $2,500 · Greater opportunities by inquiry</p>
+        <div class="cta-row"><a class="btn deep" href="#track-development-menu">Open the sponsor menu →</a><a class="btn outline-red" href="#track-development">Learn more</a></div></div>
     </section>
-
-    <section class="sp-sec" aria-labelledby="spPathsH">
-      <p class="eyebrow">Find your fit</p>
-      <h2 id="spPathsH">Four ways to partner</h2>
-      <div class="sp-paths">
-        <a class="sp-path" href="#race-day-sponsors"><span class="k">Race Day</span><b>Put our kids on the track.</b><span class="p">$100 – $15,000</span><span class="d">Division sponsors, event zones, local sponsors, live race ads, program ads and in-kind donations for the Flint Soap Box Derby.</span><span class="go">See race day →</span></a>
-        <a class="sp-path" href="#sponsor-programs"><span class="k">Year-Round Programs</span><b>Racing is only the beginning.</b><span class="p">$5,500 – $45,000</span><span class="d">Workshops, camps, field trips, leadership and STEM programming all year long.</span><span class="go">See programs →</span></a>
-        <a class="sp-path" href="#sponsor-community"><span class="k">Community Support</span><b>There’s a place for every partner.</b><span class="p">$500 – $2,500 + in-kind</span><span class="d">Flexible support for materials, meals, awards and areas of greatest need, plus goods and services.</span><span class="go">See community support →</span></a>
-        <a class="sp-path" href="#sponsor-capital"><span class="k">Capital Partners</span><b>Building what comes next.</b><span class="p">$100,000+</span><span class="d">Help turn Cronin Derby Downs into a year-round home for racing, STEM and community.</span><span class="go">See capital partners →</span></a>
-      </div>
+    <section class="av-out flip" aria-labelledby="avO2">
+      <div class="av-photos" aria-hidden="true"><img src="img/web/kevin-nephew-calvin-car.webp" alt=""><img src="img/web/1938-builders-lineup-bw.webp" alt=""><img src="img/web/coloring-car.webp" alt="" class="light"></div>
+      <div class="av-txt"><p class="eyebrow"><span class="rd-gn">02</span> Program &amp; Facility Development</p><h2 id="avO2">Racing is only the beginning</h2><p>Year-round building workshops, STEM programs, camps, field trips and leadership, plus the workshop space, tools and equipment that make them possible.</p>
+        <ul class="av-what"><li>Building workshops and STEM camps</li><li>Seasonal programs</li><li>Youth leadership</li><li>Workshop space and equipment</li></ul>
+        <p class="av-range">Tiers from $500 to $2,500 · Greater opportunities by inquiry</p>
+        <div class="cta-row"><a class="btn deep" href="#program-facility-development-menu">Open the sponsor menu →</a><a class="btn outline-red" href="#program-facility-development">Learn more</a></div></div>
     </section>
-
-    <section class="sp-sec" id="sponsor-menu" aria-labelledby="spMenuH">
-      <p class="eyebrow">2027 updated menu</p>
-      <h2 id="spMenuH">Build your partnership</h2>
-      <p class="sub">Year-round programs, community support and the future of Cronin Derby Downs. Tap everything that interests you, then send your picks. We’ll follow up with details, availability and a partnership packet. Picking doesn’t commit you to anything.</p>
-      <div class="sp-rdteaser"><div><h3>Race day has its own menu</h3><p>Division sponsors, event zones, local sponsors, live race ads, program ads and in-kind donations for the Flint Soap Box Derby, June 5, 2027.</p></div><a class="btn white" href="#race-day-menu">Open the race-day menu →</a></div>
-      <div class="sp-menu" id="spMenu" data-prefix="Sponsor menu picks: " data-empty="Interested in: Sponsoring or partnering">
-        <div class="sp-row"><h3>Programs</h3><div class="sp-grid">
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · Year-Round Presenting Partner ($45,000)"><b>Year-Round Presenting</b><small>$45,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · STEM Education &amp; Programming ($15,000)"><b>STEM Education &amp; Programming</b><small>$15,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · Youth Leadership &amp; Community Impact ($10,000)"><b>Youth Leadership &amp; Community Impact</b><small>$10,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · Direct Program Partner ($5,500)"><b>Direct Program Partner</b><small>$5,500 · Limited</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Programs · Seasonal Programs Partner ($2,500 per season)"><b>Seasonal Programs Partner</b><small>$2,500 per season</small></button>
-        </div></div>
-        <div class="sp-row"><h3>Community</h3><div class="sp-grid">
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Community · Community Program Partner ($2,500)"><b>Community Program Partner</b><small>$2,500</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Community · Student Experience Supporter ($1,000)"><b>Student Experience Supporter</b><small>$1,000</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Community · Community Friend ($500)"><b>Community Friend</b><small>$500</small></button>
-        </div></div>
-        <div class="sp-row"><h3>Development</h3><div class="sp-grid">
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Founding Development Partner ($100,000+)"><b>Founding Development Partner</b><small>$100,000+ · 3-yr min</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Transformative &amp; Naming Partnership"><b>Naming Partnership</b><small>By discussion · 3-yr min</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Workshop technology ($5,000)"><b>Workshop Tech</b><small>$5,000</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Facility ($25,000+)"><b>Facility</b><small>$25,000+ · 3-yr min</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Track infrastructure ($25,000+)"><b>Track Infrastructure</b><small>$25,000+ · 3-yr min</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Park development ($10,000+)"><b>Park Development</b><small>$10,000+ · 3-yr min</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Transportation ($7,500)"><b>Transportation</b><small>$7,500</small></button>
-          <button type="button" class="sp-pick" aria-pressed="false" data-pick="Development · Storage ($5,000)"><b>Storage</b><small>$5,000</small></button>
-        </div></div>
-        <div class="sp-bar"><p class="spk-count" aria-live="polite">Nothing picked yet. Tap any tile above.</p><div class="cta-row"><button type="button" class="btn white-ghost spk-clear" hidden>Clear</button><a class="btn white spk-send" href="#participate" data-interest="sponsor" data-note="Interested in: Sponsoring or partnering">Send my picks →</a></div></div>
-      </div>
+    <section class="av-out" aria-labelledby="avO3">
+      <div class="av-photos" aria-hidden="true"><img src="img/web/race-day-track-tents.webp" alt=""><img src="img/web/2026-racers-group.webp" alt=""><img src="img/web/racer-with-veteran.webp" alt=""></div>
+      <div class="av-txt"><p class="eyebrow"><span class="rd-gn">03</span> Park &amp; Community Development</p><h2 id="avO3">Building what comes next</h2><p>A year-round home at Cronin Derby Downs for racing, STEM, education, youth leadership, recreation, environmental learning and community gathering, built together with local businesses and families.</p>
+        <ul class="av-what"><li>Park restoration and new facilities</li><li>Community events</li><li>Local businesses and families</li><li>Goods and services</li></ul>
+        <p class="av-range">Tiers from $500 to $2,500 · Greater opportunities by inquiry</p>
+        <div class="cta-row"><a class="btn deep" href="#park-community-development-menu">Open the sponsor menu →</a><a class="btn outline-red" href="#park-community-development">Learn more</a></div></div>
     </section>
-
-    <section class="panel wide next-step" aria-labelledby="spRecH">
-      <h2 id="spRecH">Partnership recognition</h2>
-      <p>How partners are recognized at each level.</p>
-      <div class="sp-scroll"><table class="sp-table">
-        <thead><tr><th scope="col">Partnership</th><th scope="col">Digital</th><th scope="col">Program / event</th><th scope="col">Impact updates</th><th scope="col">Sponsor presence</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Presenting<small>$45,000</small></th><td>Premier</td><td>Premier</td><td>Featured</td><td>Priority</td></tr>
-          <tr><th scope="row">Major<small>$8,000 – $15,000</small></th><td>Prominent</td><td>Prominent</td><td>Full</td><td>Included</td></tr>
-          <tr><th scope="row">Program<small>$5,500</small></th><td>Yes</td><td>Program-specific</td><td>Program</td><td>As applicable</td></tr>
-          <tr><th scope="row">Partner<small>$2,500</small></th><td>Yes</td><td>Yes</td><td>Yes</td><td>—</td></tr>
-          <tr><th scope="row">Supporter &amp; Friend<small>$1,000 / $500</small></th><td>Yes</td><td>Annual recognition</td><td>Annual</td><td>—</td></tr>
-        </tbody></table></div>
-      <p class="sp-fine"><b>3-year minimum for major projects.</b> Facility, track and park development partnerships carry a 3-year minimum commitment so the work stays funded from start to finish, even if a project hits a delay.</p>
-      <p class="sp-fine"><b>Goods &amp; services welcome.</b> We also accept qualifying in-kind support, including printing, food, transportation, rentals, equipment, security, media, professional services and construction materials. <a href="#sponsor-community">More on in-kind support →</a></p>
-    </section>
-
     <div class="give-strip"><div><h2>Make a donation</h2><p>Support Flint Racing with a gift of any size. Choose personal, company or anonymous recognition.</p></div><a class="btn white" href="#donate">Donate →</a></div>
     <section class="panel wide next-step"><h2>In good company</h2><p>These organizations already help put tools in young people’s hands, cars on our track and opportunity within reach.</p><div class="logo-wall" id="partnerWall"></div></section>
     <section class="panel wide next-step"><h2>Ready to take the next step?</h2><p>Your request goes to Flint Racing admin for review. Staff will follow up by email about current needs, availability and recognition. Sending an inquiry does not commit you to a payment or sponsorship agreement.</p>
@@ -4609,9 +4608,9 @@ body.rw-tv .rw-fol{display:none}
   </div>
 </div>
 
-<!-- ======================= SPONSORS: RACE DAY (festive) ======================= -->
-<div class="page dark prog-page serve2 spx rdx" data-page="race-day-sponsors" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#support">Sponsors &amp; Partners</a><span aria-hidden="true">/</span><span aria-current="page">Race Day Sponsors</span></div></nav>
+<!-- ======================= SPONSORS: TRACK DEVELOPMENT (festive) ======================= -->
+<div class="page dark prog-page serve2 spx rdx" data-page="track-development" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#support">Sponsors &amp; Partners</a><span aria-hidden="true">/</span><span aria-current="page">Track Development</span></div></nav>
   <header class="rd-hero">
     <div class="rd-photo"><img src="img/web/racer-down-track.webp" alt=""></div>
     <div class="rd-shade"></div>
@@ -4619,232 +4618,131 @@ body.rw-tv .rw-fol{display:none}
     <svg class="rd-bunting" aria-hidden="true" width="100%" height="46"><defs><pattern id="rdFlags" width="96" height="46" patternUnits="userSpaceOnUse"><path d="M0 6Q48 14 96 6" fill="none" stroke="#e9e9ee" stroke-width="2"/><path d="M4 7h22l-11 26z" fill="#d2141c"/><path d="M28 9h22l-11 26z" fill="#fff"/><path d="M52 9h22l-11 26z" fill="#ff5a64"/><path d="M76 7h18l-9 24z" fill="#fff"/></pattern></defs><rect width="100%" height="46" fill="url(#rdFlags)"/></svg>
     <div class="wrap rd-inner">
       <p class="rd-date"><span class="rd-chk" aria-hidden="true"></span>Flint Soap Box Derby · Saturday, June 5, 2027<span class="rd-chk" aria-hidden="true"></span></p>
-      <h1>Race Day<br>Sponsors</h1>
-      <p class="rd-lede">The Flint Soap Box Derby is presented by Flint Racing and STEM. Sponsor a division, a zone, a heat or an ad, and help make June 5 the best day of the year for our racers and their families.</p>
+      <h1>Track<br>Development</h1>
+      <p class="rd-lede">Race day and the track at Cronin Derby Downs. The Flint Soap Box Derby is presented by Flint Racing and STEM, and track partners put our kids on the track and our fans in the stands.</p>
       <div class="rd-lights" role="img" aria-label="Starting lights"><span></span><span></span><span></span></div>
       <p class="rd-count"><b id="rdCount">—</b> <span id="rdCountLbl">days to race day</span></p>
-      <div class="cta-row"><a class="btn white" href="#race-day-menu">Pick your race-day package ↓</a><a class="btn white-ghost" href="#participate" data-interest="sponsor" data-note="Question about race-day sponsorship">Ask a question</a></div>
+      <div class="cta-row"><a class="btn white" href="#track-development-menu">Open the sponsor menu ↓</a><a class="btn white-ghost" href="#participate" data-interest="sponsor" data-note="Question about Track Development sponsorship">Ask a question</a></div>
     </div>
   </header>
   <div class="rd-checkband" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#race-day-sponsors" aria-current="page">Race Day</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
-
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview</a><a href="#track-development" aria-current="page">Track Development</a><a href="#program-facility-development">Program &amp; Facility</a><a href="#park-community-development">Park &amp; Community</a></nav>
     <section class="sp-sec" aria-labelledby="rdWkH">
       <p class="eyebrow">Race day 2027</p>
       <h2 id="rdWkH">Race day at a glance</h2>
       <div class="rd-tickets">
         <div class="rd-ticket"><div class="day"><b>Sat</b><span>June 5</span></div><div class="info"><h3>Flint Soap Box Derby</h3><p>Presented by Flint Racing and STEM. One big day of racing for every family, crew and fan.</p></div></div>
-        <div class="rd-ticket"><div class="day"><b>3</b><span>Divisions</span></div><div class="info"><h3>Stock, Super Stock &amp; Masters</h3><p>Each division can carry a sponsor’s name from the first heat to the trophy presentation.</p></div></div>
+        <div class="rd-ticket"><div class="day"><b>3</b><span>Divisions</span></div><div class="info"><h3>Stock, Super Stock &amp; Masters</h3><p>Racers compete in three divisions, from first-time builders to our most experienced drivers.</p></div></div>
       </div>
     </section>
-
-    <section class="sp-sec" id="race-day-menu" aria-labelledby="rdMenuH">
-      <p class="eyebrow">Race-day menu</p>
-      <h2 id="rdMenuH">Pick your pit pass</h2>
-      <p class="sub">Tap every race-day option that interests you, then send your picks. We’ll follow up with availability and details. Picking doesn’t commit you to anything.</p>
-      <div class="sp-menu rd-menu" data-prefix="Race-day menu picks: " data-empty="Interested in: Race-day sponsorship">
-        <div class="sp-row"><h3>Tournament</h3><div class="sp-grid rd-grid">
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Tournament · Stock Division Sponsor ($15,000)"><b>Stock Division Sponsor</b><small>$15,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Tournament · Super Stock Division Sponsor ($12,500)"><b>Super Stock Division Sponsor</b><small>$12,500 · Exclusive</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Tournament · Masters Division Sponsor ($10,000)"><b>Masters Division Sponsor</b><small>$10,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Tournament · Sponsor a Race Team ($2,500)"><b>Sponsor a Race Team</b><small>$2,500 · Limited</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Tournament · Heat Sponsor ($250 per heat)"><b>Heat Sponsor</b><small>$250 per heat</small></button>
-        </div></div>
-        <div class="sp-row"><h3>Event</h3><div class="sp-grid rd-grid">
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Event Experience Partner ($12,000)"><b>Event Experience Partner</b><small>$12,000 · Exclusive</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Guest Tent &amp; Hospitality ($2,500)"><b>Guest Tent &amp; Hospitality</b><small>$2,500 · Zone</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Start Line Zone ($2,000)"><b>Start Line Zone</b><small>$2,000 · Zone</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Finish Line Zone ($2,000)"><b>Finish Line Zone</b><small>$2,000 · Zone</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Family Fun Zone ($2,000)"><b>Family Fun Zone</b><small>$2,000 · Zone</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Event · Pit Row Zone ($1,500)"><b>Pit Row Zone</b><small>$1,500 · Zone</small></button>
-        </div></div>
-        <div class="sp-row"><h3>Local</h3><div class="sp-grid rd-grid">
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Local · Hometown Sponsor ($1,000)"><b>Hometown Sponsor</b><small>$1,000</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Local · Local Business Sponsor ($500)"><b>Local Business Sponsor</b><small>$500</small></button>
-        </div></div>
-        <div class="sp-row"><h3>Live Ads</h3><div class="sp-grid rd-grid">
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Live ads · Spotlight Ad ($750)"><b>Spotlight Ad</b><small>$750</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Live ads · Intermission Ad ($500)"><b>Intermission Ad</b><small>$500</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Live ads · Sponsor Strip Ad ($250)"><b>Sponsor Strip Ad</b><small>$250</small></button>
-        </div></div>
-        <div class="sp-row"><h3>Program</h3><div class="sp-grid rd-grid">
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Program ad · Full page ($1,000)"><b>Full Page</b><small>$1,000</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Program ad · Half page ($500)"><b>Half Page</b><small>$500</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Program ad · Quarter page ($250)"><b>Quarter Page</b><small>$250</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="Program ad · Business card ($100)"><b>Business Card</b><small>$100</small></button>
-        </div></div>
-        <div class="sp-row"><h3>In-Kind</h3><div class="sp-grid rd-grid">
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Music &amp; DJ"><b>Music &amp; DJ</b><small>Donate</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Restrooms"><b>Restrooms</b><small>Donate</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Accessibility carts"><b>Accessibility Carts</b><small>Donate</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Photo booth"><b>Photo Booth</b><small>Donate</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Bounce house"><b>Bounce House</b><small>Donate</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Tents &amp; tables"><b>Tents &amp; Tables</b><small>Donate</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Decorations"><b>Decorations</b><small>Donate</small></button>
-          <button type="button" class="sp-pick rd-pass" aria-pressed="false" data-pick="In-kind · Food &amp; water"><b>Food &amp; Water</b><small>Donate</small></button>
-        </div></div>
-        <div class="sp-bar"><p class="spk-count" aria-live="polite">Nothing picked yet. Tap any pass above.</p><div class="cta-row"><button type="button" class="btn white-ghost spk-clear" hidden>Clear</button><a class="btn white spk-send" href="#participate" data-interest="sponsor" data-note="Interested in: Race-day sponsorship">Send my picks →</a></div></div>
+    <section class="sp-sec" id="track-development-menu" aria-labelledby="track-development-menuH">
+      <p class="eyebrow">Sponsor menu</p>
+      <h2 id="track-development-menuH">Track Development menu</h2>
+      <p class="sub">Tap everything that interests you, then send your picks. We’ll follow up with availability and details. Picking doesn’t commit you to anything.</p>
+      <div class="sp-menu av-menu" data-prefix="Track Development menu picks: " data-empty="Interested in: Track Development sponsorship">
+        <h3 class="av-mh">Sponsorship tiers</h3>
+        <div class="av-tiers">
+          <button type="button" class="sp-pick av-tier" aria-pressed="false" data-pick="Track Development · Pit Pass ($250)"><span class="av-tn">Pit Pass</span><span class="av-tp">$250</span><span class="av-tw">Sponsor a heat on race day.</span><span class="av-perks"><span>“Heat 7, brought to you by …” on the live race page and big screen</span><span>Name in the race-day program</span></span></button>
+          <button type="button" class="sp-pick av-tier" aria-pressed="false" data-pick="Track Development · Starting Line ($500)"><span class="av-tn">Starting Line</span><span class="av-tp">$500</span><span class="av-tw">For local businesses and families who want to be part of race day.</span><span class="av-perks"><span>Name on the race-day sponsor banner</span><span>Name in the race-day program</span><span>Logo in the live race sponsor strip</span></span></button>
+          <button type="button" class="sp-pick av-tier" aria-pressed="false" data-pick="Track Development · Pole Position ($1,000)"><span class="av-tn">Pole Position</span><span class="av-tp">$1,000</span><span class="av-tw">A bigger presence all day long.</span><span class="av-perks"><span>Everything in Starting Line</span><span>Quarter-page program ad</span><span>Intermission ad on the live race page</span></span></button>
+          <button type="button" class="sp-pick av-tier" aria-pressed="false" data-pick="Track Development · Race Team ($2,500)"><span class="av-tn">Race Team</span><span class="av-badge">Limited</span><span class="av-tp">$2,500</span><span class="av-tw">Puts a Flint Racing team on the track: the car, equipment, materials, hardware, weights and wraps.</span><span class="av-perks"><span>Your logo on the race car</span><span>Half-page program ad</span><span>Spotlight ad on the live race page</span></span></button>
+        </div>
+        <h3 class="av-mh">Race-day ads</h3><p class="av-ms">Live race ads run on fans’ phones and the big screen. Program ads go home with every family.</p>
+        <div class="sp-grid"><button type="button" class="sp-pick" aria-pressed="false" data-pick="Track Development · Sponsor Strip Ad ($250)"><b>Sponsor Strip Ad</b><small>$250</small></button><button type="button" class="sp-pick" aria-pressed="false" data-pick="Track Development · Intermission Ad ($500)"><b>Intermission Ad</b><small>$500</small></button><button type="button" class="sp-pick" aria-pressed="false" data-pick="Track Development · Spotlight Ad ($750)"><b>Spotlight Ad</b><small>$750</small></button><button type="button" class="sp-pick" aria-pressed="false" data-pick="Track Development · Program Ad · Business Card ($100)"><b>Program Ad · Business Card</b><small>$100</small></button><button type="button" class="sp-pick" aria-pressed="false" data-pick="Track Development · Program Ad · Quarter Page ($250)"><b>Program Ad · Quarter Page</b><small>$250</small></button><button type="button" class="sp-pick" aria-pressed="false" data-pick="Track Development · Program Ad · Half Page ($500)"><b>Program Ad · Half Page</b><small>$500</small></button><button type="button" class="sp-pick" aria-pressed="false" data-pick="Track Development · Program Ad · Full Page ($1,000)"><b>Program Ad · Full Page</b><small>$1,000</small></button></div>
+        <h3 class="av-mh">In-kind donations</h3><p class="av-ms">Goods and services you can donate.</p>
+        <div class="av-chips"><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Music &amp; DJ (in-kind)">Music &amp; DJ</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Restrooms (in-kind)">Restrooms</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Accessibility carts (in-kind)">Accessibility carts</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Photo booth (in-kind)">Photo booth</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Bounce house (in-kind)">Bounce house</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Tents &amp; tables (in-kind)">Tents &amp; tables</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Decorations (in-kind)">Decorations</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Food &amp; water (in-kind)">Food &amp; water</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Sound system (in-kind)">Sound system</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Golf carts (in-kind)">Golf carts</button></div>
+        <div class="av-greater"><h3 class="av-mh">Inquire to discuss greater sponsorship opportunities</h3><p class="av-ms">Division, zone and track partnerships are tailored to each partner. Tap any that interest you and we’ll talk through the details. Track infrastructure partnerships carry a 3-year minimum commitment.</p>
+        <div class="av-chips"><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Stock Division Sponsor (greater opportunity)">Stock Division Sponsor</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Super Stock Division Sponsor (greater opportunity)">Super Stock Division Sponsor</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Masters Division Sponsor (greater opportunity)">Masters Division Sponsor</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · The Track (greater opportunity)">The Track</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Event Experience Partner (greater opportunity)">Event Experience Partner</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Guest Tent &amp; Hospitality Zone (greater opportunity)">Guest Tent &amp; Hospitality Zone</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Start Line Zone (greater opportunity)">Start Line Zone</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Finish Line Zone (greater opportunity)">Finish Line Zone</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Family Fun Zone (greater opportunity)">Family Fun Zone</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Pit Row Zone (greater opportunity)">Pit Row Zone</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Track Development · Track Infrastructure (greater opportunity)">Track Infrastructure</button></div></div>
+        <div class="sp-bar"><p class="spk-count" aria-live="polite">Nothing picked yet. Tap anything above.</p><div class="cta-row"><button type="button" class="btn white-ghost spk-clear" hidden>Clear</button><a class="btn white spk-send" href="#participate" data-interest="sponsor" data-note="Interested in: Track Development sponsorship">Send my picks →</a></div></div>
       </div>
     </section>
-
-    <section class="sp-sec rd-group" aria-labelledby="rdG1"><p class="eyebrow"><span class="rd-gn">01</span> Tournament sponsors</p><h2 id="rdG1">Sponsor a division</h2><p class="sub">The race is presented by Flint Racing and STEM. Our top partners put their names on the divisions, the teams and the heats.</p></section>
-    <div class="sp-tiers rd-tiers">
-      <article class="sp-tier top"><div class="sp-th"><h3>Stock Division Sponsor</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$15,000</p><p>Our top-tier partnership. Your name rides with the Stock Division all day, from the first heat to the trophy presentation.</p><ul class="sp-inc"><li>“Stock Division presented by …”</li><li>Name on every Stock heat and bracket</li><li>Trophy presentation</li><li>Finish-line banner</li><li>Live race page and big screen</li><li>Impact reporting</li></ul>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Tournament · Stock Division Sponsor ($15,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Super Stock Division Sponsor</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$12,500</p><p>Put your name on the Super Stock Division, where racers step up to bigger cars and faster runs.</p><ul class="sp-inc"><li>“Super Stock Division presented by …”</li><li>Name on every Super Stock heat and bracket</li><li>Trophy presentation</li><li>Live race page and big screen</li></ul>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Tournament · Super Stock Division Sponsor ($12,500)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Masters Division Sponsor</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$10,000</p><p>Put your name on the Masters Division, where our most experienced racers compete for the title.</p><ul class="sp-inc"><li>“Masters Division presented by …”</li><li>Name on every Masters heat and bracket</li><li>Trophy presentation</li><li>Live race page and big screen</li></ul>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Tournament · Masters Division Sponsor ($10,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Sponsor a Race Team</h3><span class="sp-badge lim">Limited spots</span></div><p class="sp-price">$2,500</p><p>Provides the complete car, equipment, materials, hardware, weights, wraps and resources needed to put a Flint Racing team on the track. Your logo goes on the car.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Tournament · Sponsor a Race Team ($2,500)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Heat Sponsor</h3><span class="sp-badge">Per heat</span></div><p class="sp-price">$250</p><p>“Heat 7, brought to you by …” Your logo shows on the live race page and the big screen while your heat runs, and the announcer says your name.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Tournament · Heat Sponsor ($250 per heat)">Ask about this</a></article>
-    </div>
-    <section class="sp-sec rd-group" aria-labelledby="rdG2"><p class="eyebrow"><span class="rd-gn">02</span> Event &amp; guest experience</p><h2 id="rdG2">Own the whole day, or pick a zone</h2><p class="sub">One Event Experience Partner can take the entire guest side of race day. If that spot is open, each zone can be sponsored on its own.</p></section>
-    <div class="sp-tiers rd-tiers">
-      <article class="sp-tier top"><div class="sp-th"><h3>Event Experience Partner</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$12,000</p><p>One partner for the whole guest side of race day: tents, seating, hospitality, guest areas and every zone below.</p><ul class="sp-inc"><li>All five zones</li><li>Tent and guest-area signage</li><li>Name on the event map</li><li>Live race page and big screen</li><li>Impact reporting</li></ul>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Event Experience Partner ($12,000)">Ask about this</a></article>
-    </div>
-    <div class="rd-zones">
-      <article class="rd-zone"><h3>Guest Tent &amp; Hospitality</h3><p class="sp-price">$2,500</p><p>Shade, seating and refreshments where families settle in for the day.</p><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Guest Tent &amp; Hospitality ($2,500)">Sponsor this zone</a></article>
-      <article class="rd-zone"><h3>Start Line Zone</h3><p class="sp-price">$2,000</p><p>The top of the hill, where every run begins and every racer gets a send-off.</p><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Start Line Zone ($2,000)">Sponsor this zone</a></article>
-      <article class="rd-zone"><h3>Finish Line Zone</h3><p class="sp-price">$2,000</p><p>The loudest spot on the track, with the timing board and the photo finish.</p><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Finish Line Zone ($2,000)">Sponsor this zone</a></article>
-      <article class="rd-zone"><h3>Family Fun Zone</h3><p class="sp-price">$2,000</p><p>Games, the photo booth and the bounce house for brothers, sisters and little fans.</p><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Family Fun Zone ($2,000)">Sponsor this zone</a></article>
-      <article class="rd-zone"><h3>Pit Row Zone</h3><p class="sp-price">$1,500</p><p>Where teams check cars, make repairs and get ready to race.</p><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Event · Pit Row Zone ($1,500)">Sponsor this zone</a></article>
-    </div>
-    <section class="sp-sec rd-group" aria-labelledby="rdG3"><p class="eyebrow"><span class="rd-gn">03</span> Local sponsors</p><h2 id="rdG3">Hometown support</h2><p class="sub">For local businesses, organizations and families who want to be part of race day.</p></section>
-    <div class="sp-tiers rd-tiers">
-      <article class="sp-tier"><div class="sp-th"><h3>Hometown Sponsor</h3></div><p class="sp-price">$1,000</p><p>Your name on the race-day sponsor banner, in the race-day program and in the rotation on the live race page.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Local · Hometown Sponsor ($1,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Local Business Sponsor</h3></div><p class="sp-price">$500</p><p>Your name on the race-day sponsor banner and in the race-day program. A great way to say: we support our kids.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Local · Local Business Sponsor ($500)">Ask about this</a></article>
-    </div>
-    <section class="sp-sec rd-group" aria-labelledby="rdG4"><p class="eyebrow"><span class="rd-gn">04</span> Live race ads</p><h2 id="rdG4">Ads on the live race page</h2><p class="sub">Fans follow every heat on the live race page, on their phones and on the big screen at the track. Your ad runs right alongside the racing.</p></section>
-    <div class="sp-tiers rd-tiers">
-      <article class="sp-tier"><div class="sp-th"><h3>Spotlight Ad</h3></div><p class="sp-price">$750</p><p>Your ad takes the featured spot for 20 seconds at a time, several times through the day, on every phone and the big screen.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Live ads · Spotlight Ad ($750)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Intermission Ad</h3></div><p class="sp-price">$500</p><p>A full-screen ad in the intermission rotation, shown on the live race page and the big screen whenever racing pauses.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Live ads · Intermission Ad ($500)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Sponsor Strip Ad</h3></div><p class="sp-price">$250</p><p>Your logo and tagline in the sponsor strip that scrolls under the racing all day.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Live ads · Sponsor Strip Ad ($250)">Ask about this</a></article>
-    </div>
-    <section class="sp-sec rd-group" aria-labelledby="rdG5"><p class="eyebrow"><span class="rd-gn">05</span> Program ads</p><h2 id="rdG5">Ads in the race-day program</h2><p class="sub">The printed race-day program goes home with every family. Support Flint Racing, and we’ll support you.</p></section>
-    <div class="sp-tiers rd-tiers">
-      <article class="sp-tier top"><div class="sp-th"><h3>Race-Day Program Ad</h3><span class="sp-badge">Slots available</span></div><p class="sp-price">$100 – $1,000</p><p>Choose a size below and send us your artwork, or let us know if you need help designing it.</p><div class="rd-sizes"><span><b>Business card</b>$100</span><span><b>Quarter page</b>$250</span><span><b>Half page</b>$500</span><span><b>Full page</b>$1,000</span></div>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Program ad (size to be chosen)">Ask about this</a></article>
-    </div>
-    <section class="sp-sec rd-group" aria-labelledby="rdG6"><p class="eyebrow"><span class="rd-gn">06</span> In-kind donations</p><h2 id="rdG6">Make race day feel like a festival</h2><p class="sub">Donate goods and services that decorate the hill and make the day more fun and more welcoming for every guest. Tap what you can offer.</p></section>
-    <section class="panel wide next-step rd-kind"><div class="sp-chips"><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Music &amp; DJ">Music &amp; DJ</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Restrooms">Restrooms</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Accessibility carts">Accessibility carts</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Photo booth">Photo booth</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Bounce house">Bounce house</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Tents &amp; tables">Tents &amp; tables</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Decorations">Decorations</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Food &amp; water">Food &amp; water</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Sound system">Sound system</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Golf carts">Golf carts</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Printing">Printing</a><a href="#participate" data-interest="sponsor" data-note="In-kind donation: Volunteers’ meals">Volunteers’ meals</a></div><p class="sp-fine">In-kind donors are thanked on the race-day sponsor banner and the live race page.</p></section>
-
-    <section class="panel wide next-step"><h2>Seen on race day</h2><p>Race-day partners show up where families and fans are looking.</p>
+    <section class="panel wide next-step"><h2>Seen on race day</h2><p>Track partners show up where families and fans are looking.</p>
       <ul class="sp-seen"><li><b>Live race page</b><span>A rotating sponsor strip on the page fans follow on their phones.</span></li><li><b>“Brought to you by”</b><span>Your logo on a heat as it runs.</span></li><li><b>Intermission spotlight</b><span>A full-screen thank-you between races.</span></li><li><b>On the cars</b><span>Sponsor decals are part of every race car.</span></li></ul></section>
-    <section class="rd-finish" aria-labelledby="rdFinH"><div><h2 id="rdFinH">Ready to race?</h2><p>Send an inquiry and staff will follow up with availability and a partnership packet. Exclusive spots go to the first confirmed partner.</p></div>
-      <div class="cta-row"><a class="btn white" href="#participate" data-interest="sponsor" data-note="Interested in: Race-day sponsorship">Start a conversation</a><a class="btn white-ghost" href="#sponsor-menu">Program &amp; development menu</a></div></section>
+    <section class="rd-finish" aria-labelledby="rdFinH"><div><h2 id="rdFinH">Ready to race?</h2><p>Send an inquiry and staff will follow up with availability and a partnership packet.</p></div>
+      <div class="cta-row"><a class="btn white" href="#participate" data-interest="sponsor" data-note="Interested in: Track Development sponsorship">Start a conversation</a><a class="btn white-ghost" href="#support">All sponsor avenues</a></div></section>
   </div>
 </div>
 
-<!-- ======================= SPONSORS: PROGRAMS ======================= -->
-<div class="page dark prog-page serve2 spx" data-page="sponsor-programs" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#support">Sponsors &amp; Partners</a><span aria-hidden="true">/</span><span aria-current="page">Program Partners</span></div></nav>
+<!-- ======================= SPONSORS: PROGRAM & FACILITY DEVELOPMENT ======================= -->
+<div class="page dark prog-page serve2 spx av-long" data-page="program-facility-development" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#support">Sponsors &amp; Partners</a><span aria-hidden="true">/</span><span aria-current="page">Program &amp; Facility Development</span></div></nav>
   <header class="prog-hero"><div class="wrap">
-    <div class="txt"><p class="eyebrow">Year-round partnerships</p><h1>Program Partners</h1><p class="lede">Racing is only the beginning. Year-round partners power hands-on STEM, leadership and community experiences beyond the annual Derby.</p></div>
+    <div class="txt"><p class="eyebrow">Year-round programs</p><h1>Program &amp; Facility Development</h1><p class="lede">Racing is only the beginning. Program partners power building workshops, STEM programs, camps, field trips and leadership all year, plus the workshop space, tools and equipment behind them.</p>
+      <div class="cta-row"><a class="btn deep" href="#program-facility-development-menu">Open the sponsor menu ↓</a></div></div>
     <div class="pic"><img src="img/web/kevin-nephew-calvin-car.webp" alt="A young racer sits in a finished Soap Box Derby car"></div>
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#race-day-sponsors">Race Day</a><a href="#sponsor-programs" aria-current="page">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
-    <div class="sp-tiers">
-      <article class="sp-tier top"><div class="sp-th"><h3>Year-Round Presenting Partner</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$45,000</p><p>Premier year-round support for workshops, camps, field trips, leadership, community programming and student experiences.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Programs · Year-Round Presenting Partner ($45,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>STEM Education &amp; Programming</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$15,000</p><p>Supports tools, materials, equipment, camps, workshops, field experiences and hands-on STEM activities.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Programs · STEM Education &amp; Programming ($15,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Youth Leadership &amp; Community Impact</h3><span class="sp-badge ex">Exclusive</span></div><p class="sp-price">$10,000</p><p>Supports the Pit Crew, Crew Chief Council, leadership training, park restoration service, community projects and career-readiness experiences.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Programs · Youth Leadership &amp; Community Impact ($10,000)">Ask about this</a></article>
-      <article class="sp-tier top"><div class="sp-th"><h3>Direct Program Partner</h3><span class="sp-badge lim">Limited spots</span></div><p class="sp-price">$5,500</p><p>Choose one program and back it for the year. Your support goes straight to the program you pick.</p>
-        <div class="sp-chips" aria-label="Choose a program">
-          <a href="#participate" data-interest="sponsor" data-note="Interested in: Direct Program Partner ($5,500) · Building Workshops">Building Workshops</a>
-          <a href="#participate" data-interest="sponsor" data-note="Interested in: Direct Program Partner ($5,500) · STEM Camp">STEM Camp</a>
-          <a href="#participate" data-interest="sponsor" data-note="Interested in: Direct Program Partner ($5,500) · Field Trips &amp; Park Education">Field Trips &amp; Park Education</a>
-          <a href="#participate" data-interest="sponsor" data-note="Interested in: Direct Program Partner ($5,500) · Community Event">Community Event</a>
-          <a href="#participate" data-interest="sponsor" data-note="Interested in: Direct Program Partner ($5,500) · Leadership Event">Leadership Event</a>
-          <a href="#participate" data-interest="sponsor" data-note="Interested in: Direct Program Partner ($5,500) · Seasonal Workshops (winter, summer or fall)">Seasonal Workshops</a>
-        </div></article>
-    </div>
-    <div class="sp-tiers"><article class="sp-tier top"><div class="sp-th"><h3>Seasonal Programs Partner</h3><span class="sp-badge">Winter · Summer · Fall</span></div><p class="sp-price">$2,500 per season</p><p>Back one season of workshops and activities: winter, summer or fall. Your name goes on that season’s programs.</p>
-      <div class="sp-chips"><a href="#participate" data-interest="sponsor" data-note="Interested in: Seasonal Programs Partner ($2,500) · Winter">Winter</a><a href="#participate" data-interest="sponsor" data-note="Interested in: Seasonal Programs Partner ($2,500) · Summer">Summer</a><a href="#participate" data-interest="sponsor" data-note="Interested in: Seasonal Programs Partner ($2,500) · Fall">Fall</a></div></article></div>
-    <section class="panel wide next-step"><h2>Programs your support reaches</h2><p>See what partners make possible.</p>
-      <div class="sp-chips"><a href="#building-workshops">Building &amp; Workshops</a><a href="#steam-and-beyond">STEM Programs</a><a href="#seasonal-workshops">Seasonal Workshops</a><a href="#stem-camps">STEM Camps</a><a href="#leadership">Student Volunteers</a></div></section>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview</a><a href="#track-development">Track Development</a><a href="#program-facility-development" aria-current="page">Program &amp; Facility</a><a href="#park-community-development">Park &amp; Community</a></nav>
+    <section class="av-out flip" aria-labelledby="avPgH">
+      <div class="av-photos" aria-hidden="true"><img src="img/web/1938-builders-lineup-bw.webp" alt=""><img src="img/web/coloring-car.webp" alt="" class="light"><img src="img/web/kevin-nephew-calvin-car.webp" alt=""></div>
+      <div class="av-txt"><p class="eyebrow">What your support reaches</p><h2 id="avPgH">Where kids build it</h2><p>Students design, build and test their own cars, learn the science behind them, and grow into volunteers, leaders and mentors. Program partners keep the tools, materials and space ready for every session.</p>
+        <div class="sp-chips"><a href="#building-workshops">Building &amp; Workshops</a><a href="#steam-and-beyond">STEM Programs</a><a href="#seasonal-workshops">Seasonal Workshops</a><a href="#stem-camps">STEM Camps</a><a href="#leadership">Student Volunteers</a></div></div>
+    </section>
+    <section class="sp-sec" id="program-facility-development-menu" aria-labelledby="program-facility-development-menuH">
+      <p class="eyebrow">Sponsor menu</p>
+      <h2 id="program-facility-development-menuH">Program &amp; Facility menu</h2>
+      <p class="sub">Tap everything that interests you, then send your picks. We’ll follow up with availability and details. Picking doesn’t commit you to anything.</p>
+      <div class="sp-menu av-menu" data-prefix="Program &amp; Facility menu picks: " data-empty="Interested in: Program &amp; Facility sponsorship">
+        <h3 class="av-mh">Sponsorship tiers</h3>
+        <div class="av-tiers">
+          <button type="button" class="sp-pick av-tier" aria-pressed="false" data-pick="Program &amp; Facility · Toolbox Sponsor ($500)"><span class="av-tn">Toolbox Sponsor</span><span class="av-tp">$500</span><span class="av-tw">Tools and building materials for a workshop session.</span><span class="av-perks"><span>Name on the workshop sponsor board</span><span>Thank-you in the monthly bulletin</span></span></button>
+          <button type="button" class="sp-pick av-tier" aria-pressed="false" data-pick="Program &amp; Facility · Student Experience Supporter ($1,000)"><span class="av-tn">Student Experience Supporter</span><span class="av-tp">$1,000</span><span class="av-tw">Materials, meals, awards and supplies that directly shape each student’s experience.</span><span class="av-perks"><span>Name on the workshop sponsor board</span><span>Logo on our website partner wall</span><span>Annual impact update</span></span></button>
+          <button type="button" class="sp-pick av-tier" aria-pressed="false" data-pick="Program &amp; Facility · Seasonal Programs Partner ($2,500)"><span class="av-tn">Seasonal Programs Partner</span><span class="av-badge">Per season</span><span class="av-tp">$2,500</span><span class="av-tw">Back one season of workshops and activities: winter, summer or fall.</span><span class="av-perks"><span>Your name on that season’s programs</span><span>Logo on our website partner wall</span><span>Season impact update</span></span></button>
+        </div>
+        <h3 class="av-mh">In-kind donations</h3><p class="av-ms">Goods and services you can donate.</p>
+        <div class="av-chips"><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Tools (in-kind)">Tools</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Building materials (in-kind)">Building materials</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Hardware (in-kind)">Hardware</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Safety gear (in-kind)">Safety gear</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Printing (in-kind)">Printing</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Snacks &amp; meals (in-kind)">Snacks &amp; meals</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Transportation (in-kind)">Transportation</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Mentors &amp; guest speakers (in-kind)">Mentors &amp; guest speakers</button></div>
+        <div class="av-greater"><h3 class="av-mh">Inquire to discuss greater sponsorship opportunities</h3><p class="av-ms">Program and facility partnerships are tailored to each partner. Tap any that interest you and we’ll talk through the details. Facility partnerships carry a 3-year minimum commitment.</p>
+        <div class="av-chips"><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Year-Round Programs Presenting Partner (greater opportunity)">Year-Round Programs Presenting Partner</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · STEM Education &amp; Programming Partner (greater opportunity)">STEM Education &amp; Programming Partner</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Youth Leadership &amp; Community Impact Partner (greater opportunity)">Youth Leadership &amp; Community Impact Partner</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Direct Program Partner (greater opportunity)">Direct Program Partner</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Workshop Space (greater opportunity)">Workshop Space</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · STEM Education Facility (greater opportunity)">STEM Education Facility</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Workshop Technology (greater opportunity)">Workshop Technology</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Transportation (greater opportunity)">Transportation</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Program &amp; Facility · Storage (greater opportunity)">Storage</button></div></div>
+        <div class="sp-bar"><p class="spk-count" aria-live="polite">Nothing picked yet. Tap anything above.</p><div class="cta-row"><button type="button" class="btn white-ghost spk-clear" hidden>Clear</button><a class="btn white spk-send" href="#participate" data-interest="sponsor" data-note="Interested in: Program &amp; Facility sponsorship">Send my picks →</a></div></div>
+      </div>
+    </section>
     <section class="panel wide next-step"><h2>Ready to talk?</h2><p>Send an inquiry and staff will follow up with availability and a partnership packet.</p>
-      <div class="cta-row"><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Year-round program partnership">Start a conversation</a><a class="btn outline-red" href="#sponsor-menu">Build a custom package</a></div></section>
+      <div class="cta-row"><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Program &amp; Facility sponsorship">Start a conversation</a><a class="btn outline-red" href="#support">All sponsor avenues</a></div></section>
   </div>
 </div>
 
-<!-- ======================= SPONSORS: COMMUNITY SUPPORT ======================= -->
-<div class="page dark prog-page serve2 spx" data-page="sponsor-community" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#support">Sponsors &amp; Partners</a><span aria-hidden="true">/</span><span aria-current="page">Community Support</span></div></nav>
+<!-- ======================= SPONSORS: PARK & COMMUNITY DEVELOPMENT ======================= -->
+<div class="page dark prog-page serve2 spx av-long" data-page="park-community-development" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#support">Sponsors &amp; Partners</a><span aria-hidden="true">/</span><span aria-current="page">Park &amp; Community Development</span></div></nav>
   <header class="prog-hero"><div class="wrap">
-    <div class="txt"><p class="eyebrow">Community partnerships</p><h1>Community Support</h1><p class="lede">There’s a place for every partner. Local businesses, organizations and families can make a real difference with flexible support.</p></div>
-    <div class="pic"><img src="img/web/2026-racers-group.webp" alt="Racers and volunteers gathered together at the track"></div>
-  </div></header>
-  <div class="tape" aria-hidden="true"></div>
-  <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#race-day-sponsors">Race Day</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community" aria-current="page">Community Support</a><a href="#sponsor-capital">Capital Partners</a></nav>
-    <div class="sp-tiers three">
-      <article class="sp-tier"><div class="sp-th"><h3>Community Program Partner</h3></div><p class="sp-price">$2,500</p><p>Flexible support for programming, equipment, student materials, meals, activities and areas of greatest need.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Community · Community Program Partner ($2,500)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Student Experience Supporter</h3></div><p class="sp-price">$1,000</p><p>Helps provide the materials, meals, awards, supplies and resources that directly shape each student’s experience.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Community · Student Experience Supporter ($1,000)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Community Friend</h3></div><p class="sp-price">$500</p><p>For businesses, organizations, families and community members who simply want to say: we support our kids.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Community · Community Friend ($500)">Ask about this</a></article>
-    </div>
-    <section class="panel wide next-step"><h2>Goods &amp; services</h2><p>We welcome qualifying in-kind support. Tap what you can offer and tell us a little more on the next page.</p>
-      <div class="sp-chips">
-        <a href="#participate" data-interest="sponsor" data-note="In-kind offer: Printing">Printing</a><a href="#participate" data-interest="sponsor" data-note="In-kind offer: Food">Food</a><a href="#participate" data-interest="sponsor" data-note="In-kind offer: Transportation">Transportation</a><a href="#participate" data-interest="sponsor" data-note="In-kind offer: Rentals">Rentals</a><a href="#participate" data-interest="sponsor" data-note="In-kind offer: Equipment">Equipment</a><a href="#participate" data-interest="sponsor" data-note="In-kind offer: Security">Security</a><a href="#participate" data-interest="sponsor" data-note="In-kind offer: Media">Media</a><a href="#participate" data-interest="sponsor" data-note="In-kind offer: Professional services">Professional services</a><a href="#participate" data-interest="sponsor" data-note="In-kind offer: Construction &amp; materials">Construction &amp; materials</a>
-      </div></section>
-    <div class="sp-photos" aria-hidden="true">
-      <figure><img src="img/web/racer-with-veteran.webp" alt="" loading="lazy"></figure>
-      <figure><img src="img/web/race-day-track-tents.webp" alt="" loading="lazy"></figure>
-      <figure><img src="img/web/two-cars-track.webp" alt="" loading="lazy"></figure>
-      <figure><img src="img/web/kevin-nephew-calvin-car.webp" alt="" loading="lazy"></figure>
-    </div>
-    <div class="give-strip"><div><h2>Give any amount</h2><p>Every gift helps. Choose personal, company or anonymous recognition.</p></div><a class="btn white" href="#donate">Donate →</a></div>
-    <section class="panel wide next-step"><h2>Ready to talk?</h2><p>Send an inquiry and staff will follow up about current needs and recognition.</p>
-      <div class="cta-row"><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Community support">Start a conversation</a><a class="btn outline-red" href="#sponsor-menu">Build a custom package</a></div></section>
-  </div>
-</div>
-
-<!-- ======================= SPONSORS: CAPITAL PARTNERS ======================= -->
-<div class="page dark prog-page serve2 spx" data-page="sponsor-capital" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#support">Sponsors &amp; Partners</a><span aria-hidden="true">/</span><span aria-current="page">Capital Partners</span></div></nav>
-  <header class="prog-hero"><div class="wrap">
-    <div class="txt"><p class="eyebrow">The future of Cronin Derby Downs</p><h1>Capital Partners</h1><p class="lede">Building what comes next. Our long-term vision is a year-round home for racing, STEM, education, youth leadership, recreation, environmental learning and community gathering.</p></div>
+    <div class="txt"><p class="eyebrow">The future of Cronin Derby Downs</p><h1>Park &amp; Community Development</h1><p class="lede">Building what comes next. Our vision is a year-round home for racing, STEM, education, youth leadership, recreation, environmental learning and community gathering, built together with local businesses and families.</p>
+      <div class="cta-row"><a class="btn deep" href="#park-community-development-menu">Open the sponsor menu ↓</a></div></div>
     <div class="pic"><img src="img/web/race-day-track-tents.webp" alt="Spectator tents along the track at Cronin Derby Downs"></div>
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview &amp; menu</a><a href="#race-day-sponsors">Race Day</a><a href="#sponsor-programs">Programs</a><a href="#sponsor-community">Community Support</a><a href="#sponsor-capital" aria-current="page">Capital Partners</a></nav>
-    <section class="panel wide next-step"><h2>The plan for the park</h2><p>Four stages take Cronin Derby Downs from a race-day hill to a year-round destination.</p>
-      <ol class="buildpath four">
-        <li><span class="dot">1</span><span><b>Restore</b><span class="t">Track, grounds, landscaping, safety and spectator areas.</span></span></li>
-        <li><span class="dot">2</span><span><b>Build</b><span class="t">Walking paths, bleachers, utilities, restrooms, concessions, a pavilion and family recreation.</span></span></li>
-        <li><span class="dot">3</span><span><b>Expand</b><span class="t">Workshop space, STEM education and community facilities, and racing infrastructure.</span></span></li>
-        <li><span class="dot">4</span><span><b>Destination</b><span class="t">Field trips, racing, leadership, recreation, community events and mentorship.</span></span></li>
-      </ol></section>
-    <div class="sp-tiers">
-      <article class="sp-tier"><div class="sp-th"><h3>Founding Development Partner</h3><span class="sp-badge lim">3-year minimum</span></div><p class="sp-price">$100,000+</p><p>Major partners help move the long-term redevelopment of Cronin Derby Downs from vision toward implementation.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Capital · Founding Development Partner ($100,000+)">Ask about this</a></article>
-      <article class="sp-tier"><div class="sp-th"><h3>Transformative &amp; Naming Partnerships</h3><span class="sp-badge lim">3-year minimum</span></div><p class="sp-price">By discussion</p><p>Major capital and naming opportunities will be developed with specific facilities and projects as the redevelopment plan advances.</p>
-        <a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Capital · Transformative &amp; Naming Partnership">Ask about this</a></article>
-    </div>
-    <section class="panel wide next-step"><h2>Projects ready for partners</h2><p>Have a specific project in mind? Tap one to start the conversation. Facility, track infrastructure and park development projects carry a 3-year minimum commitment.</p>
-      <div class="sp-chips">
-        <a href="#participate" data-interest="sponsor" data-note="Capital project: Workshop technology ($5,000)">Workshop technology · $5,000</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Facility ($25,000+)">Facility · $25,000+</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Track infrastructure ($25,000+)">Track infrastructure · $25,000+</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Park development ($10,000+)">Park development · $10,000+</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Transportation ($7,500)">Transportation · $7,500</a><a href="#participate" data-interest="sponsor" data-note="Capital project: Storage ($5,000)">Storage · $5,000</a>
-      </div></section>
-    <section class="panel wide next-step"><h2>Ready to talk?</h2><p>Capital partnerships start with a conversation with our leadership team. Major foundational partnerships carry a 3-year minimum commitment, so every phase of a project stays funded, even if construction hits a delay.</p>
-      <div class="cta-row"><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Capital partnership at Cronin Derby Downs">Start a conversation</a><a class="btn outline-red" href="#cronin-derby-downs">About Cronin Derby Downs</a></div></section>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Overview</a><a href="#track-development">Track Development</a><a href="#program-facility-development">Program &amp; Facility</a><a href="#park-community-development" aria-current="page">Park &amp; Community</a></nav>
+    <section class="av-out" aria-labelledby="avPkH">
+      <div class="av-photos" aria-hidden="true"><img src="img/web/race-day-track-tents.webp" alt=""><img src="img/web/2026-racers-group.webp" alt=""><img src="img/web/racer-with-veteran.webp" alt=""></div>
+      <div class="av-txt"><p class="eyebrow">The plan for the park</p><h2 id="avPkH">From race-day hill to year-round destination</h2>
+        <ol class="buildpath four av-path"><li><span class="dot">1</span><span><b>Restore</b><span class="t">Track, grounds, landscaping, safety and spectator areas.</span></span></li><li><span class="dot">2</span><span><b>Build</b><span class="t">Walking paths, bleachers, utilities, restrooms, concessions, a pavilion and family recreation.</span></span></li><li><span class="dot">3</span><span><b>Expand</b><span class="t">Workshop space, STEM education and community facilities, and racing infrastructure.</span></span></li><li><span class="dot">4</span><span><b>Destination</b><span class="t">Field trips, racing, leadership, recreation, community events and mentorship.</span></span></li></ol>
+        <div class="cta-row"><a class="btn outline-red" href="#cronin-derby-downs">About Cronin Derby Downs</a></div></div>
+    </section>
+    <section class="sp-sec" id="park-community-development-menu" aria-labelledby="park-community-development-menuH">
+      <p class="eyebrow">Sponsor menu</p>
+      <h2 id="park-community-development-menuH">Park &amp; Community menu</h2>
+      <p class="sub">Tap everything that interests you, then send your picks. We’ll follow up with availability and details. Picking doesn’t commit you to anything.</p>
+      <div class="sp-menu av-menu" data-prefix="Park &amp; Community menu picks: " data-empty="Interested in: Park &amp; Community sponsorship">
+        <h3 class="av-mh">Sponsorship tiers</h3>
+        <div class="av-tiers">
+          <button type="button" class="sp-pick av-tier" aria-pressed="false" data-pick="Park &amp; Community · Community Friend ($500)"><span class="av-tn">Community Friend</span><span class="av-tp">$500</span><span class="av-tw">For businesses, organizations, families and community members who simply want to say: we support our kids.</span><span class="av-perks"><span>Name on the community sponsor board</span><span>Thank-you on our website</span></span></button>
+          <button type="button" class="sp-pick av-tier" aria-pressed="false" data-pick="Park &amp; Community · Park Supporter ($1,000)"><span class="av-tn">Park Supporter</span><span class="av-tp">$1,000</span><span class="av-tw">Grounds, landscaping, clean-up and restoration supplies at Cronin Derby Downs.</span><span class="av-perks"><span>Name on the park sponsor board</span><span>Invitation to a park service day</span><span>Annual impact update</span></span></button>
+          <button type="button" class="sp-pick av-tier" aria-pressed="false" data-pick="Park &amp; Community · Community Program Partner ($2,500)"><span class="av-tn">Community Program Partner</span><span class="av-tp">$2,500</span><span class="av-tw">Flexible support for community events, programming, equipment and areas of greatest need.</span><span class="av-perks"><span>Logo on our website partner wall</span><span>Recognition at community events</span><span>Impact updates through the year</span></span></button>
+        </div>
+        <h3 class="av-mh">In-kind donations</h3><p class="av-ms">Goods and services you can donate.</p>
+        <div class="av-chips"><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Landscaping (in-kind)">Landscaping</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Trees &amp; plants (in-kind)">Trees &amp; plants</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Construction materials (in-kind)">Construction materials</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Equipment rentals (in-kind)">Equipment rentals</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Professional services (in-kind)">Professional services</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Printing &amp; media (in-kind)">Printing &amp; media</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Food for service days (in-kind)">Food for service days</button></div>
+        <div class="av-greater"><h3 class="av-mh">Inquire to discuss greater sponsorship opportunities</h3><p class="av-ms">Park and community development partnerships are tailored to each project. Major foundational partnerships carry a 3-year minimum commitment so projects stay funded from start to finish, even through delays.</p>
+        <div class="av-chips"><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Founding Development Partner (greater opportunity)">Founding Development Partner</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Transformative &amp; Naming Partnerships (greater opportunity)">Transformative &amp; Naming Partnerships</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Park Development (greater opportunity)">Park Development</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Walking Paths (greater opportunity)">Walking Paths</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Bleachers &amp; Spectator Areas (greater opportunity)">Bleachers &amp; Spectator Areas</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Pavilion (greater opportunity)">Pavilion</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Restrooms &amp; Concessions (greater opportunity)">Restrooms &amp; Concessions</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Utilities (greater opportunity)">Utilities</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Family Recreation (greater opportunity)">Family Recreation</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Park &amp; Community · Community Facilities (greater opportunity)">Community Facilities</button></div></div>
+        <div class="sp-bar"><p class="spk-count" aria-live="polite">Nothing picked yet. Tap anything above.</p><div class="cta-row"><button type="button" class="btn white-ghost spk-clear" hidden>Clear</button><a class="btn white spk-send" href="#participate" data-interest="sponsor" data-note="Interested in: Park &amp; Community sponsorship">Send my picks →</a></div></div>
+      </div>
+    </section>
+    <section class="panel wide next-step"><h2>Ready to talk?</h2><p>Send an inquiry and staff will follow up with availability and a partnership packet.</p>
+      <div class="cta-row"><a class="btn deep" href="#participate" data-interest="sponsor" data-note="Interested in: Park &amp; Community sponsorship">Start a conversation</a><a class="btn outline-red" href="#support">All sponsor avenues</a></div></section>
   </div>
 </div>
+
 <!-- ======================= JOIN OUR TEAM ======================= -->
 <div class="page dark prog-page serve2" data-page="join-our-team" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#get-involved">Get Involved</a><span aria-hidden="true">/</span><span aria-current="page">Join Our Team</span></div></nav>
@@ -5344,11 +5242,11 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","council":"Leadership Council","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","race-day-sponsors":"Race Day Sponsors","sponsor-programs":"Program Partners","sponsor-community":"Community Support","sponsor-capital":"Capital Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","council":"Leadership Council","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","track-development":"Track Development","program-facility-development":"Program & Facility Development","park-community-development":"Park & Community Development","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
-  var PAGE_ANCHORS={"sponsor-menu":"support","race-day-menu":"race-day-sponsors","school-practice":"track-schedule","how-racing":"derby-racing","dr-raceday":"derby-racing","dr-terms":"derby-racing","race-board":"track-schedule","sanctioned-racers":"racing","workshop-registration":"race-registration"};
+  var PAGE_ANCHORS={"track-development-menu":"track-development","program-facility-development-menu":"program-facility-development","park-community-development-menu":"park-community-development","school-practice":"track-schedule","how-racing":"derby-racing","dr-raceday":"derby-racing","dr-terms":"derby-racing","race-board":"track-schedule","sanctioned-racers":"racing","workshop-registration":"race-registration"};
   var ALIAS={"plan-event":"event","park-support":"park","park-inquiry":"park","register":"building"};
   var pendingInterest=null;
   var pendingNote=null;
