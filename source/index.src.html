@@ -3592,7 +3592,7 @@ body.spx-prices-on .spx-noprice{display:none}
 <!-- ======================= HOME ======================= -->
 <div class="page" data-page="home">
 
-  <section class="hero">
+  <section class="hero" data-img-host>
     <div class="hero-photo">{{HERO_PHOTO}}</div>
     <div class="hero-shade"></div>
     <canvas class="hero-flag" id="heroFlag" aria-hidden="true"></canvas>
@@ -4629,7 +4629,7 @@ body.spx-prices-on .spx-noprice{display:none}
 <!-- ======================= SPONSORS: RACE DAY (festive) ======================= -->
 <div class="page dark prog-page serve2 spx rdx" data-page="race-day-sponsors" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#support">Sponsors &amp; Partners</a><span aria-hidden="true">/</span><span aria-current="page">Race Day Sponsors</span></div></nav>
-  <header class="rd-hero">
+  <header class="rd-hero" data-img-host>
     <div class="rd-photo"><img src="{{IMG:img/web/racer-down-track.webp}}" alt=""></div>
     <div class="rd-shade"></div>
     <canvas class="hero-flag rd-flag" aria-hidden="true"></canvas>
@@ -7896,7 +7896,10 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
      .catch(function(){toast("Couldn’t save. Check your connection.")});}
 
   /* Photo replace button */
-  document.addEventListener("mouseover",function(e){if(!EDITING)return;var img=e.target.closest&&e.target.closest("[data-ci]");if(!img)return;showImgBtn(img)});
+  document.addEventListener("mouseover",function(e){if(!EDITING||!e.target.closest)return;if(e.target.closest(".fr-imgbtn"))return;var img=e.target.closest("[data-ci]");
+    /* Photos behind a shade or the waving flag (homepage and race-day headers): hovering the header reaches its background photo */
+    if(!img){var host=e.target.closest("[data-img-host]");if(host)img=host.querySelector("[data-ci]")}
+    if(!img)return;showImgBtn(img)});
   document.addEventListener("focusin",function(e){if(EDITING&&e.target.matches&&e.target.matches("[data-ci]"))showImgBtn(e.target)});
   function showImgBtn(img){
     if(!imgBtn){imgBtn=document.createElement("button");imgBtn.type="button";imgBtn.className="fr-imgbtn";imgBtn.textContent="Replace photo";document.body.appendChild(imgBtn);
