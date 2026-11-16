@@ -3246,6 +3246,13 @@ body.rw-tv .rw-fol{display:none}
 .tr-fine{font-size:.9rem;color:#5a5d64;margin:0}
 @media (max-width:600px){.tr-lane summary{grid-template-columns:minmax(0,1fr) 24px}.tr-lane .ln{grid-column:1/-1;justify-self:start}.tr-lane .more{padding-left:0}}
 @media (prefers-reduced-motion:reduce){.tr-lane .go{transition:none}}
+
+.tr-links button{all:unset;box-sizing:border-box;display:grid;gap:3px;width:100%;padding:12px 26px 12px 0;position:relative;cursor:pointer;color:var(--ink)}
+.tr-links button::after{content:"›";position:absolute;right:4px;top:50%;transform:translateY(-50%);font:800 1.5rem/1 var(--display);color:var(--red-deep)}
+.tr-links button:hover b{text-decoration:underline}
+.tr-links button:focus-visible,.tr-links a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+
+@media (min-width:900px){.panel.wide .buildpath.four{grid-template-columns:repeat(4,minmax(0,1fr))}.panel.wide .buildpath.four::before{right:calc(100%/4 - 20px)}.panel.wide .buildpath.four li{padding-right:18px}}
 </style>
 
 <header class="site-nav">
@@ -3692,40 +3699,78 @@ body.rw-tv .rw-fol{display:none}
 </div>
 
 <!-- ======================= HOW TO GET INVOLVED (racing) ======================= -->
-<div class="page dark prog-page" data-page="racing-get-involved" hidden>
+<div class="page dark prog-page tr2" data-page="racing-get-involved" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><a href="#racing">Track &amp; Racing</a><span aria-hidden="true">/</span><span aria-current="page">How to Get Involved</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Track &amp; Racing</p><h1>How to Get Involved</h1><p>There’s a place for everyone at Cronin Derby Downs: racers, families, schools, volunteers and fans. Every participant races and eats for free.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt">
+      <p class="eyebrow">There’s a place for everyone.</p>
+      <h1>How to Get Involved</h1>
+      <p class="lede">Racers, families, schools, volunteers and fans all have a place at Cronin Derby Downs. Every participant races and eats for free.</p>
+    </div>
+    <div class="pic"><img src="{{IMG:img/web/race-day-track-tents.webp}}" alt="Race day at Cronin Derby Downs, with team tents lining the track"></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="panels">
+      <section class="panel wide" aria-labelledby="giStepsH">
+        <h2 id="giStepsH">How joining works</h2>
+        <p>From your first question to race day.</p>
+        <ol class="buildpath four">
+          <li><span class="dot">1</span><span><b>Send an inquiry</b><span class="t">Choose a race day inquiry or a building workshop inquiry, and tell us a little about your racer, school or group.</span></span></li>
+          <li><span class="dot">2</span><span><b>We follow up by email</b><span class="t">Staff reply with availability, requirements and next steps.</span></span></li>
+          <li><span class="dot">3</span><span><b>Complete the official registration</b><span class="t">Once your place is confirmed, we email you the official All-American Soap Box Derby registration form to fill out and sign online.</span></span></li>
+          <li><span class="dot">4</span><span><b>Build and race</b><span class="t">Join the building workshops, practice on the hill and race at the Annual Flint Soap Box Derby.</span></span></li>
+        </ol>
+        <div class="cta-row"><a class="btn deep" href="#participate" data-interest="racing" data-scope="racing">Inquire about race day</a><a class="btn outline-red" href="#participate" data-interest="building" data-scope="building">Inquire about building workshops</a></div>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">For racers and schools</p>
+        <h2>Build and race</h2>
+        <ul class="tr-links">
+          <li><a href="#building-workshops"><b>Join a building workshop</b><small>Build a soap box car with our crew over six weeks, or three visits for out-of-town groups</small></a></li>
+          <li><a href="#racing"><b>Race in the Flint Soap Box Derby</b><small>The main event, the racing formats and how race day works</small></a></li>
+          <li><button type="button" data-sbd-open aria-haspopup="dialog"><b>Sanctioned racer from another program</b><small>Quick register and we’ll email you the forms and fees</small></button></li>
+          <li><a href="#track-schedule"><b>Fun runs and school practice</b><small>Seasonal runs at the track, and practice days for school teams</small></a></li>
+        </ul>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">Beyond race day</p>
+        <h2>Learn and lead</h2>
+        <ul class="tr-links">
+          <li><a href="#seasonal-workshops"><b>Seasonal Workshops</b><small>Hands-on workshops through the year</small></a></li>
+          <li><a href="#stem-camps"><b>STEM Camps</b><small>A week of building, science and racing in the summer</small></a></li>
+          <li><a href="#steam-and-beyond"><b>Student Leadership Council</b><small>Older students lead projects and events, and earn service hours</small></a></li>
+          <li><a href="#derby-racing"><b>About Derby Racing</b><small>How heats work, how to build a car and the terms you’ll hear</small></a></li>
+        </ul>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">Give your time</p>
+        <h2>Volunteer</h2>
+        <ul class="tr-links">
+          <li><a href="#race-volunteer"><b>Volunteer on race day</b><small>Help run the start, the finish, the tents and more</small></a></li>
+          <li><a href="#leadership"><b>Student Volunteers</b><small>Build confidence, practice leadership and help other young people succeed</small></a></li>
+          <li><a href="#serve"><b>Community Volunteers</b><small>Give a little time and make a lasting difference for Flint’s young builders</small></a></li>
+          <li><a href="#join-our-team"><b>Join Our Team</b><small>Bring your skills, your ideas and a commitment to help Flint Racing grow</small></a></li>
+        </ul>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">Back the program</p>
+        <h2>Support</h2>
+        <ul class="tr-links">
+          <li><a href="#support"><b>Sponsors &amp; Partners</b><small>Put your resources, relationships and expertise behind hands-on opportunities</small></a></li>
+          <li><a href="#donate"><b>Donate</b><small>Give directly to the program</small></a></li>
+          <li><a href="#participate" data-interest="event"><b>Plan a track event</b><small>Bring your group to the track for a party, fundraiser or custom event</small></a></li>
+          <li><a href="#spirit"><b>Spirit Shop</b><small>Wear the work</small></a></li>
+        </ul>
+      </section>
+    </div>
 
-    <section class="dr-sec" style="margin-top:clamp(1.4rem,3vw,2rem)" aria-labelledby="giStepsH">
-      <p class="hiw-k">From first question to race day</p><h2 id="giStepsH" class="dr-h">How joining works</h2>
-      <ol class="dr-flow">
-        <li><b>Send an inquiry</b><span>Choose a race day inquiry or a building workshop inquiry, and tell us a little about your racer, school or group.</span></li>
-        <li><b>We follow up by email</b><span>Staff reply with availability, requirements and next steps.</span></li>
-        <li><b>Complete the official registration</b><span>Once your place is confirmed, we email you the official All-American Soap Box Derby registration form to fill out and sign online.</span></li>
-        <li class="fin"><b>Build and race</b><span>Join the building workshops, practice on the hill and race at the Annual Flint Soap Box Derby.</span></li>
-      </ol>
-    </section>
-
-    <section class="dr-sec" aria-labelledby="giWaysH">
-      <p class="hiw-k">Pick your path</p><h2 id="giWaysH" class="dr-h">Ways to take part</h2>
-      <div class="gi-ways">
-        <article><h3>Join a building workshop</h3><p>Build a soap box car side by side with our crew over six weeks, or three visits for out-of-town groups.</p><a class="btn deep" href="#participate" data-interest="building" data-scope="building">Inquire about building workshops</a></article>
-        <article><h3>Race in the Flint Soap Box Derby</h3><p>Questions about race day, divisions or how we operate? Start with a race day inquiry.</p><a class="btn deep" href="#participate" data-interest="racing" data-scope="racing">Inquire about race day</a></article>
-        <article><h3>Sanctioned racer from another program</h3><p>Looking for a local Derby? Send a quick inquiry and we’ll email you the forms and fees.</p><button class="btn deep" type="button" data-sbd-open aria-haspopup="dialog">Quick register</button></article>
-        <article><h3>Volunteer on race day</h3><p>Help run the start, the finish, the tents and more. Students and adults are welcome.</p><a class="btn deep" href="#race-volunteer">Volunteer on race day</a></article>
-        <article><h3>Plan a track event</h3><p>Bring your group to the track for a party, fundraiser or custom event.</p><a class="btn deep" href="#participate" data-interest="event">Start planning your track event</a></article>
-        <article><h3>Stay in the loop</h3><p>Get fun run dates, race day news and workshop announcements by email.</p><a class="btn deep" href="#participate" data-interest="updates">Join email updates</a></article>
-      </div>
-    </section>
-
-    <section class="panel wide" style="margin-top:clamp(2rem,4vw,3rem)">
+    <section class="panel wide" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
       <h2>Ready to take the next step?</h2>
       <p>Questions about race day or how we operate? Send an inquiry and staff will follow up by email. Once your place is confirmed, we’ll email you the official All-American Soap Box Derby registration form to complete and sign online. Inquiring does not confirm a place.</p>
-      <div class="row"><a class="btn deep" href="#participate" data-interest="racing">Inquire about race day</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
+      <div class="row"><a class="btn deep" href="#participate" data-interest="racing">Inquire about race day</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a><a class="btn outline-red" href="#racing">← Track &amp; Racing</a></div>
     </section>
-    <p class="res-back" style="margin-top:clamp(1.4rem,3vw,2rem)"><a class="btn outline-red" href="#racing">← Track &amp; Racing</a></p>
-  </div></div>
+  </div>
 </div>
 
 <!-- ======================= ABOUT DERBY RACING ======================= -->
