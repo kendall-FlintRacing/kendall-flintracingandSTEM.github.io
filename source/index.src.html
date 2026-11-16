@@ -3176,6 +3176,33 @@ body.rw-tv .rw-fol{display:none}
 .poll-res i{height:12px;background:#e3e5e9;border-radius:99px;overflow:hidden}.poll-res i b{display:block;height:100%;background:var(--red-deep);border-radius:99px}
 .poll-res em{font-style:normal;font-weight:700;text-align:right}
 @media (max-width:480px){.poll-opts span{min-width:0;padding:12px 14px}.poll-res li{grid-template-columns:96px minmax(0,1fr) 28px}}
+
+/* STEM club poll, compact (Nov 15): slim dark strip, slanted racing chips */
+.stem-poll{margin-top:18px;background:var(--ink);color:#fff;border-left:6px solid var(--red);border-radius:6px;padding:14px 18px;display:grid;gap:10px}
+.stem-poll .sp-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
+.stem-poll h2{font:800 1.25rem/1.1 var(--display);text-transform:uppercase;color:#fff}
+.stem-poll .sp-head p{font-size:.86rem;color:#b9bcc4;margin:0}
+.stem-poll form{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 26px}
+.stem-poll fieldset{margin:0}
+.stem-poll legend{font:700 .7rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#b9bcc4;margin-bottom:7px}
+.stem-poll legend small{font-weight:500;color:#8b8f98;font-size:.7rem;letter-spacing:.04em}
+.stem-poll .poll-opts{gap:5px}
+.stem-poll .poll-opts span{min-width:0;padding:7px 13px 6px;border:1.5px solid #4a4d55;border-radius:3px;background:#1c1d22;color:#e6e8eb;font:italic 800 .95rem/1 var(--display);text-transform:uppercase;letter-spacing:.02em;transform:skewX(-12deg);transition:background .12s,border-color .12s,box-shadow .12s}
+.stem-poll .poll-opts label:hover span{border-color:#fff}
+.stem-poll .poll-opts input:checked+span{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 0 12px rgba(210,20,28,.75),inset 0 1px 0 rgba(255,255,255,.35)}
+.stem-poll .poll-opts input:focus-visible+span{outline:2px solid #fff;outline-offset:2px}
+.stem-poll .sp-go{border:0;cursor:pointer;padding:9px 20px 8px;border-radius:3px;background:#fff;color:var(--ink);font:italic 800 1rem/1 var(--display);text-transform:uppercase;letter-spacing:.03em;transform:skewX(-12deg)}
+.stem-poll .sp-go:hover{background:var(--red);color:#fff}.stem-poll .sp-go:disabled{opacity:.6}
+.stem-poll .t-msg{flex-basis:100%;margin:0;font-size:.86rem;color:#ffd0d2;min-height:0}.stem-poll .t-msg:empty{display:none}
+.stem-poll #stemPollDone p{margin:0;font-size:.95rem;color:#fff}
+.stem-poll #stemPollRes{border-top:1px dashed #4a4d55;padding-top:10px;gap:4px;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:22px}
+.stem-poll #stemPollRes h3{grid-column:1/-1;font-size:.9rem;color:#fff}.stem-poll #stemPollRes h3 small{color:#b9bcc4}
+.stem-poll .poll-q{color:#b9bcc4;font-size:.68rem;margin:4px 0 4px}
+.stem-poll .poll-res li{grid-template-columns:76px minmax(0,1fr) 24px;font-size:.8rem;color:#e6e8eb;gap:8px}
+.stem-poll .poll-res i{height:8px;background:#2a2c33}.stem-poll .poll-res i b{background:var(--red)}
+.stem-poll .sp-col{min-width:0}
+@media (max-width:760px){.stem-poll #stemPollRes{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.stem-poll .poll-opts span{transition:none}}
 </style>
 
 <header class="site-nav">
@@ -3859,21 +3886,19 @@ body.rw-tv .rw-fol{display:none}
       <div class="row"><a class="btn deep" href="#participate" data-interest="steam">Ask about STEM programs</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
     </section>
 
-    <section class="panel wide stem-poll" id="stemPollBox" style="margin-top:22px" aria-labelledby="stemPollH">
-      <p class="eyebrow">Quick poll</p>
-      <h2 id="stemPollH">Would you join a weeknight STEM club?</h2>
-      <p>We’re thinking about a weeknight STEM club: experiments, activities and projects students build week after week. Three quick questions help us plan it. No name or email needed.</p>
+    <section class="stem-poll" id="stemPollBox" aria-labelledby="stemPollH">
+      <div class="sp-head"><h2 id="stemPollH">Quick poll: a weeknight STEM club?</h2><p>Three taps help us plan it. No name needed.</p></div>
       <form id="stemPoll" novalidate>
-        <fieldset><legend>1. Would you or your student want to join?</legend>
+        <fieldset><legend>Would you join?</legend>
           <div class="poll-opts"><label><input type="radio" name="sp-join" value="yes"><span>Yes</span></label><label><input type="radio" name="sp-join" value="maybe"><span>Maybe</span></label><label><input type="radio" name="sp-join" value="no"><span>No</span></label></div></fieldset>
-        <fieldset><legend>2. How long should a season be?</legend>
-          <div class="poll-opts"><label><input type="radio" name="sp-season" value="4"><span>4 weeks</span></label><label><input type="radio" name="sp-season" value="6"><span>6 weeks</span></label><label><input type="radio" name="sp-season" value="8"><span>8 weeks</span></label><label><input type="radio" name="sp-season" value="year"><span>All school year</span></label></div></fieldset>
-        <fieldset><legend>3. Which nights would work? <small>Pick any that work.</small></legend>
-          <div class="poll-opts"><label><input type="checkbox" name="sp-night" value="mon"><span>Monday</span></label><label><input type="checkbox" name="sp-night" value="tue"><span>Tuesday</span></label><label><input type="checkbox" name="sp-night" value="wed"><span>Wednesday</span></label><label><input type="checkbox" name="sp-night" value="thu"><span>Thursday</span></label></div></fieldset>
-        <div class="row"><button class="btn deep" type="submit">Send my answers</button></div>
+        <fieldset><legend>Season length</legend>
+          <div class="poll-opts"><label><input type="radio" name="sp-season" value="4"><span>4 wks</span></label><label><input type="radio" name="sp-season" value="6"><span>6 wks</span></label><label><input type="radio" name="sp-season" value="8"><span>8 wks</span></label><label><input type="radio" name="sp-season" value="year"><span>School year</span></label></div></fieldset>
+        <fieldset><legend>Best nights <small>(pick any)</small></legend>
+          <div class="poll-opts"><label><input type="checkbox" name="sp-night" value="mon" aria-label="Monday"><span>Mon</span></label><label><input type="checkbox" name="sp-night" value="tue" aria-label="Tuesday"><span>Tue</span></label><label><input type="checkbox" name="sp-night" value="wed" aria-label="Wednesday"><span>Wed</span></label><label><input type="checkbox" name="sp-night" value="thu" aria-label="Thursday"><span>Thu</span></label></div></fieldset>
+        <button class="sp-go" type="submit">Send</button>
         <p class="t-msg" id="stemPollMsg" role="status"></p>
       </form>
-      <div id="stemPollDone" hidden><p><b>Thanks! Your answers are in.</b> We’ll share what we decide here.</p></div>
+      <div id="stemPollDone" hidden><p><b>Thanks! Your answers are in.</b></p></div>
       <div id="stemPollRes" hidden></div>
     </section>
   </div>
@@ -9099,9 +9124,9 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       db.rpc("poll_results",{p_poll:"stem-club"}).then(function(r){if(!r||r.error||!r.data)return;var d=r.data,t=d.total||0;
         function rows(obj,labels){return labels.map(function(l){var n=(obj||{})[l[0]]||0,p=t?Math.round(n/t*100):0;return '<li><span>'+esc(l[1])+'</span><i><b style="width:'+p+'%"></b></i><em>'+n+'</em></li>'}).join("")}
         box.hidden=false;box.innerHTML='<h3>Poll results so far · '+t+' answer'+(t===1?"":"s")+' <small>(only admins see this)</small></h3>'+
-          '<p class="poll-q">Would join</p><ul class="poll-res">'+rows(d.join,[["yes","Yes"],["maybe","Maybe"],["no","No"]])+'</ul>'+
-          '<p class="poll-q">Season length</p><ul class="poll-res">'+rows(d.season,[["4","4 weeks"],["6","6 weeks"],["8","8 weeks"],["year","All school year"]])+'</ul>'+
-          '<p class="poll-q">Nights that work</p><ul class="poll-res">'+rows(d.nights,[["mon","Monday"],["tue","Tuesday"],["wed","Wednesday"],["thu","Thursday"]])+'</ul>'},function(){})}
+          '<div class="sp-col"><p class="poll-q">Would join</p><ul class="poll-res">'+rows(d.join,[["yes","Yes"],["maybe","Maybe"],["no","No"]])+'</ul></div>'+
+          '<div class="sp-col"><p class="poll-q">Season length</p><ul class="poll-res">'+rows(d.season,[["4","4 weeks"],["6","6 weeks"],["8","8 weeks"],["year","School year"]])+'</ul></div>'+
+          '<div class="sp-col"><p class="poll-q">Nights that work</p><ul class="poll-res">'+rows(d.nights,[["mon","Monday"],["tue","Tuesday"],["wed","Wednesday"],["thu","Thursday"]])+'</ul></div>'},function(){})}
     f.addEventListener("submit",function(e){e.preventDefault();var m=$("#stemPollMsg"),j=f.querySelector('[name="sp-join"]:checked'),se=f.querySelector('[name="sp-season"]:checked'),n=$$('[name="sp-night"]:checked',f).map(function(i){return i.value});
       if(!j||!se||!n.length){m.textContent="Please answer all three questions.";return}
       if(!db){m.textContent="The poll isn’t connected right now. Please try again later.";return}
