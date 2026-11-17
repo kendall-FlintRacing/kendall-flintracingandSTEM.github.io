@@ -3600,6 +3600,53 @@ body.spx-prices-on .spx-noprice{display:none}
 #coBox .cx .co-clip2{max-height:4.6em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
 @media (max-width:900px){#coBox .cx .co-hcols{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:480px){#coBox .cx .co-nl li{flex-wrap:wrap}#coBox .cx .co-nl li>.mini{margin-left:46px}}
+/* Admin → Email, reply box on records, unsubscribe page */
+.em-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;align-items:start}
+@media (max-width:900px){.em-grid{grid-template-columns:minmax(0,1fr)}}
+.em-card{border:1px solid #d5d7dc;border-radius:12px;padding:16px;background:#fff;min-width:0}
+.em-card h3{font-size:1.5rem;margin:6px 0 12px;color:var(--ink)}
+.em-card .f small,.em-tpl .f small{display:block;font-weight:500;color:#5a5d64;margin-top:3px}
+.em-evs{display:grid;gap:8px}
+.em-ev{display:flex;gap:14px;align-items:center;justify-content:space-between;border:1px solid #e1e3e6;border-radius:8px;padding:10px 12px;margin-top:8px}
+.em-evs .em-ev{margin-top:0}
+.em-ev>span{min-width:0}
+.em-ev b{display:block;font-size:.96rem;line-height:1.3}
+.em-ev small{display:block;color:#5a5d64;font-size:.86rem;line-height:1.4;margin-top:2px}
+.em-ev .tgl{flex:none}
+.dn-how ul{margin:0;padding-left:20px;display:grid;gap:8px;font-size:.93rem;color:#2c2e33}
+.em-lead{color:#4a4d55;max-width:78ch;margin-bottom:14px}
+.em-lead code,.em-vars code{background:#f1f2f4;border-radius:4px;padding:2px 5px;font:500 .82rem/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:nowrap}
+.em-tpl{border:1px solid #d5d7dc;border-radius:10px;background:#fff;margin-bottom:10px}
+.em-tpl summary{cursor:pointer;padding:12px 14px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;list-style:none}
+.em-tpl summary::-webkit-details-marker{display:none}
+.em-tpl summary>span{min-width:0;flex:1 1 240px}
+.em-tpl summary b{display:block}
+.em-tpl summary small{display:block;color:#5a5d64;font-size:.86rem;line-height:1.4}
+.em-tpl[open] summary{border-bottom:1px solid #e6e7ea}
+.em-tpl form{padding:2px 14px 14px}
+.em-pill{font:800 .68rem/1 var(--body);font-style:normal;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:5px 9px;background:#eceef1;color:#4a4d55;white-space:nowrap}
+.em-pill.on{background:#e3f6ea;color:#17803d}
+.em-vars{font-size:.84rem;color:#5a5d64;line-height:2;margin-top:10px}
+.em-card textarea,.em-tpl textarea,.em-box textarea{min-height:190px;line-height:1.5}
+.em-box{border-top:1px dashed #d5d7dc;padding-top:10px;margin-top:6px;min-width:0}
+.em-box .f:first-of-type{margin-top:8px}
+.em-note{background:#fff6dc;color:#4a3800;border-radius:8px;padding:10px 12px;font-size:.9rem;margin-top:12px}
+.em-sent{display:flex;gap:6px;align-items:center;font-size:.86rem;font-weight:600;color:#17803d}
+.em-sent svg{width:16px;height:16px;flex:none}
+.em-sent.queued,.em-sent.sending{color:#7a5600}
+.em-sent.failed,.em-sent.skipped{color:var(--red-deep)}
+.em-st{display:inline-block;font:800 .68rem/1 var(--body);letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:4px 8px;background:#e3f6ea;color:#17803d}
+.em-st.queued,.em-st.sending{background:#fff0c7;color:#7a5600}
+.em-st.failed,.em-st.skipped{background:#fde3e6;color:var(--red-deep)}
+.em-to{font-size:.94rem;color:#3b3e45;margin:2px 0 10px;overflow-wrap:anywhere}
+.em-card .t-msg:empty,.em-box .t-msg:empty,.em-tpl .t-msg:empty{display:none}
+.em-ck{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:.88rem;cursor:pointer}
+.em-ck input{width:18px;height:18px;margin:0;accent-color:var(--red-deep);flex:none}
+.em-auto{font-size:.86rem;color:#5a5d64}
+a.mini{text-decoration:none;display:inline-block}
+.un-card{max-width:560px}
+.un-card p{line-height:1.55}
+.un-card a:not(.btn){color:var(--red-deep);font-weight:600}
 </style>
 </head>
 <body>
@@ -4987,6 +5034,8 @@ body.spx-prices-on .spx-noprice{display:none}
       <p>Photo and publication permissions are reviewed through the program’s forms and media workflow. Shared program access does not by itself authorize public publication of a photograph. Contact staff about a photo, permission or correction request.</p>
       <h2>Payments and other services</h2>
       <p>When available, online donations use a Stripe-hosted checkout. The website records donation status and related information received through that process. Third-party services have their own privacy notices. An optional donor mailing-address form is separate from email updates.</p>
+      <h2>Email</h2>
+      <p>If you register a profile, send a question or a form, or ask for email updates, Flint Racing &amp; STEM may email you about it. Messages are delivered by an email service acting on our behalf. Every update includes an unsubscribe link, and members can change their email choices on their dashboard at any time.</p>
       <h2>Browser preferences and sessions</h2>
       <p>The website uses browser storage and cookies for sign-in sessions, access codes and some operational tools. Shared devices should be signed out after use.</p>
       <h2>Contact, corrections and questions</h2>
@@ -5094,6 +5143,15 @@ body.spx-prices-on .spx-noprice{display:none}
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Register once</p><h1>Join the Flint Racing roster</h1><p>Create your profile one time. Once Kendall or Kevin approve it, you sign in with just your username and passcode.</p></section>
     <div id="regBox" class="reg-box"></div>
+  </div></div>
+</div>
+
+<!-- ======================= EMAIL CHOICES (unsubscribe link in every update) ======================= -->
+<div class="page dark prog-page reg-page" data-page="unsubscribe" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Email choices</span></div></nav>
+  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
+    <section class="cal-head"><p class="eyebrow">Emails from us</p><h1>Email choices</h1><p>Stop a list of emails here. No sign-in needed.</p></section>
+    <div id="unsubBox" class="reg-box"></div>
   </div></div>
 </div>
 
@@ -5356,7 +5414,7 @@ body.spx-prices-on .spx-noprice{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","council":"Leadership Council","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","race-day-sponsors":"Race Day Sponsors","track-development":"Track Development","program-facility-development":"Program & Facility Development","park-community-development":"Park & Community Development","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","council":"Leadership Council","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","unsubscribe":"Email choices","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","race-day-sponsors":"Race Day Sponsors","track-development":"Track Development","program-facility-development":"Program & Facility Development","park-community-development":"Park & Community Development","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
@@ -5366,7 +5424,7 @@ body.spx-prices-on .spx-noprice{display:none}
   var pendingNote=null;
   document.addEventListener("click",function(e){var a=e.target.closest("a[data-interest]");if(a){pendingInterest=a.getAttribute("data-interest");pendingNote=a.getAttribute("data-note")}});
   function route(){
-    var h=(location.hash||"#home").slice(1); if(h.indexOf("crew/")===0) h="crew"; if(h.indexOf("my-dashboard/")===0) h="my-dashboard"; if(h.indexOf("council/")===0) h="council";
+    var h=(location.hash||"#home").slice(1); if(h.indexOf("crew/")===0) h="crew"; if(h.indexOf("my-dashboard/")===0) h="my-dashboard"; if(h.indexOf("council/")===0) h="council"; if(h.indexOf("unsubscribe/")===0) h="unsubscribe";
     if(ALIAS[h]){pendingInterest=pendingInterest||ALIAS[h];h="participate"}
     var anchor=null; if(PAGE_ANCHORS[h]){anchor=h;h=PAGE_ANCHORS[h]}
     var real=document.querySelector('[data-page="'+h+'"]');
@@ -7979,10 +8037,10 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     shirt:'<path d="M8 3l-5 3 2 4 3-1v12h8V9l3 1 2-4-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z"/>',star:'<path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/>',undo:'<path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/>',
     heart:'<path d="M12 20s-7-4.5-9-9.5C1.7 6.8 4.3 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c2.9 0 5.5 2.8 4.2 6.5-2 5-9 9.5-9 9.5z"/>',flag:'<path d="M5 21V4M5 4h13l-2 4 2 4H5"/>',
     edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/>',out:'<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>',ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
-    menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',live:'<circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4"/>'};
+    mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7.5l9 6 9-6"/>',menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',live:'<circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4"/>'};
   function ico(k){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICO[k]||"")+'</svg>'}
   var SECT=[["Home",[["overview","Overview","Everything that needs you, at a glance","home"]]],
-    ["People",[["members","Members","Approve profiles, set roles, fix hours and see who’s been in","users","mem"],["inq","Inquiries","Questionnaire replies from families, schools and sponsors","inbox","inq"],["regs","Registrations","Race and building workshop registrations (official AASBD form) signed online","flag","regs"],["team","Admins","Kendall and Kevin’s email accounts","shield"]]],
+    ["People",[["members","Members","Approve profiles, set roles, fix hours and see who’s been in","users","mem"],["inq","Inquiries","Questionnaire replies from families, schools and sponsors","inbox","inq"],["regs","Registrations","Race and building workshop registrations (official AASBD form) signed online","flag","regs"],["email","Email","Alerts to your inbox, pre-approved replies and updates to families","mail"],["team","Admins","Kendall and Kevin’s email accounts","shield"]]],
     ["Programs",[["events","Events","Dates on the public calendar","cal"],["families","Times & places","Private times and locations for signed-in members","pin"],["notes","Bulletin","Monthly notes on the Program Dashboard","note"],["resources","Resources","Forms, links and program pages","folder"],["printables","Flyers & forms","Upload printable flyers, registration, order and field trip forms","note"],["reviews","Reviews","Photo albums and teacher plans waiting for approval","check","rev"]]],
     ["Website",[["home","Homepage","Slideshow and the numbers on the homepage","layout"],["news","News & Stories","Post and edit stories","news"],["spirit","Spirit Shop","Shirts, hats and product photos","shirt"],["partners","Partners","Sponsor and partner logos","star"],["edits","Site edits","Every text and photo change, with undo","undo"]]],
     ["Fundraising",[["donate","Donations","Connect the Donate page to Stripe checkout","heart"],["sprice","Sponsor prices","Price fields for the sponsor menus, off until you’re ready","star"]]],
@@ -7995,6 +8053,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       var c=function(i){return (r[i]&&r[i].count)||0};ADMC={mem:c(0),inq:c(1),rev:c(2)+c(3),albums:c(2),plans:c(3),vol:c(4),so:c(5),regs:c(6)};
       $$("[data-badge]").forEach(function(el){var n=ADMC[el.getAttribute("data-badge")]||0;el.textContent=n;el.hidden=!n});return ADMC})}
   function goTab(k,opt){opt=opt||{};if(k==="members:log"){k="members";MSUB="log"}else if(k==="members"&&!opt.keepSub)MSUB="people";
+    if(k.indexOf("email:")===0){EMSUB=k.slice(6);k="email"}else if(k==="email")EMSUB="alerts";
     if(opt.q!=null){MFIND.q=opt.q;MFIND.f="all"}TAB=k;ADMNAV=false;renderAdmin(true);var b=$("#admBox");if(b&&b.getBoundingClientRect().top<0)scrollTo(0,b.getBoundingClientRect().top+scrollY-80)}
 
   /* ---------- Breadcrumbs for signed-in screens: follow who is signed in ---------- */
@@ -8036,7 +8095,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     $("#admMenu").onclick=function(){ADMNAV=!ADMNAV;$(".adm-side",box).classList.toggle("open",ADMNAV);this.setAttribute("aria-expanded",String(ADMNAV))};
     $$(".adm-nav button[data-tab]",box).forEach(function(b){b.onclick=function(){goTab(b.getAttribute("data-tab"))}});
     bindAdmSearch();admCounts();
-    ({overview:tabOverview,members:tabMembers,team:tabTeam,events:tabEvents,families:tabFamilies,notes:tabNotes,inq:tabInq,regs:tabRegs,news:tabNews,resources:tabResources,home:tabHome,spirit:tabSpirit,partners:tabPartners,reviews:tabReviews,edits:tabEdits,race:tabRace,donate:tabDonate,sprice:tabSprice,printables:tabPrintables})[TAB]();
+    ({overview:tabOverview,members:tabMembers,team:tabTeam,events:tabEvents,families:tabFamilies,notes:tabNotes,inq:tabInq,regs:tabRegs,news:tabNews,resources:tabResources,home:tabHome,spirit:tabSpirit,partners:tabPartners,reviews:tabReviews,edits:tabEdits,race:tabRace,donate:tabDonate,sprice:tabSprice,printables:tabPrintables,email:tabEmail})[TAB]();
   }
   /* Search: sections, common jobs, and the people and things in the database */
   var ADM_JOBS=[["Approve new profiles","members","approve register pending family crew"],["Change someone’s roles","members","role teacher photographer workshop race control track"],["Reset a passcode","members","password passcode locked forgot"],
@@ -8046,6 +8105,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     ["Change the homepage slideshow","home","slides photos numbers stats"],["Add a sponsor logo","partners","sponsor logo partner"],["Add a shirt or hat","spirit","spiritwear merch shirt hat"],["Undo a site change","edits","undo history revert"],
     ["Edit text or photos on any page","@edit","edit text photo page wording"],["Connect Stripe donations","donate","stripe payment donate donation checkout link"],["Set sponsor prices","sprice","sponsor price prices tiers menu race day track program park"],["Add racers and sponsors for race day","race","racers bracket heats ads sponsors"],
     ["Approve shout-outs","#track-manager","shoutout shout-out intermission ads"],["Run the live race feed","#race-control","race control timer lights heats"],["Assign race-day volunteers","#volunteers","volunteer crew shift"],
+    ["Get an email when someone registers or inquires","email","email alert notify notification inbox new inquiry registration"],["Edit a pre-approved reply","email:msgs","email template message reply response instructions automatic auto"],["Send an update to families","email:update","email newsletter update announce mailing list subscribers"],["See emails the site sent","email:log","email sent mail log failed delivery"],["Connect the email service","email:setup","email setup resend domain from address reply"],
     ["Download rosters (.csv)","overview","csv export roster spreadsheet download"]];
   function admIndex(){if(ADMIDX)return Promise.resolve(ADMIDX);
     return Promise.all([db.from("members").select("display_name,username,email,status,kind"),db.from("events").select("title,start_date"),db.from("inquiries").select("first_name,last_name,email,organization,status"),
@@ -8302,7 +8362,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     return "mailto:"+encodeURIComponent(i.email)+"?subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body)}
   function tabRegs(){var P=$("#admPanel");
     var q=db.from("race_registrations").select("*").order("created_at",{ascending:false}).limit(300); if(REG_FILTER) q=q.eq("status",REG_FILTER); if(REG_PROG) q=q.eq("program",REG_PROG);
-    q.then(function(r){if(r.error){P.textContent="Couldn’t load race registrations.";return}
+    Promise.all([q,emLoad("race_registrations")]).then(function(rr){var r=rr[0];if(r.error){P.textContent="Couldn’t load race registrations.";return}
       var ST=["new","reviewed","fees paid","complete","withdrawn"];
       P.innerHTML='<p style="margin:0 0 12px;color:#4a4d55;max-width:72ch">Racers and building workshop participants fill out the official Local Race Registration Form online. Assign a car number here, then print the signed form for your files and the Local Race Director’s section. Workshop registrations print with a second page for shirts and safe check-in. Send families the registration link after you confirm their place.</p>'+
         (function(){var PR=[["","All programs"],["race","Race"],["building_workshop","Building workshop"]],SS=[["","All statuses"],["new","New"],["reviewed","Reviewed"],["fees paid","Fees paid"],["complete","Complete"]],nm=function(L,v){return (L.filter(function(x){return x[0]===v})[0]||L[0])[1]};
@@ -8318,7 +8378,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           (x.how_learned?'<p>Heard about us: “'+esc(x.how_learned)+'”</p>':'')+
           '<div class="row" style="margin-top:8px;align-items:center"><label style="display:flex;gap:6px;align-items:center;font-weight:600">Car #<input data-car="'+x.id+'" value="'+esc(x.car_number||"")+'" maxlength="10" style="width:90px;padding:6px 8px;border:1.5px solid #c9ccd1;border-radius:4px;font:inherit"></label>'+
           '<input data-note="'+x.id+'" value="'+esc(x.admin_note||"")+'" placeholder="Private note (fees, affiliation…)" maxlength="300" style="flex:1;min-width:200px;padding:6px 8px;border:1.5px solid #c9ccd1;border-radius:4px;font:inherit">'+
-          '<button class="mini solid" type="button" data-print="'+x.id+'">View &amp; print form</button></div></div>'}).join(""):'<p style="margin-top:14px;color:#4a4d55">No race registrations here yet.</p>');
+          '<button class="mini solid" type="button" data-print="'+x.id+'">View &amp; print form</button>'+emMenu("race_registrations",x.id)+'</div>'+emLine("race_registrations",x.id)+'</div>'}).join(""):'<p style="margin-top:14px;color:#4a4d55">No race registrations here yet.</p>');
       var byId={};r.data.forEach(function(x){byId[x.id]=x});
       $$("button[data-f]",P).forEach(function(b){b.onclick=function(){REG_FILTER=b.getAttribute("data-f");tabRegs()}});
       $$("button[data-p]",P).forEach(function(b){b.onclick=function(){REG_PROG=b.getAttribute("data-p");tabRegs()}}); bindCopy(P);
@@ -8327,20 +8387,20 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       $$("select[data-st]",P).forEach(function(s){s.onchange=function(){save(s.getAttribute("data-st"),{status:s.value},"Updated")}});
       $$("input[data-car]",P).forEach(function(i){i.onchange=function(){save(i.getAttribute("data-car"),{car_number:i.value.trim()||null},"Car number saved")}});
       $$("input[data-note]",P).forEach(function(i){i.onchange=function(){save(i.getAttribute("data-note"),{admin_note:i.value.trim()||null},"Note saved")}});
-      $$("button[data-print]",P).forEach(function(b){b.onclick=function(){if(window.FR_REG)window.FR_REG.print(byId[b.getAttribute("data-print")])}});
+      $$("button[data-print]",P).forEach(function(b){b.onclick=function(){if(window.FR_REG)window.FR_REG.print(byId[b.getAttribute("data-print")])}});emBind(P,"race_registrations",tabRegs);
     });
   }
   function tabInq(){var P=$("#admPanel");
     var q=db.from("inquiries").select("*").order("created_at",{ascending:false}).limit(200); if(INQ_FILTER) q=q.eq("status",INQ_FILTER);
-    q.then(function(r){if(r.error){P.textContent="Couldn’t load inquiries.";return}
+    Promise.all([q,emLoad("inquiries")]).then(function(rr){var r=rr[0];if(r.error){P.textContent="Couldn’t load inquiries.";return}
       var IS=[["new","New"],["in progress","In progress"],["done","Done"],["","All"]];
       P.innerHTML='<div class="hm-row">'+hmenu("Status: "+(IS.filter(function(x){return x[0]===INQ_FILTER})[0]||IS[3])[1],IS.map(function(f){return hmItem(f[1],'data-f="'+f[0]+'"',INQ_FILTER===f[0])}))+linksMenu()+
         hmenu("Download",[hmItem("Spreadsheet of these inquiries (.csv)",'id="inqCsv"')])+'</div>'+
         (r.data.length?r.data.map(function(i){var d=new Date(i.created_at);return '<div class="inq'+(i.status==="done"?' done':'')+'"><header><b>'+esc(i.first_name+" "+i.last_name)+'</b><small>'+d.toLocaleDateString()+' '+d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})+'</small><select data-id="'+i.id+'" aria-label="Status">'+["new","in progress","done"].map(function(s){return '<option'+(i.status===s?' selected':'')+'>'+s+'</option>'}).join("")+'</select></header>'+
           '<p><b>'+esc(i.role)+'</b>'+(i.organization?' · '+esc(i.organization):'')+'</p><p>Interested in: '+esc(i.interests)+'</p>'+((i.youth_count||i.youth_ages)?'<p>Young people: '+esc([i.youth_count,i.youth_ages&&("ages "+i.youth_ages)].filter(Boolean).join(", "))+'</p>':'')+
           (i.message?'<p>“'+esc(i.message)+'”</p>':'')+'<p>Reach by '+esc(i.contact_by)+' · '+esc(i.email)+(i.phone?' · '+esc(i.phone):'')+' · '+esc(i.best_time||"Any time")+(i.email_updates?' · wants email updates':'')+'</p>'+
-          '<div class="row" style="margin-top:6px">'+hmenu("Email registration form",['<a role="menuitem" class="hm-i" href="'+esc(regMail(i,"race"))+'">Race registration form</a>','<a role="menuitem" class="hm-i" href="'+esc(regMail(i,"workshop"))+'">Building workshop registration form</a>'])+'</div></div>'}).join(""):'<p style="margin-top:14px;color:#4a4d55">No inquiries here.</p>');
-      bindCopy(P);
+          emLine("inquiries",i.id)+'<div class="row" style="margin-top:6px">'+(emMenu("inquiries",i.id)||hmenu("Email registration form",['<a role="menuitem" class="hm-i" href="'+esc(regMail(i,"race"))+'">Race registration form</a>','<a role="menuitem" class="hm-i" href="'+esc(regMail(i,"workshop"))+'">Building workshop registration form</a>']))+'</div></div>'}).join(""):'<p style="margin-top:14px;color:#4a4d55">No inquiries here.</p>');
+      bindCopy(P);emBind(P,"inquiries",tabInq);
       $$("button[data-f]",P).forEach(function(b){b.onclick=function(){INQ_FILTER=b.getAttribute("data-f");tabInq()}});
       $("#inqCsv").onclick=function(){csv([["Received","First","Last","Role","Organization","Interests","Youth","Ages","Message","Email","Phone","Contact by","Best time","Email updates","Status"]].concat(r.data.map(function(i){return [i.created_at,i.first_name,i.last_name,i.role,i.organization,i.interests,i.youth_count,i.youth_ages,i.message,i.email,i.phone,i.contact_by,i.best_time,i.email_updates?"yes":"no",i.status]})),"inquiries.csv")};
       $$("select[data-id]",P).forEach(function(s){s.onchange=function(){db.from("inquiries").update({status:s.value}).eq("id",s.getAttribute("data-id")).then(function(x){toast(x.error?"Couldn’t update":"Updated");tabInq()})}});
@@ -9046,7 +9106,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<div class="ki-code2"><label class="ki-in">Your code<input type="password" name="code" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" class="ki-pin"></label><label class="ki-in">Type it again<input type="password" name="code2" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" class="ki-pin"></label></div></div>':'')+
         '<div class="ki-counts full">'+(acc?'':'<div class="ki-adults"><span id="kiKdL">Kids with you</span><div class="ki-step" role="group" aria-labelledby="kiKdL"><button type="button" data-gs="kids" data-d="-1" aria-label="One fewer kid">−</button><b data-gv="kids" aria-live="polite">1</b><button type="button" data-gs="kids" data-d="1" aria-label="One more kid">+</button></div></div>')+
           '<div class="ki-adults"><span id="kiGaL">Grown-ups with you</span><div class="ki-step" role="group" aria-labelledby="kiGaL"><button type="button" data-gs="adults" data-d="-1" aria-label="One fewer grown-up">−</button><b data-gv="adults" aria-live="polite">1</b><button type="button" data-gs="adults" data-d="1" aria-label="One more grown-up">+</button></div></div></div>'+
-        '<div class="full ki-prefs"><p class="ki-k">Want emails from us? <small>(optional, needs an email)</small></p>'+prefsHTML("ki-chk",g.prefs)+'</div>'+
+        '<div class="full ki-prefs"><p class="ki-k">Want emails from us? <small>(optional, needs an email)</small></p>'+prefsHTML("ki-chk",g.prefs,["account"])+'</div>'+
         '<p class="ki-msg full" id="kiMsg" role="alert"></p>'+
         '<div class="full">'+KI_PHOTO_SHORT+'</div><button type="submit" class="ki-go full" id="kiSend">'+(acc?'Create account and check in':'Sign in as a guest')+'</button></form>'+
         (acc?'<button type="button" class="ki-back" data-kgo="guest">Just visiting today? Sign in as a guest instead</button>':'<button type="button" class="ki-back" data-kgo="account">Coming back? Create a family account instead</button>')+
@@ -9971,7 +10031,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
 
   /* ---------- Route the new pages ---------- */
   function renderPortals(){var h=hashBase();
-    if(h==="program-signin")renderPD(); if(h==="printables")renderPrintables(); if(h==="my-dashboard")renderMe(); if(h==="new-profile")renderReg(); if(RES_MAP[h])renderRes(); if(h==="crew")renderCrew(); if(h==="news-page")renderNews();
+    if(h==="program-signin")renderPD(); if(h==="printables")renderPrintables(); if(h==="my-dashboard")renderMe(); if(h==="new-profile")renderReg(); if(RES_MAP[h])renderRes(); if(h==="crew")renderCrew(); if(h==="news-page")renderNews(); if(h==="unsubscribe")renderUnsub();
     renderKiosk();renderCamps();renderWS();renderVol();renderPH();renderTE();renderCO();}
   window.addEventListener("hashchange",renderPortals);
   /* ---------- Admin → Families: private times and places ---------- */
@@ -10196,8 +10256,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   /* 4-digit codes: everyone picks one at registration. It checks families in at the kiosk and signs everyone in on the site. */
   var WEAK_CODES=["1234","4321","0123","3210","9876","6789","2580","1212","6969"];
   function codeErr(c,c2){return !/^\d{4}$/.test(c)?"Your code needs to be exactly 4 digits.":/^(\d)\1{3}$/.test(c)||WEAK_CODES.indexOf(c)>=0?"Pick a code that isn’t easy to guess (not 1234 or 1111).":c2!=null&&c!==c2?"The two codes don’t match.":""}
-  var PREFS=[["workshops","Seasonal workshops","Workshop, camp and fun run dates as they’re set"],["council","Leadership Council updates & promotions","Council news, opportunities and special offers"]];
-  function prefsHTML(cls,on){on=on||[];return PREFS.map(function(x){return '<label class="'+cls+'"><input type="checkbox" name="pref" value="'+x[0]+'"'+(on.indexOf(x[0])>=0?' checked':'')+'><span><b>'+esc(x[1])+'</b><small>'+esc(x[2])+'</small></span></label>'}).join("")}
+  var PREFS=[["account","My account","When your profile is approved, plus sign-in help"],["workshops","Seasonal workshops","Workshop, camp and fun run dates as they’re set"],["council","Leadership Council updates & promotions","Council news, opportunities and special offers"]];
+  function prefsHTML(cls,on,skip){on=on||[];return PREFS.filter(function(x){return !skip||skip.indexOf(x[0])<0}).map(function(x){return '<label class="'+cls+'"><input type="checkbox" name="pref" value="'+x[0]+'"'+(on.indexOf(x[0])>=0?' checked':'')+'><span><b>'+esc(x[1])+'</b><small>'+esc(x[2])+'</small></span></label>'}).join("")}
   function prefsOf(root){return $$('input[name="pref"]:checked',root).map(function(i){return i.value})}
   function bindMem(px,after){var f=$("#"+px+"Mem");if(!f)return;
     var eye=$(".mem-eye",f),pw=$("#"+px+"-p");eye.onclick=function(){var on=pw.type==="password";pw.type=on?"text":"password";eye.textContent=on?"Hide":"Show";eye.setAttribute("aria-pressed",String(on))};
@@ -10251,7 +10311,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       '<div class="reg-sec"><h3><i>3</i>Your 4-digit code</h3><p class="reg-hint">This is how you sign in here, with your email. Families also use it to check in and out at workshops. Pick 4 digits you’ll remember that aren’t easy to guess.</p>'+
         '<div class="reg-2"><label class="f" for="rg-code">Choose your code<input type="password" id="rg-code" inputmode="numeric" pattern="[0-9]*" autocomplete="new-password" maxlength="4" class="reg-pin"></label><label class="f" for="rg-code2">Type it again<input type="password" id="rg-code2" inputmode="numeric" pattern="[0-9]*" autocomplete="new-password" maxlength="4" class="reg-pin"></label></div>'+
         '<details class="reg-pwd"><summary>Prefer a password too? <small>(optional)</small></summary><p class="reg-hint">You can sign in with either one. At least 6 characters.</p><div class="reg-2"><label class="f" for="rg-pass">Password<input type="password" id="rg-pass" autocomplete="new-password" maxlength="64"></label><label class="f" for="rg-pass2">Type it again<input type="password" id="rg-pass2" autocomplete="new-password" maxlength="64"></label></div></details></div>'+
-      '<div class="reg-sec"><h3><i>4</i>Emails from us</h3><p class="reg-hint">Pick what you’d like to hear about. You can change this any time on your dashboard.</p><div class="reg-checks">'+prefsHTML("")+'</div></div>'+
+      '<div class="reg-sec"><h3><i>4</i>Emails from us</h3><p class="reg-hint">Pick what you’d like to hear about. You can change this any time on your dashboard.</p><div class="reg-checks">'+prefsHTML("",["account"])+'</div></div>'+
       '<label class="f" for="rg-about">Anything we should know? <small>(optional)</small><textarea id="rg-about" maxlength="600" placeholder="Team name, school, allergies or how you heard about us"></textarea></label>'+
       '<label class="reg-ok"><input type="checkbox" id="rg-ok"><span>I understand an admin reviews every profile before it can see program dates, times and places, and that Flint Racing logs sign-ins to keep families safe.</span></label>'+
       '<div class="reg-go"><button class="btn deep" type="submit" id="rgGo">Register</button><span class="reg-hint">Already registered? <a href="#access">Sign in</a></span></div><p class="t-msg" id="rgMsg" role="status"></p></form>';
@@ -10310,7 +10370,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
             '<details><summary>Change my 4-digit code</summary><form class="me-pw" id="meCode" novalidate><label class="f">Current code or password<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New 4-digit code<input type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label><label class="f">Type the new code again<input type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label><button class="btn deep" type="submit" style="justify-self:start">Save new code</button><p class="t-msg" role="status"></p></form></details>'+
             '<details><summary>'+(P.member.has_password?'Change my password':'Add a password (optional)')+'</summary><form class="me-pw" id="mePw" novalidate><label class="f">Current code or password<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New password <small>(6+ characters)</small><input type="password" autocomplete="new-password" maxlength="64"></label><label class="f">Type it again<input type="password" autocomplete="new-password" maxlength="64"></label><button class="btn deep" type="submit" style="justify-self:start">Save password</button><p class="t-msg" role="status"></p></form></details>'+
             '<p class="me-fine">To change your name, email or roles, email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>'+
-          '<div class="me-card"><p class="me-k">Emails from us</p><h2>What you hear about</h2><form id="mePrefs" class="me-prefs">'+prefsHTML("me-pref",m.email_prefs||[])+'</form><p class="t-msg" id="mePrefMsg" role="status"></p></div></div></div>';
+          '<div class="me-card"><p class="me-k">Emails from us</p><h2>Email notifications</h2><p class="me-fine">Tick what you’d like in your inbox. Changes save right away, and every update has an unsubscribe link.</p><form id="mePrefs" class="me-prefs">'+prefsHTML("me-pref",m.email_prefs||[])+'</form><p class="t-msg" id="mePrefMsg" role="status"></p></div></div></div>';
     if(preview){box.insertAdjacentHTML("afterbegin",'<div class="pv-banner"><div><b>Admin preview · sample '+(fam?"family":"crew member")+'</b><span>This is what '+(fam?"a family":"a crew member with every role")+' sees. The names and numbers are made up; buttons here don’t save anything.</span></div><div class="pv-sw"><a href="#my-dashboard/family"'+(fam?' aria-current="true"':'')+'>Family</a><a href="#my-dashboard/crew"'+(!fam?' aria-current="true"':'')+'>Crew</a></div></div>');
       $$("button,input",box).forEach(function(el){if(!el.closest(".pv-banner")){el.disabled=true}});$("#meOut").onclick=null;return}
     $("#meOut").onclick=signOut;
@@ -10334,7 +10394,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     passcode_changed:"Changed their passcode",admin_update:"Admin updated profile",admin_reset_passcode:"Admin reset passcode","view:dates":"Viewed program dates, times and places","view:my-dashboard":"Opened their dashboard"};
   function logLabel(a){if(LOGACT[a])return LOGACT[a];if(a.indexOf("view:")===0)return "Opened "+a.slice(5).replace(/-/g," ");return a}
   function tabMembers(){var P=$("#admPanel");
-    Promise.all([db.from("members").select("*").order("created_at",{ascending:false}),db.from("member_hours").select("*").order("started_at",{ascending:false}),db.from("access_log").select("*").order("at",{ascending:false}).limit(500)]).then(function(r){
+    Promise.all([db.from("members").select("*").order("created_at",{ascending:false}),db.from("member_hours").select("*").order("started_at",{ascending:false}),db.from("access_log").select("*").order("at",{ascending:false}).limit(500),emLoad("members")]).then(function(r){
       if(r[0].error){P.textContent="Couldn’t load profiles: "+r[0].error.message;return}
       var M=r[0].data||[],H=r[1].data||[],L=r[2].data||[],HM={};
       H.forEach(function(h){var x=HM[h.member_id]=HM[h.member_id]||{hrs:0,list:[]};x.list.push(h);if(h.ended_at)x.hrs+=(new Date(h.ended_at)-new Date(h.started_at))/36e5});
@@ -10349,9 +10409,10 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<div class="mb-hrs"><b>'+fmtHrs(Math.round(h.hrs*10)/10)+'</b><span>hours</span></div></div>'+
           (pending?info(m):'<details><summary style="cursor:pointer;font-weight:700;color:#4a4d55">Contact and details</summary>'+info(m)+'</details>')+
           chips(m,pending?(m.requested&&m.requested.length?m.requested:[]).concat(m.kind==="family"?["family"]:[]):null)+
-          '<div class="row" style="margin:0">'+(pending?'<button class="mini solid" type="button" data-ma="approve">Approve with these roles</button><button class="mini red" type="button" data-ma="decline">Decline</button>':
+          emLine("members",m.id)+
+          '<div class="row" style="margin:0">'+(pending?'<button class="mini solid" type="button" data-ma="approve">Approve with these roles</button><button class="mini red" type="button" data-ma="decline">Decline</button>'+(m.email?emMenu("members",m.id,"Email"):"")+emApproveHTML(m):
             '<button class="mini solid" type="button" data-ma="save">Save roles</button>'+(st==="approved"?'<button class="mini" type="button" data-ma="pause">Pause</button>':'<button class="mini" type="button" data-ma="activate">Approve</button>')+
-            '<button class="mini" type="button" data-ma="hours">Hours ('+h.list.length+')</button><button class="mini" type="button" data-ma="reset">Set password</button><button class="mini red" type="button" data-ma="del">Delete</button>')+'</div>'+
+            '<button class="mini" type="button" data-ma="hours">Hours ('+h.list.length+')</button>'+(m.email?emMenu("members",m.id,"Email"):"")+'<button class="mini" type="button" data-ma="reset">Set password</button><button class="mini red" type="button" data-ma="del">Delete</button>')+'</div>'+
           '<div class="mb-more" hidden></div></div>'}
       if(MSUB==="people"){
         P.innerHTML=sub+'<p style="color:#4a4d55;max-width:78ch">Each person picks their own 4-digit code when they register. It signs them in here and checks families in at the kiosk. <button class="mini" type="button" id="mbCodes">Download family codes</button> <button class="mini" type="button" id="mbMail">Download email list</button></p><p style="color:#4a4d55;max-width:78ch">Everyone registers once with their email and a 4-digit code they choose (the code also checks families in at the kiosk). Families who register at the kiosk are approved on the spot. Approve the rest here and tick their roles: roles decide what their dashboard opens. Families get the Program Dashboard; crew roles open Workshop sign-in, Teacher, Photographer, Race control, Track operations or Volunteer lists.</p>'+
@@ -10362,7 +10423,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           csv([["Family","Email","4-digit code","Racers"]].concat(fam.map(function(m){return [m.display_name,m.email,m.family_code,(m.kids||[]).map(function(k){return k.name}).join(", ")]})),"family-codes.csv")};
         $("#mbMail").onclick=function(){db.from("inquiries").select("first_name,last_name,email,interests,created_at").eq("email_updates",true).then(function(q){
           var rows=[["Name","Email","Seasonal workshops","Leadership Council","Source"]],seen={};
-          M.filter(function(m){return m.email&&(m.email_prefs||[]).length}).forEach(function(m){seen[m.email.toLowerCase()]=1;rows.push([m.display_name,m.email,(m.email_prefs||[]).indexOf("workshops")>=0?"Yes":"",(m.email_prefs||[]).indexOf("council")>=0?"Yes":"",m.kind==="family"?"Family profile":"Crew profile"])});
+          M.filter(function(m){var p=m.email_prefs||[];return m.email&&(p.indexOf("workshops")>=0||p.indexOf("council")>=0)}).forEach(function(m){seen[m.email.toLowerCase()]=1;rows.push([m.display_name,m.email,(m.email_prefs||[]).indexOf("workshops")>=0?"Yes":"",(m.email_prefs||[]).indexOf("council")>=0?"Yes":"",m.kind==="family"?"Family profile":"Crew profile"])});
           ((q&&q.data)||[]).forEach(function(i){var e=(i.email||"").toLowerCase();if(!e||seen[e])return;seen[e]=1;var t=i.interests||"";rows.push([(i.first_name+" "+(i.last_name||"")).trim(),i.email,/workshop/i.test(t)||!/council/i.test(t)?"Yes":"",/council/i.test(t)?"Yes":"","Inquiry or kiosk guest"])});
           if(rows.length<2){toast("No one has asked for emails yet.");return}csv(rows,"email-list-"+todayISO()+".csv")})};
         var list=$("#mbList");
@@ -10386,11 +10447,14 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         $("#lgCsv").onclick=function(){csv([["When","Who","What","Detail"]].concat(L.map(function(x){return [x.at,x.who,logLabel(x.action),x.detail]})),"flint-racing-sign-in-log.csv")};
       }
       $$("[data-msub]",P).forEach(function(b){b.onclick=function(){MSUB=b.getAttribute("data-msub");tabMembers()}});
-      function bindCards(root){$$(".mb",root).forEach(function(c){if(c.__b)return;c.__b=1;var id=c.getAttribute("data-id"),m=M.filter(function(x){return x.id===id})[0],more=$(".mb-more",c);
+      function bindCards(root){emBind(root,"members",tabMembers);$$(".mb",root).forEach(function(c){if(c.__b)return;c.__b=1;var id=c.getAttribute("data-id"),m=M.filter(function(x){return x.id===id})[0],more=$(".mb-more",c);
         function roles(){return $$(".mb-roles input:checked",c).map(function(i){return i.value})}
         function upd(st,msg){db.rpc("admin_member_update",{p_id:id,p_roles:roles(),p_status:st,p_note:m.admin_note||null}).then(function(x){if(okToast(x,msg))tabMembers()})}
         $$("[data-ma]",c).forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-ma");
-          if(a==="approve"){if(!roles().length){toast("Tick at least one role first.");return}upd("approved",m.display_name+" is approved. Let them know they can sign in.");return}
+          if(a==="approve"){if(!roles().length){toast("Tick at least one role first.");return}var ck=$("[data-emok]",c),auto=(emTpl("members","account_approved")||{}).auto;
+            db.rpc("admin_member_update",{p_id:id,p_roles:roles(),p_status:"approved",p_note:m.admin_note||null}).then(function(x){if(!okToast(x))return;
+              if(ck&&ck.checked)db.rpc("admin_email_send",{p_table:"members",p_id:id,p_template:"account_approved"}).then(function(y){toast(y.error?m.display_name+" is approved, but the email didn’t go: "+y.error.message:m.display_name+" is approved. Sign-in instructions are on their way to "+m.email+".");tabMembers()});
+              else{toast(m.display_name+" is approved. "+(auto&&m.email?"Sign-in instructions go out automatically.":"Let them know they can sign in."));tabMembers()}});return}
           if(a==="decline"){if(b.textContent!=="Confirm decline"){b.textContent="Confirm decline";return}upd("declined","Declined");return}
           if(a==="save"){upd(m.status,"Roles saved");return}
           if(a==="code"){if(b.textContent!=="Confirm new code"){b.textContent="Confirm new code";return}db.rpc("admin_new_family_code",{p_id:m.id}).then(function(x){if(okToast(x,m.display_name+"’s new 4-digit code is "+x.data+". Let them know: it’s also how they sign in.")){m.family_code=x.data;$$("[data-code]",c).forEach(function(e){e.textContent=x.data});b.textContent="New code"}});return}
@@ -10428,7 +10492,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       P.innerHTML='<div class="ov-cols"><section class="ov-card"><p class="me-k">Needs you</p>'+(todo.length?'<ul class="ov-todo">'+todo.map(function(x){return '<li><button type="button" data-go="'+x[4]+'">'+ico(x[5])+'<span><b>'+x[0]+' '+(x[0]===1?x[1]:x[2])+'</b> '+x[3]+'</span><i aria-hidden="true">→</i></button></li>'}).join("")+'</ul>':'<p class="ov-clear">'+ico("check")+'You’re all caught up.</p>')+'</section>'+
         '<section class="ov-card ov-nums"><div><b>'+mem+'</b><span>Approved members</span></div><div><b>'+up+'</b><span>Upcoming events</span></div><div><b>'+(c.inq||0)+'</b><span>New inquiries</span></div><div class="'+(dn&&dn.link?"on":"off")+'"><b>'+(dn&&dn.link?(/\/test_/.test(dn.link)?"Test":"Live"):"Off")+'</b><span>Stripe donations</span></div></section></div>'+
         '<h3 class="ov-h">Quick actions</h3><div class="ov-acts">'+tile("edit","edit","Edit the site","Change any text or photo")+tile("tab:events","cal","Add an event","Public calendar dates")+tile("tab:news","news","Post a story","News & Stories")+
-          tile("tab:members","users","Approve profiles","Roles and hours")+tile("tab:members:log","shield","Who’s been in","Sign-in log")+tile("tab:race","flag","Race day setup","Racers and sponsors")+tile("tab:donate","heart","Donations","Stripe checkout")+tile("tab:home","layout","Homepage","Slideshow and numbers")+'</div>'+
+          tile("tab:members","users","Approve profiles","Roles and hours")+tile("tab:members:log","shield","Who’s been in","Sign-in log")+tile("tab:email","mail","Email","Alerts, replies and updates")+tile("tab:race","flag","Race day setup","Racers and sponsors")+tile("tab:donate","heart","Donations","Stripe checkout")+tile("tab:home","layout","Homepage","Slideshow and numbers")+'</div>'+
         '<h3 class="ov-h">Download rosters</h3><div class="ov-csv">'+[["members","Member profiles"],["workshop","Workshop sign-ins"],["volunteers","Race-day volunteers"],["racers","Racers"],["inquiries","Inquiries"],["registrations","Race registrations"],["accounts","Admin accounts"]].map(function(x){return '<button class="mini" type="button" data-csv="'+x[0]+'">'+x[1]+' <small>.csv</small></button>'}).join("")+'</div>';
       $$("[data-go]",P).forEach(function(b){b.onclick=function(){var g=b.getAttribute("data-go");
         if(g==="edit"){location.hash="#home";setTimeout(function(){setEditing(true)},60);return}
@@ -10455,6 +10519,141 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       $("#toMem").onclick=function(){goTab("members")};
     });
   }
+
+
+  /* ---------- Admin → Email: alerts to your inbox, pre-approved messages, updates to subscribers, sent mail, setup ---------- */
+  var EMSUB="alerts",EMR={},EMUP={topic:"workshops",s:"",b:""};
+  var EM_EV=[["inquiry","New inquiries","Someone fills out the Register / Inquire questionnaire or sends a donation pledge."],["profile","New profiles to approve","A family or crew member registers a profile on the website."],["registration","Signed registration forms","A race or building workshop registration form comes in."],["volunteer","Race-day volunteers","Someone signs up to volunteer on race day."],["kiosk","Kiosk registrations","A family creates a profile at the workshop check-in kiosk (already approved)."]];
+  var EM_AUD={inquiry:"Send from Inquiries",member:"Send from Members",registration:"Send from Registrations"};
+  var EM_AUTO={inquiry_new:"as soon as someone sends an inquiry",member_new:"as soon as someone registers a profile",member_approved:"as soon as you approve a profile",registration_new:"as soon as a signed registration form comes in"};
+  var EM_VARS={inquiry:["first_name","name","interests","calendar_link","register_link","race_link","workshop_link","sign_in_link"],member:["first_name","name","username","pass_name","sign_in_link","calendar_link"],registration:["first_name","name","participant","program","division","calendar_link"]};
+  var EM_ST={queued:"waiting to send",sending:"sending",sent:"sent",failed:"not sent",skipped:"skipped"},EM_KIND={admin_alert:"Alert to an admin",reply:"Reply",auto:"Automatic message",update:"Update",test:"Test"};
+  function emWhen(iso){return new Date(iso).toLocaleString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}
+  function emState(o){var s=o.settings||{},p=o.provider||{},pv=window.FR_TEST?" (Preview: nothing is really sent.)":"";
+    if(!s.on)return ["off","Email is switched off","No alerts, replies or updates go out, and nothing is saved up. Turn it back on under Setup."];
+    if(!p.ready)return ["off","Not connected yet","Alerts and replies are saved up for 7 days, but nothing can leave until the email service is connected. Setup has the steps."];
+    if(!s.from_addr)return ["warn","Connected in test mode","Emails can only reach the inbox you signed up to the email service with. Finish step 4 under Setup to email families and crew."+pv];
+    return ["on","Email is connected","Sending as "+esc(s.from_name)+" &lt;"+esc(s.from_addr)+"&gt;."+pv]}
+  function emTest(btn){btn.disabled=true;db.rpc("admin_email_test").then(function(x){btn.disabled=false;if(x.error){toast(x.error.message);return}
+    toast("Test email queued for "+x.data.to+". Checking the connection…");setTimeout(function(){db.rpc("admin_email_overview").then(function(r){var b=$("#admPanel .dn-status");if(!b||!r.data||TAB!=="email")return;
+      var st=emState(r.data);b.className="dn-status "+st[0];$("b",b).textContent=st[1];$("span",b).innerHTML=st[2];if(st[0]==="on")toast("Email is connected. Check your inbox for the test.")})},4500)})}
+  function tabEmail(){var P=$("#admPanel");
+    db.rpc("admin_email_overview").then(function(r){
+      if(r.error||!r.data){P.textContent="Couldn’t load the email settings"+(r.error?": "+r.error.message:".");return}
+      var o=r.data,s=o.settings||{},me=o.me||{},c=o.counts||{},subs=o.subscribers||{},st=emState(o),html="";
+      var tabs=[["alerts","My alerts"],["msgs","Pre-approved messages"],["update","Send an update"],["log","Sent mail",c.failed],["setup","Setup"]];
+      var sub='<div class="mb-sub" role="tablist">'+tabs.map(function(t){return '<button type="button" role="tab" data-esub="'+t[0]+'" aria-selected="'+(EMSUB===t[0])+'">'+t[1]+(t[2]?'<em>'+t[2]+'</em>':'')+'</button>'}).join("")+'</div>';
+      var banner='<div class="dn-status '+st[0]+'">'+ico(st[0]==="on"?"check":"mail")+'<div><b>'+st[1]+'</b><span>'+st[2]+'</span></div>'+(EMSUB==="setup"?'':'<button class="mini" type="button" data-esub="setup">'+(st[0]==="on"?"Settings":"Set it up")+'</button>')+'</div>';
+      if(EMSUB==="alerts"){
+        html='<div class="em-grid"><form class="em-card" id="emMe" novalidate><p class="me-k">Your admin account</p><h3>Email me when…</h3><p class="em-to">Alerts for <b>'+esc(me.email||"")+'</b></p><div class="em-evs">'+
+          EM_EV.map(function(e){return '<div class="em-ev"><span><b>'+e[1]+'</b><small>'+e[2]+'</small></span><label class="tgl"><input type="checkbox" value="'+e[0]+'"'+((me.events||[]).indexOf(e[0])>=0?' checked':'')+' aria-label="'+esc(e[1])+'"><span></span></label></div>'}).join("")+'</div>'+
+          '<label class="f">Send my alerts to <small>Leave blank to use the email you sign in with.</small><input type="email" id="em-to" maxlength="254" value="'+esc(me.send_to||"")+'" placeholder="'+esc(me.email||"")+'" autocomplete="off" spellcheck="false"></label>'+
+          '<div class="row"><button class="mini solid" type="submit">Save my alerts</button><button class="mini" type="button" id="emTest">Send me a test email</button></div><p class="t-msg" role="status"></p></form>'+
+          '<aside class="dn-how"><p class="me-k">How alerts work</p><ul><li>Each alert has the person’s details and a link straight to Admin.</li>'+
+          '<li><b>Hit Reply in your inbox</b> and your answer goes to the person who wrote in, not to the website.</li>'+
+          '<li>Alerts belong to each admin account. Kevin turns on his own here after he signs in.</li>'+
+          '<li>Registration alerts leave out birth dates, addresses and medical notes. Those stay in Admin.</li>'+
+          '<li>If more than 30 arrive within an hour, you get one “lots of activity” note instead of a flood.</li></ul></aside></div>';
+      } else if(EMSUB==="msgs"){
+        html='<p class="em-lead">These are the messages you’ve approved ahead of time. Send one from any inquiry, profile or registration with <b>Email a reply</b>: it fills in the person’s details and you can still adjust the wording before it goes. Words in <code>{{double braces}}</code> are filled in for each person.</p>'+
+          (o.templates||[]).map(function(t){return '<details class="em-tpl" data-key="'+esc(t.key)+'"><summary><span><b>'+esc(t.name)+'</b><small>'+esc(t.hint||"")+'</small></span><em class="em-pill'+(t.auto_send?' on':'')+'">'+(t.auto_send?"Sends automatically":EM_AUD[t.audience])+'</em></summary>'+
+            '<form novalidate><label class="f">Subject<input type="text" maxlength="150" value="'+esc(t.subject)+'"></label><label class="f">Message<textarea rows="12" maxlength="8000">'+esc(t.body)+'</textarea></label>'+
+            '<p class="em-vars">Fill-ins you can use: '+(EM_VARS[t.audience]||[]).map(function(v){return '<code>{{'+v+'}}</code>'}).join(" ")+'</p>'+
+            (t.auto_event?'<div class="em-ev"><span><b>Send this automatically</b><small>Goes out by itself '+EM_AUTO[t.auto_event]+'. Off means you send it yourself with one click.</small></span><label class="tgl"><input type="checkbox" data-auto'+(t.auto_send?' checked':'')+' aria-label="Send this message automatically"><span></span></label></div>':'')+
+            '<div class="row"><button class="mini solid" type="submit">Save message</button></div><p class="t-msg" role="status"></p></form></details>'}).join("");
+      } else if(EMSUB==="update"){
+        html='<div class="em-grid"><form class="em-card" id="emUp" novalidate><p class="me-k">To everyone who asked for emails</p><h3>Send an update</h3>'+
+          '<label class="f">Who gets it<select id="em-topic">'+[["workshops","Seasonal workshops"],["council","Leadership Council updates"]].map(function(x){var n=subs[x[0]]||0;return '<option value="'+x[0]+'" data-n="'+n+'"'+(EMUP.topic===x[0]?' selected':'')+'>'+x[1]+' · '+n+(n===1?" person":" people")+'</option>'}).join("")+'</select></label>'+
+          '<label class="f">Subject<input type="text" id="em-usub" maxlength="150" value="'+esc(EMUP.s)+'" placeholder="Winter workshop dates are set"></label>'+
+          '<label class="f">Message <small>Start with “Hi {{first_name}},” to greet each person by name. An unsubscribe link is added at the bottom for you.</small><textarea id="em-ubody" rows="10" maxlength="8000">'+esc(EMUP.b||"Hi {{first_name}},\n\n")+'</textarea></label>'+
+          '<div class="row"><button class="mini" type="button" id="emUpTest">Send a test to me first</button><button class="mini solid" type="submit" id="emUpGo">Send the update</button></div><p class="t-msg" role="status"></p></form>'+
+          '<aside class="dn-how"><p class="me-k">Who is on these lists</p><ul><li>People tick these emails when they register, on their dashboard, at the kiosk, or on the questionnaire.</li>'+
+          '<li>Every update carries a one-click unsubscribe link, and members can change their choices on My dashboard.</li>'+
+          '<li>Up to three updates can go out in a day.</li><li>The email service’s free plan sends 100 emails a day. A bigger list finishes over the following days by itself.</li></ul></aside></div>';
+      } else if(EMSUB==="log"){
+        html='<div class="stat-row"><div><b>'+(c.waiting||0)+'</b><span>Waiting to send</span></div><div><b>'+(c.today||0)+'</b><span>Sent in the last 24 hours</span></div><div><b>'+(c.sent||0)+'</b><span>Sent in the last 30 days</span></div><div><b>'+(c.failed||0)+'</b><span>Not delivered, last 30 days</span></div></div><div id="emLog"><p class="adm-loading">Loading…</p></div>';
+      } else {
+        html='<div class="em-grid"><form class="em-card" id="emSet" novalidate><p class="me-k">Sender details</p><h3>How emails go out</h3>'+
+          '<div class="em-ev"><span><b>Email sending</b><small>Turn off to pause every alert, reply and update. Nothing is saved up while it’s off.</small></span><label class="tgl"><input type="checkbox" id="em-on"'+(s.on?' checked':'')+' aria-label="Email sending"><span></span></label></div>'+
+          '<label class="f">Sender name<input type="text" id="em-fn" maxlength="60" value="'+esc(s.from_name||"")+'"></label>'+
+          '<label class="f">“From” address <small>Works once flintracing.org is verified with the email service (step 4). Leave blank to stay in test mode.</small><input type="email" id="em-fa" maxlength="254" value="'+esc(s.from_addr||"")+'" placeholder="hello@flintracing.org" autocomplete="off" spellcheck="false"></label>'+
+          '<label class="f">Replies go to <small>When someone hits Reply on a message from the website, it lands in this inbox.</small><input type="email" id="em-rt" maxlength="254" value="'+esc(s.reply_to||"")+'" placeholder="info@flintsoapbox.org" autocomplete="off" spellcheck="false"></label>'+
+          '<label class="f">Footer line <small>Small print under every email. Add your mailing address before sending updates to a list.</small><input type="text" id="em-ft" maxlength="300" value="'+esc(s.footer||"")+'"></label>'+
+          '<div class="row"><button class="mini solid" type="submit">Save</button><button class="mini" type="button" id="emTest">Send me a test email</button></div><p class="t-msg" role="status"></p></form>'+
+          '<aside class="dn-how"><p class="me-k">One-time setup · about 15 minutes</p><ol>'+
+          '<li>Create a free account at <b>resend.com</b>. Sign up with the inbox where you want test emails to land.</li>'+
+          '<li>In Resend, open <b>API Keys</b>, create a key with “Sending access”, and copy it.</li>'+
+          '<li>In your Supabase project, open <b>Edge Functions → Secrets</b>. Add a secret named <b>RESEND_API_KEY</b> and paste the key as its value. Then press <b>Send me a test email</b> here.</li>'+
+          '<li>To email families and crew, not only yourself: in Resend open <b>Domains → Add domain</b>, enter flintracing.org, and copy the DNS records it lists into Squarespace (Domains → flintracing.org → DNS). When Resend shows Verified, type a “from” address here, such as hello@flintracing.org, and Save.</li></ol>'+
+          '<p class="me-fine">The key works like a password: it goes into Supabase only, never into this website or an email. The “from” address doesn’t need a mailbox of its own, because replies go to the reply address. Resend’s free plan sends up to 100 emails a day and 3,000 a month.</p></aside></div>';
+      }
+      P.innerHTML=sub+banner+html;
+      $$("[data-esub]",P).forEach(function(b){b.onclick=function(){EMSUB=b.getAttribute("data-esub");tabEmail()}});
+      var tb=$("#emTest");if(tb)tb.onclick=function(){emTest(tb)};
+      if(EMSUB==="alerts"){var fm=$("#emMe"),saveMe=function(){var ev=$$(".em-ev input:checked",fm).map(function(i){return i.value}),m=$(".t-msg",fm);
+          db.rpc("admin_email_notify",{p_events:ev,p_send_to:$("#em-to").value.trim()}).then(function(x){if(x.error){m.textContent=x.error.message;return}m.textContent="";
+            toast(ev.length?"Saved. You’ll get an email for "+ev.length+" kind"+(ev.length===1?"":"s")+" of activity.":"Saved. Email alerts are off for your account.")})};
+        fm.onsubmit=function(e){e.preventDefault();saveMe()};$$(".em-ev input",fm).forEach(function(i){i.onchange=saveMe})}
+      if(EMSUB==="msgs")$$(".em-tpl",P).forEach(function(d){var f=$("form",d);f.onsubmit=function(e){e.preventDefault();var au=$("[data-auto]",f),m=$(".t-msg",f),on=!!(au&&au.checked);
+        db.rpc("admin_email_template_save",{p_key:d.getAttribute("data-key"),p_subject:$("input[type=text]",f).value,p_body:$("textarea",f).value,p_auto:on}).then(function(x){if(x.error){m.textContent=x.error.message;return}m.textContent="";
+          if(au){var pill=$(".em-pill",d);pill.textContent=on?"Sends automatically":pill.getAttribute("data-off")||pill.textContent;pill.classList.toggle("on",on)}EMR={};toast("Message saved"+(au?(on?". It now sends automatically.":". You send it yourself."):"."))})};
+        var pl=$(".em-pill",d),t0=(o.templates||[]).filter(function(t){return t.key===d.getAttribute("data-key")})[0];if(pl&&t0)pl.setAttribute("data-off",EM_AUD[t0.audience])});
+      if(EMSUB==="update"){var uf=$("#emUp"),tp=$("#em-topic"),us=$("#em-usub"),ub=$("#em-ubody"),go=$("#emUpGo"),um=$(".t-msg",uf),cnt=function(){return +tp.options[tp.selectedIndex].getAttribute("data-n")||0};
+        var keep=function(){EMUP={topic:tp.value,s:us.value,b:ub.value};go.removeAttribute("data-sure");go.textContent="Send the update"};tp.onchange=us.oninput=ub.oninput=keep;
+        var chk=function(){return us.value.trim().length<3?"Add a subject.":ub.value.trim().length<10?"Write your message first.":""};
+        $("#emUpTest").onclick=function(){var b=this,er=chk();if(er){um.textContent=er;return}um.textContent="";b.disabled=true;
+          db.rpc("admin_email_update",{p_topic:tp.value,p_subject:us.value,p_body:ub.value,p_test:true}).then(function(x){b.disabled=false;if(x.error){um.textContent=x.error.message;return}toast("Test copy on its way to "+x.data.to)})};
+        uf.onsubmit=function(e){e.preventDefault();var er=chk(),n=cnt();if(er){um.textContent=er;return}if(!n){um.textContent="No one has asked for these emails yet.";return}um.textContent="";
+          if(!go.getAttribute("data-sure")){go.setAttribute("data-sure","1");go.textContent="Confirm: send to "+n+(n===1?" person":" people");return}
+          go.disabled=true;db.rpc("admin_email_update",{p_topic:tp.value,p_subject:us.value,p_body:ub.value,p_test:false}).then(function(x){go.disabled=false;if(x.error){um.textContent=x.error.message;keep();return}
+            EMUP={topic:tp.value,s:"",b:""};toast("Update on its way to "+x.data.count+(x.data.count===1?" person":" people"));EMSUB="log";tabEmail()})}}
+      if(EMSUB==="log")db.rpc("admin_email_log").then(function(x){var L=$("#emLog");if(!L)return;if(x.error){L.textContent="Couldn’t load sent mail: "+x.error.message;return}var rows=x.data||[];
+        L.innerHTML=rows.length?'<div class="adm-scroll"><table class="adm-table" style="min-width:640px"><thead><tr><th>When</th><th>To</th><th>What</th><th>Status</th></tr></thead><tbody>'+rows.map(function(m){
+            return '<tr><td style="white-space:nowrap">'+emWhen(m.at)+'</td><td>'+esc(m.to)+'</td><td><b>'+esc(EM_KIND[m.kind]||m.kind)+'</b><br><small>'+esc(m.subject)+'</small></td><td><span class="em-st '+esc(m.status)+'">'+esc(EM_ST[m.status]||m.status)+'</span>'+
+              (m.error&&m.status!=="sent"?'<br><small>'+esc(m.error)+'</small>':'')+(m.status==="failed"||m.status==="skipped"?' <button class="mini" type="button" data-retry="'+esc(m.id)+'">Try again</button>':'')+'</td></tr>'}).join("")+'</tbody></table></div><p class="rk-fine">The 200 most recent emails. Records are cleared after six months.</p>'
+          :'<p class="rk-fine">Nothing has been sent yet. Alerts, replies and updates will be listed here.</p>';
+        $$("[data-retry]",L).forEach(function(b){b.onclick=function(){b.disabled=true;db.rpc("admin_email_retry",{p_id:b.getAttribute("data-retry")}).then(function(y){if(okToast(y,"Trying again"))tabEmail();else b.disabled=false})}})});
+      if(EMSUB==="setup"){var sf=$("#emSet");sf.onsubmit=function(e){e.preventDefault();var m=$(".t-msg",sf);
+        db.rpc("admin_email_settings",{p_on:$("#em-on").checked,p_from_name:$("#em-fn").value,p_from_addr:$("#em-fa").value,p_reply_to:$("#em-rt").value,p_footer:$("#em-ft").value}).then(function(x){if(x.error){m.textContent=x.error.message;return}EMR={};toast("Email settings saved");tabEmail()})}}
+    })}
+  /* Pre-approved replies on a record (Inquiries, Members, Registrations). One call loads the messages and what was already sent. */
+  function emLoad(table){return db.rpc("admin_email_refs",{p_table:table}).then(function(r){var d=(r&&r.data)||{templates:[],refs:[],on:false,ready:false},by={};
+      (d.refs||[]).forEach(function(x){(by[x.ref]=by[x.ref]||[]).push(x)});d.by=by;EMR[table]=d;return d},function(){return EMR[table]={templates:[],refs:[],by:{},on:false,ready:false}})}
+  function emTpl(table,key){return ((EMR[table]||{}).templates||[]).filter(function(t){return t.key===key})[0]}
+  function emLine(table,id){var l=((EMR[table]||{}).by||{})[id];if(!l||!l.length)return "";var x=l[0];
+    return '<p class="em-sent '+esc(x.status)+'">'+ico("mail")+'<span>'+esc(x.name)+(x.auto?" (automatic)":"")+' · '+esc(EM_ST[x.status]||x.status)+' '+emWhen(x.at)+(l.length>1?' · '+l.length+' emails in all':'')+'</span></p>'}
+  function emMenu(table,id,label){var t=(EMR[table]||{}).templates||[];if(!t.length)return "";
+    return hmenu(label||"Email a reply",t.map(function(x){return hmItem(esc(x.name),'data-em="'+esc(x.key)+'" data-em-id="'+esc(id)+'"')}))}
+  function emBind(root,table,after){$$("[data-em]",root).forEach(function(b){b.onclick=function(){emCompose(b.closest(".inq,.mb"),table,b.getAttribute("data-em-id"),b.getAttribute("data-em"),after)}})}
+  function emCompose(card,table,id,key,after){if(!card)return;var box=$(".em-box",card),d0=EMR[table]||{};if(!box){box=document.createElement("div");box.className="em-box";card.appendChild(box)}
+    box.innerHTML='<p class="adm-loading">Getting the message ready…</p>';
+    db.rpc("admin_email_preview",{p_table:table,p_id:id,p_template:key}).then(function(r){
+      if(r.error||!r.data){box.innerHTML='<p class="t-msg">'+esc(r.error?r.error.message:"Couldn’t open that message.")+'</p>';return}
+      var d=r.data,on=!!d0.on,ready=!!d0.ready;
+      box.innerHTML='<form novalidate><p class="me-k">Email reply</p><p class="em-to">To <b>'+esc(d.to_name||"")+'</b> · '+esc(d.to||"no email address on file")+'</p><label class="f">Subject<input type="text" maxlength="150" value="'+esc(d.subject)+'"></label><label class="f">Message<textarea rows="11" maxlength="8000">'+esc(d.body)+'</textarea></label>'+
+        (!on?'<p class="em-note">Email is switched off in Admin → Email, so use your own email app for now.</p>':!ready?'<p class="em-note">The website’s email service isn’t connected yet. Queue this to send as soon as it is (it waits up to 7 days), or open it in your own email app now.</p>':'')+
+        '<div class="row"><button class="mini solid" type="submit"'+(on&&d.to?'':' disabled')+'>'+(ready?"Send email":"Queue to send")+'</button><a class="mini" data-mailto href="#">Open in my email app</a><button class="mini" type="button" data-x>Cancel</button></div><p class="t-msg" role="status"></p></form>';
+      var f=$("form",box),sub=$("input",f),body=$("textarea",f),ml=$("[data-mailto]",f),setMl=function(){ml.href="mailto:"+encodeURIComponent(d.to||"")+"?subject="+encodeURIComponent(sub.value)+"&body="+encodeURIComponent(body.value)};
+      setMl();sub.oninput=body.oninput=setMl;$("[data-x]",f).onclick=function(){box.remove()};
+      f.onsubmit=function(e){e.preventDefault();var b=$("button[type=submit]",f),m=$(".t-msg",f);b.disabled=true;m.textContent="Sending…";
+        db.rpc("admin_email_send",{p_table:table,p_id:id,p_template:key,p_subject:sub.value,p_body:body.value}).then(function(x){b.disabled=false;
+          if(x.error){m.textContent=x.error.message;return}toast((ready?"Email on its way to ":"Email queued for ")+d.to+(table==="inquiries"&&INQ_FILTER==="new"?". The inquiry moved to In progress.":"."));box.remove();if(after)after()})};
+      body.focus()})}
+
+  /* ---------- Unsubscribe page (#unsubscribe/…): the link at the bottom of every update ---------- */
+  function renderUnsub(){var box=$("#unsubBox");if(!box||hashBase()!=="unsubscribe")return;
+    var p=(location.hash||"").split("/"),a={p_e:p[1]||"",p_topic:p[2]||"",p_sig:p[3]||""},names={workshops:"Seasonal workshops",council:"Leadership Council updates"};
+    var card=function(h){box.innerHTML='<div class="reg-card un-card">'+h+'</div>'},bad='<p class="me-k">Email choices</p><h2>This link didn’t work</h2><p>The unsubscribe link may be incomplete. Try the link in a newer email, or write to <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a> and we’ll take you off the list.</p>';
+    if(!window.FR_DB){card(bad);return}
+    card('<p class="reg-hint">Checking your link…</p>');
+    db.rpc("email_unsubscribe",Object.assign({p_go:false},a)).then(function(r){if(r.error||!r.data){card(bad);return}var d=r.data,nm=names[d.topic]||"these";
+      card('<p class="me-k">Email choices</p><h2>Stop these emails?</h2><p><b>'+esc(d.email)+'</b> will stop getting <b>'+esc(nm)+'</b> emails from Flint Racing &amp; STEM. Replies to your own questions and emails about your account aren’t affected.</p>'+
+        '<div class="reg-go"><button class="btn deep" type="button" id="unGo">Unsubscribe</button><a class="reg-hint" href="#home">Keep my emails</a></div><p class="t-msg" id="unMsg" role="status"></p>');
+      $("#unGo").onclick=function(){var b=this;b.disabled=true;db.rpc("email_unsubscribe",Object.assign({p_go:true},a)).then(function(x){
+        if(x.error){b.disabled=false;$("#unMsg").textContent=x.error.message;return}
+        card('<p class="me-k">Done</p><h2>You’re unsubscribed</h2><p>'+esc(d.email)+' won’t get '+esc(nm)+' emails anymore. Changed your mind? Sign in and turn them back on from My dashboard.</p><div class="reg-go"><a class="btn deep" href="#home">Back to the site</a></div>')})}},function(){card(bad)})}
+  function emApproveHTML(m){var d=EMR.members||{},t=emTpl("members","account_approved");if(!t||!d.on||!m.email)return "";
+    return t.auto?'<small class="em-auto">Sign-in instructions are emailed automatically when you approve.</small>':'<label class="em-ck"><input type="checkbox" data-emok checked>Email them sign-in instructions</label>'}
 
   /* ---------- Admin → Spirit Shop ---------- */
   function tabSpirit(){var P=$("#admPanel");
