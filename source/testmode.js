@@ -193,6 +193,10 @@
         s.forEach(function(x){var k=(x.last_name+"|"+(x.team||"")).toLowerCase();fam[k]=Math.max(fam[k]||0,x.kids);if(x.team)teams[x.team.toLowerCase()]=1;days[x.session_date]=1;meals+=x.kids+x.volunteers;vv+=x.volunteers});
         return R({kids:Object.keys(fam).reduce(function(a,k){return a+fam[k]},0),families:Object.keys(fam).length,teams:Object.keys(teams).length,meals:meals,volunteer_visits:vv,sessions:Object.keys(days).length})}
       if(fn==="list_admins")return R([{email:"test-admin@flintracing.org",user_id:"test-admin"}].concat((T.extra_admins||[]).map(function(e){return{email:e,user_id:"u-"+e}})));
+      if(fn==="admin_invites_open")return R((T.invites||[]).map(function(i){return {email:i.email,name:i.name,created_at:i.created_at,has_account:false}}));
+      if(fn==="admin_invite_add"){var ie=String(args.p_email||"").trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ie))return R(null,"That email address doesn’t look right.");
+        T.invites=(T.invites||[]).filter(function(i){return i.email!==ie}).concat([{email:ie,name:args.p_name||null,created_at:new Date().toISOString()}]);save();return R({status:"invited",email:ie,sent:args.p_send!==false})}
+      if(fn==="admin_invite_cancel"){T.invites=(T.invites||[]).filter(function(i){return i.email!==String(args.p_email||"").toLowerCase()});save();return R(null)}
       if(fn==="grant_admin"){T.extra_admins=(T.extra_admins||[]).filter(function(e){return e!==args.p_email}).concat([args.p_email]);save();return R(args.p_email)}
       if(fn==="revoke_admin"){T.extra_admins=(T.extra_admins||[]).filter(function(e){return "u-"+e!==args.p_user});save();return R(null)}
       if(fn==="set_staff"){T.staff=T.staff.filter(function(x){return !(x.email===args.p_email&&x.role===args.p_role)});if(args.p_on)T.staff.push({user_id:"u-"+args.p_email,role:args.p_role,email:args.p_email});save();return R(args.p_email)}

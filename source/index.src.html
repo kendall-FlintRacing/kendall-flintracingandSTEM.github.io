@@ -283,6 +283,8 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 .crp-f:active{cursor:grabbing}.crp-f img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none}
 .crp-f.wide{aspect-ratio:16/7.2}.crp-f.tall{aspect-ratio:4/3}
 .crp-zoom{display:flex;align-items:center;gap:10px;margin:16px 0 4px;font-weight:700}.crp-zoom input{flex:1;max-width:340px}
+.inv-form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:10px;align-items:end;max-width:760px;min-width:0}.inv-form label{display:grid;gap:4px;min-width:0;font-weight:700}.inv-form label.inv-chk{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-weight:500}.inv-chk input{width:18px;height:18px;flex:none}.inv-table{min-width:0}.inv-form input[type=text],.inv-form input[type=email]{width:100%;min-width:0;min-height:44px;padding:8px 10px;border:1.5px solid #c9ccd1;border-radius:4px;font:500 1rem/1.2 var(--body)}
+@media (max-width:560px){.inv-form{grid-template-columns:minmax(0,1fr)}.inv-table tr{display:grid;gap:4px;padding:8px 0}.inv-table td{border:0;padding:2px 0;text-align:left!important}}
 @media (max-width:640px){.crp-frames{grid-template-columns:minmax(0,1fr)}.crp-box{padding:14px}}
 
 /* News */
@@ -8142,7 +8144,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7.5l9 6 9-6"/>',menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',live:'<circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4"/>'};
   function ico(k){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICO[k]||"")+'</svg>'}
   var SECT=[["Home",[["overview","Overview","Everything that needs you, at a glance","home"]]],
-    ["People",[["members","Members","Approve profiles, set roles, fix hours and see who’s been in","users","mem"],["inq","Inquiries","Questionnaire replies from families, schools and sponsors","inbox","inq"],["regs","Registrations","Race and building workshop registrations (official AASBD form) signed online","flag","regs"],["email","Email","Alerts to your inbox, pre-approved replies and updates to families","mail"],["team","Admins","Kendall and Kevin’s email accounts","shield"]]],
+    ["People",[["members","Members","Approve profiles, set roles, fix hours and see who’s been in","users","mem"],["inq","Inquiries","Questionnaire replies from families, schools and sponsors","inbox","inq"],["regs","Registrations","Race and building workshop registrations (official AASBD form) signed online","flag","regs"],["email","Email","Alerts to your inbox, pre-approved replies and updates to families","mail"],["team","Admins","Email accounts for everyone who runs the site","shield"]]],
     ["Programs",[["events","Events","Dates on the public calendar","cal"],["families","Times & places","Private times and locations for signed-in members","pin"],["notes","Bulletin","Monthly notes on the Program Dashboard","note"],["resources","Resources","Forms, links and program pages","folder"],["printables","Flyers & forms","Upload printable flyers, registration, order and field trip forms","note"],["reviews","Reviews","Photo albums and teacher plans waiting for approval","check","rev"]]],
     ["Website",[["home","Homepage","Slideshow and the numbers on the homepage","layout"],["news","News & Stories","Post and edit stories","news"],["partners","Partners","Sponsor and partner logos","star"],["edits","Site edits","Every text and photo change, with undo","undo"]]],
     ["Fundraising",[["donate","Donations","Connect the Donate page to your Square link","heart"],["sprice","Sponsor prices","Price fields for the sponsor menus, off until you’re ready","star"]]],
@@ -10650,16 +10652,30 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
 
   /* ---------- Admin → Admins: email accounts for Kendall and Kevin ---------- */
   function tabTeam(){var P=$("#admPanel");
-    db.rpc("list_accounts").then(function(r){
+    Promise.all([db.rpc("list_accounts"),db.rpc("admin_invites_open")]).then(function(rr){var r=rr[0],inv=(rr[1]&&rr[1].data)||[];
       if(r.error){P.textContent="Couldn’t load accounts: "+r.error.message;return}
       var acc=r.data||[];
-      P.innerHTML='<div class="inq"><header><b>Admin accounts</b><small>Email sign-in in the Staff Garage</small><button class="mini" type="button" id="accCsv">Download (.csv)</button></header>'+
+      P.innerHTML='<div class="inq"><header><b>Invite an admin</b><small>Kevin, Kasey…</small></header><p style="margin:0 0 12px;color:#4a4d55;max-width:70ch">Enter their email. Admin turns on by itself as soon as they create their account and confirm that email.</p>'+
+          '<form id="invForm" class="inv-form">'+
+          '<label>Name<input type="text" id="invName" maxlength="80" autocomplete="off" placeholder="Kasey"></label>'+
+          '<label>Email<input type="email" id="invEmail" maxlength="160" autocomplete="off" required placeholder="name@example.com"></label>'+
+          '<label class="inv-chk"><input type="checkbox" id="invSend" checked> Email them the steps to create their account</label>'+
+          '<div class="row" style="margin:0;grid-column:1/-1"><button class="btn deep" type="submit">Invite as admin</button></div></form>'+
+          (inv.length?'<p style="margin:14px 0 6px;font-weight:700">Waiting to create their account</p><div><table class="adm-table inv-table" style="min-width:0"><tbody>'+inv.map(function(i){return '<tr><td><b>'+esc(i.name||"(no name)")+'</b><br><small>'+esc(i.email)+'</small></td><td><small>Invited '+fmtDate(String(i.created_at).slice(0,10),{month:"short",day:"numeric"})+(i.has_account?' · account made, email not confirmed yet':'')+'</small></td><td style="text-align:right"><button class="mini" type="button" data-inv-re="'+esc(i.email)+'" data-inv-nm="'+esc(i.name||"")+'">Send the steps again</button> <button class="mini red" type="button" data-inv-x="'+esc(i.email)+'">Cancel invite</button></td></tr>'}).join("")+'</tbody></table></div>':'')+
+          '<p class="rk-fine">They open Sign in → Staff Garage → New admin account and use the email you entered here. Only that email, once confirmed from its inbox, gets admin.</p></div>'+'<div class="inq"><header><b>Admin accounts</b><small>Email sign-in in the Staff Garage</small><button class="mini" type="button" id="accCsv">Download (.csv)</button></header>'+
           '<p style="color:#4a4d55;max-width:78ch">Admins run the whole site and sign in with email. Everyone else (families, volunteers, teachers, photographers and race-day crew) registers a username profile instead: approve them and choose their roles in <button class="mini" type="button" id="toMem">Members</button></p>'+
           (acc.length?'<div class="adm-scroll"><table class="adm-table acc-table" style="min-width:560px"><thead><tr><th>Person</th><th>Joined · last sign in</th><th>Admin</th></tr></thead><tbody>'+
             acc.map(function(a){var me=USER&&a.user_id===USER.id;return '<tr data-email="'+esc(a.email)+'" data-id="'+a.user_id+'"><td><b>'+esc(a.full_name||"(no name)")+'</b>'+(me?' <small>(you)</small>':'')+'<br><small>'+esc(a.email)+'</small></td>'+
               '<td><small>'+fmtDate(String(a.created_at).slice(0,10),{month:"short",day:"numeric",year:"numeric"})+'<br>'+(a.last_sign_in_at?fmtDate(String(a.last_sign_in_at).slice(0,10),{month:"short",day:"numeric"}):"never")+'</small></td>'+
               '<td><label class="tgl"><input type="checkbox" data-r="admin"'+(a.is_admin?' checked':'')+(me?' disabled':'')+' aria-label="Admin for '+esc(a.email)+'"><span></span></label></td></tr>'}).join("")+'</tbody></table></div>':'<p class="rk-fine">No accounts yet.</p>')+
-          '<p class="rk-fine">Adding Kevin: he opens Sign in → Staff Garage → Create an account. Then turn on Admin next to his email here.</p></div>';
+          '<p class="rk-fine">Already have an account here? Turn Admin on or off with the switch.</p></div>';
+      function invite(em,nm,send){return db.rpc("admin_invite_add",{p_email:em,p_name:nm,p_send:send}).then(function(x){if(x.error){toast(x.error.message);return false}
+        var d=x.data||{};toast(d.status==="granted"?"Admin turned on for "+d.email+".":"Invited "+d.email+(d.sent?". The steps are on their way by email.":". Send them the steps yourself: Sign in → Staff Garage → New admin account."));tabTeam();return true})}
+      $("#invForm").onsubmit=function(e){e.preventDefault();var em=$("#invEmail").value.trim();if(!em){$("#invEmail").focus();return}var b=$("#invForm button");b.disabled=true;
+        invite(em,$("#invName").value.trim(),$("#invSend").checked).then(function(){b.disabled=false})};
+      $$("[data-inv-re]",P).forEach(function(b){b.onclick=function(){b.disabled=true;invite(b.getAttribute("data-inv-re"),b.getAttribute("data-inv-nm"),true)}});
+      $$("[data-inv-x]",P).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm cancel"){b.textContent="Confirm cancel";return}
+        db.rpc("admin_invite_cancel",{p_email:b.getAttribute("data-inv-x")}).then(function(x){if(x.error){toast(x.error.message);return}toast("Invite cancelled");tabTeam()})}});
       $$(".acc-table input[data-r]",P).forEach(function(i){i.onchange=function(){var tr=i.closest("tr"),em=tr.getAttribute("data-email"),id=tr.getAttribute("data-id"),on=i.checked;
         (on?db.rpc("grant_admin",{p_email:em}):db.rpc("revoke_admin",{p_user:id})).then(function(x){if(x.error){toast(x.error.message);i.checked=!on;return}toast((on?"Admin turned on for ":"Admin turned off for ")+em)})}});
       $("#accCsv").onclick=function(){rosterCSV("accounts")};
