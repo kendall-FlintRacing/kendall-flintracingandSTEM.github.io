@@ -218,7 +218,7 @@
         if(a.p_passcode&&weak(a.p_passcode))return {e:"Pick a password of at least 6 characters that isn’t easy to guess, or leave it blank."};
         var kids=(a.p_kids||[]).filter(function(k){return k&&String(k.name||"").trim()}).slice(0,8);if(a.p_kind==="family"&&!kids.length)return {e:"Add at least one racer."};
         var b=em.split("@")[0].replace(/[^a-z0-9._-]/g,"").replace(/^[._-]+/,"");if(b.length<3)b+="family";b=b.slice(0,20);var u=b,i=1;while(T.members.some(function(m){return m.username===u})){i++;u=b+i}
-        var id="m"+rid(),m={id:id,username:u,display_name:String(a.p_name).trim(),kind:a.p_kind,email:em,phone:a.p_phone||null,kids:kids,requested:(a.p_requested||[]).filter(function(r){return ROLES.indexOf(r)>=0}),roles:roles,status:status,about:a.p_about||null,admin_note:null,first_year:new Date().getFullYear(),created_at:new Date().toISOString(),approved_at:status==="approved"?new Date().toISOString():null,last_seen_at:null,family_code:a.p_code,email_prefs:(a.p_prefs||[]).filter(function(x){return x==="account"||x==="workshops"||x==="council"})};
+        var id="m"+rid(),m={id:id,username:u,display_name:String(a.p_name).trim(),kind:a.p_kind,email:em,phone:a.p_phone||null,kids:kids,requested:(a.p_requested||[]).filter(function(r){return ROLES.indexOf(r)>=0}),roles:roles,status:status,about:a.p_about||null,admin_note:null,first_year:new Date().getFullYear(),created_at:new Date().toISOString(),approved_at:status==="approved"?new Date().toISOString():null,last_seen_at:null,family_code:a.p_code,email_prefs:(a.p_prefs||[]).filter(function(x){return x==="account"||["building","workshops","volunteers","council"].indexOf(x)>=0||((T.email||{}).defs||[]).some(function(d){return d.key===x&&d.member_choice})})};
         T.members.unshift(m);if(a.p_passcode)T.mpass[id]=a.p_passcode;mlog(id,u,"register",a.p_kind);save();return {m:m}};
       if(fn==="member_register"){var nm0=newMem(args,"pending",[]);if(nm0.e)return R(null,nm0.e);eAlert("profile","New profile to approve: "+nm0.m.display_name);eAuto("member_new","members",nm0.m.id);save();return R({ok:true,username:nm0.m.username})}
       if(fn==="kiosk_register_family"){var td0=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10),nm1=newMem(Object.assign({},args,{p_kind:"family",p_requested:["family"],p_about:"Registered at the workshop check-in kiosk."}),"approved",["family"]);
@@ -233,7 +233,7 @@
       if(fn==="member_set_code"){var c9=curM();if(!c9)return R(null,"Sign in first.");if(!proof(c9,args.p_current))return R(null,"Your current code or password isn’t right.");
         if(wcode(args.p_new))return R(null,"Pick a 4-digit code that isn’t easy to guess (not 1234 or 1111).");if(T.members.some(function(m){return m.family_code===args.p_new&&m.id!==c9.id}))return R(null,"That code is already in use. Pick a different 4 digits.");
         c9.family_code=args.p_new;mlog(c9.id,c9.username,"code_changed");save();return R(null)}
-      if(fn==="member_set_prefs"){var c10=curM();if(!c10)return R(null,"Sign in first.");c10.email_prefs=(args.p_prefs||[]).filter(function(x){return x==="account"||x==="workshops"||x==="council"});save();return R(c10.email_prefs)}
+      if(fn==="member_set_prefs"){var c10=curM();if(!c10)return R(null,"Sign in first.");c10.email_prefs=(args.p_prefs||[]).filter(function(x){return x==="account"||["building","workshops","volunteers","council"].indexOf(x)>=0||((T.email||{}).defs||[]).some(function(d){return d.key===x&&d.member_choice})});save();return R(c10.email_prefs)}
       if(fn==="member_signout"){var c0=curM();if(c0)mlog(c0.id,c0.username,"sign_out");if(user)delete T.msess[user.id];save();return R(null)}
       if(fn==="admin_member_session"){if(!user||user.id!=="test-admin")return R(null,"Admins only");var am=T.members.filter(function(m){return (m.email||"")==="test-admin@flintracing.org"})[0];
         if(!am){am={id:"madmin",username:"testadmin",display_name:"Test Admin",kind:"crew",email:"test-admin@flintracing.org",phone:null,kids:[],requested:[],roles:[],status:"approved",about:"Admin’s own participant profile",admin_note:null,first_year:2026,created_at:new Date().toISOString(),approved_at:new Date().toISOString(),last_seen_at:null};T.members.push(am)}
@@ -320,15 +320,33 @@
       if(fn==="list_accounts")return R([{user_id:"test-admin",email:"test-admin@flintracing.org",full_name:"Test Admin",created_at:new Date().toISOString(),last_sign_in_at:new Date().toISOString(),is_admin:true,staff_roles:T.staff.filter(function(x){return x.user_id==="test-admin"}).map(function(x){return x.role}),race_role:null},
         {user_id:"u-kevin@example.com",email:"kevin@example.com",full_name:"Kevin C.",created_at:new Date().toISOString(),last_sign_in_at:null,is_admin:(T.extra_admins||[]).indexOf("kevin@example.com")>=0,staff_roles:T.staff.filter(function(x){return x.email==="kevin@example.com"}).map(function(x){return x.role}),race_role:null}]);
       /* ---- email (preview) ---- */
-      if(fn.indexOf("admin_email_")===0||fn==="email_unsubscribe"||fn.indexOf("admin_list")===0){var E=EM(),ok=function(e){return /^[^@\s<>,;:"'()]+@[^@\s<>,;:"'()]+\.[A-Za-z]{2,24}$/.test(e||"")},AUD={inquiries:"inquiry",members:"member",race_registrations:"registration"};
+      if(fn.indexOf("admin_email_")===0||fn==="email_unsubscribe"||fn.indexOf("admin_list")===0||fn==="public_email_lists"){var E=EM(),ok=function(e){return /^[^@\s<>,;:"'()]+@[^@\s<>,;:"'()]+\.[A-Za-z]{2,24}$/.test(e||"")},AUD={inquiries:"inquiry",members:"member",race_registrations:"registration"};
         E.lists=E.lists||[];var LR=function(e,tp){return E.lists.filter(function(x){return x.email===e&&x.topic===tp})[0]};
-        var topics=function(t){t=t||"";var o=[];if(/workshop/i.test(t)||!/council/i.test(t))o.push("workshops");if(/council/i.test(t))o.push("council");return o};
-        var aud=function(tp){var seen={},src={},n=0,add=function(e,nm,s){e=(e||"").toLowerCase();if(!ok(e))return;var r=LR(e,tp);if(r&&r.status==="off")return;(src[e]=src[e]||[]).indexOf(s)<0&&src[e].push(s);if(!(e in seen)){seen[e]=nm||"";n++}};
-          T.members.forEach(function(m){if(m.status==="approved"&&(m.email_prefs||[]).indexOf(tp)>=0)add(m.email,m.display_name,"member")});
+        E.defs=E.defs||[{key:"building",name:"Building workshops",about:"Building workshop dates, registration and reminders",member_choice:true,roles:[],include_admins:false,builtin:true},
+          {key:"workshops",name:"Seasonal workshops",about:"Workshop, camp and fun run dates as they’re set",member_choice:true,roles:[],include_admins:false,builtin:true},
+          {key:"volunteers",name:"Volunteers",about:"Volunteer shifts, race-day help and crew news",member_choice:true,roles:["volunteer"],include_admins:false,builtin:true},
+          {key:"council",name:"Leadership Council",about:"Council news, opportunities and special offers",member_choice:true,roles:["council"],include_admins:false,builtin:true},
+          {key:"teachers",name:"Teachers",about:"For teachers who plan and lead workshops",member_choice:false,roles:["teacher"],include_admins:false,builtin:true},
+          {key:"coaches",name:"Coaches",about:"For coaches and team mentors",member_choice:false,roles:[],include_admins:false,builtin:true},
+          {key:"admins",name:"Admins",about:"Everyone with an admin account",member_choice:false,roles:[],include_admins:true,builtin:true}];
+        var DEF=function(k){return E.defs.filter(function(d){return d.key===k})[0]};
+        var topics=function(t){t=t||"";var o=[];if(/building/i.test(t))o.push("building");if(/steam|seasonal|camp|weekday/i.test(t)||(/workshop/i.test(t)&&!/building/i.test(t)))o.push("workshops");if(/volunteer/i.test(t))o.push("volunteers");if(/council/i.test(t))o.push("council");return o.length?o:["workshops"]};
+        var aud=function(tp){var seen={},src={},n=0,d=DEF(tp)||{roles:[]},add=function(e,nm,s){e=(e||"").toLowerCase();if(!ok(e))return;var r=LR(e,tp);if(r&&r.status==="off")return;(src[e]=src[e]||[]).indexOf(s)<0&&src[e].push(s);if(!(e in seen)){seen[e]=nm||"";n++}};
+          if(d.member_choice)T.members.forEach(function(m){if(m.status==="approved"&&(m.email_prefs||[]).indexOf(tp)>=0)add(m.email,m.display_name,"member")});
+          T.members.forEach(function(m){if(m.status==="approved"&&(m.roles||[]).some(function(x){return d.roles.indexOf(x)>=0}))add(m.email,m.display_name,"role")});
+          if(d.include_admins&&user)add(user.email,(user.user_metadata||{}).full_name,"admin");
           E.lists.forEach(function(x){if(x.topic===tp&&x.status==="on")add(x.email,x.name,"added")});
-          (T.inquiries||[]).forEach(function(i){if(i.email_updates&&topics(i.interests).indexOf(tp)>=0)add(i.email,(i.first_name+" "+(i.last_name||"")).trim(),i.role==="Workshop guest"?"kiosk":"questionnaire")});return {n:n,list:seen,src:src}};
-        if(fn==="admin_lists"){var a8=aud(args.p_topic);
-          return R({counts:{workshops:aud("workshops").n,council:aud("council").n},people:Object.keys(a8.list).sort(function(x,y){return (a8.list[x]||x).toLowerCase()<(a8.list[y]||y).toLowerCase()?-1:1}).map(function(e){var r=LR(e,args.p_topic);return {email:e,name:a8.list[e],sources:a8.src[e],note:r&&r.status==="on"?r.note:null,since:r&&r.status==="on"?r.at:new Date().toISOString()}}),
+          if(d.member_choice)(T.inquiries||[]).forEach(function(i){if(i.email_updates&&topics(i.interests).indexOf(tp)>=0)add(i.email,(i.first_name+" "+(i.last_name||"")).trim(),i.role==="Workshop guest"?"kiosk":"questionnaire")});return {n:n,list:seen,src:src}};
+        var meta=function(){return E.defs.map(function(d){return Object.assign({},d,{count:aud(d.key).n})})};
+        if(fn==="public_email_lists")return R(E.defs.filter(function(d){return d.member_choice}).map(function(d){return {key:d.key,name:d.name,about:d.about}}));
+        if(fn==="admin_lists_reach"){var u11={};(args.p_topics||[]).forEach(function(k){Object.keys(aud(k).list).forEach(function(e){u11[e]=1})});return R(Object.keys(u11).length)}
+        if(fn==="admin_list_save"){var nm12=String(args.p_name||"").trim();if(nm12.length<2||nm12.length>60)return R(null,"Give the list a name (2 to 60 characters).");
+          if(E.defs.some(function(d){return d.name.toLowerCase()===nm12.toLowerCase()&&d.key!==args.p_key}))return R(null,"There’s already a list with that name.");
+          if(args.p_key){var d12=DEF(args.p_key);d12.name=nm12;d12.about=String(args.p_about||"").trim()||null;if(args.p_member_choice!=null)d12.member_choice=!!args.p_member_choice;save();return R(args.p_key)}
+          var k12=(nm12.toLowerCase().replace(/[^a-z0-9]/g,"")||"list").slice(0,20);if(!/^[a-z]/.test(k12))k12="list"+k12;var b12=k12,i12=1;while(DEF(k12)){i12++;k12=b12+i12}
+          E.defs.push({key:k12,name:nm12,about:String(args.p_about||"").trim()||null,member_choice:!!args.p_member_choice,roles:[],include_admins:false,builtin:false});save();return R(k12)}
+        if(fn==="admin_lists"){var a8=aud(args.p_topic);if(!DEF(args.p_topic))return R(null,"Unknown list");var m8=meta(),c8={};m8.forEach(function(x){c8[x.key]=x.count});
+          return R({lists:m8,counts:c8,people:Object.keys(a8.list).sort(function(x,y){return (a8.list[x]||x).toLowerCase()<(a8.list[y]||y).toLowerCase()?-1:1}).map(function(e){var r=LR(e,args.p_topic);return {email:e,name:a8.list[e],sources:a8.src[e],note:r&&r.status==="on"?r.note:null,since:r&&r.status==="on"?r.at:new Date().toISOString()}}),
             removed:E.lists.filter(function(x){return x.topic===args.p_topic&&x.status==="off"}).map(function(x){return {email:x.email,name:x.name,how:x.source,at:x.at}})})}
         if(fn==="admin_list_add"){var o9={added:0,back:0,already:0,invalid:[],unsubscribed:[]},seen9={};(args.p_people||[]).forEach(function(p){var e=String(p.email||"").trim().toLowerCase();if(!ok(e)){o9.invalid.push(p.email);return}if(seen9[e])return;seen9[e]=1;var r=LR(e,args.p_topic);
             if(r&&r.status==="off"&&r.source==="unsubscribed"&&!args.p_force){o9.unsubscribed.push(e);return}
@@ -339,7 +357,7 @@
         if(fn==="admin_email_overview"){var cnt=function(f){return E.outbox.filter(f).length};
           return R({settings:E.settings,provider:E.provider,me:{email:user?user.email:"",events:E.me.events,send_to:E.me.send_to},templates:E.templates,
             counts:{waiting:cnt(function(x){return x.status==="queued"||x.status==="sending"}),sent:cnt(function(x){return x.status==="sent"}),failed:cnt(function(x){return x.status==="failed"}),today:cnt(function(x){return x.status==="sent"&&Date.now()-new Date(x.at)<864e5})},
-            subscribers:{workshops:aud("workshops").n,council:aud("council").n}})}
+            lists:meta()})}
         if(fn==="admin_email_settings"){var fa=String(args.p_from_addr||"").trim().toLowerCase(),rt=String(args.p_reply_to||"").trim().toLowerCase(),nm=String(args.p_from_name||"").replace(/[\r\n\t<>"@,;:]+/g," ").trim();
           if(nm.length<2||nm.length>60)return R(null,"Add a sender name (2 to 60 characters).");if(fa&&!ok(fa))return R(null,"The “from” address doesn’t look right.");if(rt&&!ok(rt))return R(null,"The reply address doesn’t look right.");
           E.settings={on:args.p_on!==false,from_name:nm,from_addr:fa,reply_to:rt,footer:String(args.p_footer||"").trim().slice(0,300)};save();return R(null)}
@@ -359,14 +377,17 @@
         if(fn==="admin_email_log")return R(E.outbox.map(function(x){return{id:x.id,at:x.at,kind:x.kind,to:x.to,subject:x.subject,status:x.status,error:x.error,sent_at:x.sent_at,tries:x.tries}}));
         if(fn==="admin_email_retry"){E.outbox.forEach(function(x){if(x.id===args.p_id){x.status="sent";x.error=null;x.sent_at=new Date().toISOString()}});save();return R(null)}
         if(fn==="admin_email_test"){if(!E.settings.on)return R(null,"Email is switched off. Turn it on first.");var to4=E.me.send_to||(user?user.email:"");eOut({kind:"test",to:to4,subject:"Test email from flintracing.org",template:"test"});E.provider={ready:true,at:new Date().toISOString(),note:""};save();return R({ok:true,to:to4})}
-        if(fn==="admin_email_update"){var sb5=String(args.p_subject||"").trim(),bd5=String(args.p_body||"").trim(),to5=E.me.send_to||(user?user.email:"");if(!E.settings.on)return R(null,"Email is switched off. Turn it on first.");
-          if(sb5.length<3)return R(null,"The subject needs 3 to 150 characters.");if(bd5.length<10)return R(null,"The message needs 10 to 8,000 characters.");
-          if(args.p_test){eOut({kind:"test",to:to5,subject:"[Test] "+sb5,template:"update:"+args.p_topic});save();return R({ok:true,test:true,to:to5})}
-          var au5=aud(args.p_topic);if(!au5.n)return R(null,"No one has asked for these emails yet.");Object.keys(au5.list).forEach(function(e){eOut({kind:"update",to:e,subject:sb5,template:"update:"+args.p_topic})});save();return R({ok:true,count:au5.n})}
+        if(fn==="admin_email_send_update"){var sb5=String(args.p_subject||"").trim(),bd5=String(args.p_body||"").trim(),to5=E.me.send_to||(user?user.email:""),tp5=(args.p_topics||[]).filter(DEF);if(!E.settings.on)return R(null,"Email is switched off. Turn it on first.");
+          if(!tp5.length)return R(null,"Choose at least one list.");if(sb5.length<3)return R(null,"The subject needs 3 to 150 characters.");if(bd5.length<10)return R(null,"The message needs 10 to 8,000 characters.");
+          if(args.p_test){eOut({kind:"test",to:to5,subject:"[Test] "+sb5,template:"update:"+tp5.join(".")});save();return R({ok:true,test:true,to:to5})}
+          var u5={};tp5.forEach(function(k){Object.keys(aud(k).list).forEach(function(e){u5[e]=1})});var n5=Object.keys(u5).length;if(!n5)return R(null,"No one is on those lists yet.");
+          Object.keys(u5).forEach(function(e){eOut({kind:"update",to:e,subject:sb5,template:"update:"+tp5.join(".")})});save();return R({ok:true,count:n5})}
         if(fn==="email_unsubscribe"){var em6="";try{em6=decodeURIComponent(String(args.p_e||"").replace(/(..)/g,"%$1"))}catch(e6){}
-          if(!ok(em6)||["workshops","council"].indexOf(args.p_topic)<0||!/^[0-9a-f]{40}$/.test(args.p_sig||""))return R(null,"This unsubscribe link isn’t valid.");
-          if(args.p_go){T.members.forEach(function(m){if((m.email||"").toLowerCase()===em6)m.email_prefs=(m.email_prefs||[]).filter(function(x){return x!==args.p_topic})});(T.inquiries||[]).forEach(function(i){if((i.email||"").toLowerCase()===em6)i.email_updates=false});var r6=LR(em6,args.p_topic);if(r6){r6.status="off";r6.source="unsubscribed"}else E.lists.push({email:em6,topic:args.p_topic,status:"off",source:"unsubscribed",at:new Date().toISOString()});save()}
-          return R({email:em6,topic:args.p_topic,done:!!args.p_go})}}
+          var t6=String(args.p_topic||"").split(".").filter(DEF);
+          if(!ok(em6)||!t6.length||!/^[0-9a-f]{40}$/.test(args.p_sig||""))return R(null,"This unsubscribe link isn’t valid.");
+          if(args.p_go){t6.forEach(function(k){T.members.forEach(function(m){if((m.email||"").toLowerCase()===em6)m.email_prefs=(m.email_prefs||[]).filter(function(x){return x!==k})});var r6=LR(em6,k);if(r6){r6.status="off";r6.source="unsubscribed"}else E.lists.push({email:em6,topic:k,status:"off",source:"unsubscribed",at:new Date().toISOString()})});
+            (T.inquiries||[]).forEach(function(i){if((i.email||"").toLowerCase()===em6)i.email_updates=false});save()}
+          return R({email:em6,topic:args.p_topic,names:t6.map(function(k){return DEF(k).name}),done:!!args.p_go})}}
       return Promise.resolve({data:null,error:{message:"Unknown function"}})},
     auth:{getSession:function(){return Promise.resolve({data:{session:user?{user:user}:null}})},
       onAuthStateChange:function(cb){listeners.push(cb);setTimeout(function(){cb("INITIAL_SESSION",user?{user:JSON.parse(JSON.stringify(user))}:null)},0)},

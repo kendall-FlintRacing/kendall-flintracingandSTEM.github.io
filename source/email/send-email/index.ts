@@ -17,7 +17,7 @@ type Row = {
   id: string; kind: string; to_email: string; to_name: string | null; subject: string; body: string;
   reply_to: string | null; unsub_url: string | null; template_key: string | null; attempts: number;
 };
-type Batch = { rows: Row[]; from_name?: string; from_addr?: string; reply_to?: string; footer?: string; site?: string };
+type Batch = { rows: Row[]; from_name?: string; from_addr?: string; reply_to?: string; footer?: string; site?: string; lists?: Record<string, string> };
 
 async function rpc(name: string, args: Record<string, unknown>) {
   const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
@@ -48,7 +48,12 @@ function toHtml(text: string, site: string, ownLinksOnly: boolean) {
     `<p style="margin:0 0 16px">${p.split("\n").map(link).join("<br>")}</p>`).join("");
 }
 
-const TOPICS: Record<string, string> = { "update:workshops": "seasonal workshop", "update:council": "Leadership Council" };
+// "update:building.workshops" -> "Building workshops and Seasonal workshops"
+function listNames(key: string | null, lists: Record<string, string> = {}) {
+  const names = String(key || "").replace(/^update:/, "").split(".").map((k) => lists[k]).filter(Boolean);
+  const text = names.length <= 1 ? (names[0] || "Flint Racing") : names.slice(0, -1).join(", ") + " and " + names[names.length - 1];
+  return text + " email list" + (names.length > 1 ? "s" : "");
+}
 
 function build(row: Row, b: Batch) {
   const site = (b.site || "https://flintracing.org").replace(/\/+$/, "");
@@ -59,7 +64,8 @@ function build(row: Row, b: Batch) {
   if (b.footer) note(b.footer);
   if (row.kind === "admin_alert") note("You’re getting this because email alerts are on for your admin account. Change them in Admin → Email.");
   if (row.unsub_url) {
-    const why = `You’re getting this because you asked for ${TOPICS[row.template_key || ""] || "Flint Racing"} emails.`;
+    const names = listNames(row.template_key, b.lists);
+    const why = `You’re getting this because you’re on our ${names}.`;
     note(`${why} Unsubscribe: ${row.unsub_url}`, `${esc(why)} <a href="${esc(row.unsub_url)}" style="color:#6d7077">Unsubscribe</a>`);
   }
   const html = `<!doctype html><html><body style="margin:0;padding:0;background:#f3f4f6">` +
