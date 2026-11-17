@@ -3667,6 +3667,25 @@ html.fr-gated #frGate{display:grid;place-items:center;min-height:100vh;min-heigh
 .gate-auth p{line-height:1.5}
 .fr-pill .gate-flag{color:#ffd166;font:700 .78rem/1 var(--body);padding:0 10px 0 6px;white-space:nowrap}
 @media (max-width:520px){.fr-pill .gate-flag{display:none}}
+.em-lists{margin-bottom:14px}
+.em-count{font-size:.88rem;color:#4a4d55;font-weight:600}
+.em-lhead{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 10px}
+.em-lhead h3{font-size:1.35rem;color:var(--ink);margin-right:auto}
+.em-lhead input[type=search]{flex:1 1 220px;max-width:320px;font:400 .95rem/1.4 var(--body);border:1.5px solid #c9ccd1;border-radius:6px;padding:8px 10px}
+.em-ltable{min-width:0!important;width:100%;table-layout:auto}
+.em-ltable td{vertical-align:top}
+.em-ltable td:last-child,.em-ltable th:last-child{width:1%;white-space:nowrap;text-align:right}
+@media (max-width:700px){.em-ltable{min-width:560px!important}}
+.em-addr{overflow-wrap:anywhere}
+.em-src{display:inline-block;font:800 .66rem/1 var(--body);letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:4px 8px;background:#eceef1;color:#4a4d55;margin:1px 0}
+.em-src.member{background:#e3f6ea;color:#17803d}.em-src.added{background:#e8eefc;color:#2446a6}.em-src.kiosk{background:#fff0c7;color:#7a5600}
+.em-rm{margin-top:16px;border:1px solid #d5d7dc;border-radius:10px;background:#fff}
+.em-rm summary{cursor:pointer;padding:10px 14px;font-weight:700}
+.em-rm ul{list-style:none;margin:0;padding:0 14px 10px;display:grid;gap:8px}
+.em-rm li{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-top:1px solid #eceef1;padding-top:8px}
+.em-rm li span{min-width:0;overflow-wrap:anywhere}
+.em-rm small{display:block;color:#5a5d64}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .em-ck{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:.88rem;cursor:pointer}
 .em-ck input{width:18px;height:18px;margin:0;accent-color:var(--red-deep);flex:none}
 .em-auto{font-size:.86rem;color:#5a5d64}
@@ -8139,7 +8158,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     ["Change the homepage slideshow","home","slides photos numbers stats"],["Add a sponsor logo","partners","sponsor logo partner"],["Undo a site change","edits","undo history revert"],
     ["Edit text or photos on any page","@edit","edit text photo page wording"],["Connect Square donations","donate","square payment donate donation checkout link"],["Set sponsor prices","sprice","sponsor price prices tiers menu race day track program park"],["Add racers and sponsors for race day","race","racers bracket heats ads sponsors"],
     ["Approve shout-outs","#track-manager","shoutout shout-out intermission ads"],["Run the live race feed","#race-control","race control timer lights heats"],["Assign race-day volunteers","#volunteers","volunteer crew shift"],
-    ["Get an email when someone registers or inquires","email","email alert notify notification inbox new inquiry registration"],["Edit a pre-approved reply","email:msgs","email template message reply response instructions automatic auto"],["Send an update to families","email:update","email newsletter update announce mailing list subscribers"],["See emails the site sent","email:log","email sent mail log failed delivery"],["Connect the email service","email:setup","email setup resend domain from address reply"],
+    ["Get an email when someone registers or inquires","email","email alert notify notification inbox new inquiry registration"],["Edit a pre-approved reply","email:msgs","email template message reply response instructions automatic auto"],["Mailing lists: add or remove people","email:lists","mailing list subscribers sign-up sheet add email newsletter list remove unsubscribe"],["Send an update to families","email:update","email newsletter update announce subscribers"],["See emails the site sent","email:log","email sent mail log failed delivery"],["Connect the email service","email:setup","email setup resend domain from address reply"],
     ["Close or reopen the site to the public","overview","close open public private maintenance updating password lock hide site gate"],["Download rosters (.csv)","overview","csv export roster spreadsheet download"]];
   function admIndex(){if(ADMIDX)return Promise.resolve(ADMIDX);
     return Promise.all([db.from("members").select("display_name,username,email,status,kind"),db.from("events").select("title,start_date"),db.from("inquiries").select("first_name,last_name,email,organization,status"),
@@ -10583,7 +10602,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     db.rpc("admin_email_overview").then(function(r){
       if(r.error||!r.data){P.textContent="Couldn’t load the email settings"+(r.error?": "+r.error.message:".");return}
       var o=r.data,s=o.settings||{},me=o.me||{},c=o.counts||{},subs=o.subscribers||{},st=emState(o),html="";
-      var tabs=[["alerts","My alerts"],["msgs","Pre-approved messages"],["update","Send an update"],["log","Sent mail",c.failed],["setup","Setup"]];
+      var tabs=[["alerts","My alerts"],["lists","Mailing lists"],["msgs","Pre-approved messages"],["update","Send an update"],["log","Sent mail",c.failed],["setup","Setup"]];
       var sub='<div class="mb-sub" role="tablist">'+tabs.map(function(t){return '<button type="button" role="tab" data-esub="'+t[0]+'" aria-selected="'+(EMSUB===t[0])+'">'+t[1]+(t[2]?'<em>'+t[2]+'</em>':'')+'</button>'}).join("")+'</div>';
       var banner='<div class="dn-status '+st[0]+'">'+ico(st[0]==="on"?"check":"mail")+'<div><b>'+st[1]+'</b><span>'+st[2]+'</span></div>'+(EMSUB==="setup"?'':'<button class="mini" type="button" data-esub="setup">'+(st[0]==="on"?"Settings":"Set it up")+'</button>')+'</div>';
       if(EMSUB==="alerts"){
@@ -10609,9 +10628,11 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<label class="f">Subject<input type="text" id="em-usub" maxlength="150" value="'+esc(EMUP.s)+'" placeholder="Winter workshop dates are set"></label>'+
           '<label class="f">Message <small>Start with “Hi {{first_name}},” to greet each person by name. An unsubscribe link is added at the bottom for you.</small><textarea id="em-ubody" rows="10" maxlength="8000">'+esc(EMUP.b||"Hi {{first_name}},\n\n")+'</textarea></label>'+
           '<div class="row"><button class="mini" type="button" id="emUpTest">Send a test to me first</button><button class="mini solid" type="submit" id="emUpGo">Send the update</button></div><p class="t-msg" role="status"></p></form>'+
-          '<aside class="dn-how"><p class="me-k">Who is on these lists</p><ul><li>People tick these emails when they register, on their dashboard, at the kiosk, or on the questionnaire.</li>'+
+          '<aside class="dn-how"><p class="me-k">Who is on these lists</p><ul><li>People tick these emails when they register, on their dashboard, at the kiosk, or on the questionnaire, and you can add people from a sign-up sheet. <a href="#" data-esub="lists">See or edit the lists</a>.</li>'+
           '<li>Every update carries a one-click unsubscribe link, and members can change their choices on My dashboard.</li>'+
           '<li>Up to three updates can go out in a day.</li><li>The email service’s free plan sends 100 emails a day. A bigger list finishes over the following days by itself.</li></ul></aside></div>';
+      } else if(EMSUB==="lists"){
+        html='<div id="emLists"><p class="adm-loading">Loading the lists…</p></div>';
       } else if(EMSUB==="log"){
         html='<div class="stat-row"><div><b>'+(c.waiting||0)+'</b><span>Waiting to send</span></div><div><b>'+(c.today||0)+'</b><span>Sent in the last 24 hours</span></div><div><b>'+(c.sent||0)+'</b><span>Sent in the last 30 days</span></div><div><b>'+(c.failed||0)+'</b><span>Not delivered, last 30 days</span></div></div><div id="emLog"><p class="adm-loading">Loading…</p></div>';
       } else {
@@ -10630,7 +10651,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<p class="me-fine">The key works like a password: it goes into Supabase only, never into this website or an email. The “from” address doesn’t need a mailbox of its own, because replies go to the reply address. Resend’s free plan sends up to 100 emails a day and 3,000 a month.</p></aside></div>';
       }
       P.innerHTML=sub+banner+html;
-      $$("[data-esub]",P).forEach(function(b){b.onclick=function(){EMSUB=b.getAttribute("data-esub");tabEmail()}});
+      $$("[data-esub]",P).forEach(function(b){b.onclick=function(e){if(e)e.preventDefault();EMSUB=b.getAttribute("data-esub");tabEmail()}});
       var tb=$("#emTest");if(tb)tb.onclick=function(){emTest(tb)};
       if(EMSUB==="alerts"){var fm=$("#emMe"),saveMe=function(){var ev=$$(".em-ev input:checked",fm).map(function(i){return i.value}),m=$(".t-msg",fm);
           db.rpc("admin_email_notify",{p_events:ev,p_send_to:$("#em-to").value.trim()}).then(function(x){if(x.error){m.textContent=x.error.message;return}m.textContent="";
@@ -10649,6 +10670,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           if(!go.getAttribute("data-sure")){go.setAttribute("data-sure","1");go.textContent="Confirm: send to "+n+(n===1?" person":" people");return}
           go.disabled=true;db.rpc("admin_email_update",{p_topic:tp.value,p_subject:us.value,p_body:ub.value,p_test:false}).then(function(x){go.disabled=false;if(x.error){um.textContent=x.error.message;keep();return}
             EMUP={topic:tp.value,s:"",b:""};toast("Update on its way to "+x.data.count+(x.data.count===1?" person":" people"));EMSUB="log";tabEmail()})}}
+      if(EMSUB==="lists")emLists();
       if(EMSUB==="log")db.rpc("admin_email_log").then(function(x){var L=$("#emLog");if(!L)return;if(x.error){L.textContent="Couldn’t load sent mail: "+x.error.message;return}var rows=x.data||[];
         L.innerHTML=rows.length?'<div class="adm-scroll"><table class="adm-table" style="min-width:640px"><thead><tr><th>When</th><th>To</th><th>What</th><th>Status</th></tr></thead><tbody>'+rows.map(function(m){
             return '<tr><td style="white-space:nowrap">'+emWhen(m.at)+'</td><td>'+esc(m.to)+'</td><td><b>'+esc(EM_KIND[m.kind]||m.kind)+'</b><br><small>'+esc(m.subject)+'</small></td><td><span class="em-st '+esc(m.status)+'">'+esc(EM_ST[m.status]||m.status)+'</span>'+
@@ -10657,6 +10679,72 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         $$("[data-retry]",L).forEach(function(b){b.onclick=function(){b.disabled=true;db.rpc("admin_email_retry",{p_id:b.getAttribute("data-retry")}).then(function(y){if(okToast(y,"Trying again"))tabEmail();else b.disabled=false})}})});
       if(EMSUB==="setup"){var sf=$("#emSet");sf.onsubmit=function(e){e.preventDefault();var m=$(".t-msg",sf);
         db.rpc("admin_email_settings",{p_on:$("#em-on").checked,p_from_name:$("#em-fn").value,p_from_addr:$("#em-fa").value,p_reply_to:$("#em-rt").value,p_footer:$("#em-ft").value}).then(function(x){if(x.error){m.textContent=x.error.message;return}EMR={};toast("Email settings saved");tabEmail()})}}
+    })}
+
+  /* ---------- Admin → Email → Mailing lists: see everyone on a list, add people from a sign-up sheet, take people off ---------- */
+  var EMLIST={topic:"workshops",q:"",paste:"",note:""};
+  var EM_LISTS=[["workshops","Seasonal workshops","Workshop, camp and fun run dates as they’re set"],["council","Leadership Council","Leadership Council news and meetings"]];
+  var EM_SRC={member:"Member",added:"Added by you",questionnaire:"Questionnaire",kiosk:"Kiosk"};
+  /* Pull email addresses (and a name, when there's one email on the line) out of pasted text: a column from a spreadsheet,
+     "Name, email", "Name <email>", or several addresses on one line. */
+  function emParse(text){var out=[],re=/[^\s<>,;:"'()\[\]]+@[^\s<>,;:"'()\[\]]+\.[A-Za-z]{2,24}/g;
+    String(text||"").split(/\r?\n/).forEach(function(line){var found=line.match(re)||[];if(!found.length){if(line.trim())out.push({email:line.trim(),bad:true});return}
+      var nm=found.length===1?line.replace(found[0],"").replace(/[<>"\[\]()\t]+/g," ").replace(/\s*[,;:|]\s*/g," ").replace(/\s+/g," ").trim():"";
+      found.forEach(function(e){out.push({email:e,name:nm})})});
+    return out}
+  function emLists(){var B=$("#emLists");if(!B)return;
+    db.rpc("admin_lists",{p_topic:EMLIST.topic}).then(function(r){B=$("#emLists");if(!B)return;
+      if(r.error||!r.data){B.textContent="Couldn’t load the lists"+(r.error?": "+r.error.message:".");return}
+      var d=r.data,cn=d.counts||{},ppl=d.people||[],rm=d.removed||[],cur=EM_LISTS.filter(function(x){return x[0]===EMLIST.topic})[0];
+      var shown=ppl;
+      B.innerHTML='<div class="mb-sub em-lists" role="tablist" aria-label="Mailing lists">'+EM_LISTS.map(function(x){return '<button type="button" role="tab" data-list="'+x[0]+'" aria-selected="'+(EMLIST.topic===x[0])+'">'+x[1]+'<em>'+(cn[x[0]]||0)+'</em></button>'}).join("")+'</div>'+
+        '<div class="em-grid">'+
+        '<form class="em-card" id="emAdd" novalidate><p class="me-k">'+esc(cur[1])+'</p><h3>Add people to this list</h3>'+
+          '<label class="f" for="em-paste">Email addresses <small>One per line, or paste a column from your sign-up sheet. To include names, write “Jordan Taylor, jordan@example.com”.</small><textarea id="em-paste" rows="6" maxlength="40000" spellcheck="false" placeholder="jordan@example.com&#10;Casey Lee, casey@example.com">'+esc(EMLIST.paste)+'</textarea></label>'+
+          '<label class="f" for="em-note">Where they signed up <small>Optional, for your records.</small><input type="text" id="em-note" maxlength="120" value="'+esc(EMLIST.note)+'" placeholder="Workshop sign-up sheet, Nov 14"></label>'+
+          '<p class="em-note">Only add people who asked to get these emails. Every update has an unsubscribe link.</p>'+
+          '<div class="row"><button class="mini solid" type="submit" id="emAddGo">Add to list</button><span class="em-count" id="emAddN" aria-live="polite"></span></div><p class="t-msg" role="status"></p></form>'+
+        '<aside class="dn-how"><p class="me-k">How people get on '+esc(cur[1])+'</p><ul>'+
+          '<li><b>Member:</b> ticked “'+esc(cur[1])+'” when they registered or on My dashboard.</li>'+
+          '<li><b>Questionnaire</b> or <b>Kiosk:</b> asked for email updates when they wrote in or signed in as a guest.</li>'+
+          '<li><b>Added by you:</b> from a sign-up sheet, here.</li>'+
+          '<li>Taking someone off works for all of these, and they stay off until they sign up again themselves.</li></ul></aside></div>'+
+        '<div class="em-lhead"><h3>'+(cn[EMLIST.topic]||0)+' '+((cn[EMLIST.topic]||0)===1?"person":"people")+' on '+esc(cur[1])+'</h3>'+
+          '<input type="search" id="em-q" placeholder="Search names or emails" aria-label="Search this list" value="'+esc(EMLIST.q)+'">'+
+          (ppl.length?'<button class="mini" type="button" id="emCsv">Download list (.csv)</button>':'')+'</div>'+
+        (shown.length?'<div class="adm-scroll"><table class="adm-table em-ltable"><thead><tr><th>Name</th><th>Email</th><th>How they joined</th><th>Since</th><th><span class="sr-only">Remove</span></th></tr></thead><tbody>'+
+          shown.map(function(p){return '<tr data-k="'+esc(((p.name||"")+" "+p.email).toLowerCase())+'"><td>'+esc(p.name||"—")+'</td><td class="em-addr">'+esc(p.email)+'</td><td>'+(p.sources||[]).map(function(x){return '<span class="em-src '+esc(x)+'">'+esc(EM_SRC[x]||x)+'</span>'}).join(" ")+(p.note?'<br><small>'+esc(p.note)+'</small>':'')+'</td><td style="white-space:nowrap">'+(p.since?fmtDate(String(p.since).slice(0,10),{month:"short",day:"numeric",year:"numeric"}):"")+'</td>'+
+            '<td><button class="mini" type="button" data-lrm="'+esc(p.email)+'">Take off</button></td></tr>'}).join("")+'</tbody></table></div>'
+          :'<p class="rk-fine">No one is on this list yet. Add people above, or they’ll join as they sign up on the website.</p>')+'<p class="rk-fine" id="emQnone" hidden>No one on this list matches your search.</p>'+
+        (rm.length?'<details class="em-rm"><summary>Taken off this list ('+rm.length+')</summary><ul>'+rm.map(function(x){
+            return '<li><span><b>'+esc(x.name||x.email)+'</b>'+(x.name?' · '+esc(x.email):'')+'<small>'+(x.how==="unsubscribed"?"Unsubscribed themselves":"Taken off by an admin")+' · '+fmtDate(String(x.at).slice(0,10),{month:"short",day:"numeric"})+'</small></span>'+
+              '<button class="mini" type="button" data-lback="'+esc(x.email)+'" data-how="'+esc(x.how)+'">'+(x.how==="unsubscribed"?"They asked again: add back":"Add back")+'</button></li>'}).join("")+'</ul></details>':'');
+      var f=$("#emAdd",B),ta=$("#em-paste",B),nt=$("#em-note",B),cntEl=$("#emAddN",B),msg=$(".t-msg",f);
+      var count=function(){var p=emParse(ta.value),ok=p.filter(function(x){return !x.bad}).length,bad=p.length-ok;cntEl.textContent=p.length?ok+" address"+(ok===1?"":"es")+" found"+(bad?" · "+bad+" line"+(bad===1?"":"s")+" without an email":""):""};
+      ta.oninput=function(){EMLIST.paste=ta.value;count()};nt.oninput=function(){EMLIST.note=nt.value};count();
+      $$("[data-list]",B).forEach(function(b){b.onclick=function(){EMLIST.topic=b.getAttribute("data-list");EMLIST.q="";emLists()}});
+      var qi=$("#em-q",B),filt=function(){var q=qi.value.trim().toLowerCase(),n=0;EMLIST.q=qi.value;
+          $$(".em-ltable tbody tr",B).forEach(function(tr){var hit=!q||tr.getAttribute("data-k").indexOf(q)>=0;tr.hidden=!hit;if(hit)n++});
+          var none=$("#emQnone",B);if(none)none.hidden=!(q&&ppl.length&&!n)};qi.oninput=filt;filt();
+      f.onsubmit=function(e){e.preventDefault();var p=emParse(ta.value),good=p.filter(function(x){return !x.bad}),bad=p.filter(function(x){return x.bad});
+        if(!p.length){msg.textContent="Paste or type at least one email address.";return}
+        if(!good.length){msg.textContent="No email addresses found in what you pasted.";return}
+        if(good.length>500){msg.textContent="Add up to 500 people at a time.";return}
+        var go=$("#emAddGo",B);go.disabled=true;msg.textContent="Adding…";
+        db.rpc("admin_list_add",{p_topic:EMLIST.topic,p_people:good.map(function(x){return {email:x.email,name:x.name}}),p_note:nt.value.trim()||null,p_force:false}).then(function(x){go.disabled=false;
+          if(x.error){msg.textContent=x.error.message;return}var o=x.data||{},parts=[],inv=(o.invalid||[]).concat(bad.map(function(b){return b.email})),un=o.unsubscribed||[];
+          if(o.added)parts.push(o.added+" added");if(o.back)parts.push(o.back+" added back");if(o.already)parts.push(o.already+" already on the list");
+          toast(parts.length?parts.join(" · ")+".":"No one new to add.");
+          EMLIST.paste=inv.concat(un).join("\n");
+          var left=[];if(inv.length)left.push(inv.length+" line"+(inv.length===1?" doesn’t":"s don’t")+" look like an email address");
+          if(un.length)left.push((un.length===1?un[0]+" unsubscribed":un.length+" people unsubscribed")+" with the link earlier, so we didn’t add "+(un.length===1?"them":"them")+" back. If they asked to rejoin, use “They asked again: add back” under “Taken off this list” below");
+          emLists();setTimeout(function(){var m=$("#emAdd .t-msg");if(m&&left.length)m.textContent=left.join(". ")+". "+(inv.length?"They’re left in the box so you can fix them.":"")},350)})};
+      var cv=$("#emCsv",B);if(cv)cv.onclick=function(){csv([["Name","Email","How they joined","Note","Since"]].concat(ppl.map(function(p){return [p.name||"",p.email,(p.sources||[]).map(function(x){return EM_SRC[x]||x}).join(" + "),p.note||"",p.since?String(p.since).slice(0,10):""]})),"mailing-list-"+EMLIST.topic+".csv")};
+      $$("[data-lrm]",B).forEach(function(b){b.onclick=function(){if(!b.getAttribute("data-sure")){b.setAttribute("data-sure","1");b.textContent="Confirm";b.classList.add("red");return}
+        b.disabled=true;db.rpc("admin_list_remove",{p_topic:EMLIST.topic,p_email:b.getAttribute("data-lrm")}).then(function(x){if(okToast(x,"Taken off "+cur[1]+"."))emLists();else b.disabled=false})}});
+      $$("[data-lback]",B).forEach(function(b){b.onclick=function(){var un=b.getAttribute("data-how")==="unsubscribed";
+        if(un&&!b.getAttribute("data-sure")){b.setAttribute("data-sure","1");b.textContent="Confirm: they asked to rejoin";return}
+        b.disabled=true;db.rpc("admin_list_add",{p_topic:EMLIST.topic,p_people:[{email:b.getAttribute("data-lback")}],p_note:null,p_force:un}).then(function(x){if(okToast(x,"Back on "+cur[1]+"."))emLists();else b.disabled=false})}});
     })}
   /* Pre-approved replies on a record (Inquiries, Members, Registrations). One call loads the messages and what was already sent. */
   function emLoad(table){return db.rpc("admin_email_refs",{p_table:table}).then(function(r){var d=(r&&r.data)||{templates:[],refs:[],on:false,ready:false},by={};

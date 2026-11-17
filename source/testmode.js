@@ -320,9 +320,22 @@
       if(fn==="list_accounts")return R([{user_id:"test-admin",email:"test-admin@flintracing.org",full_name:"Test Admin",created_at:new Date().toISOString(),last_sign_in_at:new Date().toISOString(),is_admin:true,staff_roles:T.staff.filter(function(x){return x.user_id==="test-admin"}).map(function(x){return x.role}),race_role:null},
         {user_id:"u-kevin@example.com",email:"kevin@example.com",full_name:"Kevin C.",created_at:new Date().toISOString(),last_sign_in_at:null,is_admin:(T.extra_admins||[]).indexOf("kevin@example.com")>=0,staff_roles:T.staff.filter(function(x){return x.email==="kevin@example.com"}).map(function(x){return x.role}),race_role:null}]);
       /* ---- email (preview) ---- */
-      if(fn.indexOf("admin_email_")===0||fn==="email_unsubscribe"){var E=EM(),ok=function(e){return /^[^@\s<>,;:"'()]+@[^@\s<>,;:"'()]+\.[A-Za-z]{2,24}$/.test(e||"")},AUD={inquiries:"inquiry",members:"member",race_registrations:"registration"};
-        var aud=function(tp){var seen={},n=0;T.members.forEach(function(m){var e=(m.email||"").toLowerCase();if(m.status==="approved"&&e&&(m.email_prefs||[]).indexOf(tp)>=0&&!seen[e]){seen[e]=m.display_name;n++}});
-          (T.inquiries||[]).forEach(function(i){var e=(i.email||"").toLowerCase(),t=i.interests||"";if(i.email_updates&&e&&!seen[e]&&(tp==="council"?/council/i.test(t):(/workshop/i.test(t)||!/council/i.test(t)))){seen[e]=i.first_name;n++}});return {n:n,list:seen}};
+      if(fn.indexOf("admin_email_")===0||fn==="email_unsubscribe"||fn.indexOf("admin_list")===0){var E=EM(),ok=function(e){return /^[^@\s<>,;:"'()]+@[^@\s<>,;:"'()]+\.[A-Za-z]{2,24}$/.test(e||"")},AUD={inquiries:"inquiry",members:"member",race_registrations:"registration"};
+        E.lists=E.lists||[];var LR=function(e,tp){return E.lists.filter(function(x){return x.email===e&&x.topic===tp})[0]};
+        var topics=function(t){t=t||"";var o=[];if(/workshop/i.test(t)||!/council/i.test(t))o.push("workshops");if(/council/i.test(t))o.push("council");return o};
+        var aud=function(tp){var seen={},src={},n=0,add=function(e,nm,s){e=(e||"").toLowerCase();if(!ok(e))return;var r=LR(e,tp);if(r&&r.status==="off")return;(src[e]=src[e]||[]).indexOf(s)<0&&src[e].push(s);if(!(e in seen)){seen[e]=nm||"";n++}};
+          T.members.forEach(function(m){if(m.status==="approved"&&(m.email_prefs||[]).indexOf(tp)>=0)add(m.email,m.display_name,"member")});
+          E.lists.forEach(function(x){if(x.topic===tp&&x.status==="on")add(x.email,x.name,"added")});
+          (T.inquiries||[]).forEach(function(i){if(i.email_updates&&topics(i.interests).indexOf(tp)>=0)add(i.email,(i.first_name+" "+(i.last_name||"")).trim(),i.role==="Workshop guest"?"kiosk":"questionnaire")});return {n:n,list:seen,src:src}};
+        if(fn==="admin_lists"){var a8=aud(args.p_topic);
+          return R({counts:{workshops:aud("workshops").n,council:aud("council").n},people:Object.keys(a8.list).sort(function(x,y){return (a8.list[x]||x).toLowerCase()<(a8.list[y]||y).toLowerCase()?-1:1}).map(function(e){var r=LR(e,args.p_topic);return {email:e,name:a8.list[e],sources:a8.src[e],note:r&&r.status==="on"?r.note:null,since:r&&r.status==="on"?r.at:new Date().toISOString()}}),
+            removed:E.lists.filter(function(x){return x.topic===args.p_topic&&x.status==="off"}).map(function(x){return {email:x.email,name:x.name,how:x.source,at:x.at}})})}
+        if(fn==="admin_list_add"){var o9={added:0,back:0,already:0,invalid:[],unsubscribed:[]},seen9={};(args.p_people||[]).forEach(function(p){var e=String(p.email||"").trim().toLowerCase();if(!ok(e)){o9.invalid.push(p.email);return}if(seen9[e])return;seen9[e]=1;var r=LR(e,args.p_topic);
+            if(r&&r.status==="off"&&r.source==="unsubscribed"&&!args.p_force){o9.unsubscribed.push(e);return}
+            if(r&&r.status==="off"){r.status="on";r.source="added";r.name=p.name||r.name;r.note=args.p_note||r.note;r.at=new Date().toISOString();o9.back++;return}
+            if(e in aud(args.p_topic).list){o9.already++;return}E.lists.push({email:e,topic:args.p_topic,name:p.name||null,status:"on",source:"added",note:args.p_note||null,at:new Date().toISOString()});o9.added++});save();return R(o9)}
+        if(fn==="admin_list_remove"){var e10=String(args.p_email||"").toLowerCase(),r10=LR(e10,args.p_topic),nm10=aud(args.p_topic).list[e10]||null;T.members.forEach(function(m){if((m.email||"").toLowerCase()===e10)m.email_prefs=(m.email_prefs||[]).filter(function(x){return x!==args.p_topic})});
+          if(r10){r10.status="off";r10.source="removed";r10.at=new Date().toISOString()}else E.lists.push({email:e10,topic:args.p_topic,name:nm10,status:"off",source:"removed",at:new Date().toISOString()});save();return R(null)}
         if(fn==="admin_email_overview"){var cnt=function(f){return E.outbox.filter(f).length};
           return R({settings:E.settings,provider:E.provider,me:{email:user?user.email:"",events:E.me.events,send_to:E.me.send_to},templates:E.templates,
             counts:{waiting:cnt(function(x){return x.status==="queued"||x.status==="sending"}),sent:cnt(function(x){return x.status==="sent"}),failed:cnt(function(x){return x.status==="failed"}),today:cnt(function(x){return x.status==="sent"&&Date.now()-new Date(x.at)<864e5})},
@@ -352,7 +365,7 @@
           var au5=aud(args.p_topic);if(!au5.n)return R(null,"No one has asked for these emails yet.");Object.keys(au5.list).forEach(function(e){eOut({kind:"update",to:e,subject:sb5,template:"update:"+args.p_topic})});save();return R({ok:true,count:au5.n})}
         if(fn==="email_unsubscribe"){var em6="";try{em6=decodeURIComponent(String(args.p_e||"").replace(/(..)/g,"%$1"))}catch(e6){}
           if(!ok(em6)||["workshops","council"].indexOf(args.p_topic)<0||!/^[0-9a-f]{40}$/.test(args.p_sig||""))return R(null,"This unsubscribe link isn’t valid.");
-          if(args.p_go){T.members.forEach(function(m){if((m.email||"").toLowerCase()===em6)m.email_prefs=(m.email_prefs||[]).filter(function(x){return x!==args.p_topic})});(T.inquiries||[]).forEach(function(i){if((i.email||"").toLowerCase()===em6)i.email_updates=false});save()}
+          if(args.p_go){T.members.forEach(function(m){if((m.email||"").toLowerCase()===em6)m.email_prefs=(m.email_prefs||[]).filter(function(x){return x!==args.p_topic})});(T.inquiries||[]).forEach(function(i){if((i.email||"").toLowerCase()===em6)i.email_updates=false});var r6=LR(em6,args.p_topic);if(r6){r6.status="off";r6.source="unsubscribed"}else E.lists.push({email:em6,topic:args.p_topic,status:"off",source:"unsubscribed",at:new Date().toISOString()});save()}
           return R({email:em6,topic:args.p_topic,done:!!args.p_go})}}
       return Promise.resolve({data:null,error:{message:"Unknown function"}})},
     auth:{getSession:function(){return Promise.resolve({data:{session:user?{user:user}:null}})},
