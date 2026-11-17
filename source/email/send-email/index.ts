@@ -115,7 +115,9 @@ async function work(key: string) {
           const quota = /quota/.test(res.name);
           hold = { minutes: /monthly/.test(res.name) ? 720 : quota ? 120 : 1, why: quota ? "The email service’s sending allowance is used up for now. It will try again later." : "Sending too fast. It will try again in a minute." };
           await done("wait", { p_error: hold.why, p_wait_minutes: hold.minutes });
-        } else if (res.status === 400 || res.status === 422) await done("failed", { p_error: `The email service refused it: ${res.message || res.name || res.status}` });
+        } else if (res.status === 403 && /domain is not verified/i.test(res.message)) await done("failed", { p_error: `The “from” address uses a domain Resend hasn’t verified yet. Clear the “from” address in Admin → Email → Setup, or finish verifying the domain in Resend.` });
+        else if (res.status === 403 && /own email address/i.test(res.message)) await done("failed", { p_error: `Resend is in test mode, so it only delivers to the inbox you signed up to Resend with. Verify your domain in Resend (Setup, step 4) to email anyone else.` });
+        else if (res.status === 400 || res.status === 403 || res.status === 422) await done("failed", { p_error: `The email service refused it: ${res.message || res.name || res.status}` });
         else await done("retry", { p_error: `The email service answered ${res.status}: ${res.message || res.name || "no details"}` });
       } catch (e) {
         try { await done("retry", { p_error: `Couldn’t reach the email service: ${String((e as Error)?.message ?? e).slice(0, 160)}` }); } catch (_) { /* picked up again in 10 minutes */ }
