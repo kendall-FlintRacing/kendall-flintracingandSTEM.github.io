@@ -8072,7 +8072,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   document.addEventListener("focusin",function(e){if(EDITING&&e.target.matches&&e.target.matches("[data-ci]"))showImgBtn(e.target)});
   function showImgBtn(img){
     if(!imgBtn){imgBtn=document.createElement("button");imgBtn.type="button";imgBtn.className="fr-imgbtn";imgBtn.textContent="Replace photo";document.body.appendChild(imgBtn);
-      fileIn=document.createElement("input");fileIn.type="file";fileIn.accept="image/jpeg,image/png,image/webp,image/gif";fileIn.hidden=true;document.body.appendChild(fileIn);
+      fileIn=document.createElement("input");fileIn.type="file";fileIn.accept="image/*";fileIn.hidden=true;document.body.appendChild(fileIn);
       imgBtn.onclick=function(){fileIn.value="";fileIn.click()};
       fileIn.onchange=function(){if(fileIn.files[0]&&imgTarget)uploadImg(imgTarget,fileIn.files[0])};
       imgEd=document.createElement("button");imgEd.type="button";imgEd.className="fr-imgbtn fr-imged";imgEd.textContent="Crop / edit";document.body.appendChild(imgEd);
@@ -8081,16 +8081,40 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     imgBtn.hidden=false; imgBtn.style.left=(r.left+scrollX+10)+"px"; imgBtn.style.top=(r.top+scrollY+10)+"px";
     imgEd.hidden=false; imgEd.style.left=(r.left+scrollX+10)+"px"; imgEd.style.top=(r.top+scrollY+10+imgBtn.offsetHeight+6)+"px";
   }
-  function uploadImg(img,file){
-    if(file.size>8*1024*1024){toast("That photo is over 8 MB. Please use a smaller file.");return}
-    var ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"");
-    var path="content/"+Date.now()+"-"+Math.random().toString(36).slice(2,8)+"."+ext, key=img.getAttribute("data-ci");
+
+  /* ---------- Photos: shrink big ones in the browser before uploading, and say clearly why one can't be used ----------
+     Phone photos are often 4–12 MB; the site stores up to 8 MB. Anything the browser can open (JPG, PNG, WebP, AVIF, BMP…)
+     is resized to at most 2400 px on the long side and saved as a JPG (PNGs stay PNG so logos keep see-through backgrounds). */
+  function upErr(e){toast((e&&e.userMsg)||"Couldn’t upload that photo. Please try again.")}
+  function prepImage(file,maxBytes){maxBytes=maxBytes||8*1024*1024;
+    var fail=function(msg){var e=new Error(msg);e.userMsg=msg;return Promise.reject(e)},nm=String(file&&file.name||"photo"),ty=String(file&&file.type||"").toLowerCase();
+    if(!file)return fail("No photo was chosen.");
+    if(/\.(heic|heif)$/i.test(nm)||/heic|heif/.test(ty))return fail("This photo is in Apple’s HEIC format, which websites can’t show. On the iPhone, open the photo, tap Share → Save as File… or email it to yourself to get a JPG, or set Settings → Camera → Formats → Most Compatible.");
+    if(ty&&ty.indexOf("image/")!==0)return fail("That file isn’t a photo. Use a JPG, PNG or WebP picture.");
+    if(ty==="image/gif")return file.size<=maxBytes?Promise.resolve(file):fail("That GIF is over 8 MB. Please use a smaller one.");
+    var small=file.size<=1.5*1024*1024&&/^image\/(jpeg|png|webp)$/.test(ty);
+    var load=function(){if(window.createImageBitmap)return createImageBitmap(file,{imageOrientation:"from-image"}).catch(function(){return createImageBitmap(file)});
+      return new Promise(function(ok,no){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){ok(im)};im.onerror=no;im.src=u})};
+    return load().then(function(bm){var w=bm.width||bm.naturalWidth,h=bm.height||bm.naturalHeight,max=2400;
+      if(small&&w<=max&&h<=max)return file;
+      var k=Math.min(1,max/Math.max(w,h)),cw=Math.max(1,Math.round(w*k)),ch=Math.max(1,Math.round(h*k)),c=document.createElement("canvas");c.width=cw;c.height=ch;
+      var png=ty==="image/png",g=c.getContext("2d");if(!png){g.fillStyle="#fff";g.fillRect(0,0,cw,ch)}g.drawImage(bm,0,0,cw,ch);if(bm.close)bm.close();
+      var out=function(type,q){return new Promise(function(ok){c.toBlob(ok,type,q)})};
+      return out(png?"image/png":"image/jpeg",0.86).then(function(b){if(b&&b.size>maxBytes&&png){g.globalCompositeOperation="destination-over";g.fillStyle="#fff";g.fillRect(0,0,cw,ch);return out("image/jpeg",0.86)}return b})
+        .then(function(b){if(!b)throw new Error("x");if(b.size>maxBytes)return out("image/jpeg",0.7);return b})
+        .then(function(b){if(!b||b.size>maxBytes){var e=new Error("big");e.userMsg="That photo is too large even after shrinking it. Please use a smaller one.";throw e}
+          var jpg=b.type==="image/jpeg";return new File([b],nm.replace(/\.[^.]+$/,"")+(jpg?".jpg":".png"),{type:b.type})})},
+      function(){var e=new Error("decode");e.userMsg="Couldn’t open that photo. Use a JPG, PNG or WebP picture.";throw e})}
+  function uploadImg(img,file0){
+    var key=img.getAttribute("data-ci"),path,file;
     toast("Uploading…");
-    db.storage.from("site-images").upload(path,file,{cacheControl:"31536000",upsert:false,contentType:file.type}).then(function(r){
+    prepImage(file0).then(function(f){file=f;var ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"");
+      path="content/"+Date.now()+"-"+Math.random().toString(36).slice(2,8)+"."+ext;
+      return db.storage.from("site-images").upload(path,file,{cacheControl:"31536000",upsert:false,contentType:file.type})}).then(function(r){
       if(r.error) throw r.error; var url=db.storage.from("site-images").getPublicUrl(path).data.publicUrl;
       return db.from("site_content").upsert({key:key,kind:"image",value:url,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(r2){
         if(r2.error) throw r2.error; CONTENT[key]={key:key,kind:"image",value:url}; img.src=url; img.removeAttribute("srcset"); toast("Photo replaced");});
-    }).catch(function(){toast("Couldn’t upload that photo. Try a JPG, PNG or WebP under 8 MB.")});
+    }).catch(function(e){e&&e.userMsg?upErr(e):toast(navigator.onLine===false?"You’re offline. Reconnect and try again.":"Couldn’t save that photo. Check you’re still signed in, then try again.")});
   }
 
   /* ---------- Admin dashboard: side toolbar, search and sections ---------- */
@@ -8467,10 +8491,11 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       $$("select[data-id]",P).forEach(function(s){s.onchange=function(){db.from("inquiries").update({status:s.value}).eq("id",s.getAttribute("data-id")).then(function(x){toast(x.error?"Couldn’t update":"Updated");tabInq()})}});
     });
   }
-  function uploadFile(file,folder){return new Promise(function(ok,bad){
-    if(file.size>8*1024*1024){bad(new Error("big"));return}
+  function uploadFile(file0,folder){return prepImage(file0).then(function(file){
     var ext=(file.name.split(".").pop()||"png").toLowerCase().replace(/[^a-z0-9]/g,""),path=(folder||"partners")+"/"+Date.now()+"-"+Math.random().toString(36).slice(2,8)+"."+ext;
-    db.storage.from("site-images").upload(path,file,{cacheControl:"31536000",upsert:false,contentType:file.type}).then(function(r){if(r.error)throw r.error;ok(db.storage.from("site-images").getPublicUrl(path).data.publicUrl)}).catch(bad)})}
+    return db.storage.from("site-images").upload(path,file,{cacheControl:"31536000",upsert:false,contentType:file.type}).then(function(r){
+      if(r.error){var e=new Error(r.error.message);e.userMsg=/row-level|policy|unauthor|jwt|403/i.test(r.error.message)?"Your sign-in has expired. Sign in again, then retry.":"Couldn’t upload that photo: "+r.error.message;throw e}
+      return db.storage.from("site-images").getPublicUrl(path).data.publicUrl})})}
   function tabPartners(){var P=$("#admPanel"),list=[];
     FR.PARTNERS.forEach(function(pg,si){pg.forEach(function(p){list.push({slide:si+1,name:p.name,img:p.img})})});
     function draw(){
@@ -8481,8 +8506,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         inp[0].onchange=function(){list[i].slide=Math.max(1,parseInt(this.value,10)||1)}; inp[1].oninput=function(){list[i].name=this.value};
         $$("button",tr).forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-act");
           if(a==="rm"){list.splice(i,1);draw()} else if(a==="up"&&i>0){var t=list[i-1];list[i-1]=list[i];list[i]=t;draw()} else if(a==="down"&&i<list.length-1){var t2=list[i+1];list[i+1]=list[i];list[i]=t2;draw()}
-          else if(a==="logo"){pick(function(f){toast("Uploading…");uploadFile(f).then(function(u){list[i].img=u;draw();toast("Logo added. Click Save partners.")}).catch(function(){toast("Couldn’t upload. Use a JPG, PNG or WebP under 8 MB.")})})}}});});
-      $("#ptAdd").onclick=function(){pick(function(f){toast("Uploading…");uploadFile(f).then(function(u){var last=list.length?list[list.length-1].slide:1;list.push({slide:last,name:"New partner",img:u});draw();toast("Added. Name it, then click Save partners.")}).catch(function(){toast("Couldn’t upload that logo.")})})};
+          else if(a==="logo"){pick(function(f){toast("Uploading…");uploadFile(f).then(function(u){list[i].img=u;draw();toast("Logo added. Click Save partners.")}).catch(upErr)})}}});});
+      $("#ptAdd").onclick=function(){pick(function(f){toast("Uploading…");uploadFile(f).then(function(u){var last=list.length?list[list.length-1].slide:1;list.push({slide:last,name:"New partner",img:u});draw();toast("Added. Name it, then click Save partners.")}).catch(upErr)})};
       $("#ptCard").onclick=function(){var last=list.length?list[list.length-1].slide:1;list.push({slide:last,name:"Your Logo Here",img:""});draw()};
       $("#ptSave").onclick=function(){var pages={};list.forEach(function(p){(pages[p.slide]=pages[p.slide]||[]).push({name:p.name.trim()||"Partner",img:p.img})});
         var out=Object.keys(pages).map(Number).sort(function(a,b){return a-b}).map(function(k){return pages[k]});
@@ -8492,12 +8517,12 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       $("#ptReset").onclick=function(){var b=this;if(b.textContent!=="Confirm restore"){b.textContent="Confirm restore";return}
         db.from("site_content").delete().eq("key","data|partners").then(function(){delete CONTENT["data|partners"];FR.setPartners(JSON.parse(JSON.stringify(FR.PARTNERS_DEFAULT)));toast("Original list restored");tabPartners()})};
     }
-    function pick(cb){var f=document.createElement("input");f.type="file";f.accept="image/jpeg,image/png,image/webp,image/gif";f.onchange=function(){if(f.files[0])cb(f.files[0])};f.click()}
+    function pick(cb){var f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=function(){if(f.files[0])cb(f.files[0])};f.click()}
     draw();
   }
   /* ===================== RACE DAY: admin presets, Race control, Track manager ===================== */
   var RSUB="team";
-  function pickFile(cb){var f=document.createElement("input");f.type="file";f.accept="image/jpeg,image/png,image/webp,image/gif";f.onchange=function(){if(f.files[0])cb(f.files[0])};f.click()}
+  function pickFile(cb){var f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=function(){if(f.files[0])cb(f.files[0])};f.click()}
   function absUrl(u){try{return new URL(u,location.href).href}catch(e){return u}}
 
   /* ---------- Admin → Race day: the team, racers and sponsors are set up before race day ---------- */
@@ -8554,7 +8579,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
             db.from("race_heats").select("id").eq("lane1",id).then(function(h1){return db.from("race_heats").select("id").eq("lane2",id).then(function(h2){
               if((h1.data||[]).length||(h2.data||[]).length){toast("This racer is in a bracket. Change the bracket first.");b.textContent="Delete";return}
               db.from("race_racers").delete().eq("id",id).then(function(z){done(z,"Deleted")})})});return}
-          if(a==="logo"){pickFile(function(file){toast("Uploading…");uploadFile(file,"racers").then(function(u){db.from("race_racers").update({logo_url:u}).eq("id",id).then(function(z){done(z,"Logo added")})}).catch(function(){toast("Couldn’t upload. Use a JPG, PNG or WebP under 8 MB.")})});return}
+          if(a==="logo"){pickFile(function(file){toast("Uploading…");uploadFile(file,"racers").then(function(u){db.from("race_racers").update({logo_url:u}).eq("id",id).then(function(z){done(z,"Logo added")})}).catch(upErr)});return}
           if(a==="nologo"){db.from("race_racers").update({logo_url:null}).eq("id",id).then(function(z){done(z,"Logo removed")});return}
           var rec={display_name:f[0].value.trim(),team:f[1].value.trim()||null,car_number:f[2].value.trim()||null,sponsor:f[3].value.trim()||null,division:f[4].value.trim()||null};
           if(!rec.display_name){toast("Add the racer’s name.");return}
@@ -8571,11 +8596,11 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         $$("tbody tr[data-id]",P).forEach(function(tr){var id=tr.getAttribute("data-id"),i=ads.findIndex(function(a){return a.id===id}),f=$$("input",tr);
           $$("button[data-act]",tr).forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-act");
             if(a==="save"){var nm=f[0].value.trim();if(!nm){toast("Name the sponsor.");return}db.from("race_ads").update({name:nm,tagline:f[1].value.trim()||null,active:f[2].checked,sort_order:i}).eq("id",id).then(function(z){done(z,"Saved")});return}
-            if(a==="logo"){pickFile(function(file){toast("Uploading…");uploadFile(file,"ads").then(function(u){db.from("race_ads").update({logo_url:u}).eq("id",id).then(function(z){done(z,"Logo replaced")})}).catch(function(){toast("Couldn’t upload that logo.")})});return}
+            if(a==="logo"){pickFile(function(file){toast("Uploading…");uploadFile(file,"ads").then(function(u){db.from("race_ads").update({logo_url:u}).eq("id",id).then(function(z){done(z,"Logo replaced")})}).catch(upErr)});return}
             if(a==="up"){bump(i,i-1);return} if(a==="down"){bump(i,i+1);return}
             if(a==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}db.from("race_ads").delete().eq("id",id).then(function(z){done(z,"Deleted")})}}})});
         $("#adNew").onclick=function(){pickFile(function(file){toast("Uploading…");uploadFile(file,"ads").then(function(u){
-          db.from("race_ads").insert({name:file.name.replace(/\.[a-z0-9]+$/i,"").replace(/[-_]+/g," ").slice(0,80)||"New sponsor",logo_url:u,active:true,sort_order:ads.length}).then(function(z){done(z,"Added. Fix the name if needed, then Save.")})}).catch(function(){toast("Couldn’t upload that logo.")})})};
+          db.from("race_ads").insert({name:file.name.replace(/\.[a-z0-9]+$/i,"").replace(/[-_]+/g," ").slice(0,80)||"New sponsor",logo_url:u,active:true,sort_order:ads.length}).then(function(z){done(z,"Added. Fix the name if needed, then Save.")})}).catch(upErr)})};
         var imp=$("#adImport"); if(imp) imp.onclick=function(){var have={};ads.forEach(function(a){have[a.name.toLowerCase()]=1});
           var list=[];FR.PARTNERS.forEach(function(pg){pg.forEach(function(p){if(p.img&&!/your logo/i.test(p.name)&&!have[p.name.toLowerCase()]){have[p.name.toLowerCase()]=1;list.push({name:p.name.slice(0,80),logo_url:/^data:/.test(p.img)&&window.FR_TEST?p.img:absUrl(p.img),active:true,sort_order:ads.length+list.length})}})});
           if(!list.length){toast("Those logos are already here.");return} db.from("race_ads").insert(list).then(function(z){done(z,list.length+" sponsors copied")})};
@@ -9429,12 +9454,12 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           $("#phBack").onclick=function(){PH.album=null;renderPH()};
           var del=$("#phDel");if(del)del.onclick=function(){if(del.textContent!=="Confirm delete"){del.textContent="Confirm delete";return}
             var paths=photos.map(function(p){return p.path}).filter(Boolean);(paths.length&&db.storage.from("album-drafts").remove?db.storage.from("album-drafts").remove(paths):Promise.resolve()).then(function(){return db.from("albums").delete().eq("id",a.id)}).then(function(x){if(okToast(x,"Album deleted")){PH.album=null;renderPH()}})};
-          var pick=$("#phPick");if(pick)pick.onclick=function(){var f=document.createElement("input");f.type="file";f.multiple=true;f.accept="image/jpeg,image/png,image/webp";f.onchange=function(){var files=Array.prototype.slice.call(f.files||[]);if(!files.length)return;
-            var n=0,bad=0;toast("Uploading "+files.length+" photo"+(files.length===1?"":"s")+"…");
-            files.reduce(function(pr,file,i){return pr.then(function(){if(file.size>15*1024*1024){bad++;return}
+          var pick=$("#phPick");if(pick)pick.onclick=function(){var f=document.createElement("input");f.type="file";f.multiple=true;f.accept="image/*";f.onchange=function(){var files=Array.prototype.slice.call(f.files||[]);if(!files.length)return;
+            var n=0,bad=0,why="";toast("Uploading "+files.length+" photo"+(files.length===1?"":"s")+"…");
+            files.reduce(function(pr,file0,i){return pr.then(function(){return prepImage(file0,15*1024*1024).then(function(file){
               var ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,""),path=USER.id+"/"+a.id+"/"+Date.now()+"-"+i+"."+ext;
-              return db.storage.from("album-drafts").upload(path,file,{contentType:file.type,upsert:false}).then(function(u){if(u.error){bad++;return}n++;return db.from("album_photos").insert({album_id:a.id,path:path,sort_order:photos.length+i})})})},Promise.resolve())
-            .then(function(){toast(n+" added"+(bad?" · "+bad+" couldn’t upload":""));renderPH()})};f.click()};
+              return db.storage.from("album-drafts").upload(path,file,{contentType:file.type,upsert:false}).then(function(u){if(u.error){bad++;why=why||u.error.message;return}n++;return db.from("album_photos").insert({album_id:a.id,path:path,sort_order:photos.length+i})})},function(e){bad++;why=why||(e&&e.userMsg)||""})})},Promise.resolve())
+            .then(function(){toast(n+" added"+(bad?" · "+bad+" couldn’t upload"+(why?": "+why:""):""));renderPH()})};f.click()};
           $$(".ph-ph",box).forEach(function(fg){var id=fg.getAttribute("data-id"),p=photos.filter(function(x){return x.id===id})[0],cap=$("input",fg);
             if(cap)cap.onchange=function(){db.from("album_photos").update({caption:cap.value.trim()||null}).eq("id",id).then(function(x){okToast(x,"Caption saved")})};
             $$("[data-pa]",fg).forEach(function(b){b.onclick=function(){if(b.getAttribute("data-pa")==="pin"){db.from("album_photos").update({pinned:!p.pinned}).eq("id",id).then(function(x){if(okToast(x))renderPH()});return}
@@ -10080,10 +10105,10 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function pdGalBind(box){var tr=$("#pdGalTrack",box);
     $$("[data-gn]",box).forEach(function(b){b.onclick=function(){if(tr)tr.scrollBy({left:+b.getAttribute("data-gn")*Math.max(240,tr.clientWidth*.8),behavior:"smooth"})}});
     function again(){pdGalLoad().then(renderPD)}
-    var add=$("#pdGalAdd",box);if(add)add.onclick=function(){var f=document.createElement("input");f.type="file";f.accept="image/jpeg,image/png,image/webp";f.multiple=true;
-      f.onchange=function(){var files=Array.prototype.slice.call(f.files||[]).slice(0,20);if(!files.length)return;toast("Uploading "+files.length+" photo"+(files.length===1?"":"s")+"…");var base=(PD.gal||[]).length,bad=0;
-        files.reduce(function(pr,file,i){return pr.then(function(){return uploadFile(file,"gallery").then(function(url){return db.from("gallery_photos").insert({album:"seasonal",url:url,sort_order:base+i})},function(){bad++})})},Promise.resolve())
-          .then(function(){toast(bad?bad+" couldn’t upload (8 MB limit each)":"Photos added");again()})};f.click()};
+    var add=$("#pdGalAdd",box);if(add)add.onclick=function(){var f=document.createElement("input");f.type="file";f.accept="image/*";f.multiple=true;
+      f.onchange=function(){var files=Array.prototype.slice.call(f.files||[]).slice(0,20);if(!files.length)return;toast("Uploading "+files.length+" photo"+(files.length===1?"":"s")+"…");var base=(PD.gal||[]).length,bad=0,why="";
+        files.reduce(function(pr,file,i){return pr.then(function(){return uploadFile(file,"gallery").then(function(url){return db.from("gallery_photos").insert({album:"seasonal",url:url,sort_order:base+i})},function(e){bad++;why=why||(e&&e.userMsg)||""})})},Promise.resolve())
+          .then(function(){toast(bad?bad+" couldn’t upload"+(why?": "+why:"."):"Photos added");again()})};f.click()};
     $$("[data-gp]",box).forEach(function(fig){var id=fig.getAttribute("data-gp"),g=PD.gal,ix=g.map(function(p){return p.id}).indexOf(id),p=g[ix],cap=$("input",fig);
       if(cap)cap.onchange=function(){db.from("gallery_photos").update({caption:cap.value.trim()||null}).eq("id",id).then(function(x){okToast(x,"Caption saved");p.caption=cap.value.trim()||null})};
       $$("[data-ga]",fig).forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-ga");
@@ -10164,7 +10189,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       $$("[data-nedit]",P).forEach(function(b){b.onclick=function(){NEWS_EDIT=b.getAttribute("data-nedit");tabNews()}});
       if(!n)return; var img=n.image_url||null;
       $("#nwCancel").onclick=function(){NEWS_EDIT=null;tabNews()};
-      $("#nwImg").onclick=function(){pickFile(function(f){toast("Uploading…");uploadFile(f,"news").then(function(u){img=u;n.image_url=u;toast("Photo added. Save the story to keep it.")}).catch(function(){toast("Couldn’t upload that photo.")})})};
+      $("#nwImg").onclick=function(){pickFile(function(f){toast("Uploading…");uploadFile(f,"news").then(function(u){img=u;n.image_url=u;toast("Photo added. Save the story to keep it.")}).catch(upErr)})};
       var ni=$("#nwNoImg");if(ni)ni.onclick=function(){img=null;n.image_url=null;toast("Photo removed. Save to keep the change.")};
       var nd=$("#nwDel");if(nd)nd.onclick=function(){if(nd.textContent!=="Confirm delete"){nd.textContent="Confirm delete";return}db.from("news_posts").delete().eq("id",n.id).then(function(x){if(okToast(x,"Deleted")){NEWS_EDIT=null;tabNews()}})};
       $("#newsForm").onsubmit=function(e){e.preventDefault();var lk=$("#nw-l").value.trim(),iu=$("#nw-iu").value.trim(),web=function(u){return /^https?:\/\/[^\s<>"]+$/i.test(u)};
@@ -10262,10 +10287,11 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         $$("tbody tr[data-i]",P).forEach(function(tr){var i=+tr.getAttribute("data-i"),f=$$("input",tr);f[0].oninput=function(){slides[i].title=this.value};f[1].oninput=function(){slides[i].tag=this.value};
           $$("[data-sa]",tr).forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-sa");
             if(a==="rm"){slides.splice(i,1);draw()} else if(a==="up"&&i>0){slides.splice(i-1,0,slides.splice(i,1)[0]);draw()} else if(a==="down"&&i<slides.length-1){slides.splice(i+1,0,slides.splice(i,1)[0]);draw()}
-            else if(a==="img"){pickFile(function(file){toast("Uploading…");uploadFile(file,"slides").then(function(u){slides[i].img=u;draw();toast("Photo added. Click Save slideshow.")}).catch(function(){toast("Couldn’t upload that photo.")})})}}})});
-        $("#slAdd").onclick=function(){pickFile(function(file){toast("Uploading…");uploadFile(file,"slides").then(function(u){slides.push({img:u,title:"New photo",tag:"Flint Racing"});draw();toast("Added. Write a caption, then Save slideshow.")}).catch(function(){toast("Couldn’t upload that photo.")})})};
-        $("#slSave").onclick=function(){if(!slides.length){toast("Keep at least one photo.");return}var v=JSON.stringify(slides);
-          db.from("site_content").upsert({key:"data|slides",kind:"text",value:v,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(okToast(x,"Slideshow saved")){CONTENT["data|slides"]={key:"data|slides",kind:"text",value:v};FR.setSlides(JSON.parse(v))}})};
+            else if(a==="img"){pickFile(function(file){toast("Uploading…");uploadFile(file,"slides").then(function(u){slides[i].img=u;draw();saveSlides("Photo replaced and saved.")}).catch(upErr)})}}})});
+        $("#slAdd").onclick=function(){pickFile(function(file){toast("Uploading…");uploadFile(file,"slides").then(function(u){slides.push({img:u,title:"New photo",tag:"Flint Racing"});draw();saveSlides("Photo added and saved. Write a caption, then press Save slideshow.")}).catch(upErr)})};
+        function saveSlides(msg){if(!slides.length){toast("Keep at least one photo.");return}var v=JSON.stringify(slides);
+          db.from("site_content").upsert({key:"data|slides",kind:"text",value:v,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(okToast(x,msg||"Slideshow saved")){CONTENT["data|slides"]={key:"data|slides",kind:"text",value:v};FR.setSlides(JSON.parse(v))}})}
+        $("#slSave").onclick=function(){saveSlides()};
         $("#slReset").onclick=function(){var b=this;if(b.textContent!=="Confirm restore"){b.textContent="Confirm restore";return}
           db.from("site_content").delete().eq("key","data|slides").then(function(){delete CONTENT["data|slides"];FR.setSlides(FR.SLIDES_DEFAULT);slides=FR.getSlides();draw();toast("Original slideshow restored")})};}
       draw();});
@@ -10852,7 +10878,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       $$(".sp-ed",P).forEach(function(c){var id=c.getAttribute("data-id"),i=items.findIndex(function(x){return x.id===id}),f=$$("input,select",c);
         $$("[data-sa]",c).forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-sa");
           if(a==="save"){db.from("spirit_items").update({name:f[0].value.trim()||"Untitled",category:f[1].value.trim()||"T-shirts",description:f[2].value.trim()||null,art_text:f[3].value.trim().replace(/\s*\/\s*/g,"\n")||null,style:f[4].value,badge:f[5].value.trim()||null,visible:f[6].checked}).eq("id",id).then(function(x){after(x,"Saved")});return}
-          if(a==="photo"){pickFile(function(file){toast("Uploading…");uploadFile(file,"spirit").then(function(u){db.from("spirit_items").update({image_url:u}).eq("id",id).then(function(x){after(x,"Photo added")})}).catch(function(){toast("Couldn’t upload that photo.")})});return}
+          if(a==="photo"){pickFile(function(file){toast("Uploading…");uploadFile(file,"spirit").then(function(u){db.from("spirit_items").update({image_url:u}).eq("id",id).then(function(x){after(x,"Photo added")})}).catch(upErr)});return}
           if(a==="nophoto"){db.from("spirit_items").update({image_url:null}).eq("id",id).then(function(x){after(x,"Back to the artwork tile")});return}
           if(a==="up"||a==="down"){var j=a==="up"?i-1:i+1,o=items[j];if(!o)return;Promise.all([db.from("spirit_items").update({sort_order:j}).eq("id",id),db.from("spirit_items").update({sort_order:i}).eq("id",o.id)]).then(function(){renderSpirit();tabSpirit()});return}
           if(a==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}db.from("spirit_items").delete().eq("id",id).then(function(x){after(x,"Deleted")})}}})});
