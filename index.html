@@ -1442,7 +1442,15 @@ a.ycell:hover{background:#fbe2e5}
 .fr-bar select.mini{padding:7px 8px;max-width:200px}
 .fr-bar .mini:not(.solid){background:#fff}
 .fr-bar .mini.solid{background:var(--red);border-color:#fff;color:#fff}
-.fr-pill{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:55;background:var(--ink);color:#fff;border:2px solid var(--red);border-radius:999px;padding:10px 16px;font:700 .85rem/1 var(--body);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.fr-pill{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;align-items:center;gap:2px;background:var(--ink);border:2px solid var(--red);border-radius:999px;padding:3px;box-shadow:0 8px 20px rgba(0,0,0,.3);max-width:calc(100vw - 28px)}
+.fr-pill a,.fr-pill button{border:0;border-radius:999px;padding:9px 13px;font:700 .85rem/1 var(--body);color:#fff;background:transparent;text-decoration:none;cursor:pointer;white-space:nowrap}
+.fr-pill a{background:#fff;color:var(--red-deep)}
+.fr-pill a:hover{background:#ffe9eb}
+.fr-pill button:hover{background:rgba(255,255,255,.14)}
+.fr-pill a:focus-visible,.fr-pill button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (max-width:380px){.fr-pill a,.fr-pill button{padding:9px 10px;font-size:.8rem}}
+/* preview copy only: keep the admin shortcuts clear of the "Preview copy" note on phones */
+@media (max-width:700px){body:has(.fr-test) .fr-pill{bottom:calc(62px + env(safe-area-inset-bottom,0px))}body:has(.fr-test) .fr-mode.up{bottom:calc(116px + env(safe-area-inset-bottom,0px))}}
 body.fr-editing{padding-bottom:70px}
 body.fr-editing [data-ck]{outline:1.5px dashed rgba(210,20,28,.55);outline-offset:2px;cursor:text}
 body.fr-editing a[data-ck]{cursor:pointer}
@@ -3640,6 +3648,10 @@ body.spx-prices-on .spx-noprice{display:none}
 .em-st.failed,.em-st.skipped{background:#fde3e6;color:var(--red-deep)}
 .em-to{font-size:.94rem;color:#3b3e45;margin:2px 0 10px;overflow-wrap:anywhere}
 .em-card .t-msg:empty,.em-box .t-msg:empty,.em-tpl .t-msg:empty{display:none}
+.adm-back{display:grid;gap:10px;background:#16171c;border:1px solid color-mix(in srgb,var(--n,#e8222b) 55%,#333);border-radius:12px;padding:14px 16px;margin-bottom:12px;color:#c9cbd0}
+.adm-back p{font-size:.95rem;line-height:1.45}
+.adm-back b{color:#fff}
+.adm-back .cs-go{justify-self:start;min-height:46px;font-size:1rem}
 .em-ck{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:.88rem;cursor:pointer}
 .em-ck input{width:18px;height:18px;margin:0;accent-color:var(--red-deep);flex:none}
 .em-auto{font-size:.86rem;color:#5a5d64}
@@ -4962,7 +4974,7 @@ a.mini{text-decoration:none;display:inline-block}
           <label class="f" for="da-use">What would you like to support?<select id="da-use"><option>Where it’s needed most</option><option>STEM education</option><option>Racing development</option><option>Leadership and workforce development</option><option>Community stewardship</option></select></label>
           <label class="f" for="da-rec">How would you like your donation recognized?<select id="da-rec"><option>Remain anonymous</option><option>List my name</option><option>List my company name</option></select></label>
           <div class="cta-row"><button class="btn deep" type="submit" id="donGo">Send my pledge →</button><a class="btn outline-red" href="#support">Other ways to support</a></div>
-          <p class="don-safe" id="donSafe">No payment is taken on this page. Card details will only ever be entered on Stripe’s secure checkout page.</p>
+          <p class="don-safe" id="donSafe">No payment is taken on this page. Card details are only ever entered on a secure checkout page run by our payment partner.</p>
         </form>
       </section>
       <section class="panel">
@@ -4985,7 +4997,7 @@ a.mini{text-decoration:none;display:inline-block}
     <section class="news-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 8h3v9a2 2 0 0 1-2 2"/><path d="M7 9h7M7 12h7M7 15h4"/></svg>
       <h2>Stories are on the way.</h2>
-      <p>Stories will appear here after approval. In the meantime, see what’s coming up on the calendar or browse photos from the track.</p>
+      <p>Stories will appear here after approval. In the meantime, see what’s coming up on the calendar or browse photos from our workshops.</p>
       <div class="cta-row" style="justify-content:center"><a class="btn deep" href="#calendar">See the calendar</a><a class="btn outline-red" href="#seasonal-workshops">Browse photos</a></div>
     </section>
   </div></div>
@@ -5033,14 +5045,14 @@ a.mini{text-decoration:none;display:inline-block}
       <h2>Photos and program updates</h2>
       <p>Photo and publication permissions are reviewed through the program’s forms and media workflow. Shared program access does not by itself authorize public publication of a photograph. Contact staff about a photo, permission or correction request.</p>
       <h2>Payments and other services</h2>
-      <p>When available, online donations use a Stripe-hosted checkout. The website records donation status and related information received through that process. Third-party services have their own privacy notices. An optional donor mailing-address form is separate from email updates.</p>
+      <p>Online donations are completed on a secure checkout page hosted by our payment provider (Stripe or Square); card details are never entered on this website. The website records donation status and related information received through that process. Third-party services have their own privacy notices. An optional donor mailing-address form is separate from email updates.</p>
       <h2>Email</h2>
       <p>If you register a profile, send a question or a form, or ask for email updates, Flint Racing &amp; STEM may email you about it. Messages are delivered by an email service acting on our behalf. Every update includes an unsubscribe link, and members can change their email choices on their dashboard at any time.</p>
       <h2>Browser preferences and sessions</h2>
       <p>The website uses browser storage and cookies for sign-in sessions, access codes and some operational tools. Shared devices should be signed out after use.</p>
       <h2>Contact, corrections and questions</h2>
       <p>Contact Flint Racing &amp; STEM at <a href="mailto:info@flintsoapbox.org" style="color:var(--red-deep);font-weight:600">info@flintsoapbox.org</a> or through the <a href="#contact" style="color:var(--red-deep);font-weight:600">Contact page</a> to ask about your information, request a correction, discuss photo permissions, or ask about available deletion and retention options. Staff will review requests in the context of program, safety and recordkeeping needs.</p>
-      <p class="fine">This notice describes the prelaunch website. Program staff should confirm retention periods, service providers and the final privacy contact before launch.</p>
+      <p class="fine">Last updated November 2026.</p>
     </article>
   </div></div>
 </div>
@@ -6108,18 +6120,24 @@ a.mini{text-decoration:none;display:inline-block}
     if(d>1){el.textContent=d}else if(d===1){el.textContent="1";lbl.textContent="day to race day"}else if(d===0){el.textContent="Today";lbl.textContent="is race day!"}else{el.textContent="See you";lbl.textContent="next race season"}})();
   /* ---- Donate: Stripe Payment Link when connected (Admin → Donations), otherwise a pledge to the questionnaire ---- */
   var DON=null;
+  /* Which checkout the saved link opens. Only Stripe links accept a filled-in amount and the fund note. */
+  function payProv(u){u=String(u||"");return /stripe\.com/i.test(u)?"Stripe":/square\.link|squareup\.com|square\.site/i.test(u)?"Square":"our payment partner"}
+  window.FR_payProv=payProv;
   function donAmounts(list){var box=document.querySelector("#donForm .amounts");if(!box)return;var cur=(document.querySelector('input[name="amt"]:checked')||{}).value;
     if(list.map(String).indexOf(cur)<0)cur=null;
     box.innerHTML=list.map(function(a,i){return '<label><input type="radio" name="amt" value="'+a+'" id="da-'+a+'"'+((cur?String(a)===cur:i===Math.min(1,list.length-1))?' checked':'')+'><span>$'+a+'</span></label>'}).join("");
     box.style.gridTemplateColumns="repeat("+Math.min(list.length,4)+",1fr)"}
   window.FR_setDonate=function(c){DON=c&&c.link?c:null;var on=!!DON,mon=!!(DON&&DON.monthly);
     donAmounts(on&&DON.amounts&&DON.amounts.length?DON.amounts:[25,50,100,250]);
-    $("#donNote").textContent=on?"Give securely with a card, Apple Pay or Google Pay. You’ll finish on Stripe’s checkout page and get an emailed receipt.":"Online donations are being connected. Until then, send us your pledge and we’ll follow up with ways to give.";
-    $("#donNote").classList.toggle("on",on);$("#donFreq").hidden=!mon;$("#donGo").textContent=on?"Donate with Stripe →":"Send my pledge →";
-    $("#donSafe").textContent=on?"Card details are entered only on Stripe’s secure page. Flint Racing never sees your card number.":"No payment is taken on this page. Card details will only ever be entered on Stripe’s secure checkout page.";
+    var pv=on?payProv(DON.link):"",pp=pv==="our payment partner"?"our payment partner’s":pv+"’s",st=pv==="Stripe";
+    $("#donNote").textContent=on?(st?"Give securely with a card, Apple Pay or Google Pay. You’ll finish on Stripe’s checkout page and get an emailed receipt.":"Give securely with a card. You’ll choose your amount and finish on "+pp+" secure checkout page."):"Online donations are being connected. Until then, send us your pledge and we’ll follow up with ways to give.";
+    $("#donNote").classList.toggle("on",on);$("#donFreq").hidden=!mon;$("#donGo").textContent=on?"Donate with "+(pv==="our payment partner"?"a card":pv)+" →":"Send my pledge →";
+    $("#donSafe").textContent=on?"Card details are entered only on "+pp+" secure page. Flint Racing never sees your card number.":"No payment is taken on this page. Card details are only ever entered on a secure checkout page run by our payment partner.";
+    /* a link that can't carry the amount or the fund: don't ask for what would be lost */
+    document.querySelectorAll("#donForm label[for=da-use],#donForm label[for=da-rec]").forEach(function(l){l.hidden=on&&!st});
     syncFreq()};
-  function syncFreq(){var m=DON&&DON.monthly&&(document.querySelector('input[name="dfq"]:checked')||{}).value==="monthly";$("#donAmtSet").hidden=!!m;
-    if(DON)$("#donGo").textContent=m?"Give monthly with Stripe →":"Donate with Stripe →"}
+  function syncFreq(){var m=DON&&DON.monthly&&(document.querySelector('input[name="dfq"]:checked')||{}).value==="monthly",pv=DON?payProv(DON.link):"",w=pv==="our payment partner"?"a card":pv;$("#donAmtSet").hidden=!!m||(!!DON&&pv!=="Stripe");
+    if(DON)$("#donGo").textContent=m?"Give monthly with "+w+" →":"Donate with "+w+" →"}
   document.querySelectorAll('input[name="dfq"]').forEach(function(r){r.addEventListener("change",syncFreq)});
   $("#donForm").addEventListener("submit",function(e){e.preventDefault();
     var other=$("#da-other").value.trim(), pick=(document.querySelector('input[name="amt"]:checked')||{}).value;
@@ -6127,9 +6145,9 @@ a.mini{text-decoration:none;display:inline-block}
     if(DON){var monthly=DON.monthly&&(document.querySelector('input[name="dfq"]:checked')||{}).value==="monthly";
       var slug=function(v){return v.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)};
       var ref="web_"+slug($("#da-use").value)+"_"+slug($("#da-rec").value);
-      var url=monthly?DON.monthly:DON.link,cents=Math.round(parseFloat(String(amt).replace(/[^0-9.]/g,""))*100);
-      if(!monthly&&!(cents>=100)){alertDon("Enter an amount of at least $1.");return}
-      url+=(url.indexOf("?")<0?"?":"&")+"client_reference_id="+encodeURIComponent(ref)+(monthly?"":"&prefilled_amount="+cents);
+      var url=monthly?DON.monthly:DON.link,cents=Math.round(parseFloat(String(amt).replace(/[^0-9.]/g,""))*100),stripe=payProv(url)==="Stripe";
+      if(stripe&&!monthly&&!(cents>=100)){alertDon("Enter an amount of at least $1.");return}
+      if(stripe)url+=(url.indexOf("?")<0?"?":"&")+"client_reference_id="+encodeURIComponent(ref)+(monthly?"":"&prefilled_amount="+cents);
       window.FR_lastDonateUrl=url;var w=null;try{w=window.open(url,"_blank","noopener")}catch(x){}if(!w)location.href=url;return}
     pendingInterest="sponsor";
     pendingNote="Donation pledge: $"+amt+" · Support: "+$("#da-use").value+" · Recognition: "+$("#da-rec").value;
@@ -6349,7 +6367,7 @@ a.mini{text-decoration:none;display:inline-block}
   })();
 
   /* Shared hooks for the Supabase + Admin layer */
-  window.FR={EVENTS:EVENTS,NOTES:BULLETIN_NOTES,route:route,PARTNERS:PARTNERS,PARTNERS_DEFAULT:PARTNERS_DEFAULT,
+  window.FR={NAMES:NAMES,EVENTS:EVENTS,NOTES:BULLETIN_NOTES,route:route,PARTNERS:PARTNERS,PARTNERS_DEFAULT:PARTNERS_DEFAULT,
     setPartners:function(list){PARTNERS.length=0;list.forEach(function(pg){PARTNERS.push(pg)});sp=0;drawS();drawWall()},
     recaptureForm:function(){if(document.getElementById("qForm"))qFormHTML=qCard.innerHTML.replace(/ contenteditable="true"/g,"")},
     refresh:function(){nowStrip();monthOptions();var h=(location.hash||"#home").slice(1);
@@ -7934,7 +7952,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function modeChip(){var c=$(".fr-mode"),show=ADMIN_REAL&&onPortal()&&hashBase()!=="kiosk";
     if(!show){if(c)c.hidden=true;return}
     if(!c){c=document.createElement("div");c.className="fr-mode";c.setAttribute("role","group");c.setAttribute("aria-label","Viewing mode");document.body.appendChild(c)}
-    c.hidden=false;c.classList.toggle("up",MODE!=="member");c.innerHTML='<span>Viewing as</span><button type="button" data-mode="member" aria-pressed="'+(MODE==="member")+'">Participant</button><button type="button" data-mode="admin" aria-pressed="'+(MODE!=="member")+'">Admin tools</button>';
+    c.hidden=false;c.classList.add("up");c.innerHTML='<span>Viewing as</span><button type="button" data-mode="member" aria-pressed="'+(MODE==="member")+'">Participant</button><button type="button" data-mode="admin" aria-pressed="'+(MODE!=="member")+'">Admin tools</button>';
     $$("[data-mode]",c).forEach(function(b){b.onclick=function(){switchMode(b.getAttribute("data-mode"))}})}
   function switchMode(m,role){if(MODE_BUSY)return Promise.resolve();if(m===MODE&&!role)return Promise.resolve();setMode(m);applyMode();MODE_BUSY=true;CO.sig="";
     var q=m==="member"?db.rpc("admin_member_session",role?{p_role:role}:{}):db.rpc("member_signout");
@@ -7965,8 +7983,11 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       updatePill();renderAdmin();renderRK(true);renderTM(true);renderAccess();renderMemCards();renderPortals();
       if(IS_ADMIN) loadEvents().then(function(){FR.refresh()});});
   }
+  /* Signed-in admins always see a way back to the Admin dashboard (every page, both viewing modes); "Edit this page" sits beside it in Admin tools. */
   function updatePill(){var p=$(".fr-pill");
-    if(IS_ADMIN&&!EDITING&&location.hash!=="#admin"){if(!p){p=document.createElement("button");p.className="fr-pill";p.type="button";p.textContent="Admin · Edit this page";p.onclick=function(){setEditing(true)};document.body.appendChild(p)}p.hidden=false}
+    if(ADMIN_REAL&&!EDITING&&location.hash!=="#admin"){if(!p){p=document.createElement("div");p.className="fr-pill";p.setAttribute("role","group");p.setAttribute("aria-label","Admin shortcuts");
+        p.innerHTML='<a href="#admin"><span aria-hidden="true">←</span> Admin dashboard</a><button type="button">Edit this page</button>';$("button",p).onclick=function(){setEditing(true)};document.body.appendChild(p)}
+      p.hidden=false;$("button",p).hidden=!IS_ADMIN}
     else if(p) p.hidden=true;}
 
   /* ---------- Edit mode ---------- */
@@ -7975,8 +7996,9 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     if(on&&!IS_ADMIN) return; EDITING=!!on; document.body.classList.toggle("fr-editing",EDITING);
     $$("[data-ck]").forEach(function(el){if(EDITING&&!el.closest("a,button,summary,label")) el.setAttribute("contenteditable","true"); else el.removeAttribute("contenteditable")});
     if(EDITING&&!bar){bar=document.createElement("div");bar.className="fr-bar";
+      var NM=Object.assign({},window.FR.NAMES||{},{home:"Home",about:"Our Story",participate:"Register / Inquire",admin:"Admin dashboard",spirit:"Spirit Shop","news-page":"News & Stories",contact:"Contact",privacy:"Privacy","background-check":"Background Checks","join-our-team":"Join Our Team"});
       var opts=$$("main > .page").filter(function(p){return p.getAttribute("data-page")!=="stub"}).map(function(p){var id=p.getAttribute("data-page"),h=p.querySelector("h1");
-        return '<option value="'+id+'">'+esc(id==="home"?"Home":(h?h.textContent.replace(/\s+/g," ").trim():id))+'</option>'}).join("");
+        return '<option value="'+id+'">'+esc(NM[id]||(h?h.textContent.replace(/\s+/g," ").trim():id))+'</option>'}).join("");
       bar.innerHTML='<span><b>Editing</b> &nbsp;Click any words to change them, including buttons and links. Hover a photo to replace it, or crop, rotate or make it black and white. Changes save when you click away.</span><span class="btns"><label class="sr" for="frGo">Go to page</label><select id="frGo" class="mini">'+opts+'</select><a class="mini" href="#admin">Admin dashboard</a><button class="mini solid" type="button" id="frDone">Done editing</button></span>';
       document.body.appendChild(bar); $("#frDone").onclick=function(){setEditing(false)};
       $("#frGo").onchange=function(){location.hash="#"+this.value};}
@@ -8103,7 +8125,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     ["Add an event to the calendar","events","date calendar workshop camp race"],["Set workshop times and places","families","time location address private"],["Post a monthly note","notes","bulletin announcement"],
     ["Post a news story","news","story article press"],["Add a form or link","resources","pdf form link waiver"],["Upload a flyer or printable form","printables","flyer upload print pdf registration order field trip form file share"],["Post this month’s bulletin file","notes","bulletin pdf monthly newsletter file"],["Approve photos","reviews","album photographer pictures"],["Approve a teacher plan","reviews","lesson teacher materials"],
     ["Change the homepage slideshow","home","slides photos numbers stats"],["Add a sponsor logo","partners","sponsor logo partner"],["Add a shirt or hat","spirit","spiritwear merch shirt hat"],["Undo a site change","edits","undo history revert"],
-    ["Edit text or photos on any page","@edit","edit text photo page wording"],["Connect Stripe donations","donate","stripe payment donate donation checkout link"],["Set sponsor prices","sprice","sponsor price prices tiers menu race day track program park"],["Add racers and sponsors for race day","race","racers bracket heats ads sponsors"],
+    ["Edit text or photos on any page","@edit","edit text photo page wording"],["Connect online donations","donate","stripe square payment donate donation checkout link"],["Set sponsor prices","sprice","sponsor price prices tiers menu race day track program park"],["Add racers and sponsors for race day","race","racers bracket heats ads sponsors"],
     ["Approve shout-outs","#track-manager","shoutout shout-out intermission ads"],["Run the live race feed","#race-control","race control timer lights heats"],["Assign race-day volunteers","#volunteers","volunteer crew shift"],
     ["Get an email when someone registers or inquires","email","email alert notify notification inbox new inquiry registration"],["Edit a pre-approved reply","email:msgs","email template message reply response instructions automatic auto"],["Send an update to families","email:update","email newsletter update announce mailing list subscribers"],["See emails the site sent","email:log","email sent mail log failed delivery"],["Connect the email service","email:setup","email setup resend domain from address reply"],
     ["Download rosters (.csv)","overview","csv export roster spreadsheet download"]];
@@ -8145,10 +8167,10 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   /* ---------- Admin → Donations: Stripe Payment Link ---------- */
   function donateCfg(){try{return JSON.parse((CONTENT["data|donate"]||{}).value||"null")}catch(e){return null}}
   function tabDonate(){var P=$("#admPanel"),c=donateCfg()||{},live=!!c.link,test=/\/test_/.test(c.link||"");
-    P.innerHTML='<div class="dn-status '+(live?(test?"warn":"on"):"off")+'">'+ico(live?"check":"heart")+'<div><b>'+(live?(test?"Connected in Stripe test mode":"Donations are live"):"Not connected yet")+'</b><span>'+
-        (live?(test?"This is a test link: no real cards are charged. Swap in your live link when you’re ready.":"The Donate page opens Stripe’s secure checkout with the donor’s amount filled in. The kiosk uses it too unless Square tap to pay is set up below."):"Until you add a link, the Donate page and the kiosk’s Donate button collect pledges and send them to Inquiries.")+'</span></div>'+(live?'<a class="mini" href="#donate">View the Donate page</a>':'')+'</div>'+
+    P.innerHTML='<div class="dn-status '+(live?(test?"warn":"on"):"off")+'">'+ico(live?"check":"heart")+'<div><b>'+(live?(test?"Connected in Stripe test mode":"Donations are live · "+(window.FR_payProv(c.link)==="our payment partner"?"custom link":window.FR_payProv(c.link))):"Not connected yet")+'</b><span>'+
+        (live?(test?"This is a test link: no real cards are charged. Swap in your live link when you’re ready.":window.FR_payProv(c.link)==="Stripe"?"The Donate page opens Stripe’s secure checkout with the donor’s amount filled in. The kiosk uses it too unless Square tap to pay is set up below.":"The Donate page sends donors to your "+(window.FR_payProv(c.link)==="Square"?"Square":"payment")+" link, where they enter their amount. Only a Stripe link can carry the amount, the fund and the recognition choice over from the website, so those questions are hidden on the Donate page."):"Until you add a link, the Donate page and the kiosk’s Donate button collect pledges and send them to Inquiries.")+'</span></div>'+(live?'<a class="mini" href="#donate">View the Donate page</a>':'')+'</div>'+
       '<div class="dn-grid"><form class="dn-form" id="dnForm" novalidate>'+
-        '<label class="f">Stripe donation link <small>From a Payment Link set to “Customers choose what to pay”. Starts with https://buy.stripe.com/ or https://donate.stripe.com/</small><input type="url" id="dn-link" value="'+esc(c.link||"")+'" placeholder="https://buy.stripe.com/…" autocomplete="off" spellcheck="false"></label>'+
+        '<label class="f">Donation link <small>A Stripe Payment Link set to “Customers choose what to pay” (starts with https://buy.stripe.com/ or https://donate.stripe.com/), or a Square payment link (https://square.link/…).</small><input type="url" id="dn-link" value="'+esc(c.link||"")+'" placeholder="https://buy.stripe.com/…" autocomplete="off" spellcheck="false"></label>'+
         '<label class="f">Monthly giving link <small>(optional) A second Payment Link with a monthly price. Adds a One-time / Monthly choice.</small><input type="url" id="dn-monthly" value="'+esc(c.monthly||"")+'" placeholder="https://buy.stripe.com/…" autocomplete="off" spellcheck="false"></label>'+
         '<label class="f">Suggested amounts <small>Dollars, separated by commas</small><input type="text" id="dn-amts" value="'+esc((c.amounts||[25,50,100,250]).join(", "))+'" inputmode="numeric"></label>'+
         '<div class="row"><button class="mini solid" type="submit">Save</button>'+(live?'<button class="mini" type="button" id="dnTry">Open my link</button><button class="mini red" type="button" id="dnOff">Disconnect</button>':'')+'</div></form>'+
@@ -8161,12 +8183,12 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         '<p class="me-fine">Card numbers are only ever typed on Stripe’s page. Your site never sees them and no secret keys are stored here. Each gift shows up in Stripe with the fund the donor picked (in “Client reference ID”).</p></aside></div>';
     function ok(u){return !u||/^https:\/\/[^\s]+$/.test(u)}
     $("#dnForm").onsubmit=function(e){e.preventDefault();var link=$("#dn-link").value.trim(),mon=$("#dn-monthly").value.trim();
-      if(!link){toast("Paste your Stripe donation link first.");return}
+      if(!link){toast("Paste your donation link first.");return}
       if(!ok(link)||!ok(mon)){toast("Links need to start with https://");return}
-      if(!/stripe\.com\//.test(link)&&!confirm("That link isn’t on stripe.com. Save it anyway? (Only if you set up a custom Stripe domain.)"))return;
+      if(window.FR_payProv(link)==="our payment partner"&&!confirm("That isn’t a Stripe or Square link. Save it anyway?"))return;
       var amts=$("#dn-amts").value.split(/[,\s]+/).map(function(x){return Math.round(+x.replace(/[^0-9.]/g,""))}).filter(function(x){return x>0&&x<100000}).slice(0,6);
       var val=JSON.stringify({link:link,monthly:mon||null,amounts:amts.length?amts:[25,50,100,250]});
-      db.from("site_content").upsert({key:"data|donate",kind:"text",value:val,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(okToast(x,"Saved. The Donate page now opens Stripe checkout.")){CONTENT["data|donate"]={key:"data|donate",kind:"text",value:val};applyDonate();tabDonate()}})};
+      db.from("site_content").upsert({key:"data|donate",kind:"text",value:val,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(okToast(x,"Saved. The Donate page now opens "+(window.FR_payProv(link)==="our payment partner"?"your payment link":window.FR_payProv(link)+" checkout")+".")){CONTENT["data|donate"]={key:"data|donate",kind:"text",value:val};applyDonate();tabDonate()}})};
     var sq=sqCfg(),cbu=location.origin+location.pathname;
     P.insertAdjacentHTML("beforeend",'<div class="dn-status '+(sq.app_id?"on":"off")+'" style="margin-top:22px">'+ico(sq.app_id?"check":"heart")+'<div><b>'+(sq.app_id?"Kiosk tap to pay is on":"Kiosk tap to pay: not set up")+'</b><span>'+(sq.app_id?"The kiosk’s Donate button opens Square on the tablet so donors tap their card on your Square reader.":"Add your Square application ID so donors can tap their card on your Square reader at the check-in kiosk.")+'</span></div></div>'+
       '<div class="dn-grid"><form class="dn-form" id="sqForm" novalidate><label class="f">Square application ID <small>From developer.squareup.com → your application → Credentials (Production). Starts with sq0idp-</small><input type="text" id="sq-app" value="'+esc(sq.app_id||"")+'" placeholder="sq0idp-…" autocomplete="off" spellcheck="false"></label>'+
@@ -8289,7 +8311,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         bindSignIn("acc");$("#staffBack").onclick=function(){STAFFUI=null;RECOVERY=false;AUTH_NOTE="";box.innerHTML="";renderAccess()}}return}
     if(USER&&!USER.is_anonymous){var name=(USER.user_metadata&&USER.user_metadata.full_name)||USER.email;
       box.innerHTML='<div class="mem mem-on mem-dark"><p class="mem-k">Signed in'+(IS_ADMIN?' · Admin':'')+'</p><h2 class="mem-h">'+esc(name)+'</h2><p>'+esc(USER.email||"")+'</p>'+(AUTH_NOTE?'<p class="auth-note">'+esc(AUTH_NOTE)+'</p>':'')+
-        (IS_ADMIN?'<a class="cs-go" href="#admin">Open Admin</a><p class="mem-sub">Admin includes race control, track operations and every other portal.</p>':'<p class="mem-sub">This account isn’t an admin yet. Kendall or Kevin can turn it on in Admin → Admins, then sign in again.</p>')+
+        (IS_ADMIN?'<a class="cs-go" href="#admin">← Admin dashboard</a><p class="mem-sub">Admin includes race control, track operations and every other portal.</p>':'<p class="mem-sub">This account isn’t an admin yet. Kendall or Kevin can turn it on in Admin → Admins, then sign in again.</p>')+
         '<button class="mem-out" type="button">Sign out</button></div>';$(".mem-out",box).onclick=signOut;return}
     if(ME){box.innerHTML=memOnHTML("mistaff",true);$(".mem-out",box).onclick=signOut;return}
     if(box.querySelector("#staffMem"))return;
@@ -8979,7 +9001,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
 
   /* ---------- Crew link (#crew/<token>) ---------- */
   function renderCrew(){var box=$("#crewBox"),tok=(location.hash.split("/")[1]||"").trim();if(!box)return;
-    if(!tok){box.innerHTML='<div class="crew-pass"><h1>Crew pass</h1><p>Open the crew link from your email to see your race-day role.</p></div>';return}
+    if(!tok){box.innerHTML='<div class="crew-pass"><h1>Crew pass</h1><p>Open the crew link from your email to see your race-day role.</p><p>No link yet? Sign up to help, or sign in with your Crew Pass.</p><div class="cta-row" style="justify-content:center"><a class="btn deep" href="#race-volunteer">Volunteer on race day</a><a class="btn outline-red" href="#access">Sign in</a></div></div>';return}
     var sample=tok==="sample"&&IS_ADMIN;
     (sample?Promise.resolve({data:{first_name:"Marcus",role:"Check-in table",area:"event",shift:"Morning",assignment:"Welcome tent at 7:45 AM. Hand out wristbands and programs.",checked_in_at:null}}):db.rpc("crew_view",{p_token:tok})).then(function(r){var c=r.data;
       if(r.error||!c){box.innerHTML='<div class="crew-pass"><h1>Link not found</h1><p>This crew link isn’t active. Check the newest email from Flint Racing, or email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>';return}
@@ -9067,7 +9089,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         '<button type="button" class="ki-alt" id="kiTap">Open the card reader again</button><button type="button" class="ki-back" id="kiBack">Back to the start</button></section>'}
     else if(KI.step==="givepay"){var gp=KI.give,url=kiGiveUrl(gp.amt);
       body='<section class="ki-card ki-give" aria-labelledby="kiH"><p class="ki-who">Your gift · $'+esc(String(gp.amt))+'</p><h2 id="kiH">Scan to give with your phone</h2>'+
-        '<p>Point your phone’s camera at the code. Pay with Apple Pay, Google Pay or a card on Stripe’s secure page, and get your receipt by email.</p>'+
+        '<p>Point your phone’s camera at the code. Pay with a card on '+kiPayName()+' secure page'+(window.FR_payProv((donateCfg()||{}).link)==="Stripe"?"":", where you’ll enter your amount")+', and get your receipt by email.</p>'+
         '<div class="ki-qr" role="img" aria-label="QR code that opens the donation page for $'+esc(String(gp.amt))+'">'+kiQR(url)+'</div>'+
         '<button type="button" class="ki-alt" id="kiTablet">Pay on this tablet instead</button>'+
         '<p class="ki-fine">On a shared tablet, Stripe may offer to remember your card. Choose not to save it.</p>'+
@@ -9216,7 +9238,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var canceled=/cancel/i.test(r.err||"");KI.give={amt:amt,err:canceled?"Payment canceled. Tap the button to try again.":"The card reader couldn’t finish ("+String(r.err||"unknown").replace(/_/g," ").toLowerCase()+"). Try again or ask a staff member."};
     KI.step=amt?"givetap":"give";kiIdle();kiDraw();return true}
   function kiAmt(v){var n=parseFloat(String(v||"").replace(/[^0-9.]/g,""));return n>=1?Math.round(n*100)/100:0}
-  function kiGiveUrl(amt){var c=donateCfg()||{},u=c.link||"";if(!u)return "";return u+(u.indexOf("?")<0?"?":"&")+"prefilled_amount="+Math.round(amt*100)+"&client_reference_id=kiosk_donation"}
+  function kiGiveUrl(amt){var c=donateCfg()||{},u=c.link||"";if(!u)return "";if(window.FR_payProv(u)!=="Stripe")return u;return u+(u.indexOf("?")<0?"?":"&")+"prefilled_amount="+Math.round(amt*100)+"&client_reference_id=kiosk_donation"}
+  function kiPayName(){var p=window.FR_payProv((donateCfg()||{}).link);return p==="our payment partner"?"our payment partner’s":p+"’s"}
   function kiQR(url){try{var m=window.FR_QR(url),n=m.length,q=4,d="";for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(m[r][c])d+="M"+(c+q)+" "+(r+q)+"h1v1h-1z";
     return '<svg viewBox="0 0 '+(n+2*q)+' '+(n+2*q)+'" shape-rendering="crispEdges" aria-hidden="true"><rect width="100%" height="100%" fill="#fff"/><path d="'+d+'" fill="#000"/></svg>'}catch(e){return '<p class="ki-fine">Couldn’t draw the code. Use “Pay on this tablet” instead.</p>'}}
   function kiRacerRow(){return '<div class="ki-racer"><input type="text" maxlength="40" placeholder="First name and last initial (Maya R.)" aria-label="Racer’s first name and last initial" autocomplete="off"><input type="number" min="3" max="25" inputmode="numeric" placeholder="Age" aria-label="Racer’s age"></div>'}
@@ -10280,10 +10303,13 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         m.textContent="";toast("Welcome, "+firstName(d.display_name)+"!");if(after)after();else location.hash=landing()[0]})})
       .catch(function(err){b.disabled=false;m.textContent=err.message||"Couldn’t sign in. Try again."})}}
   function renderMemCards(){$$("a.util.dash").forEach(function(a){a.setAttribute("href",ME?"#my-dashboard":"#program-signin")});$$(".mem-in[data-mem]").forEach(function(box){var px="mi"+box.getAttribute("data-mem");
-    if(ME){box.innerHTML=memOnHTML(px,true);$(".mem-out",box).onclick=signOut;return}
-    if(box.querySelector("form.mem"))return;
+    if(ME){box.innerHTML=memOnHTML(px,true);$(".mem-out",box).onclick=signOut;admBack(box);return}
+    if(box.querySelector("form.mem")){admBack(box);return}
     box.innerHTML=memHTML(px,{dark:true,kind:box.getAttribute("data-kind"),kicker:(box.getAttribute("data-mem")==="council"?"Leadership Council":box.getAttribute("data-kind")==="family"?"Family Pass":"Crew Pass")+" sign in",sub:box.getAttribute("data-mem")==="council"?"Use the same email and 4-digit code as your Crew Pass. Admins: your email and password open the council too.":"One email and 4-digit code work on both the Family and Crew Pass."});
-    bindMem(px,box.getAttribute("data-mem")==="council"?function(){location.hash=hasRole("council")||ADMIN_REAL?"#council":landing()[0]}:undefined)})}
+    bindMem(px,box.getAttribute("data-mem")==="council"?function(){location.hash=hasRole("council")||ADMIN_REAL?"#council":landing()[0]}:undefined);admBack(box)})}
+  function admBack(box){var el=$(".adm-back",box),want=ADMIN_REAL&&USER&&!USER.is_anonymous;
+    if(!want){if(el)el.remove();return}
+    if(!el){el=document.createElement("div");el.className="adm-back";el.innerHTML='<p><b>You’re already signed in as an admin.</b> '+(ME?"You’re looking at this pass in Participant view.":"Sign in below only to see this pass the way a participant does.")+'</p><a class="cs-go" href="#admin">← Admin dashboard</a>';box.insertBefore(el,box.firstChild)}}
   document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-regkind]");if(a&&a.getAttribute("data-regkind"))REG.kind=a.getAttribute("data-regkind")});
   function crewName(){if(ME)return ME.display_name;if(!USER)return "";if(USER.is_anonymous)return "Guest";return (USER.user_metadata&&USER.user_metadata.full_name)||USER.email}
 
@@ -10490,9 +10516,9 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         [c.plans,"teacher plan","teacher plans","to review","tab:reviews","note"],[c.vol,"race-day volunteer","race-day volunteers","to place","#volunteers","flag"],[c.so,"shout-out","shout-outs","to approve","#track-manager","star"]].filter(function(x){return x[0]});
       var tile=function(go,i,title,sub){return '<button type="button" class="ov-act" data-go="'+go+'">'+ico(i)+'<b>'+title+'</b><span>'+sub+'</span></button>'};
       P.innerHTML='<div class="ov-cols"><section class="ov-card"><p class="me-k">Needs you</p>'+(todo.length?'<ul class="ov-todo">'+todo.map(function(x){return '<li><button type="button" data-go="'+x[4]+'">'+ico(x[5])+'<span><b>'+x[0]+' '+(x[0]===1?x[1]:x[2])+'</b> '+x[3]+'</span><i aria-hidden="true">→</i></button></li>'}).join("")+'</ul>':'<p class="ov-clear">'+ico("check")+'You’re all caught up.</p>')+'</section>'+
-        '<section class="ov-card ov-nums"><div><b>'+mem+'</b><span>Approved members</span></div><div><b>'+up+'</b><span>Upcoming events</span></div><div><b>'+(c.inq||0)+'</b><span>New inquiries</span></div><div class="'+(dn&&dn.link?"on":"off")+'"><b>'+(dn&&dn.link?(/\/test_/.test(dn.link)?"Test":"Live"):"Off")+'</b><span>Stripe donations</span></div></section></div>'+
+        '<section class="ov-card ov-nums"><div><b>'+mem+'</b><span>Approved members</span></div><div><b>'+up+'</b><span>Upcoming events</span></div><div><b>'+(c.inq||0)+'</b><span>New inquiries</span></div><div class="'+(dn&&dn.link?"on":"off")+'"><b>'+(dn&&dn.link?(/\/test_/.test(dn.link)?"Test":"Live"):"Off")+'</b><span>Online donations</span></div></section></div>'+
         '<h3 class="ov-h">Quick actions</h3><div class="ov-acts">'+tile("edit","edit","Edit the site","Change any text or photo")+tile("tab:events","cal","Add an event","Public calendar dates")+tile("tab:news","news","Post a story","News & Stories")+
-          tile("tab:members","users","Approve profiles","Roles and hours")+tile("tab:members:log","shield","Who’s been in","Sign-in log")+tile("tab:email","mail","Email","Alerts, replies and updates")+tile("tab:race","flag","Race day setup","Racers and sponsors")+tile("tab:donate","heart","Donations","Stripe checkout")+tile("tab:home","layout","Homepage","Slideshow and numbers")+'</div>'+
+          tile("tab:members","users","Approve profiles","Roles and hours")+tile("tab:members:log","shield","Who’s been in","Sign-in log")+tile("tab:email","mail","Email","Alerts, replies and updates")+tile("tab:race","flag","Race day setup","Racers and sponsors")+tile("tab:donate","heart","Donations","Online giving link")+tile("tab:home","layout","Homepage","Slideshow and numbers")+'</div>'+
         '<h3 class="ov-h">Download rosters</h3><div class="ov-csv">'+[["members","Member profiles"],["workshop","Workshop sign-ins"],["volunteers","Race-day volunteers"],["racers","Racers"],["inquiries","Inquiries"],["registrations","Race registrations"],["accounts","Admin accounts"]].map(function(x){return '<button class="mini" type="button" data-csv="'+x[0]+'">'+x[1]+' <small>.csv</small></button>'}).join("")+'</div>';
       $$("[data-go]",P).forEach(function(b){b.onclick=function(){var g=b.getAttribute("data-go");
         if(g==="edit"){location.hash="#home";setTimeout(function(){setEditing(true)},60);return}
@@ -10691,7 +10717,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   var PVPAGES=[["Families","users","Register, sign in, and the family dashboards",[["#new-profile","Register","The one-time sign-up form"],["#access","Sign in","The car select page"],["#my-dashboard/family","My dashboard","Profile, stats and check-in (sample family)"],["#program-signin","Program Dashboard","Dates, times, places and the bulletin"],["#printables","Flyers & forms","Printables to download"]]],
     ["Crew & staff","check","Volunteers, workshop crew, teachers and photographers",[["#my-dashboard/crew","My dashboard","Profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#kiosk","Check-in kiosk","Families type their 4-digit code"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],["#council","Leadership Council","Student council projects, events and posts"],["#crew/sample","Volunteer crew pass","A race-day volunteer’s link (sample)"],["#volunteers","Volunteer lists","Race-day crew and check-in"]]],
     ["Race day","flag","Everything that runs the track on race day",[["#race-control","Race control","Brackets, lights and run times"],["#track-manager","Track operations","Shout-outs, intermissions and ads"],["#race-watch","Live race","What spectators see"]]],
-    ["Public site","layout","Pages anyone can visit",[["#home","Homepage","The front door"],["#calendar","Calendar","Dates for the year"],["#donate","Donate","Stripe checkout"],["#printables","Flyers & forms","Printables to download"],["#spirit","Spirit Shop","Shirts and hats"]]]];
+    ["Public site","layout","Pages anyone can visit",[["#home","Homepage","The front door"],["#calendar","Calendar","Dates for the year"],["#donate","Donate","Online giving"],["#printables","Flyers & forms","Printables to download"],["#spirit","Spirit Shop","Shirts and hats"]]]];
   function tabEdits(){var P=$("#admPanel");
     var sub='<div class="mb-sub" role="tablist"><button type="button" role="tab" data-esub="previews" aria-selected="'+(EDSUB==="previews")+'">Page previews</button><button type="button" role="tab" data-esub="history" aria-selected="'+(EDSUB==="history")+'">Change history</button></div>';
     if(EDSUB==="history"){tabEditsHistory(P,sub);}
