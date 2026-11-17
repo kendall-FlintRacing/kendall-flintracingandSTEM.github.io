@@ -3698,6 +3698,10 @@ html.fr-gated #frGate{display:grid;place-items:center;min-height:100vh;min-heigh
 .em-pick small{color:#5a5d64;font-weight:500}
 .em-reach{font-weight:700;font-size:.92rem;color:var(--ink);margin-top:2px}
 .em-newl{border-style:dashed!important}
+.em-undo{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#16171c;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px}
+.em-undo span{flex:1 1 200px}
+.em-undo .mini:not(.solid){background:transparent;color:#fff;border-color:#555}
+.em-undo .mini.solid{background:#fff;color:var(--ink);border-color:#fff}
 .em-lform{margin-bottom:16px}
 .em-about{color:#3b3e45;font-size:.93rem;margin:0 0 8px}
 .em-ck{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:.88rem;cursor:pointer}
@@ -10706,7 +10710,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     })}
 
   /* ---------- Admin → Email → Mailing lists: see everyone on a list, add people from a sign-up sheet, take people off ---------- */
-  var EMLIST={topic:"workshops",q:"",paste:"",note:""};
+  var EMLIST={topic:"workshops",q:"",paste:"",note:"",undo:null};
   var LISTS=[],EM_SRC={member:"Member",role:"From their role",admin:"Admin account",added:"Added by you",questionnaire:"Questionnaire",kiosk:"Kiosk"};
   var EM_ROLE={volunteer:"Volunteer",council:"Leadership Council",teacher:"Teacher"};
   /* Pull email addresses (and a name, when there's one email on the line) out of pasted text: a column from a spreadsheet,
@@ -10727,7 +10731,9 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       if(!L.member_choice)how.push('<li>Families and crew can’t pick this list themselves; only you add people'+((L.roles||[]).length||L.include_admins?", besides the automatic ones":"")+'.</li>');
       how.push('<li>Taking someone off works however they joined, and they stay off until they sign up again themselves.</li>');
       var shown=ppl;
-      B.innerHTML='<div class="mb-sub em-lists" role="tablist" aria-label="Mailing lists">'+LISTS.map(function(x){return '<button type="button" role="tab" data-list="'+esc(x.key)+'" aria-selected="'+(EMLIST.topic===x.key)+'">'+esc(x.name)+'<em>'+(cn[x.key]||0)+'</em></button>'}).join("")+'<button type="button" class="em-newl" id="emNewL">+ New list</button></div>'+
+      var rl=d.removed_lists||[];
+      B.innerHTML=(EMLIST.undo?'<div class="em-undo" role="status"><span>Removed the list “<b>'+esc(EMLIST.undo.name)+'</b>”.</span><button class="mini solid" type="button" id="emUndo">Undo</button><button class="mini" type="button" id="emUndoX" aria-label="Dismiss">✕</button></div>':'')+
+        '<div class="mb-sub em-lists" role="tablist" aria-label="Mailing lists">'+LISTS.map(function(x){return '<button type="button" role="tab" data-list="'+esc(x.key)+'" aria-selected="'+(EMLIST.topic===x.key)+'">'+esc(x.name)+'<em>'+(cn[x.key]||0)+'</em></button>'}).join("")+'<button type="button" class="em-newl" id="emNewL">+ New list</button></div>'+
         '<form class="em-card em-lform" id="emLForm" hidden novalidate><p class="me-k" id="emLFk">New list</p><div class="rk-form"><label class="f" for="em-ln">List name<input type="text" id="em-ln" maxlength="60" placeholder="Race day crew"></label>'+
           '<label class="f" for="em-la">What it’s for <small>Optional</small><input type="text" id="em-la" maxlength="160" placeholder="People helping on race day"></label></div>'+
           '<label class="em-ck"><input type="checkbox" id="em-lc"><span>Families and crew can pick this list themselves (on Register and My dashboard)</span></label>'+
@@ -10739,7 +10745,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<p class="em-note">Only add people who asked to get these emails. Every update has an unsubscribe link.</p>'+
           '<div class="row"><button class="mini solid" type="submit" id="emAddGo">Add to list</button><span class="em-count" id="emAddN" aria-live="polite"></span></div><p class="t-msg" role="status"></p></form>'+
         '<aside class="dn-how"><p class="me-k">How people get on '+esc(cur[1])+'</p>'+(L.about?'<p class="em-about">'+esc(L.about)+'</p>':'')+'<ul>'+how.join("")+'</ul>'+
-          '<p><button class="mini" type="button" id="emRenL">Rename or change this list</button></p></aside></div>'+
+          '<p class="row" style="margin-top:10px"><button class="mini" type="button" id="emRenL">Rename or change this list</button>'+(L.builtin?'':'<button class="mini" type="button" id="emRmL">Remove this list</button>')+'</p></aside></div>'+
         '<div class="em-lhead"><h3>'+(cn[EMLIST.topic]||0)+' '+((cn[EMLIST.topic]||0)===1?"person":"people")+' on '+esc(cur[1])+'</h3>'+
           '<input type="search" id="em-q" placeholder="Search names or emails" aria-label="Search this list" value="'+esc(EMLIST.q)+'">'+
           (ppl.length?'<button class="mini" type="button" id="emCsv">Download list (.csv)</button>':'')+'</div>'+
@@ -10747,6 +10753,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           shown.map(function(p){return '<tr data-k="'+esc(((p.name||"")+" "+p.email).toLowerCase())+'"><td>'+esc(p.name||"—")+'</td><td class="em-addr">'+esc(p.email)+'</td><td>'+(p.sources||[]).map(function(x){return '<span class="em-src '+esc(x)+'">'+esc(EM_SRC[x]||x)+'</span>'}).join(" ")+(p.note?'<br><small>'+esc(p.note)+'</small>':'')+'</td><td style="white-space:nowrap">'+(p.since?fmtDate(String(p.since).slice(0,10),{month:"short",day:"numeric",year:"numeric"}):"")+'</td>'+
             '<td><button class="mini" type="button" data-lrm="'+esc(p.email)+'">Take off</button></td></tr>'}).join("")+'</tbody></table></div>'
           :'<p class="rk-fine">No one is on this list yet. Add people above, or they’ll join as they sign up on the website.</p>')+'<p class="rk-fine" id="emQnone" hidden>No one on this list matches your search.</p>'+
+        (rl.length?'<details class="em-rm em-rml"'+(EMLIST.undo?' open':'')+'><summary>Removed lists ('+rl.length+')</summary><ul>'+rl.map(function(x){
+            return '<li><span><b>'+esc(x.name)+'</b><small>Removed '+fmtDate(String(x.at).slice(0,10),{month:"short",day:"numeric",year:"numeric"})+(x.added?' · '+x.added+' '+(x.added===1?"person":"people")+' you added are kept':'')+'</small></span><button class="mini" type="button" data-lrestore="'+esc(x.key)+'">Restore</button></li>'}).join("")+'</ul></details>':'')+
         (rm.length?'<details class="em-rm"><summary>Taken off this list ('+rm.length+')</summary><ul>'+rm.map(function(x){
             return '<li><span><b>'+esc(x.name||x.email)+'</b>'+(x.name?' · '+esc(x.email):'')+'<small>'+(x.how==="unsubscribed"?"Unsubscribed themselves":"Taken off by an admin")+' · '+fmtDate(String(x.at).slice(0,10),{month:"short",day:"numeric"})+'</small></span>'+
               '<button class="mini" type="button" data-lback="'+esc(x.email)+'" data-how="'+esc(x.how)+'">'+(x.how==="unsubscribed"?"They asked again: add back":"Add back")+'</button></li>'}).join("")+'</ul></details>':'');
@@ -10756,6 +10764,14 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       $$("[data-list]",B).forEach(function(b){b.onclick=function(){EMLIST.topic=b.getAttribute("data-list");EMLIST.q="";emLists()}});
       var lf=$("#emLForm",B),lfKey=null,openLF=function(key){lfKey=key;var x=key?L:null;$("#emLFk",B).textContent=key?"Change “"+L.name+"”":"New list";
           $("#em-ln",B).value=x?x.name:"";$("#em-la",B).value=x?(x.about||""):"";$("#em-lc",B).checked=!!(x&&x.member_choice);lf.hidden=false;$(".t-msg",lf).textContent="";$("#em-ln",B).focus()};
+      var restore=function(key,btn){if(btn)btn.disabled=true;db.rpc("admin_list_restore",{p_key:key}).then(function(x){if(x.error){toast(x.error.message);if(btn)btn.disabled=false;return}
+          EMLIST.undo=null;EMLIST.topic=key;toast("List restored.");loadPrefLists.done=0;loadPrefLists();emLists()})};
+      var ub=$("#emUndo",B);if(ub)ub.onclick=function(){restore(EMLIST.undo.key,ub)};
+      if(ub&&EMLIST.jump){EMLIST.jump=0;try{ub.closest(".em-undo").scrollIntoView({block:"center"})}catch(e){}ub.focus({preventScroll:true})}var ux=$("#emUndoX",B);if(ux)ux.onclick=function(){EMLIST.undo=null;emLists()};
+      $$("[data-lrestore]",B).forEach(function(b){b.onclick=function(){restore(b.getAttribute("data-lrestore"),b)}});
+      var rmL=$("#emRmL",B);if(rmL)rmL.onclick=function(){if(!rmL.getAttribute("data-sure")){rmL.setAttribute("data-sure","1");rmL.textContent="Confirm: remove “"+L.name+"”";rmL.classList.add("red");return}
+        rmL.disabled=true;db.rpc("admin_list_remove_list",{p_key:L.key}).then(function(x){if(x.error){toast(x.error.message);rmL.disabled=false;return}
+          EMLIST.undo={key:L.key,name:L.name};EMLIST.jump=1;EMLIST.topic=(LISTS.filter(function(z){return z.key!==L.key})[0]||{key:"workshops"}).key;loadPrefLists.done=0;loadPrefLists();emLists()})};
       $("#emNewL",B).onclick=function(){openLF(null)};$("#emRenL",B).onclick=function(){openLF(EMLIST.topic)};$("#emLCancel",B).onclick=function(){lf.hidden=true};
       lf.onsubmit=function(e){e.preventDefault();var m=$(".t-msg",lf);
         db.rpc("admin_list_save",{p_key:lfKey,p_name:$("#em-ln",B).value,p_about:$("#em-la",B).value,p_member_choice:$("#em-lc",B).checked}).then(function(x){if(x.error){m.textContent=x.error.message;return}

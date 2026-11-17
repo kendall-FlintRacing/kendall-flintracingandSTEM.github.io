@@ -329,7 +329,7 @@
           {key:"teachers",name:"Teachers",about:"For teachers who plan and lead workshops",member_choice:false,roles:["teacher"],include_admins:false,builtin:true},
           {key:"coaches",name:"Coaches",about:"For coaches and team mentors",member_choice:false,roles:[],include_admins:false,builtin:true},
           {key:"admins",name:"Admins",about:"Everyone with an admin account",member_choice:false,roles:[],include_admins:true,builtin:true}];
-        var DEF=function(k){return E.defs.filter(function(d){return d.key===k})[0]};
+        var DEF=function(k){return E.defs.filter(function(d){return d.key===k&&!d.removed})[0]};
         var topics=function(t){t=t||"";var o=[];if(/building/i.test(t))o.push("building");if(/steam|seasonal|camp|weekday/i.test(t)||(/workshop/i.test(t)&&!/building/i.test(t)))o.push("workshops");if(/volunteer/i.test(t))o.push("volunteers");if(/council/i.test(t))o.push("council");return o.length?o:["workshops"]};
         var aud=function(tp){var seen={},src={},n=0,d=DEF(tp)||{roles:[]},add=function(e,nm,s){e=(e||"").toLowerCase();if(!ok(e))return;var r=LR(e,tp);if(r&&r.status==="off")return;(src[e]=src[e]||[]).indexOf(s)<0&&src[e].push(s);if(!(e in seen)){seen[e]=nm||"";n++}};
           if(d.member_choice)T.members.forEach(function(m){if(m.status==="approved"&&(m.email_prefs||[]).indexOf(tp)>=0)add(m.email,m.display_name,"member")});
@@ -337,16 +337,18 @@
           if(d.include_admins&&user)add(user.email,(user.user_metadata||{}).full_name,"admin");
           E.lists.forEach(function(x){if(x.topic===tp&&x.status==="on")add(x.email,x.name,"added")});
           if(d.member_choice)(T.inquiries||[]).forEach(function(i){if(i.email_updates&&topics(i.interests).indexOf(tp)>=0)add(i.email,(i.first_name+" "+(i.last_name||"")).trim(),i.role==="Workshop guest"?"kiosk":"questionnaire")});return {n:n,list:seen,src:src}};
-        var meta=function(){return E.defs.map(function(d){return Object.assign({},d,{count:aud(d.key).n})})};
-        if(fn==="public_email_lists")return R(E.defs.filter(function(d){return d.member_choice}).map(function(d){return {key:d.key,name:d.name,about:d.about}}));
+        var meta=function(){return E.defs.filter(function(d){return !d.removed}).map(function(d){return Object.assign({},d,{count:aud(d.key).n})})};
+        if(fn==="admin_list_remove_list"){var d13=DEF(args.p_key);if(!d13)return R(null,"Unknown list");if(d13.builtin)return R(null,"The starting lists can’t be removed.");d13.removed=new Date().toISOString();save();return R(null)}
+        if(fn==="admin_list_restore"){var d14=E.defs.filter(function(d){return d.key===args.p_key&&d.removed})[0];if(!d14)return R(null,"That list isn’t removed.");delete d14.removed;save();return R(null)}
+        if(fn==="public_email_lists")return R(E.defs.filter(function(d){return d.member_choice&&!d.removed}).map(function(d){return {key:d.key,name:d.name,about:d.about}}));
         if(fn==="admin_lists_reach"){var u11={};(args.p_topics||[]).forEach(function(k){Object.keys(aud(k).list).forEach(function(e){u11[e]=1})});return R(Object.keys(u11).length)}
         if(fn==="admin_list_save"){var nm12=String(args.p_name||"").trim();if(nm12.length<2||nm12.length>60)return R(null,"Give the list a name (2 to 60 characters).");
-          if(E.defs.some(function(d){return d.name.toLowerCase()===nm12.toLowerCase()&&d.key!==args.p_key}))return R(null,"There’s already a list with that name.");
+          if(E.defs.some(function(d){return !d.removed&&d.name.toLowerCase()===nm12.toLowerCase()&&d.key!==args.p_key}))return R(null,"There’s already a list with that name.");
           if(args.p_key){var d12=DEF(args.p_key);d12.name=nm12;d12.about=String(args.p_about||"").trim()||null;if(args.p_member_choice!=null)d12.member_choice=!!args.p_member_choice;save();return R(args.p_key)}
-          var k12=(nm12.toLowerCase().replace(/[^a-z0-9]/g,"")||"list").slice(0,20);if(!/^[a-z]/.test(k12))k12="list"+k12;var b12=k12,i12=1;while(DEF(k12)){i12++;k12=b12+i12}
+          var k12=(nm12.toLowerCase().replace(/[^a-z0-9]/g,"")||"list").slice(0,20);if(!/^[a-z]/.test(k12))k12="list"+k12;var b12=k12,i12=1;while(E.defs.some(function(d){return d.key===k12})){i12++;k12=b12+i12}
           E.defs.push({key:k12,name:nm12,about:String(args.p_about||"").trim()||null,member_choice:!!args.p_member_choice,roles:[],include_admins:false,builtin:false});save();return R(k12)}
         if(fn==="admin_lists"){var a8=aud(args.p_topic);if(!DEF(args.p_topic))return R(null,"Unknown list");var m8=meta(),c8={};m8.forEach(function(x){c8[x.key]=x.count});
-          return R({lists:m8,counts:c8,people:Object.keys(a8.list).sort(function(x,y){return (a8.list[x]||x).toLowerCase()<(a8.list[y]||y).toLowerCase()?-1:1}).map(function(e){var r=LR(e,args.p_topic);return {email:e,name:a8.list[e],sources:a8.src[e],note:r&&r.status==="on"?r.note:null,since:r&&r.status==="on"?r.at:new Date().toISOString()}}),
+          return R({lists:m8,counts:c8,removed_lists:E.defs.filter(function(d){return d.removed}).map(function(d){return {key:d.key,name:d.name,at:d.removed,added:E.lists.filter(function(x){return x.topic===d.key&&x.status==="on"}).length}}),people:Object.keys(a8.list).sort(function(x,y){return (a8.list[x]||x).toLowerCase()<(a8.list[y]||y).toLowerCase()?-1:1}).map(function(e){var r=LR(e,args.p_topic);return {email:e,name:a8.list[e],sources:a8.src[e],note:r&&r.status==="on"?r.note:null,since:r&&r.status==="on"?r.at:new Date().toISOString()}}),
             removed:E.lists.filter(function(x){return x.topic===args.p_topic&&x.status==="off"}).map(function(x){return {email:x.email,name:x.name,how:x.source,at:x.at}})})}
         if(fn==="admin_list_add"){var o9={added:0,back:0,already:0,invalid:[],unsubscribed:[]},seen9={};(args.p_people||[]).forEach(function(p){var e=String(p.email||"").trim().toLowerCase();if(!ok(e)){o9.invalid.push(p.email);return}if(seen9[e])return;seen9[e]=1;var r=LR(e,args.p_topic);
             if(r&&r.status==="off"&&r.source==="unsubscribed"&&!args.p_force){o9.unsubscribed.push(e);return}
