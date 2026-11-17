@@ -65,7 +65,7 @@
     T.member_hours=[{id:"h1",member_id:"m1",kind:"workshop",started_at:d(30,-1),ended_at:d(30,2),note:null,added_by:"self"},{id:"h2",member_id:"m1",kind:"workshop",started_at:d(16,-1),ended_at:d(16,2),note:null,added_by:"self"},
       {id:"h3",member_id:"m1",kind:"race_day",started_at:d(160,-4),ended_at:d(160,4),note:null,added_by:"admin"},{id:"h4",member_id:"m2",kind:"workshop",started_at:d(16,-2),ended_at:d(16,2),note:null,added_by:"self"},
       {id:"h5",member_id:"m2",kind:"event",started_at:d(9,-3),ended_at:d(9,1),note:null,added_by:"self"}];
-    T.access_log=[{id:"l1",at:d(0,-3),member_id:"m4",who:"coachdee",action:"register",detail:"crew"},{id:"l2",at:d(1),member_id:"m3",who:"morganfam",action:"register",detail:"family"},
+    T.access_log=[{id:"l0",at:new Date().toISOString(),member_id:null,who:"Kevin C.",action:"admin_sign_in",detail:"kevin@example.com"},{id:"l1",at:d(0,-3),member_id:"m4",who:"coachdee",action:"register",detail:"crew"},{id:"l2",at:d(1),member_id:"m3",who:"morganfam",action:"register",detail:"family"},
       {id:"l3",at:d(2,1),member_id:"m1",who:"taylorfamily",action:"view:dates",detail:null},{id:"l4",at:d(2),member_id:"m1",who:"taylorfamily",action:"sign_in",detail:"kept signed in"},
       {id:"l5",at:d(3),member_id:null,who:"taylorfam",action:"signin_failed",detail:"unknown username"},{id:"l6",at:d(5),member_id:"m2",who:"samrivera",action:"sign_in",detail:"this visit"}];
   }
@@ -194,6 +194,7 @@
         s.forEach(function(x){var k=(x.last_name+"|"+(x.team||"")).toLowerCase();fam[k]=Math.max(fam[k]||0,x.kids);if(x.team)teams[x.team.toLowerCase()]=1;days[x.session_date]=1;meals+=x.kids+x.volunteers;vv+=x.volunteers});
         return R({kids:Object.keys(fam).reduce(function(a,k){return a+fam[k]},0),families:Object.keys(fam).length,teams:Object.keys(teams).length,meals:meals,volunteer_visits:vv,sessions:Object.keys(days).length})}
       if(fn==="list_admins")return R([{email:"test-admin@flintracing.org",user_id:"test-admin"}].concat((T.extra_admins||[]).map(function(e){return{email:e,user_id:"u-"+e}})));
+      if(fn==="admin_signout_log"){T.access_log=T.access_log||[];T.access_log.unshift({id:rid(),at:new Date().toISOString(),member_id:null,who:"Test Admin",action:"admin_sign_out",detail:"test-admin@flintracing.org"});save();return R(null)}
       if(fn==="admin_invites_open")return R((T.invites||[]).map(function(i){return {email:i.email,name:i.name,created_at:i.created_at,has_account:false}}));
       if(fn==="admin_invite_add"){var ie=String(args.p_email||"").trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ie))return R(null,"That email address doesn’t look right.");
         T.invites=(T.invites||[]).filter(function(i){return i.email!==ie}).concat([{email:ie,name:args.p_name||null,created_at:new Date().toISOString()}]);save();return R({status:"invited",email:ie,sent:args.p_send!==false})}

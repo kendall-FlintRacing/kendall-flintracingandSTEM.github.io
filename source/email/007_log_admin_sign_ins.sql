@@ -1,0 +1,4 @@
+-- Admin (email account) sign-ins and sign-outs go into the same "Who's been in" log as everyone else.
+-- Applied as migration "log_admin_sign_ins". Sign-ins are logged by a trigger when auth.users.last_sign_in_at changes;
+-- sign-outs are logged by the site calling public.admin_signout_log() just before signing out.
+-- See the migration in Supabase for the full text: private.tg_log_admin_signin(), trigger log_admin_signin, public.admin_signout_log().
