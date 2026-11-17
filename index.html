@@ -7,6 +7,8 @@
 <title>Flint Racing and STEM</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Flint Racing and STEM: hands-on STEM, racing, leadership and community at Cronin Derby Downs in Flint, Michigan.">
+<script>/* "Site is being updated" screen: use the last known answer right away so closed pages never flash */
+(function(){try{var H=document.documentElement,g=localStorage.getItem("fr-gate"),a=localStorage.getItem("fr-gate-adm");if(g==="on"&&!a)H.classList.add("fr-gated");else if(g===null){H.classList.add("fr-gate-wait");setTimeout(function(){H.classList.remove("fr-gate-wait")},4000)}}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800&family=Caveat:wght@500;600&family=Inter:wght@400;500;600;700&display=swap">
@@ -3655,6 +3657,22 @@ body.spx-prices-on .spx-noprice{display:none}
 .news-more{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-top:10px}
 .news-more a{font-weight:800;color:var(--red-deep)}
 .news-more small{color:#6b6e75}
+/* temporary "site is being updated" screen */
+#frGate{display:none}
+html.fr-gate-wait body{visibility:hidden}
+html.fr-gated header.site-nav,html.fr-gated main,html.fr-gated footer.site-foot,html.fr-gated .fr-pill,html.fr-gated .fr-mode{display:none!important}
+html.fr-gated #frGate{display:grid;place-items:center;min-height:100vh;min-height:100dvh;background:#0d0d10;color:#fff;padding:clamp(20px,5vw,48px) 18px}
+.gate-card{width:100%;max-width:480px;display:grid;gap:14px}
+.gate-k{font:800 .8rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+.gate-card h1{font-size:clamp(2.4rem,8vw,3.6rem);line-height:.95;color:#fff}
+.gate-msg{font-size:1.05rem;line-height:1.55;color:#d5d7dc}
+.gate-msg a{color:#fff;font-weight:700}
+.gate-det{margin-top:10px}
+.gate-det summary{cursor:pointer;color:#b9bcc3;font-weight:600;font-size:.92rem;padding:8px 0}
+.gate-auth.adm{margin-top:8px;padding:18px;border-radius:12px}
+.gate-auth p{line-height:1.5}
+.fr-pill .gate-flag{color:#ffd166;font:700 .78rem/1 var(--body);padding:0 10px 0 6px;white-space:nowrap}
+@media (max-width:520px){.fr-pill .gate-flag{display:none}}
 .em-ck{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:.88rem;cursor:pointer}
 .em-ck input{width:18px;height:18px;margin:0;accent-color:var(--red-deep);flex:none}
 .em-auto{font-size:.86rem;color:#5a5d64}
@@ -3667,6 +3685,12 @@ a.mini{text-decoration:none;display:inline-block}
 <body>
 
 
+<div id="frGate" role="region" aria-labelledby="gateH"><div class="gate-card">
+  <p class="gate-k">Flint Racing &amp; STEM</p>
+  <h1 id="gateH">We’re updating our site.</h1>
+  <p class="gate-msg">We’re refreshing our pages and will be back soon. Questions in the meantime? Email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p>
+  <div id="gateAuth"></div>
+</div></div>
 <header class="site-nav">
   <div class="topbar">
     <div class="top-row">
@@ -7961,11 +7985,26 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       updatePill();renderAdmin();renderRK(true);renderTM(true);renderAccess();renderMemCards();renderPortals();
       if(IS_ADMIN) loadEvents().then(function(){FR.refresh()});});
   }
+  /* ---------- Temporary "site is being updated" screen (switch on Admin → Overview). Visitors see only the notice and an admin sign-in;
+     signed-in admins see the whole site. It is a curtain for visitors, not a lock: private data is protected by the database either way. ---------- */
+  function gateOn(){try{return !!JSON.parse((CONTENT["data|gate"]||{}).value||"{}").on}catch(e){return false}}
+  function applyGate(){var on=gateOn(),open=!on||ADMIN_REAL||hashBase()==="unsubscribe",H=document.documentElement,mt=$('meta[name="robots"][data-gate]');
+    try{localStorage.setItem("fr-gate",on?"on":"off");if(ADMIN_REAL)localStorage.setItem("fr-gate-adm","1");else localStorage.removeItem("fr-gate-adm")}catch(e){}
+    H.classList.remove("fr-gate-wait");H.classList.toggle("fr-gated",!open);
+    if(on&&!mt){mt=document.createElement("meta");mt.name="robots";mt.content="noindex";mt.setAttribute("data-gate","1");document.head.appendChild(mt)}else if(!on&&mt)mt.remove();
+    if(!open)drawGate()}
+  function drawGate(){var b=$("#gateAuth");if(!b)return;
+    if(USER&&!USER.is_anonymous){b.innerHTML='<div class="adm gate-auth"><p><b>Signed in as '+esc(USER.email||"")+'.</b> This account isn’t an admin yet. Kendall can turn it on in Admin → Admins. After that, reload this page.</p><div class="row"><button class="mini" type="button" id="gateOut">Sign out</button></div></div>';$("#gateOut").onclick=signOut;return}
+    if($("#gateAuthBody"))return;
+    b.innerHTML='<details class="gate-det"><summary>Admins: sign in or create an account</summary><div class="adm gate-auth">'+signInHTML("gate")+'</div></details>';bindSignIn("gate")}
+  function setGate(on){var val=JSON.stringify({on:!!on,at:new Date().toISOString()});
+    return db.from("site_content").upsert({key:"data|gate",kind:"text",value:val,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(x.error){toast("Couldn’t change it: "+x.error.message);return false}
+      CONTENT["data|gate"]={key:"data|gate",kind:"text",value:val};applyGate();updatePill();toast(on?"The site is now closed to the public. Admins still see everything.":"The site is open to the public again.");return true})}
   /* Signed-in admins always see a way back to the Admin dashboard (every page, both viewing modes); "Edit this page" sits beside it in Admin tools. */
-  function updatePill(){var p=$(".fr-pill");
+  function updatePill(){var p=$(".fr-pill");applyGate();
     if(ADMIN_REAL&&!EDITING&&location.hash!=="#admin"){if(!p){p=document.createElement("div");p.className="fr-pill";p.setAttribute("role","group");p.setAttribute("aria-label","Admin shortcuts");
-        p.innerHTML='<a href="#admin"><span aria-hidden="true">←</span> Admin dashboard</a><button type="button">Edit this page</button>';$("button",p).onclick=function(){setEditing(true)};document.body.appendChild(p)}
-      p.hidden=false;$("button",p).hidden=!IS_ADMIN}
+        p.innerHTML='<a href="#admin"><span aria-hidden="true">←</span> Admin dashboard</a><button type="button">Edit this page</button><span class="gate-flag" hidden>Closed to the public</span>';$("button",p).onclick=function(){setEditing(true)};document.body.appendChild(p)}
+      p.hidden=false;$("button",p).hidden=!IS_ADMIN;$(".gate-flag",p).hidden=!gateOn()}
     else if(p) p.hidden=true;}
 
   /* ---------- Edit mode ---------- */
@@ -8106,7 +8145,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     ["Edit text or photos on any page","@edit","edit text photo page wording"],["Connect Square donations","donate","square payment donate donation checkout link"],["Set sponsor prices","sprice","sponsor price prices tiers menu race day track program park"],["Add racers and sponsors for race day","race","racers bracket heats ads sponsors"],
     ["Approve shout-outs","#track-manager","shoutout shout-out intermission ads"],["Run the live race feed","#race-control","race control timer lights heats"],["Assign race-day volunteers","#volunteers","volunteer crew shift"],
     ["Get an email when someone registers or inquires","email","email alert notify notification inbox new inquiry registration"],["Edit a pre-approved reply","email:msgs","email template message reply response instructions automatic auto"],["Send an update to families","email:update","email newsletter update announce mailing list subscribers"],["See emails the site sent","email:log","email sent mail log failed delivery"],["Connect the email service","email:setup","email setup resend domain from address reply"],
-    ["Download rosters (.csv)","overview","csv export roster spreadsheet download"]];
+    ["Close or reopen the site to the public","overview","close open public private maintenance updating password lock hide site gate"],["Download rosters (.csv)","overview","csv export roster spreadsheet download"]];
   function admIndex(){if(ADMIDX)return Promise.resolve(ADMIDX);
     return Promise.all([db.from("members").select("display_name,username,email,status,kind"),db.from("events").select("title,start_date"),db.from("inquiries").select("first_name,last_name,email,organization,status"),
       db.from("news_posts").select("title"),db.from("spirit_items").select("name"),db.from("race_racers").select("display_name,team,car_number"),db.from("race_volunteers").select("first_name,last_name,email"),db.from("resources").select("title")]).then(function(r){
@@ -10494,7 +10533,9 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       var todo=[[c.mem,"profile","profiles","waiting for approval","tab:members","users"],[c.inq,"new inquiry","new inquiries","to answer","tab:inq","inbox"],[c.regs,"new race registration","new race registrations","to review","tab:regs","flag"],[c.albums,"photo album","photo albums","to review","tab:reviews","check"],
         [c.plans,"teacher plan","teacher plans","to review","tab:reviews","note"],[c.vol,"race-day volunteer","race-day volunteers","to place","#volunteers","flag"],[c.so,"shout-out","shout-outs","to approve","#track-manager","star"]].filter(function(x){return x[0]});
       var tile=function(go,i,title,sub){return '<button type="button" class="ov-act" data-go="'+go+'">'+ico(i)+'<b>'+title+'</b><span>'+sub+'</span></button>'};
-      P.innerHTML='<div class="ov-cols"><section class="ov-card"><p class="me-k">Needs you</p>'+(todo.length?'<ul class="ov-todo">'+todo.map(function(x){return '<li><button type="button" data-go="'+x[4]+'">'+ico(x[5])+'<span><b>'+x[0]+' '+(x[0]===1?x[1]:x[2])+'</b> '+x[3]+'</span><i aria-hidden="true">→</i></button></li>'}).join("")+'</ul>':'<p class="ov-clear">'+ico("check")+'You’re all caught up.</p>')+'</section>'+
+      var gOn=gateOn();
+      P.innerHTML='<div class="dn-status '+(gOn?"warn":"on")+'" style="margin-bottom:16px">'+ico(gOn?"shield":"check")+'<div><b>'+(gOn?"The site is closed to the public":"The site is open to the public")+'</b><span>'+(gOn?"Visitors see “We’re updating our site” with your email address and an admin sign-in. Families and crew can’t sign in, and the public forms are closed. Signed-in admins see everything.":"Need time to finish wording and photos? Close the site: visitors see a short “We’re updating our site” notice until you reopen it. Nothing is deleted.")+'</span></div><button class="mini'+(gOn?" solid":"")+'" type="button" id="gateBtn">'+(gOn?"Reopen the site":"Close the site to the public")+'</button></div>'+
+        '<div class="ov-cols"><section class="ov-card"><p class="me-k">Needs you</p>'+(todo.length?'<ul class="ov-todo">'+todo.map(function(x){return '<li><button type="button" data-go="'+x[4]+'">'+ico(x[5])+'<span><b>'+x[0]+' '+(x[0]===1?x[1]:x[2])+'</b> '+x[3]+'</span><i aria-hidden="true">→</i></button></li>'}).join("")+'</ul>':'<p class="ov-clear">'+ico("check")+'You’re all caught up.</p>')+'</section>'+
         '<section class="ov-card ov-nums"><div><b>'+mem+'</b><span>Approved members</span></div><div><b>'+up+'</b><span>Upcoming events</span></div><div><b>'+(c.inq||0)+'</b><span>New inquiries</span></div><div class="'+(dn&&dn.link?"on":"off")+'"><b>'+(dn&&dn.link?(/\/test_/.test(dn.link)?"Test":"Live"):"Off")+'</b><span>Online donations</span></div></section></div>'+
         '<h3 class="ov-h">Quick actions</h3><div class="ov-acts">'+tile("edit","edit","Edit the site","Change any text or photo")+tile("tab:events","cal","Add an event","Public calendar dates")+tile("tab:news","news","Post a story","News & Stories")+
           tile("tab:members","users","Approve profiles","Roles and hours")+tile("tab:members:log","shield","Who’s been in","Sign-in log")+tile("tab:email","mail","Email","Alerts, replies and updates")+tile("tab:race","flag","Race day setup","Racers and sponsors")+tile("tab:donate","heart","Donations","Online giving link")+tile("tab:home","layout","Homepage","Slideshow and numbers")+'</div>'+
@@ -10503,6 +10544,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         if(g==="edit"){location.hash="#home";setTimeout(function(){setEditing(true)},60);return}
         if(g.indexOf("tab:")===0){goTab(g.slice(4));return} location.hash=g}});
       $$("[data-csv]",P).forEach(function(b){b.onclick=function(){rosterCSV(b.getAttribute("data-csv"))}});
+      $("#gateBtn").onclick=function(){var b=this;if(!gOn&&!b.getAttribute("data-sure")){b.setAttribute("data-sure","1");b.textContent="Confirm: close the site now";return}b.disabled=true;setGate(!gOn).then(function(){if(TAB==="overview")tabOverview()})};
     });
   }
 
