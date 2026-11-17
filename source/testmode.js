@@ -195,6 +195,13 @@
         return R({kids:Object.keys(fam).reduce(function(a,k){return a+fam[k]},0),families:Object.keys(fam).length,teams:Object.keys(teams).length,meals:meals,volunteer_visits:vv,sessions:Object.keys(days).length})}
       if(fn==="list_admins")return R([{email:"test-admin@flintracing.org",user_id:"test-admin"}].concat((T.extra_admins||[]).map(function(e){return{email:e,user_id:"u-"+e}})));
       if(fn==="admin_signout_log"){T.access_log=T.access_log||[];T.access_log.unshift({id:rid(),at:new Date().toISOString(),member_id:null,who:"Test Admin",action:"admin_sign_out",detail:"test-admin@flintracing.org"});save();return R(null)}
+      if(fn==="admin_council_meetings"){T.council_meetings=T.council_meetings||[];return R({meetings:T.council_meetings.slice().sort(function(a,b){return a.meeting_date<b.meeting_date?1:-1}),reach:3,members:4})}
+      if(fn==="admin_council_meeting_save"){T.council_meetings=T.council_meetings||[];var now5=new Date().toISOString(),mm=args.p_id?T.council_meetings.filter(function(x){return x.id===args.p_id})[0]:null;
+        if(!args.p_date)return R(null,"Pick a date.");if(args.p_start&&args.p_end&&args.p_end<=args.p_start)return R(null,"The meeting has to end after it starts.");
+        var rec={meeting_date:args.p_date,start_time:args.p_start,end_time:args.p_end,location:args.p_location||null,title:args.p_title||"Leadership Council meeting",notes:args.p_notes||null,remind:args.p_remind!==false,cancelled_at:null,updated_at:now5,hours:2};
+        if(mm){Object.assign(mm,rec)}else{mm=Object.assign({id:rid(),created_at:now5},rec);T.council_meetings.push(mm)}save();return R({id:mm.id,sent:args.p_notify===false?0:3,changed:true})}
+      if(fn==="admin_council_meeting_remind")return R({sent:3});
+      if(fn==="admin_council_meeting_cancel"){var mc=(T.council_meetings||[]).filter(function(x){return x.id===args.p_id})[0];if(!mc)return R(null,"That meeting wasn’t found.");mc.cancelled_at=new Date().toISOString();mc.updated_at=mc.cancelled_at;save();return R({sent:3})}
       if(fn==="admin_invites_open")return R((T.invites||[]).map(function(i){return {email:i.email,name:i.name,created_at:i.created_at,has_account:false}}));
       if(fn==="admin_invite_add"){var ie=String(args.p_email||"").trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ie))return R(null,"That email address doesn’t look right.");
         T.invites=(T.invites||[]).filter(function(i){return i.email!==ie}).concat([{email:ie,name:args.p_name||null,created_at:new Date().toISOString()}]);save();return R({status:"invited",email:ie,sent:args.p_send!==false})}
