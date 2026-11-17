@@ -273,6 +273,17 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 .dots button.on{background:var(--red)}
 .stream .count{color:var(--ink)}
 @media (max-width:640px){.slides{aspect-ratio:4/3}.dots{display:none}}
+.crp{position:fixed;inset:0;z-index:300;background:rgba(17,17,19,.72);display:grid;place-items:center;padding:16px;overflow:auto}
+.crp-box{background:#fff;border-radius:8px;max-width:980px;width:100%;padding:20px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.crp-box h3{margin:0 0 4px;font:800 1.2rem/1.2 var(--display);text-transform:uppercase;letter-spacing:.03em}
+.crp-box p{margin:0 0 14px;color:#4a4d55;font-size:.95rem}
+.crp-frames{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(0,1fr);gap:16px;align-items:start}
+.crp-frames figure{margin:0}.crp-frames figcaption{font:700 .8rem/1 var(--body);text-transform:uppercase;letter-spacing:.06em;color:#4a4d55;margin-bottom:6px}
+.crp-f{position:relative;overflow:hidden;border-radius:6px;background:#2a2d33;cursor:grab;touch-action:none;outline-offset:3px}
+.crp-f:active{cursor:grabbing}.crp-f img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none}
+.crp-f.wide{aspect-ratio:16/7.2}.crp-f.tall{aspect-ratio:4/3}
+.crp-zoom{display:flex;align-items:center;gap:10px;margin:16px 0 4px;font-weight:700}.crp-zoom input{flex:1;max-width:340px}
+@media (max-width:640px){.crp-frames{grid-template-columns:minmax(0,1fr)}.crp-box{padding:14px}}
 
 /* News */
 .news{background:#eef0f2;padding-block:var(--space)}
@@ -5505,10 +5516,12 @@ a.mini{text-decoration:none;display:inline-block}
   /* ---- Photo carousel ---- */
   var SLIDES={{SLIDES}}, SLIDES_DEFAULT=JSON.parse(JSON.stringify(SLIDES));
   var ci=0, timer;
+  function slideCss(s){var p=/^\d{1,3}(\.\d+)?% \d{1,3}(\.\d+)?%$/.test(s.pos||"")?s.pos:"50% 50%",z=Math.min(3,Math.max(1,+s.zoom||1));
+    return "object-position:"+p+(z>1?";transform:scale("+z+");transform-origin:"+p:"")}
   function drawSlides(){ci=0;
     $("#slides").innerHTML=SLIDES.map(function(s,i){
       return '<div class="slide'+(i===0?' on':'')+'" role="group" aria-label="'+(i+1)+' of '+SLIDES.length+'">'+
-        (s.img?'<img src="'+esc(s.img)+'" alt="'+esc(s.title||"")+'" style="object-position:'+(s.pos||'50% 50%')+'"'+(i>1?' loading="lazy"':'')+'>':'<div class="photo-ph"><div><b>Photo '+(i+1)+'</b>'+esc(s.title||"")+'</div></div>')+
+        (s.img?'<img src="'+esc(s.img)+'" alt="'+esc(s.title||"")+'" style="'+slideCss(s)+'"'+(i>1?' loading="lazy"':'')+'>':'<div class="photo-ph"><div><b>Photo '+(i+1)+'</b>'+esc(s.title||"")+'</div></div>')+
         '<strong>'+esc(s.title||"")+'</strong><span class="tag">'+esc(s.tag||"")+'</span></div>';
     }).join("");
     $("#dots").innerHTML=SLIDES.map(function(_,i){return '<button aria-label="Show photo '+(i+1)+'"'+(i===0?' class="on"':'')+'></button>'}).join("");
@@ -6400,7 +6413,7 @@ a.mini{text-decoration:none;display:inline-block}
     recaptureForm:function(){if(document.getElementById("qForm"))qFormHTML=qCard.innerHTML.replace(/ contenteditable="true"/g,"")},
     refresh:function(){nowStrip();monthOptions();var h=(location.hash||"#home").slice(1);
       if(h==="calendar")renderCal();if(h==="racing"||h==="track-schedule")renderBoard();if(h==="seasonal-workshops")renderSeasons();},
-    esc:esc,getSlides:function(){return JSON.parse(JSON.stringify(SLIDES))},setSlides:function(l){SLIDES=l;drawSlides()},SLIDES_DEFAULT:SLIDES_DEFAULT};
+    esc:esc,getSlides:function(){return JSON.parse(JSON.stringify(SLIDES))},slideCss:slideCss,setSlides:function(l){SLIDES=l;drawSlides()},SLIDES_DEFAULT:SLIDES_DEFAULT};
   route();
 })();
 </script>
@@ -10271,6 +10284,36 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
             db.from("resources").delete().eq("id",id).then(function(z){if(okToast(z,"Deleted"))tabPrintables()})}}})});
     });
   }
+  /* ---------- Slideshow crop: drag the photo inside the frame and zoom; saved as position + zoom (the original photo is kept) ---------- */
+  function cropSlide(sl,done){
+    var m=/^(\d+(?:\.\d+)?)% (\d+(?:\.\d+)?)%$/.exec(sl.pos||""),x=m?+m[1]:50,y=m?+m[2]:50,z=Math.min(3,Math.max(1,+sl.zoom||1)),back=document.activeElement;
+    var o=document.createElement("div");o.className="crp";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");o.setAttribute("aria-label","Crop photo");
+    o.innerHTML='<div class="crp-box"><h3>Crop photo</h3><p>Drag the photo to move it inside the frame. Use the slider to zoom in. Check both views. Computers show the wide frame, phones show the taller one.</p>'+
+      '<div class="crp-frames"><figure><figcaption>On a computer</figcaption><div class="crp-f wide" tabindex="0" aria-label="Wide frame. Drag, or use the arrow keys, to move the photo"><img alt="" src="'+esc(sl.img)+'"></div></figure>'+
+      '<figure><figcaption>On a phone</figcaption><div class="crp-f tall" tabindex="0" aria-label="Phone frame. Drag, or use the arrow keys, to move the photo"><img alt="" src="'+esc(sl.img)+'"></div></figure></div>'+
+      '<label class="crp-zoom">Zoom <input type="range" min="1" max="3" step="0.05" value="'+z+'" aria-label="Zoom"><span></span></label>'+
+      '<div class="row"><button class="btn deep" type="button" data-c="ok">Save crop</button><button class="mini" type="button" data-c="reset">Reset</button><button class="mini" type="button" data-c="no">Cancel</button></div></div>';
+    document.body.appendChild(o);
+    var frames=$$(".crp-f",o),imgs=$$(".crp-f img",o),zr=$(".crp-zoom input",o),zl=$(".crp-zoom span",o);
+    function paint(){var p=x.toFixed(1)+"% "+y.toFixed(1)+"%";imgs.forEach(function(im){im.style.objectPosition=p;im.style.transformOrigin=p;im.style.transform=z>1?"scale("+z+")":""});zl.textContent=Math.round(z*100)+"%"}
+    function nudge(f,dx,dy){var im=$("img",f),fw=f.clientWidth,fh=f.clientHeight,nw=im.naturalWidth||fw,nh=im.naturalHeight||fh,k=Math.max(fw/nw,fh/nh)*z,
+        ox=nw*k-fw,oy=nh*k-fh;
+      if(ox>1)x=Math.min(100,Math.max(0,x-dx/ox*100)); if(oy>1)y=Math.min(100,Math.max(0,y-dy/oy*100)); paint()}
+    frames.forEach(function(f){var last=null;
+      f.addEventListener("pointerdown",function(e){last=[e.clientX,e.clientY];f.setPointerCapture(e.pointerId);e.preventDefault()});
+      f.addEventListener("pointermove",function(e){if(!last)return;nudge(f,e.clientX-last[0],e.clientY-last[1]);last=[e.clientX,e.clientY]});
+      f.addEventListener("pointerup",function(){last=null});f.addEventListener("pointercancel",function(){last=null});
+      f.addEventListener("wheel",function(e){e.preventDefault();z=Math.min(3,Math.max(1,z-e.deltaY*0.002));zr.value=z;paint()},{passive:false});
+      f.addEventListener("keydown",function(e){var d={ArrowLeft:[8,0],ArrowRight:[-8,0],ArrowUp:[0,8],ArrowDown:[0,-8]}[e.key];if(d){e.preventDefault();nudge(f,d[0],d[1])}})});
+    zr.oninput=function(){z=+zr.value;paint()};
+    function close(){o.remove();document.removeEventListener("keydown",esc_);if(back&&back.focus)back.focus()}
+    function esc_(e){if(e.key==="Escape")close()}
+    document.addEventListener("keydown",esc_);
+    o.addEventListener("click",function(e){if(e.target===o)close()});
+    $("[data-c=no]",o).onclick=close;
+    $("[data-c=reset]",o).onclick=function(){x=50;y=50;z=1;zr.value=1;paint()};
+    $("[data-c=ok]",o).onclick=function(){sl.pos=x.toFixed(1)+"% "+y.toFixed(1)+"%";if(z>1.001)sl.zoom=+z.toFixed(2);else delete sl.zoom;close();done()};
+    paint();frames[0].focus()}
   /* ---------- Admin → Homepage: slideshow + "Work you can see" numbers ---------- */
   function tabHome(){var P=$("#admPanel"),slides=FR.getSlides(),cfg=[];try{cfg=JSON.parse((CONTENT["data|stats"]||{}).value||"[]")}catch(e){}
     var labels=$$(".impact .stat span").map(function(s){return s.textContent});
@@ -10279,16 +10322,17 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           labels.map(function(l,i){var v=cfg[i]||"manual";return '<tr><td>'+esc(l)+'</td><td><select data-si="'+i+'"><option value="manual">What’s typed on the page</option>'+Object.keys(STAT_SRC).map(function(k){return '<option value="'+k+'"'+(v===k?' selected':'')+'>'+STAT_SRC[k]+'</option>'}).join("")+'</select></td><td>'+(v==="manual"?'<small>Edit the number on the homepage</small>':(st[v]||0)+(st[v]?'':' <small>(the typed number shows until this is above 0)</small>'))+'</td></tr>'}).join("")+'</tbody></table></div>'+
           '<p class="rk-fine">Tip: change the labels themselves with Edit the site, e.g. “Meals served this season”.</p><div class="row"><button class="mini solid" type="button" id="stSave">Save numbers</button></div></div>'+
         '<div class="inq"><header><b>Built Together slideshow</b><small>'+slides.length+' photos</small></header><div class="adm-scroll"><table class="adm-table" style="min-width:720px"><thead><tr><th>Photo</th><th>Caption</th><th>Tag</th><th></th></tr></thead><tbody>'+
-          slides.map(function(s,i){return '<tr data-i="'+i+'"><td style="width:120px">'+(s.img?'<img src="'+esc(s.img)+'" alt="" style="max-width:110px;max-height:64px;object-fit:cover;border-radius:3px">':'<small>No photo</small>')+'</td><td><input type="text" maxlength="80" value="'+esc(s.title||"")+'" aria-label="Caption"></td><td style="width:160px"><input type="text" maxlength="30" value="'+esc(s.tag||"")+'" aria-label="Tag"></td>'+
-            '<td style="white-space:nowrap"><button class="mini" type="button" data-sa="img">Photo</button> <button class="mini" type="button" data-sa="up"'+(i===0?' disabled':'')+'>↑</button> <button class="mini" type="button" data-sa="down"'+(i===slides.length-1?' disabled':'')+'>↓</button> <button class="mini red" type="button" data-sa="rm">Remove</button></td></tr>'}).join("")+'</tbody></table></div>'+
+          slides.map(function(s,i){return '<tr data-i="'+i+'"><td style="width:120px">'+(s.img?'<div style="width:110px;aspect-ratio:16/7.2;overflow:hidden;border-radius:3px;background:#2a2d33"><img src="'+esc(s.img)+'" alt="" style="width:100%;height:100%;object-fit:cover;'+FR.slideCss(s)+'"></div>':'<small>No photo</small>')+'</td><td><input type="text" maxlength="80" value="'+esc(s.title||"")+'" aria-label="Caption"></td><td style="width:160px"><input type="text" maxlength="30" value="'+esc(s.tag||"")+'" aria-label="Tag"></td>'+
+            '<td style="white-space:nowrap"><button class="mini" type="button" data-sa="img">Photo</button> '+(s.img?'<button class="mini" type="button" data-sa="crop">Crop</button> ':'')+'<button class="mini" type="button" data-sa="up"'+(i===0?' disabled':'')+'>↑</button> <button class="mini" type="button" data-sa="down"'+(i===slides.length-1?' disabled':'')+'>↓</button> <button class="mini red" type="button" data-sa="rm">Remove</button></td></tr>'}).join("")+'</tbody></table></div>'+
           '<div class="row"><button class="mini" type="button" id="slAdd">+ Add a photo</button><button class="btn deep" type="button" id="slSave">Save slideshow</button><button class="mini red" type="button" id="slReset">Restore original</button></div></div>';
         $("#stSave").onclick=function(){cfg=$$("[data-si]",P).map(function(s){return s.value});
           db.from("site_content").upsert({key:"data|stats",kind:"text",value:JSON.stringify(cfg),updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(okToast(x,"Numbers saved")){CONTENT["data|stats"]={key:"data|stats",kind:"text",value:JSON.stringify(cfg)};applyStats()}})};
         $$("tbody tr[data-i]",P).forEach(function(tr){var i=+tr.getAttribute("data-i"),f=$$("input",tr);f[0].oninput=function(){slides[i].title=this.value};f[1].oninput=function(){slides[i].tag=this.value};
           $$("[data-sa]",tr).forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-sa");
+            if(a==="crop"){cropSlide(slides[i],function(){draw();saveSlides("Crop saved.")});return}
             if(a==="rm"){slides.splice(i,1);draw()} else if(a==="up"&&i>0){slides.splice(i-1,0,slides.splice(i,1)[0]);draw()} else if(a==="down"&&i<slides.length-1){slides.splice(i+1,0,slides.splice(i,1)[0]);draw()}
-            else if(a==="img"){pickFile(function(file){toast("Uploading…");uploadFile(file,"slides").then(function(u){slides[i].img=u;draw();saveSlides("Photo replaced and saved.")}).catch(upErr)})}}})});
-        $("#slAdd").onclick=function(){pickFile(function(file){toast("Uploading…");uploadFile(file,"slides").then(function(u){slides.push({img:u,title:"New photo",tag:"Flint Racing"});draw();saveSlides("Photo added and saved. Write a caption, then press Save slideshow.")}).catch(upErr)})};
+            else if(a==="img"){pickFile(function(file){toast("Uploading…");uploadFile(file,"slides").then(function(u){slides[i].img=u;delete slides[i].pos;delete slides[i].zoom;draw();saveSlides("Photo replaced and saved.")}).catch(upErr)})}}})});
+        $("#slAdd").onclick=function(){pickFile(function(file){toast("Uploading…");uploadFile(file,"slides").then(function(u){slides.push({img:u,title:"New photo",tag:"Flint Racing"});draw();saveSlides("Photo added and saved. Use Crop to adjust it, and write a caption.")}).catch(upErr)})};
         function saveSlides(msg){if(!slides.length){toast("Keep at least one photo.");return}var v=JSON.stringify(slides);
           db.from("site_content").upsert({key:"data|slides",kind:"text",value:v,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(okToast(x,msg||"Slideshow saved")){CONTENT["data|slides"]={key:"data|slides",kind:"text",value:v};FR.setSlides(JSON.parse(v))}})}
         $("#slSave").onclick=function(){saveSlides()};
