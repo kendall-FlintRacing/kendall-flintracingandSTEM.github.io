@@ -2928,6 +2928,30 @@ body.sle-open{overflow:hidden}
 .reh-ov{position:fixed;inset:0;z-index:500;background:rgba(10,10,12,.8);display:grid;place-items:center;padding:20px}
 .reh-ovin{background:#fff;border-radius:10px;padding:22px;max-width:440px;display:grid;gap:8px}.reh-ovin b{font:800 1.2rem/1 var(--display);text-transform:uppercase}.reh-ovin p{margin:0}.reh-ovin .row{margin:0}
 body.rw-app-on .fr-test.reh-chip{bottom:calc(62px + env(safe-area-inset-bottom,0px))}
+/* admin event cards + carousel */
+.evp-head{display:flex;gap:12px 20px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}.evp-head p{margin:0;color:#4a4d55;max-width:70ch}
+.evc-car{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:stretch}
+.evc-nav{width:40px;border:1.5px solid #c9ccd1;background:#fff;border-radius:8px;font:700 1.6rem/1 var(--body);color:var(--ink);cursor:pointer}.evc-nav:disabled{opacity:.3;cursor:default}.evc-nav:not(:disabled):hover{border-color:var(--ink)}
+.evc-row{display:grid;grid-template-columns:repeat(var(--per),minmax(0,1fr));gap:12px}
+.evc{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-content:start;background:#fff;border:1px solid #e1e3e6;border-top:4px solid var(--red);border-radius:10px;padding:14px;box-shadow:0 4px 14px rgba(17,18,22,.06)}
+.evc.off{border-top-color:#9aa0a6;opacity:.75}.evc.flash{animation:evflash 1.6s ease-out}
+@keyframes evflash{0%{box-shadow:0 0 0 4px #20d36b}100%{box-shadow:0 4px 14px rgba(17,18,22,.06)}}
+.evc-date{display:flex;align-items:baseline;gap:6px;justify-self:start;background:#111216;color:#fff;border-radius:6px;padding:6px 10px;text-transform:uppercase}
+.evc-date span{font:800 .7rem/1 var(--body);letter-spacing:.1em;color:var(--pink)}.evc-date b{font:800 1.4rem/1 var(--display)}.evc-date small{font:700 .66rem/1 var(--body);letter-spacing:.08em;color:#c9cbd0}
+.evc-b{display:grid;gap:5px;align-content:start;min-width:0}.evc-b h4{margin:0;font:800 1.05rem/1.2 var(--body);color:var(--ink)}.evc-b .row{margin:4px 0 0;gap:6px}.evc-b>.mini{justify-self:start;margin-top:4px}
+.evc-type{font:800 .66rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--red-deep)}
+.evc-l{margin:0;font-size:.88rem;color:#3a3d44}.evc-miss{color:#8a5a00;font-style:italic}
+.evc-chips{display:flex;gap:6px;flex-wrap:wrap}.evchip{font:700 .7rem/1 var(--body);padding:5px 8px;border-radius:999px;background:#eceef1;color:#3a3d44}.evchip.ok{background:#e3f6ea;color:#17803d}.evchip.warn{background:#fff3cd;color:#7a5600}.evchip.off{background:#eceef1;color:#5a5d64}
+.evc-count{margin:6px 0 0;text-align:center;font-size:.82rem;color:#5a5d64}
+.evf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;background:#f8f9fa;border:1px solid #e1e3e6;border-left:4px solid var(--red);border-radius:8px;padding:14px;margin:14px 0;max-width:820px}
+.evf h3{grid-column:1/-1;margin:0;font:800 1.05rem/1 var(--display);text-transform:uppercase;letter-spacing:.03em}
+.evf label{display:grid;gap:4px;font-weight:700;font-size:.9rem;min-width:0}.evf label small{font-weight:500;color:#5a5d64}.evf .w{grid-column:1/-1}
+.evf input[type=text],.evf input[type=date],.evf select{width:100%;min-height:42px;border:1.5px solid #c9ccd1;border-radius:4px;padding:6px 10px;font:500 1rem/1.2 var(--body);background:#fff}
+.evf label.chk{display:flex;align-items:center;gap:8px;font-weight:500}.evf .chk input{width:18px;height:18px;flex:none}.evf .row{margin:0}
+.evp-past{margin-top:18px}.evp-past summary{cursor:pointer;font-weight:700;color:#4a4d55}
+.evp-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px}.evp-list li{display:grid;grid-template-columns:120px minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:6px 8px;border-bottom:1px solid #eceef1}
+.evp-list span{color:#5a5d64;font-size:.88rem}.evp-list small{color:#6b6e75}
+@media (max-width:640px){.evf{grid-template-columns:minmax(0,1fr)}.evp-list li{grid-template-columns:minmax(0,1fr) auto}.evp-list span,.evp-list small{grid-column:1}.evc-nav{width:34px}}
 /* phones: ask viewers to turn sideways; landscape phone layout */
 .rw-rotate{display:none;align-items:center;gap:12px;background:#f5b82e;color:#2a1d00;border-radius:8px;padding:10px 8px 10px 14px;flex:none}
 .rw-rotate p{margin:0;flex:1;font-size:.95rem;line-height:1.3}.rw-rotate b{display:block;font-size:1.02rem}
@@ -8521,7 +8545,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function ico(k){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICO[k]||"")+'</svg>'}
   var SECT=[["Home",[["overview","Overview","Everything that needs you, at a glance","home"]]],
     ["People",[["members","Members","Approve profiles, set roles, fix hours and see who’s been in","users","mem"],["inq","Inquiries","Questionnaire replies from families, schools and sponsors","inbox","inq"],["regs","Registrations","Race and building workshop registrations (official AASBD form) signed online","flag","regs"],["email","Email","Alerts to your inbox, pre-approved replies and updates to families","mail"],["team","Admins","Email accounts for everyone who runs the site","shield"]]],
-    ["Programs",[["events","Events","Dates on the public calendar","cal"],["families","Times & places","Private times and locations for signed-in members","pin"],["notes","Bulletin","Monthly notes on the Program Dashboard","note"],["resources","Resources","Forms, links and program pages","folder"],["printables","Flyers & forms","Upload printable flyers, registration, order and field trip forms","note"],["reviews","Reviews","Photo albums and teacher plans waiting for approval","check","rev"]]],
+    ["Events",[["events","Program events","Monthly workshops, fun runs and camps","cal"],["racingev","Racing events","Building workshops, race day and sanctioned races","flag"],["leadership","Leadership meetings","Council meetings with email reminders","users"]]],
+    ["Programs",[["notes","Bulletin","Monthly notes on the Program Dashboard","note"],["resources","Resources","Forms, links and program pages","folder"],["printables","Flyers & forms","Upload printable flyers, registration, order and field trip forms","note"],["reviews","Reviews","Photo albums and teacher plans waiting for approval","check","rev"]]],
     ["Website",[["home","Homepage","Slideshow and the numbers on the homepage","layout"],["news","News & Stories","Post and edit stories","news"],["partners","Partners","Sponsor and partner logos","star"],["edits","Site edits","Every text and photo change, with undo","undo"]]],
     ["Fundraising",[["donate","Donations","Connect the Donate page to your Square link","heart"],["sprice","Sponsor prices","Price fields for the sponsor menus, off until you’re ready","star"]]],
     ["Race day",[["race","Race day setup","Racers, brackets, sponsors, ads and the race-day team","flag"]]]];
@@ -8575,12 +8600,12 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     $("#admMenu").onclick=function(){ADMNAV=!ADMNAV;$(".adm-side",box).classList.toggle("open",ADMNAV);this.setAttribute("aria-expanded",String(ADMNAV))};
     $$(".adm-nav button[data-tab]",box).forEach(function(b){b.onclick=function(){goTab(b.getAttribute("data-tab"))}});
     bindAdmSearch();admCounts();
-    ({overview:tabOverview,members:tabMembers,team:tabTeam,events:tabEvents,families:tabFamilies,notes:tabNotes,inq:tabInq,regs:tabRegs,news:tabNews,resources:tabResources,home:tabHome,spirit:tabSpirit,partners:tabPartners,reviews:tabReviews,edits:tabEdits,race:tabRace,donate:tabDonate,sprice:tabSprice,printables:tabPrintables,email:tabEmail})[TAB]();
+    ({overview:tabOverview,members:tabMembers,team:tabTeam,events:tabEvents,racingev:tabRacingEv,leadership:tabLeadership,families:tabEvents,notes:tabNotes,inq:tabInq,regs:tabRegs,news:tabNews,resources:tabResources,home:tabHome,spirit:tabSpirit,partners:tabPartners,reviews:tabReviews,edits:tabEdits,race:tabRace,donate:tabDonate,sprice:tabSprice,printables:tabPrintables,email:tabEmail})[TAB]();
   }
   /* Search: sections, common jobs, and the people and things in the database */
   var ADM_JOBS=[["Approve new profiles","members","approve register pending family crew"],["Change someone’s roles","members","role teacher photographer workshop race control track"],["Reset a passcode","members","password passcode locked forgot"],
     ["Fix or add volunteer hours","members","hours check in clock"],["See who signed in","members:log","log visitor sign-in who viewed dates security"],["Make someone an admin","team","admin kevin access"],
-    ["Add an event to the calendar","events","date calendar workshop camp race"],["Set workshop times and places","families","time location address private"],["Post a monthly note","notes","bulletin announcement"],
+    ["Add a workshop, fun run or camp","events","date calendar workshop camp fun run monthly steam"],["Add a building workshop or race","racingev","date calendar race derby building sanctioned practice"],["Schedule a Leadership Council meeting","leadership","council meeting students reminder"],["Set times and places for an event","events","time location address private"],["Post a monthly note","notes","bulletin announcement"],
     ["Post a news story","news","story article press"],["Add a form or link","resources","pdf form link waiver"],["Upload a flyer or printable form","printables","flyer upload print pdf registration order field trip form file share"],["Post this month’s bulletin file","notes","bulletin pdf monthly newsletter file"],["Approve photos","reviews","album photographer pictures"],["Approve a teacher plan","reviews","lesson teacher materials"],
     ["Change the homepage slideshow","home","slides photos numbers stats"],["Add a sponsor logo","partners","sponsor logo partner"],["Undo a site change","edits","undo history revert"],
     ["Edit text or photos on any page","@edit","edit text photo page wording"],["Connect Square donations","donate","square payment donate donation checkout link"],["Set sponsor prices","sprice","sponsor price prices tiers menu race day track program park"],["Add racers and sponsors for race day","race","racers bracket heats ads sponsors"],
@@ -8807,10 +8832,14 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       var row=function(x){var dt=fmtDate(x.meeting_date,{weekday:"short",month:"short",day:"numeric",year:"numeric"}),tm=x.start_time?(x.end_time?hm12(x.start_time)+" – "+hm12(x.end_time):hm12(x.start_time)):"";
         return '<tr data-mid="'+x.id+'"'+(x.cancelled_at?' class="mtg-off"':'')+'><td><b>'+esc(dt)+'</b><br><small>'+esc(tm)+'</small></td><td>'+esc(x.title)+'<br><small>'+esc(x.location||"")+'</small></td><td><span class="mtg-type">Leadership Council</span>'+(x.cancelled_at?' <span class="mtg-st x">Cancelled</span>':x.reminded_at?' <span class="mtg-st">Reminder sent</span>':'')+'</td>'+
           '<td style="text-align:right">'+(x.meeting_date>=t?'<button class="mini" type="button" data-mt="edit">'+(x.cancelled_at?'Reschedule':'Edit / reschedule')+'</button> '+(x.cancelled_at?'':'<button class="mini" type="button" data-mt="mail">Email reminder now</button> <button class="mini red" type="button" data-mt="cancel">Cancel meeting</button>'):'<small>Past</small>')+'</td></tr>'};
-      box.innerHTML='<div class="inq"><header><b>Leadership Council meetings</b><small>Type: Leadership Council · shows in the council portal</small>'+(MTG_EDIT?'':'<button class="mini solid" type="button" id="mtNew">+ Schedule a meeting</button>')+'</header>'+
-        '<p style="margin:0;color:#4a4d55;max-width:78ch">Students see these in their Leadership Council portal, with the time and place. Each meeting can email every council member when you schedule or change it, plus a reminder the day before. They don’t need to reply. Meetings count toward service hours once students confirm they were there.</p>'+form+
-        (up.length?'<div><table class="adm-table mtg-table" style="min-width:0"><tbody>'+up.map(row).join("")+'</tbody></table></div>':(MTG_EDIT?'':'<p class="rk-fine">No meetings scheduled.</p>'))+
-        (past.length?'<details style="margin-top:8px"><summary style="cursor:pointer;font-weight:700;color:#4a4d55">Past meetings ('+past.length+')</summary><div><table class="adm-table mtg-table" style="min-width:0"><tbody>'+past.slice(0,30).map(row).join("")+'</tbody></table></div></details>':'')+'</div>';
+      var mcard=function(x){var tm=x.start_time?(x.end_time?hm12(x.start_time)+" – "+hm12(x.end_time):hm12(x.start_time)):"";
+        return '<article class="evc'+(x.cancelled_at?' off':'')+'" data-mid="'+x.id+'">'+evDateBlock(x.meeting_date)+'<div class="evc-b"><span class="evc-type">Leadership Council</span><h4>'+esc(x.title)+'</h4><p class="evc-l">'+esc([tm,x.location].filter(Boolean).join(" · ")||"No time or place yet")+'</p>'+
+          '<div class="evc-chips">'+(x.cancelled_at?'<span class="evchip off">Cancelled</span>':(x.reminded_at?'<span class="evchip ok">Reminder sent</span>':x.remind!==false?'<span class="evchip ok">Reminder the day before</span>':''))+'</div>'+
+          '<div class="row"><button class="mini" type="button" data-mt="edit">'+(x.cancelled_at?'Reschedule':'Edit / reschedule')+'</button>'+(x.cancelled_at?'':'<button class="mini" type="button" data-mt="mail">Email reminder now</button><button class="mini red" type="button" data-mt="cancel">Cancel meeting</button>')+'</div></div></article>'};
+      box.innerHTML=form+'<h3 class="ov-h">Coming up</h3><div id="mtgCar"></div>'+
+        '<p class="rk-fine">Email goes to '+esc(who)+'. Students don’t need to reply. Meetings count toward service hours once students confirm they were there.</p>'+
+        '<details class="evp-past"><summary>Past meetings ('+past.length+')</summary>'+(past.length?'<div><table class="adm-table mtg-table" style="min-width:0"><tbody>'+past.slice(0,30).map(row).join("")+'</tbody></table></div>':'<p class="rk-fine">Meetings move here the day after they happen.</p>')+'</details>';
+      evCarousel($("#mtgCar",box),"lead",up,mcard,"No meetings scheduled. Add one with + New meeting.");
       var nb=$("#mtNew",box);if(nb)nb.onclick=function(){MTG_EDIT="new";mtgPanel(box)};
       var f=$("#mtgForm",box);if(f){$("#mtX",box).onclick=function(){MTG_EDIT=null;mtgPanel(box)};$("#mtD",box).focus();
         f.onsubmit=function(e){e.preventDefault();var g=function(id){return $(id,box).value.trim()};if(!g("#mtD")){toast("Pick a date.");$("#mtD",box).focus();return}
@@ -8818,28 +8847,93 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           db.rpc("admin_council_meeting_save",{p_id:ed?ed.id:null,p_date:g("#mtD"),p_start:g("#mtS")||null,p_end:g("#mtE")||null,p_location:g("#mtL"),p_title:g("#mtT"),p_notes:g("#mtN"),p_notify:$("#mtMail",box).checked,p_remind:$("#mtRem",box).checked}).then(function(x){btn.disabled=false;
             if(x.error){toast(x.error.message);return}var dd=x.data||{};
             toast((ed?"Meeting updated":"Meeting scheduled")+(dd.sent?". Email sent to "+dd.sent+" council member"+(dd.sent===1?"":"s")+".":"."));MTG_EDIT=null;mtgPanel(box)})}}
-      $$("tr[data-mid] [data-mt]",box).forEach(function(b){b.onclick=function(){var id=b.closest("tr").getAttribute("data-mid"),a=b.getAttribute("data-mt"),x=all.filter(function(q){return q.id===id})[0];
+      box.onclick=function(ev){var b=ev.target.closest&&ev.target.closest("[data-mid] [data-mt]");if(!b)return;(function(){var id=b.closest("[data-mid]").getAttribute("data-mid"),a=b.getAttribute("data-mt"),x=all.filter(function(q){return q.id===id})[0];
         if(a==="edit"){MTG_EDIT=id;mtgPanel(box);return}
         if(a==="cancel"){if(b.textContent!=="Confirm: cancel and email everyone"){b.textContent="Confirm: cancel and email everyone";return}
           db.rpc("admin_council_meeting_cancel",{p_id:id,p_notify:true}).then(function(y){if(y.error){toast(y.error.message);return}toast("Meeting cancelled"+(y.data&&y.data.sent?". "+y.data.sent+" council member"+(y.data.sent===1?"":"s")+" emailed.":"."));mtgPanel(box)});return}
         if(a==="mail"){if(b.textContent!=="Confirm: email it now"){b.textContent="Confirm: email it now";return}
-          db.rpc("admin_council_meeting_remind",{p_id:id}).then(function(y){if(y.error){toast(y.error.message);return}toast("Reminder sent to "+((y.data&&y.data.sent)||0)+" council member"+(((y.data&&y.data.sent)||0)===1?"":"s")+".");mtgPanel(box)})}}});
+          db.rpc("admin_council_meeting_remind",{p_id:id}).then(function(y){if(y.error){toast(y.error.message);return}toast("Reminder sent to "+((y.data&&y.data.sent)||0)+" council member"+(((y.data&&y.data.sent)||0)===1?"":"s")+".");mtgPanel(box)})}})()};
     })}
-  function tabEvents(){var P=$("#admPanel");
-    db.from("events").select("*").order("start_date").then(function(r){if(r.error){P.textContent="Couldn’t load events.";return}
-      var kinds=["workshop","camp","racing"];
-      function row(e){e=e||{};return '<tr data-id="'+(e.id||"")+'"><td><input type="date" value="'+(e.start_date||"")+'" aria-label="Start date"></td><td><input type="date" value="'+(e.end_date||"")+'" aria-label="End date (optional)"></td><td><input type="text" value="'+esc(e.title||"")+'" aria-label="Title"></td><td><select aria-label="Type">'+kinds.map(function(k){return '<option'+(e.kind===k?' selected':'')+'>'+k+'</option>'}).join("")+'</select></td><td><input type="checkbox"'+(e.to_be_confirmed?' checked':'')+' aria-label="To be confirmed"></td><td><input type="checkbox"'+(e.published!==false?' checked':'')+' aria-label="Shown on site"></td><td><button class="mini solid" type="button" data-act="save">Save</button> '+(e.id?'<button class="mini red" type="button" data-act="del">Delete</button>':'')+'</td></tr>'}
-      P.innerHTML='<h3 class="ov-h" style="margin-top:0">Program events</h3><p style="color:#4a4d55">Dates only appear publicly; times and locations stay in your emails.</p><div class="adm-scroll"><table class="adm-table"><thead><tr><th>Start</th><th>End</th><th>Title</th><th>Type</th><th>TBC</th><th>Shown</th><th></th></tr></thead><tbody>'+row(null)+r.data.map(row).join("")+'</tbody></table></div><h3 class="ov-h">Leadership Council</h3><div id="mtgBox"><p class="rk-fine">Loading meetings…</p></div>';
-      mtgPanel($("#mtgBox",P));
-      $$("button[data-act]",P).forEach(function(b){b.onclick=function(){var tr=b.closest("tr"),id=tr.getAttribute("data-id"),f=$$("input,select",tr);
-        if(b.getAttribute("data-act")==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
-          db.from("events").delete().eq("id",id).then(function(x){toast(x.error?"Couldn’t delete":"Deleted");afterEvents()});return}
-        var rec={start_date:f[0].value,end_date:f[1].value||null,title:f[2].value.trim(),kind:f[3].value,to_be_confirmed:f[4].checked,published:f[5].checked};
-        if(!rec.start_date||!rec.title){toast("Add a start date and a title.");return}
-        (id?db.from("events").update(rec).eq("id",id):db.from("events").insert(rec)).then(function(x){toast(x.error?"Couldn’t save: "+x.error.message:"Saved");if(!x.error)afterEvents()});}});
-    });
-    function afterEvents(){loadEvents().then(function(){FR.refresh();tabEvents()})}
-  }
+  /* ---------- Admin → Events: Program events, Racing events, Leadership meetings (cards + carousel; past ones archived) ---------- */
+  var ETYPES={programs:[["monthly","Monthly STEAM workshop","workshop","Monthly STEAM Workshop"],["funrun","Fun run","racing","Fun Run"],["camp","Camp","camp","Summer Camp"],["program_other","Other program event","workshop",""]],
+    racing:[["building","Building workshop","workshop","Building Workshop · Week 1 of 5"],["practice","Practice runs","racing","Practice Runs"],["raceday","Soap Box Derby race day","racing","Flint Soap Box Derby · Race Day"],["sanctioned","Sanctioned race","racing",""],["racing_other","Other racing event","racing",""]]};
+  var EVUI={page:{},open:null};
+  function evGuess(e){var t=(e.title||"").toLowerCase();
+    if(e.program&&e.etype)return [e.program,e.etype];
+    if(/^building workshop/.test(t))return ["racing","building"];if(e.kind==="camp")return ["programs","camp"];if(e.kind==="workshop")return ["programs","monthly"];
+    if(/fun run/.test(t))return ["programs","funrun"];if(/race day/.test(t))return ["racing","raceday"];if(/practice/.test(t))return ["racing","practice"];return ["racing","sanctioned"]}
+  function evTypeOf(prog,k){return (ETYPES[prog]||[]).filter(function(t){return t[0]===k})[0]}
+  function evDateBlock(d,e2){var dt=new Date(d+"T12:00:00");return '<div class="evc-date"><span>'+dt.toLocaleDateString([],{month:"short"})+'</span><b>'+dt.getDate()+'</b><small>'+dt.toLocaleDateString([],{weekday:"short"})+'</small></div>'}
+  function evPer(box){var w=(box&&box.clientWidth)||innerWidth;return w<480?1:w<640?2:3}
+  function evCarousel(box,key,items,cardFn,emptyMsg){var per=evPer(box),pg=Math.min(EVUI.page[key]||0,Math.max(0,Math.ceil(items.length/per)-1));EVUI.page[key]=pg;
+    if(!items.length){box.innerHTML='<p class="rk-fine">'+emptyMsg+'</p>';return}
+    var show=items.slice(pg*per,pg*per+per);
+    box.innerHTML='<div class="evc-car"><button class="evc-nav" type="button" data-pg="-1" aria-label="Earlier events"'+(pg===0?' disabled':'')+'>‹</button><div class="evc-row" style="--per:'+per+'">'+show.map(cardFn).join("")+'</div><button class="evc-nav" type="button" data-pg="1" aria-label="Later events"'+((pg+1)*per>=items.length?' disabled':'')+'>›</button></div>'+
+      '<p class="evc-count">'+(pg*per+1)+(show.length>1?'–'+(pg*per+show.length):'')+' of '+items.length+' coming up</p>';
+    $$("[data-pg]",box).forEach(function(b){b.onclick=function(){EVUI.page[key]=pg+(+b.getAttribute("data-pg"));evCarousel(box,key,items,cardFn,emptyMsg);var r=$("[data-pg]:not([disabled])",box);if(r)r.focus()}})}
+  function tabEvPage(prog){var P=$("#admPanel"),T=ETYPES[prog];
+    Promise.all([db.from("events").select("*").order("start_date"),db.from("event_details").select("*")]).then(function(r){if(r[0].error){P.textContent="Couldn’t load events.";return}
+      var D={};(r[1].data||[]).forEach(function(x){D[x.event_id]=x});
+      var all=(r[0].data||[]).map(function(e){var g=evGuess(e);e.program=g[0];e.etype=g[1];return e}).filter(function(e){return e.program===prog}),t=todayISO();
+      var up=all.filter(function(e){return (e.end_date||e.start_date)>=t}),past=all.filter(function(e){return (e.end_date||e.start_date)<t}).reverse();
+      var intro=prog==="racing"?"Building workshops, practice runs, race day and sanctioned races.":"Monthly STEAM workshops, fun runs and camps.";
+      P.innerHTML='<div class="evp-head"><p>'+intro+' Dates show on the public calendar; times and places only show to signed-in families and crew on their Program Dashboard.</p><button class="btn deep" type="button" id="evNew">+ New event</button></div>'+
+        '<div id="evForm"></div><h3 class="ov-h">Coming up</h3><div id="evCar"></div>'+
+        (prog==="racing"?'<p class="rk-fine">Racers, brackets, sponsors and the race-day team are in <button class="linkbtn" type="button" id="evRace">Race day setup</button>.</p>':'')+
+        '<details class="evp-past"'+(EVUI.pastOpen?' open':'')+'><summary>Past events ('+past.length+')</summary>'+(past.length?'<ul class="evp-list">'+past.map(function(e){var ty=evTypeOf(prog,e.etype);return '<li><span>'+fmtDate(e.start_date,{month:"short",day:"numeric",year:"numeric"})+'</span><b>'+esc(e.title)+'</b><small>'+esc(ty?ty[1]:e.kind)+'</small><button class="mini" type="button" data-evedit="'+e.id+'">Open</button></li>'}).join("")+'</ul>':'<p class="rk-fine">Events move here the day after they happen.</p>')+'</details>';
+      var rb=$("#evRace",P);if(rb)rb.onclick=function(){goTab("race")};
+      $(".evp-past",P).addEventListener("toggle",function(){EVUI.pastOpen=this.open});
+      function card(e){var ty=evTypeOf(prog,e.etype),d=D[e.id]||{},when=[d.start_time,d.end_time].filter(Boolean).join(" – ");
+        return '<article class="evc'+(EVUI.flash===e.id?' flash':'')+'" data-id="'+e.id+'">'+evDateBlock(e.start_date)+'<div class="evc-b"><span class="evc-type">'+esc(ty?ty[1]:e.kind)+'</span><h4>'+esc(e.title)+'</h4>'+
+          (e.end_date&&e.end_date!==e.start_date?'<p class="evc-l">Through '+fmtDate(e.end_date,{weekday:"short",month:"short",day:"numeric"})+'</p>':'')+
+          '<p class="evc-l">'+(when||d.location?esc([when,d.location].filter(Boolean).join(" · ")):'<span class="evc-miss">No time or place yet</span>')+'</p>'+
+          '<div class="evc-chips">'+(e.to_be_confirmed?'<span class="evchip warn">Date not final</span>':'')+(e.published===false?'<span class="evchip off">Hidden from calendar</span>':'<span class="evchip ok">On the calendar</span>')+'</div>'+
+          '<button class="mini" type="button" data-evedit="'+e.id+'">Edit</button></div></article>'}
+      evCarousel($("#evCar",P),prog,up,card,"Nothing coming up. Add an event with + New event.");
+      EVUI.flash=null;
+      function form(e){e=e||{};var d=D[e.id]||{},ty=evTypeOf(prog,e.etype)?e.etype:T[0][0],box=$("#evForm",P);
+        box.innerHTML='<form class="evf" novalidate><h3>'+(e.id?"Edit event":"New event")+'</h3>'+
+          '<label>Type<select id="evT">'+T.map(function(x){return '<option value="'+x[0]+'"'+(x[0]===ty?' selected':'')+'>'+x[1]+'</option>'}).join("")+'</select></label>'+
+          '<label class="w">Title<input type="text" id="evTi" maxlength="120" value="'+esc(e.title||evTypeOf(prog,ty)[3])+'"></label>'+
+          '<label>Date<input type="date" id="evS" value="'+esc(e.start_date||"")+'"></label><label>Last day <small>(for multi-day events)</small><input type="date" id="evE" value="'+esc(e.end_date||"")+'"></label>'+
+          '<label>Starts<input type="text" id="evST" maxlength="20" placeholder="10:00 AM" value="'+esc(d.start_time||"")+'"></label><label>Ends<input type="text" id="evET" maxlength="20" placeholder="1:00 PM" value="'+esc(d.end_time||"")+'"></label>'+
+          '<label class="w">Place<input type="text" id="evL" maxlength="160" placeholder="Flint Racer Space" value="'+esc(d.location||"")+'"></label>'+
+          '<label class="w">Note for families <small>(only signed-in families and crew see this)</small><input type="text" id="evN" maxlength="1000" placeholder="Bring safety glasses" value="'+esc(d.notes||"")+'"></label>'+
+          '<label class="chk w"><input type="checkbox" id="evP"'+(e.published!==false?' checked':'')+'> Show on the public calendar</label>'+
+          '<label class="chk w"><input type="checkbox" id="evC"'+(e.to_be_confirmed?' checked':'')+'> The date isn’t final yet <small>(the calendar says “Date to be confirmed”)</small></label>'+
+          (e.id?'<label class="chk w"><input type="checkbox" id="evCopy"> Also use this time, place and note for every later '+esc(evTypeOf(prog,ty)[1].toLowerCase())+'</label>':'')+
+          '<div class="row w"><button class="btn deep" type="submit">'+(e.id?"Save changes":"Add event")+'</button><button class="mini" type="button" id="evX">Cancel</button>'+(e.id?'<button class="mini red" type="button" id="evDel">Delete</button>':'')+'</div></form>';
+        var f=$("form",box);box.scrollIntoView({block:"nearest"});$("#evT",box).focus();
+        $("#evT",box).onchange=function(){var ti=$("#evTi",box),old=T.filter(function(x){return x[3]&&x[3]===ti.value})[0];if(!ti.value.trim()||old)ti.value=evTypeOf(prog,this.value)[3]};
+        $("#evX",box).onclick=function(){box.innerHTML="";$("#evNew",P).focus()};
+        var del=$("#evDel",box);if(del)del.onclick=function(){if(del.textContent!=="Confirm delete"){del.textContent="Confirm delete";return}
+          db.from("event_details").delete().eq("event_id",e.id).then(function(){return db.from("events").delete().eq("id",e.id)}).then(function(x){if(x.error){toast("Couldn’t delete: "+x.error.message);return}toast("Event deleted");done()})};
+        f.onsubmit=function(ev){ev.preventDefault();var g=function(id){return $(id,box).value.trim()},tt=evTypeOf(prog,$("#evT",box).value);
+          var rec={program:prog,etype:tt[0],kind:tt[2],title:g("#evTi"),start_date:g("#evS"),end_date:g("#evE")||null,published:$("#evP",box).checked,to_be_confirmed:$("#evC",box).checked};
+          if(!rec.title){toast("Add a title.");$("#evTi",box).focus();return}if(!rec.start_date){toast("Pick a date.");$("#evS",box).focus();return}
+          if(rec.end_date&&rec.end_date<rec.start_date){toast("The last day can’t be before the first day.");return}
+          if(tt[0]==="building"&&!/^building workshop/i.test(rec.title)){toast("Start the title with “Building Workshop” so leaders’ service hours count it.");$("#evTi",box).focus();return}
+          var det={start_time:g("#evST")||null,end_time:g("#evET")||null,location:g("#evL")||null,notes:g("#evN")||null},btn=$("button[type=submit]",box);btn.disabled=true;
+          (e.id?db.from("events").update(rec).eq("id",e.id).select().maybeSingle():db.from("events").insert(rec).select().maybeSingle()).then(function(x){
+            if(x.error){btn.disabled=false;toast("Couldn’t save: "+x.error.message);return}
+            var gotId=(x.data&&x.data.id)||e.id;(gotId?Promise.resolve(gotId):db.from("events").select("id").eq("title",rec.title).eq("start_date",rec.start_date).then(function(q){var L=q.data||[];return L.length?L[L.length-1].id:null})).then(function(id){
+            var saveDet=function(eid){return db.from("event_details").delete().eq("event_id",eid).then(function(){return (det.start_time||det.end_time||det.location||det.notes)?db.from("event_details").insert(Object.assign({event_id:eid},det)):{error:null}})};
+            var later=$("#evCopy",box)&&$("#evCopy",box).checked?all.filter(function(o){return o.id!==id&&o.etype===rec.etype&&o.start_date>rec.start_date}):[];
+            Promise.all([saveDet(id)].concat(later.map(function(o){return saveDet(o.id)}))).then(function(rs){var bad=rs.filter(function(y){return y&&y.error})[0];
+              toast(bad?"Saved the event, but not its time and place: "+bad.error.message:(e.id?"Saved":"Event added")+(later.length?" · copied to "+later.length+" later":""));
+              done(id)})})})}}
+      function done(id){EVUI.goto=id;loadEvents().then(function(){FR.refresh();tabEvPage(prog);setTimeout(function(){var c=id&&$('.evc[data-id="'+id+'"]',P);if(c){c.scrollIntoView({block:"nearest",behavior:"smooth"});var b=$("[data-evedit]",c);if(b)b.focus()}},60)})}
+      /* jump the carousel to a just-saved event */
+      if(EVUI.goto){var per=evPer($("#evCar",P)),ix=up.map(function(o){return o.id}).indexOf(EVUI.goto);if(ix>=0){EVUI.page[prog]=Math.floor(ix/per);EVUI.flash=EVUI.goto;evCarousel($("#evCar",P),prog,up,card,"")}EVUI.goto=null}
+      $("#evNew",P).onclick=function(){form(null)};
+      P.onclick=function(ev){var b=ev.target.closest&&ev.target.closest("[data-evedit]");if(!b)return;form(all.filter(function(o){return o.id===b.getAttribute("data-evedit")})[0])};
+    })}
+  function tabEvents(){tabEvPage("programs")}
+  function tabRacingEv(){tabEvPage("racing")}
+  /* Leadership meetings: same cards, with the email / reminder tools */
+  function tabLeadership(){var P=$("#admPanel");
+    P.innerHTML='<div class="evp-head"><p>Leadership Council meetings. Students see them in their council portal, get an email when you schedule or change one, and a reminder the day before. They aren’t on the public calendar. Student-planned council events stay in the council portal.</p><button class="btn deep" type="button" id="lmNew">+ New meeting</button></div><div id="mtgBox"><p class="rk-fine">Loading meetings…</p></div>';
+    mtgPanel($("#mtgBox",P));$("#lmNew",P).onclick=function(){MTG_EDIT="new";mtgPanel($("#mtgBox",P))}}
   function tabNotes(){var P=$("#admPanel"),now=new Date(),mk=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0"),FILE=null;
     db.from("bulletin_notes").select("*").order("month",{ascending:false}).then(function(r){if(r.error){P.textContent="Couldn’t load notes.";return}
       P.innerHTML='<p style="color:#4a4d55;max-width:78ch">The monthly bulletin shows on the Program Dashboard and the calendar. Write a note, attach the month’s bulletin file (PDF or image), or both.</p>'+
