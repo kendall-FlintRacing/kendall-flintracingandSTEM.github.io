@@ -1854,6 +1854,30 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .gs-bi svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .gs-big small{display:block;font:800 .64rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#6b6e75}
 .gs-big b{display:block;font:800 1.02rem/1.2 var(--body);color:#14151a;margin-top:3px;overflow-wrap:anywhere}
+/* event picture stacked over its details, Choose your track beside it */
+.ck-on .me-row{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(20px,3.5vw,40px);align-items:start}
+.ck-on .me-row .gs-main{grid-template-columns:minmax(0,1fr);gap:10px}
+.ck-on .me-row .gs-stage{min-height:200px}
+.ck-on .me-row .me-spaces{border-top:0;padding-top:4px}
+.ck-on .me-row .me-sp{grid-template-columns:minmax(0,1fr)}
+@media (max-width:900px){.ck-on .me-row{grid-template-columns:minmax(0,1fr)}.ck-on .me-row .me-spaces{border-top:1px solid rgba(255,255,255,.09);padding-top:22px}.ck-on .me-row .me-sp{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}}
+/* letter circle opens the profile */
+.ck-av{position:relative;border:0;cursor:pointer;padding:0;transition:transform .15s,box-shadow .15s}
+.ck-av:hover,.ck-av:focus-visible{transform:scale(1.05);box-shadow:0 0 0 3px #1a1b20,0 0 0 4px #fff,0 0 26px rgba(255,48,69,.7)}
+.ck-gear{position:absolute;right:-4px;bottom:-4px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:0 0 0 2px #1a1b20,0 0 10px rgba(255,255,255,.5)}
+.ck-gear svg{width:14px;height:14px;fill:none;stroke:#c3122a;stroke-width:2.4;stroke-linecap:round}
+.pf-dlg{width:min(560px,calc(100vw - 28px))}
+.pf-av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;flex:none;font:italic 900 1.4rem/1 var(--display);color:#fff;background:radial-gradient(circle at 35% 30%,#ff4d5f,#a10f1f 70%);box-shadow:0 0 0 2px #1a1b20,0 0 0 3px #ff3045,0 0 18px rgba(255,48,69,.5)}
+.pf-dlg .me-card{background:none;border:0;border-top:1px solid rgba(255,255,255,.09);border-radius:0;padding:18px 0;color:#e3e5e9;display:grid;gap:10px}
+.pf-dlg .me-card h2{color:#fff;font-size:1.15rem;font-style:italic}
+.pf-dlg .me-k{color:#ff6b7a}
+.pf-dlg .me-list li{border-color:rgba(255,255,255,.08)}.pf-dlg .me-list small,.pf-dlg .me-fine,.pf-dlg .me-code p{color:#9aa0aa}
+.pf-dlg .me-fine a,.pf-dlg details summary{color:#ff8592}
+.pf-dlg .me-pw .f{color:#e3e5e9}.pf-dlg .me-pw input{background:#111216;color:#fff;border-color:#3a3d46}
+.pf-dlg .me-prefs{gap:0}.pf-dlg .me-pref{border:0;border-radius:0;border-bottom:1px solid rgba(255,255,255,.07);padding:10px 2px;color:#9aa0aa}.pf-dlg .me-pref b{color:#fff}
+.pf-dlg .me-code{grid-template-columns:minmax(0,1fr) auto auto;align-items:center}.pf-dlg .me-code .me-k,.pf-dlg .me-code h2{grid-column:1}.pf-dlg .me-code p{grid-column:1/-1}
+.pf-dlg .me-digits span{color:#fff}
+.pf-dlg .mini{background:transparent;color:#fff;border-color:#55545b}
 /* Toolbox button + pop-up */
 .ck-tb{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:12px;padding:10px 18px 10px 12px;border-radius:14px;border:0;cursor:pointer;text-align:left;background:var(--lite);color:#14151a;box-shadow:0 0 0 2px var(--neo),0 0 20px rgba(255,48,69,.4),0 8px 18px rgba(0,0,0,.35);transition:transform .15s,box-shadow .15s}
 .ck-tb svg{width:30px;height:30px;padding:6px;border-radius:9px;background:var(--neo);fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;box-sizing:content-box}
@@ -11628,7 +11652,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
     var tell=function(on,cls,label,svg){return '<span class="ck-tell '+cls+(on?' on':'')+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+svg+'</svg>'+esc(label)+'</span>'};
     return '<section class="ck" aria-label="Your dashboard">'+
       '<div class="ck-shift" aria-hidden="true">'+leds+'</div>'+
-      '<div class="ck-drv"><div class="ck-av" aria-hidden="true">'+esc((m.display_name||"?").charAt(0).toUpperCase())+'</div><div><p class="ck-k">'+(fam?"Family Pass":"Crew Pass")+' · Since '+esc(m.first_year)+'</p><h1>'+esc(m.display_name)+'</h1><p class="ck-u">@'+esc(m.username)+'</p></div>'+
+      '<div class="ck-drv"><button class="ck-av" type="button" id="meProf" aria-haspopup="dialog" aria-label="Your profile: account, sign-in code and email settings">'+esc((m.display_name||"?").charAt(0).toUpperCase())+'<span class="ck-gear" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c.9-3.8 3.9-6 7.5-6s6.6 2.2 7.5 6"/></svg></span></button><div><p class="ck-k">'+(fam?"Family Pass":"Crew Pass")+' · Since '+esc(m.first_year)+'</p><h1>'+esc(m.display_name)+'</h1><p class="ck-u">@'+esc(m.username)+'</p></div>'+
         '<div class="ck-modes"><span class="ck-st'+(P.open?' on':'')+'"><i></i>'+(P.open?"Checked in":"Not checked in")+'</span><span class="ck-st sp">'+roles.length+' space'+(roles.length===1?"":"s")+' unlocked</span><button class="ck-out" type="button" id="meOut">Sign out</button></div><button class="ck-tb" type="button" id="meTools" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 9V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3"/><path d="M3 13h18M10 13v2h4v-2"/></svg><span><b>Toolbox</b><small>Forms, waivers, contact</small></span></button></div>'+
       '<div class="ck-mid">'+ckTach(hrs,fam?"Hours at the shop":"Volunteer hours","h")+
         (P.open?'<div class="ck-in on"><span><b>Checked in · '+esc(MKIND[P.open.kind]||"Here")+'</b><small>Since '+fmtTime(P.open.started_at)+'</small></span><button class="ck-go out" type="button" id="meClock">Check out</button></div>':
@@ -11715,20 +11739,23 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
     var recent=(P.recent||[]).map(function(h){var hrs=h.ended_at?(new Date(h.ended_at)-new Date(h.started_at))/36e5:null;
       return '<li><span>'+esc(MKIND[h.kind]||h.kind)+'<small>'+new Date(h.started_at).toLocaleDateString([],{weekday:"short",month:"short",day:"numeric"})+' · '+fmtTime(h.started_at)+(h.ended_at?'–'+fmtTime(h.ended_at):' · still checked in')+'</small>'+(h.note?'<small>'+esc(h.note)+'</small>':'')+'</span><em>'+(hrs==null?'—':fmtHrs(Math.round(hrs*10)/10)+' h')+'</em></li>'}).join("");
     var kids=(m.kids||[]).map(function(k){return '<span>'+esc(k.name)+(k.age?' <small>age '+esc(k.age)+'</small>':'')+'</span>'}).join("");
-    box.innerHTML=ckHTML(P,m,fam,roles)+'<section class="gs" id="meGarage" aria-label="Garage: events, photos and forms"></section>'+
-      '<div class="me-grid"><div class="me-col"><div class="me-card"><p class="me-k">Your dashboard</p><h2>Choose your track</h2><div class="me-sp">'+sp.map(function(s,k){return '<a href="'+s[0]+'"'+(s[4]?' class="main"':'')+'><b>'+esc(s[1])+'</b><span>'+esc(s[2])+'</span></a>'}).join("")+'</div>'+
-          (roles.length<=1&&!fam?'<p class="me-fine">Need another space, like Race control or Photographer? Ask Kendall or Kevin to add it to your profile.</p>':'')+'</div>'+
-        '<div class="me-card"><p class="me-k">Your history</p><h2>Recent check-ins</h2>'+(recent?'<ul class="me-list">'+recent+'</ul>':'<p class="me-empty">Nothing yet. Check in the next time you’re at the shop or the track.</p>')+'</div></div>'+
+    box.innerHTML=ckHTML(P,m,fam,roles)+'<div class="me-row"><section class="gs" id="meGarage" aria-label="Garage: events, photos and forms"></section>'+
+      '<div class="me-card me-spaces"><p class="me-k">Your dashboard</p><h2>Choose your track</h2><div class="me-sp">'+sp.map(function(s,k){return '<a href="'+s[0]+'"'+(s[4]?' class="main"':'')+'><b>'+esc(s[1])+'</b><span>'+esc(s[2])+'</span></a>'}).join("")+'</div>'+
+          (roles.length<=1&&!fam?'<p class="me-fine">Need another space, like Race control or Photographer? Ask Kendall or Kevin to add it to your profile.</p>':'')+'</div></div>'+
+        '<div class="me-grid"><div class="me-col"><div class="me-card"><p class="me-k">Your history</p><h2>Recent check-ins</h2>'+(recent?'<ul class="me-list">'+recent+'</ul>':'<p class="me-empty">Nothing yet. Check in the next time you’re at the shop or the track.</p>')+'</div></div>'+
         '<div class="me-col">'+
-          (fam?'<div class="me-card"><p class="me-k">Your household</p><h2>Racers</h2>'+(kids?'<div class="me-kids">'+kids+'</div>':'<p class="me-empty">No racers listed.</p>')+'<p class="me-fine">Adding a racer or changing details? Email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>':'')+
+          (fam?'<div class="me-card"><p class="me-k">Your household</p><h2>Racers</h2>'+(kids?'<div class="me-kids">'+kids+'</div>':'<p class="me-empty">No racers listed.</p>')+'<p class="me-fine">Adding a racer or changing details? Email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>':'')+'</div></div>'+
+        '<dialog class="tb-dlg pf-dlg" id="meProfDlg" aria-labelledby="pfH"><div class="tb-top"><span class="pf-av" aria-hidden="true">'+esc((m.display_name||"?").charAt(0).toUpperCase())+'</span><div><p class="tb-k">Your profile</p><h2 id="pfH">'+esc(m.display_name)+'</h2></div><button class="tb-x" type="button" data-pfx aria-label="Close">×</button></div>'+
+          (m.family_code?'<div class="me-card me-code"><p class="me-k">Sign-in'+(fam?' and workshop check-in':'')+'</p><h2>Your 4-digit code</h2><div class="me-digits" id="meDigits" data-c="'+esc(m.family_code)+'">'+[0,1,2,3].map(function(){return '<span aria-hidden="true">•</span>'}).join("")+'</div><button class="mini" type="button" id="meShow" aria-pressed="false">Show</button><p>'+(fam?'Sign in here with your email and this code, and type it on the check-in tablet on workshop day. Keep it in the family.':'Sign in here with your email and this code. Keep it to yourself.')+'</p></div>':'')+
           '<div class="me-card"><p class="me-k">Your profile</p><h2>Account</h2><ul class="me-list"><li><span>Email<small>'+esc(m.email||"—")+'</small></span></li><li><span>Phone<small>'+esc(m.phone||"—")+'</small></span></li></ul>'+
             '<details><summary>Change my 4-digit code</summary><form class="me-pw" id="meCode" novalidate><label class="f">Current code or password<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New 4-digit code<input type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label><label class="f">Type the new code again<input type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label><button class="btn deep" type="submit" style="justify-self:start">Save new code</button><p class="t-msg" role="status"></p></form></details>'+
             '<details><summary>'+(P.member.has_password?'Change my password':'Add a password (optional)')+'</summary><form class="me-pw" id="mePw" novalidate><label class="f">Current code or password<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New password <small>(6+ characters)</small><input type="password" autocomplete="new-password" maxlength="64"></label><label class="f">Type it again<input type="password" autocomplete="new-password" maxlength="64"></label><button class="btn deep" type="submit" style="justify-self:start">Save password</button><p class="t-msg" role="status"></p></form></details>'+
             '<p class="me-fine">To change your name, email or roles, email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>'+
-          '<div class="me-card"><p class="me-k">Emails from us</p><h2>Email notifications</h2><p class="me-fine">Tick what you’d like in your inbox. Changes save right away, and every update has an unsubscribe link.</p><form id="mePrefs" class="me-prefs">'+prefsHTML("me-pref",m.email_prefs||[])+'</form><p class="t-msg" id="mePrefMsg" role="status"></p></div></div></div>';
+          '<div class="me-card"><p class="me-k">Emails from us</p><h2>Email notifications</h2><p class="me-fine">Tick what you’d like in your inbox. Changes save right away, and every update has an unsubscribe link.</p><form id="mePrefs" class="me-prefs">'+prefsHTML("me-pref",m.email_prefs||[])+'</form><p class="t-msg" id="mePrefMsg" role="status"></p></div></dialog>';
     box.classList.add("ck-on");ckAnimate(box);if(!P.open)ckFill(box,P,preview);Promise.resolve().then(gsDraw);$("#meTools",box).onclick=tbOpen;
+    var pd=$("#meProfDlg",box);$("#meProf",box).onclick=function(){if(pd&&!pd.open)pd.showModal()};if(pd)pd.addEventListener("click",function(e){if(e.target===pd||e.target.closest("[data-pfx]"))pd.close()});
     if(preview){box.insertAdjacentHTML("afterbegin",'<div class="pv-banner"><div><b>Admin preview · sample '+(fam?"family":"crew member")+'</b><span>This is what '+(fam?"a family":"a crew member with every role")+' sees. The names and numbers are made up; buttons here don’t save anything.</span></div><div class="pv-sw"><a href="#my-dashboard/family"'+(fam?' aria-current="true"':'')+'>Family</a><a href="#my-dashboard/crew"'+(!fam?' aria-current="true"':'')+'>Crew</a></div></div>');
-      $$("button,input",box).forEach(function(el){if(!el.closest(".pv-banner")&&!el.closest("#meGarage")&&el.id!=="meTools"){el.disabled=true}});$("#meOut").onclick=null;return}
+      $$("button,input",box).forEach(function(el){if(!el.closest(".pv-banner")&&!el.closest("#meGarage")&&el.id!=="meTools"&&el.id!=="meProf"&&!el.hasAttribute("data-pfx")){el.disabled=true}});$("#meOut").onclick=null;return}
     $("#meOut").onclick=signOut;
     box.__clk=function(b,k){b.disabled=true;
       db.rpc("member_clock",{p_kind:k||"other"}).then(function(x){b.disabled=false;if(x.error){toast(x.error.message);return}
