@@ -9856,7 +9856,7 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
             var gotId=(x.data&&x.data.id)||e.id;(gotId?Promise.resolve(gotId):db.from("events").select("id").eq("title",rec.title).eq("start_date",rec.start_date).then(function(q){var L=q.data||[];return L.length?L[L.length-1].id:null})).then(function(id){
             var saveDet=function(eid){return db.from("event_details").delete().eq("event_id",eid).then(function(){return (det.start_time||det.end_time||det.location||det.ages||det.notes)?db.from("event_details").insert(Object.assign({event_id:eid},det)):{error:null}})};
             var later=$("#evCopy",box)&&$("#evCopy",box).checked?all.filter(function(o){return o.id!==id&&o.etype===rec.etype&&o.start_date>rec.start_date}):[];
-            Promise.all([saveDet(id)].concat(later.map(function(o){return saveDet(o.id)}))).then(function(rs){var bad=rs.filter(function(y){return y&&y.error})[0];
+            Promise.all([saveDet(id)].concat(later.map(function(o){return saveDet(o.id)}))).then(function(rs){var bad=rs.filter(function(y){return y&&y.error})[0];PD.data=null;GS.d=null;
               toast(bad?"Saved the event, but not its time and place: "+bad.error.message:(e.id?"Saved":"Event added")+(later.length?" · copied to "+later.length+" later":""));
               done(id)})})})}}
       function done(id){EVUI.goto=id;loadEvents().then(function(){FR.refresh();tabEvPage(prog);setTimeout(function(){var c=id&&$('.evc[data-id="'+id+'"]',P);if(c){c.scrollIntoView({block:"nearest",behavior:"smooth"});var b=$("[data-evedit]",c);if(b)b.focus()}},60)})}
