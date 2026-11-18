@@ -1,0 +1,8 @@
+-- Applied as migrations "race_slides" and "race_slides_realtime" (Nov 17, 2026).
+-- public.race_slides: special screens for the live race page (anthem, closing, emergency, custom):
+--   name, kind, bg (#hex), effect (none|stars|fireworks|confetti|alert), flag_in (checkered-flag transition),
+--   elements jsonb [{id,type:text|image,x,y,w,h (% of a 16:9 screen),text,size (cqw),color,bold,align,anim,src,crop{zoom,px,py}}].
+--   Everyone can read; track managers (private.can_manage_track) add/edit/delete.
+-- race_show.slide_id / slide_at: race_show.screen = 'slide' shows that slide on every live screen.
+-- Storage: track managers may upload to site-images/screens/.
+-- race_slides added to the supabase_realtime publication. Seeded: National Anthem, Closing Ceremony, Emergency.
