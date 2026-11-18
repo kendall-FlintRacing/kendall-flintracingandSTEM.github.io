@@ -2768,6 +2768,7 @@ body.rw-app-on .fr-pill{bottom:calc(62px + env(safe-area-inset-bottom,0px))}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 /* ticker sits at the bottom like a broadcast crawl */
 .rw-app .rw-ticker{border-bottom:0;border-top:2px solid var(--red);z-index:3}
+.rw-run .hype b{color:#4cc9f0}.rw-run .hype i{font-style:normal;margin-right:6px}
 .rw-run .gift{color:#ffd166}.rw-run .gift b{color:#ffd166}.rw-run .gift i{font-style:normal;margin-right:6px}
 /* donor thank-you announcement */
 .rw-thanks{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:rgba(10,10,12,.72);padding:20px;cursor:pointer}
@@ -9397,21 +9398,19 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<div class="row">'+(on?'<button class="rk-go tm-end" type="button" data-slx="1">Back to racing</button>':'<button class="'+(x.kind==="emergency"?"rk-go tm-em":"mini solid")+'" type="button" data-slon="'+x.id+'">'+(x.kind==="emergency"?"Show emergency screen":"Show on screen")+'</button>')+'<button class="mini" type="button" data-sled="'+x.id+'">Edit</button></div></div></li>'}).join("")+'</ul>'+
         '<div class="row"><button class="mini" type="button" id="tmSlNew">+ New screen</button></div></section>'+
       '<section class="rk-card"><h3>Shout-outs waiting'+(pend.length?' ('+pend.length+')':'')+'</h3>'+(pend.length?pend.map(function(s){return '<div class="rk-so'+(s.donation?' rk-so-gift':'')+'">'+(s.donation?'<p class="rk-gift">♥ Came with a donation · check Square before approving. Approving adds a thank-you with their name to the shout-out banner (the amount is never shown).</p>':'')+'<p><b>'+esc(s.name)+':</b> '+esc(s.message)+'</p><div class="row"><button class="mini solid" type="button" data-so="approved" data-id="'+s.id+'">Approve</button><button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Reject</button></div></div>'}).join(""):'<p class="rk-fine">None waiting. New ones show up here on their own.</p>')+
-        (appr.length?'<h3 style="margin-top:14px">On the ticker now</h3>'+appr.map(function(s){var pin=sh.pinned_shout===s.id;return '<div class="rk-so"><p><b>'+esc(s.name)+':</b> '+esc(s.message)+'</p><div class="row"><button class="mini'+(pin?' solid':'')+'" type="button" data-pin="'+(pin?"":s.id)+'">'+(pin?"Unpin spotlight":"Spotlight it")+'</button><button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Take down</button></div></div>'}).join(""):'')+'</section>'+
+        (appr.length?'<h3 style="margin-top:14px">On the ticker now</h3>'+appr.map(function(s){var pin=sh.pinned_shout===s.id;return '<div class="rk-so"><p><b>'+esc(s.name)+':</b> '+esc(s.message)+'</p><div class="row"><button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Take down</button></div></div>'}).join(""):'')+'</section>'+
       '<section class="rk-card'+(intOn?' tm-int-on':'')+'"><h3>Intermission</h3><p class="rk-fine">Takes over the main screen with a countdown and rotating sponsor ads.</p>'+
         '<div class="rk-chips">'+INTS.map(function(t){return '<button class="mini" type="button" data-intt="'+esc(t)+'">'+esc(t)+'</button>'}).join("")+'</div>'+
         '<div class="rk-form"><label class="f" for="tm-it">Title<input type="text" id="tm-it" maxlength="60" value="'+esc(sh.int_title||"Intermission")+'"></label><label class="f" for="tm-im">Back in (minutes)<input type="number" id="tm-im" min="0" max="240" value="'+(sh.int_until?Math.max(0,Math.round((new Date(sh.int_until)-new Date())/6e4)):10)+'"></label></div>'+
         '<div class="row">'+(intOn?'<button class="mini solid" type="button" id="tmIntUp">Update</button><button class="rk-go tm-end" type="button" id="tmIntOff">End intermission · back to racing</button>':'<button class="rk-go" type="button" id="tmIntOn">Start intermission</button>')+'</div></section>'+
       '<section class="rk-card"><h3>Sponsor ads</h3>'+(act.length?
-        '<label class="rk-radio tm-sw"><input type="checkbox" id="tmStrip"'+(sh.ad_strip?' checked':'')+'> Show the rotating sponsor strip on the live page</label>'+
-        '<p class="rk-fine" style="margin-top:12px">Feature a sponsor now (big spotlight for 20 seconds):</p><div class="tm-ads">'+act.map(function(a){return '<button type="button" class="tm-ad" data-feat="'+a.id+'">'+(a.logo_url?'<img src="'+esc(a.logo_url)+'" alt="">':'')+'<span>'+esc(a.name)+'</span></button>'}).join("")+'</div>'+
+        '<p class="rk-fine">Sponsor ads play on the big screen during intermissions.</p><p class="rk-fine" style="margin-top:12px">Feature a sponsor now (big spotlight for 20 seconds):</p><div class="tm-ads">'+act.map(function(a){return '<button type="button" class="tm-ad" data-feat="'+a.id+'">'+(a.logo_url?'<img src="'+esc(a.logo_url)+'" alt="">':'')+'<span>'+esc(a.name)+'</span></button>'}).join("")+'</div>'+
         '<h3 style="margin-top:16px">Heat sponsors · “brought to you by”</h3>'+(up.length?'<ol class="rk-list">'+up.map(function(h){return '<li><div><b>Heat '+N[h.id]+'</b> <small>'+esc((h.division||"")+" · "+(h.label||""))+'</small></div><select data-hs="'+h.id+'" aria-label="Sponsor for Heat '+N[h.id]+'">'+adOpts(HA[h.id])+'</select></li>'}).join("")+'</ol>':'<p class="rk-fine">No heats waiting yet.</p>')+
         '<div class="row"><button class="mini solid" type="button" id="tmRot">Rotate sponsors through every heat</button><button class="mini" type="button" id="tmRotX">Clear heat sponsors</button></div>'
         :'<p class="rk-fine">No sponsors in the library yet. An admin adds them in Admin → Race day → Sponsors &amp; ads.</p>')+'</section>'+
-      '<section class="rk-card"><h3>Fun moments</h3><p class="rk-fine">Hype moments pop up big on every screen for 8 seconds.</p><div class="rk-chips">'+HYPE.map(function(t){return '<button class="mini" type="button" data-hype="'+esc(t)+'">'+esc(t)+'</button>'}).join("")+'</div>'+
+      '<section class="rk-card"><h3>Hype moments</h3><p class="rk-fine">Runs at the front of the shout-out banner on every screen for 2 minutes.</p><div class="rk-chips">'+HYPE.map(function(t){return '<button class="mini" type="button" data-hype="'+esc(t)+'">'+esc(t)+'</button>'}).join("")+'</div>'+
         '<div class="rk-form"><label class="f" for="tm-hy">Your own<input type="text" id="tm-hy" maxlength="80" placeholder="Happy birthday, Jalen!"></label></div><div class="row"><button class="mini solid" type="button" id="tmHy">Send hype moment</button></div>'+
-        '<h3 style="margin-top:16px">Did you know?</h3><div class="rk-chips">'+FACTS.map(function(t){return '<button class="mini" type="button" data-fact="'+esc(t)+'">'+esc(t.split(".")[0])+'</button>'}).join("")+'</div>'+
-        '<div class="rk-form"><label class="f" for="tm-fa">Fun fact on the live page'+(sh.fact_text?' (showing now)':'')+'<input type="text" id="tm-fa" maxlength="200" value="'+esc(sh.fact_text||"")+'"></label></div><div class="row"><button class="mini solid" type="button" id="tmFa">Show fact</button><button class="mini" type="button" id="tmFaX">Remove</button></div></section>';
+        '</section>';
     $("#tmSide").innerHTML='';
     var M=$("#tmMain");
     $$("[data-so]",M).forEach(function(b){b.onclick=function(){var id=b.getAttribute("data-id"),v=b.getAttribute("data-so");
@@ -9435,11 +9434,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var rot=$("#tmRot");if(rot)rot.onclick=function(){var list=heats.filter(function(h){return !FRB.isBye(h)&&h.status!=="finished"});if(!list.length||!act.length)return;
       Promise.all(list.map(function(h){return db.from("race_heat_ads").delete().eq("heat_id",h.id)})).then(function(){return db.from("race_heat_ads").insert(list.map(function(h,i){return{heat_id:h.id,ad_id:act[i%act.length].id}}))}).then(function(x){ok(x,"Sponsors rotated through "+list.length+" heats")})};
     var rx=$("#tmRotX");if(rx)rx.onclick=function(){if(rx.textContent!=="Confirm clear"){rx.textContent="Confirm clear";return}Promise.all(heats.map(function(h){return db.from("race_heat_ads").delete().eq("heat_id",h.id)})).then(function(){ok({},"Heat sponsors cleared")})};
-    $$("[data-hype]",M).forEach(function(b){b.onclick=function(){setShow({hype_text:b.getAttribute("data-hype"),hype_at:new Date().toISOString()},"Hype moment sent")}});
-    $("#tmHy").onclick=function(){var t=$("#tm-hy").value.trim();if(!t){toast("Type a message first.");return}setShow({hype_text:t,hype_at:new Date().toISOString()},"Hype moment sent")};
-    $$("[data-fact]",M).forEach(function(b){b.onclick=function(){$("#tm-fa").value=b.getAttribute("data-fact")}});
-    $("#tmFa").onclick=function(){var t=$("#tm-fa").value.trim();if(!t){toast("Type a fact first.");return}setShow({fact_text:t},"Fun fact is showing")};
-    $("#tmFaX").onclick=function(){setShow({fact_text:null},"Fun fact removed")};
+    $$("[data-hype]",M).forEach(function(b){b.onclick=function(){setShow({hype_text:b.getAttribute("data-hype"),hype_at:new Date().toISOString()},"Hype moment is in the banner")}});
+    $("#tmHy").onclick=function(){var t=$("#tm-hy").value.trim();if(!t){toast("Type a message first.");return}setShow({hype_text:t,hype_at:new Date().toISOString()},"Hype moment is in the banner")};
   }
   /* ===================== GUEST PAGES, PORTALS AND ADMIN TOOLS ===================== */
   function hashBase(){return (location.hash||"").replace(/^#/,"").split("/")[0]}
@@ -11615,7 +11611,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     if(!loaded){SEEN.feat=fk;SEEN.hype=hk;return}
     if(fk&&fk!==SEEN.feat&&live){var a=ad(sh.feature_ad);if(a){var sp=$("#rwSpot");sp.innerHTML='<p class="rw-k2">Sponsor spotlight</p>'+logo(a,"rw-spot-logo")+'<div><p class="rw-spot-name">'+esc(a.name)+'</p>'+(a.tagline?'<p class="rw-spot-tag">'+esc(a.tagline)+'</p>':'')+'</div>';sp.hidden=false;clearTimeout(sp.__t);sp.__t=setTimeout(function(){sp.hidden=true},20000)}}
     SEEN.feat=fk;
-    if(hk&&hk!==SEEN.hype&&live){var hy=$("#rwHype");hy.innerHTML='<div class="rw-hype-in"><p>'+esc(sh.hype_text)+'</p></div>';hy.hidden=false;clearTimeout(hy.__t);hy.__t=setTimeout(function(){hy.hidden=true},8000)}
+
     SEEN.hype=hk;}
   setInterval(function(){if(page.hidden)return;ROT.i++;rotInt();var sh=S.show||{};if(sh.ad_strip&&S.ads.length>4){$("#rwAds").__h=null;show()}},7000);
   $("#rwHype").addEventListener("click",function(){this.hidden=true});
@@ -11642,8 +11638,9 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var st=S.state||{}, live=!!st.live, cur=current(), up=upcoming(cur), R=real();
     $("#rwLive").hidden=!live; $("#rwIdle").hidden=live; $("#rwOn").hidden=!live;
     $("#rwMine").hidden=!live||!S.list.length||!FOLLOW.some(function(id){return racer(id)}); $("#rwProg").hidden=!live||!R.length; page.classList.toggle("is-live",live);
-    $("#rwTicker").hidden=!S.shout.length;
-    if(S.shout.length){var run=$("#rwRun");if(setH(run,S.shout.map(function(s){return s.donation?'<span class="gift"><i aria-hidden="true">♥</i><b>Thank you, '+esc(s.name)+'!</b> '+esc(s.message)+'</span>':'<span><b>'+esc(s.name)+':</b> '+esc(s.message)+'</span>'}).join("")))run.style.animationDuration=Math.max(25,S.shout.length*9)+"s"}
+    var shw=S.show||{},hypeOn=live&&shw.hype_text&&shw.hype_at&&(Date.now()-new Date(shw.hype_at))<120000;
+    $("#rwTicker").hidden=!S.shout.length&&!hypeOn;
+    if(S.shout.length||hypeOn){var run=$("#rwRun");if(setH(run,(hypeOn?'<span class="hype"><i aria-hidden="true">⚡</i><b>'+esc(shw.hype_text)+'</b></span>':'')+S.shout.map(function(s){return s.donation?'<span class="gift"><i aria-hidden="true">♥</i><b>Thank you, '+esc(s.name)+'!</b> '+esc(s.message)+'</span>':'<span><b>'+esc(s.name)+':</b> '+esc(s.message)+'</span>'}).join("")))run.style.animationDuration=Math.max(25,S.shout.length*9)+"s"}
     var bn=$("#rwBanner"); bn.hidden=!(live&&st.banner); if(live&&st.banner){bn.className="rw-banner";setH(bn,'<b>Announcement</b><span>'+esc(st.banner)+'</span>')}
     if(!live){view(null,up);return}
     var done=R.filter(function(x){return x.status==="finished"}).length,tot=R.length;
