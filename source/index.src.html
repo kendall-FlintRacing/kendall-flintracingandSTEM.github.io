@@ -1842,6 +1842,12 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 @keyframes gsGlow{50%{box-shadow:0 0 0 2px var(--grn,#36d67a),0 0 34px rgba(54,214,122,.85)}}
 @keyframes gsPop{from{transform:scale(.9);opacity:.4}}
 @media (prefers-reduced-motion:reduce){.gs-rsvp.ok,.gs-rsvp.ok.pop{animation:none}}
+.gs-bigs{display:grid;gap:12px;margin:4px 0 2px}
+.gs-big{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center}
+.gs-bi{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#14151a}
+.gs-bi svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.gs-big small{display:block;font:800 .64rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#6b6e75}
+.gs-big b{display:block;font:800 1.02rem/1.2 var(--body);color:#14151a;margin-top:3px;overflow-wrap:anywhere}
 /* Toolbox button + pop-up */
 .ck-tb{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:12px;padding:10px 18px 10px 12px;border-radius:14px;border:0;cursor:pointer;text-align:left;background:var(--lite);color:#14151a;box-shadow:0 0 0 2px var(--neo),0 0 20px rgba(255,48,69,.4),0 8px 18px rgba(0,0,0,.35);transition:transform .15s,box-shadow .15s}
 .ck-tb svg{width:30px;height:30px;padding:6px;border-radius:9px;background:var(--neo);fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;box-sizing:content-box}
@@ -9259,6 +9265,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<label>Date<input type="date" id="evS" value="'+esc(e.start_date||"")+'"></label><label>Last day <small>(for multi-day events)</small><input type="date" id="evE" value="'+esc(e.end_date||"")+'"></label>'+
           '<label>Starts<input type="text" id="evST" maxlength="20" placeholder="10:00 AM" value="'+esc(d.start_time||"")+'"></label><label>Ends<input type="text" id="evET" maxlength="20" placeholder="1:00 PM" value="'+esc(d.end_time||"")+'"></label>'+
           '<label class="w">Place<input type="text" id="evL" maxlength="160" placeholder="Flint Racer Space" value="'+esc(d.location||"")+'"></label>'+
+          '<label class="w">Age groups <small>(shown to signed-in families and crew)</small><input type="text" id="evA" maxlength="80" placeholder="Ages 7–17" value="'+esc(d.ages||"")+'"></label>'+
           '<label class="w">Note for families <small>(only signed-in families and crew see this)</small><input type="text" id="evN" maxlength="1000" placeholder="Bring safety glasses" value="'+esc(d.notes||"")+'"></label>'+
           '<label class="chk w"><input type="checkbox" id="evP"'+(e.published!==false?' checked':'')+'> Show on the public calendar</label>'+
           '<label class="chk w"><input type="checkbox" id="evC"'+(e.to_be_confirmed?' checked':'')+'> The date isn’t final yet <small>(the calendar says “Date to be confirmed”)</small></label>'+
@@ -9282,11 +9289,11 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           if(!rec.title){toast("Add a title.");$("#evTi",box).focus();return}if(!rec.start_date){toast("Pick a date.");$("#evS",box).focus();return}
           if(rec.end_date&&rec.end_date<rec.start_date){toast("The last day can’t be before the first day.");return}
           if(tt[0]==="building"&&!/^building workshop/i.test(rec.title)){toast("Start the title with “Building Workshop” so leaders’ service hours count it.");$("#evTi",box).focus();return}
-          var det={start_time:g("#evST")||null,end_time:g("#evET")||null,location:g("#evL")||null,notes:g("#evN")||null},btn=$("button[type=submit]",box);btn.disabled=true;
+          var det={start_time:g("#evST")||null,end_time:g("#evET")||null,location:g("#evL")||null,ages:g("#evA")||null,notes:g("#evN")||null},btn=$("button[type=submit]",box);btn.disabled=true;
           (e.id?db.from("events").update(rec).eq("id",e.id).select().maybeSingle():db.from("events").insert(rec).select().maybeSingle()).then(function(x){
             if(x.error){btn.disabled=false;toast("Couldn’t save: "+x.error.message);return}
             var gotId=(x.data&&x.data.id)||e.id;(gotId?Promise.resolve(gotId):db.from("events").select("id").eq("title",rec.title).eq("start_date",rec.start_date).then(function(q){var L=q.data||[];return L.length?L[L.length-1].id:null})).then(function(id){
-            var saveDet=function(eid){return db.from("event_details").delete().eq("event_id",eid).then(function(){return (det.start_time||det.end_time||det.location||det.notes)?db.from("event_details").insert(Object.assign({event_id:eid},det)):{error:null}})};
+            var saveDet=function(eid){return db.from("event_details").delete().eq("event_id",eid).then(function(){return (det.start_time||det.end_time||det.location||det.ages||det.notes)?db.from("event_details").insert(Object.assign({event_id:eid},det)):{error:null}})};
             var later=$("#evCopy",box)&&$("#evCopy",box).checked?all.filter(function(o){return o.id!==id&&o.etype===rec.etype&&o.start_date>rec.start_date}):[];
             Promise.all([saveDet(id)].concat(later.map(function(o){return saveDet(o.id)}))).then(function(rs){var bad=rs.filter(function(y){return y&&y.error})[0];
               toast(bad?"Saved the event, but not its time and place: "+bad.error.message:(e.id?"Saved":"Event added")+(later.length?" · copied to "+later.length+" later":""));
@@ -11226,7 +11233,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
             '<td><input type="text" maxlength="160" value="'+esc(d.location||"")+'" placeholder="Flint Racer Space" aria-label="Location"></td><td><input type="text" maxlength="1000" value="'+esc(d.notes||"")+'" placeholder="Bring safety glasses" aria-label="Note"></td></tr>'}).join("")+'</tbody></table></div>':'<p>No upcoming events. Add them in the Events tab.</p>')+'</div>';
       $("#toMem2").onclick=function(){goTab("members")};
       function saveRow(tr,quiet){var id=tr.getAttribute("data-id"),f=$$("input",tr);
-        var rec={event_id:id,start_time:f[0].value.trim()||null,end_time:f[1].value.trim()||null,location:f[2].value.trim()||null,notes:f[3].value.trim()||null};
+        var rec={event_id:id,start_time:f[0].value.trim()||null,end_time:f[1].value.trim()||null,location:f[2].value.trim()||null,notes:f[3].value.trim()||null,ages:(D[id]||{}).ages||null};
         return db.from("event_details").delete().eq("event_id",id).then(function(){return db.from("event_details").insert(rec)}).then(function(x){if(!quiet)okToast(x,"Saved");return x})}
       $$("tbody tr[data-id]",P).forEach(function(tr){
         $$("input",tr).forEach(function(i){i.__v=i.value;i.addEventListener("change",function(){if(i.value!==i.__v){i.__v=i.value;saveRow(tr)}})});
@@ -11649,7 +11656,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
   function gsWd(d,o){return fmtDate(d,o)}
   function gsStage(tab,it){
     if(!it)return '<div class="gs-stage gs-empty"><div class="gs-door" aria-hidden="true"></div><p>'+(tab==="photos"?"No photos posted yet. Albums show up here once they’re published.":tab==="events"?"Nothing on the schedule right now. New dates land here first.":"No forms posted yet. Check back before the next event.")+'</p></div>';
-    if(tab==="events")return '<div class="gs-stage gs-ev"><div class="gs-plate"><span>'+esc(gsWd(it.start_date,{weekday:"short"}))+'</span><b>'+esc(gsWd(it.start_date,{day:"numeric"}))+'</b><span>'+esc(gsWd(it.start_date,{month:"short"}))+'</span></div><div class="gs-evt"><p class="gs-tag">'+esc(evTypeLabel(it))+'</p><h3>'+esc(it.title)+'</h3>'+(it.location?'<p>'+esc(it.location)+'</p>':'')+'</div></div>';
+    if(tab==="events")return '<div class="gs-stage gs-ev"><div class="gs-plate"><span>'+esc(gsWd(it.start_date,{weekday:"short"}))+'</span><b>'+esc(gsWd(it.start_date,{day:"numeric"}))+'</b><span>'+esc(gsWd(it.start_date,{month:"short"}))+'</span></div><div class="gs-evt">'+(evTypeLabel(it).toLowerCase()!==String(it.title||"").toLowerCase()?'<p class="gs-tag">'+esc(evTypeLabel(it))+'</p>':'')+'<h3>'+esc(it.title)+'</h3>'+(it.end_date&&it.end_date!==it.start_date?'<p>Through '+esc(fmtDate(it.end_date,{weekday:"short",month:"short",day:"numeric"}))+'</p>':'')+'</div></div>';
     if(tab==="photos"){var n=it.photos.length,i=((GS.ph%n)+n)%n,p=it.photos[i];
       return '<div class="gs-stage gs-ph"><img src="'+esc(p.url)+'" alt="'+esc(p.caption||it.title)+'" loading="lazy">'+(p.caption?'<p class="gs-cap">'+esc(p.caption)+'</p>':'')+
         (n>1?'<button class="gs-pn l" type="button" data-gph="-1" aria-label="Previous photo">‹</button><button class="gs-pn r" type="button" data-gph="1" aria-label="Next photo">›</button>':'')+'<span class="gs-pc">'+(i+1)+' / '+n+'</span></div>'}
@@ -11658,7 +11665,9 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
   function gsSpec(tab,it,i,n){var no='<p class="gs-no">'+String(i+1).padStart(2,"0")+' / '+String(n).padStart(2,"0")+'</p>',row=function(k,v){return v?'<div class="gs-row"><span>'+esc(k)+'</span><b>'+v+'</b></div>':''};
     if(!it)return '<div class="gs-spec"><p class="gs-no">00 / 00</p><h3 class="gs-name">'+(tab==="photos"?"Photo garage":tab==="events"?"Schedule":"Forms")+'</h3></div>';
     if(tab==="events"){var tm=it.start_time?esc(it.start_time)+(it.end_time?"–"+esc(it.end_time):""):"";
-      return '<div class="gs-spec">'+no+'<h3 class="gs-name">'+esc(it.title)+'</h3><div class="gs-rows">'+row("Date",esc(fmtDate(it.start_date,{weekday:"long",month:"long",day:"numeric"})))+row("Time",tm)+row("Place",esc(it.location||""))+(it.end_date&&it.end_date!==it.start_date?row("Through",esc(fmtDate(it.end_date))):'')+'</div>'+
+      var big=function(k,v,ic){return '<div class="gs-big"><span class="gs-bi" aria-hidden="true"><svg viewBox="0 0 24 24">'+ic+'</svg></span><div><small>'+k+'</small><b>'+v+'</b></div></div>'};
+      return '<div class="gs-spec">'+no+'<div class="gs-bigs">'+big("Time",tm||"Time to be announced",'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>')+big("Location",it.location?esc(it.location):"Place to be announced",'<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>')+
+        big("Age groups",it.ages?esc(it.ages):"Ask us about ages",'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9.5" r="2.3"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M14.5 14.6c.8-.4 1.6-.6 2.5-.6 2.2 0 3.7 1.5 4 4"/>')+'</div>'+
         (it.notes?'<p class="gs-note">'+esc(it.notes)+'</p>':'')+(it.files&&it.files.length?'<p class="gs-files">'+it.files.map(function(f){return /^https:\/\//.test(f.url)?'<a href="'+esc(f.url)+'" target="_blank" rel="noopener">'+esc(f.name)+'</a>':''}).join("")+'</p>':'')+
         (ME?(qsCount(it.rsvp)?'<div class="gs-rsvp ok"><span class="gs-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Confirmed</span><small>'+qsCount(it.rsvp)+' going</small><button type="button" class="gs-chg" data-qs="'+esc(it.id)+'">Change</button></div>':
           '<button type="button" class="gs-rsvp" data-rsvp="'+esc(it.id)+'">RSVP<small>Tap to let us know you’re coming</small></button>'):
