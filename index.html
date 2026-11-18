@@ -2675,6 +2675,136 @@ body.rw-tv .rw-name{font-size:clamp(2rem,3.6vw,3rem)}
 body.rw-tv .rw-av{width:96px;height:96px;font-size:2.6rem}
 body.rw-tv .rw-run{font-size:1.6rem}
 body.rw-tv .rw-fol{display:none}
+.rk-so-gift{border-left:4px solid #f5b82e;background:#fff8e6}.rk-gift{font:700 .82rem/1.35 var(--body);color:#7a5600;margin:0 0 4px}
+/* ===== Live race: full-screen broadcast layout (Nov 17) ===== */
+body.rw-app-on header.site-nav,body.rw-app-on footer.site-foot,body.rw-app-on .crumbs{display:none!important}
+body.rw-app-on{overflow:hidden}
+body.rw-app-on .fr-pill{bottom:calc(62px + env(safe-area-inset-bottom,0px))}
+@media (max-width:1099px){body.rw-app-on.rw-panel-open .fr-pill{display:none}}
+.race-page.rw-app{position:fixed;inset:0;z-index:40;min-height:0;padding:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;
+  background:radial-gradient(120% 80% at 50% -10%,#2a1216 0%,rgba(18,18,22,0) 55%),radial-gradient(rgba(255,255,255,.05) .8px,transparent .8px) 0 0/6px 6px,#111115}
+.rw-top{display:flex;align-items:center;gap:14px;padding:10px clamp(12px,2vw,22px);background:linear-gradient(180deg,#0b0b0e,#121216);border-bottom:2px solid var(--red);position:relative;z-index:3}
+.rw-top::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:6px;background:conic-gradient(#fff 25%,#111 0 50%,#fff 0 75%,#111 0) 0 0/6px 6px;opacity:.18;pointer-events:none}
+.rw-brand{flex:none;display:block;line-height:0}.rw-brand img{height:clamp(38px,5vw,54px);width:auto}
+.rw-title{flex:1;min-width:0;display:grid;gap:6px}
+.rw-app .rw-where{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0;font:700 .78rem/1.2 var(--body);letter-spacing:.12em;text-transform:uppercase;color:#e3e5e9}
+.rw-where b{font:800 clamp(.95rem,1.6vw,1.2rem)/1.1 var(--display);letter-spacing:.04em;color:#fff}.rw-at{color:var(--pink)}
+.rw-app .rw-prog{max-width:420px}.rw-app .rw-meter{flex:1}
+.rw-topbtns{display:flex;gap:8px;flex:none}
+.rw-panelbtn{gap:8px}.rw-pb-ico{width:16px;height:12px;display:inline-block;background:linear-gradient(currentColor 0 0) 0 0/100% 2px no-repeat,linear-gradient(currentColor 0 0) 0 50%/100% 2px no-repeat,linear-gradient(currentColor 0 0) 0 100%/100% 2px no-repeat}
+.rw-body{display:grid;grid-template-columns:minmax(0,1fr);min-height:0;position:relative}
+.rw-app.panel-on .rw-body{grid-template-columns:minmax(0,1fr) clamp(340px,30vw,440px)}
+.rw-main{min-height:0;overflow:auto;padding:clamp(10px,2vw,22px);display:flex;flex-direction:column;gap:12px;scrollbar-width:thin}
+.rw-app .rw-stage{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;margin:0}
+.rw-app .rw-extras{margin:0;gap:10px}.rw-app .rw-fact,.rw-app .rw-pin{padding:8px 14px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.rw-app .rw-fact p:last-child,.rw-app .rw-pin p:nth-child(2){margin:0;font-size:1rem}.rw-app .rw-pin b{margin:0}
+.rw-app .rw-adstrip{display:flex;align-items:center;gap:14px;padding:8px 12px;flex:none}
+.rw-app .rw-adrow{flex:1;margin:0;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.rw-app .rw-adc{min-height:0;padding:6px 8px;grid-auto-flow:column;gap:8px;justify-content:center}.rw-app .rw-adimg{max-height:30px;max-width:110px}.rw-app .rw-adc span{font-size:.74rem}
+.rw-app .rw-mine,.rw-app #rwBanner,.rw-app .rw-banner{margin:0}
+/* size the race to the screen height so the whole heat fits without scrolling */
+@media (min-width:641px){
+  .rw-app .rw-stage{padding:clamp(12px,2.4vh,30px) clamp(14px,2vw,28px)}
+  .rw-app #rwOn .rw-head{font-size:clamp(1.9rem,6vh,4rem);margin:clamp(4px,1vh,12px) 0 clamp(8px,1.8vh,20px)}
+  .rw-app .rw-lane{padding:clamp(10px,1.8vh,22px);gap:clamp(2px,.6vh,6px)}
+  .rw-app .rw-av{width:clamp(44px,7vh,72px);height:clamp(44px,7vh,72px);font-size:clamp(1.2rem,3.2vh,2rem)}
+  .rw-app .rw-name{font-size:clamp(1.3rem,3.6vh,2.1rem)}
+  .rw-app .rw-logo{max-height:clamp(28px,6vh,56px)}
+  .rw-app .rw-pres{margin:0}.rw-app .rw-pres-img{max-height:clamp(24px,4.4vh,40px)}
+  .rw-app .rw-lights{margin-top:clamp(8px,1.8vh,22px)}.rw-app .rw-lt i{width:clamp(20px,3.4vh,30px);height:clamp(20px,3.4vh,30px)}
+  .rw-app .rw-status{margin-top:clamp(6px,1.2vh,14px)}
+  .rw-app .rw-banner{padding:8px 14px;font-size:.98rem}
+  .rw-app #rwOn:not(:empty){display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:18px;align-items:center}
+  .rw-app #rwOn>*{grid-column:1/-1}.rw-app #rwOn>.rw-match{width:100%}.rw-app #rwOn>.rw-lights{grid-column:1;margin-top:clamp(8px,1.8vh,22px)}
+  .rw-app #rwOn>.rw-lights+.rw-status{grid-column:2;text-align:left;margin-top:clamp(8px,1.8vh,22px)}
+  .rw-app #rwOn>.rw-int,.rw-app #rwOn>.rw-int *{grid-column:auto}
+}
+@media (min-width:641px) and (max-height:1000px){.rw-app .rw-lane .rw-fol{display:none}.rw-app .rw-lane .rw-meta:has(+ .rw-logo){display:none}}
+.rw-app .rw-mine-in{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;background:rgba(255,255,255,.05);border:1px solid #2c2b32;border-radius:999px;padding:6px 8px 6px 16px;font-size:.92rem}
+.rw-app .rw-mine-in p{margin:0}.rw-app .rw-mt{font:800 .7rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+.rw-app .rw-mi{display:inline-flex;gap:6px;align-items:baseline;background:rgba(255,255,255,.06);border-radius:999px;padding:5px 10px}.rw-app .rw-mi.hot{background:var(--red-deep)}.rw-app .rw-mi span{color:#c9cbd0;font-size:.82rem}.rw-app .rw-mi.hot span{color:#fff}
+.rw-app .rw-mine-in .rw-link{margin-left:auto}
+.rw-app .rw-adstrip{margin:0}
+/* side panel */
+.rw-panel{min-height:0;display:flex;flex-direction:column;background:#f6f7f9;color:var(--ink);border-left:3px solid var(--red);box-shadow:-18px 0 40px rgba(0,0,0,.35);z-index:4}
+.rw-ph{flex:none;display:flex;align-items:stretch;background:#0b0b0e;border-bottom:1px solid #26262c}
+.rw-app .rw-tabs{flex:1;display:flex;gap:0;margin:0;padding:0;border:0;overflow-x:auto;scrollbar-width:none}
+.rw-app .rw-tabs button{flex:1 0 auto;background:transparent;border:0;border-bottom:3px solid transparent;color:#c9cbd0;font:800 .8rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:16px 12px 13px;cursor:pointer;border-radius:0}
+.rw-app .rw-tabs button[aria-selected="true"]{color:#fff;border-bottom-color:var(--red);background:rgba(255,255,255,.05)}
+.rw-app .rw-tabs button:hover{color:#fff}
+.rw-x{flex:none;width:46px;background:transparent;border:0;border-left:1px solid #26262c;color:#fff;font:400 1.7rem/1 var(--body);cursor:pointer}.rw-x:hover{background:var(--red-deep)}
+.rw-app .rw-divs{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px 0;margin:0}
+.rw-app .rw-divs button{background:#fff;border:1.5px solid #c9ccd1;color:var(--ink);border-radius:999px;padding:6px 11px;font:700 .8rem/1 var(--body);cursor:pointer}
+.rw-app .rw-divs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.rw-app .rw-view{flex:1 1 auto;overflow:auto;padding:12px 14px 18px;min-height:0;scrollbar-width:thin;background:transparent;border:0;margin:0}
+.rw-app .rw-view .rw-k2{font:800 .7rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep);margin:14px 0 8px}
+.rw-app .rw-view .rw-k2:first-child{margin-top:4px}
+.rw-pfoot{flex:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 14px;background:#0b0b0e;border-top:1px solid #26262c}
+.rw-pfoot .rw-btn{justify-content:center;min-height:46px;font-size:.92rem}
+.rw-btn.gold{background:#f5b82e;border-color:#f5b82e;color:#2a1d00}.rw-btn.gold:hover{background:#ffd166;border-color:#ffd166;color:#2a1d00}
+.rw-nxl{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rw-nx{background:#fff;border:1px solid #e1e3e6;border-left:4px solid #c9ccd1;border-radius:6px;padding:10px 12px}
+.rw-nx.first{border-left-color:#f5b82e}.rw-nx.now{border-left-color:var(--red);background:#fff5f5}.rw-nx.mine{box-shadow:inset 0 0 0 2px var(--pink)}
+.rw-nx .rw-in{margin:0;font:800 .68rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#6b6e75}
+.rw-nx .rw-uph{margin:4px 0 2px;font-weight:700;color:#4a4d55;font-size:.85rem}
+.rw-nx .rw-vsl{margin:0;font-weight:800;font-size:1.02rem;color:var(--ink)}.rw-nx .vs{margin:0 8px;color:#9a9da4;font-weight:600;font-size:.8rem}
+.rw-nx .rw-vsl .me{color:var(--red-deep)}.rw-nx .ph{color:#6b6e75;font-weight:600}
+.rw-nxp{margin:6px 0 0;font-size:.8rem;color:#5a5d64}.rw-nxp b{color:var(--ink)}
+.rw-app .rw-view .rw-list{margin:0}.rw-app .rw-view .rw-res{background:#fff;border:1px solid #e1e3e6;border-radius:6px;padding:10px 12px;margin-bottom:8px;color:var(--ink)}
+.rw-app .rw-view .rw-res .big{font-weight:800}.rw-app .rw-view .rw-res .tm,.rw-app .rw-view .rw-rt{color:#4a4d55;font-size:.84rem;margin:2px 0}
+.rw-app .rw-view .rw-empty{color:#4a4d55}.rw-app .rw-view .rw-fine{color:#5a5d64;font-size:.84rem}
+.rw-pre{background:#fff;border:1px solid #e1e3e6;border-radius:6px;padding:12px 14px}.rw-pre p{margin:0}.rw-pre p+p{margin-top:6px}
+.rw-app .rw-view .rw-link{color:var(--red-deep);text-decoration:underline;background:none;border:0;padding:0;font:inherit;font-weight:700;cursor:pointer}
+.rw-app .rw-how{background:#fff;border:1px solid #e1e3e6;border-radius:6px;padding:10px 12px;margin-top:14px;color:var(--ink)}.rw-app .rw-how summary{cursor:pointer;font:700 .95rem/1.3 var(--body);color:var(--ink);padding:0}.rw-app .rw-how ol{margin:8px 0 0 18px;padding:0;display:grid;gap:4px;font-size:.88rem;color:#3a3d44}
+.rw-app .rw-search{display:block;margin:0 0 10px}.rw-app .rw-search input{width:100%;min-height:44px;border:1.5px solid #c9ccd1;border-radius:6px;padding:8px 12px;font:500 1rem/1 var(--body);background:#fff;color:var(--ink)}
+.rw-app .rw-rl{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rw-app .rw-rl>li{background:#fff;border:1px solid #e1e3e6;border-radius:6px;padding:10px 12px;display:block}
+.rw-app .rw-rl>li.mine{border-color:var(--pink);box-shadow:inset 3px 0 0 var(--red-deep)}
+.rw-rh{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}.rw-rh b{display:block;font-size:1.02rem}.rw-rh small{display:block;color:#5a5d64;font-size:.8rem;margin-top:2px}
+.rw-rstat b,.rw-rtimes b{font-size:inherit}
+.rw-rstat{display:flex;gap:6px 12px;flex-wrap:wrap;align-items:center;margin:8px 0 0;font-size:.84rem;color:#4a4d55}.rw-rstat em{font-style:normal;font-weight:700;color:var(--ink)}.rw-rstat em.hot{color:var(--red-deep)}.rw-rstat em.soon{color:#8a5a00}
+.rw-rtimes{list-style:none;margin:8px 0 0;padding:8px 0 0;border-top:1px dashed #e1e3e6;display:grid;gap:4px;font-size:.84rem;font-variant-numeric:tabular-nums}
+.rw-rtimes li{display:grid;grid-template-columns:62px 1fr auto;gap:8px;align-items:baseline}.rw-rtimes .h{color:#6b6e75;font-weight:700}.rw-rtimes .r{font:800 .66rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:4px 7px;background:#eceef1;color:#4a4d55}
+.rw-rtimes .r.w{background:#e3f6ea;color:#17803d}.rw-rtimes .r.l{background:#fde3e6;color:var(--red-deep)}.rw-rtimes.none{display:block;color:#6b6e75}
+.rw-spons{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rw-spons li{display:grid;grid-template-columns:88px minmax(0,1fr);gap:12px;align-items:center;background:#fff;border:1px solid #e1e3e6;border-radius:6px;padding:10px 12px}
+.rw-spons img{width:88px;height:52px;object-fit:contain}.rw-sp-ph{width:88px;height:52px;display:grid;place-items:center;background:#111216;color:#fff;font:800 1.4rem/1 var(--display);border-radius:4px}
+.rw-spons b{display:block}.rw-spons small{display:block;color:#5a5d64;font-size:.82rem;margin-top:2px}.rw-spons small.pres{color:var(--red-deep);font-weight:700}
+.rw-app .rw-view .bk{color:var(--ink)}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* ticker sits at the bottom like a broadcast crawl */
+.rw-app .rw-ticker{border-bottom:0;border-top:2px solid var(--red);z-index:3}
+.rw-run .gift{color:#ffd166}.rw-run .gift b{color:#ffd166}.rw-run .gift i{font-style:normal;margin-right:6px}
+/* donor thank-you announcement */
+.rw-thanks{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:rgba(10,10,12,.72);padding:20px;cursor:pointer}
+.rw-thanks-in{max-width:760px;text-align:center;background:linear-gradient(160deg,#2a1216,#141317);border:2px solid #f5b82e;border-radius:12px;padding:clamp(22px,4vw,44px);box-shadow:0 30px 80px rgba(0,0,0,.5);animation:rwpop .6s ease-out}
+.rw-thanks-in img{height:56px;width:auto;margin-bottom:10px}.rw-thanks-in .rw-k2{color:#ffd166;font:800 .8rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase}
+.rw-thanks-in h2{font:800 clamp(2rem,5vw,3.6rem)/1.05 var(--display);text-transform:uppercase;color:#fff;margin:10px 0}.rw-thanks-in .m{font:600 clamp(1.1rem,2.4vw,1.6rem)/1.35 var(--body);color:#f3f4f6;margin:0}
+/* donation form */
+.rw-give .gv-amts{border:0;margin:0;padding:0;display:grid;gap:8px}.rw-give legend{font-weight:700;margin-bottom:6px}
+.gv-chips{display:flex;gap:8px;flex-wrap:wrap}.gv-chip{min-width:72px;min-height:46px;border:1.5px solid #c9ccd1;background:#fff;color:var(--ink);border-radius:6px;font:800 1.05rem/1 var(--body);cursor:pointer}
+.gv-chip[aria-pressed="true"]{background:var(--red-deep);border-color:var(--red-deep);color:#fff}
+.gv-other{display:grid;gap:4px;font-weight:700}.gv-dollar{display:flex;align-items:center;border:1.5px solid #c9ccd1;border-radius:6px;background:#fff;max-width:200px}.gv-dollar b{padding:0 4px 0 10px;color:#5a5d64}.gv-dollar input{border:0!important;outline:0;min-height:42px;width:100%;font:600 1rem/1 var(--body);background:transparent}
+.gv-pair{display:grid!important;grid-template-columns:auto 1fr;gap:10px;align-items:start;background:#fff8e6;border:1px solid #f5d27a;border-radius:6px;padding:10px 12px;font-weight:500!important}
+.gv-pair input{width:20px;height:20px;margin-top:2px}.gv-pair small{display:block;color:#5a5d64;margin-top:2px;font-size:.84rem}
+.rw-give label small{font-weight:500;color:#5a5d64}
+/* track screen: full width, no panel */
+body.rw-tv .rw-panel,body.rw-tv .rw-panelbtn{display:none!important}body.rw-tv .rw-app .rw-body{grid-template-columns:minmax(0,1fr)!important}
+/* phones and tablets: the panel slides over the stage */
+@media (max-width:1099px){
+  .rw-app.panel-on .rw-body{grid-template-columns:minmax(0,1fr)}
+  .rw-panel{position:absolute;top:0;right:0;bottom:0;width:min(440px,100%);animation:rwslide .22s ease-out}
+}
+@keyframes rwslide{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+@media (max-width:640px){
+  .rw-top{gap:8px;padding:8px 10px}.rw-brand img{height:34px}.rw-at,.rw-tvbtn{display:none}
+  .rw-app .rw-where b{font-size:.9rem}.rw-panelbtn{padding:10px 12px;font-size:.8rem}
+  .rw-app .rw-stage{padding:16px 12px}
+  .rw-app .rw-head{font-size:clamp(1.6rem,8vw,2.2rem);margin:10px 0 12px}.rw-app .rw-lights{margin-top:12px}
+  .rw-app .rw-mine-in{border-radius:10px;font-size:.84rem;padding:8px 12px}
+  .rw-app .rw-expect{display:none}
+}
+@media (prefers-reduced-motion:reduce){.rw-panel{animation:none}.rw-thanks-in{animation:none}}
 /* ===== Student Leadership Council portal (#council) ===== */
 .co-tabs{display:flex;gap:4px;overflow-x:auto;background:#d4d6da;padding:4px;border-radius:8px;margin-bottom:14px;scrollbar-width:thin}
 .co-tabs a{flex:none;text-decoration:none;color:#2a2d33;font:800 .92rem/1 var(--body);padding:12px 14px;border-radius:6px;white-space:nowrap;display:flex;gap:6px;align-items:center}
@@ -5355,77 +5485,86 @@ a.mini{text-decoration:none;display:inline-block}
 </div>
 
 <!-- ======================= LIVE RACE (SPECTATORS) ======================= -->
-<div class="page race-page" data-page="race-watch" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#racing">Track &amp; Racing</a><span aria-hidden="true">/</span><span aria-current="page">Live race</span></div></nav>
-  <div class="rw-ticker" id="rwTicker" hidden><span class="rw-tag">Trackside cheers</span><div class="rw-track"><div class="rw-run" id="rwRun"></div></div></div>
-  <div class="rw-strip-wrap">
-    <div class="wrap rw-strip">
-      <span class="rw-live" id="rwLive" hidden><i aria-hidden="true"></i>Live</span>
-      <p class="rw-where">Flint Soap Box Derby · Cronin Derby Downs</p>
+<div class="page race-page rw-app" data-page="race-watch" hidden>
+  <header class="rw-top">
+    <a class="rw-brand" href="#home" title="Flint Racing home"><img src="img/logo-white.webp" alt="Flint Racing and STEM"></a>
+    <div class="rw-title">
+      <p class="rw-where"><span class="rw-live" id="rwLive" hidden><i aria-hidden="true"></i>Live</span><b>Flint Soap Box Derby</b><span class="rw-at">Cronin Derby Downs</span></p>
       <div class="rw-prog" id="rwProg" hidden></div>
-      <button class="rw-btn" type="button" id="rwTv">Track screen</button>
     </div>
-  </div>
-  <div class="wrap rw-wrap">
-    <div id="rwBanner" hidden></div>
-    <div class="rw-mine" id="rwMine" hidden></div>
-    <div class="rw-spot" id="rwSpot" hidden aria-live="polite"></div>
-    <section class="rw-stage" id="rwStage" aria-label="Race on the track now">
-      <div class="rw-idle" id="rwIdle">
-        <p class="rw-kicker">Race day is coming</p>
-        <h1 class="rw-head">Follow every heat live, right here.</h1>
-        <p class="rw-sub rw-when" id="rwWhen">Race day: Saturday, June 5, 2027</p>
-        <div class="rw-count" id="rwCount" aria-label="Countdown to race day"></div>
-        <div class="rw-expect">
-          <div><h3>Watch every heat</h3><p>See who’s on the ramp, the starting lights and each winner the moment it’s posted.</p></div>
-          <div><h3>Follow your racer</h3><p>Tap Follow on any racer and their next heat and results stay at the top of your screen.</p></div>
-          <div><h3>Cheer them on</h3><p>Send a shout-out from the stands. Our team shares them on the big screen.</p></div>
+    <div class="rw-topbtns">
+      <button class="rw-btn rw-tvbtn" type="button" id="rwTv">Track screen</button>
+      <button class="rw-btn red rw-panelbtn" type="button" id="rwPanelBtn" aria-controls="rwPanel" aria-expanded="false"><span class="rw-pb-ico" aria-hidden="true"></span><span class="rw-pb-txt">Race details</span></button>
+    </div>
+  </header>
+  <div class="rw-body">
+    <main class="rw-main" id="rwMain">
+      <div id="rwBanner" hidden></div>
+      <div class="rw-mine" id="rwMine" hidden></div>
+      <div class="rw-spot" id="rwSpot" hidden aria-live="polite"></div>
+      <section class="rw-stage" id="rwStage" aria-label="Race on the track now">
+        <div class="rw-idle" id="rwIdle">
+          <p class="rw-kicker">Race day is coming</p>
+          <h1 class="rw-head">Follow every heat live, right here.</h1>
+          <p class="rw-sub rw-when" id="rwWhen">Race day: Saturday, June 5, 2027</p>
+          <div class="rw-count" id="rwCount" aria-label="Countdown to race day"></div>
+          <div class="rw-expect">
+            <div><h3>Watch every heat</h3><p>See who’s on the ramp, the starting lights and each winner the moment it’s posted.</p></div>
+            <div><h3>Follow your racer</h3><p>Open Race details, tap Follow on any racer, and their next heat stays on your screen.</p></div>
+            <div><h3>Cheer them on</h3><p>Send a shout-out or give to the program. Approved shout-outs roll across the screen.</p></div>
+          </div>
+          <div class="row"><a class="rw-btn red" href="#calendar">See the calendar</a><a class="rw-btn" href="#how-racing">How racing works</a></div>
         </div>
-        <div class="row"><a class="rw-btn red" href="#calendar">See the calendar</a><a class="rw-btn" href="#how-racing">How racing works</a></div>
-      </div>
-      <div id="rwOn" hidden aria-live="polite"></div>
-    </section>
-    <div class="rw-extras" id="rwExtras" hidden></div>
-    <section class="rw-adstrip" id="rwAds" hidden aria-label="Race day sponsors"></section>
-    <section class="rw-upnext" id="rwUp" hidden aria-label="Coming up"></section>
-    <section class="rw-board" id="rwBoard" hidden aria-labelledby="rwBoardTitle">
-      <div class="rw-board-head"><h2 id="rwBoardTitle">Race center</h2><p>Every heat, result and racer. Updates on its own.</p></div>
-      <div class="rw-tabs" role="tablist" aria-label="Race center">
-        <button type="button" role="tab" data-view="sched" aria-selected="true">Schedule</button>
-        <button type="button" role="tab" data-view="bracket" aria-selected="false">Bracket</button>
-        <button type="button" role="tab" data-view="results" aria-selected="false">Results</button>
-        <button type="button" role="tab" data-view="stand" aria-selected="false">Standings</button>
-        <button type="button" role="tab" data-view="racers" aria-selected="false">Find a racer</button>
-        <button type="button" role="tab" data-view="cheers" aria-selected="false">Cheers</button>
+        <div id="rwOn" hidden aria-live="polite"></div>
+      </section>
+      <div class="rw-extras" id="rwExtras" hidden></div>
+      <section class="rw-adstrip" id="rwAds" hidden aria-label="Race day sponsors"></section>
+    </main>
+    <aside class="rw-panel" id="rwPanel" aria-label="Race details" hidden>
+      <div class="rw-ph">
+        <div class="rw-tabs" role="tablist" aria-label="Race details">
+          <button type="button" role="tab" data-view="next" aria-selected="true">Up next</button>
+          <button type="button" role="tab" data-view="racers" aria-selected="false">Racers</button>
+          <button type="button" role="tab" data-view="sponsors" aria-selected="false">Sponsors</button>
+          <button type="button" role="tab" data-view="bracket" aria-selected="false">Bracket</button>
+        </div>
+        <button class="rw-x" type="button" id="rwPanelX" aria-label="Close race details">×</button>
       </div>
       <div class="rw-divs" id="rwDivs" role="group" aria-label="Division"></div>
-      <div class="rw-view" id="rwView" role="tabpanel"></div>
-    </section>
-    <details class="rw-how">
-      <summary>New to derby racing? How to follow along</summary>
-      <ol>
-        <li>Soap box cars have no engine. Racers roll down the hill on gravity alone.</li>
-        <li>Two cars race side by side, one in Lane 1 and one in Lane 2. Each heat is two runs: the racers swap lanes for run 2, and the lowest total time wins.</li>
-        <li>The lights go red when cars are on the ramp, amber when they’re set, and green when they’re off.</li>
-        <li>Times are shown to the thousandth of a second. A bye means a racer moves on to the next round without racing.</li>
-        <li>Racers compete in brackets by division. In double elimination a racer is out after two losses and keeps racing on the consolation side after the first.</li>
-      </ol>
-    </details>
+      <div class="rw-view" id="rwView" role="tabpanel" tabindex="0"></div>
+      <div class="rw-pfoot">
+        <button class="rw-btn red" type="button" data-so="1">Send a shout-out</button>
+        <button class="rw-btn gold" type="button" data-give="1">Donate</button>
+      </div>
+    </aside>
   </div>
-  <div class="rw-actions" id="rwActions" hidden>
-    <div class="grp"><button class="rw-btn red" type="button" id="rwSoOpen">Send a shout-out</button></div>
-    <div class="grp"><button class="rw-btn" type="button" data-go="racers">Follow a racer</button><button class="rw-btn" type="button" data-go="sched">Schedule</button></div>
-  </div>
+  <div class="rw-ticker" id="rwTicker" hidden><span class="rw-tag">Trackside cheers</span><div class="rw-track"><div class="rw-run" id="rwRun"></div></div></div>
   <div class="rw-hype" id="rwHype" hidden aria-live="assertive"></div>
-  <div class="rw-so" id="rwSo" hidden>
+  <div class="rw-thanks" id="rwThanks" hidden aria-live="polite"></div>
+  <div class="rw-so" id="rwSo" hidden role="dialog" aria-modal="true" aria-labelledby="soH">
     <form id="rwSoForm" novalidate>
-      <div class="top"><h2>Give someone a little extra horsepower.</h2><p>Cheer on a racer, celebrate your family or thank someone who makes this day possible.</p></div>
+      <div class="top"><h2 id="soH">Give someone a little extra horsepower.</h2><p>Cheer on a racer, celebrate your family or thank someone who makes this day possible.</p></div>
       <div class="body">
         <label for="so-name">Your name<input type="text" id="so-name" maxlength="60" placeholder="First name or team name" required></label>
         <label for="so-msg">Shout-out<textarea id="so-msg" maxlength="280" placeholder="Go Northside! Your whole family is cheering for you!" required></textarea></label>
         <p class="fine">Up to 280 characters. Our team reviews every shout-out before it appears on the screen.</p>
         <p class="msg" id="soMsg" role="status"></p>
         <div class="row"><button class="btn deep" type="submit" id="soSend">Send for review</button><button class="btn outline-red" type="button" id="soClose">Close</button></div>
+      </div>
+    </form>
+  </div>
+  <div class="rw-so rw-give" id="rwGive" hidden role="dialog" aria-modal="true" aria-labelledby="gvH">
+    <form id="rwGiveForm" novalidate>
+      <div class="top"><h2 id="gvH">Fuel the next generation of racers.</h2><p>Every gift keeps kids building, learning and racing at Cronin Derby Downs.</p></div>
+      <div class="body">
+        <fieldset class="gv-amts"><legend>Amount</legend><div class="gv-chips" id="gvChips"></div><label class="gv-other" for="gv-amt">Other amount<span class="gv-dollar"><b aria-hidden="true">$</b><input type="number" id="gv-amt" min="1" max="100000" step="1" inputmode="decimal" placeholder="Any amount"></span></label></fieldset>
+        <label for="gv-name">Your name <small>(optional)</small><input type="text" id="gv-name" maxlength="60" autocomplete="name"></label>
+        <label for="gv-email">Email <small>(optional, so we can thank you)</small><input type="email" id="gv-email" maxlength="160" autocomplete="email"></label>
+        <label class="gv-pair"><input type="checkbox" id="gv-pair"> <span><b>Add a shout-out with my gift</b><small>We’ll thank you by name on the screen and announce your shout-out for the racers. We never show the amount.</small></span></label>
+        <label for="gv-msg" id="gvMsgWrap" hidden>Your shout-out<textarea id="gv-msg" maxlength="280" placeholder="Go Jalen! The whole family is cheering for you!"></textarea></label>
+        <p class="fine" id="gvFine">Your gift is private unless you add a shout-out. You’ll finish on Square’s secure checkout.</p>
+        <p class="msg" id="gvMsg" role="status"></p>
+        <div class="row"><button class="btn deep" type="submit" id="gvSend">Continue to secure checkout</button><button class="btn outline-red" type="button" id="gvClose">Close</button></div>
       </div>
     </form>
   </div>
@@ -7897,12 +8036,12 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     ".chips2 span",".feature-list li",".pace b",".pace small",".sp-art b",".sp-body .k",".topic b",".topic span",".brand strong",".brand small",
     ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
     ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
-  var DYN=["dialog.dr-dlg","#rgForm","#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#qsDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DYN=["dialog.dr-dlg","#rgForm","#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#qsDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwThanks","#gvChips","#gvSend","#gvFine","#gvMsg","#rwPanelBtn","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall",".spk-count",".spx-price","#rdCount","#rdCountLbl","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
   var TAGGED=[], DEF={};
-  var DATA=["dialog.dr-dlg","#rgForm","#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#qsDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DATA=["dialog.dr-dlg","#rgForm","#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#qsDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwThanks","#gvChips","#gvSend","#gvFine","#gvMsg","#rwPanelBtn","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle","#yr",
     "script","style","svg",".fr-bar",".fr-test",".q-done","#qErr","option","select","textarea"].join(",");
   function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
@@ -8305,6 +8444,13 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     if($("#dnTry"))$("#dnTry").onclick=function(){window.open(c.link,"_blank","noopener")};
     if($("#dnOff"))$("#dnOff").onclick=function(){var b=this;if(b.textContent!=="Confirm disconnect"){b.textContent="Confirm disconnect";return}
       db.from("site_content").delete().eq("key","data|donate").then(function(x){if(okToast(x,"Disconnected. The Donate page is back to pledges.")){delete CONTENT["data|donate"];applyDonate();tabDonate()}})};
+    /* gifts started on the live race page (private: admins only) */
+    db.from("race_gifts").select("*").order("created_at",{ascending:false}).limit(100).then(function(g){if(g.error||TAB!=="donate")return;var L=g.data||[],ST={"new":"Check Square","confirmed":"Received","not_received":"Not received"};
+      var box=document.createElement("div");box.className="inq";box.style.marginTop="22px";
+      box.innerHTML='<header><b>Race day gifts</b><small>Started on the Live Race page · private</small></header><p style="margin:0;color:#4a4d55;max-width:78ch">Viewers pick an amount here, then pay on Square. The website can’t see whether the payment went through, so match each one to Square and mark it. Gifts that came with a shout-out wait in Track operations; the amount is never shown on screen.</p>'+
+        (L.length?'<div class="adm-scroll"><table class="adm-table" style="min-width:640px"><thead><tr><th>When</th><th>Donor</th><th>Amount</th><th>Shout-out</th><th>Status</th></tr></thead><tbody>'+L.map(function(x){return '<tr data-gid="'+x.id+'"><td><small>'+new Date(x.created_at).toLocaleString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+'</small></td><td>'+esc(x.name||"Anonymous")+(x.email?'<br><small><a href="mailto:'+esc(x.email)+'">'+esc(x.email)+'</a></small>':'')+'</td><td><b>'+(x.amount!=null?"$"+(+x.amount).toLocaleString():"–")+'</b></td><td>'+(x.message?'<small>“'+esc(x.message)+'”</small>':'<small>Private</small>')+'</td><td><select data-gst aria-label="Status">'+Object.keys(ST).map(function(k){return '<option value="'+k+'"'+(x.status===k?' selected':'')+'>'+ST[k]+'</option>'}).join("")+'</select></td></tr>'}).join("")+'</tbody></table></div>':'<p class="rk-fine">None yet. They show up here on race day.</p>');
+      P.appendChild(box);
+      $$("[data-gst]",box).forEach(function(sel){sel.onchange=function(){db.from("race_gifts").update({status:sel.value}).eq("id",sel.closest("tr").getAttribute("data-gid")).then(function(x){okToast(x,"Saved")})}})});
   }
   function applyDonate(){if(window.FR_setDonate)window.FR_setDonate(donateCfg())}
   /* ---------- Admin → Sponsor prices: blank until Kendall turns them on ---------- */
@@ -8987,7 +9133,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var up=heats.filter(function(h){return !FRB.isBye(h)&&h.status!=="finished"}).slice(0,8);
     var adOpts=function(sel){return '<option value="">No sponsor</option>'+act.map(function(a){return '<option value="'+a.id+'"'+(a.id===sel?' selected':'')+'>'+esc(a.name)+'</option>'}).join("")};
     $("#tmMain").innerHTML=
-      '<section class="rk-card"><h3>Shout-outs waiting'+(pend.length?' ('+pend.length+')':'')+'</h3>'+(pend.length?pend.map(function(s){return '<div class="rk-so"><p><b>'+esc(s.name)+':</b> '+esc(s.message)+'</p><div class="row"><button class="mini solid" type="button" data-so="approved" data-id="'+s.id+'">Approve</button><button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Reject</button></div></div>'}).join(""):'<p class="rk-fine">None waiting. New ones show up here on their own.</p>')+
+      '<section class="rk-card"><h3>Shout-outs waiting'+(pend.length?' ('+pend.length+')':'')+'</h3>'+(pend.length?pend.map(function(s){return '<div class="rk-so'+(s.donation?' rk-so-gift':'')+'">'+(s.donation?'<p class="rk-gift">♥ Came with a donation · check Square before approving. Approving thanks them by name on every screen (the amount is never shown).</p>':'')+'<p><b>'+esc(s.name)+':</b> '+esc(s.message)+'</p><div class="row"><button class="mini solid" type="button" data-so="approved" data-id="'+s.id+'">Approve</button><button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Reject</button></div></div>'}).join(""):'<p class="rk-fine">None waiting. New ones show up here on their own.</p>')+
         (appr.length?'<h3 style="margin-top:14px">On the ticker now</h3>'+appr.map(function(s){var pin=sh.pinned_shout===s.id;return '<div class="rk-so"><p><b>'+esc(s.name)+':</b> '+esc(s.message)+'</p><div class="row"><button class="mini'+(pin?' solid':'')+'" type="button" data-pin="'+(pin?"":s.id)+'">'+(pin?"Unpin spotlight":"Spotlight it")+'</button><button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Take down</button></div></div>'}).join(""):'')+'</section>'+
       '<section class="rk-card'+(intOn?' tm-int-on':'')+'"><h3>Intermission</h3><p class="rk-fine">Takes over the main screen with a countdown and rotating sponsor ads.</p>'+
         '<div class="rk-chips">'+INTS.map(function(t){return '<button class="mini" type="button" data-intt="'+esc(t)+'">'+esc(t)+'</button>'}).join("")+'</div>'+
@@ -11092,7 +11238,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   var $=function(s,r){return (r||document).querySelector(s)};
   var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   var esc=FR.esc, page=$('[data-page="race-watch"]'); if(!page) return;
-  var S={state:null,heats:[],racers:{},list:[],shout:[],brackets:[],N:{},show:{},ads:[],hads:{}}, SEEN={hype:null,feat:null}, ROT={i:0,t:null}, EMBED=window.name==="rk-preview", VIEW="sched", DIV="", Q="", timer=null, cdTimer=null, chan=null, busy=false, prevKey=null, loaded=false;
+  var S={state:null,heats:[],racers:{},list:[],shout:[],brackets:[],N:{},show:{},ads:[],hads:{}}, SEEN={hype:null,feat:null}, ROT={i:0,t:null}, EMBED=window.name==="rk-preview", VIEW="next", DIV="", Q="", PANEL=null, timer=null, cdTimer=null, chan=null, busy=false, prevKey=null, loaded=false;
   var FOLLOW=[]; try{FOLLOW=JSON.parse(localStorage.getItem("fr-follow")||"[]")||[]}catch(e){FOLLOW=[]}
   function saveF(){try{localStorage.setItem("fr-follow",JSON.stringify(FOLLOW))}catch(e){}}
   function isF(id){return !!id&&FOLLOW.indexOf(id)>=0}
@@ -11117,15 +11263,16 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   /* ---------- Load ---------- */
   function load(){var d=db(); if(!d||busy) return; busy=true;
     Promise.all([d.from("race_state").select("*").eq("id",1).maybeSingle(),d.from("race_heats").select("*").order("sort_order"),
-      d.from("race_racers").select("*").order("display_name"),d.from("shoutouts").select("id,name,message,created_at").eq("status","approved").order("created_at",{ascending:false}).limit(25),
+      d.from("race_racers").select("*").order("display_name"),d.from("shoutouts").select("id,name,message,created_at,donation").eq("status","approved").order("created_at",{ascending:false}).limit(25),
       d.from("race_brackets").select("*").order("sort_order"),d.from("race_show").select("*").eq("id",1).maybeSingle(),
-      d.from("race_ads").select("*").order("sort_order"),d.from("race_heat_ads").select("*")])
+      d.from("race_ads").select("*").order("sort_order"),d.from("race_heat_ads").select("*"),d.from("site_content").select("value").eq("key","data|donate").maybeSingle()])
     .then(function(r){busy=false; if(r.slice(0,4).some(function(x){return x.error})) return;
       S.state=r[0].data; S.heats=r[1].data||[]; S.list=r[2].data||[]; S.racers={}; S.list.forEach(function(x){S.racers[x.id]=x}); S.shout=r[3].data||[];
       S.brackets=r[4].error?[]:(r[4].data||[]); S.N=FRB.numbers(S.heats);
       S.show=(!r[5].error&&r[5].data)||{}; S.ads=r[6].error?[]:(r[6].data||[]).filter(function(a){return a.active!==false}); S.hads={};
       if(!r[7].error)(r[7].data||[]).forEach(function(x){S.hads[x.heat_id]=x.ad_id});
-      draw(); show(); loaded=true;})
+      try{S.donate=(r[8]&&!r[8].error&&r[8].data)?JSON.parse(r[8].data.value||"null"):null}catch(e){S.donate=null}
+      donorCheck(); draw(); show(); loaded=true;})
     .catch(function(){busy=false});}
 
   /* ---------- Helpers ---------- */
@@ -11216,22 +11363,20 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       (r?'<button class="rw-fol" type="button" data-follow="'+esc(id)+'" aria-pressed="'+isF(id)+'">'+(isF(id)?"★ Following":"☆ Follow")+'</button>':'')+'</div>'}
   function draw(){
     var st=S.state||{}, live=!!st.live, cur=current(), up=upcoming(cur), R=real();
-    $("#rwLive").hidden=!live; $("#rwIdle").hidden=live; $("#rwOn").hidden=!live; $("#rwBoard").hidden=!live||!S.heats.length;
-    $("#rwActions").hidden=!live; $("#rwUp").hidden=!live||!up.length; $("#rwMine").hidden=!live||!S.list.length; $("#rwProg").hidden=!live||!R.length;
-    page.style.paddingBottom=live?"":"40px";
-    document.body.classList.toggle("rw-bar",live&&visible()); if(live) document.body.style.setProperty("--rwbar",$("#rwActions").offsetHeight+"px");
+    $("#rwLive").hidden=!live; $("#rwIdle").hidden=live; $("#rwOn").hidden=!live;
+    $("#rwMine").hidden=!live||!S.list.length||!FOLLOW.some(function(id){return racer(id)}); $("#rwProg").hidden=!live||!R.length; page.classList.toggle("is-live",live);
     $("#rwTicker").hidden=!S.shout.length;
-    if(S.shout.length){var run=$("#rwRun");if(setH(run,S.shout.map(function(s){return '<span><b>'+esc(s.name)+':</b> '+esc(s.message)+'</span>'}).join("")))run.style.animationDuration=Math.max(25,S.shout.length*9)+"s"}
+    if(S.shout.length){var run=$("#rwRun");if(setH(run,S.shout.map(function(s){return s.donation?'<span class="gift"><i aria-hidden="true">♥</i><b>Thank you, '+esc(s.name)+'!</b> '+esc(s.message)+'</span>':'<span><b>'+esc(s.name)+':</b> '+esc(s.message)+'</span>'}).join("")))run.style.animationDuration=Math.max(25,S.shout.length*9)+"s"}
     var bn=$("#rwBanner"); bn.hidden=!(live&&st.banner); if(live&&st.banner){bn.className="rw-banner";setH(bn,'<b>Announcement</b><span>'+esc(st.banner)+'</span>')}
-    if(!live) return;
+    if(!live){view(null,up);return}
     var done=R.filter(function(x){return x.status==="finished"}).length,tot=R.length;
     setH($("#rwProg"),'<span>'+(cur?esc(num(cur))+' of '+tot:'All '+tot+' heats done')+'</span><span class="rw-meter" role="img" aria-label="'+done+' of '+tot+' heats complete"><i style="width:'+(tot?Math.round(done/tot*100):0)+'%"></i></span>');
     if(FOLLOW.length){var items=FOLLOW.filter(function(id){return racer(id)}).map(function(id){var w=where(id,cur,up);return '<div class="rw-mi '+w[0]+'"><b>'+nm(id)+'</b><span>'+w[1]+'</span></div>'}).join("");
-      setH($("#rwMine"),'<div class="rw-mine-in"><p class="rw-mt">Your racers</p>'+(items||'<p>Your racers aren’t on today’s list.</p>')+'<button class="rw-link" type="button" data-go="racers">Change</button></div>')}
-    else setH($("#rwMine"),'<div class="rw-mine-in"><p><b>Here for someone special?</b> Follow a racer to keep their next heat and results right here.</p><button class="rw-btn red" type="button" data-go="racers">Find a racer</button></div>');
+      setH($("#rwMine"),'<div class="rw-mine-in"><p class="rw-mt">Following</p>'+(items||'<p>Your racers aren’t on today’s list.</p>')+'<button class="rw-link" type="button" data-go="racers">Change</button></div>')}
+    else setH($("#rwMine"),'<div class="rw-mine-in"><p><b>Here for someone special?</b> Follow them and their next heat stays right here.</p><button class="rw-link" type="button" data-go="racers">Find a racer</button></div>');
     var on=$("#rwOn"), sh=S.show||{};
     if(sh.screen==="intermission"){var ok=setH(on,intermission(up));if(ok){ROT.i=0;rotInt()}}
-    else if(!cur){setH(on,'<div class="rw-st-top"><span class="rw-state s-finished">Final</span></div><h2 class="rw-head">That’s a wrap on racing!</h2><p class="rw-status">Thanks for cheering. Check the Bracket, Results and Standings below.</p>');}
+    else if(!cur){setH(on,'<div class="rw-st-top"><span class="rw-state s-finished">Final</span></div><h2 class="rw-head">That’s a wrap on racing!</h2><p class="rw-status">Thanks for cheering! Open Race details for every racer’s times and the brackets.</p>');}
     else if(!cur.lane1||!cur.lane2){setH(on,'<div class="rw-st-top"><span class="rw-state">Up next</span><span class="rw-heat">'+esc(num(cur))+' · '+heatTitle(cur)+'</span></div><h2 class="rw-head">Waiting on results</h2><p class="rw-status">'+slot(cur,"a")+' vs '+slot(cur,"b")+'</p>');}
     else{var s=cur.status||"upcoming",L={staging:"r",set:"ry",racing:"g"}[s]||"",m=margin(cur),fin=s==="finished"&&cur.winner,run=cur.run||1;
       var light=function(c,lbl,onn){return '<span class="rw-lt"><i class="'+c+(onn?" on":"")+'"></i><small>'+lbl+'</small></span>'};
@@ -11244,8 +11389,6 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         '<div class="rw-lights" role="img" aria-label="Starting lights: '+(L?({r:"red",ry:"red and amber",g:"green"})[L]:"off")+'">'+light("r","Ramp",L.indexOf("r")>=0)+light("y","Set",L.indexOf("y")>=0)+light("g","Go",L==="g")+'</div>'+
         '<p class="rw-status">'+line+'</p>');
       var key=cur.id+":"+s; if(loaded&&prevKey&&prevKey!==key&&fin){var stg=$("#rwStage");stg.classList.remove("rw-cele");void stg.offsetWidth;stg.classList.add("rw-cele");setTimeout(function(){stg.classList.remove("rw-cele")},3000)} prevKey=key;}
-    setH($("#rwUp"),'<h2>Coming up</h2><div class="rw-up">'+up.slice(0,3).map(function(x,i){var mine=isF(x.lane1)||isF(x.lane2);
-      return '<div class="rw-upc'+(i===0?' first':'')+(mine?' mine':'')+'"><p class="rw-in">'+(i===0?'Next heat':'In '+(i+1)+' heats')+' · '+esc(num(x))+'</p><p class="rw-uph">'+heatTitle(x)+'</p><p class="rw-vsl">'+slot(x,"a")+'<span class="vs">vs</span>'+slot(x,"b")+'</p></div>'}).join("")+'</div>');
     view(cur,up);
   }
   function card(h){var fin=h.status==="finished",isB=bye(h),cur=current(),on=cur&&cur.id===h.id&&!fin;
@@ -11261,76 +11404,124 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       return '<p class="bk-side">'+sd[1]+'</p><div class="bk-scroll" tabindex="0" role="region" aria-label="'+esc(b.name)+' '+sd[1]+'"><div class="bk-cols">'+rounds.map(function(r){var col=inSide.filter(function(h){return h.round===r}).sort(function(a,b){return a.slot-b.slot}),
         lab=sd[0]==="F"?(r===2?"Runoff (if required)":"Championship"):(col[0].label||"").split(" · ")[0];
         return '<div class="bk-col"><p class="bk-rt">'+esc(lab)+'</p><div class="bk-stack">'+col.map(card).join("")+'</div></div>'}).join("")+'</div></div>'}).join("")+'</div>'}
-  function view(cur,up){
+  /* ---------- Side panel: Up next · Racers · Sponsors · Bracket ---------- */
+  function heatsOf(id){return S.heats.filter(function(h){return !bye(h)&&(h.lane1===id||h.lane2===id)})}
+  function timesHTML(id){var hs=heatsOf(id).filter(function(h){var t=runTimes(h,id);return t[0]!=null||t[1]!=null||h.status==="finished"});
+    if(!hs.length)return '<p class="rw-rtimes none">No runs recorded yet.</p>';
+    return '<ul class="rw-rtimes">'+hs.map(function(h){var t=runTimes(h,id),tot=id===h.lane1?h.lane1_time:h.lane2_time,fin=h.status==="finished"&&h.winner,won=fin&&h.winner===id;
+      return '<li><span class="h">'+esc(num(h)||"Heat")+'</span><span class="t">'+[t[0]!=null?Number(t[0]).toFixed(3):"–",t[1]!=null?Number(t[1]).toFixed(3):"–"].join(" + ")+(tot!=null?' = <b>'+Number(tot).toFixed(3)+'s</b>':'')+'</span>'+(fin?'<span class="r '+(won?"w":"l")+'">'+(won?"Won":"Lost")+'</span>':'<span class="r">Racing</span>')+'</li>'}).join("")+'</ul>'}
+  function heatRow(x,lbl,cls){var fin=x.status==="finished";return '<li class="rw-nx'+(cls?" "+cls:"")+((isF(x.lane1)||isF(x.lane2))?" mine":"")+'"><p class="rw-in">'+lbl+'</p><p class="rw-uph">'+heatTitle(x)+'</p><p class="rw-vsl">'+slot(x,"a",fin&&x.winner===x.lane1)+'<span class="vs">vs</span>'+slot(x,"b",fin&&x.winner===x.lane2)+'</p>'+(ad(S.hads[x.id])?'<p class="rw-nxp">Presented by <b>'+esc(ad(S.hads[x.id]).name)+'</b></p>':'')+'</li>'}
+  function view(cur,up){var live=!!(S.state&&S.state.live);
     $$('.rw-tabs button',page).forEach(function(b){b.setAttribute("aria-selected",String(b.getAttribute("data-view")===VIEW))});
-    var bt=$('.rw-tabs [data-view="bracket"]',page); if(bt) bt.hidden=!S.brackets.length; if(VIEW==="bracket"&&!S.brackets.length) VIEW="sched";
-    var divs=divisions(), dv=$("#rwDivs"), useDiv=VIEW==="sched"||VIEW==="results"||VIEW==="stand"||VIEW==="bracket"; if(DIV&&divs.indexOf(DIV)<0) DIV="";
+    var bt=$('.rw-tabs [data-view="bracket"]',page); if(bt) bt.hidden=!S.brackets.length; if(VIEW==="bracket"&&!S.brackets.length) VIEW="next";
+    var st=$('.rw-tabs [data-view="sponsors"]',page); if(st) st.hidden=!S.ads.length; if(VIEW==="sponsors"&&!S.ads.length) VIEW="next";
+    var divs=divisions(), dv=$("#rwDivs"), useDiv=VIEW==="bracket"||VIEW==="racers"; if(DIV&&divs.indexOf(DIV)<0) DIV="";
     if(VIEW==="bracket"&&!DIV) DIV=(cur&&cur.bracket_id&&cur.division)||(S.brackets[0]&&S.brackets[0].name)||"";
     dv.hidden=!useDiv||divs.length<2;
     setH(dv,(VIEW==="bracket"?[]:['<button type="button" data-div="" aria-pressed="'+(!DIV)+'">All</button>']).concat((VIEW==="bracket"?S.brackets.map(function(b){return b.name}):divs).map(function(d){return '<button type="button" data-div="'+esc(d)+'" aria-pressed="'+(DIV===d)+'">'+esc(d)+'</button>'})).join(""));
-    var box=$("#rwView"), inDiv=function(x){return !DIV||(x.division||"Race")===DIV}, none='<p class="rw-empty">Nothing here yet.</p>';
+    var box=$("#rwView"), inDiv=function(x){return !DIV||(x.division||"Race")===DIV};
     if(VIEW==="racers"){
-      if(box.__mode!=="racers"){box.__mode="racers";box.__h=null;box.innerHTML='<label class="rw-search" for="rwQ">Find a racer<input type="search" id="rwQ" placeholder="Name, team or car number" autocomplete="off"></label><p class="rw-fine">Tap Follow and their next heat stays at the top of this page. Saved on this device only.</p><ul class="rw-rl" id="rwRL"></ul>';
+      if(box.__mode!=="racers"){box.__mode="racers";box.__h=null;box.innerHTML='<label class="rw-search" for="rwQ"><span class="sr-only">Find a racer</span><input type="search" id="rwQ" placeholder="Search name, team or car #" autocomplete="off"></label><ul class="rw-rl" id="rwRL"></ul><p class="rw-fine">Tap Follow and their next heat stays on your screen. Saved on this device only.</p>';
         var q=$("#rwQ");q.value=Q;q.oninput=function(){Q=q.value;view(current(),upcoming(current()))}}
-      var qq=Q.trim().toLowerCase(), list=S.list.filter(function(r){return !qq||[r.display_name,r.team,r.car_number].join(" ").toLowerCase().indexOf(qq)>=0});
-      setH($("#rwRL"),list.length?list.map(function(r){var w=where(r.id,cur,up);return '<li><div><b class="'+(isF(r.id)?"me":"")+'">'+esc(r.display_name)+'</b><small>'+[r.team&&esc(r.team),r.car_number&&"Car #"+esc(r.car_number),r.division&&esc(r.division)].filter(Boolean).join(" · ")+'</small><em>'+w[1]+'</em></div><button class="rw-fol lt" type="button" data-follow="'+esc(r.id)+'" aria-pressed="'+isF(r.id)+'">'+(isF(r.id)?"★ Following":"☆ Follow")+'</button></li>'}).join(""):'<li class="rw-empty">No racers match that.</li>');
+      var qq=Q.trim().toLowerCase(), list=S.list.filter(function(r){return (!DIV||(r.division||"")===DIV||heatsOf(r.id).some(inDiv))&&(!qq||[r.display_name,r.team,r.car_number].join(" ").toLowerCase().indexOf(qq)>=0)})
+        .sort(function(a,b){return (isF(b.id)?1:0)-(isF(a.id)?1:0)||(a.display_name>b.display_name?1:-1)});
+      setH($("#rwRL"),list.length?list.map(function(r){var w=where(r.id,cur,up),rec=record(r.id);
+        return '<li class="'+(isF(r.id)?"mine":"")+'"><div class="rw-rh"><div><b>'+esc(r.display_name)+'</b><small>'+[r.car_number&&"Car #"+esc(r.car_number),r.team&&esc(r.team),r.division&&esc(r.division)].filter(Boolean).join(" · ")+'</small></div><button class="rw-fol lt" type="button" data-follow="'+esc(r.id)+'" aria-pressed="'+isF(r.id)+'">'+(isF(r.id)?"★ Following":"☆ Follow")+'</button></div>'+
+          (live||rec.w+rec.l?'<p class="rw-rstat"><em class="'+w[0]+'">'+w[1]+'</em>'+(rec.best!=null?'<span>Best run <b>'+rec.best.toFixed(3)+'s</b></span>':'')+'</p>'+timesHTML(r.id):(r.sponsor?'<p class="rw-rstat"><span>Sponsored by '+esc(r.sponsor)+'</span></p>':''))+'</li>'}).join(""):'<li class="rw-empty">'+(S.list.length?"No racers match.":"The roster is posted closer to race day.")+'</li>');
       return;
     }
-    box.__mode=VIEW; var html="";
-    if(VIEW==="sched"){var hs=real().filter(inDiv),ups=S.heats.filter(function(x){return bye(x)&&!(x.a_bye&&x.b_bye)&&x.winner&&x.bracket_id&&inDiv(x)&&x.round===1&&x.side==="W"});
-      html=(hs.length?'<ol class="rw-list">'+hs.map(function(x){var isCur=cur&&x.id===cur.id&&x.status!=="finished",fin=x.status==="finished";
-        var pill=fin?'<span class="rw-pill done">Final</span>':isCur?'<span class="rw-pill live">'+(x.status==="upcoming"?"Up next":"On track · Phase "+(x.run||1))+'</span>':'<span class="rw-pill">Upcoming</span>';
-        return '<li class="rw-row'+(isCur?' cur':'')+(fin?' done':'')+'"><span class="rw-n">'+(S.N[x.id]||"")+'</span><div><p class="rw-rt">'+heatTitle(x)+'</p><p class="rw-rv">'+slot(x,"a",fin&&x.winner===x.lane1)+'<span class="vs">vs</span>'+slot(x,"b",fin&&x.winner===x.lane2)+'</p></div><div class="rw-rs">'+pill+(fin&&x.winner?'<small>'+nm(x.winner)+(x.lane1_time!=null?' · '+secs(x.winner===x.lane1?x.lane1_time:x.lane2_time)+' total':'')+'</small>':'')+'</div></li>'}).join("")+'</ol>':none)+
-        (ups.length?'<p class="rw-fine">First-round byes: '+ups.map(function(x){return nm(x.winner)+' ('+esc(x.division)+')'}).join(", ")+' move straight to the next round.</p>':'');}
-    else if(VIEW==="results"){var rs=real().filter(function(x){return x.status==="finished"&&x.winner&&inDiv(x)}).sort(function(a,b){return (b.updated_at||"")>(a.updated_at||"")?1:-1});
-      html=(rs.length?SHEETBTN(null):'')+(rs.length?'<ul class="rw-list">'+rs.map(function(x){var m=margin(x),lo=loser(x),tw=runTimes(x,x.winner),tl=runTimes(x,lo);
-        var line=function(id,t,tot){return t[0]!=null&&t[1]!=null?nm(id)+' '+Number(t[0]).toFixed(3)+' + '+Number(t[1]).toFixed(3)+' = <b>'+Number(tot).toFixed(3)+'s</b>':''};
-        return '<li class="rw-res"><p class="rw-rt">'+esc(num(x))+' · '+heatTitle(x)+'</p><p class="big">'+nmF(x.winner,true)+' beat '+nmF(lo)+(m?' by '+m+'s':'')+'</p>'+
-          (x.lane1_time!=null?'<p class="tm">'+line(x.winner,tw,x.winner===x.lane1?x.lane1_time:x.lane2_time)+'<br>'+line(lo,tl,lo===x.lane1?x.lane1_time:x.lane2_time)+'</p>':phaseTxt(x)?'<p class="tm">'+phaseTxt(x)+'</p>':'<p class="tm">Decided by race officials</p>')+(x.note?'<p class="tm"><b>Note:</b> '+esc(x.note)+'</p>':'')+'</li>'}).join("")+'</ul>':'<p class="rw-empty">Results show up here as soon as each heat finishes.</p>');}
-    else if(VIEW==="stand"){html='<div class="rw-stand">'+(DIV?[DIV]:divisions()).map(function(d){var b=S.brackets.filter(function(x){return x.name===d})[0];
-        var ids=[];S.heats.forEach(function(h){if((h.division||"Race")===d)[h.lane1,h.lane2].forEach(function(id){if(id&&ids.indexOf(id)<0)ids.push(id)})});S.list.forEach(function(r){if((r.division||"")===d&&ids.indexOf(r.id)<0&&!b)ids.push(r.id)});
-        var rank={"Champion":0,"Runner-up":1,"Winners side":2,"Still racing":2,"Consolation side":3,"Out":4,"":2};
-        var rows=ids.map(function(id){var r=record(id);r.id=id;r.s=standing(id,b);return r}).sort(function(a,c){return rank[a.s]-rank[c.s]||c.w-a.w||a.l-c.l||((a.best==null?1e9:a.best)-(c.best==null?1e9:c.best))});
-        return '<h3>'+esc(d)+(b?' <small>'+(b.kind==="double"?"Double":"Single")+' elimination</small>':'')+'</h3>'+(rows.length?'<table><thead><tr><th>Racer</th><th class="c">W</th><th class="c">L</th><th class="bt">Best run</th></tr></thead><tbody>'+rows.map(function(r){var x=racer(r.id);
-          return '<tr><td>'+nmF(r.id)+(r.s?' <span class="rw-tagx t-'+r.s.split(" ")[0].toLowerCase()+'">'+esc(r.s)+'</span>':'')+(x&&x.team?'<small>'+esc(x.team)+'</small>':'')+'</td><td class="c">'+r.w+'</td><td class="c">'+r.l+'</td><td class="bt">'+(r.best!=null?r.best.toFixed(3)+"s":"–")+'</td></tr>'}).join("")+'</tbody></table>':none)}).join("")+
-        '<p class="rw-fine">Racers still in the bracket are listed first. Official placings are announced at the track.</p></div>';}
+    box.__mode=VIEW; var html="", none='<p class="rw-empty">Nothing here yet.</p>';
+    if(VIEW==="next"){
+      if(!live){html='<div class="rw-pre"><p class="rw-k2">Before the race</p><p>The heat schedule appears here when racing starts. Until then, browse the '+(S.list.length?'<button class="rw-link" type="button" data-view="racers">racer roster</button>':'racer roster (posted closer to race day)')+(S.ads.length?' and meet our <button class="rw-link" type="button" data-view="sponsors">sponsors</button>':'')+'.</p></div>'+howHTML()}
+      else{var nxt=up.slice(0,8),fins=real().filter(function(x){return x.status==="finished"&&x.winner}).sort(function(a,b){return (b.updated_at||"")>(a.updated_at||"")?1:-1}).slice(0,6);
+        html=(cur&&cur.status!=="finished"?'<p class="rw-k2">On the track</p><ol class="rw-nxl">'+heatRow(cur,esc(num(cur))+' · '+(cur.status==="upcoming"?"Up next":"Racing now"),"now")+'</ol>':'')+
+          '<p class="rw-k2">Coming up</p>'+(nxt.length?'<ol class="rw-nxl">'+nxt.map(function(x,i){return heatRow(x,(i===0?'Next heat':'In '+(i+1)+' heats')+' · '+esc(num(x)),i===0?"first":"")}).join("")+'</ol>'+(up.length>8?'<p class="rw-fine">And '+(up.length-8)+' more heats today.</p>':''):'<p class="rw-empty">No more heats scheduled.</p>')+
+          (fins.length?'<p class="rw-k2">Just finished</p><ul class="rw-list">'+fins.map(function(x){var m=margin(x),lo=loser(x);return '<li class="rw-res"><p class="rw-rt">'+esc(num(x))+' · '+heatTitle(x)+'</p><p class="big">'+nmF(x.winner,true)+' beat '+nmF(lo)+(m?' by '+m+'s':'')+'</p>'+(x.lane1_time!=null?'<p class="tm">'+nm(x.winner)+' '+secs(x.winner===x.lane1?x.lane1_time:x.lane2_time)+' · '+nm(lo)+' '+secs(lo===x.lane1?x.lane1_time:x.lane2_time)+' (total of both phases)</p>':'')+'</li>'}).join("")+'</ul>'+SHEETBTN(null):'')+howHTML()}}
+    else if(VIEW==="sponsors"){
+      html='<p class="rw-fine" style="margin-top:0">Today’s racing is made possible by these sponsors. Thank you!</p><ul class="rw-spons">'+S.ads.map(function(a){var hs=S.heats.filter(function(h){return S.hads[h.id]===a.id}).map(function(h){return num(h)}).filter(Boolean);
+        return '<li>'+(a.logo_url?'<img src="'+esc(a.logo_url)+'" alt="" loading="lazy">':'<span class="rw-sp-ph" aria-hidden="true">'+esc((a.name||"?").charAt(0))+'</span>')+'<div><b>'+esc(a.name)+'</b>'+(a.tagline?'<small>'+esc(a.tagline)+'</small>':'')+(hs.length?'<small class="pres">Presenting '+esc(hs.slice(0,4).join(", "))+(hs.length>4?' and more':'')+'</small>':'')+'</div></li>'}).join("")+'</ul>'+
+        '<p class="rw-fine">Want your business on race day? <a href="#become-a-sponsor">Become a sponsor</a>.</p>';}
     else if(VIEW==="bracket"){var bb=S.brackets.filter(function(b){return b.name===DIV})[0]||S.brackets[0];html=bb?bracketHTML(bb)+'<p class="rw-fine">Each heat is two phases: racers swap lanes and wheels, and the lower combined time wins. Times in seconds.'+(bb.kind==="double"?' If the consolation-side finalist wins the championship heat, a runoff decides the champion.':'')+'</p>'+SHEETBTN(bb):none;}
-    else {html=(S.shout.length?'<ul class="rw-cheer">'+S.shout.map(function(s){return '<li><b>'+esc(s.name)+'</b>'+esc(s.message)+'</li>'}).join("")+'</ul>':'<p class="rw-empty">No cheers yet. Be the first!</p>')+'<p style="margin-top:12px"><button class="btn deep" type="button" data-so="1">Send a shout-out</button></p>';}
     setH(box,html);
   }
+  function howHTML(){return '<details class="rw-how"><summary>New to derby racing? How it works</summary><ol><li>Soap box cars have no engine. Racers roll down the hill on gravity alone.</li><li>Two cars race side by side. Each heat is two runs: the racers swap lanes for run 2, and the lowest total time wins.</li><li>The lights go red when cars are on the ramp, amber when they’re set, and green when they’re off.</li><li>Times are shown to the thousandth of a second. A bye means a racer moves on without racing.</li><li>Racers compete in brackets by division. In double elimination a racer is out after two losses.</li></ol></details>'}
+
+  /* ---------- Panel open / close ---------- */
+  function wide(){return innerWidth>=1100}
+  function panel(o,focus){var p=$("#rwPanel"),b=$("#rwPanelBtn");PANEL=o;p.hidden=!o;page.classList.toggle("panel-on",o);document.body.classList.toggle("rw-panel-open",o);b.setAttribute("aria-expanded",String(o));$(".rw-pb-txt",b).textContent=o?(innerWidth<641?"Close":"Hide details"):(innerWidth<641?"Details":"Race details");
+    if(o&&focus){var t=$('.rw-tabs [aria-selected="true"]',page);if(t)t.focus({preventScroll:true})}else if(!o&&focus)b.focus({preventScroll:true})}
+  $("#rwPanelBtn").addEventListener("click",function(){panel(!PANEL,true)});
+  $("#rwPanelX").addEventListener("click",function(){panel(false,true)});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&PANEL&&!wide()&&visible()&&$("#rwSo").hidden&&$("#rwGive").hidden)panel(false,true)});
+
+  /* ---------- Donor thank-yous: a newly approved shout-out that came with a gift is announced on every screen ---------- */
+  var DONOR_SEEN=null;
+  function donorCheck(){var ids=S.shout.filter(function(x){return x.donation}).map(function(x){return x.id});
+    if(DONOR_SEEN===null){DONOR_SEEN=ids;return}
+    var fresh=S.shout.filter(function(x){return x.donation&&DONOR_SEEN.indexOf(x.id)<0});DONOR_SEEN=ids;
+    if(!fresh.length||!(S.state&&S.state.live))return;var x=fresh[fresh.length-1],th=$("#rwThanks");
+    th.innerHTML='<div class="rw-thanks-in"><img src="'+esc(($(".rw-brand img",page)||{}).src||"")+'" alt=""><p class="rw-k2">A gift for our racers</p><h2>Thank you, '+esc(x.name)+'!</h2><p class="m">“'+esc(x.message)+'”</p></div>';
+    th.hidden=false;clearTimeout(th.__t);th.__t=setTimeout(function(){th.hidden=true},12000)}
+  $("#rwThanks").addEventListener("click",function(){this.hidden=true});
 
   /* ---------- Taps anywhere on the page ---------- */
-  page.addEventListener("click",function(e){var t=e.target.closest("[data-follow],[data-div],[data-view],[data-go],[data-so]");if(!t||document.body.classList.contains("fr-editing")) return;
+  page.addEventListener("click",function(e){var t=e.target.closest("[data-follow],[data-div],[data-view],[data-go],[data-so],[data-give]");if(!t||document.body.classList.contains("fr-editing")) return;
+    if(t.hasAttribute("data-give")){giveOpen(true);return}
     if(t.hasAttribute("data-follow")){var id=t.getAttribute("data-follow"),i=FOLLOW.indexOf(id);if(i>=0)FOLLOW.splice(i,1);else FOLLOW.push(id);saveF();draw();return}
     if(t.hasAttribute("data-div")){DIV=t.getAttribute("data-div");draw();return}
-    if(t.hasAttribute("data-view")){var was=VIEW;VIEW=t.getAttribute("data-view");if(VIEW==="bracket"||was==="bracket")DIV="";draw();return}
+    if(t.hasAttribute("data-view")){var was=VIEW;VIEW=t.getAttribute("data-view");if(VIEW==="bracket"||was==="bracket")DIV="";draw();var vw=$("#rwView");if(vw)vw.scrollTop=0;return}
     if(t.hasAttribute("data-so")){soOpen(true);return}
-    VIEW=t.getAttribute("data-go");draw();$("#rwBoard").scrollIntoView({behavior:"smooth",block:"start"});
-    if(VIEW==="racers") setTimeout(function(){var q=$("#rwQ");if(q)q.focus({preventScroll:true})},400);});
+    VIEW=t.getAttribute("data-go");if(!PANEL)panel(true);draw();
+    if(VIEW==="racers") setTimeout(function(){var q=$("#rwQ");if(q)q.focus({preventScroll:true})},250);});
   $(".rw-tabs",page).addEventListener("keydown",function(e){if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;var b=$$(".rw-tabs button",page).filter(function(x){return !x.hidden}),i=b.indexOf(document.activeElement);if(i<0)return;
     var n=b[(i+(e.key==="ArrowRight"?1:b.length-1))%b.length];n.focus();n.click();});
 
   /* ---------- Start / stop with the page ---------- */
-  function start(){countdown(); clearInterval(cdTimer); cdTimer=setInterval(countdown,30000);
+  function start(){document.body.classList.add("rw-app-on");if(PANEL===null)panel(wide());countdown(); clearInterval(cdTimer); cdTimer=setInterval(countdown,30000);
     if(!db()){setTimeout(function(){if(visible())start()},600);return}
     load(); clearInterval(timer); timer=setInterval(function(){if(visible())load()},window.FR_TEST?3000:15000);
     var d=db(); if(!chan&&d.channel){try{chan=d.channel("race-live");["race_state","race_heats","race_racers","race_brackets","shoutouts"].forEach(function(t){chan.on("postgres_changes",{event:"*",schema:"public",table:t},function(){load()})});chan.subscribe()}catch(e){chan=null}}}
-  function stop(){document.body.classList.remove("rw-bar");clearInterval(timer);clearInterval(cdTimer);timer=cdTimer=null;tv(false);
+  function stop(){document.body.classList.remove("rw-bar");document.body.classList.remove("rw-app-on");document.body.classList.remove("rw-panel-open");clearInterval(timer);clearInterval(cdTimer);timer=cdTimer=null;tv(false);
     if(chan&&db()&&db().removeChannel){try{db().removeChannel(chan)}catch(e){}} chan=null;}
   function onRoute(){if(location.hash==="#race-watch") start(); else if(timer||cdTimer) stop()}
   addEventListener("hashchange",onRoute); onRoute();
 
   /* ---------- Track screen ---------- */
-  function tv(on){document.body.classList.toggle("rw-tv",on);$("#rwTv").textContent=on?"Exit track screen":"Track screen";
+  function tv(on){document.body.classList.toggle("rw-tv",on);if(on&&PANEL)panel(false);$("#rwTv").textContent=on?"Exit track screen":"Track screen";
     try{if(on&&document.documentElement.requestFullscreen&&!document.fullscreenElement)document.documentElement.requestFullscreen().catch(function(){});
       if(!on&&document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){})}catch(e){}}
   $("#rwTv").addEventListener("click",function(){tv(!document.body.classList.contains("rw-tv"))});
   document.addEventListener("fullscreenchange",function(){if(!document.fullscreenElement&&document.body.classList.contains("rw-tv"))tv(false)});
 
+  /* ---------- Donations ---------- */
+  var gv=$("#rwGive"),gvLast=null,gvAmt=null;
+  function giveOpen(o){gv.hidden=!o;if(o){gvLast=document.activeElement;$("#gvMsg").textContent="";var c=S.donate||{},am=(c.amounts&&c.amounts.length?c.amounts:[25,50,100,250]).slice(0,5);
+      $("#gvChips").innerHTML=am.map(function(a){return '<button type="button" class="gv-chip" data-amt="'+(+a)+'" aria-pressed="'+(gvAmt===+a)+'">$'+(+a)+'</button>'}).join("");
+      $$("[data-amt]",gv).forEach(function(b){b.onclick=function(){gvAmt=+b.getAttribute("data-amt");$("#gv-amt").value="";$$("[data-amt]",gv).forEach(function(x){x.setAttribute("aria-pressed",String(x===b))})}});
+      $("#gvSend").textContent=c.link?"Continue to secure checkout":"Send my pledge";$("#gvFine").textContent=c.link?"Your gift is private unless you add a shout-out. You’ll finish on Square’s secure checkout.":"Your gift is private unless you add a shout-out. Online giving is being set up, so we’ll email you a way to complete it.";
+      var f=$("[data-amt]",gv)||$("#gv-amt");f.focus()} else if(gvLast) gvLast.focus()}
+  $("#gv-amt").addEventListener("input",function(){if(this.value){gvAmt=null;$$("[data-amt]",gv).forEach(function(x){x.setAttribute("aria-pressed","false")})}});
+  $("#gv-pair").addEventListener("change",function(){$("#gvMsgWrap").hidden=!this.checked;if(this.checked)$("#gv-msg").focus()});
+  $("#gvClose").addEventListener("click",function(){giveOpen(false)});
+  gv.addEventListener("click",function(e){if(e.target===gv)giveOpen(false)});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!gv.hidden)giveOpen(false)});
+  $("#rwGiveForm").addEventListener("submit",function(e){e.preventDefault();var out=$("#gvMsg"),other=$("#gv-amt").value,amt=other?+other:gvAmt,nm=$("#gv-name").value.trim(),em=$("#gv-email").value.trim(),pair=$("#gv-pair").checked,msg=pair?$("#gv-msg").value.trim():"",c=S.donate||{};
+    if(!amt||!(amt>=1)){out.textContent="Pick an amount, or type your own.";return}
+    if(pair&&!msg){out.textContent="Write your shout-out, or untick “Add a shout-out”.";$("#gv-msg").focus();return}
+    if(pair&&!nm){out.textContent="Add your name so we can thank you on the screen.";$("#gv-name").focus();return}
+    if(!c.link&&!em){out.textContent="Add your email so we can send you a way to complete your gift.";$("#gv-email").focus();return}
+    if(!db()){out.textContent="Giving opens in a moment. Please try again.";return}
+    var win=c.link?window.open("","_blank"):null;$("#gvSend").disabled=true;out.textContent="One moment…";
+    db().rpc("race_gift",{p_name:nm||null,p_email:em||null,p_amount:amt,p_message:msg||null}).then(function(r){$("#gvSend").disabled=false;
+      if(r.error){if(win)win.close();out.textContent=r.error.message||"That didn’t go through. Please try again.";return}
+      var link=(r.data&&r.data.link)||c.link;
+      if(link){if(win&&!win.closed){try{win.opener=null}catch(x){}win.location.href=link}else{location.assign(link);return}}
+      out.textContent=link?"Thank you! Finish your $"+amt+" gift in the Square tab that just opened."+(pair?" Your shout-out appears after our team confirms it.":""):"Thank you! We’ll email you a way to complete your gift."+(pair?" Your shout-out appears after our team confirms it.":"");
+      $("#gv-msg").value="";$("#gv-pair").checked=false;$("#gvMsgWrap").hidden=true});});
+
   /* ---------- Shout-outs ---------- */
   var so=$("#rwSo"),last=null;
   function soOpen(o){so.hidden=!o; if(o){last=document.activeElement;$("#soMsg").textContent="";$("#so-name").focus()} else if(last) last.focus()}
-  $("#rwSoOpen").addEventListener("click",function(){soOpen(true)});
   $("#soClose").addEventListener("click",function(){soOpen(false)});
   so.addEventListener("click",function(e){if(e.target===so)soOpen(false)});
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!so.hidden)soOpen(false)});

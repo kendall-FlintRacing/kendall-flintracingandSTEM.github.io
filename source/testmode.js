@@ -195,6 +195,9 @@
         return R({kids:Object.keys(fam).reduce(function(a,k){return a+fam[k]},0),families:Object.keys(fam).length,teams:Object.keys(teams).length,meals:meals,volunteer_visits:vv,sessions:Object.keys(days).length})}
       if(fn==="list_admins")return R([{email:"test-admin@flintracing.org",user_id:"test-admin"}].concat((T.extra_admins||[]).map(function(e){return{email:e,user_id:"u-"+e}})));
       if(fn==="admin_signout_log"){T.access_log=T.access_log||[];T.access_log.unshift({id:rid(),at:new Date().toISOString(),member_id:null,who:"Test Admin",action:"admin_sign_out",detail:"test-admin@flintracing.org"});save();return R(null)}
+      if(fn==="race_gift"){T.race_gifts=T.race_gifts||[];T.shoutouts=T.shoutouts||[];var gso=null;if(args.p_message){gso=rid();T.shoutouts.unshift({id:gso,name:args.p_name,message:args.p_message,status:"pending",donation:true,created_at:new Date().toISOString()})}
+        var gid=rid();T.race_gifts.unshift({id:gid,created_at:new Date().toISOString(),name:args.p_name,email:args.p_email,amount:args.p_amount,message:args.p_message,shoutout_id:gso,status:"new"});save();
+        var dc=(T.site_content||[]).filter(function(x){return x.key==="data|donate"})[0];return R({id:gid,shoutout:gso,link:dc?JSON.parse(dc.value).link:null})}
       if(fn==="admin_council_meetings"){T.council_meetings=T.council_meetings||[];return R({meetings:T.council_meetings.slice().sort(function(a,b){return a.meeting_date<b.meeting_date?1:-1}),reach:3,members:4})}
       if(fn==="admin_council_meeting_save"){T.council_meetings=T.council_meetings||[];var now5=new Date().toISOString(),mm=args.p_id?T.council_meetings.filter(function(x){return x.id===args.p_id})[0]:null;
         if(!args.p_date)return R(null,"Pick a date.");if(args.p_start&&args.p_end&&args.p_end<=args.p_start)return R(null,"The meeting has to end after it starts.");
