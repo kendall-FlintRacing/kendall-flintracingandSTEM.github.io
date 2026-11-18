@@ -5540,7 +5540,6 @@ a.mini{text-decoration:none;display:inline-block}
   </div>
   <div class="rw-ticker" id="rwTicker" hidden><span class="rw-tag">Trackside cheers</span><div class="rw-track"><div class="rw-run" id="rwRun"></div></div></div>
   <div class="rw-hype" id="rwHype" hidden aria-live="assertive"></div>
-  <div class="rw-thanks" id="rwThanks" hidden aria-live="polite"></div>
   <div class="rw-so" id="rwSo" hidden role="dialog" aria-modal="true" aria-labelledby="soH">
     <form id="rwSoForm" novalidate>
       <div class="top"><h2 id="soH">Give someone a little extra horsepower.</h2><p>Cheer on a racer, celebrate your family or thank someone who makes this day possible.</p></div>
@@ -5560,7 +5559,7 @@ a.mini{text-decoration:none;display:inline-block}
         <fieldset class="gv-amts"><legend>Amount</legend><div class="gv-chips" id="gvChips"></div><label class="gv-other" for="gv-amt">Other amount<span class="gv-dollar"><b aria-hidden="true">$</b><input type="number" id="gv-amt" min="1" max="100000" step="1" inputmode="decimal" placeholder="Any amount"></span></label></fieldset>
         <label for="gv-name">Your name <small>(optional)</small><input type="text" id="gv-name" maxlength="60" autocomplete="name"></label>
         <label for="gv-email">Email <small>(optional, so we can thank you)</small><input type="email" id="gv-email" maxlength="160" autocomplete="email"></label>
-        <label class="gv-pair"><input type="checkbox" id="gv-pair"> <span><b>Add a shout-out with my gift</b><small>We’ll thank you by name on the screen and announce your shout-out for the racers. We never show the amount.</small></span></label>
+        <label class="gv-pair"><input type="checkbox" id="gv-pair"> <span><b>Add a shout-out with my gift</b><small>We’ll thank you by name in the shout-out banner on the race screen. We never show the amount.</small></span></label>
         <label for="gv-msg" id="gvMsgWrap" hidden>Your shout-out<textarea id="gv-msg" maxlength="280" placeholder="Go Jalen! The whole family is cheering for you!"></textarea></label>
         <p class="fine" id="gvFine">Your gift is private unless you add a shout-out. You’ll finish on Square’s secure checkout.</p>
         <p class="msg" id="gvMsg" role="status"></p>
@@ -9133,7 +9132,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var up=heats.filter(function(h){return !FRB.isBye(h)&&h.status!=="finished"}).slice(0,8);
     var adOpts=function(sel){return '<option value="">No sponsor</option>'+act.map(function(a){return '<option value="'+a.id+'"'+(a.id===sel?' selected':'')+'>'+esc(a.name)+'</option>'}).join("")};
     $("#tmMain").innerHTML=
-      '<section class="rk-card"><h3>Shout-outs waiting'+(pend.length?' ('+pend.length+')':'')+'</h3>'+(pend.length?pend.map(function(s){return '<div class="rk-so'+(s.donation?' rk-so-gift':'')+'">'+(s.donation?'<p class="rk-gift">♥ Came with a donation · check Square before approving. Approving thanks them by name on every screen (the amount is never shown).</p>':'')+'<p><b>'+esc(s.name)+':</b> '+esc(s.message)+'</p><div class="row"><button class="mini solid" type="button" data-so="approved" data-id="'+s.id+'">Approve</button><button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Reject</button></div></div>'}).join(""):'<p class="rk-fine">None waiting. New ones show up here on their own.</p>')+
+      '<section class="rk-card"><h3>Shout-outs waiting'+(pend.length?' ('+pend.length+')':'')+'</h3>'+(pend.length?pend.map(function(s){return '<div class="rk-so'+(s.donation?' rk-so-gift':'')+'">'+(s.donation?'<p class="rk-gift">♥ Came with a donation · check Square before approving. Approving adds a thank-you with their name to the shout-out banner (the amount is never shown).</p>':'')+'<p><b>'+esc(s.name)+':</b> '+esc(s.message)+'</p><div class="row"><button class="mini solid" type="button" data-so="approved" data-id="'+s.id+'">Approve</button><button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Reject</button></div></div>'}).join(""):'<p class="rk-fine">None waiting. New ones show up here on their own.</p>')+
         (appr.length?'<h3 style="margin-top:14px">On the ticker now</h3>'+appr.map(function(s){var pin=sh.pinned_shout===s.id;return '<div class="rk-so"><p><b>'+esc(s.name)+':</b> '+esc(s.message)+'</p><div class="row"><button class="mini'+(pin?' solid':'')+'" type="button" data-pin="'+(pin?"":s.id)+'">'+(pin?"Unpin spotlight":"Spotlight it")+'</button><button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Take down</button></div></div>'}).join(""):'')+'</section>'+
       '<section class="rk-card'+(intOn?' tm-int-on':'')+'"><h3>Intermission</h3><p class="rk-fine">Takes over the main screen with a countdown and rotating sponsor ads.</p>'+
         '<div class="rk-chips">'+INTS.map(function(t){return '<button class="mini" type="button" data-intt="'+esc(t)+'">'+esc(t)+'</button>'}).join("")+'</div>'+
@@ -11454,15 +11453,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   $("#rwPanelX").addEventListener("click",function(){panel(false,true)});
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&PANEL&&!wide()&&visible()&&$("#rwSo").hidden&&$("#rwGive").hidden)panel(false,true)});
 
-  /* ---------- Donor thank-yous: a newly approved shout-out that came with a gift is announced on every screen ---------- */
-  var DONOR_SEEN=null;
-  function donorCheck(){var ids=S.shout.filter(function(x){return x.donation}).map(function(x){return x.id});
-    if(DONOR_SEEN===null){DONOR_SEEN=ids;return}
-    var fresh=S.shout.filter(function(x){return x.donation&&DONOR_SEEN.indexOf(x.id)<0});DONOR_SEEN=ids;
-    if(!fresh.length||!(S.state&&S.state.live))return;var x=fresh[fresh.length-1],th=$("#rwThanks");
-    th.innerHTML='<div class="rw-thanks-in"><img src="'+esc(($(".rw-brand img",page)||{}).src||"")+'" alt=""><p class="rw-k2">A gift for our racers</p><h2>Thank you, '+esc(x.name)+'!</h2><p class="m">“'+esc(x.message)+'”</p></div>';
-    th.hidden=false;clearTimeout(th.__t);th.__t=setTimeout(function(){th.hidden=true},12000)}
-  $("#rwThanks").addEventListener("click",function(){this.hidden=true});
+  /* Donor thank-yous run in the shout-out crawl only (nothing covers the race). */
+  function donorCheck(){}
 
   /* ---------- Taps anywhere on the page ---------- */
   page.addEventListener("click",function(e){var t=e.target.closest("[data-follow],[data-div],[data-view],[data-go],[data-so],[data-give]");if(!t||document.body.classList.contains("fr-editing")) return;
