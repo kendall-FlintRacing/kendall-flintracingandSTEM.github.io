@@ -2805,6 +2805,46 @@ body.rw-tv .rw-panel,body.rw-tv .rw-panelbtn{display:none!important}body.rw-tv .
   .rw-app .rw-expect{display:none}
 }
 @media (prefers-reduced-motion:reduce){.rw-panel{animation:none}.rw-thanks-in{animation:none}}
+/* phones: ask viewers to turn sideways; landscape phone layout */
+.rw-rotate{display:none;align-items:center;gap:12px;background:#f5b82e;color:#2a1d00;border-radius:8px;padding:10px 8px 10px 14px;flex:none}
+.rw-rotate p{margin:0;flex:1;font-size:.95rem;line-height:1.3}.rw-rotate b{display:block;font-size:1.02rem}
+.rw-rotate button{flex:none;width:40px;height:40px;border:0;background:transparent;color:#2a1d00;font:400 1.6rem/1 var(--body);cursor:pointer;border-radius:6px}
+.rw-rot-ico{flex:none;width:34px;height:34px;display:grid;place-items:center}
+.rw-rot-ico i{display:block;width:16px;height:26px;border:2.5px solid #2a1d00;border-radius:4px;animation:rwrot 2.4s ease-in-out infinite}
+@keyframes rwrot{0%,25%{transform:rotate(0)}55%,85%{transform:rotate(-90deg)}100%{transform:rotate(0)}}
+@media (orientation:portrait) and (max-width:700px){.rw-rotate{display:flex}}
+.rw-rotate.off,body.rw-tv .rw-rotate{display:none!important}
+@media (prefers-reduced-motion:reduce){.rw-rot-ico i{animation:none;transform:rotate(-90deg)}}
+@media (orientation:landscape) and (max-height:520px){
+  .rw-top{padding:4px 10px;gap:10px}.rw-top::after{display:none}.rw-brand img{height:30px}
+  .rw-app .rw-where{gap:8px;font-size:.66rem}.rw-app .rw-where b{font-size:.85rem}.rw-at{display:none}
+  .rw-app .rw-prog{max-width:260px;font-size:.75rem}.rw-title{gap:2px}
+  .rw-tvbtn{display:none}.rw-topbtns .rw-btn{padding:7px 12px;font-size:.78rem;min-height:34px}
+  .rw-main{padding:6px 10px;gap:6px}
+  .rw-app .rw-banner{padding:4px 10px;font-size:.8rem}
+  .rw-app .rw-extras,.rw-app .rw-adstrip,.rw-app .rw-mine{display:none!important}
+  .rw-app .rw-stage{padding:8px 12px;justify-content:flex-start}
+  .rw-app #rwOn .rw-st-top{gap:6px;font-size:.72rem}.rw-app #rwOn .rw-st-top>*{padding:3px 7px}
+  .rw-app #rwOn .rw-pres{margin:2px 0 0;font-size:.75rem;gap:6px}.rw-app #rwOn .rw-pres-img{max-height:20px}
+  .rw-app #rwOn .rw-head{font-size:1.25rem;margin:4px 0 6px}
+  .rw-app #rwOn:not(:empty){display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:12px;align-items:center}
+  .rw-app #rwOn>*{grid-column:1/-1}.rw-app #rwOn>.rw-match{width:100%}
+  .rw-app #rwOn>.rw-lights{grid-column:1;margin-top:6px;padding:4px 8px}.rw-app #rwOn>.rw-lights+.rw-status{grid-column:2;text-align:left;margin-top:6px;font-size:.85rem}
+  .rw-app .rw-lt i{width:16px;height:16px}.rw-app .rw-lt span{font-size:.55rem}
+  .rw-app .rw-match{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px}
+  .rw-app .rw-vs{width:34px;height:34px;font-size:.85rem;margin:0}
+  .rw-app .rw-lane{display:grid;grid-template-columns:auto minmax(0,1fr);justify-items:start;text-align:left;column-gap:10px;row-gap:1px;padding:8px 10px;align-content:center}
+  .rw-app .rw-lane>*{grid-column:2}.rw-app .rw-lane .rw-av{grid-column:1;grid-row:1/span 4;width:38px;height:38px;font-size:.95rem;align-self:center}
+  .rw-app .rw-lane .rw-lp{font-size:.6rem;padding:2px 6px}
+  .rw-app .rw-lane .rw-name{font-size:1.05rem;line-height:1.1}.rw-app .rw-lane .rw-team{font-size:.78rem;margin:0}
+  .rw-app .rw-lane .rw-meta,.rw-app .rw-lane .rw-fol{display:none}.rw-app .rw-lane .rw-logo{max-height:22px;max-width:110px;margin:3px 0 0;padding:2px 4px}
+  .rw-app .rw-lane .rw-runs{font-size:.75rem;margin:2px 0 0;gap:2px 8px}.rw-app .rw-lane .rw-time{font-size:1rem;margin:0}.rw-app .rw-lane .rw-badge{font-size:.6rem}
+  .rw-app .rw-idle .rw-expect{display:none}.rw-app .rw-idle .rw-head{font-size:1.5rem;margin:6px 0}.rw-app .rw-count{transform:scale(.8);margin:-6px 0}.rw-app .rw-idle .rw-kicker{margin:0}
+  .rw-app .rw-ticker{min-height:0}.rw-app .rw-ticker .rw-tag{font-size:.6rem;padding:6px 10px}.rw-app .rw-run span{font-size:.85rem}
+  .rw-panel{width:min(400px,62%)}.rw-app .rw-tabs button{padding:10px 8px 8px;font-size:.7rem}.rw-pfoot{padding:6px 10px}.rw-pfoot .rw-btn{min-height:36px;font-size:.8rem}
+  .rw-so form{max-height:calc(100dvh - 20px);overflow:auto}
+}
+
 /* ===== Student Leadership Council portal (#council) ===== */
 .co-tabs{display:flex;gap:4px;overflow-x:auto;background:#d4d6da;padding:4px;border-radius:8px;margin-bottom:14px;scrollbar-width:thin}
 .co-tabs a{flex:none;text-decoration:none;color:#2a2d33;font:800 .92rem/1 var(--body);padding:12px 14px;border-radius:6px;white-space:nowrap;display:flex;gap:6px;align-items:center}
@@ -5499,6 +5539,7 @@ a.mini{text-decoration:none;display:inline-block}
   </header>
   <div class="rw-body">
     <main class="rw-main" id="rwMain">
+      <div class="rw-rotate" id="rwRotate"><span class="rw-rot-ico" aria-hidden="true"><i></i></span><p><b>Turn your phone sideways</b> for the best view of the race.</p><button type="button" id="rwRotX" aria-label="Hide this tip">×</button></div>
       <div id="rwBanner" hidden></div>
       <div class="rw-mine" id="rwMine" hidden></div>
       <div class="rw-spot" id="rwSpot" hidden aria-live="polite"></div>
@@ -11450,6 +11491,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function panel(o,focus){var p=$("#rwPanel"),b=$("#rwPanelBtn");PANEL=o;p.hidden=!o;page.classList.toggle("panel-on",o);document.body.classList.toggle("rw-panel-open",o);b.setAttribute("aria-expanded",String(o));$(".rw-pb-txt",b).textContent=o?(innerWidth<641?"Close":"Hide details"):(innerWidth<641?"Details":"Race details");
     if(o&&focus){var t=$('.rw-tabs [aria-selected="true"]',page);if(t)t.focus({preventScroll:true})}else if(!o&&focus)b.focus({preventScroll:true})}
   $("#rwPanelBtn").addEventListener("click",function(){panel(!PANEL,true)});
+  (function(){var rt=$("#rwRotate");try{if(sessionStorage.getItem("rw-rot-off"))rt.classList.add("off")}catch(e){}
+    $("#rwRotX").addEventListener("click",function(){rt.classList.add("off");try{sessionStorage.setItem("rw-rot-off","1")}catch(e){}})})();
   $("#rwPanelX").addEventListener("click",function(){panel(false,true)});
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&PANEL&&!wide()&&visible()&&$("#rwSo").hidden&&$("#rwGive").hidden)panel(false,true)});
 
