@@ -96,6 +96,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .util{display:inline-flex;align-items:center;gap:7px;font:600 .88rem/1 var(--body);color:var(--ink);text-decoration:none;padding:8px 6px;border-radius:4px;white-space:nowrap}
 .util:hover{color:var(--red)}
 .util svg{width:20px;height:20px;flex:none}
+/* Dashboard link: a raised button that sits with Donate and Get Involved */
+.nav-actions .util.dash{min-height:50px;padding:0 16px;gap:8px;border-radius:6px;background:#fff;color:var(--ink);border:1px solid #d9dbe0;border-bottom-width:3px;box-shadow:0 2px 0 rgba(23,26,32,.06),0 6px 14px -6px rgba(23,26,32,.28);transition:transform .15s,box-shadow .15s,border-color .15s,color .15s}
+.nav-actions .util.dash:hover,.nav-actions .util.dash:focus-visible{color:var(--red);border-color:#c9ccd3;border-bottom-color:var(--red);transform:translateY(-2px);box-shadow:0 3px 0 rgba(23,26,32,.06),0 10px 20px -8px rgba(23,26,32,.35)}
+.nav-actions .util.dash:active{transform:translateY(0);box-shadow:0 1px 0 rgba(23,26,32,.06)}
+.nav-actions .util.dash svg{color:var(--red)}
 
 /* Laptop / small desktop: icons drop their labels */
 @media (max-width:1100px){.util span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.util{padding:10px}.nav-actions{gap:8px}}
@@ -111,6 +116,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .more-menu a:hover{background:rgba(255,255,255,.08);color:#fff}
   .nav-row{min-height:70px}
   .nav-actions .btn{min-height:44px;padding:0 16px;font-size:.95rem}
+  .nav-actions .util.dash{min-height:44px;padding:0 12px}
 }
 /* Phone */
 @media (max-width:600px){
@@ -123,6 +129,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .nav-actions{gap:4px}
   .nav-actions .btn{min-height:40px;padding:0 11px;font-size:.86rem}
   .util{padding:8px 6px}
+  .nav-actions .util.dash{min-height:40px;padding:0 9px}
 }
 @media (max-width:350px){.nav-actions .btn{padding:0 8px;font-size:.8rem}.brand img{width:36px}.util{padding:8px 4px}}
 
@@ -3006,7 +3013,7 @@ body.rw-app-on .fr-test.reh-chip{bottom:calc(62px + env(safe-area-inset-bottom,0
 .evf-files ul{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:6px}.evf-files li{display:flex;align-items:center;gap:8px}.evf-files li a{flex:1;min-width:0}.evf-files select{min-height:38px;border:1.5px solid #c9ccd1;border-radius:4px;padding:4px 8px;max-width:100%}
 .pd-files{display:flex;flex-wrap:wrap;gap:6px 14px;margin:6px 0 0}.pd-files a{font-weight:700;font-size:.9rem}
 /* ===== Overview: instrument-cluster dashboard (Nov 18, replaces the banded look) ===== */
-.dash{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;align-items:center;padding:18px 20px;border-radius:16px;color:#e8eaee;
+section.dash{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;align-items:center;padding:18px 20px;border-radius:16px;color:#e8eaee;
   background:radial-gradient(120% 140% at 15% 0%,#2a2d35 0%,#17191e 55%,#0f1014 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 0 1px #262930,0 10px 30px rgba(10,11,14,.18)}
 .dash-gauge{position:relative;width:190px;height:190px;justify-self:center}
 .dash-gauge svg{width:100%;height:100%}
@@ -3030,7 +3037,7 @@ body.rw-app-on .fr-test.reh-chip{bottom:calc(62px + env(safe-area-inset-bottom,0
 .dash-tell button{flex:none;background:transparent;border:1px solid #3a3e48;color:#d6d9df;border-radius:7px;padding:6px 10px;font:600 .78rem/1 var(--body);cursor:pointer;white-space:nowrap}
 .dash-tell button:hover,.dash-tell button:focus-visible{border-color:#c9ccd3;color:#fff}
 
-@media (max-width:640px){.dash{grid-template-columns:minmax(0,1fr);padding:14px}.dash-read{border:0;border-top:1px solid #2b2e36}.dash-tell{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){section.dash{grid-template-columns:minmax(0,1fr);padding:14px}.dash-read{border:0;border-top:1px solid #2b2e36}.dash-tell{grid-template-columns:minmax(0,1fr)}}
 /* light cards below the cluster: calm, no colored bars */
 .ov-cols .ov-card,.ov-card.qu{padding:16px;gap:10px;overflow:visible;border:1px solid #e3e5e9;border-radius:14px;background:#fff}
 .ov-cols .ov-card>*,.ov-card.qu>*{margin:0}
