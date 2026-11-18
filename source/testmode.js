@@ -379,7 +379,7 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
           if(r10){r10.status="off";r10.source="removed";r10.at=new Date().toISOString()}else E.lists.push({email:e10,topic:args.p_topic,name:nm10,status:"off",source:"removed",at:new Date().toISOString()});save();return R(null)}
         if(fn==="admin_email_overview"){var cnt=function(f){return E.outbox.filter(f).length};
           return R({settings:E.settings,provider:E.provider,me:{email:user?user.email:"",events:E.me.events,send_to:E.me.send_to},templates:E.templates,
-            counts:{waiting:cnt(function(x){return x.status==="queued"||x.status==="sending"}),sent:cnt(function(x){return x.status==="sent"}),failed:cnt(function(x){return x.status==="failed"}),today:cnt(function(x){return x.status==="sent"&&Date.now()-new Date(x.at)<864e5})},
+            counts:{waiting:cnt(function(x){return x.status==="queued"||x.status==="sending"}),sent:cnt(function(x){return x.status==="sent"}),failed:cnt(function(x){return x.status==="failed"&&!x.dismissed}),today:cnt(function(x){return x.status==="sent"&&Date.now()-new Date(x.at)<864e5})},
             lists:meta()})}
         if(fn==="admin_email_settings"){var fa=String(args.p_from_addr||"").trim().toLowerCase(),rt=String(args.p_reply_to||"").trim().toLowerCase(),nm=String(args.p_from_name||"").replace(/[\r\n\t<>"@,;:]+/g," ").trim();
           if(nm.length<2||nm.length>60)return R(null,"Add a sender name (2 to 60 characters).");if(fa&&!ok(fa))return R(null,"The “from” address doesn’t look right.");if(rt&&!ok(rt))return R(null,"The reply address doesn’t look right.");
@@ -397,7 +397,8 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
         if(fn==="admin_email_refs"){var a3=AUD[args.p_table];if(!a3)return R(null,"Unknown record");var nmOf=function(k){return (E.templates.filter(function(x){return x.key===k})[0]||{name:"Email"}).name};
           return R({on:E.settings.on,ready:E.provider.ready,templates:E.templates.filter(function(x){return x.audience===a3}).map(function(x){return{key:x.key,name:x.name,auto:x.auto_send,event:x.auto_event}}),
             refs:E.outbox.filter(function(x){return x.ref_table===args.p_table&&(x.kind==="reply"||x.kind==="auto")}).map(function(x){return{ref:x.ref,name:nmOf(x.template),status:x.status,at:x.at,auto:x.kind==="auto"}})})}
-        if(fn==="admin_email_log")return R(E.outbox.map(function(x){return{id:x.id,at:x.at,kind:x.kind,to:x.to,subject:x.subject,status:x.status,error:x.error,sent_at:x.sent_at,tries:x.tries}}));
+        if(fn==="admin_email_log")return R(E.outbox.map(function(x){return{id:x.id,at:x.at,kind:x.kind,to:x.to,subject:x.subject,status:x.status,error:x.error,sent_at:x.sent_at,tries:x.tries,dismissed:!!x.dismissed}}));
+      if(fn==="admin_email_dismiss"){var nd=0;E.outbox.forEach(function(x){if(x.status==="failed"&&!x.dismissed&&(!args.p_id||x.id===args.p_id)){x.dismissed=true;nd++}});save();return R(nd)};
         if(fn==="admin_email_retry"){E.outbox.forEach(function(x){if(x.id===args.p_id){x.status="sent";x.error=null;x.sent_at=new Date().toISOString()}});save();return R(null)}
         if(fn==="admin_email_test"){if(!E.settings.on)return R(null,"Email is switched off. Turn it on first.");var to4=E.me.send_to||(user?user.email:"");eOut({kind:"test",to:to4,subject:"Test email from flintracing.org",template:"test"});E.provider={ready:true,at:new Date().toISOString(),note:""};save();return R({ok:true,to:to4})}
         if(fn==="admin_email_send_update"){var sb5=String(args.p_subject||"").trim(),bd5=String(args.p_body||"").trim(),to5=E.me.send_to||(user?user.email:""),tp5=(args.p_topics||[]).filter(DEF);if(!E.settings.on)return R(null,"Email is switched off. Turn it on first.");
