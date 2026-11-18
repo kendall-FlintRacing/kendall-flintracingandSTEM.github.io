@@ -1733,10 +1733,10 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .ck-needle{transform:rotate(150deg);transform-origin:110px 110px;transition:transform 1.4s cubic-bezier(.2,.9,.2,1.15)}
 .ck-needle line{stroke:#fff;stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(255,255,255,.6))}
 .ck-hub{fill:#1b1c22;stroke:var(--neo);stroke-width:3}
-.ck-dig{position:absolute;left:50%;top:60%;transform:translateX(-50%);display:grid;justify-items:center;gap:3px;text-align:center;padding:8px 14px 9px;border-radius:12px;background:var(--lite);color:#14151a;box-shadow:0 6px 18px rgba(0,0,0,.35),0 0 0 3px rgba(255,255,255,.08)}
-.ck-dig b{font:italic 800 clamp(1.7rem,3.4vw,2.3rem)/1 var(--body);font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#14151a}
-.ck-dig span{font:800 .58rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#4a4d55;white-space:nowrap}
-.ck-dig small{font:800 .62rem/1 var(--body);color:#c3122a;white-space:nowrap}
+.ck-dig{position:absolute;left:50%;top:60%;transform:translateX(-50%);display:grid;justify-items:center;gap:4px;text-align:center}
+.ck-dig b{font:italic 800 clamp(2rem,4vw,2.7rem)/1 var(--body);font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#fff;text-shadow:0 0 18px rgba(255,255,255,.45)}
+.ck-dig span{font:800 .58rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#c9ccd3;white-space:nowrap}
+.ck-dig small{font:800 .62rem/1 var(--body);color:var(--amb);white-space:nowrap}
 .ck-side{grid-area:side;display:grid;gap:8px}
 .ck-mini{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:center;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
 .ck-mini span{font:800 .64rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#c9ccd3}
@@ -1823,6 +1823,11 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .ck-mid .ck-in{justify-self:center}
 .ck-mid .ck-tach{grid-area:auto}
 .ck-in{display:flex;align-items:center;gap:6px;padding:5px;border-radius:999px;background:rgba(0,0,0,.35);box-shadow:inset 0 0 0 1px #33363f}
+.ck-in{padding:5px 5px 5px 16px}
+.ck-msg{display:grid;gap:3px;min-width:0}.ck-msg b{font:800 .8rem/1.15 var(--body);color:#fff}.ck-msg small{font:600 .72rem/1.2 var(--body);color:#b5b9c1}
+.ck-in.wait{padding:8px 16px 8px 8px;gap:10px;max-width:300px}
+.ck-lock{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08)}
+.ck-lock svg{width:16px;height:16px;fill:none;stroke:#9aa0aa;stroke-width:2;stroke-linecap:round}
 .ck-why select{appearance:none;-webkit-appearance:none;font:700 .82rem/1 var(--body);color:#e9ebef;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23c9ccd3' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 10px center/10px;border:0;border-radius:999px;padding:9px 28px 9px 12px;cursor:pointer;max-width:170px}
 .ck-why select option{color:#14151a}
 .ck-go{white-space:nowrap;border:0;border-radius:999px;padding:10px 18px;font:italic 800 .9rem/1 var(--display);text-transform:uppercase;letter-spacing:.03em;color:#fff;background:var(--grn);color:#062b15;cursor:pointer;box-shadow:0 0 16px rgba(54,214,122,.55);transition:transform .12s}
@@ -1893,6 +1898,60 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .ck-on .me-pref{border-color:#2e3038;color:#9aa0aa}.ck-on .me-pref b{color:#fff}
 .ck-on .me-pw .f{color:#e3e5e9}.ck-on .me-pw input{background:#111216;color:#fff;border-color:#3a3d46}
 .ck-on .me-code{background:var(--lite);color:#14151a;border:0}.ck-on .me-code h2{color:#14151a}.ck-on .me-code .me-k{color:#c3122a}.ck-on .me-code p{color:#3b3e45}
+/* ===== Sleek pass: fewer boxes, hairlines instead of cards ===== */
+.me-box.ck-on>*,.ck-on .gs,.ck-on .gs-strip,.ck-on .gs-ths,.ck-on .gs-main>*{min-width:0}
+.ck-on .ck{border:0;box-shadow:0 18px 44px rgba(0,0,0,.3);background:radial-gradient(ellipse 45% 75% at 50% 60%,rgba(255,48,69,.14),transparent 70%),radial-gradient(ellipse 120% 90% at 50% 0%,#202228,#141519 62%)}
+.ck-on .ck-shift{background:none;padding:0}
+.ck-on .ck-shift i{height:4px;width:clamp(12px,1.6vw,16px)}
+.ck-on .ck-st{background:none;padding:2px 0;margin-right:10px;color:#9aa0aa}
+.ck-on .ck-st.on{background:none;color:var(--grn)}
+.ck-on .ck-mini{background:none;box-shadow:none;border-radius:0;padding:10px 2px;border-bottom:1px solid rgba(255,255,255,.08)}
+.ck-on .ck-mini:last-child{border-bottom:0}
+.ck-on .ck-side{gap:0}
+.ck-on .ck-tb{padding:8px 16px 8px 8px;border-radius:999px;background:rgba(255,255,255,.06);color:#fff;box-shadow:0 0 0 1px rgba(255,48,69,.7),0 0 16px rgba(255,48,69,.3)}
+.ck-on .ck-tb svg{width:20px;height:20px;padding:6px;border-radius:50%}
+.ck-on .ck-tb b{font-size:.95rem}.ck-on .ck-tb small{color:#b5b9c1}
+.ck-on .ck-tb:hover,.ck-on .ck-tb:focus-visible{background:rgba(255,48,69,.12)}
+.ck-on .ck-in{box-shadow:none;background:rgba(255,255,255,.06)}
+.ck-on .ck-in.on{background:rgba(54,214,122,.12);box-shadow:0 0 0 1px var(--grn),0 0 18px rgba(54,214,122,.3)}
+.ck-on .ck-in.on span,.ck-on .ck-in.on b{color:#bff3d3}.ck-on .ck-in.on small{color:#8fd9ad}
+.ck-on .ck-go.out{background:#fff;color:#14151a}
+/* Garage */
+.ck-on .gs{border:0;background:none;box-shadow:none;border-radius:0;overflow:visible}
+.ck-on .gs-top{padding:4px 0 12px}
+.ck-on .gs-main{padding:0}
+.ck-on .gs-stage{box-shadow:none;background:radial-gradient(ellipse 60% 55% at 50% 75%,rgba(255,48,69,.2),transparent 70%),linear-gradient(180deg,#1b1c21,#121317)}
+.ck-on .gs-stage.gs-ev::before{display:none}
+.ck-on .gs-spec{box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.ck-on .gs-strip{padding:10px 0 0}
+.ck-on .gs-arw{background:none;width:30px;height:30px;color:#9aa0aa}
+.ck-on .gs-arw:hover,.ck-on .gs-arw:focus-visible{background:none;color:#fff}
+.ck-on .gs-th{background:none;border:0;border-radius:0;padding:6px 8px 8px;border-bottom:2px solid transparent;width:140px}
+.ck-on .gs-th:hover{background:none;border-bottom-color:rgba(255,255,255,.2)}
+.ck-on .gs-th em{background:none;padding:2px 4px}
+.ck-on .gs-th[aria-selected=true]{background:none;color:#fff;transform:none;box-shadow:none;border-bottom-color:var(--neo)}
+.ck-on .gs-th[aria-selected=true] em{background:none}
+.ck-on .gs-th[aria-selected=true] em b{text-shadow:0 0 12px rgba(255,48,69,.8)}
+.ck-on .gs-th.photos{border-radius:8px;padding:0}
+/* Lower sections: no cards, just hairlines */
+.ck-on .me-grid{gap:0 clamp(24px,4vw,48px)}
+.ck-on .me-col{gap:0}
+.ck-on .me-card{background:none;border:0;box-shadow:none;border-radius:0;padding:22px 0;border-top:1px solid rgba(255,255,255,.09)}
+.ck-on .me-card h2{font-size:1.2rem}
+.ck-on .me-sp{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:0 24px}
+.ck-on .me-sp a{position:relative;background:none;border:0;border-radius:0;border-bottom:1px solid rgba(255,255,255,.07);padding:11px 26px 11px 2px;box-shadow:none;transform:none}
+.ck-on .me-sp a::after{content:"›";position:absolute;right:4px;top:50%;transform:translateY(-50%);color:#5a5e68;font-size:1.3rem;transition:transform .15s,color .15s}
+.ck-on .me-sp b{font-size:1rem}
+.ck-on .me-sp span{font-size:.82rem}
+.ck-on .me-sp a:hover,.ck-on .me-sp a:focus-visible{background:none;box-shadow:none;transform:none;border-bottom-color:var(--neo)}
+.ck-on .me-sp a:hover::after,.ck-on .me-sp a:focus-visible::after{color:var(--neo);transform:translate(3px,-50%)}
+.ck-on .me-sp a.main{background:none;border-color:rgba(255,255,255,.07);box-shadow:none;padding-left:14px}
+.ck-on .me-sp a.main::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:2px;background:var(--neo);box-shadow:0 0 10px var(--neo)}
+.ck-on .me-sp a.main b{color:#fff}.ck-on .me-sp a.main span{color:#c9ccd3}
+.ck-on .me-pref{border:0;border-radius:0;border-bottom:1px solid rgba(255,255,255,.07);padding:10px 2px}
+.ck-on .me-prefs{gap:0}
+.ck-on .me-kids span{background:none;padding:0;margin-right:14px}
+.ck-on .me-code{background:none;color:inherit}.ck-on .me-code h2{color:#fff}.ck-on .me-code .me-k{color:#ff6b7a}.ck-on .me-code p{color:#9aa0aa}
 /* admin → members */
 .mb-sub{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
 .mb-sub button{border:1px solid #c3c6cc;background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer}
@@ -11533,6 +11592,22 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
       '<div class="ck-dig"><b>'+esc(fmtHrs(v))+'</b><span>'+esc(label)+'</span><small>Next goal · '+next+' '+esc(unit)+'</small></div></div>'}
   function ckMini(v,label,steps){v=+v||0;var n=nextGoal(v,steps),lit=Math.round(Math.min(1,v/n)*10),seg="";for(var i=0;i<10;i++)seg+='<i'+(i<lit?' class="on"':'')+'></i>';
     return '<div class="ck-mini"><span>'+esc(label)+'</span><b>'+esc(v)+'</b><div class="ck-seg" aria-hidden="true">'+seg+'</div></div>'}
+  /* Check-in opens 2 hours before an event starts and closes 2 hours after it ends */
+  function ckTime(t){var m=String(t||"").trim().toLowerCase().match(/^(\d{1,2})(?::(\d{2}))?\s*(a|p)?\.?m?\.?/);if(!m)return null;var h=+m[1],mi=+(m[2]||0);
+    if(m[3]==="p"&&h<12)h+=12;else if(m[3]==="a"&&h===12)h=0;else if(!m[3]&&h>=1&&h<=6)h+=12;return h*60+mi}
+  function ckWins(evs){var out=[];(evs||[]).forEach(function(e){var st=ckTime(e.start_time),en=ckTime(e.end_time);if(st==null){st=8*60;en=20*60}else if(en==null||en<=st)en=st+120;
+      var d=new Date(e.start_date+"T00:00:00"),last=new Date((e.end_date||e.start_date)+"T00:00:00");
+      for(var i=0;d<=last&&i<31;i++){var b=new Date(d);out.push({e:e,open:new Date(b.getTime()+(st-120)*6e4),start:new Date(b.getTime()+st*6e4),close:new Date(b.getTime()+(en+120)*6e4)});d.setDate(d.getDate()+1)}});
+    return out.sort(function(a,b){return a.open-b.open})}
+  function ckKind(e){try{var g=evGuess(e);return g[1]==="raceday"||g[1]==="practice"||g[1]==="sanctioned"?"race_day":/workshop|building|monthly/.test(g[1]+" "+(e.title||"").toLowerCase())?"workshop":"event"}catch(x){return "event"}}
+  function ckFill(box,P,preview){var el=$("#ckIn",box);if(!el)return;
+    gsLoad().then(function(){if(!el.isConnected)return;var now=new Date(),W=ckWins((PD.data||{}).events),cur=W.filter(function(w){return now>=w.open&&now<=w.close})[0],nxt=W.filter(function(w){return w.open>now})[0];
+      if(cur){el.className="ck-in";el.innerHTML='<span class="ck-msg"><b>'+esc(cur.e.title)+'</b><small>Open until '+fmtTime(cur.close.toISOString())+'</small></span><button class="ck-go" type="button" id="meClock" data-kind="'+ckKind(cur.e)+'"'+(preview?' disabled':'')+'>Check in</button>';
+        $("#meClock",el).onclick=function(){box.__clk&&box.__clk(this,this.getAttribute("data-kind"))};
+        clearTimeout(box.__ckT);box.__ckT=setTimeout(function(){ckFill(box,P,preview)},Math.min(cur.close-now+1000,36e5))}
+      else{el.className="ck-in wait";el.innerHTML='<span class="ck-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span class="ck-msg"><b>Check-in opens 2 hours before an event</b><small>'+(nxt?'Next: '+esc(nxt.e.title)+' · '+esc(ckDay(nxt.open))+' at '+fmtTime(nxt.open.toISOString()):"No events on the schedule yet")+'</small></span>';
+        if(nxt&&nxt.open-now<864e5){clearTimeout(box.__ckT);box.__ckT=setTimeout(function(){ckFill(box,P,preview)},nxt.open-now+1000)}}})}
+  function ckDay(d){var t=new Date(),tm=new Date(t.getFullYear(),t.getMonth(),t.getDate()+1);if(d.toDateString()===t.toDateString())return "Today";if(d.toDateString()===tm.toDateString())return "Tomorrow";return d.toLocaleDateString([],{weekday:"short",month:"short",day:"numeric"})}
   function ckHTML(P,m,fam,roles){var hrs=+P.hours||0,pct=Math.min(1,hrs/nextGoal(hrs,[10,25,50,100,150,250,500,1000])),lit=Math.round(pct*10),leds="";
     for(var i=0;i<10;i++)leds+='<i class="'+(i<5?"g":i<8?"a":"r")+(i<lit?" on":"")+'"></i>';
     var tell=function(on,cls,label,svg){return '<span class="ck-tell '+cls+(on?' on':'')+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+svg+'</svg>'+esc(label)+'</span>'};
@@ -11542,7 +11617,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
         '<div class="ck-modes"><span class="ck-st'+(P.open?' on':'')+'"><i></i>'+(P.open?"Checked in":"Not checked in")+'</span><span class="ck-st sp">'+roles.length+' space'+(roles.length===1?"":"s")+' unlocked</span><button class="ck-out" type="button" id="meOut">Sign out</button></div><button class="ck-tb" type="button" id="meTools" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 9V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3"/><path d="M3 13h18M10 13v2h4v-2"/></svg><span><b>Toolbox</b><small>Forms, waivers, contact</small></span></button></div>'+
       '<div class="ck-mid">'+ckTach(hrs,fam?"Hours at the shop":"Volunteer hours","h")+
         (P.open?'<div class="ck-in on"><span><b>Checked in · '+esc(MKIND[P.open.kind]||"Here")+'</b><small>Since '+fmtTime(P.open.started_at)+'</small></span><button class="ck-go out" type="button" id="meClock">Check out</button></div>':
-          '<div class="ck-in"><label class="ck-why"><span class="sr-only">What are you here for?</span><select id="meKindSel">'+Object.keys(MKIND).map(function(k){return '<option value="'+k+'">'+esc(MKIND[k])+'</option>'}).join("")+'</select></label><button class="ck-go" type="button" id="meClock">Check in</button></div>')+'</div>'+
+          '<div class="ck-in wait" id="ckIn"><span class="ck-msg"><b>Check-in</b><small>Checking the schedule…</small></span></div>')+'</div>'+
       '<div class="ck-side">'+ckMini(P.workshops,"Workshops",[5,10,20,30,50,75,100])+ckMini(P.race_days,"Race days",[1,3,5,10,15,25])+ckMini(P.years,P.years===1?"Season":"Seasons",[1,2,3,5,8,10])+'</div>'+
     '</section>'}
   function ckAnimate(box){var g=$(".ck-tach",box);if(!g)return;var p=+g.getAttribute("data-p")||0,f=$(".ck-fill",g),n=$(".ck-needle",g);
@@ -11634,13 +11709,14 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
             '<details><summary>'+(P.member.has_password?'Change my password':'Add a password (optional)')+'</summary><form class="me-pw" id="mePw" novalidate><label class="f">Current code or password<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New password <small>(6+ characters)</small><input type="password" autocomplete="new-password" maxlength="64"></label><label class="f">Type it again<input type="password" autocomplete="new-password" maxlength="64"></label><button class="btn deep" type="submit" style="justify-self:start">Save password</button><p class="t-msg" role="status"></p></form></details>'+
             '<p class="me-fine">To change your name, email or roles, email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>'+
           '<div class="me-card"><p class="me-k">Emails from us</p><h2>Email notifications</h2><p class="me-fine">Tick what you’d like in your inbox. Changes save right away, and every update has an unsubscribe link.</p><form id="mePrefs" class="me-prefs">'+prefsHTML("me-pref",m.email_prefs||[])+'</form><p class="t-msg" id="mePrefMsg" role="status"></p></div></div></div>';
-    box.classList.add("ck-on");ckAnimate(box);Promise.resolve().then(gsDraw);$("#meTools",box).onclick=tbOpen;
+    box.classList.add("ck-on");ckAnimate(box);if(!P.open)ckFill(box,P,preview);Promise.resolve().then(gsDraw);$("#meTools",box).onclick=tbOpen;
     if(preview){box.insertAdjacentHTML("afterbegin",'<div class="pv-banner"><div><b>Admin preview · sample '+(fam?"family":"crew member")+'</b><span>This is what '+(fam?"a family":"a crew member with every role")+' sees. The names and numbers are made up; buttons here don’t save anything.</span></div><div class="pv-sw"><a href="#my-dashboard/family"'+(fam?' aria-current="true"':'')+'>Family</a><a href="#my-dashboard/crew"'+(!fam?' aria-current="true"':'')+'>Crew</a></div></div>');
       $$("button,input",box).forEach(function(el){if(!el.closest(".pv-banner")&&!el.closest("#meGarage")&&el.id!=="meTools"){el.disabled=true}});$("#meOut").onclick=null;return}
     $("#meOut").onclick=signOut;
-    $("#meClock").onclick=function(){var b=this,k=($("#meKindSel",box)||{}).value;b.disabled=true;
+    box.__clk=function(b,k){b.disabled=true;
       db.rpc("member_clock",{p_kind:k||"other"}).then(function(x){b.disabled=false;if(x.error){toast(x.error.message);return}
         toast(x.data&&x.data.clocked==="in"?"You’re checked in. Have fun!":"Checked out"+(x.data&&x.data.hours!=null?" · "+fmtHrs(Math.round(x.data.hours*10)/10)+" hours":"")+". Thank you!");renderMe()})};
+    var mc=$("#meClock",box);if(mc)mc.onclick=function(){box.__clk(this,"other")};
     var pf=$("#mePw");pf.onsubmit=function(e){e.preventDefault();var i=$$("input",pf),msg=$(".t-msg",pf);
       if(i[1].value.length<6){msg.textContent="Use at least 6 characters.";return}if(i[1].value!==i[2].value){msg.textContent="The new passwords don’t match.";return}
       db.rpc("member_set_passcode",{p_old:i[0].value,p_new:i[1].value}).then(function(x){if(x.error){msg.textContent=x.error.message;return}i.forEach(function(n){n.value=""});msg.textContent="";toast("Password saved. You can sign in with it or your code.");pf.closest("details").open=false})};
