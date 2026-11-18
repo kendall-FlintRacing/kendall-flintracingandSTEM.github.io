@@ -149,7 +149,7 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
     if(tb==="race_volunteers")eAlert("volunteer","New race-day volunteer: "+r.first_name+" "+r.last_name)}
   var user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}}, listeners=[];
   function rid(){return Math.random().toString(36).slice(2,10)}
-  function Q(t){this.t=t;this.f=[];this.op="select";this.row=null;this.single=false;this.head=false;this.ord=null}
+  function Q(t){this.t=t;this.f=[];this.op="select";this.row=null;this._one=false;this.head=false;this.ord=null}
   Q.prototype.select=function(c,o){if(o&&o.head)this.head=true;return this};
   Q.prototype.order=function(col,o){this.ord=[col,!(o&&o.ascending===false)];return this};
   Q.prototype.limit=function(){return this};
@@ -158,7 +158,8 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
   if(!Q.prototype.lt)Q.prototype.lt=function(k,v){this.f.push([k,v,"lt"]);return this};
   Q.prototype.lte=function(k,v){this.f.push([k,v,"lte"]);return this};
   Q.prototype.in=function(k,v){this.f.push([k,v,"in"]);return this};
-  Q.prototype.maybeSingle=function(){this.single=true;return this};
+  Q.prototype.maybeSingle=function(){this._one=true;return this};
+  Q.prototype.single=function(){this._one=true;return this};
   Q.prototype.insert=function(r){this.op="insert";this.row=r;return this};
   Q.prototype.upsert=function(r){this.op="upsert";this.row=r;return this};
   Q.prototype.update=function(r){this.op="update";this.row=r;return this};
@@ -168,8 +169,8 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
     var s=this, rows=T[s.t]||(T[s.t]=[]), m=function(r){return s.f.every(function(f){return f[2]==="in"?(f[1]||[]).indexOf(r[f[0]])>=0:f[2]==="gte"?r[f[0]]>=f[1]:f[2]==="lte"?r[f[0]]<=f[1]:f[2]==="lt"?r[f[0]]<f[1]:r[f[0]]===f[1]})}, res;
     if(s.op==="select"){var d=rows.filter(m).slice();
       if(s.ord){var c=s.ord[0],asc=s.ord[1];d.sort(function(a,b){return (a[c]>b[c]?1:a[c]<b[c]?-1:0)*(asc?1:-1)})}
-      res=s.head?{data:null,count:d.length,error:null}:{data:s.single?(d[0]||null):JSON.parse(JSON.stringify(d)),error:null}}
-    else if(s.op==="insert"){(Array.isArray(s.row)?s.row:[s.row]).forEach(function(row){var nr=Object.assign({id:rid(),created_at:new Date().toISOString()},s.t==="inquiries"?{status:"new"}:s.t==="shoutouts"?{status:"pending"}:{},JSON.parse(JSON.stringify(row)));rows.push(nr);eOnInsert(s.t,nr)});res={data:null,error:null}}
+      res=s.head?{data:null,count:d.length,error:null}:{data:s._one?(d[0]||null):JSON.parse(JSON.stringify(d)),error:null}}
+    else if(s.op==="insert"){(Array.isArray(s.row)?s.row:[s.row]).forEach(function(row){var nr=Object.assign({id:rid(),created_at:new Date().toISOString()},s.t==="inquiries"?{status:"new"}:s.t==="shoutouts"?{status:"pending"}:{},JSON.parse(JSON.stringify(row)));rows.push(nr);eOnInsert(s.t,nr);s.last=nr});res={data:s._one&&s.last?JSON.parse(JSON.stringify(s.last)):null,error:null}}
     else if(s.op==="upsert"){var i=rows.findIndex(function(r){return r.key===s.row.key});if(i>=0)rows[i]=s.row;else rows.push(s.row);res={data:null,error:null}}
     else if(s.op==="update"){rows.filter(m).forEach(function(r){Object.assign(r,s.row)});res={data:null,error:null}}
     else {T[s.t]=rows.filter(function(r){return !m(r)});res={data:null,error:null}}
@@ -285,6 +286,14 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
         return R({me:me?me.id:null,admin:isA,members:T.members.filter(function(m){return m.status==="approved"&&(m.roles||[]).indexOf("council")>=0}).map(function(m){return{id:m.id,name:m.display_name,
           positions:(T.council_officers||[]).filter(function(o){return o.member_id===m.id}).map(function(o){return o.position}),titles:(T.council_roles||[]).filter(function(r){return r.member_id===m.id&&r.status==="approved"}).map(function(r){return r.title})}}).sort(function(a,b){return a.name>b.name?1:-1})})}
       if(fn==="public_council_counts")return R({council_members:T.members.filter(function(m){return m.status==="approved"&&(m.roles||[]).indexOf("council")>=0}).length,council_projects:(T.council_projects||[]).filter(function(p){return p.status==="planning"||p.status==="active"}).length});
+      if(fn==="bw_my"){var cb=curM();if(!cb)return R(null);var ss=(new Date().getMonth()>=6?new Date().getFullYear()+1:new Date().getFullYear());T.bw_teams=T.bw_teams||[];T.bw_people=T.bw_people||[];T.bw_submissions=T.bw_submissions||[];
+        var mt=T.bw_teams.filter(function(t){return t.season===ss&&(t.member_id===cb.id||T.bw_people.some(function(p){return p.team_id===t.id&&p.member_id===cb.id}))});
+        return R({member:cb.id,season:ss,teams:mt.map(function(t){return {id:t.id,name:t.name,school:t.school,car_number:t.car_number,status:t.status}}),
+          submissions:T.bw_submissions.filter(function(x){return x.member_id===cb.id}).sort(function(a,b){return a.created_at<b.created_at?1:-1}).slice(0,25).map(function(x){var t=T.bw_teams.filter(function(y){return y.id===x.team_id})[0];return {id:x.id,created_at:x.created_at,kind:x.kind,team_name:t?t.name:x.team_name,file_name:x.file_name,note:x.note,status:x.status,admin_note:x.admin_note}})})}
+      if(fn==="bw_submit"){var cs=curM();if(!cs)return R(null,"Sign in with your Family or Crew Pass first.");T.bw_submissions=T.bw_submissions||[];var ss2=(new Date().getMonth()>=6?new Date().getFullYear()+1:new Date().getFullYear());
+        if(args.p_kind!=="request"&&args.p_kind!=="spiritwear"&&args.p_kind!=="team"&&!args.p_path)return R(null,"Attach the file for this form.");
+        var nb={id:rid(),created_at:new Date().toISOString(),season:ss2,kind:args.p_kind,via:"portal",team_id:args.p_team_id||null,person_id:null,member_id:cs.id,submitted_by:cs.display_name,team_name:args.p_team_name||null,note:args.p_note||null,file_path:args.p_path||null,file_name:args.p_name||null,mime:args.p_mime||null,size:args.p_size||null,status:"new",admin_note:null};
+        T.bw_submissions.push(nb);save();return R(nb.id)}
       if(fn==="my_member"){var c1=curM();return R(c1?{id:c1.id,username:c1.username,display_name:c1.display_name,kind:c1.kind,roles:c1.roles,first_year:c1.first_year,family_code:c1.family_code||null}:null)}
       if(fn==="kiosk_guest_signin"||fn==="kiosk_guests_today"||fn==="kiosk_checkout"){var td=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
         if(fn==="kiosk_guest_signin"){var gn=String(args.p_name||"").trim().replace(/\s+/g," "),ge=String(args.p_email||"").trim(),gp=String(args.p_phone||"").trim();
@@ -433,6 +442,7 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
         img.onerror=function(){res({error:{message:"Not an image"}})};img.src=url;})},
       getPublicUrl:function(p){return{data:{publicUrl:files[p]||""}}},
       createSignedUrl:function(p){return Promise.resolve({data:{signedUrl:files[p]||""},error:null})},
+      createSignedUrls:function(ps){return Promise.resolve({data:(ps||[]).map(function(p){return {path:p,signedUrl:files[p]||""}}),error:null})},
       download:function(p){return fetch(files[p]).then(function(r){return r.blob()}).then(function(b){return{data:b,error:null}},function(){return{data:null,error:{message:"missing"}}})},
       remove:function(){return Promise.resolve({data:null,error:null})}}}}
   }}};

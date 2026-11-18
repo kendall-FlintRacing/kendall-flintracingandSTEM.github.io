@@ -4447,6 +4447,69 @@ a.mini{text-decoration:none;display:inline-block}
 .un-card{max-width:560px}
 .un-card p{line-height:1.55}
 .un-card a:not(.btn){color:var(--red-deep);font-weight:600}
+
+/* Building Workshop (admin + My dashboard) */
+.qu-areas.q4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.qu-areas.q4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.qu-areas.q4{grid-template-columns:minmax(0,1fr)}}
+.bw-qu{margin-top:16px}.bw-qu .qu-areas{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:640px){.bw-qu .qu-areas{grid-template-columns:minmax(0,1fr)}}
+.bw-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}.bw-top .mb-sub{margin-bottom:6px}
+.bw-season{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.9rem}.bw-season select{border:1.5px solid #c9ccd1;border-radius:4px;padding:7px 8px;font:inherit}
+.bw-lead{color:#4a4d55;margin:6px 0 0;max-width:75ch}
+.bw-g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.bw-g4{display:grid;grid-template-columns:2fr 1fr 1.5fr 1fr;gap:0 12px}
+@media (max-width:700px){.bw-g2,.bw-g4{grid-template-columns:minmax(0,1fr)}}
+.bw-filt{margin-top:18px}.bw-filt select{border:1.5px solid #c9ccd1;border-radius:4px;padding:8px;font:inherit;max-width:100%}
+.bw-chip{display:inline-block;font:800 .68rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:#eceef1;color:#26282e}
+.bw-chip.k-design{background:#ffe4e7;color:#a10f24}.bw-chip.k-team{background:#e4ecff;color:#1d3f9e}.bw-chip.k-waiver{background:#e3f6ea;color:#17673a}.bw-chip.k-registration{background:#fff1d6;color:#8a5300}.bw-chip.k-spiritwear{background:#f0e6ff;color:#5b2aa6}
+.bw-subs{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:10px}
+.bw-subs>li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) minmax(220px,auto);gap:10px 16px;align-items:start;border:1px solid #e3e5e9;border-left:4px solid #c3122a;border-radius:10px;padding:12px 14px;background:#fff}
+.bw-subs>li.st-approved{border-left-color:#1d8a4a}.bw-subs>li.st-changes{border-left-color:#d08a00}.bw-subs>li.st-filed{border-left-color:#9a9da3}
+@media (max-width:900px){.bw-subs>li{grid-template-columns:minmax(0,1fr)}}
+.bw-sh{display:grid;gap:6px;justify-items:start}.bw-sh small{color:#5a5d64;font-size:.8rem}.bw-st{font-weight:700;font-size:.85rem}
+.bw-sb{display:grid;gap:4px;justify-items:start;min-width:0}.bw-sb p{margin:0}.bw-for{color:#5a5d64}.bw-tn{font-size:.92rem}.bw-note{color:#3b3e45;font-size:.9rem;white-space:pre-wrap;overflow-wrap:anywhere}.bw-an{color:#8a5300;font-size:.85rem}
+.bw-file{display:inline-flex;align-items:center;gap:8px;border:1px solid #d4d6da;background:#fafafb;border-radius:8px;padding:6px 10px;cursor:pointer;font:600 .88rem/1.2 var(--body);color:var(--ink);max-width:100%;text-align:left}.bw-file span{overflow:hidden;text-overflow:ellipsis}.bw-file small{color:#6b6e75;font-weight:400}.bw-file:hover{border-color:var(--ink)}
+.bw-sa label{display:grid;gap:4px;font:600 .82rem/1.2 var(--body)}.bw-sa select{border:1.5px solid #c9ccd1;border-radius:4px;padding:7px;font:400 .9rem var(--body);max-width:100%}.bw-sa .row{margin-top:8px;gap:6px}
+.bw-empty{margin-top:14px}
+.bw-stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:12px 0 16px}.bw-stats div{border:1px solid #e3e5e9;border-radius:10px;padding:10px 12px;display:grid;gap:2px}.bw-stats b{font:800 1.4rem/1 var(--display)}.bw-stats span{font-size:.78rem;color:#5a5d64}
+@media (max-width:900px){.bw-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:420px){.bw-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.bw-teams{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:12px}
+.bw-team{display:grid;grid-template-columns:120px minmax(0,1fr) 180px;gap:16px;border:1px solid #e3e5e9;border-radius:12px;padding:14px;background:#fff;align-items:start}.bw-team.off{opacity:.6}.bw-team.ed{display:block}
+@media (max-width:760px){.bw-team{grid-template-columns:90px minmax(0,1fr)}.bw-design{grid-column:1/-1}}
+.bw-logo{display:grid;gap:6px;justify-items:center}.bw-logo img,.bw-logo>span{width:100%;aspect-ratio:1;border-radius:10px;object-fit:contain;background:#f3f4f6;border:1px solid #e3e5e9}
+.bw-logo>span{display:grid;place-items:center;font:italic 800 2.4rem/1 var(--display);color:#9a9da3}
+.bw-tb h3{font-size:1.25rem;margin:0}.bw-tb h3 em{font-style:normal;color:#c3122a}.bw-tb p{margin:6px 0 0;font-size:.9rem}.bw-tm{color:#5a5d64}.bw-tb .row{margin-top:10px;gap:6px}
+.bw-miss{font-style:normal;font:700 .62rem/1 var(--body);text-transform:uppercase;letter-spacing:.05em;color:#a10f24;background:#ffe4e7;border-radius:999px;padding:3px 6px;vertical-align:middle}
+.bw-none{color:#9a9da3}
+.bw-design{display:grid;gap:6px;justify-items:center;text-align:center}.bw-design small{color:#1d6b3a;font-weight:700;font-size:.78rem}
+.bw-dimg{border:1px solid #e3e5e9;border-radius:10px;padding:0;background:#fff;cursor:zoom-in;width:100%;overflow:hidden}.bw-dimg img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.bw-nod{display:grid;place-items:center;width:100%;aspect-ratio:4/3;border:1.5px dashed #c9ccd1;border-radius:10px;color:#6b6e75;font-size:.82rem;padding:8px}
+.bw-add{margin-top:12px}
+.bw-ptab{min-width:1100px}.bw-ptab .bw-sm{width:70px}.bw-ptab .bw-md{width:120px}.bw-ptab .bw-ck{text-align:center}
+/* My dashboard → Toolbox → Building Workshop */
+.tb-bw{width:100%;margin-bottom:10px;border:0;cursor:pointer;text-align:left;font:inherit;background:linear-gradient(135deg,#14151a,#2a2c35);color:#fff;box-shadow:0 0 0 2px var(--neo,#ff3045),0 8px 20px rgba(0,0,0,.3)}
+.tb-bw small{color:#c9ccd3}.tb-bw .tb-ic{background:var(--neo,#ff3045)}
+@media (max-width:520px){.tb-bw{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:12px}}
+.bw-dlg .bw-k{font:800 .7rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#ff8592;margin:0 0 10px}
+.bw-kinds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:520px){.bw-kinds{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.bw-kinds button{display:grid;gap:4px;text-align:left;padding:12px;border-radius:12px;border:1.5px solid #3a3d46;background:rgba(255,255,255,.04);color:#fff;cursor:pointer;font:inherit}
+.bw-kinds button b{font:italic 800 .98rem/1.05 var(--display);text-transform:uppercase}.bw-kinds button small{font-size:.78rem;color:#aab0ba;line-height:1.25}
+.bw-kinds button:hover,.bw-kinds button:focus-visible{border-color:#ff8592}
+.bw-kinds button[aria-checked="true"]{border-color:var(--neo,#ff3045);background:rgba(255,48,69,.16);box-shadow:0 0 18px rgba(255,48,69,.35)}
+.bw-mf{display:grid;gap:12px;margin-top:16px}
+.bw-mf .f{display:grid;gap:6px;font:700 .9rem/1.2 var(--body);color:#e3e5e9}.bw-mf .f small{font-weight:400;color:#9aa0aa}
+.bw-mf input,.bw-mf select,.bw-mf textarea{width:100%;background:#111216;color:#fff;border:1.5px solid #3a3d46;border-radius:10px;padding:11px 12px;font:400 1rem/1.4 var(--body)}
+.bw-mf input:focus,.bw-mf select:focus,.bw-mf textarea:focus{outline:2px solid var(--neo,#ff3045);outline-offset:1px}
+.bw-pick{display:grid;gap:4px;text-align:center;padding:20px 14px;border:2px dashed #4a4d57;border-radius:14px;cursor:pointer;background:rgba(255,255,255,.03)}
+.bw-pick:hover,.bw-pick:focus-visible{border-color:var(--neo,#ff3045);outline:none}.bw-pick b{color:#fff;overflow-wrap:anywhere}.bw-pick small{color:#9aa0aa}
+.bw-mf .ck-go{justify-self:start;padding:12px 22px;background:#36d67a;color:#062b15}.bw-mf .ck-go:disabled{opacity:.6}.bw-fine{color:#8a909a;font-size:.8rem;margin:0}
+.bw-wait{color:#c9ccd3}
+.bw-mine{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.bw-mine li{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.05)}
+.bw-mine li span{display:grid;gap:2px;min-width:0}.bw-mine small{color:#9aa0aa;font-size:.8rem;overflow-wrap:anywhere}.bw-mine .bw-fix{color:#ffcf7a}
+.bw-mine em{flex:none;font:800 .66rem/1 var(--body);font-style:normal;letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:#2d3039;color:#d6d9df}
+.bw-mine em.st-approved{background:#123d26;color:#7ff0ad}.bw-mine em.st-changes{background:#4a3410;color:#ffcf7a}
 </style>
 
 <div id="frGate" role="region" aria-labelledby="gateH"><div class="gate-card">
@@ -8937,20 +9000,22 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     shirt:'<path d="M8 3l-5 3 2 4 3-1v12h8V9l3 1 2-4-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z"/>',star:'<path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/>',undo:'<path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/>',
     heart:'<path d="M12 20s-7-4.5-9-9.5C1.7 6.8 4.3 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c2.9 0 5.5 2.8 4.2 6.5-2 5-9 9.5-9 9.5z"/>',flag:'<path d="M5 21V4M5 4h13l-2 4 2 4H5"/>',
     edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/>',out:'<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>',ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
-    mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7.5l9 6 9-6"/>',menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',live:'<circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4"/>'};
+    mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7.5l9 6 9-6"/>',menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',grid:'<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',live:'<circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4"/>'};
   function ico(k){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICO[k]||"")+'</svg>'}
   var SECT=[["Home",[["overview","Overview","Everything that needs you, at a glance","home"]]],
     ["People",[["members","Members","Approve profiles, set roles, fix hours and see who’s been in","users","mem"],["inq","Inquiries","Questionnaire replies from families, schools and sponsors","inbox","inq"],["regs","Registrations","Race and building workshop registrations (official AASBD form) signed online","flag","regs"],["email","Email","Alerts to your inbox, pre-approved replies and updates to families","mail"],["team","Admins","Email accounts for everyone who runs the site","shield"]]],
     ["Programs",[["events","Program events","Monthly workshops, fun runs and camps","cal"],["racingev","Racing events","Building workshops, race day and sanctioned races","flag"],["leadership","Leadership meetings","Council meetings with email reminders","users"],["notes","Bulletin","Monthly notes on the Program Dashboard","note"],["resources","Resources","Forms, links and program pages","folder"],["printables","Flyers & forms","Upload printable flyers, registration, order and field trip forms","note"],["reviews","Reviews","Photo albums and teacher plans waiting for approval","check","rev"]]],
     ["Website",[["home","Homepage","Slideshow and the numbers on the homepage","layout"],["news","News & Stories","Post and edit stories","news"],["partners","Partners","Sponsor and partner logos","star"],["uploads","Uploads","Every file from Quick upload","folder"],["edits","Site edits","Every text and photo change, with undo","undo"]]],
     ["Fundraising",[["donate","Donations","Connect the Donate page to your Square link","heart"],["sprice","Sponsor prices","Price fields for the sponsor menus, off until you’re ready","star"]]],
+    ["Building Workshop",[["bwsubs","Submissions","Car designs, team names and logos, waivers, registrations, spirit wear and requests","inbox","bw"],["bwteams","Teams","Teams, school logos, car designs and car numbers","star"],["bwpeople","Participants & coaches","Racers, coaches and mentors, with forms on file","users"]]],
     ["Race day",[["race","Race day setup","Racers, brackets, sponsors, ads and the race-day team","flag"]]]];
-  var RLINKS=[["#race-control","Race control","live"],["#track-manager","Track operations","star","so"],["#volunteers","Volunteer lists","users","vol"],["#workshop-signin","Workshop sign-in","check"],["#kiosk","Check-in kiosk","grid"],["#race-watch","Spectator view","ext"]];
+  var RLINKS=[["#race-control","Race control","live"],["#track-manager","Track operations","star","so"],["#volunteers","Volunteer lists","users","vol"],["#race-watch","Spectator view","ext"]];
+  var BLINKS=[["#workshop-signin","Workshop sign-in","check"],["#kiosk","Check-in kiosk","grid"]];
   function sectOf(k){var o=null;SECT.forEach(function(g){g[1].forEach(function(s){if(s[0]===k)o={g:g[0],k:s[0],t:s[1],d:s[2],i:s[3],b:s[4]}})});return o}
   function admCounts(){return Promise.all([db.from("members").select("id",{count:"exact",head:true}).eq("status","pending"),db.from("inquiries").select("id",{count:"exact",head:true}).eq("status","new"),
       db.from("albums").select("id",{count:"exact",head:true}).eq("status","submitted"),db.from("teacher_plans").select("id",{count:"exact",head:true}).eq("status","submitted"),
-      db.from("race_volunteers").select("id",{count:"exact",head:true}).eq("status","new"),db.from("shoutouts").select("id",{count:"exact",head:true}).eq("status","pending"),db.from("race_registrations").select("id",{count:"exact",head:true}).eq("status","new")]).then(function(r){
-      var c=function(i){return (r[i]&&r[i].count)||0};ADMC={mem:c(0),inq:c(1),rev:c(2)+c(3),albums:c(2),plans:c(3),vol:c(4),so:c(5),regs:c(6)};
+      db.from("race_volunteers").select("id",{count:"exact",head:true}).eq("status","new"),db.from("shoutouts").select("id",{count:"exact",head:true}).eq("status","pending"),db.from("race_registrations").select("id",{count:"exact",head:true}).eq("status","new"),db.from("bw_submissions").select("id",{count:"exact",head:true}).eq("status","new")]).then(function(r){
+      var c=function(i){return (r[i]&&r[i].count)||0};ADMC={mem:c(0),inq:c(1),rev:c(2)+c(3),albums:c(2),plans:c(3),vol:c(4),so:c(5),regs:c(6),bw:c(7)};
       $$("[data-badge]").forEach(function(el){var n=ADMC[el.getAttribute("data-badge")]||0;el.textContent=n;el.hidden=!n});return ADMC})}
   function goTab(k,opt){opt=opt||{};if(k==="members:log"){k="members";MSUB="log"}else if(k==="members"&&!opt.keepSub)MSUB="people";
     if(k.indexOf("email:")===0){EMSUB=k.slice(6);k="email"}else if(k==="email")EMSUB="alerts";
@@ -8988,6 +9053,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         '<div class="adm-find" role="search"><label class="adm-q">'+ico("search")+'<input type="search" id="admQ" placeholder="Search admin" aria-label="Search admin: sections, people, events and more" autocomplete="off" aria-controls="admRes" aria-expanded="false"><kbd aria-hidden="true">/</kbd></label><div class="adm-res" id="admRes" role="listbox" hidden></div></div>'+
         '<button class="adm-menu" type="button" id="admMenu" aria-expanded="'+ADMNAV+'">'+ico("menu")+'<span>Menu</span><b>'+esc(cur.t)+'</b></button>'+
         '<nav class="adm-nav">'+SECT.map(function(g){return '<p class="adm-g">'+esc(g[0])+'</p>'+g[1].map(function(s){return '<button type="button" data-tab="'+s[0]+'"'+(TAB===s[0]?' aria-current="page"':'')+'>'+ico(s[3])+'<span>'+esc(s[1])+'</span>'+(s[4]?'<em data-badge="'+s[4]+'" hidden></em>':'')+'</button>'}).join("")}).join("")+
+          '<p class="adm-g">Building Workshop controls</p>'+BLINKS.map(function(l){return '<a href="'+l[0]+'">'+ico(l[2])+'<span>'+esc(l[1])+'</span></a>'}).join("")+
           '<p class="adm-g">Race-day controls</p>'+RLINKS.map(function(l){return '<a href="'+l[0]+'"'+(l[0]==="#race-watch"?' class="ext"':'')+'>'+ico(l[2])+'<span>'+esc(l[1])+'</span>'+(l[3]?'<em data-badge="'+l[3]+'" hidden></em>':'')+'</a>'}).join("")+'</nav>'+
         '</aside>'+
       '<section class="adm-main"><header class="adm-head"><div><p class="adm-crumb">'+esc(cur.g)+'</p><h2>'+(cur.k==="overview"?'Welcome back, '+esc(first)+'.':esc(cur.t))+'</h2><p>'+esc(cur.d)+'</p></div><div class="adm-acts"><button type="button" class="adm-editbtn" id="admEdit">'+ico("edit")+'Edit the site</button><button type="button" id="admOut">'+ico("out")+'Sign out</button></div></header><div class="adm-panel" id="admPanel"><p class="adm-loading">Loading…</p></div></section>';
@@ -8995,11 +9061,12 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     $("#admMenu").onclick=function(){ADMNAV=!ADMNAV;$(".adm-side",box).classList.toggle("open",ADMNAV);this.setAttribute("aria-expanded",String(ADMNAV))};
     $$(".adm-nav button[data-tab]",box).forEach(function(b){b.onclick=function(){goTab(b.getAttribute("data-tab"))}});
     bindAdmSearch();admCounts();
-    ({overview:tabOverview,members:tabMembers,team:tabTeam,events:tabEvents,racingev:tabRacingEv,leadership:tabLeadership,uploads:tabUploads,families:tabEvents,notes:tabNotes,inq:tabInq,regs:tabRegs,news:tabNews,resources:tabResources,home:tabHome,spirit:tabSpirit,partners:tabPartners,reviews:tabReviews,edits:tabEdits,race:tabRace,donate:tabDonate,sprice:tabSprice,printables:tabPrintables,email:tabEmail})[TAB]();
+    ({overview:tabOverview,members:tabMembers,team:tabTeam,events:tabEvents,racingev:tabRacingEv,leadership:tabLeadership,uploads:tabUploads,families:tabEvents,notes:tabNotes,inq:tabInq,regs:tabRegs,news:tabNews,resources:tabResources,home:tabHome,spirit:tabSpirit,partners:tabPartners,reviews:tabReviews,edits:tabEdits,race:tabRace,bwsubs:tabBwSubs,bwteams:tabBwTeams,bwpeople:tabBwPeople,donate:tabDonate,sprice:tabSprice,printables:tabPrintables,email:tabEmail})[TAB]();
   }
   /* Search: sections, common jobs, and the people and things in the database */
   var ADM_JOBS=[["Approve new profiles","members","approve register pending family crew"],["Change someone’s roles","members","role teacher photographer workshop race control track"],["Reset a passcode","members","password passcode locked forgot"],
     ["Fix or add volunteer hours","members","hours check in clock"],["See who signed in","members:log","log visitor sign-in who viewed dates security"],["Make someone an admin","team","admin kevin access"],
+    ["Review car designs and workshop forms","bwsubs","building workshop design waiver registration spirit wear request team name logo submission upload"],["Add a building workshop team","bwteams","building workshop team school logo car number design"],["Add a participant or coach","bwpeople","building workshop participant racer student coach mentor waiver shirt"],
     ["Add a workshop, fun run or camp","events","date calendar workshop camp fun run monthly steam"],["Add a building workshop or race","racingev","date calendar race derby building sanctioned practice"],["Schedule a Leadership Council meeting","leadership","council meeting students reminder"],["Set times and places for an event","events","time location address private"],["Post a monthly note","notes","bulletin announcement"],
     ["Post a news story","news","story article press"],["Add a form or link","resources","pdf form link waiver"],["Upload a flyer or printable form","printables","flyer upload print pdf registration order field trip form file share"],["Post this month’s bulletin file","notes","bulletin pdf monthly newsletter file"],["Approve photos","reviews","album photographer pictures"],["Approve a teacher plan","reviews","lesson teacher materials"],
     ["Change the homepage slideshow","home","slides photos numbers stats"],["Add a sponsor logo","partners","sponsor logo partner"],["Undo a site change","edits","undo history revert"],
@@ -11615,8 +11682,9 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
     ["#contact","Contact Flint Racing","Questions about a form, a date or your account",null,'<path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/>']];
   var TB_COUNT=null;
   function tbOpen(){var d=$("#tbDlg");if(!d){d=document.createElement("dialog");d.id="tbDlg";d.className="tb-dlg";d.setAttribute("aria-labelledby","tbH");document.body.appendChild(d);
-      d.addEventListener("click",function(e){if(e.target===d||e.target.closest("[data-tbx]")||e.target.closest(".tb-it"))d.close()})}
+      d.addEventListener("click",function(e){if(e.target.closest("[data-bw]")){e.preventDefault();d.close();bwOpen();return}if(e.target===d||e.target.closest("[data-tbx]")||e.target.closest(".tb-it"))d.close()})}
     var draw=function(){d.innerHTML='<div class="tb-top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 9V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3"/><path d="M3 13h18M10 13v2h4v-2"/></svg><div><p class="tb-k">Your toolbox</p><h2 id="tbH">What do you need?</h2></div><button class="tb-x" type="button" data-tbx aria-label="Close">×</button></div>'+
+      '<button class="tb-it tb-bw" type="button" data-bw><span class="tb-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15h18l-2-5H5z"/><circle cx="7" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/><path d="M9 10V7h5l2 3"/></svg></span><b>Building Workshop</b><small>Send your car design, team name & logo, waiver, registration, spirit wear or a request</small></button>'+
       '<div class="tb-grid">'+TB_ITEMS.map(function(x,i){var c=TB_COUNT&&x[3]!=null?TB_COUNT[x[3]]||0:TB_COUNT&&i===0?TB_COUNT.__all:null;
         return '<a class="tb-it'+(i===3?' tb-ct':'')+'" href="'+x[0]+'"><span class="tb-ic"><svg viewBox="0 0 24 24" aria-hidden="true">'+x[4]+'</svg></span><b>'+esc(x[1])+'</b><small>'+esc(x[2])+'</small>'+(c!=null?'<em>'+c+' file'+(c===1?'':'s')+'</em>':'')+'</a>'}).join("")+'</div>'+
       '<p class="tb-mail">Or email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a></p>'};
@@ -11652,7 +11720,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
     return '<section class="ck" aria-label="Your dashboard">'+
       '<div class="ck-shift" aria-hidden="true">'+leds+'</div>'+
       '<div class="ck-drv"><button class="ck-av" type="button" id="meProf" aria-haspopup="dialog" aria-label="Your profile: account, sign-in code and email settings">'+esc((m.display_name||"?").charAt(0).toUpperCase())+'<span class="ck-gear" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c.9-3.8 3.9-6 7.5-6s6.6 2.2 7.5 6"/></svg></span></button><div><p class="ck-k">'+(fam?"Family Pass":"Crew Pass")+' · Since '+esc(m.first_year)+'</p><h1>'+esc(m.display_name)+'</h1><p class="ck-u">@'+esc(m.username)+'</p>'+(m.family_code?'<p class="ck-code"><span>Code</span><b id="ckCode" data-c="'+esc(m.family_code)+'">••••</b><button type="button" id="ckCodeBtn" aria-pressed="false" aria-label="Show my 4-digit code">Show</button></p>':'')+'</div>'+
-        '<div class="ck-modes"><span class="ck-st'+(P.open?' on':'')+'"><i></i>'+(P.open?"Checked in":"Not checked in")+'</span><span class="ck-st sp">'+roles.length+' space'+(roles.length===1?"":"s")+' unlocked</span><button class="ck-out" type="button" id="meOut">Sign out</button></div><button class="ck-tb" type="button" id="meTools" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 9V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3"/><path d="M3 13h18M10 13v2h4v-2"/></svg><span><b>Toolbox</b><small>Forms, waivers, contact</small></span></button></div>'+
+        '<div class="ck-modes"><span class="ck-st'+(P.open?' on':'')+'"><i></i>'+(P.open?"Checked in":"Not checked in")+'</span><span class="ck-st sp">'+roles.length+' space'+(roles.length===1?"":"s")+' unlocked</span><button class="ck-out" type="button" id="meOut">Sign out</button></div><button class="ck-tb" type="button" id="meTools" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 9V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3"/><path d="M3 13h18M10 13v2h4v-2"/></svg><span><b>Toolbox</b><small>Forms, workshop uploads, contact</small></span></button></div>'+
       '<div class="ck-mid">'+ckTach(hrs,fam?"Hours at the shop":"Volunteer hours","h")+
         (P.open?'<div class="ck-in on"><span><b>Checked in · '+esc(MKIND[P.open.kind]||"Here")+'</b><small>Since '+fmtTime(P.open.started_at)+'</small></span><button class="ck-go out" type="button" id="meClock">Check out</button></div>':
           '<div class="ck-in wait" id="ckIn"><span class="ck-msg"><b>Check-in</b><small>Checking the schedule…</small></span></div>')+'</div>'+
@@ -11938,14 +12006,14 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
     function draw(){if(!QU.files.length){step.innerHTML="";drop.hidden=false;return}drop.hidden=true;var k=kinds(),onlyPhotos=k.photo&&!k.video&&!k.doc,up=evs.filter(function(e){return (e.end_date||e.start_date)>=todayISO()});
       step.innerHTML='<div class="qu-files">'+QU.files.map(function(f){return '<span>'+libIco(libKind(f.type,f.name))+esc(f.name)+' <small>'+fmtSize(f.size)+'</small></span>'}).join("")+'<button class="mini" type="button" id="quClear">Change</button></div>'+
         (QU.files.length===1?'<label class="f">Name<input type="text" id="quName" maxlength="160" value="'+esc(QU.files[0].name.replace(/\.[^.]+$/,"").replace(/[-_]+/g," "))+'"></label>':'')+
-        '<p class="me-k" style="margin:10px 0 6px">What is it for?</p><div class="qu-areas" role="radiogroup" aria-label="What is it for?">'+[["website","Website","A page on the site"],["program","A program event","Attach to an event"],["admin","Administration","Forms, waivers, documents, email"]].map(function(a){return '<button type="button" role="radio" aria-checked="'+(QU.area===a[0])+'" data-qa="'+a[0]+'"><b>'+a[1]+'</b><span>'+a[2]+'</span></button>'}).join("")+'</div>'+
+        '<p class="me-k" style="margin:10px 0 6px">What is it for?</p><div class="qu-areas q4" role="radiogroup" aria-label="What is it for?">'+[["website","Website","A page on the site"],["program","A program event","Attach to an event"],["admin","Administration","Forms, waivers, documents, email"],["workshop","Building Workshop","Designs, team logos, waivers, registrations, spirit wear"]].map(function(a){return '<button type="button" role="radio" aria-checked="'+(QU.area===a[0])+'" data-qa="'+a[0]+'"><b>'+a[1]+'</b><span>'+a[2]+'</span></button>'}).join("")+'</div>'+
         (QU.area==="website"?'<label class="f">Where on the website?<select id="quDest">'+LIB_WEB.map(function(w){var ok=w[2]==="any"||(w[2]==="photo"?onlyPhotos:!k.video);return '<option value="'+w[0]+'"'+(ok?'':' disabled')+'>'+w[1]+(ok?'':w[2]==="photo"?' (photos only)':' (not for videos)')+'</option>'}).join("")+'</select></label>'+
             '<label class="f" id="quSubW" hidden><span id="quSubL"></span><select id="quSub"></select></label>':'')+
         (QU.area==="program"?(up.length?'<label class="f">Which event?<select id="quEv">'+up.map(function(e){var g=evGuess(e);return '<option value="'+e.id+'">'+fmtDate(e.start_date,{month:"short",day:"numeric"})+' · '+esc(e.title)+(g[0]==="racing"?" (racing)":"")+'</option>'}).join("")+'</select></label><label class="rk-radio"><input type="checkbox" id="quFam" checked> Show it to signed-in families and crew on their Program Dashboard</label>':'<p class="rk-fine">No upcoming events. Add one in Program events or Racing events first.</p>'):'')+
         (QU.area==="admin"?'<label class="f">Save it under<select id="quFold">'+LIB_ADMIN.map(function(a){return '<option value="'+a[0]+'">'+a[1]+'</option>'}).join("")+'</select></label><p class="rk-fine">Only admins see this list. Files here can be attached to emails and events later.</p>':'')+
         (QU.area?'<div class="row"><button class="btn deep" type="button" id="quGo">Upload '+(QU.files.length>1?QU.files.length+" files":"")+'</button></div>':'');
       $("#quClear",step).onclick=function(){QU.files=[];QU.area=null;draw();drop.focus()};
-      $$("[data-qa]",step).forEach(function(b){b.onclick=function(){QU.area=b.getAttribute("data-qa");draw();var f=$("select",step);if(f)f.focus()}});
+      $$("[data-qa]",step).forEach(function(b){b.onclick=function(){if(b.getAttribute("data-qa")==="workshop"){var fs=QU.files;QU.files=[];QU.area=null;draw();var c=$("#bwQuOv");if(QU.bw&&c){QU.bw.take(fs);c.scrollIntoView({block:"center",behavior:"smooth"});var k=$("[data-bwk]",c);if(k)k.focus()}else toast("Open Building Workshop → Submissions to upload workshop forms.");return}QU.area=b.getAttribute("data-qa");draw();var f=$("select",step);if(f)f.focus()}});
       var dsel=$("#quDest",step);if(dsel){var first=$("option:not([disabled])",dsel);if(first)dsel.value=first.value;
         var sub=function(){var v=dsel.value,w=$("#quSubW",step),s=$("#quSub",step);w.hidden=!(v==="printables"||v==="resources");
           if(v==="printables"){$("#quSubL",step).textContent="Category";s.innerHTML=PRT_CATS.map(function(c){return '<option>'+esc(c)+'</option>'}).join("")}
@@ -11979,6 +12047,225 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
         var u=all.filter(function(x){return x.id===b.closest("li").getAttribute("data-id")})[0];
         (u.path?db.storage.from("library").remove([u.path]):Promise.resolve()).then(function(){return db.from("uploads").delete().eq("id",u.id)}).then(function(x){if(okToast(x,"Deleted"))tabUploads()})}});
     })}
+  /* ---------- Building Workshop: teams, participants & coaches, submissions (designs, team names & logos, waivers, registrations, spirit wear, requests) ---------- */
+  var BW_KINDS=[["design","Car design","Drawings, sketches or a photo of the car plan"],["team","Team name & logo","Team name, school or team logo"],["waiver","Waiver","A signed waiver"],["registration","Registration","A registration form"],["spiritwear","Spirit wear","Shirt sizes or an order form"],["request","Request","Anything you need from us"]];
+  var BW_ST={"new":"New","approved":"Approved","changes":"Needs changes","filed":"Filed"};
+  var BW_ROLES=[["participant","Participant"],["coach","Coach"],["mentor","Mentor / volunteer"]];
+  var BW_SIZES=["","YS","YM","YL","AS","AM","AL","AXL","A2XL","A3XL"];
+  var BWF={st:"new",kind:"all",team:"all"},BWP={role:"all",team:"all",miss:""},BW_SEASON=null;
+  function bwSeason(){var d=new Date();return d.getMonth()>=6?d.getFullYear()+1:d.getFullYear()}
+  function bwKind(k){var x=BW_KINDS.filter(function(a){return a[0]===k})[0];return x?x[1]:k}
+  function bwChip(k){return '<span class="bw-chip k-'+esc(k)+'">'+esc(bwKind(k))+'</span>'}
+  function bwSafeName(n){return String(n||"file").toLowerCase().replace(/[^a-z0-9.]+/g,"-").slice(-80)}
+  /* upload one file to the private workshop bucket; images are shrunk first */
+  function bwPutFile(file,folder){var isImg=/^image\/(jpeg|png|webp)$/.test(file.type)||/\.(heic|heif)$/i.test(file.name);
+    return (isImg?prepImage(file,8*1024*1024):Promise.resolve(file)).then(function(f){
+      if(f.size>25*1024*1024){var e=new Error("big");e.userMsg=f.name+" is over 25 MB. Take a smaller photo or scan, then try again.";throw e}
+      var path=folder+"/"+new Date().toISOString().slice(0,10)+"/"+Date.now()+"-"+bwSafeName(f.name);
+      return db.storage.from("workshop-files").upload(path,f,{contentType:f.type||undefined,upsert:false}).then(function(u){
+        if(u.error){var e2=new Error(u.error.message);e2.userMsg=/mime|type/i.test(u.error.message)?"That kind of file can’t be sent. Use a photo, PDF, Word, Excel or PowerPoint file.":"Couldn’t upload "+f.name+": "+u.error.message;throw e2}
+        return {path:path,name:f.name,mime:f.type||null,size:f.size}})})}
+  function bwOpenFile(path){var w=window.open("about:blank","_blank");db.storage.from("workshop-files").createSignedUrl(path,3600).then(function(r){
+    if(r.error||!r.data){if(w)w.close();toast("Couldn’t open that file: "+(r.error?r.error.message:"not found"));return}if(w)w.location=r.data.signedUrl;else location.href=r.data.signedUrl})}
+  function bwSigned(paths){paths=paths.filter(Boolean);if(!paths.length)return Promise.resolve({});
+    return db.storage.from("workshop-files").createSignedUrls(paths,3600).then(function(r){var o={};(r.data||[]).forEach(function(x){if(x.signedUrl)o[x.path]=x.signedUrl});return o},function(){return {}})}
+  function bwLoad(season){return Promise.all([db.from("bw_teams").select("*").eq("season",season).order("name"),db.from("bw_people").select("*").eq("season",season).order("name"),db.from("bw_submissions").select("*").eq("season",season).order("created_at",{ascending:false})]).then(function(r){
+    var err=r.filter(function(x){return x.error})[0];if(err)throw err.error;return {teams:r[0].data||[],people:r[1].data||[],subs:r[2].data||[]}})}
+  function bwSeasonSel(cur){var y=bwSeason(),o=[y+1,y,y-1,y-2];return '<label class="bw-season">Season <select id="bwSeason">'+o.map(function(s){return '<option value="'+s+'"'+(s===cur?' selected':'')+'>'+s+'</option>'}).join("")+'</select></label>'}
+  function bwBindSeason(P,again){var s=$("#bwSeason",P);if(s)s.onchange=function(){BW_SEASON=+s.value;again()}}
+  function bwTeamOpts(teams,sel,blank){return (blank!=null?'<option value="">'+esc(blank)+'</option>':'')+teams.map(function(t){return '<option value="'+t.id+'"'+(t.id===sel?' selected':'')+'>'+esc(t.name)+(t.school?' · '+esc(t.school):'')+(t.status==="withdrawn"?' (withdrawn)':'')+'</option>'}).join("")}
+  function bwHeader(P,sub){return '<div class="bw-top"><div class="mb-sub" role="tablist">'+[["bwsubs","Submissions"],["bwteams","Teams"],["bwpeople","Participants & coaches"]].map(function(t){return '<button type="button" role="tab" data-bwt="'+t[0]+'" aria-selected="'+(sub===t[0])+'">'+t[1]+'</button>'}).join("")+'</div>'+bwSeasonSel(BW_SEASON)+'</div>'}
+  function bwBindHeader(P,again){$$("[data-bwt]",P).forEach(function(b){b.onclick=function(){goTab(b.getAttribute("data-bwt"))}});bwBindSeason(P,again)}
+
+  /* approving a submission files it where it belongs: design on the team, team name & logo, waiver/registration ticks */
+  function bwApply(s,teams){var up=function(id,o){o.updated_at=new Date().toISOString();return db.from("bw_teams").update(o).eq("id",id)};
+    var findOrMake=function(){if(s.team_id)return Promise.resolve(s.team_id);var nm=(s.team_name||"").trim();if(!nm)return Promise.resolve(null);
+      var ex=teams.filter(function(t){return t.name.toLowerCase()===nm.toLowerCase()})[0];if(ex)return db.from("bw_submissions").update({team_id:ex.id}).eq("id",s.id).then(function(){return ex.id});
+      return db.from("bw_teams").insert({season:s.season,name:nm.slice(0,80),member_id:s.member_id||null}).select("id").single().then(function(r){if(r.error)throw r.error;return db.from("bw_submissions").update({team_id:r.data.id}).eq("id",s.id).then(function(){return r.data.id})})};
+    if(s.kind==="design")return findOrMake().then(function(id){return id?up(id,{design_id:s.id}):null});
+    if(s.kind==="team")return findOrMake().then(function(id){if(!id)return null;var o={};if(s.team_id&&s.team_name)o.name=s.team_name.slice(0,80);if(s.file_path&&/^image\//.test(s.mime||"")){o.logo_path=s.file_path;o.logo_name=s.file_name}return Object.keys(o).length?up(id,o):null});
+    if((s.kind==="waiver"||s.kind==="registration")&&s.person_id){var o2={};o2[s.kind]=true;return db.from("bw_people").update(o2).eq("id",s.person_id)}
+    return Promise.resolve()}
+  function bwReview(s,status,note,teams){var o={status:status,reviewed_at:new Date().toISOString(),reviewed_by:USER.id};if(note!=null)o.admin_note=note;
+    return db.from("bw_submissions").update(o).eq("id",s.id).then(function(x){if(x.error)throw x.error;return status==="approved"?bwApply(s,teams):null})}
+
+  /* Quick upload for forms handed in at a workshop (also on the Overview) */
+  var BWQ={files:[],kind:null};
+  function bwQuHTML(id){return '<section class="ov-card qu bw-qu" id="'+id+'"><div class="ov-hd"><b>Building Workshop quick upload</b><span>Forms handed in at a workshop</span></div>'+
+    '<div class="qu-drop" data-bwdrop tabindex="0" role="button" aria-label="Choose files to upload"><b>Drop a scan or photo here, or click to choose</b><span>Designs, waivers, registrations, spirit wear forms, logos · photos, PDF, Word, Excel · up to 25 MB</span></div><div data-bwstep></div></section>'}
+  function bwQuBind(box,D,done){var drop=$("[data-bwdrop]",box),step=$("[data-bwstep]",box);if(!drop)return;
+    function pick(){var i=document.createElement("input");i.type="file";i.multiple=true;i.accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt";i.onchange=function(){take(Array.prototype.slice.call(i.files))};i.click()}
+    function take(fs){if(!fs.length)return;BWQ.files=fs;draw()}
+    drop.onclick=pick;drop.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pick()}};
+    drop.ondragover=function(e){e.preventDefault();drop.classList.add("over")};drop.ondragleave=function(){drop.classList.remove("over")};drop.ondrop=function(e){e.preventDefault();drop.classList.remove("over");take(Array.prototype.slice.call(e.dataTransfer.files))};
+    function draw(){if(!BWQ.files.length){step.innerHTML="";drop.hidden=false;return}drop.hidden=true;var k=BWQ.kind,act=D.teams.filter(function(t){return t.status!=="withdrawn"});
+      step.innerHTML='<div class="qu-files">'+BWQ.files.map(function(f){return '<span>'+libIco(libKind(f.type,f.name))+esc(f.name)+' <small>'+fmtSize(f.size)+'</small></span>'}).join("")+'<button class="mini" type="button" data-bwclr>Change</button></div>'+
+        '<p class="me-k" style="margin:10px 0 6px">What kind of form is it?</p><div class="qu-areas" role="radiogroup" aria-label="What kind of form is it?">'+BW_KINDS.map(function(a){return '<button type="button" role="radio" aria-checked="'+(k===a[0])+'" data-bwk="'+a[0]+'"><b>'+a[1]+'</b><span>'+a[2]+'</span></button>'}).join("")+'</div>'+
+        (k?'<div class="bw-g2"><label class="f">Team<select data-bwteam>'+bwTeamOpts(act,null,act.length?"No team yet":"No teams yet")+'<option value="__new">+ New team…</option></select></label>'+
+          '<label class="f" data-bwnw hidden>New team name<input type="text" data-bwtn maxlength="80"></label>'+
+          '<label class="f">Who handed it in?<input type="text" data-bwwho maxlength="120" list="bwPeopleList" placeholder="Student, parent or coach"><datalist id="bwPeopleList">'+D.people.map(function(p){return '<option value="'+esc(p.name)+'">'}).join("")+'</datalist></label></div>'+
+          ((k==="waiver"||k==="registration")?'<label class="f">Whose '+(k==="waiver"?"waiver":"registration")+' is it? <small>Picking a name ticks it off when you approve.</small><select data-bwperson><option value="">Not on the list yet</option>'+D.people.map(function(p){return '<option value="'+p.id+'">'+esc(p.name)+' ('+(p.role==="participant"?"participant":p.role)+')</option>'}).join("")+'</select></label>':'')+
+          '<label class="f">Note <small>Optional</small><input type="text" data-bwnote maxlength="300"></label>'+
+          '<label class="rk-radio"><input type="checkbox" data-bwok checked> Mark as approved now (I checked it in person)</label>'+
+          '<div class="row"><button class="btn deep" type="button" data-bwgo>Upload '+(BWQ.files.length>1?BWQ.files.length+" files":"")+'</button></div>':'');
+      $("[data-bwclr]",step).onclick=function(){BWQ.files=[];BWQ.kind=null;draw();drop.focus()};
+      $$("[data-bwk]",step).forEach(function(b){b.onclick=function(){BWQ.kind=b.getAttribute("data-bwk");draw();var s=$("[data-bwteam]",step);if(s)s.focus()}});
+      var ts=$("[data-bwteam]",step);if(ts)ts.onchange=function(){$("[data-bwnw]",step).hidden=ts.value!=="__new";if(ts.value==="__new")$("[data-bwtn]",step).focus()};
+      var go=$("[data-bwgo]",step);if(go)go.onclick=function(){var kind=BWQ.kind,tid=ts.value,tn=$("[data-bwtn]",step).value.trim(),who=$("[data-bwwho]",step).value.trim(),note=$("[data-bwnote]",step).value.trim(),ps=$("[data-bwperson]",step),ok=$("[data-bwok]",step).checked;
+        if(tid==="__new"&&!tn){toast("Type the new team’s name.");$("[data-bwtn]",step).focus();return}
+        go.disabled=true;go.textContent="Uploading…";var n=0,errs=[],season=BW_SEASON||bwSeason();
+        (tid==="__new"?db.from("bw_teams").insert({season:season,name:tn}).select("*").single().then(function(r){if(r.error)throw r.error;D.teams.push(r.data);return r.data.id}):Promise.resolve(tid||null)).then(function(teamId){
+          return BWQ.files.reduce(function(pr,f){return pr.then(function(){return bwPutFile(f,"desk").then(function(up){
+            var row={season:season,kind:kind,via:"in_person",team_id:teamId,person_id:ps&&ps.value||null,submitted_by:who||null,team_name:tid==="__new"?tn:null,note:note||null,file_path:up.path,file_name:up.name.slice(0,200),mime:up.mime,size:up.size};
+            return db.from("bw_submissions").insert(row).select("*").single().then(function(x){if(x.error)throw x.error;n++;return ok?bwReview(x.data,"approved",null,D.teams):null})}).catch(function(e){errs.push((e&&e.userMsg)||e.message)})})},Promise.resolve())}).catch(function(e){errs.push(e.message)}).then(function(){
+            toast(errs.length?errs[0]:n+" file"+(n===1?"":"s")+" saved · "+bwKind(kind)+(ok?" · approved":""));BWQ.files=[];BWQ.kind=null;draw();if(done)done()})}}
+    draw();return {take:take}}
+
+  /* Admin → Building Workshop → Submissions */
+  function tabBwSubs(){var P=$("#admPanel");BW_SEASON=BW_SEASON||bwSeason();
+    bwLoad(BW_SEASON).then(function(D){if(TAB!=="bwsubs")return;
+      var T={};D.teams.forEach(function(t){T[t.id]=t});var PE={};D.people.forEach(function(p){PE[p.id]=p});
+      var cnt=function(st){return D.subs.filter(function(s){return st==="all"||s.status===st}).length};
+      var list=D.subs.filter(function(s){return (BWF.st==="all"||s.status===BWF.st)&&(BWF.kind==="all"||s.kind===BWF.kind)&&(BWF.team==="all"||(BWF.team==="none"?!s.team_id:s.team_id===BWF.team))});
+      P.innerHTML=bwHeader(P,"bwsubs")+
+        '<p class="bw-lead">Families and crew send these from <b>My dashboard → Toolbox → Building Workshop</b>. Forms handed in on paper go in with the quick upload below. Files are private: only admins can open them.</p>'+
+        bwQuHTML("bwQu")+
+        '<div class="mb-find bw-filt"><select id="bwFs" aria-label="Status">'+[["new","New ("+cnt("new")+")"],["changes","Needs changes ("+cnt("changes")+")"],["approved","Approved ("+cnt("approved")+")"],["filed","Filed ("+cnt("filed")+")"],["all","All ("+cnt("all")+")"]].map(function(o){return '<option value="'+o[0]+'"'+(BWF.st===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join("")+'</select>'+
+          '<select id="bwFk" aria-label="Kind"><option value="all">Every kind</option>'+BW_KINDS.map(function(k){return '<option value="'+k[0]+'"'+(BWF.kind===k[0]?' selected':'')+'>'+k[1]+'</option>'}).join("")+'</select>'+
+          '<select id="bwFt" aria-label="Team"><option value="all">Every team</option><option value="none"'+(BWF.team==="none"?' selected':'')+'>No team yet</option>'+bwTeamOpts(D.teams,BWF.team)+'</select>'+
+          '<button class="mini" type="button" id="bwCsv">Download (.csv)</button></div>'+
+        (list.length?'<ul class="bw-subs">'+list.map(function(s){var t=s.team_id&&T[s.team_id],p=s.person_id&&PE[s.person_id];
+          return '<li data-id="'+s.id+'" class="st-'+s.status+'"><div class="bw-sh">'+bwChip(s.kind)+'<span class="bw-st">'+esc(BW_ST[s.status]||s.status)+'</span><small>'+(s.via==="in_person"?"In person":"Portal")+' · '+new Date(s.created_at).toLocaleDateString([],{month:"short",day:"numeric"})+' '+fmtTime(s.created_at)+'</small></div>'+
+            '<div class="bw-sb"><b>'+esc(s.submitted_by||"Someone")+'</b>'+(p?' <span class="bw-for">for '+esc(p.name)+'</span>':'')+
+              (s.team_name&&(!t||t.name!==s.team_name)?'<p class="bw-tn">'+(t?'Asks to rename the team to ':'Team name: ')+'<b>“'+esc(s.team_name)+'”</b></p>':'')+
+              (s.note?'<p class="bw-note">'+esc(s.note)+'</p>':'')+(s.admin_note?'<p class="bw-an">Your note: '+esc(s.admin_note)+'</p>':'')+
+              (s.file_path?'<button class="bw-file" type="button" data-open="'+esc(s.file_path)+'">'+libIco(libKind(s.mime,s.file_name))+'<span>'+esc(s.file_name||"File")+(s.size?' <small>'+fmtSize(s.size)+'</small>':'')+'</span></button>':'')+'</div>'+
+            '<div class="bw-sa"><label>Team<select data-team><option value="">No team yet</option>'+bwTeamOpts(D.teams,s.team_id)+'</select></label>'+
+              '<div class="row">'+(s.status!=="approved"?'<button class="mini solid" type="button" data-rv="approved">Approve</button>':'')+(s.status!=="changes"?'<button class="mini" type="button" data-rv="changes">Needs changes</button>':'')+(s.status!=="filed"?'<button class="mini" type="button" data-rv="filed">File</button>':'')+'<button class="mini red" type="button" data-del>Delete</button></div></div></li>'}).join("")+'</ul>':
+          '<p class="rk-fine bw-empty">'+(D.subs.length?"Nothing matches these filters.":"Nothing sent yet for the "+BW_SEASON+" season.")+'</p>');
+      bwBindHeader(P,tabBwSubs);
+      bwQuBind($("#bwQu",P),D,function(){setTimeout(tabBwSubs,300)});
+      $("#bwFs",P).onchange=function(){BWF.st=this.value;tabBwSubs()};$("#bwFk",P).onchange=function(){BWF.kind=this.value;tabBwSubs()};$("#bwFt",P).onchange=function(){BWF.team=this.value;tabBwSubs()};
+      $("#bwCsv",P).onclick=function(){csv([["Received","Kind","Status","How","From","For","Team","Team name asked","Note","File","Admin note"]].concat(D.subs.map(function(s){return [s.created_at,bwKind(s.kind),BW_ST[s.status],s.via==="in_person"?"In person":"Portal",s.submitted_by,s.person_id&&PE[s.person_id]?PE[s.person_id].name:"",s.team_id&&T[s.team_id]?T[s.team_id].name:"",s.team_name,s.note,s.file_name,s.admin_note]})),"building-workshop-submissions-"+BW_SEASON+".csv")};
+      $$("[data-open]",P).forEach(function(b){b.onclick=function(){bwOpenFile(b.getAttribute("data-open"))}});
+      $$(".bw-subs>li",P).forEach(function(li){var s=D.subs.filter(function(x){return x.id===li.getAttribute("data-id")})[0];
+        $("[data-team]",li).onchange=function(){var v=this.value||null;db.from("bw_submissions").update({team_id:v}).eq("id",s.id).then(function(x){if(okToast(x,"Team updated"))s.team_id=v})};
+        $$("[data-rv]",li).forEach(function(b){b.onclick=function(){var st=b.getAttribute("data-rv"),note=null;
+          if(st==="changes"){note=prompt("What needs to change? They’ll see this note on My dashboard.",s.admin_note||"");if(note===null)return}
+          b.disabled=true;bwReview(s,st,note,D.teams).then(function(){toast(st==="approved"?(s.kind==="design"?"Approved · design saved on the team":s.kind==="team"?"Approved · team updated":"Approved"):st==="changes"?"Marked: needs changes":"Filed");admCounts();tabBwSubs()},function(e){b.disabled=false;toast("Couldn’t save: "+(e.message||e))})}});
+        $("[data-del]",li).onclick=function(){var b=this;if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
+          (s.file_path?db.storage.from("workshop-files").remove([s.file_path]):Promise.resolve()).then(function(){return db.from("bw_submissions").delete().eq("id",s.id)}).then(function(x){if(okToast(x,"Deleted")){admCounts();tabBwSubs()}})}});
+    }).catch(function(e){P.textContent="Couldn’t load Building Workshop: "+(e.message||e)})}
+
+  /* Admin → Building Workshop → Teams */
+  var BW_EDIT=null;
+  function bwTeamForm(t){t=t||{};return '<form class="bw-tf" data-tf="'+(t.id||"new")+'"><div class="bw-g2"><label class="f">Team name<input name="name" required maxlength="80" value="'+esc(t.name||"")+'"></label><label class="f">School or group<input name="school" maxlength="120" value="'+esc(t.school||"")+'"></label>'+
+      '<label class="f">Car #<input name="car_number" maxlength="12" value="'+esc(t.car_number||"")+'"></label><label class="f">Division<select name="division">'+["","Stock","Super Stock","Masters","Legacy","Rally","Other"].map(function(d){return '<option'+((t.division||"")===d?' selected':'')+'>'+d+'</option>'}).join("")+'</select></label>'+
+      '<label class="f">Status<select name="status">'+[["active","Active"],["pending","Waiting on forms"],["withdrawn","Withdrawn"]].map(function(s){return '<option value="'+s[0]+'"'+((t.status||"active")===s[0]?' selected':'')+'>'+s[1]+'</option>'}).join("")+'</select></label>'+
+      '<label class="f">Notes<input name="notes" maxlength="2000" value="'+esc(t.notes||"")+'"></label></div>'+
+      '<div class="row"><button class="mini solid" type="submit">'+(t.id?"Save team":"Add team")+'</button><button class="mini" type="button" data-tfx>Cancel</button></div></form>'}
+  function tabBwTeams(){var P=$("#admPanel");BW_SEASON=BW_SEASON||bwSeason();
+    bwLoad(BW_SEASON).then(function(D){if(TAB!=="bwteams")return;var S={};D.subs.forEach(function(s){S[s.id]=s});
+      var paths=D.teams.map(function(t){return t.logo_path}).concat(D.teams.map(function(t){var s=t.design_id&&S[t.design_id];return s&&/^image\//.test(s.mime||"")?s.file_path:null}));
+      bwSigned(paths).then(function(U){if(TAB!=="bwteams")return;
+        var kids=function(t){return D.people.filter(function(p){return p.team_id===t.id&&p.role==="participant"})},coach=function(t){return D.people.filter(function(p){return p.team_id===t.id&&p.role!=="participant"})};
+        var waiting=function(t){return D.subs.filter(function(s){return s.team_id===t.id&&s.status==="new"}).length};
+        var act=D.teams.filter(function(t){return t.status!=="withdrawn"}),np=D.people.filter(function(p){return p.role==="participant"}),nc=D.people.filter(function(p){return p.role!=="participant"});
+        P.innerHTML=bwHeader(P,"bwteams")+
+          '<div class="bw-stats">'+[[act.length,"Teams"],[np.length,"Participants"],[nc.length,"Coaches & mentors"],[act.filter(function(t){return t.design_id}).length+"/"+act.length,"Designs approved"],[np.filter(function(p){return p.waiver}).length+"/"+np.length,"Waivers in"],[np.filter(function(p){return p.registration}).length+"/"+np.length,"Registrations in"]].map(function(x){return '<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'}).join("")+'</div>'+
+          '<div class="evp-head"><p>Every team this season with its school logo, car design, racers and coaches. Approving a design or a “Team name & logo” in Submissions fills these in for you.</p><span class="row" style="margin:0"><button class="mini" type="button" id="bwTCsv">Download (.csv)</button><button class="btn deep" type="button" id="bwTNew">+ Team</button></span></div>'+
+          (BW_EDIT==="new"?'<div class="ov-card">'+bwTeamForm()+'</div>':'')+
+          (D.teams.length?'<ul class="bw-teams">'+D.teams.map(function(t){var ds=t.design_id&&S[t.design_id],K=kids(t),C=coach(t),w=waiting(t);
+            if(BW_EDIT===t.id)return '<li class="bw-team ed">'+bwTeamForm(t)+'</li>';
+            return '<li class="bw-team'+(t.status==="withdrawn"?' off':'')+'" data-id="'+t.id+'"><div class="bw-logo">'+(t.logo_path&&U[t.logo_path]?'<img src="'+esc(U[t.logo_path])+'" alt="'+esc(t.name)+' logo">':'<span aria-hidden="true">'+esc(t.name.charAt(0).toUpperCase())+'</span>')+'<button class="mini" type="button" data-logo>'+(t.logo_path?"Change logo":"Add logo")+'</button></div>'+
+              '<div class="bw-tb"><h3>'+esc(t.name)+(t.car_number?' <em>#'+esc(t.car_number)+'</em>':'')+'</h3><p class="bw-tm">'+esc([t.school,t.division,t.status==="pending"?"Waiting on forms":t.status==="withdrawn"?"Withdrawn":""].filter(Boolean).join(" · ")||"No school yet")+'</p>'+
+                '<p><b>Racers:</b> '+(K.length?K.map(function(p){return esc(p.name)+(p.waiver?'':' <i class="bw-miss" title="No waiver yet">waiver</i>')+(p.registration?'':' <i class="bw-miss" title="No registration yet">reg</i>')}).join(", "):'<span class="bw-none">none yet</span>')+'</p>'+
+                '<p><b>Coaches:</b> '+(C.length?C.map(function(p){return esc(p.name)+(p.role==="mentor"?" (mentor)":"")}).join(", "):'<span class="bw-none">none yet</span>')+'</p>'+
+                (t.notes?'<p class="bw-note">'+esc(t.notes)+'</p>':'')+
+                '<div class="row">'+(w?'<button class="mini solid" type="button" data-subs>'+w+' new to review</button>':'')+'<button class="mini" type="button" data-edit>Edit</button><button class="mini red" type="button" data-del>Delete</button></div></div>'+
+              '<div class="bw-design">'+(ds?(ds.file_path&&U[ds.file_path]?'<button type="button" data-open="'+esc(ds.file_path)+'" class="bw-dimg"><img src="'+esc(U[ds.file_path])+'" alt="Car design for '+esc(t.name)+'"></button>':'<button type="button" class="bw-file" data-open="'+esc(ds.file_path||"")+'">'+libIco("doc")+'<span>'+esc(ds.file_name||"Design")+'</span></button>')+'<small>Approved design</small>':'<span class="bw-nod">No approved design yet</span>')+'</div></li>'}).join("")+'</ul>':'<p class="rk-fine bw-empty">No teams yet for '+BW_SEASON+'. Add one, or approve a “Team name & logo” submission.</p>');
+        bwBindHeader(P,tabBwTeams);
+        $("#bwTNew",P).onclick=function(){BW_EDIT="new";tabBwTeams()};
+        $("#bwTCsv",P).onclick=function(){csv([["Team","School","Car #","Division","Status","Racers","Coaches","Design approved","Logo","Notes"]].concat(D.teams.map(function(t){return [t.name,t.school,t.car_number,t.division,t.status,kids(t).map(function(p){return p.name}).join("; "),coach(t).map(function(p){return p.name}).join("; "),t.design_id?"yes":"no",t.logo_path?"yes":"no",t.notes]})),"building-workshop-teams-"+BW_SEASON+".csv")};
+        $$("[data-open]",P).forEach(function(b){b.onclick=function(){var p=b.getAttribute("data-open");if(p)bwOpenFile(p)}});
+        $$("form[data-tf]",P).forEach(function(f){f.onsubmit=function(e){e.preventDefault();var id=f.getAttribute("data-tf"),o={};["name","school","car_number","division","status","notes"].forEach(function(k){var v=f.elements[k].value.trim();o[k]=v||null});
+            if(!o.name){toast("Give the team a name.");return}o.status=o.status||"active";o.updated_at=new Date().toISOString();
+            (id==="new"?db.from("bw_teams").insert(Object.assign({season:BW_SEASON},o)):db.from("bw_teams").update(o).eq("id",id)).then(function(x){if(okToast(x,id==="new"?"Team added":"Saved")){BW_EDIT=null;tabBwTeams()}})};
+          $("[data-tfx]",f).onclick=function(){BW_EDIT=null;tabBwTeams()}});
+        $$(".bw-team[data-id]",P).forEach(function(li){var t=D.teams.filter(function(x){return x.id===li.getAttribute("data-id")})[0];
+          $("[data-edit]",li).onclick=function(){BW_EDIT=t.id;tabBwTeams()};
+          var sb=$("[data-subs]",li);if(sb)sb.onclick=function(){BWF={st:"new",kind:"all",team:t.id};goTab("bwsubs")};
+          $("[data-logo]",li).onclick=function(){var i=document.createElement("input");i.type="file";i.accept="image/*";i.onchange=function(){var f=i.files[0];if(!f)return;toast("Uploading the logo…");
+            bwPutFile(f,"logos").then(function(up){return db.from("bw_teams").update({logo_path:up.path,logo_name:up.name,updated_at:new Date().toISOString()}).eq("id",t.id).then(function(x){if(x.error)throw x.error;var old=t.logo_path;if(old&&old.indexOf("logos/")===0)db.storage.from("workshop-files").remove([old]);toast("Logo saved");tabBwTeams()})}).catch(function(e){toast((e&&e.userMsg)||"Couldn’t save the logo: "+e.message)})};i.click()};
+          $("[data-del]",li).onclick=function(){var b=this;if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";toast("Racers and submissions stay; they just lose this team.");return}
+            db.from("bw_teams").delete().eq("id",t.id).then(function(x){if(okToast(x,"Team deleted"))tabBwTeams()})}});
+      })}).catch(function(e){P.textContent="Couldn’t load teams: "+(e.message||e)})}
+
+  /* Admin → Building Workshop → Participants & coaches */
+  function tabBwPeople(){var P=$("#admPanel");BW_SEASON=BW_SEASON||bwSeason();
+    Promise.all([bwLoad(BW_SEASON),db.from("members").select("id,display_name,kids,kind,status").eq("status","approved")]).then(function(r){if(TAB!=="bwpeople")return;var D=r[0],M=(r[1].data||[]),T={};D.teams.forEach(function(t){T[t.id]=t});
+      var list=D.people.filter(function(p){return (BWP.role==="all"||(BWP.role==="participant"?p.role==="participant":p.role!=="participant"))&&(BWP.team==="all"||(BWP.team==="none"?!p.team_id:p.team_id===BWP.team))&&(!BWP.miss||!p[BWP.miss])});
+      var have={};D.people.forEach(function(p){have[(p.member_id||"")+"|"+p.name.toLowerCase()]=1});
+      var fromFam=[];M.forEach(function(m){(m.kids||[]).forEach(function(k){var nm=String(k&&k.name||"").trim();if(nm&&!have[m.id+"|"+nm.toLowerCase()])fromFam.push({m:m,name:nm,age:k.age||null})})});
+      var row=function(p){return '<tr data-id="'+p.id+'"><td><input data-k="name" value="'+esc(p.name)+'" maxlength="100" aria-label="Name"></td><td><select data-k="role" aria-label="Role">'+BW_ROLES.map(function(x){return '<option value="'+x[0]+'"'+(p.role===x[0]?' selected':'')+'>'+x[1]+'</option>'}).join("")+'</select></td>'+
+        '<td><select data-k="team_id" aria-label="Team">'+bwTeamOpts(D.teams,p.team_id,"—")+'</select></td><td><input data-k="grade" value="'+esc(p.grade||"")+'" maxlength="20" aria-label="Grade" class="bw-sm"></td><td><input data-k="school" value="'+esc(p.school||"")+'" maxlength="120" aria-label="School"></td>'+
+        '<td><select data-k="shirt_size" aria-label="Shirt size" class="bw-sm">'+BW_SIZES.map(function(s){return '<option'+((p.shirt_size||"")===s?' selected':'')+'>'+s+'</option>'}).join("")+'</select></td>'+
+        '<td class="bw-ck"><input type="checkbox" data-k="waiver"'+(p.waiver?' checked':'')+' aria-label="Waiver in"></td><td class="bw-ck"><input type="checkbox" data-k="registration"'+(p.registration?' checked':'')+' aria-label="Registration in"></td><td class="bw-ck">'+(p.role==="participant"?'<span class="bw-none">—</span>':'<input type="checkbox" data-k="background_check"'+(p.background_check?' checked':'')+' aria-label="Background check done">')+'</td>'+
+        '<td><input data-k="email" value="'+esc(p.email||"")+'" maxlength="254" aria-label="Email"></td><td><input data-k="phone" value="'+esc(p.phone||"")+'" maxlength="40" aria-label="Phone" class="bw-md"></td><td><button class="mini red" type="button" data-del aria-label="Remove '+esc(p.name)+'">×</button></td></tr>'};
+      P.innerHTML=bwHeader(P,"bwpeople")+
+        '<form class="ov-card bw-add" id="bwAdd"><div class="ov-hd"><b>Add a participant or coach</b></div><div class="bw-g4"><label class="f">Name<input name="name" required maxlength="100"></label><label class="f">Role<select name="role">'+BW_ROLES.map(function(x){return '<option value="'+x[0]+'">'+x[1]+'</option>'}).join("")+'</select></label>'+
+          '<label class="f">Team<select name="team_id">'+bwTeamOpts(D.teams,null,"No team yet")+'</select></label><label class="f">Grade<input name="grade" maxlength="20"></label></div><div class="row"><button class="mini solid" type="submit">Add</button>'+
+          (fromFam.length?'<button class="mini" type="button" id="bwFam">Add '+fromFam.length+' racer'+(fromFam.length===1?'':'s')+' from family profiles</button>':'')+'</div></form>'+
+        '<div class="mb-find bw-filt"><select id="bwPr" aria-label="Role"><option value="all">Everyone ('+D.people.length+')</option><option value="participant"'+(BWP.role==="participant"?' selected':'')+'>Participants</option><option value="coach"'+(BWP.role==="coach"?' selected':'')+'>Coaches & mentors</option></select>'+
+          '<select id="bwPt" aria-label="Team"><option value="all">Every team</option><option value="none"'+(BWP.team==="none"?' selected':'')+'>No team yet</option>'+bwTeamOpts(D.teams,BWP.team)+'</select>'+
+          '<select id="bwPm" aria-label="Missing"><option value="">Any forms</option><option value="waiver"'+(BWP.miss==="waiver"?' selected':'')+'>Missing a waiver</option><option value="registration"'+(BWP.miss==="registration"?' selected':'')+'>Missing a registration</option></select>'+
+          '<button class="mini" type="button" id="bwPCsv">Download (.csv)</button></div>'+
+        (list.length?'<div class="adm-scroll"><table class="adm-table bw-ptab"><thead><tr><th>Name</th><th>Role</th><th>Team</th><th>Grade</th><th>School</th><th>Shirt</th><th>Waiver</th><th>Reg.</th><th>Bkgd</th><th>Email</th><th>Phone</th><th></th></tr></thead><tbody>'+list.map(row).join("")+'</tbody></table></div><p class="rk-fine">Changes save as you leave each box.</p>':'<p class="rk-fine bw-empty">'+(D.people.length?"No one matches these filters.":"No participants or coaches yet for "+BW_SEASON+".")+'</p>');
+      bwBindHeader(P,tabBwPeople);
+      $("#bwPr",P).onchange=function(){BWP.role=this.value;tabBwPeople()};$("#bwPt",P).onchange=function(){BWP.team=this.value;tabBwPeople()};$("#bwPm",P).onchange=function(){BWP.miss=this.value;tabBwPeople()};
+      $("#bwAdd",P).onsubmit=function(e){e.preventDefault();var f=this,o={season:BW_SEASON,name:f.elements.name.value.trim(),role:f.elements.role.value,team_id:f.elements.team_id.value||null,grade:f.elements.grade.value.trim()||null};if(!o.name)return;
+        db.from("bw_people").insert(o).then(function(x){if(okToast(x,o.name+" added"))tabBwPeople()})};
+      var fb=$("#bwFam",P);if(fb)fb.onclick=function(){fb.disabled=true;db.from("bw_people").insert(fromFam.map(function(k){var a=parseInt(k.age,10);return {season:BW_SEASON,name:k.name.slice(0,100),role:"participant",member_id:k.m.id,age:a>=3&&a<=99?a:null}})).then(function(x){if(okToast(x,fromFam.length+" added from family profiles"))tabBwPeople()})};
+      $("#bwPCsv",P).onclick=function(){csv([["Name","Role","Team","Grade","Age","School","Shirt","Waiver","Registration","Background check","Email","Phone","Notes"]].concat(D.people.map(function(p){return [p.name,p.role,p.team_id&&T[p.team_id]?T[p.team_id].name:"",p.grade,p.age,p.school,p.shirt_size,p.waiver?"yes":"no",p.registration?"yes":"no",p.role==="participant"?"":p.background_check?"yes":"no",p.email,p.phone,p.notes]})),"building-workshop-people-"+BW_SEASON+".csv")};
+      $$(".bw-ptab tbody tr",P).forEach(function(tr){var id=tr.getAttribute("data-id");
+        $$("[data-k]",tr).forEach(function(el){el.onchange=function(){var k=el.getAttribute("data-k"),o={};o[k]=el.type==="checkbox"?el.checked:(el.value.trim()||null);if(k==="name"&&!o.name){toast("A name is needed.");return}
+          db.from("bw_people").update(o).eq("id",id).then(function(x){okToast(x,"Saved");if(k==="role")tabBwPeople()})}});
+        $("[data-del]",tr).onclick=function(){var b=this;if(b.textContent!=="Sure?"){b.textContent="Sure?";return}db.from("bw_people").delete().eq("id",id).then(function(x){if(okToast(x,"Removed"))tabBwPeople()})}});
+    }).catch(function(e){P.textContent="Couldn’t load participants: "+(e.message||e)})}
+
+  /* My dashboard → Toolbox → Building Workshop: students and families send forms */
+  var BWM={kind:null,file:null};
+  function bwOpen(){var d=$("#bwDlg");if(!d){d=document.createElement("dialog");d.id="bwDlg";d.className="tb-dlg bw-dlg";d.setAttribute("aria-labelledby","bwH");document.body.appendChild(d);
+      d.addEventListener("click",function(e){if(e.target===d||e.target.closest("[data-bwx]"))d.close()})}
+    BWM={kind:null,file:null};
+    d.innerHTML='<div class="tb-top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15h18l-2-5H5z"/><circle cx="7" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/><path d="M9 10V7h5l2 3"/></svg><div><p class="tb-k">Building Workshop</p><h2 id="bwH">Send us a form</h2></div><button class="tb-x" type="button" data-bwx aria-label="Close">×</button></div><div id="bwBody"><p class="bw-wait">Loading…</p></div>';
+    if(!d.open)d.showModal();
+    db.rpc("bw_my").then(function(r){var b=$("#bwBody",d);if(!b)return;
+      if(r.error||!r.data){b.innerHTML='<p class="bw-wait">Sign in with your Family Pass or Crew Pass to send forms. You can also hand them to a staff member at any workshop.</p>';return}
+      bwDraw(d,r.data)},function(){var b=$("#bwBody",d);if(b)b.innerHTML='<p class="bw-wait">Couldn’t reach Flint Racing. Check your connection and try again.</p>'})}
+  function bwDraw(d,my){var b=$("#bwBody",d),k=BWM.kind,teams=my.teams||[],subs=my.submissions||[],needTeam=k==="design"||k==="team";
+    b.innerHTML='<p class="bw-k">What are you sending?</p><div class="bw-kinds" role="radiogroup" aria-label="What are you sending?">'+BW_KINDS.map(function(a){return '<button type="button" role="radio" aria-checked="'+(k===a[0])+'" data-mk="'+a[0]+'"><b>'+a[1]+'</b><small>'+a[2]+'</small></button>'}).join("")+'</div>'+
+      (k?'<form class="bw-mf" id="bwMf" novalidate>'+
+        '<div class="bw-pick" tabindex="0" role="button" id="bwPick">'+(BWM.file?'<b>'+esc(BWM.file.name)+'</b><small>'+fmtSize(BWM.file.size)+' · tap to change</small>':'<b>'+(k==="team"?"Add your logo":"Add a photo or file")+'</b><small>'+(k==="request"||k==="spiritwear"||k==="team"?"Optional · ":"")+'Take a photo, or choose a PDF, Word or image file</small>')+'</div>'+
+        (teams.length?'<label class="f">Team<select id="bwMt">'+(teams.length>1?'<option value="">Choose your team</option>':'')+teams.map(function(t){return '<option value="'+t.id+'">'+esc(t.name)+'</option>'}).join("")+'</select></label>':'')+
+        (needTeam?'<label class="f">'+(teams.length?(k==="team"?"New team name":"Team name (if it changed)"):"Team name")+' <small>'+(k==="team"&&!teams.length?"":"Optional")+'</small><input type="text" id="bwMn" maxlength="80" autocomplete="off"></label>':'')+
+        '<label class="f">'+(k==="request"?"What do you need?":k==="spiritwear"?"Sizes and names":"Note")+' <small>'+(k==="request"||k==="spiritwear"?"":"Optional")+'</small><textarea id="bwMx" maxlength="2000" rows="3"></textarea></label>'+
+        '<button class="ck-go" type="submit" id="bwGo">Send '+esc(bwKind(k).toLowerCase())+'</button><p class="bw-fine">Only Flint Racing staff can see what you send.</p></form>':'')+
+      (subs.length?'<p class="bw-k" style="margin-top:20px">What you’ve sent</p><ul class="bw-mine">'+subs.map(function(s){return '<li><span><b>'+esc(bwKind(s.kind))+'</b><small>'+esc([s.team_name,s.file_name,new Date(s.created_at).toLocaleDateString([],{month:"short",day:"numeric"})].filter(Boolean).join(" · "))+'</small>'+(s.status==="changes"&&s.admin_note?'<small class="bw-fix">'+esc(s.admin_note)+'</small>':'')+'</span><em class="st-'+s.status+'">'+esc(s.status==="new"?"Received":BW_ST[s.status])+'</em></li>'}).join("")+'</ul>':'');
+    $$("[data-mk]",b).forEach(function(x){x.onclick=function(){BWM.kind=x.getAttribute("data-mk");bwDraw(d,my);var p=$("#bwPick",b);if(p)p.focus()}});
+    var f=$("#bwMf",b);if(!f)return;
+    var pk=$("#bwPick",b),pick=function(){var i=document.createElement("input");i.type="file";i.accept=k==="team"?"image/*":"image/*,.pdf,.doc,.docx,.xls,.xlsx";i.onchange=function(){if(i.files[0]){BWM.file=i.files[0];var keep={t:$("#bwMt",b)&&$("#bwMt",b).value,n:$("#bwMn",b)&&$("#bwMn",b).value,x:$("#bwMx",b).value};bwDraw(d,my);if(keep.t&&$("#bwMt",b))$("#bwMt",b).value=keep.t;if($("#bwMn",b))$("#bwMn",b).value=keep.n||"";$("#bwMx",b).value=keep.x||""}};i.click()};
+    pk.onclick=pick;pk.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pick()}};
+    f.onsubmit=function(e){e.preventDefault();var t=$("#bwMt",b),tid=t?t.value||null:null,tn=$("#bwMn",b)?$("#bwMn",b).value.trim():"",note=$("#bwMx",b).value.trim(),go=$("#bwGo",b);
+      if((k==="design"||k==="waiver"||k==="registration")&&!BWM.file){toast("Add a photo or file of your "+bwKind(k).toLowerCase()+".");pk.focus();return}
+      if(k==="team"&&!teams.length&&!tn){toast("Type your team name.");$("#bwMn",b).focus();return}
+      if((k==="request"||k==="spiritwear")&&!note&&!BWM.file){toast(k==="request"?"Tell us what you need.":"Add the sizes or an order form.");$("#bwMx",b).focus();return}
+      if(teams.length>1&&!tid&&(k==="design"||k==="team")){toast("Choose your team.");t.focus();return}
+      go.disabled=true;go.textContent="Sending…";
+      (BWM.file?bwPutFile(BWM.file,"m-"+my.member):Promise.resolve(null)).then(function(up){
+        return db.rpc("bw_submit",{p_kind:k,p_team_id:tid,p_team_name:tn||null,p_note:note||null,p_path:up&&up.path,p_name:up&&up.name,p_mime:up&&up.mime,p_size:up&&up.size}).then(function(x){if(x.error){var er=new Error(x.error.message);er.userMsg=x.error.message;throw er}})}).then(function(){
+          toast("Sent! We’ll take a look.");BWM={kind:null,file:null};return db.rpc("bw_my").then(function(r){if(r.data)bwDraw(d,r.data)})}).catch(function(e){go.disabled=false;go.textContent="Try again";toast((e&&e.userMsg)||"Couldn’t send that. Try again.")})}}
+
   function tabOverview(){var P=$("#admPanel"),t=todayISO(),addD=function(n){var d=new Date();d.setDate(d.getDate()+n);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")},in14=addD(14),in21=addD(21),wk=new Date(Date.now()-7*864e5).toISOString();
     var safe=function(p){return Promise.resolve(p).then(function(x){return x||{}},function(){return {}})};
     Promise.all([admCounts(),safe(db.from("members").select("id,status,created_at")),safe(db.from("events").select("*").gte("start_date",t).order("start_date")),safe(db.from("event_details").select("event_id,start_time,end_time,location")),
@@ -11992,7 +12279,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
       var evProg=function(e){return evGuess(e)[0]==="racing"?"racingev":"events"};
       var noDet=EV.filter(function(e){var d=DET[e.id];return e.start_date<=in21&&!(d&&(d.start_time||d.location))});
       /* everything waiting on an admin, most urgent first */
-      var todo=[[c.mem,"profile","profiles","waiting for approval","tab:members","users"],[c.inq,"new inquiry","new inquiries","to answer","tab:inq","inbox"],[c.regs,"race registration","race registrations","to review","tab:regs","flag"],
+      var todo=[[c.mem,"profile","profiles","waiting for approval","tab:members","users"],[c.inq,"new inquiry","new inquiries","to answer","tab:inq","inbox"],[c.regs,"race registration","race registrations","to review","tab:regs","flag"],[c.bw,"Building Workshop submission","Building Workshop submissions","to review","tab:bwsubs","inbox"],
         [gifts,"race-day gift","race-day gifts","to match with Square","tab:donate","heart"],[reps,"weekly service report","weekly service reports","to approve","#council","check"],[social,"council social post","council social posts","to approve","#council/social","star"],
         [c.albums,"photo album","photo albums","to review","tab:reviews","check"],[c.plans,"teacher plan","teacher plans","to review","tab:reviews","note"],[c.vol,"race-day volunteer","race-day volunteers","to place","#volunteers","flag"],
         [c.so,"shout-out","shout-outs","to approve","#track-manager","star"],[failed,"email","emails","didn’t send in the last 30 days","tab:email:log","mail"],
@@ -12022,7 +12309,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
               return '<li><button type="button" data-go="'+a.go+'"><span class="ov-agd"><small>'+dt.toLocaleDateString([],{weekday:"short"})+'</small><b>'+dt.getDate()+'</b><small>'+dt.toLocaleDateString([],{month:"short"})+'</small></span><span class="ov-agb"><em>'+esc(a.type)+'</em><b>'+esc(a.title)+'</b>'+
                 (a.miss?'<span class="ov-warn">No time or place yet</span>':'<span>'+esc([a.when,a.where].filter(Boolean).join(" · "))+'</span>')+(a.tbc?'<span class="ov-warn">Date not final</span>':'')+(a.hidden?'<span class="ov-muted">Hidden from the calendar</span>':'')+'</span><i aria-hidden="true">›</i></button></li>'}).join("")+'</ul>':'<p class="rk-fine">Nothing on the schedule in the next two weeks.</p>')+
           '<div class="ov-add"><button class="mini" type="button" data-new="events">+ Program event</button><button class="mini" type="button" data-new="racingev">+ Racing event</button><button class="mini" type="button" data-new="leadership">+ Council meeting</button></div></section></div>'+
-        quHTML()+
+        quHTML()+bwQuHTML("bwQuOv")+
         '<details class="ov-dl"><summary>Download rosters (.csv)</summary><div class="ov-csv">'+[["members","Member profiles"],["workshop","Workshop sign-ins"],["volunteers","Race-day volunteers"],["racers","Racers"],["inquiries","Inquiries"],["registrations","Race registrations"],["accounts","Admin accounts"]].map(function(x){return '<button class="mini" type="button" data-csv="'+x[0]+'">'+x[1]+' <small>.csv</small></button>'}).join("")+'</div></details>';
       $$("[data-go]",P).forEach(function(b){b.onclick=function(){var g=b.getAttribute("data-go");
         if(g==="gate"){if(gOn){b.disabled=true;setGate(false).then(function(){if(TAB==="overview")tabOverview()})}else{var h=$("#gateHint",P);h.hidden=false;$("#gateBtn",P).focus()}return}
@@ -12033,6 +12320,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
       $$("[data-new]",P).forEach(function(b){b.onclick=function(){var k=b.getAttribute("data-new");if(k==="leadership")MTG_EDIT="new";else EVUI.autoNew=true;goTab(k)}});
       $$("[data-csv]",P).forEach(function(b){b.onclick=function(){rosterCSV(b.getAttribute("data-csv"))}});
       quBind(P,EV);
+      bwLoad(bwSeason()).then(function(D){if(TAB!=="overview")return;BW_SEASON=BW_SEASON||bwSeason();var api=bwQuBind($("#bwQuOv",P),D,function(){admCounts()});QU.bw=api},function(){});
     });
   }
 
