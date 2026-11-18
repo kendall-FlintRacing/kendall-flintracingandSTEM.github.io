@@ -1899,6 +1899,15 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .ck-on .me-pw .f{color:#e3e5e9}.ck-on .me-pw input{background:#111216;color:#fff;border-color:#3a3d46}
 .ck-on .me-code{background:var(--lite);color:#14151a;border:0}.ck-on .me-code h2{color:#14151a}.ck-on .me-code .me-k{color:#c3122a}.ck-on .me-code p{color:#3b3e45}
 /* ===== Sleek pass: fewer boxes, hairlines instead of cards ===== */
+/* speedometer: just the bright meter line */
+.ck-on .ck-tach::before{display:none}
+.ck-on .ck-fill{stroke:url(#ckGrad);stroke-width:10;filter:drop-shadow(0 0 6px rgba(255,64,64,.9)) drop-shadow(0 0 18px rgba(255,48,69,.55))}
+.ck-on .ck-tip{fill:#fff;filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 14px rgba(255,176,32,.9))}
+.ck-on .ck-needle line{display:none}
+.ck-on .ck-dig{top:50%;transform:translate(-50%,-42%)}
+.ck-on .ck-dig b{font-size:clamp(2.6rem,5vw,3.4rem);text-shadow:0 0 22px rgba(255,255,255,.4)}
+/* smooth, solid page background behind the dashboard (no dot texture) */
+.me-page.dark{background-image:none;background-color:#111216}
 .me-box.ck-on>*,.ck-on .gs,.ck-on .gs-strip,.ck-on .gs-ths,.ck-on .gs-main>*{min-width:0}
 .ck-on .ck{border:0;box-shadow:0 18px 44px rgba(0,0,0,.3);background:radial-gradient(ellipse 45% 75% at 50% 60%,rgba(255,48,69,.14),transparent 70%),radial-gradient(ellipse 120% 90% at 50% 0%,#202228,#141519 62%)}
 .ck-on .ck-shift{background:none;padding:0}
@@ -12114,9 +12123,8 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
 
   /* ---------- My dashboard: cockpit gauges and the Garage select screens (photos, events, forms) ---------- */
   function nextGoal(v,steps){v=+v||0;var n=steps.filter(function(s){return s>v})[0];return n||Math.ceil((v+1)/steps[steps.length-1])*steps[steps.length-1]}
-  function ckTach(v,label,unit){v=+v||0;var next=nextGoal(v,[10,25,50,100,150,250,500,1000]),pct=Math.max(0,Math.min(1,v/next)),t="";
-    for(var i=0;i<=24;i++){var a=(150+i*10)*Math.PI/180,r1=i%4?84:76;t+='<line x1="'+(110+r1*Math.cos(a)).toFixed(1)+'" y1="'+(110+r1*Math.sin(a)).toFixed(1)+'" x2="'+(110+90*Math.cos(a)).toFixed(1)+'" y2="'+(110+90*Math.sin(a)).toFixed(1)+'"'+(i>=20?' class="hot"':'')+'/>'}
-    return '<div class="ck-tach" role="img" aria-label="'+esc(fmtHrs(v)+" "+label+". Next goal: "+next+" "+unit)+'" data-p="'+pct.toFixed(3)+'"><svg viewBox="0 0 220 220" aria-hidden="true"><circle class="ck-trk" cx="110" cy="110" r="99" pathLength="360"/><circle class="ck-fill" cx="110" cy="110" r="99" pathLength="360"/><g class="ck-ticks">'+t+'</g><g class="ck-needle"><line x1="110" y1="110" x2="188" y2="110"/></g><circle class="ck-hub" cx="110" cy="110" r="10"/></svg>'+
+  function ckTach(v,label,unit){v=+v||0;var next=nextGoal(v,[10,25,50,100,150,250,500,1000]),pct=Math.max(0,Math.min(1,v/next));
+    return '<div class="ck-tach" role="img" aria-label="'+esc(fmtHrs(v)+" "+label+". Next goal: "+next+" "+unit)+'" data-p="'+pct.toFixed(3)+'"><svg viewBox="0 0 220 220" aria-hidden="true"><defs><linearGradient id="ckGrad" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ff2d55"/><stop offset=".6" stop-color="#ff5a3c"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs><circle class="ck-fill" cx="110" cy="110" r="96" pathLength="360"/><g class="ck-needle"><circle class="ck-tip" cx="206" cy="110" r="7"/></g></svg>'+
       '<div class="ck-dig"><b>'+esc(fmtHrs(v))+'</b><span>'+esc(label)+'</span><small>Next goal · '+next+' '+esc(unit)+'</small></div></div>'}
   function ckMini(v,label,steps){v=+v||0;var n=nextGoal(v,steps),lit=Math.round(Math.min(1,v/n)*10),seg="";for(var i=0;i<10;i++)seg+='<i'+(i<lit?' class="on"':'')+'></i>';
     return '<div class="ck-mini"><span>'+esc(label)+'</span><b>'+esc(v)+'</b><div class="ck-seg" aria-hidden="true">'+seg+'</div></div>'}
