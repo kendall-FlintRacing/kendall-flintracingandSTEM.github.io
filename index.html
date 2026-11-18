@@ -2952,6 +2952,23 @@ body.rw-app-on .fr-test.reh-chip{bottom:calc(62px + env(safe-area-inset-bottom,0
 .evp-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px}.evp-list li{display:grid;grid-template-columns:120px minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:6px 8px;border-bottom:1px solid #eceef1}
 .evp-list span{color:#5a5d64;font-size:.88rem}.evp-list small{color:#6b6e75}
 @media (max-width:640px){.evf{grid-template-columns:minmax(0,1fr)}.evp-list li{grid-template-columns:minmax(0,1fr) auto}.evp-list span,.evp-list small{grid-column:1}.evc-nav{width:34px}}
+/* admin overview (Nov 18) */
+.ov-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}.ov-stat .mini{flex:none;white-space:nowrap}
+.ov-stat{display:flex;align-items:center;gap:10px;border:1px solid #e3e5e9;border-left:4px solid #17803d;border-radius:10px;padding:10px 12px;background:#fff}
+.ov-stat svg{width:22px;height:22px;flex:none;color:#17803d}.ov-stat>div{flex:1;min-width:0;display:grid;gap:2px}.ov-stat span{font:700 .7rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#6b6e75}.ov-stat b{font-size:.98rem}
+.ov-stat.warn{border-left-color:#d97706;background:#fffaf0}.ov-stat.warn svg{color:#d97706}.ov-stat.off{border-left-color:#9aa0a6}.ov-stat.off svg{color:#9aa0a6}.ov-stat.live{border-left-color:var(--red);background:#fff5f5}.ov-stat.live svg{color:var(--red)}
+.ov-gatehint{margin:10px 0 0;background:#fffaf0;border:1px solid #f5d27a;border-radius:8px;padding:10px 12px}
+.me-k .ov-n{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--red);color:#fff;font:800 .75rem/1 var(--body);letter-spacing:0;margin-left:6px;vertical-align:1px}
+.ov-ag{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ov-ag button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid #ececef;background:#fafafb;border-radius:9px;padding:8px 10px;cursor:pointer;font:inherit;color:var(--ink)}
+.ov-ag button:hover{border-color:var(--red-deep);background:#fff}.ov-ag i{font-style:normal;color:var(--red-deep);font-weight:800}
+.ov-agd{flex:none;width:46px;display:grid;justify-items:center;background:#111216;color:#fff;border-radius:7px;padding:5px 0;text-transform:uppercase}.ov-agd b{font:800 1.25rem/1 var(--display)}.ov-agd small{font:700 .6rem/1.2 var(--body);letter-spacing:.08em;color:#c9cbd0}
+.ov-agb{flex:1;min-width:0;display:grid;gap:2px}.ov-agb em{font:800 .62rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--red-deep);font-style:normal}.ov-agb b{font-size:.95rem}.ov-agb span{font-size:.84rem;color:#4a4d55}
+.ov-warn{color:#8a5a00!important;font-weight:700}.ov-muted{color:#6b6e75!important}
+.ov-add{display:flex;gap:6px;flex-wrap:wrap}
+.ov-nums.ov-nums4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+@media (max-width:760px){.ov-nums.ov-nums4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ov-dl{margin-top:20px}.ov-dl summary{cursor:pointer;font-weight:700;color:#4a4d55}.ov-dl .ov-csv{margin-top:10px}
 /* phones: ask viewers to turn sideways; landscape phone layout */
 .rw-rotate{display:none;align-items:center;gap:12px;background:#f5b82e;color:#2a1d00;border-radius:8px;padding:10px 8px 10px 14px;flex:none}
 .rw-rotate p{margin:0;flex:1;font-size:.95rem;line-height:1.3}.rw-rotate b{display:block;font-size:1.02rem}
@@ -8925,7 +8942,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       function done(id){EVUI.goto=id;loadEvents().then(function(){FR.refresh();tabEvPage(prog);setTimeout(function(){var c=id&&$('.evc[data-id="'+id+'"]',P);if(c){c.scrollIntoView({block:"nearest",behavior:"smooth"});var b=$("[data-evedit]",c);if(b)b.focus()}},60)})}
       /* jump the carousel to a just-saved event */
       if(EVUI.goto){var per=evPer($("#evCar",P)),ix=up.map(function(o){return o.id}).indexOf(EVUI.goto);if(ix>=0){EVUI.page[prog]=Math.floor(ix/per);EVUI.flash=EVUI.goto;evCarousel($("#evCar",P),prog,up,card,"")}EVUI.goto=null}
-      $("#evNew",P).onclick=function(){form(null)};
+      $("#evNew",P).onclick=function(){form(null)};if(EVUI.autoNew){EVUI.autoNew=false;form(null)}
       P.onclick=function(ev){var b=ev.target.closest&&ev.target.closest("[data-evedit]");if(!b)return;form(all.filter(function(o){return o.id===b.getAttribute("data-evedit")})[0])};
     })}
   function tabEvents(){tabEvPage("programs")}
@@ -11340,23 +11357,56 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     if(kind==="members") return Promise.all([db.from("members").select("*").order("display_name"),db.from("member_hours").select("*")]).then(function(r){if(!okToast(r[0]))return;var H={};(r[1].data||[]).forEach(function(h){if(h.ended_at)H[h.member_id]=(H[h.member_id]||0)+(new Date(h.ended_at)-new Date(h.started_at))/36e5});
       csv([["Name","Username","Type","Status","Roles","Email","Phone","Racers","Hours","Registered","Last seen"]].concat((r[0].data||[]).map(function(m){return [m.display_name,m.username,m.kind,m.status,(m.roles||[]).join(" "),m.email,m.phone,(m.kids||[]).map(function(k){return k.name}).join("; "),Math.round((H[m.id]||0)*10)/10,m.created_at,m.last_seen_at]})),"flint-racing-members.csv")});
     if(kind==="accounts") return db.rpc("list_accounts").then(function(r){if(okToast(r))csv([["Email","Name","Joined","Last sign in","Admin","Staff roles","Race-day role"]].concat((r.data||[]).map(function(a){return [a.email,a.full_name,a.created_at,a.last_sign_in_at,a.is_admin?"yes":"no",(a.staff_roles||[]).join(" "),a.race_role]})),"accounts.csv")});}
-  function tabOverview(){var P=$("#admPanel");
-    Promise.all([admCounts(),db.from("members").select("id",{count:"exact",head:true}).eq("status","approved")]).then(function(r){var c=r[0],mem=(r[1]&&r[1].count)||0,t=todayISO(),up=FR.EVENTS.filter(function(e){return (e.e||e.d)>=t}).length,dn=donateCfg();
-      var todo=[[c.mem,"profile","profiles","waiting for approval","tab:members","users"],[c.inq,"new inquiry","new inquiries","to answer","tab:inq","inbox"],[c.regs,"new race registration","new race registrations","to review","tab:regs","flag"],[c.albums,"photo album","photo albums","to review","tab:reviews","check"],
-        [c.plans,"teacher plan","teacher plans","to review","tab:reviews","note"],[c.vol,"race-day volunteer","race-day volunteers","to place","#volunteers","flag"],[c.so,"shout-out","shout-outs","to approve","#track-manager","star"]].filter(function(x){return x[0]});
+  function tabOverview(){var P=$("#admPanel"),t=todayISO(),addD=function(n){var d=new Date();d.setDate(d.getDate()+n);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")},in14=addD(14),in21=addD(21),wk=new Date(Date.now()-7*864e5).toISOString();
+    var safe=function(p){return Promise.resolve(p).then(function(x){return x||{}},function(){return {}})};
+    Promise.all([admCounts(),safe(db.from("members").select("id,status,created_at")),safe(db.from("events").select("*").gte("start_date",t).order("start_date")),safe(db.from("event_details").select("event_id,start_time,end_time,location")),
+      safe(db.rpc("admin_council_meetings")),safe(db.from("race_gifts").select("id",{count:"exact",head:true}).eq("status","new")),safe(db.from("council_service_reports").select("week_of",{count:"exact",head:true}).eq("status","submitted")),
+      safe(db.from("council_social").select("id",{count:"exact",head:true}).eq("status","ready")),safe(db.rpc("admin_email_overview")),safe(db.from("race_state").select("live").eq("id",1).maybeSingle())]).then(function(r){
+      if(TAB!=="overview")return;
+      var c=r[0]||{},M=r[1].data||[],EV=r[2].data||[],DET={},mt=((r[4].data||{}).meetings||[]).filter(function(m){return m.meeting_date>=t&&!m.cancelled_at}),cnt=function(x){return (x&&x.count)||0},
+        gifts=cnt(r[5]),reps=cnt(r[6]),social=cnt(r[7]),em=r[8].data||null,live=!!(r[9].data&&r[9].data.live),dn=donateCfg(),gOn=gateOn();
+      (r[3].data||[]).forEach(function(d){DET[d.event_id]=d});
+      var approved=M.filter(function(m){return m.status==="approved"}).length,newWk=M.filter(function(m){return m.created_at>wk}).length,failed=em&&em.counts?em.counts.failed||0:0,emOn=!(em&&em.settings&&em.settings.on===false);
+      var evProg=function(e){return evGuess(e)[0]==="racing"?"racingev":"events"};
+      var noDet=EV.filter(function(e){var d=DET[e.id];return e.start_date<=in21&&!(d&&(d.start_time||d.location))});
+      /* everything waiting on an admin, most urgent first */
+      var todo=[[c.mem,"profile","profiles","waiting for approval","tab:members","users"],[c.inq,"new inquiry","new inquiries","to answer","tab:inq","inbox"],[c.regs,"race registration","race registrations","to review","tab:regs","flag"],
+        [gifts,"race-day gift","race-day gifts","to match with Square","tab:donate","heart"],[reps,"weekly service report","weekly service reports","to approve","#council","check"],[social,"council social post","council social posts","to approve","#council/social","star"],
+        [c.albums,"photo album","photo albums","to review","tab:reviews","check"],[c.plans,"teacher plan","teacher plans","to review","tab:reviews","note"],[c.vol,"race-day volunteer","race-day volunteers","to place","#volunteers","flag"],
+        [c.so,"shout-out","shout-outs","to approve","#track-manager","star"],[failed,"email","emails","didn’t send in the last 30 days","tab:email:log","mail"],
+        [noDet.length,"event in the next 3 weeks","events in the next 3 weeks",noDet.length===1?"needs a time or place":"need a time or place",noDet.length?"tab:"+evProg(noDet[0]):"","pin"]].filter(function(x){return x[0]});
+      /* the next two weeks, events and council meetings together */
+      var agenda=EV.filter(function(e){return e.start_date<=in14}).map(function(e){var d=DET[e.id]||{};return {d:e.start_date,title:e.title,type:(function(){var g=evGuess(e),ty=evTypeOf(g[0],g[1]);return ty?ty[1]:e.kind})(),when:[d.start_time,d.end_time].filter(Boolean).join(" – "),where:d.location||"",go:"tab:"+evProg(e),miss:!(d.start_time||d.location),hidden:e.published===false,tbc:e.to_be_confirmed}})
+        .concat(mt.filter(function(m){return m.meeting_date<=in14}).map(function(m){return {d:m.meeting_date,title:m.title,type:"Leadership Council",when:m.start_time?(m.end_time?hm12(m.start_time)+" – "+hm12(m.end_time):hm12(m.start_time)):"",where:m.location||"",go:"tab:leadership",miss:!(m.start_time||m.location)}}))
+        .sort(function(a,b){return a.d>b.d?1:-1});
+      var stat=function(cls,icon,label,val,btn,go){return '<div class="ov-stat '+cls+'">'+ico(icon)+'<div><span>'+label+'</span><b>'+val+'</b></div>'+(btn?'<button class="mini" type="button" data-go="'+go+'">'+btn+'</button>':'')+'</div>'};
       var tile=function(go,i,title,sub){return '<button type="button" class="ov-act" data-go="'+go+'">'+ico(i)+'<b>'+title+'</b><span>'+sub+'</span></button>'};
-      var gOn=gateOn();
-      P.innerHTML='<div class="dn-status '+(gOn?"warn":"on")+'" style="margin-bottom:16px">'+ico(gOn?"shield":"check")+'<div><b>'+(gOn?"The site is closed to the public":"The site is open to the public")+'</b><span>'+(gOn?"Visitors see “We’re updating our site” with your email address and an admin sign-in. Families and crew can’t sign in, and the public forms are closed. Signed-in admins see everything.":"Need time to finish wording and photos? Close the site: visitors see a short “We’re updating our site” notice until you reopen it. Nothing is deleted.")+'</span></div><button class="mini'+(gOn?" solid":"")+'" type="button" id="gateBtn">'+(gOn?"Reopen the site":"Close the site to the public")+'</button></div>'+
-        '<div class="ov-cols"><section class="ov-card"><p class="me-k">Needs you</p>'+(todo.length?'<ul class="ov-todo">'+todo.map(function(x){return '<li><button type="button" data-go="'+x[4]+'">'+ico(x[5])+'<span><b>'+x[0]+' '+(x[0]===1?x[1]:x[2])+'</b> '+x[3]+'</span><i aria-hidden="true">→</i></button></li>'}).join("")+'</ul>':'<p class="ov-clear">'+ico("check")+'You’re all caught up.</p>')+'</section>'+
-        '<section class="ov-card ov-nums"><div><b>'+mem+'</b><span>Approved members</span></div><div><b>'+up+'</b><span>Upcoming events</span></div><div><b>'+(c.inq||0)+'</b><span>New inquiries</span></div><div class="'+(dn&&dn.link?"on":"off")+'"><b>'+(dn&&dn.link?(/\/test_/.test(dn.link)?"Test":"Live"):"Off")+'</b><span>Online donations</span></div></section></div>'+
-        '<h3 class="ov-h">Quick actions</h3><div class="ov-acts">'+tile("edit","edit","Edit the site","Change any text or photo")+tile("tab:events","cal","Add an event","Public calendar dates")+tile("tab:news","news","Post a story","News & Stories")+
-          tile("tab:members","users","Approve profiles","Roles and hours")+tile("tab:members:log","shield","Who’s been in","Sign-in log")+tile("tab:email","mail","Email","Alerts, replies and updates")+tile("tab:race","flag","Race day setup","Racers and sponsors")+tile("tab:donate","heart","Donations","Online giving link")+tile("tab:home","layout","Homepage","Slideshow and numbers")+'</div>'+
-        '<h3 class="ov-h">Download rosters</h3><div class="ov-csv">'+[["members","Member profiles"],["workshop","Workshop sign-ins"],["volunteers","Race-day volunteers"],["racers","Racers"],["inquiries","Inquiries"],["registrations","Race registrations"],["accounts","Admin accounts"]].map(function(x){return '<button class="mini" type="button" data-csv="'+x[0]+'">'+x[1]+' <small>.csv</small></button>'}).join("")+'</div>';
+      P.innerHTML='<div class="ov-stats">'+
+          stat(gOn?"warn":"ok",gOn?"shield":"check","Website",gOn?"Closed to the public":"Open to the public",gOn?"Reopen":"Close",'gate')+
+          stat(!emOn||failed?"warn":"ok","mail","Email",!emOn?"Sending is off":failed?failed+" didn’t send":"Working",failed||!emOn?"Fix":"Open","tab:email")+
+          stat(dn&&dn.link?"ok":"off","heart","Online donations",dn&&dn.link?(/\/test_/.test(dn.link)?"Test link":"Live (Square)"):"Not connected",dn&&dn.link?"":"Connect","tab:donate")+
+          stat(live?"live":"off","live","Live race page",live?"Racing is live":"Not live",live?"Track operations":"Rehearse",live?"#track-manager":"rehearsal.html")+'</div>'+
+        (gOn?'':'<p class="ov-gatehint" id="gateHint" hidden>Visitors will see a short “We’re updating our site” notice until you reopen it. Nothing is deleted. <button class="mini solid" type="button" id="gateBtn">Confirm: close the site now</button> <button class="mini" type="button" id="gateNo">Keep it open</button></p>')+
+        '<div class="ov-cols"><section class="ov-card"><p class="me-k">Needs you'+(todo.length?' <span class="ov-n">'+todo.reduce(function(a,x){return a+x[0]},0)+'</span>':'')+'</p>'+
+          (todo.length?'<ul class="ov-todo">'+todo.map(function(x){return '<li><button type="button" data-go="'+x[4]+'">'+ico(x[5])+'<span><b>'+x[0]+' '+(x[0]===1?x[1]:x[2])+'</b> '+x[3]+'</span><i aria-hidden="true">→</i></button></li>'}).join("")+'</ul>':'<p class="ov-clear">'+ico("check")+'You’re all caught up.</p>')+'</section>'+
+          '<section class="ov-card"><p class="me-k">Next 2 weeks</p>'+(agenda.length?'<ul class="ov-ag">'+agenda.map(function(a){var dt=new Date(a.d+"T12:00:00");
+              return '<li><button type="button" data-go="'+a.go+'"><span class="ov-agd"><small>'+dt.toLocaleDateString([],{weekday:"short"})+'</small><b>'+dt.getDate()+'</b><small>'+dt.toLocaleDateString([],{month:"short"})+'</small></span><span class="ov-agb"><em>'+esc(a.type)+'</em><b>'+esc(a.title)+'</b>'+
+                (a.miss?'<span class="ov-warn">No time or place yet</span>':'<span>'+esc([a.when,a.where].filter(Boolean).join(" · "))+'</span>')+(a.tbc?'<span class="ov-warn">Date not final</span>':'')+(a.hidden?'<span class="ov-muted">Hidden from the calendar</span>':'')+'</span><i aria-hidden="true">→</i></button></li>'}).join("")+'</ul>':'<p class="rk-fine">Nothing on the schedule in the next two weeks.</p>')+
+          '<div class="ov-add"><button class="mini" type="button" data-new="events">+ Program event</button><button class="mini" type="button" data-new="racingev">+ Racing event</button><button class="mini" type="button" data-new="leadership">+ Council meeting</button></div></section></div>'+
+        '<div class="ov-nums ov-nums4"><div><b>'+approved+'</b><span>Approved members</span></div><div><b>'+newWk+'</b><span>New sign-ups this week</span></div><div><b>'+EV.length+'</b><span>Upcoming events</span></div><div><b>'+(em&&em.counts?em.counts.today||0:0)+'</b><span>Emails sent today</span></div></div>'+
+        '<h3 class="ov-h">Go to</h3><div class="ov-acts">'+tile("edit","edit","Edit the site","Change any text or photo")+tile("tab:members","users","Members","Approve, roles and hours")+tile("tab:email","mail","Email","Alerts, replies and mailing lists")+
+          tile("tab:events","cal","Program events","Workshops, fun runs, camps")+tile("tab:racingev","flag","Racing events","Building workshops and races")+tile("tab:leadership","users","Leadership","Council meetings")+
+          tile("tab:news","news","News & Stories","Post a story")+tile("tab:home","layout","Homepage","Slideshow and numbers")+tile("tab:race","flag","Race day setup","Racers, brackets, sponsors")+
+          tile("#track-manager","live","Track operations","Screens and run of show")+tile("tab:donate","heart","Donations","Square link and gifts")+tile("tab:members:log","shield","Who’s been in","Sign-in log")+'</div>'+
+        '<details class="ov-dl"><summary>Download rosters (.csv)</summary><div class="ov-csv">'+[["members","Member profiles"],["workshop","Workshop sign-ins"],["volunteers","Race-day volunteers"],["racers","Racers"],["inquiries","Inquiries"],["registrations","Race registrations"],["accounts","Admin accounts"]].map(function(x){return '<button class="mini" type="button" data-csv="'+x[0]+'">'+x[1]+' <small>.csv</small></button>'}).join("")+'</div></details>';
       $$("[data-go]",P).forEach(function(b){b.onclick=function(){var g=b.getAttribute("data-go");
+        if(g==="gate"){if(gOn){b.disabled=true;setGate(false).then(function(){if(TAB==="overview")tabOverview()})}else{var h=$("#gateHint",P);h.hidden=false;$("#gateBtn",P).focus()}return}
         if(g==="edit"){location.hash="#home";setTimeout(function(){setEditing(true)},60);return}
+        if(/\.html/.test(g)){window.open(g,"_blank","noopener");return}
         if(g.indexOf("tab:")===0){goTab(g.slice(4));return} location.hash=g}});
+      var gb=$("#gateBtn",P);if(gb){gb.onclick=function(){gb.disabled=true;setGate(true).then(function(){if(TAB==="overview")tabOverview()})};$("#gateNo",P).onclick=function(){$("#gateHint",P).hidden=true}}
+      $$("[data-new]",P).forEach(function(b){b.onclick=function(){var k=b.getAttribute("data-new");if(k==="leadership")MTG_EDIT="new";else EVUI.autoNew=true;goTab(k)}});
       $$("[data-csv]",P).forEach(function(b){b.onclick=function(){rosterCSV(b.getAttribute("data-csv"))}});
-      $("#gateBtn").onclick=function(){var b=this;if(!gOn&&!b.getAttribute("data-sure")){b.setAttribute("data-sure","1");b.textContent="Confirm: close the site now";return}b.disabled=true;setGate(!gOn).then(function(){if(TAB==="overview")tabOverview()})};
     });
   }
 
