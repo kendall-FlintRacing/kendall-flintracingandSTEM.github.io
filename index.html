@@ -3005,6 +3005,47 @@ body.rw-app-on .fr-test.reh-chip{bottom:calc(62px + env(safe-area-inset-bottom,0
 .evf-files{border-top:1px solid #e1e3e6;padding-top:10px}.evf-k{margin:0 0 6px;font-weight:700}.evf-k small{font-weight:500;color:#5a5d64}
 .evf-files ul{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:6px}.evf-files li{display:flex;align-items:center;gap:8px}.evf-files li a{flex:1;min-width:0}.evf-files select{min-height:38px;border:1.5px solid #c9ccd1;border-radius:4px;padding:4px 8px;max-width:100%}
 .pd-files{display:flex;flex-wrap:wrap;gap:6px 14px;margin:6px 0 0}.pd-files a{font-weight:700;font-size:.9rem}
+/* ===== Overview: instrument-cluster dashboard (Nov 18, replaces the banded look) ===== */
+.dash{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;align-items:center;padding:18px 20px;border-radius:16px;color:#e8eaee;
+  background:radial-gradient(120% 140% at 15% 0%,#2a2d35 0%,#17191e 55%,#0f1014 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 0 1px #262930,0 10px 30px rgba(10,11,14,.18)}
+.dash-gauge{position:relative;width:190px;height:190px;justify-self:center}
+.dash-gauge svg{width:100%;height:100%}
+.dg-ticks line{stroke:#5b5f69;stroke-width:2;stroke-linecap:round}
+.dg-track,.dg-fill{fill:none;stroke-width:9;stroke-linecap:round;transform:rotate(135deg);transform-origin:100px 100px}
+.dg-track{stroke:#2b2e36}.dg-fill{stroke:#e8eaee}
+.dash-gauge.mid .dg-fill{stroke:#f2b84b}.dash-gauge.high .dg-fill{stroke:#ff5a66}.dash-gauge.clear .dg-fill{stroke:#46d39a}
+.dg-needle{stroke:#ff5a66;stroke-width:3;stroke-linecap:round}.dg-hub{fill:#e8eaee;stroke:#17191e;stroke-width:3}
+.dg-read{position:absolute;left:0;right:0;bottom:18px;display:grid;justify-items:center;gap:3px}
+.dg-read b{font:600 2.1rem/1 var(--body);font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#fff}
+.dg-read span{font:700 .6rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#9aa0aa}
+.dash-read{display:grid;grid-template-columns:1fr 1fr;border-left:1px solid #2b2e36;align-self:stretch}
+.dash-read div{display:grid;align-content:center;gap:6px;padding:12px 18px}.dash-read div:nth-child(-n+2){border-bottom:1px solid #2b2e36}.dash-read div:nth-child(odd){border-right:1px solid #2b2e36}
+.dash-read b{font:500 1.9rem/1 var(--body);font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#fff}
+.dash-read span{font:700 .6rem/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#9aa0aa}
+.dash-tell{list-style:none;margin:0;padding:14px 0 0;display:grid;gap:8px;grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid #2b2e36}
+.dash-tell li{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.03)}
+.tt-ico{flex:none;width:30px;height:30px;display:grid;place-items:center;border-radius:8px;background:#20232a}.tt-ico svg{width:17px;height:17px}
+.tt-ok .tt-ico{color:#46d39a}.tt-warn .tt-ico{color:#f2b84b;box-shadow:0 0 0 1px rgba(242,184,75,.35)}.tt-off .tt-ico{color:#6b707b}.tt-live .tt-ico{color:#ff5a66;box-shadow:0 0 0 1px rgba(255,90,102,.4)}
+.tt-t{flex:1;min-width:0;display:grid;gap:3px}.tt-t small{font:700 .6rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#8d929c}.tt-t b{font:600 .92rem/1.2 var(--body);color:#fff}
+.dash-tell button{flex:none;background:transparent;border:1px solid #3a3e48;color:#d6d9df;border-radius:7px;padding:6px 10px;font:600 .78rem/1 var(--body);cursor:pointer;white-space:nowrap}
+.dash-tell button:hover,.dash-tell button:focus-visible{border-color:#c9ccd3;color:#fff}
+
+@media (max-width:640px){.dash{grid-template-columns:minmax(0,1fr);padding:14px}.dash-read{border:0;border-top:1px solid #2b2e36}.dash-tell{grid-template-columns:minmax(0,1fr)}}
+/* light cards below the cluster: calm, no colored bars */
+.ov-cols .ov-card,.ov-card.qu{padding:16px;gap:10px;overflow:visible;border:1px solid #e3e5e9;border-radius:14px;background:#fff}
+.ov-cols .ov-card>*,.ov-card.qu>*{margin:0}
+.ov-hd{display:flex;align-items:baseline;gap:10px;padding-bottom:10px;border-bottom:1px solid #eceef1}
+.ov-hd b{font:800 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#17191e}.ov-hd span{margin-left:auto;font-size:.8rem;color:#6b707b}
+.ov-todo{gap:0}.ov-todo li+li button{border-top:1px solid #f0f1f3}
+.ov-todo button{border:0;border-radius:8px;background:transparent;padding:10px 8px;gap:12px}
+.ov-todo button:hover{background:#f5f6f8;border-color:transparent}.ov-todo button:hover .td-n{background:#17191e;color:#fff}
+.ov-todo .td-n{flex:none;min-width:34px;height:28px;display:grid;place-items:center;border-radius:7px;background:#f0f1f4;color:#17191e;font:700 .9rem/1 var(--body);font-variant-numeric:tabular-nums}
+.ov-todo i,.ov-ag i{font-style:normal;color:#9aa0aa;font-weight:600;font-size:1.3rem}
+.ov-ag{gap:0}.ov-ag li+li button{border-top:1px solid #f0f1f3}.ov-ag button{border:0;border-radius:8px;background:transparent;padding:9px 6px}.ov-ag button:hover{background:#f5f6f8;border-color:transparent}
+.ov-agd{background:#f0f1f4;color:#17191e}.ov-agd small{color:#6b707b}.ov-agb em{color:#6b707b}
+.qu .qu-drop{border:1.5px dashed #c9ccd3;background:#fafbfc}.qu .qu-drop b{font:700 .95rem/1.2 var(--body);text-transform:none}
+.qu-recent{border-top:1px solid #eceef1}.qu-recent .me-k{color:#17191e}
+.qu-areas button[aria-checked="true"]{border-color:#17191e;background:#f5f6f8;box-shadow:inset 3px 0 0 #17191e}
 /* phones: ask viewers to turn sideways; landscape phone layout */
 .rw-rotate{display:none;align-items:center;gap:12px;background:#f5b82e;color:#2a1d00;border-radius:8px;padding:10px 8px 10px 14px;flex:none}
 .rw-rotate p{margin:0;flex:1;font-size:.95rem;line-height:1.3}.rw-rotate b{display:block;font-size:1.02rem}
@@ -8587,7 +8628,10 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
 
   /* ---------- Admin dashboard: side toolbar, search and sections ---------- */
   var TAB="overview", ADMC={}, ADMIDX=null, ADMNAV=false;
-  var ICO={home:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/>',users:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 6M18 14c2 .8 3 3 3 6"/>',
+  var ICO={engine:'<path d="M3 10v6M3 13h2.5"/><path d="M5.5 9.5H9l1.2-2.2h4.6L16 9.5h2l1.5 2.5H21v4.5h-1.5L18 19H9.5l-2-2H5.5z"/><path d="M10.5 7.3V5h4v2.3"/>',
+    radio:'<rect x="3" y="9" width="18" height="11" rx="2"/><path d="M6 9l11-4.5"/><circle cx="8.5" cy="14.5" r="2.6"/><path d="M14 13h4M14 16h4"/>',
+    fuel:'<path d="M5 20V5.5A1.5 1.5 0 0 1 6.5 4h6A1.5 1.5 0 0 1 14 5.5V20M3.5 20h12M5 10h9"/><path d="M14 9h1.5a1.5 1.5 0 0 1 1.5 1.5v5a1.5 1.5 0 0 0 3 0V8.5L17.5 6"/>',
+    lights:'<path d="M11 6.5c-4 0-7 2.4-7 5.5s3 5.5 7 5.5c.8 0 1.5-.7 1.5-1.5v-8c0-.8-.7-1.5-1.5-1.5z"/><path d="M15.5 8.5l5-1M15.5 12h5M15.5 15.5l5 1"/>',home:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/>',users:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 6M18 14c2 .8 3 3 3 6"/>',
     inbox:'<path d="M3 13l3-8h12l3 8v6H3z"/><path d="M3 13h5l1 2h6l1-2h5"/>',shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
     pin:'<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',note:'<path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h6"/>',folder:'<path d="M3 6h7l2 2h9v11H3z"/>',
     check:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12l3 3 5-6"/>',layout:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M10 10v10"/>',news:'<path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 8h3v9a2 2 0 0 1-2 2M7 9h7M7 13h7"/>',
@@ -11434,7 +11478,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         ta.value=ta.value.slice(0,s)+ins+ta.value.slice(s);ta.dispatchEvent(new Event("input",{bubbles:true}));sel.value="";toast("Link to “"+u.name+"” added to the message");ta.focus()}})}
   /* Quick upload card on the Overview */
   var QU={files:[],area:null};
-  function quHTML(){return '<section class="ov-card qu" id="quCard"><div class="ov-band red">'+ico("folder")+'<b>Quick upload</b><span>Photos, videos and documents</span></div>'+
+  function quHTML(){return '<section class="ov-card qu" id="quCard"><div class="ov-hd"><b>Quick upload</b><span>Photos, videos and documents</span></div>'+
     '<div class="qu-drop" id="quDrop" tabindex="0" role="button" aria-label="Choose files to upload"><b>Drop files here or click to choose</b><span>Photos, videos (MP4/MOV), PDF, Word, Excel, PowerPoint · up to 50 MB each</span></div><div id="quStep"></div>'+
     '<div class="qu-recent"><div class="qu-rh"><p class="me-k">Recent uploads</p><button class="mini" type="button" id="quAll">See all</button></div><ul id="quRecent"><li class="rk-fine">Loading…</li></ul></div></section>'}
   function quBind(P,evs){var drop=$("#quDrop",P),step=$("#quStep",P);
@@ -11510,21 +11554,27 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       var agenda=EV.filter(function(e){return e.start_date<=in14}).map(function(e){var d=DET[e.id]||{};return {d:e.start_date,title:e.title,type:(function(){var g=evGuess(e),ty=evTypeOf(g[0],g[1]);return ty?ty[1]:e.kind})(),when:[d.start_time,d.end_time].filter(Boolean).join(" – "),where:d.location||"",go:"tab:"+evProg(e),miss:!(d.start_time||d.location),hidden:e.published===false,tbc:e.to_be_confirmed}})
         .concat(mt.filter(function(m){return m.meeting_date<=in14}).map(function(m){return {d:m.meeting_date,title:m.title,type:"Leadership Council",when:m.start_time?(m.end_time?hm12(m.start_time)+" – "+hm12(m.end_time):hm12(m.start_time)):"",where:m.location||"",go:"tab:leadership",miss:!(m.start_time||m.location)}}))
         .sort(function(a,b){return a.d>b.d?1:-1});
-      var stat=function(cls,icon,label,val,btn,go){return '<div class="ov-stat '+cls+'"><i class="ov-dot" aria-hidden="true"></i><div><span>'+label+'</span><b>'+val+'</b></div>'+(btn?'<button type="button" data-go="'+go+'">'+btn+'</button>':'')+'</div>'};
+      var stat=function(cls,icon,label,val,btn,go){return '<li class="tt-'+cls+'"><span class="tt-ico">'+ico(icon)+'</span><span class="tt-t"><small>'+label+'</small><b>'+val+'</b></span>'+(btn?'<button type="button" data-go="'+go+'">'+btn+'</button>':'')+'</li>'};
+      var total=todo.reduce(function(a,x){return a+x[0]},0),frac=Math.min(1,total/15),gaugeCls=total===0?"clear":total>8?"high":"mid",ARCL=2*Math.PI*60*0.75;
+      var ticks="";for(var tk=0;tk<=10;tk++){var a=(135+tk*27)*Math.PI/180,r1=tk%5?84:79,r2=90;ticks+='<line x1="'+(100+r1*Math.cos(a)).toFixed(1)+'" y1="'+(100+r1*Math.sin(a)).toFixed(1)+'" x2="'+(100+r2*Math.cos(a)).toFixed(1)+'" y2="'+(100+r2*Math.sin(a)).toFixed(1)+'"/>'}
+      var na=(135+270*frac)*Math.PI/180,needle='<line class="dg-needle" x1="100" y1="100" x2="'+(100+70*Math.cos(na)).toFixed(1)+'" y2="'+(100+70*Math.sin(na)).toFixed(1)+'"/><circle class="dg-hub" cx="100" cy="100" r="6"/>';
+      var rd=function(n,l){return '<div><b>'+n+'</b><span>'+l+'</span></div>'};
       var tile=function(go,i,title,sub){return '<button type="button" class="ov-act" data-go="'+go+'">'+ico(i)+'<b>'+title+'</b><span>'+sub+'</span></button>'};
-      P.innerHTML='<div class="ov-stats" role="group" aria-label="Site status">'+
-          stat(gOn?"warn":"ok",gOn?"shield":"check","Website",gOn?"Closed to the public":"Open to the public",gOn?"Reopen":"Close",'gate')+
-          stat(!emOn||failed?"warn":"ok","mail","Email",!emOn?"Sending is off":failed?failed+" didn’t send":"Working",failed||!emOn?"Fix":"Open","tab:email")+
-          stat(dn&&dn.link?"ok":"off","heart","Online donations",dn&&dn.link?(/\/test_/.test(dn.link)?"Test link":"Live (Square)"):"Not connected",dn&&dn.link?"":"Connect","tab:donate")+
-          stat(live?"live":"off","live","Live race page",live?"Racing is live":"Not live",live?"Track operations":"Rehearse",live?"#track-manager":"rehearsal.html")+'</div>'+
+      P.innerHTML='<section class="dash" aria-label="Dashboard"><div class="dash-gauge '+gaugeCls+'" role="img" aria-label="'+total+' items waiting on you"><svg viewBox="0 0 200 200" aria-hidden="true"><g class="dg-ticks">'+ticks+'</g><circle class="dg-track" cx="100" cy="100" r="60" stroke-dasharray="'+ARCL.toFixed(1)+' 999"/><circle class="dg-fill" cx="100" cy="100" r="60" stroke-dasharray="'+(ARCL*frac).toFixed(1)+' 999"/>'+needle+'</svg>'+
+          '<div class="dg-read"><b>'+total+'</b><span>'+(total?"waiting on you":"all clear")+'</span></div></div>'+
+        '<div class="dash-read">'+rd(approved,"Approved members")+rd(newWk,"New sign-ups · 7 days")+rd(EV.length,"Upcoming events")+rd(em&&em.counts?em.counts.today||0:0,"Emails sent today")+'</div>'+
+        '<ul class="dash-tell" aria-label="Site status">'+
+          stat(gOn?"warn":"ok","engine","Website",gOn?"Closed to the public":"Open to the public",gOn?"Reopen":"Close",'gate')+
+          stat(!emOn||failed?"warn":"ok","radio","Email & comms",!emOn?"Sending is off":failed?failed+" didn’t send":"Working",failed||!emOn?"Fix":"Open","tab:email")+
+          stat(dn&&dn.link?"ok":"off","fuel","Donations",dn&&dn.link?(/\/test_/.test(dn.link)?"Test link":"Live (Square)"):"Not connected",dn&&dn.link?"":"Connect","tab:donate")+
+          stat(live?"live":"off","lights","Race day",live?"Racing is live":"Not live",live?"Track operations":"Rehearse",live?"#track-manager":"rehearsal.html")+'</ul></section>'+
         (gOn?'':'<p class="ov-gatehint" id="gateHint" hidden>Visitors will see a short “We’re updating our site” notice until you reopen it. Nothing is deleted. <button class="mini solid" type="button" id="gateBtn">Confirm: close the site now</button> <button class="mini" type="button" id="gateNo">Keep it open</button></p>')+
-        '<div class="ov-cols"><section class="ov-card"><div class="ov-band red">'+ico("inbox")+'<b>Needs you</b>'+(todo.length?'<span class="ov-n">'+todo.reduce(function(a,x){return a+x[0]},0)+'</span>':'<span>All clear</span>')+'</div>'+
-          (todo.length?'<ul class="ov-todo">'+todo.map(function(x){return '<li><button type="button" data-go="'+x[4]+'">'+ico(x[5])+'<span><b>'+x[0]+' '+(x[0]===1?x[1]:x[2])+'</b> '+x[3]+'</span><i aria-hidden="true">→</i></button></li>'}).join("")+'</ul>':'<p class="ov-clear">'+ico("check")+'You’re all caught up.</p>')+'</section>'+
-          '<section class="ov-card"><div class="ov-band">'+ico("cal")+'<b>Next 2 weeks</b></div>'+(agenda.length?'<ul class="ov-ag">'+agenda.map(function(a){var dt=new Date(a.d+"T12:00:00");
+        '<div class="ov-cols"><section class="ov-card"><div class="ov-hd"><b>Needs you</b><span>'+(todo.length?"Most urgent first":"All clear")+'</span></div>'+
+          (todo.length?'<ul class="ov-todo">'+todo.map(function(x){return '<li><button type="button" data-go="'+x[4]+'"><span class="td-n">'+x[0]+'</span><span><b>'+(x[0]===1?x[1]:x[2])+'</b> '+x[3]+'</span><i aria-hidden="true">›</i></button></li>'}).join("")+'</ul>':'<p class="ov-clear">'+ico("check")+'You’re all caught up.</p>')+'</section>'+
+          '<section class="ov-card"><div class="ov-hd"><b>Next 2 weeks</b></div>'+(agenda.length?'<ul class="ov-ag">'+agenda.map(function(a){var dt=new Date(a.d+"T12:00:00");
               return '<li><button type="button" data-go="'+a.go+'"><span class="ov-agd"><small>'+dt.toLocaleDateString([],{weekday:"short"})+'</small><b>'+dt.getDate()+'</b><small>'+dt.toLocaleDateString([],{month:"short"})+'</small></span><span class="ov-agb"><em>'+esc(a.type)+'</em><b>'+esc(a.title)+'</b>'+
-                (a.miss?'<span class="ov-warn">No time or place yet</span>':'<span>'+esc([a.when,a.where].filter(Boolean).join(" · "))+'</span>')+(a.tbc?'<span class="ov-warn">Date not final</span>':'')+(a.hidden?'<span class="ov-muted">Hidden from the calendar</span>':'')+'</span><i aria-hidden="true">→</i></button></li>'}).join("")+'</ul>':'<p class="rk-fine">Nothing on the schedule in the next two weeks.</p>')+
+                (a.miss?'<span class="ov-warn">No time or place yet</span>':'<span>'+esc([a.when,a.where].filter(Boolean).join(" · "))+'</span>')+(a.tbc?'<span class="ov-warn">Date not final</span>':'')+(a.hidden?'<span class="ov-muted">Hidden from the calendar</span>':'')+'</span><i aria-hidden="true">›</i></button></li>'}).join("")+'</ul>':'<p class="rk-fine">Nothing on the schedule in the next two weeks.</p>')+
           '<div class="ov-add"><button class="mini" type="button" data-new="events">+ Program event</button><button class="mini" type="button" data-new="racingev">+ Racing event</button><button class="mini" type="button" data-new="leadership">+ Council meeting</button></div></section></div>'+
-        '<div class="ov-nums ov-nums4"><div><b>'+approved+'</b><span>Approved members</span></div><div><b>'+newWk+'</b><span>New sign-ups this week</span></div><div><b>'+EV.length+'</b><span>Upcoming events</span></div><div><b>'+(em&&em.counts?em.counts.today||0:0)+'</b><span>Emails sent today</span></div></div>'+
         quHTML()+
         '<details class="ov-dl"><summary>Download rosters (.csv)</summary><div class="ov-csv">'+[["members","Member profiles"],["workshop","Workshop sign-ins"],["volunteers","Race-day volunteers"],["racers","Racers"],["inquiries","Inquiries"],["registrations","Race registrations"],["accounts","Admin accounts"]].map(function(x){return '<button class="mini" type="button" data-csv="'+x[0]+'">'+x[1]+' <small>.csv</small></button>'}).join("")+'</div></details>';
       $$("[data-go]",P).forEach(function(b){b.onclick=function(){var g=b.getAttribute("data-go");
