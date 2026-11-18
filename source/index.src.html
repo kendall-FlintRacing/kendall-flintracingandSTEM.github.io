@@ -2894,6 +2894,34 @@ body.sle-open{overflow:hidden}
 .tm-sl-th{pointer-events:none}.tm-sl-th .sl-canvas{border-radius:0}.tm-sl-th .sl-fx{display:none}
 .tm-sl-b{padding:8px 10px;display:grid;gap:6px}.tm-sl-b .row{margin:0;gap:6px}
 .tm-em{background:#c8102e!important;border-color:#c8102e!important;color:#fff!important}
+/* run of show */
+.ros-now{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;background:#eafaf0;border:1px solid #b5e8c8;border-radius:8px;padding:10px 12px;margin:8px 0}.ros-now b{font-size:1.05rem}.ros-now .row{margin:0 0 0 auto;gap:8px}
+.ros-list{list-style:none;margin:10px 0;padding:0;display:grid;gap:4px;max-height:520px;overflow:auto;border:1px solid #e1e3e6;border-radius:8px;padding:6px}
+.ros-slot{border-radius:6px;padding:4px 8px}.ros-slot.big{background:#f8f9fa;border:1px solid #e1e3e6;padding:8px 10px}.ros-slot.edge{background:#fff8e6;border-color:#f5d27a}
+.ros-h{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:700;font-size:.9rem}.ros-h small{font-weight:500;color:#5a5d64}
+.ros-slot:not(.big) .ros-h{color:#5a5d64;font-weight:600}.ros-slot:not(.big) .ros-h .mini{padding:3px 8px;font-size:.75rem}
+.ros-items{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px}
+.ros-it{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:4px 10px;align-items:center;background:#fff;border:1px solid #e1e3e6;border-left:4px solid #111216;border-radius:6px;padding:6px 8px}
+.ros-it.on{border-left-color:#20d36b;box-shadow:0 0 0 2px #20d36b}
+.ros-k{font:800 .64rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#6b6e75}.ros-t{font-size:.82rem;color:#4a4d55;white-space:nowrap}.ros-b{display:flex;gap:4px}
+@media (max-width:640px){.ros-it{grid-template-columns:minmax(0,1fr) auto}.ros-k{grid-column:1/-1}.ros-b{grid-column:1/-1}}
+.ros-form{display:grid;gap:8px;background:#fff;border:1px dashed #9aa0a6;border-radius:6px;padding:10px;margin-top:6px}.ros-form label{display:grid;gap:4px;font-weight:700;font-size:.88rem}
+.ros-form select,.ros-form input[type=text]{min-height:38px;border:1.5px solid #c9ccd1;border-radius:4px;padding:4px 8px;font:500 .95rem/1 var(--body)}
+.ros-form fieldset{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px 16px}.ros-form legend{font-weight:700;font-size:.88rem;margin-bottom:4px}
+.ros-form label.chk{display:flex;align-items:center;gap:6px;font-weight:500}.ros-form input[type=number]{width:70px;min-height:34px;border:1.5px solid #c9ccd1;border-radius:4px;padding:2px 6px}.ros-form .row{margin:0}
+.ros-pvs{position:relative;background:#111115;border-radius:6px;overflow:hidden;aspect-ratio:16/9;display:grid;place-items:center}
+.ros-pvslide{width:100%;height:100%;display:grid}.ros-pvslide .sl-canvas{height:100%}
+.ros-pvcard{text-align:center;color:#fff;padding:20px}.ros-pvcard p{margin:0;color:#c9cbd0;font-weight:600}.ros-pvcard h2{font:800 clamp(1.8rem,5vw,3.4rem)/1.05 var(--display);text-transform:uppercase;margin:8px 0}
+.ros-pvcard.heat h2{color:#20d36b}.ros-pvcard.int h2{color:#ffd166}
+.ros-pvbar{height:6px;background:#e1e3e6;border-radius:999px;overflow:hidden}.ros-pvbar i{display:block;height:100%;background:var(--red);transition:width .3s}
+.ros-pvt{font:800 1.05rem/1 var(--display);text-transform:uppercase}
+/* rehearsal toolbar */
+.fr-test.reh-chip{max-width:min(440px,calc(100vw - 28px));display:grid;gap:6px}.reh-chip span{display:block!important}
+.reh-warn{background:#fde3e6;color:#8a0f1f;border-radius:4px;padding:6px 8px;font-weight:700}.reh-warn[hidden]{display:none!important}
+.reh-nav,.reh-btns{display:flex;gap:6px;flex-wrap:wrap}
+.reh-ov{position:fixed;inset:0;z-index:500;background:rgba(10,10,12,.8);display:grid;place-items:center;padding:20px}
+.reh-ovin{background:#fff;border-radius:10px;padding:22px;max-width:440px;display:grid;gap:8px}.reh-ovin b{font:800 1.2rem/1 var(--display);text-transform:uppercase}.reh-ovin p{margin:0}.reh-ovin .row{margin:0}
+body.rw-app-on .fr-test.reh-chip{bottom:calc(62px + env(safe-area-inset-bottom,0px))}
 /* phones: ask viewers to turn sideways; landscape phone layout */
 .rw-rotate{display:none;align-items:center;gap:12px;background:#f5b82e;color:#2a1d00;border-radius:8px;padding:10px 8px 10px 14px;flex:none}
 .rw-rotate p{margin:0;flex:1;font-size:.95rem;line-height:1.3}.rw-rotate b{display:block;font-size:1.02rem}
@@ -8192,7 +8220,16 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function mount(box,s,opts){opts=opts||{};if(box.__stop)box.__stop();box.innerHTML=html(s,opts.edit)+(s&&s.flag_in&&opts.flag?'<div class="sl-flag" aria-hidden="true"></div>':'');
     var stop=fx(box.querySelector(".sl-fx"),s&&s.effect),fl=box.querySelector(".sl-flag");if(fl)setTimeout(function(){if(fl.parentNode)fl.remove()},1500);
     box.__stop=function(){stop();box.__stop=null};return box.__stop}
-  window.FRSL={html:html,mount:mount,fx:fx,ANIMS:ANIMS,elHTML:elHTML};
+  /* ----- Run of show: which planned item is on screen now ----- */
+  function slotKey(sl){return sl==="start"?-1:sl==="end"?1e6:(+sl||0)}
+  function items(lineup,slots){var v=String(slots||"").split(",").map(function(x){return x.trim()}).filter(Boolean);
+    return (lineup||[]).filter(function(x){return v.indexOf(String(x.slot))>=0}).sort(function(a,b){return v.indexOf(String(a.slot))-v.indexOf(String(b.slot))||(a.position||0)-(b.position||0)})}
+  function lineupNow(show,lineup,now){show=show||{};if(show.takeover!=="lineup"||!show.lineup_at)return null;var L=items(lineup,show.lineup_slots);if(!L.length)return null;
+    var t=((now||Date.now())-new Date(show.lineup_at))/1000;for(var i=Math.max(0,show.lineup_step||0);i<L.length;i++){var it=L[i];
+      if(it.mode==="tap")return {i:i,item:it,left:null,count:L.length};var d=(+it.minutes||1)*60;if(t<d)return {i:i,item:it,left:d-t,count:L.length};t-=d}
+    return null}
+  function itemName(it,slides){if(!it)return "";if(it.kind==="intermission")return it.title||"Intermission";var s=(slides||[]).filter(function(x){return x.id===it.slide_id})[0];return s?s.name:"Screen"}
+  window.FRSL={html:html,mount:mount,fx:fx,ANIMS:ANIMS,elHTML:elHTML,items:items,lineupNow:lineupNow,slotKey:slotKey,itemName:itemName};
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -8306,9 +8343,10 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     FR.refresh(); var n=$("#qNote"); if(n) n.hidden=true; startUp();
   }).catch(function(e){ if(window.console)console.warn("Live content didn’t load; showing built-in content.",e); startUp(); });
 
+  window.FR_TOAST=function(m){toast(m)};
   function testChip(){var c=document.createElement("div");c.className="fr-test";c.setAttribute("role","note");
     c.innerHTML='<b>Preview copy</b><span>Practice only: nothing here reaches your real site. Create real accounts on your website.</span><a href="#admin">Admin</a><button type="button">Reset test data</button>';
-    document.body.appendChild(c);var b=c.querySelector("button");b.onclick=function(){if(b.textContent!=="Confirm reset"){b.textContent="Confirm reset";return}window.FR_TEST_RESET()};}
+    document.body.appendChild(c);if(window.FR_REHEARSAL&&window.FR_REH_CHIP){window.FR_REH_CHIP(c);return}var b=c.querySelector("button");b.onclick=function(){if(b.textContent!=="Confirm reset"){b.textContent="Confirm reset";return}window.FR_TEST_RESET()};}
   /* ---------- Toast ---------- */
   var tt; function toast(m){var t=$(".fr-toast");if(!t){t=document.createElement("div");t.className="fr-toast";t.setAttribute("role","status");document.body.appendChild(t)}
     t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(function(){t.hidden=true},2400)}
@@ -9052,7 +9090,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       '<div class="rk-bar"><div class="rk-tabs" role="tablist">'+[["race","Race"],["brackets","Brackets ("+brackets.length+")"],["order","Running order"]].map(function(t){return '<button type="button" role="tab" data-tab="'+t[0]+'" aria-selected="'+(RK.tab===t[0])+'">'+t[1]+'</button>'}).join("")+'</div>'+
       '<p class="rk-prog"><b>'+fin+' of '+real.length+'</b> heats raced'+(real.length?'<span class="rk-meter"><i style="width:'+Math.round(fin/real.length*100)+'%"></i></span>':'')+'</p></div>';
     $("#rkOut").onclick=signOut;
-    $("#rkLive").onclick=function(){var b=this;if(st.live&&b.getAttribute("data-c")!=="1"){b.setAttribute("data-c","1");b.innerHTML="<i></i><b>Turn off?</b> <span>Tap again to switch the live page off</span>";return}rkState({live:!st.live},st.live?"Live page is off":"You’re live")};
+    $("#rkLive").onclick=function(){var b=this;if(st.live&&b.getAttribute("data-c")!=="1"){b.setAttribute("data-c","1");b.innerHTML="<i></i><b>Turn off?</b> <span>Tap again to switch the live page off</span>";return}var goingLive=!st.live;rkState({live:!st.live},st.live?"Live page is off":"You’re live").then(function(){if(goingLive)db.rpc("race_lineup_fire",{p_slots:"start"}).then(function(x){if(x&&x.data===true)toast("Run of show: the opening screens are up")})})};
     $$(".rk-tabs [data-tab]",$("#rkTop")).forEach(function(b){b.onclick=function(){RK.tab=b.getAttribute("data-tab");renderRK(true)}});
     if(RK.tab==="brackets") rkBrackets(C); else if(RK.tab==="order") rkOrder(C); else rkRace(C);
     rkSide(C);
@@ -9139,7 +9177,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       if(res.error){toast(res.error);return}
       if(RK.confirm!==key2+"F"){var h2=trial.filter(function(x){return x.id===cur.id})[0],nt=FRB.net(h2);RK.confirm=key2+"F";post.classList.add("confirm");
         post.textContent="Confirm: "+rn(h2.winner)+" wins"+(t.winner?" ("+(t.note||"officials’ decision")+")":nt!=null?" by "+Math.abs(nt).toFixed(3)+"s":"");return}
-      rkSave(res.changed,label||"Result posted. Winner moves on.");delete RK.draft[key2];RK.ovr[cur.id]="";RK.why[cur.id]="";RK.note[cur.id]=""}
+      var hn=N[cur.id],left=trial.some(function(x){return !FRB.isBye(x)&&x.status!=="finished"});
+      rkSave(res.changed,label||"Result posted. Winner moves on.").then(function(){if(hn||!left)db.rpc("race_lineup_fire",{p_slots:(hn?String(hn):"")+(left?"":(hn?",":"")+"end")}).then(function(x){if(x&&x.data===true)toast("Run of show: the screens after this heat are up")})});delete RK.draft[key2];RK.ovr[cur.id]="";RK.why[cur.id]="";RK.note[cur.id]=""}
     post.onclick=function(){var w=winPick();
       if(w){ /* officials decide the heat now (either phase) */
         if(!$("#rk-why").value){toast("Pick a reason for the heat sheet.");return}
@@ -9368,31 +9407,96 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         if(x.error){toast("Couldn’t save: "+x.error.message);return}if(x.data&&x.data.id)S2.id=x.data.id;dirty=false;$("#sleX",o).textContent="Close";toast("Screen saved"+(sh_on(S2.id)?" · the live screen updates now":""));done&&done()})};
     function sh_on(){return false}
     draw();$("#sleName",o).focus()}
+  /* ---------- Run of show (Track operations): screens placed before racing, between heats and after the last heat ---------- */
+  var RS={add:null,edit:null,extra:0};
+  function rsHeatInfo(heats){var FRB=window.FRB,N=FRB.numbers(heats),by={};heats.forEach(function(h){if(N[h.id])by[N[h.id]]=h});return {count:Object.keys(by).length,by:by}}
+  function rsSlots(lineup,heats){var hi=rsHeatInfo(heats),mx=Math.max(hi.count,12+RS.extra);lineup.forEach(function(x){if(/^\d+$/.test(x.slot))mx=Math.max(mx,+x.slot)});
+    var out=["start"];for(var i=1;i<=mx;i++)out.push(String(i));out.push("end");return {slots:out,hi:hi}}
+  function rsSlotName(sl,hi){if(sl==="start")return "Before racing starts";if(sl==="end")return "After the last heat";var h=hi.by[+sl];return "After Heat "+sl+(h?' <small>'+esc((h.division||"")+(h.label?" · "+h.label:""))+'</small>':'')}
+  function rsTime(it){return it.mode==="tap"?"Waits for Next":(+it.minutes||1)+" min"}
+  function rsForm(it,slides,slot){it=it||{kind:slides.length?"slide":"intermission",mode:"timed",minutes:2};var cur=it.kind==="intermission"?"int":(it.slide_id||"");
+    return '<div class="ros-form" data-slot="'+esc(slot)+'"'+(it.id?' data-id="'+it.id+'"':'')+'><label>What shows<select data-f="what"><option value="int"'+(cur==="int"?' selected':'')+'>Intermission with sponsor ads</option>'+slides.map(function(s){return '<option value="'+s.id+'"'+(cur===s.id?' selected':'')+'>'+esc(s.name)+'</option>'}).join("")+'</select></label>'+
+      '<label class="ros-title"'+(cur==="int"?'':' hidden')+'>Title<input type="text" data-f="title" maxlength="60" value="'+esc(it.title||"Intermission")+'"></label>'+
+      '<fieldset><legend>How it ends</legend><label class="chk"><input type="radio" name="rsm'+esc(slot)+(it.id||"n")+'" value="timed"'+(it.mode!=="tap"?' checked':'')+'> After <input type="number" data-f="min" min="0.25" max="240" step="0.25" value="'+(+it.minutes||2)+'" aria-label="Minutes"> min</label><label class="chk"><input type="radio" name="rsm'+esc(slot)+(it.id||"n")+'" value="tap"'+(it.mode==="tap"?' checked':'')+'> When we tap Next</label></fieldset>'+
+      '<div class="row"><button class="mini solid" type="button" data-rs="save">'+(it.id?"Save":"Add")+'</button><button class="mini" type="button" data-rs="cancel">Cancel</button></div></div>'}
+  function runShowHTML(sh,lineup,slides,heats){var S3=rsSlots(lineup,heats),now=window.FRSL.lineupNow(sh,lineup),playing=sh.takeover==="lineup"&&now;
+    var by={};lineup.forEach(function(x){(by[x.slot]=by[x.slot]||[]).push(x)});Object.keys(by).forEach(function(k){by[k].sort(function(a,b){return (a.position||0)-(b.position||0)})});
+    var total=lineup.length;
+    return '<section class="rk-card ros'+(playing?' tm-int-on':'')+'"><div class="rk-ordhead"><h3>Run of show</h3><div class="row">'+(window.FR_REHEARSAL?'':'<a class="mini" href="rehearsal.html#race-control" target="_blank" rel="noopener">Rehearse the race day ↗</a>')+'<button class="mini solid" type="button" id="rsPlay"'+(total?'':' disabled')+'>▶ Play preview</button></div></div>'+
+      (playing?'<div class="ros-now"><span class="tm-live">ON SCREEN</span><b>'+esc(window.FRSL.itemName(now.item,slides))+'</b><span>'+(now.left!=null?'until '+new Date(Date.now()+now.left*1000).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})+', then racing':'Waiting for you to tap Next')+' · '+(now.i+1)+' of '+now.count+'</span><div class="row"><button class="rk-go" type="button" id="rsNext">Next ›</button><button class="mini" type="button" id="rsStop">Back to racing</button></div></div>':'')+
+      '<p class="rk-fine">Plan the screens for the day. When a heat’s result is posted, whatever you placed after that heat comes up on every screen by itself, then racing returns. Screens are tied to heat numbers, so this plan stays the same after the race-morning bingo draw.</p>'+
+      '<ol class="ros-list">'+S3.slots.map(function(sl){var L=by[sl]||[],big=sl==="start"||sl==="end"||L.length||RS.add===sl;
+        return '<li class="ros-slot'+(big?' big':'')+(sl==="start"||sl==="end"?' edge':'')+'"><div class="ros-h"><span>'+rsSlotName(sl,S3.hi)+'</span><button class="mini" type="button" data-rsadd="'+sl+'" aria-label="Add a screen '+(sl==="start"?"before racing":sl==="end"?"after the last heat":"after Heat "+sl)+'">+ Add</button></div>'+
+          (L.length?'<ol class="ros-items">'+L.map(function(it,k){if(RS.edit===it.id)return '<li>'+rsForm(it,slides,sl)+'</li>';
+            return '<li class="ros-it'+(playing&&now.item.id===it.id?' on':'')+'" data-id="'+it.id+'"><span class="ros-k">'+(it.kind==="intermission"?"Intermission":"Screen")+'</span><b>'+esc(window.FRSL.itemName(it,slides))+'</b><span class="ros-t">'+rsTime(it)+'</span>'+
+              '<span class="ros-b"><button class="mini" type="button" data-rsmv="-1" aria-label="Move up"'+(k===0?' disabled':'')+'>↑</button><button class="mini" type="button" data-rsmv="1" aria-label="Move down"'+(k===L.length-1?' disabled':'')+'>↓</button><button class="mini" type="button" data-rsed="1">Edit</button><button class="mini red" type="button" data-rsx="1" aria-label="Remove">✕</button></span></li>'}).join("")+'</ol>':'')+
+          (RS.add===sl?rsForm(null,slides,sl):'')+'</li>'}).join("")+'</ol>'+
+      '<div class="row"><button class="mini" type="button" id="rsMore">Show 8 more heats</button></div></section>'}
+  function bindRunShow(M,sh,lineup,slides,heats,setShow,ok){
+    var pl=$("#rsPlay",M);if(pl)pl.onclick=function(){lineupPreview(lineup,slides,heats)};
+    var nx=$("#rsNext",M);if(nx)nx.onclick=function(){var n=window.FRSL.lineupNow(sh,lineup);setShow({lineup_step:n?n.i+1:0,lineup_at:new Date().toISOString()},"Next")};
+    var sp=$("#rsStop",M);if(sp)sp.onclick=function(){setShow({takeover:"none",screen:"race"},"Back to racing")};
+    $("#rsMore",M).onclick=function(){RS.extra+=8;renderTM(true)};
+    $$("[data-rsadd]",M).forEach(function(b){b.onclick=function(){RS.add=b.getAttribute("data-rsadd");RS.edit=null;renderTM(true);setTimeout(function(){var f=$('.ros-form[data-slot="'+RS.add+'"] select');if(f)f.focus()},50)}});
+    $$(".ros-form",M).forEach(function(f){var sel=$('[data-f="what"]',f);sel.onchange=function(){$(".ros-title",f).hidden=sel.value!=="int"};
+      $('[data-rs="cancel"]',f).onclick=function(){RS.add=null;RS.edit=null;renderTM(true)};
+      $('[data-rs="save"]',f).onclick=function(){var slot=f.getAttribute("data-slot"),id=f.getAttribute("data-id"),mode=($('input[type=radio]:checked',f)||{}).value||"timed",min=+$('[data-f="min"]',f).value;
+        if(mode==="timed"&&!(min>0)){toast("Enter how many minutes it shows.");return}
+        var rec={kind:sel.value==="int"?"intermission":"slide",slide_id:sel.value==="int"?null:sel.value,title:sel.value==="int"?($('[data-f="title"]',f).value.trim()||"Intermission"):null,mode:mode,minutes:mode==="timed"?min:2,updated_at:new Date().toISOString()};
+        var same=lineup.filter(function(x){return x.slot===slot});
+        (id?db.from("race_lineup").update(rec).eq("id",id):db.from("race_lineup").insert(Object.assign({slot:slot,position:same.length?Math.max.apply(null,same.map(function(x){return x.position||0}))+1:0},rec))).then(function(x){RS.add=null;RS.edit=null;ok(x,id?"Saved":"Added to the run of show")})}});
+    $$(".ros-it",M).forEach(function(li){var id=li.getAttribute("data-id"),it=lineup.filter(function(x){return x.id===id})[0];
+      $("[data-rsed]",li).onclick=function(){RS.edit=id;RS.add=null;renderTM(true)};
+      var xb=$("[data-rsx]",li);xb.onclick=function(){if(xb.textContent!=="Remove?"){xb.textContent="Remove?";return}db.from("race_lineup").delete().eq("id",id).then(function(x){ok(x,"Removed")})};
+      $$("[data-rsmv]",li).forEach(function(b){b.onclick=function(){var same=lineup.filter(function(x){return x.slot===it.slot}).sort(function(a,c){return (a.position||0)-(c.position||0)}),i=same.indexOf(it),j=i+(+b.getAttribute("data-rsmv"));if(!same[j])return;
+        var o=same[j];same[i]=o;same[j]=it;Promise.all(same.map(function(x,k){return db.from("race_lineup").update({position:k}).eq("id",x.id)})).then(function(rs){ok(rs.filter(function(x){return x.error})[0]||{},"Moved")})}})});
+  }
+  /* Play preview: walks the whole day quickly (each screen a few seconds, each heat a moment) */
+  function lineupPreview(lineup,slides,heats){var hi=rsHeatInfo(heats),seq=[],back=document.activeElement,by={},mx=Math.max(hi.count,1);
+    lineup.forEach(function(x){(by[x.slot]=by[x.slot]||[]).push(x);if(/^\d+$/.test(x.slot))mx=Math.max(mx,+x.slot)});Object.keys(by).forEach(function(k){by[k].sort(function(a,b){return (a.position||0)-(b.position||0)})});
+    var slots=["start"];for(var i=1;i<=mx;i++)slots.push(String(i));slots.push("end");
+    slots.forEach(function(sl){if(/^\d+$/.test(sl))seq.push({heat:+sl,h:hi.by[+sl]});(by[sl]||[]).forEach(function(it){seq.push({it:it,sl:sl})})});
+    var o=document.createElement("div");o.className="sle ros-pv";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");o.setAttribute("aria-label","Run of show preview");
+    o.innerHTML='<div class="sle-box"><header class="sle-top"><div><b class="ros-pvt">Run of show preview</b><p class="rk-fine" id="pvCap" style="margin:2px 0 0"></p></div><div class="row"><button class="mini" type="button" id="pvPrev">⏮ Back</button><button class="mini solid" type="button" id="pvPlay">⏸ Pause</button><button class="mini" type="button" id="pvNext">Next ⏭</button><button class="mini" type="button" id="pvX">Close</button></div></header><div class="ros-pvs" id="pvStage"></div><div class="ros-pvbar"><i id="pvBar"></i></div></div>';
+    document.body.appendChild(o);document.body.classList.add("sle-open");
+    var st=$("#pvStage",o),k=0,playing=true,tmr=null;
+    function show(){clearTimeout(tmr);if(st.__stop)st.__stop();var e=seq[k];$("#pvBar",o).style.width=Math.round((k+1)/seq.length*100)+"%";
+      if(!e){st.innerHTML='<div class="ros-pvcard"><p>End of the day</p><h2>That’s the whole run of show</h2></div>';$("#pvCap",o).textContent="";return}
+      if(e.heat){st.innerHTML='<div class="ros-pvcard heat"><p>Racing</p><h2>Heat '+e.heat+'</h2>'+(e.h?'<p>'+esc((e.h.division||"")+(e.h.label?" · "+e.h.label:""))+'</p>':'<p>Heat details fill in after the bingo draw</p>')+'</div>';$("#pvCap",o).textContent="Heat "+e.heat+" races, then its result is posted";}
+      else{var it=e.it,where=e.sl==="start"?"Before racing":e.sl==="end"?"After the last heat":"After Heat "+e.sl;$("#pvCap",o).textContent=where+" · "+window.FRSL.itemName(it,slides)+" · on race day: "+rsTime(it).toLowerCase();
+        if(it.kind==="intermission")st.innerHTML='<div class="ros-pvcard int"><p>Intermission</p><h2>'+esc(it.title||"Intermission")+'</h2><p>'+(it.mode==="tap"?"Racing resumes soon":"Racing resumes in "+it.minutes+" min")+' · sponsor ads play here</p></div>';
+        else{var sl=slides.filter(function(x){return x.id===it.slide_id})[0];if(sl){var b=document.createElement("div");b.className="ros-pvslide";st.innerHTML="";st.appendChild(b);window.FRSL.mount(b,sl,{flag:true});st.__stop=b.__stop}else st.innerHTML='<div class="ros-pvcard"><h2>Missing screen</h2></div>'}}
+      if(playing)tmr=setTimeout(function(){if(k<seq.length){k++;show()}},e.heat?1600:5000)}
+    $("#pvPlay",o).onclick=function(){playing=!playing;this.textContent=playing?"⏸ Pause":"▶ Play";show()};
+    $("#pvNext",o).onclick=function(){if(k<seq.length){k++;show()}};$("#pvPrev",o).onclick=function(){if(k>0){k--;show()}};
+    function close(){clearTimeout(tmr);if(st.__stop)st.__stop();o.remove();document.body.classList.remove("sle-open");if(back&&back.focus)back.focus()}
+    $("#pvX",o).onclick=close;o.addEventListener("keydown",function(e){if(e.key==="Escape")close();if(e.key==="ArrowRight")$("#pvNext",o).click();if(e.key==="ArrowLeft")$("#pvPrev",o).click()});
+    show();$("#pvPlay",o).focus()}
   function renderTM(force){var box=$("#tmBox"); if(!box||!window.FR_DB) return;
     if(location.hash!=="#track-manager"){clearInterval(TM.timer);TM.timer=null;return}
     if(!gate(box,"tms","Track operations",IS_ADMIN||IS_TRACK)){box.__kind=null;TM.sig="";return}
     if(!TM.timer) TM.timer=setInterval(function(){renderTM()},window.FR_TEST?2500:5000);
     var act=document.activeElement; if(!force&&act&&box.contains(act)&&/INPUT|TEXTAREA|SELECT/.test(act.tagName)) return;
     Promise.all([db.from("race_show").select("*").eq("id",1).maybeSingle(),db.from("shoutouts").select("*").order("created_at",{ascending:false}).limit(60),db.from("race_ads").select("*").order("sort_order"),
-      db.from("race_heat_ads").select("*"),db.from("race_heats").select("*").order("sort_order"),db.from("race_state").select("*").eq("id",1).maybeSingle(),db.from("race_racers").select("id,display_name"),db.from("race_slides").select("*").order("sort_order")]).then(function(r){
+      db.from("race_heat_ads").select("*"),db.from("race_heats").select("*").order("sort_order"),db.from("race_state").select("*").eq("id",1).maybeSingle(),db.from("race_racers").select("id,display_name"),db.from("race_slides").select("*").order("sort_order"),db.from("race_lineup").select("*").order("position")]).then(function(r){
       if(r.some(function(x){return x.error})){box.__kind=null;box.innerHTML='<div class="rk-card"><p>Couldn’t reach the race data. This screen keeps trying.</p></div>';TM.sig="";return}
       var sig=JSON.stringify(r.map(function(x){return x.data}));if(!force&&sig===TM.sig)return;TM.sig=sig;
-      skeleton(box,"tm"); drawTM(r[0].data||{id:1},r[1].data||[],r[2].data||[],r[3].data||[],r[4].data||[],r[5].data||{},r[6].data||[],r[7].data||[]);});
+      skeleton(box,"tm"); drawTM(r[0].data||{id:1},r[1].data||[],r[2].data||[],r[3].data||[],r[4].data||[],r[5].data||{},r[6].data||[],r[7].data||[],r[8].data||[]);});
   }
-  function drawTM(sh,shouts,ads,hads,heats,st,racers,slides){var FRB=window.FRB,N=FRB.numbers(heats),R={},HA={};racers.forEach(function(x){R[x.id]=x});hads.forEach(function(x){HA[x.heat_id]=x.ad_id});
+  function drawTM(sh,shouts,ads,hads,heats,st,racers,slides,lineup){var FRB=window.FRB,N=FRB.numbers(heats),R={},HA={};racers.forEach(function(x){R[x.id]=x});hads.forEach(function(x){HA[x.heat_id]=x.ad_id});
     var act=ads.filter(function(a){return a.active!==false}),cur=heats.filter(function(h){return h.id===st.current_heat})[0];
     function rn(id){return id&&R[id]?esc(R[id].display_name):"TBD"}
     function ok(x,msg){if(x&&x.error){toast("Couldn’t save: "+x.error.message);return}if(msg)toast(msg);renderTM(true)}
     function setShow(rec,msg){rec.updated_at=new Date().toISOString();db.from("race_show").update(rec).eq("id",1).then(function(x){ok(x,msg)})}
     var pend=shouts.filter(function(s){return s.status==="pending"}),appr=shouts.filter(function(s){return s.status==="approved"}).slice(0,6),intOn=sh.screen==="intermission";
     $("#tmTop").innerHTML='<div class="rk-top"><div class="rk-tt"><p class="rk-k">Flint Soap Box Derby</p><h1>Track operations</h1></div>'+
-      '<p class="tm-status">'+(st.live?'<span class="tm-live">LIVE</span>':'<span class="tm-off">Live page off</span>')+(cur?' Heat '+(N[cur.id]||"")+' · '+esc(cur.division||"")+' · '+rn(cur.lane1)+' vs '+rn(cur.lane2):'')+(intOn?' · <b>Intermission on</b>':'')+(sh.screen==="slide"?' · <b>Showing a special screen</b>':'')+'</p>'+
+      '<p class="tm-status">'+(st.live?'<span class="tm-live">LIVE</span>':'<span class="tm-off">Live page off</span>')+(cur?' Heat '+(N[cur.id]||"")+' · '+esc(cur.division||"")+' · '+rn(cur.lane1)+' vs '+rn(cur.lane2):'')+(intOn?' · <b>Intermission on</b>':'')+(sh.takeover==="slide"?' · <b>Showing a special screen</b>':sh.takeover==="lineup"?' · <b>Run of show playing</b>':'')+'</p>'+
       '<div class="rk-who"><span>'+esc(crewName())+' · '+(IS_ADMIN?"Admin":"Track operations")+'</span><button class="mini" type="button" id="tmOut">Sign out</button></div></div>';
     $("#tmOut").onclick=signOut;
     var up=heats.filter(function(h){return !FRB.isBye(h)&&h.status!=="finished"}).slice(0,8);
     var adOpts=function(sel){return '<option value="">No sponsor</option>'+act.map(function(a){return '<option value="'+a.id+'"'+(a.id===sel?' selected':'')+'>'+esc(a.name)+'</option>'}).join("")};
-    var slOn=sh.screen==="slide"?sh.slide_id:null;
-    $("#tmMain").innerHTML=
+    var slOn=sh.takeover==="slide"?sh.slide_id:null;
+    $("#tmMain").innerHTML=runShowHTML(sh,lineup,slides,heats)+
       '<section class="rk-card'+(slOn?' tm-int-on':'')+'"><h3>Special screens</h3><p class="rk-fine">National anthem, closing ceremony and emergencies. Showing one replaces the race on every screen until you go back to racing.</p>'+
         '<ul class="tm-slides">'+slides.map(function(x){var on=slOn===x.id;return '<li class="'+(on?"on ":"")+(x.kind==="emergency"?"em":"")+'"><div class="tm-sl-th">'+window.FRSL.html(x,true)+'</div><div class="tm-sl-b"><b>'+esc(x.name)+'</b>'+(on?'<span class="tm-live">ON SCREEN</span>':'')+
           '<div class="row">'+(on?'<button class="rk-go tm-end" type="button" data-slx="1">Back to racing</button>':'<button class="'+(x.kind==="emergency"?"rk-go tm-em":"mini solid")+'" type="button" data-slon="'+x.id+'">'+(x.kind==="emergency"?"Show emergency screen":"Show on screen")+'</button>')+'<button class="mini" type="button" data-sled="'+x.id+'">Edit</button></div></div></li>'}).join("")+'</ul>'+
@@ -9415,15 +9519,16 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var M=$("#tmMain");
     $$("[data-so]",M).forEach(function(b){b.onclick=function(){var id=b.getAttribute("data-id"),v=b.getAttribute("data-so");
       db.from("shoutouts").update({status:v}).eq("id",id).then(function(x){if(v==="hidden"&&sh.pinned_shout===id)setShow({pinned_shout:null});ok(x,v==="approved"?"Approved: it’s on the ticker":"Rejected")})}});
+    bindRunShow(M,sh,lineup,slides,heats,setShow,ok);
     $$("[data-slon]",M).forEach(function(b){b.onclick=function(){var sl=slides.filter(function(x){return x.id===b.getAttribute("data-slon")})[0];
       if(sl&&sl.kind==="emergency"&&b.textContent!=="Confirm: show it now"){b.textContent="Confirm: show it now";return}
-      setShow({screen:"slide",slide_id:b.getAttribute("data-slon"),slide_at:new Date().toISOString()},"Showing "+(sl?sl.name:"the screen"))}});
-    $$("[data-slx]",M).forEach(function(b){b.onclick=function(){setShow({screen:"race"},"Back to racing")}});
+      setShow({screen:"race",takeover:"slide",slide_id:b.getAttribute("data-slon"),slide_at:new Date().toISOString()},"Showing "+(sl?sl.name:"the screen"))}});
+    $$("[data-slx]",M).forEach(function(b){b.onclick=function(){setShow({screen:"race",takeover:"none"},"Back to racing")}});
     $$("[data-sled]",M).forEach(function(b){b.onclick=function(){slideEditor(slides.filter(function(x){return x.id===b.getAttribute("data-sled")})[0],function(){renderTM(true)})}});
     $("#tmSlNew").onclick=function(){slideEditor({name:"New screen",kind:"custom",bg:"#111216",effect:"none",flag_in:true,elements:[{id:"t1",type:"text",x:10,y:38,w:80,h:20,text:"Your message here",size:7,color:"#ffffff",bold:true,align:"center",anim:"fade"}],sort_order:slides.length+1},function(){renderTM(true)})};
     $$("[data-pin]",M).forEach(function(b){b.onclick=function(){var v=b.getAttribute("data-pin")||null;setShow({pinned_shout:v},v?"Spotlighted":"Spotlight removed")}});
     $$("[data-intt]",M).forEach(function(b){b.onclick=function(){$("#tm-it").value=b.getAttribute("data-intt")}});
-    function intRec(){var m=Math.max(0,parseInt($("#tm-im").value,10)||0);return{screen:"intermission",int_title:$("#tm-it").value.trim()||"Intermission",int_until:m?new Date(Date.now()+m*6e4).toISOString():null}}
+    function intRec(){var m=Math.max(0,parseInt($("#tm-im").value,10)||0);return{screen:"intermission",takeover:"none",int_title:$("#tm-it").value.trim()||"Intermission",int_until:m?new Date(Date.now()+m*6e4).toISOString():null}}
     var b1=$("#tmIntOn");if(b1)b1.onclick=function(){setShow(intRec(),"Intermission is on")};
     var b2=$("#tmIntUp");if(b2)b2.onclick=function(){setShow(intRec(),"Intermission updated")};
     var b3=$("#tmIntOff");if(b3)b3.onclick=function(){setShow({screen:"race",int_until:null},"Back to racing")};
@@ -11530,13 +11635,13 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     Promise.all([d.from("race_state").select("*").eq("id",1).maybeSingle(),d.from("race_heats").select("*").order("sort_order"),
       d.from("race_racers").select("*").order("display_name"),d.from("shoutouts").select("id,name,message,created_at,donation").eq("status","approved").order("created_at",{ascending:false}).limit(25),
       d.from("race_brackets").select("*").order("sort_order"),d.from("race_show").select("*").eq("id",1).maybeSingle(),
-      d.from("race_ads").select("*").order("sort_order"),d.from("race_heat_ads").select("*"),d.from("site_content").select("value").eq("key","data|donate").maybeSingle(),d.from("race_slides").select("*")])
+      d.from("race_ads").select("*").order("sort_order"),d.from("race_heat_ads").select("*"),d.from("site_content").select("value").eq("key","data|donate").maybeSingle(),d.from("race_slides").select("*"),d.from("race_lineup").select("*").order("position")])
     .then(function(r){busy=false; if(r.slice(0,4).some(function(x){return x.error})) return;
       S.state=r[0].data; S.heats=r[1].data||[]; S.list=r[2].data||[]; S.racers={}; S.list.forEach(function(x){S.racers[x.id]=x}); S.shout=r[3].data||[];
       S.brackets=r[4].error?[]:(r[4].data||[]); S.N=FRB.numbers(S.heats);
       S.show=(!r[5].error&&r[5].data)||{}; S.ads=r[6].error?[]:(r[6].data||[]).filter(function(a){return a.active!==false}); S.hads={};
       if(!r[7].error)(r[7].data||[]).forEach(function(x){S.hads[x.heat_id]=x.ad_id});
-      S.slides=(r[9]&&!r[9].error&&r[9].data)||[];
+      S.slides=(r[9]&&!r[9].error&&r[9].data)||[];S.lineup=(r[10]&&!r[10].error&&r[10].data)||[];
       try{S.donate=(r[8]&&!r[8].error&&r[8].data)?JSON.parse(r[8].data.value||"null"):null}catch(e){S.donate=null}
       donorCheck(); draw(); show(); loaded=true;})
     .catch(function(){busy=false});}
@@ -11588,7 +11693,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function logo(a,cls){return a&&a.logo_url?'<img class="'+(cls||"")+'" src="'+esc(a.logo_url)+'" alt="'+esc(a.name)+' logo">':'<b class="'+(cls||"")+' rw-lname">'+esc(a?a.name:"")+'</b>'}
   function presents(h){var a=ad(S.hads[h.id]);return a?'<p class="rw-pres"><span>'+esc(num(h))+' brought to you by</span>'+logo(a,"rw-pres-img")+(a.logo_url?'<b>'+esc(a.name)+'</b>':'')+'</p>':''}
   function clock(t){var d=new Date(t);return isNaN(d)?"":d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}
-  function intermission(up){var sh=S.show,nx=up[0];
+  function intermission(up,ov){var sh=ov||S.show,nx=up[0];
     return '<div class="rw-int"><p class="rw-kicker">Intermission</p><h2 class="rw-head">'+esc(sh.int_title||"Intermission")+'</h2>'+
       (sh.int_until?'<p class="rw-int-back">Racing resumes at <b>'+clock(sh.int_until)+'</b> <span class="rw-int-left" data-until="'+esc(sh.int_until)+'"></span></p>':'<p class="rw-int-back">Racing resumes soon. Stay close!</p>')+
       (S.ads.length?'<div class="rw-int-ad" id="rwIntAd"></div>':'')+
@@ -11628,12 +11733,22 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function nextCards(cur,up){var box=$("#rwNext"),list=up.filter(function(x){return x.lane1||x.lane2}).slice(0,4);
     box.hidden=!list.length;if(!list.length)return;
     setH(box,'<p class="rx-k">Coming up</p><div class="rx-cards">'+list.map(function(x,i){return '<div class="rx-card'+(i===0?" first":"")+((isF(x.lane1)||isF(x.lane2))?" mine":"")+'"><small>'+(i===0?"Next":"In "+(i+1))+' · '+esc(num(x))+' · '+esc(x.division||"")+'</small><b>'+slot(x,"a")+' <i>vs</i> '+slot(x,"b")+'</b></div>'}).join("")+'</div>')}
-  var SLIDE_KEY=null;
-  function slideOn(){var sh=S.show||{},sl=sh.screen==="slide"&&sh.slide_id&&(S.slides||[]).filter(function(x){return x.id===sh.slide_id})[0],box=$("#rwSlide");
+  var SLIDE_KEY=null,TAKE_KEY="";
+  function takeover(cur){var sh=S.show||{};
+    if(sh.takeover==="slide"&&sh.slide_id){var sl=(S.slides||[]).filter(function(x){return x.id===sh.slide_id})[0];return sl?{t:"slide",slide:sl,key:"s|"+sl.id+"|"+(sh.slide_at||"")}:null}
+    if(sh.takeover==="lineup"){
+      if(cur&&["staging","set","racing"].indexOf(cur.status)>=0&&cur.updated_at&&sh.lineup_at&&new Date(cur.updated_at)>new Date(sh.lineup_at))return null; /* the next heat started */
+      var n=window.FRSL.lineupNow(sh,S.lineup);if(!n)return null;var it=n.item;
+      if(it.kind==="intermission")return {t:"int",title:it.title||"Intermission",until:n.left!=null?new Date(Date.now()+n.left*1000).toISOString():null,key:"l|"+it.id+"|"+sh.lineup_at+"|"+sh.lineup_step};
+      var sl2=(S.slides||[]).filter(function(x){return x.id===it.slide_id})[0];return sl2?{t:"slide",slide:sl2,key:"l|"+it.id+"|"+sh.lineup_at+"|"+sh.lineup_step}:null}
+    return null}
+  function slideOn(tk){var box=$("#rwSlide"),sl=tk&&tk.t==="slide"?tk.slide:null;
     page.classList.toggle("slide-on",!!sl);box.hidden=!sl;
     if(!sl){if(box.__stop)box.__stop();box.innerHTML="";SLIDE_KEY=null;return false}
-    var key=sl.id+"|"+sl.updated_at+"|"+(sh.slide_at||"");if(key!==SLIDE_KEY){var fresh=!SLIDE_KEY||SLIDE_KEY.split("|")[0]!==sl.id;SLIDE_KEY=key;window.FRSL.mount(box,sl,{flag:fresh})}
+    var key=tk.key+"|"+sl.updated_at;if(key!==SLIDE_KEY){var fresh=!SLIDE_KEY||SLIDE_KEY.split("|")[1]!==sl.id;SLIDE_KEY=key;window.FRSL.mount(box,sl,{flag:fresh})}
     return true}
+  /* timed screens in the run of show end on their own: check every second */
+  setInterval(function(){if(page.hidden||!(S.show&&S.show.takeover==="lineup"))return;var tk=takeover(current()),k=tk?tk.key:"";if(k.split("|").slice(0,3).join("|")!==TAKE_KEY.split("|").slice(0,3).join("|")||(!tk)!==(!TAKE_KEY)){draw()}},1000);
   function draw(){
     var st=S.state||{}, live=!!st.live, cur=current(), up=upcoming(cur), R=real();
     $("#rwLive").hidden=!live; $("#rwIdle").hidden=live; $("#rwOn").hidden=!live;
@@ -11649,10 +11764,13 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       setH($("#rwMine"),'<div class="rw-mine-in"><p class="rw-mt">Following</p>'+(items||'<p>Your racers aren’t on today’s list.</p>')+'<button class="rw-link" type="button" data-go="racers">Change</button></div>')}
     else setH($("#rwMine"),'<div class="rw-mine-in"><p><b>Here for someone special?</b> Follow them and their next heat stays right here.</p><button class="rw-link" type="button" data-go="racers">Find a racer</button></div>');
     var on=$("#rwOn"), sh=S.show||{};
-    if(slideOn()){$("#rwStage").hidden=true;$("#rwNext").hidden=true;view(cur,up);return}
+    var tk=live?takeover(cur):null;TAKE_KEY=tk?tk.key:"";
+    if(slideOn(tk)){$("#rwStage").hidden=true;$("#rwNext").hidden=true;view(cur,up);return}
     $("#rwStage").hidden=false;
-    if(sh.screen!=="intermission")nextCards(cur,up);else $("#rwNext").hidden=true;
-    if(sh.screen==="intermission"){var ok=setH(on,intermission(up));if(ok){ROT.i=0;rotInt()}}
+    var intOn=(tk&&tk.t==="int")||(sh.screen==="intermission"&&sh.takeover!=="lineup");
+    if(!intOn)nextCards(cur,up);else $("#rwNext").hidden=true;
+    if(tk&&tk.t==="int"){var ok2=setH(on,intermission(up,{int_title:tk.title,int_until:tk.until&&new Date(Math.round(new Date(tk.until)/60000)*60000).toISOString()}));if(ok2){ROT.i=0;rotInt()}}
+    else if(sh.screen==="intermission"&&sh.takeover!=="lineup"){var ok=setH(on,intermission(up));if(ok){ROT.i=0;rotInt()}}
     else if(!cur){setH(on,'<div class="rw-st-top"><span class="rw-state s-finished">Final</span></div><h2 class="rw-head">That’s a wrap on racing!</h2><p class="rw-status">Thanks for cheering! Open Race details for every racer’s times and the brackets.</p>');}
     else if(!cur.lane1||!cur.lane2){setH(on,'<div class="rw-st-top"><span class="rw-state">Up next</span><span class="rw-heat">'+esc(num(cur))+' · '+heatTitle(cur)+'</span></div><h2 class="rw-head">Waiting on results</h2><p class="rw-status">'+slot(cur,"a")+' vs '+slot(cur,"b")+'</p>');}
     else{var s=cur.status||"upcoming",L={staging:"r",set:"ry",racing:"g"}[s]||"",m=margin(cur),fin=s==="finished"&&cur.winner,run=cur.run||1;

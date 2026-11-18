@@ -112,4 +112,15 @@ if __name__ == "__main__":
         # Without it, every photo and logo path points to the wrong folder. Add the slash first.
         + '<script>(function(){var p=location.pathname;if(location.protocol!=="file:"&&!/\\/$/.test(p)&&!/\\.html?$/i.test(p))location.replace(p+"/"+location.search+location.hash)})()</script>\n'
         + page[:i] + "\n</head>\n<body>\n" + page[i:] + "\n</body>\n</html>\n")
+    # Race-day rehearsal: the real site with racing data kept in this browser only (see rehearsal.js)
+    reh = build(False)
+    assert CDN_TAG in reh
+    reh = reh.replace(CDN_TAG, CDN_TAG + "\n<script>window.FR_REAL_SB=window.supabase;window.FR_REHEARSAL=true;</script>\n<script>\n"
+                      + open(os.path.join(HERE, "testmode.js")).read() + "</script>\n<script>\n" + open(os.path.join(HERE, "rehearsal.js")).read() + "</script>")
+    j = reh.index("</style>") + len("</style>")
+    open(os.path.join(HERE, "rehearsal.html"), "w").write(
+        '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
+        '<meta name="robots" content="noindex, nofollow">\n'
+        + reh[:j] + "\n</head>\n<body>\n" + reh[j:] + "\n</body>\n</html>\n")
     print("artifact bytes:", len(art))

@@ -6,3 +6,9 @@
 -- race_show.slide_id / slide_at: race_show.screen = 'slide' shows that slide on every live screen.
 -- Storage: track managers may upload to site-images/screens/.
 -- race_slides added to the supabase_realtime publication. Seeded: National Anthem, Closing Ceremony, Emergency.
+
+-- Run of show (migrations "race_lineup", "race_show_takeover", Nov 17):
+-- public.race_lineup(slot 'start'|'end'|heat number, position, kind slide|intermission, slide_id, title, mode timed|tap, minutes).
+-- race_show.takeover none|slide|lineup (+ lineup_slots, lineup_at, lineup_step). race_show.screen keeps its old race|intermission check.
+-- public.race_lineup_fire(p_slots) — Race control calls it on going live ('start') and after each posted result ('7' or '7,end').
+-- rehearsal.html = the site with racing data kept in the browser (testmode.js) + rehearsal.js; race_slides/race_lineup/site-images are real.
