@@ -11632,7 +11632,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var cls="rx-car"+(fin?(h.winner===id?" win":" lose"):"")+(isF(id)?" mine":"");
     var sub=[r&&r.car_number?"Car #"+esc(r.car_number):"",esc(h.division||(r&&r.division)||""),r&&r.sponsor?esc(r.sponsor):""].filter(Boolean).join(" · ");
     var t=[tt[0]!=null?'<span>Phase 1 <b>'+secs(tt[0])+'</b></span>':'',tt[1]!=null?'<span>Phase 2 <b>'+secs(tt[1])+'</b></span>':'',fin&&tot!=null?'<span class="tot">Total <b>'+secs(tot)+'</b></span>':''].join("");
-    return '<div class="'+cls+'"><div class="rx-logo">'+(r&&r.logo_url?'<img src="'+esc(r.logo_url)+'" alt="'+esc(r.sponsor||"Sponsor")+' logo">':'<span class="rx-ini" aria-hidden="true">'+esc(initials(r))+'</span>')+'</div>'+
+    return '<div class="'+cls+'"><div class="rx-logo">'+(r&&r.logo_url?'<img src="'+esc(r.logo_url)+'" alt="'+esc(r.team||"School")+' logo">':'<span class="rx-ini" aria-hidden="true">'+esc(initials(r))+'</span>')+'</div>'+
       '<p class="rx-name">'+nm(id)+'</p>'+(sub?'<p class="rx-sub">'+sub+'</p>':'')+'<p class="rx-times" aria-live="polite">'+(t||'<span class="wait">Lane '+n+'</span>')+'</p>'+(fin&&h.winner===id?'<span class="rx-win">Winner</span>':'')+'</div>'}
   function nextCards(cur,up){var box=$("#rwNext"),list=up.filter(function(x){return x.lane1||x.lane2}).slice(0,4);
     box.hidden=!list.length;if(!list.length)return;
