@@ -10,7 +10,7 @@
 <style>
 /* Layout: rebuild of the live Flint Racing homepage. Full-width bands on a 1040px column; dark dotted sections, red racing bands, mist-gray light sections. Fixed light appearance. */
 :root{
-  --red:#d2141c; --red2:#e0242b; --red-deep:#b01218; --red-final:#c0141b; --pink:#e5363c;
+  --red:#d2141c; --red2:#e0242b; --red-deep:#b01218; --red-final:#b01218; --pink:#e5363c;
   --ink:#111113; --char:#19191c; --night:#17191f; --black:#0b0b0b; --card-dark:#22242b;
   --steel:#6d7077; --text:#191c22; --mist:#f3f4f6; --mist2:#f5f6f7; --line:#d9dbde; --paper:#ffffff;
   --amber:#f5b82e; --green:#2fc26b;
@@ -390,7 +390,7 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 @media (max-width:560px){.f-grid{grid-template-columns:1fr 1fr;row-gap:28px}.f-logo img{width:124px}}
 
 /* Calendar page (matches live /calendar: dark dotted page, red header card, white filter + event cards) */
-.cal-page{padding-block:clamp(2rem,5vw,3.5rem) var(--space)}
+.cal-page{padding-block:0 var(--space)}
 .cal-col{max-width:1064px;margin:0 auto}
 .cal-head{position:relative;overflow:hidden;background:var(--red-deep);border:1px solid #d02a3f;border-radius:6px;padding:clamp(1.6rem,4vw,3rem) clamp(1.3rem,3vw,1.6rem);color:#fff;display:grid;gap:14px}
 .cal-head::after{content:"";position:absolute;right:-20px;top:-10px;width:260px;height:240px;background:conic-gradient(rgba(255,255,255,.08) 25%,transparent 0 50%,rgba(255,255,255,.08) 0 75%,transparent 0) 0 0/34px 34px;transform:rotate(-12deg);-webkit-mask-image:linear-gradient(225deg,#000 35%,transparent 80%);mask-image:linear-gradient(225deg,#000 35%,transparent 80%)}
@@ -2685,7 +2685,7 @@ html.kiosk-on body{background:#0e0f12}
 
 /* breadcrumb bar sits flush under the site header, lined up with the page title */
 .rk-page>.crumbs{margin:calc(-1*clamp(1rem,2.5vw,1.6rem)) 0 clamp(1rem,2.5vw,1.6rem)}.rk-page>.crumbs .wrap{max-width:1240px}
-.cal-page>.crumbs{margin:calc(-1*clamp(2rem,5vw,3.5rem)) 0 clamp(2rem,5vw,3.5rem)}
+.cal-page>.crumbs{margin:0}
 .stub>.crumbs{margin:calc(-1*var(--space)) 0 var(--space)}
 .rk-wrap{max-width:1240px}
 .rk-card{background:#fff;color:var(--ink);border:1px solid #d4d6da;border-radius:8px;padding:clamp(14px,2.4vw,22px);margin-bottom:14px}
@@ -4666,6 +4666,22 @@ a.mini{text-decoration:none;display:inline-block}
 .bw-mine li span{display:grid;gap:2px;min-width:0}.bw-mine small{color:#9aa0aa;font-size:.8rem;overflow-wrap:anywhere}.bw-mine .bw-fix{color:#ffcf7a}
 .bw-mine em{flex:none;font:800 .66rem/1 var(--body);font-style:normal;letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:#2d3039;color:#d6d9df}
 .bw-mine em.st-approved{background:#123d26;color:#7ff0ad}.bw-mine em.st-changes{background:#4a3410;color:#ffcf7a}
+
+/* ===== Consistency layer (Nov 20): one set of corners, shadows, reds and spacing for the public pages ===== */
+:root{--r:8px;--r-sm:4px;--shadow:0 18px 38px -18px rgba(0,0,0,.6);--shadow-soft:0 12px 28px -16px rgba(17,17,19,.32);--gap-sec:clamp(2rem,4vw,3rem)}
+main .panel,main .q-card,main .stub-card,main .cal-info,main .news-empty,main .legal,main .contact-card,main .rd-ticket,main .cdd-intro,main .cdd-future,main .cdd-history,main .stem-poll,main .schematic,main .rg-paper,main .dr-hov,main .dr-block,main .rh3-feat,main .slides,main .fcard,main .sp-tabs,main .rd-beyond,main .board,main .cal-filters,main .give-strip,main .rd-finish,main .rx-practice,main .dr-free,main .sp-rdteaser,main .sp-menu,main .av-greater,main .s-panel,main .mission-card,main .pe-card,main .numcard,main .n-card,main .lanes,main .sp-pick:not(.av-chip){border-radius:var(--r)}
+.dark .panel,.dark .q-card,.dark .cal-info,.dark .news-empty,.dark .legal,.dark .contact-card,.dark .rd-ticket,.dark .cdd-intro,.dark .cdd-future,.dark .cdd-history,.dark .stem-poll,.dark .schematic,.dark .rg-paper,.dark .dr-block,.dark .slides,.dark .fcard,.dark .sp-tabs,.dark .rd-beyond,.dark .board,.dark .give-strip,.dark .rd-finish,.dark .rx-practice,.dark .dr-free,.dark .sp-rdteaser,.dark .s-panel{box-shadow:var(--shadow)}
+main .mission-card,main .pe-card,main .n-card{box-shadow:var(--shadow-soft)}
+main .topic,main .cal-filters input,main .cal-filters select,main .q-card input,main .q-card select,main .q-card textarea,main .ev{border-radius:var(--r-sm)}
+/* one rhythm: space under every page header, and between stacked sections */
+.prog-page .tape+.wrap,.cal-page .tape+.wrap{padding-top:var(--gap-sec)}
+.tape+.wrap>:first-child,.tape+.wrap>:first-child>:first-child{margin-top:0}
+.panels,.next-step,.sp-sec,.serve2 .panel.wide.next-step,.spx .give-strip,.rd-finish,.rd-beyond{margin-top:var(--gap-sec)}
+.tape+.wrap>.sp-tabs:first-child{margin-top:0}
+/* page headers: every inner page uses the light header with a photo and the ruler strip */
+.prog-hero .lede a{color:var(--red-deep);font-weight:600}
+.prog-hero .txt>.cta-row,.prog-hero .txt>.row{margin-top:4px}
+@media (max-width:760px){.prog-hero .pic{min-height:160px}.prog-hero .txt{padding-block:1.8rem 1.4rem}}
 </style>
 
 <div id="frGate" role="region" aria-labelledby="gateH"><div class="gate-card">
@@ -5061,8 +5077,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= TRACK SCHEDULE ======================= -->
 <div class="page dark prog-page" data-page="track-schedule" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><a href="#racing">Track &amp; Racing</a><span aria-hidden="true">/</span><span aria-current="page">Track Schedule</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">At Cronin Derby Downs</p><h1>Track Schedule</h1><p>Seasonal fun runs, practice runs and school practice days at the track. The Annual Flint Soap Box Derby is on <a href="#racing" id="tsRace" style="color:#fff">Saturday, June 5, 2027</a>.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">At Cronin Derby Downs</p><h1>Track Schedule</h1><p class="lede">Seasonal fun runs, practice runs and school practice days at the track. The Annual Flint Soap Box Derby is on <a href="#racing" id="tsRace">Saturday, June 5, 2027</a>.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/racer-down-track.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <h2 class="sec-title"><small>The main event</small>2027 Race Day</h2>
     <article class="rh3-feat ts-feat">
       <img src="{{IMG:img/web/two-cars-track.webp}}" alt="Two soap box cars race side by side down the hill at Cronin Derby Downs">
@@ -5287,8 +5307,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- Official Local Race Registration Form, digital version -->
 <div class="page dark prog-page" data-page="race-registration" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#racing">Track &amp; Racing</a><span aria-hidden="true">/</span><span aria-current="page">Race Registration</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow" id="rgEyebrow">2027 Flint Soap Box Derby</p><h1 id="rgH1">Race Registration</h1><p id="rgIntro">This is the official All-American Soap Box Derby Local Race Registration Form for the 2027 Flint Soap Box Derby. The racer fills in and signs the top half. A parent or guardian completes and signs the rest. Race day registration has a fee for racers not affiliated with our program. We’ll email you about fees after you submit.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow" id="rgEyebrow">2027 Flint Soap Box Derby</p><h1 id="rgH1">Race Registration</h1><p class="lede" id="rgIntro">This is the official All-American Soap Box Derby Local Race Registration Form for the 2027 Flint Soap Box Derby. The racer fills in and signs the top half. A parent or guardian completes and signs the rest. Race day registration has a fee for racers not affiliated with our program. We’ll email you about fees after you submit.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/two-cars-track.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="rg-wrap" id="rgWrap">
       <ol class="rg-steps" id="rgSteps"><li><b>1</b>Racer details and signature</li><li><b>2</b>Parent or guardian details and signature</li><li><b>3</b>Submit. We’ll email next steps.</li></ol>
       <form class="rg-paper" id="rgForm" novalidate></form>
@@ -5531,12 +5555,14 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= REGISTER / INQUIRE QUESTIONNAIRE ======================= -->
 <div class="page dark prog-page" data-page="participate" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Register / Inquire</span></div></nav>
-  <div class="wrap"><div class="q-wrap" style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head">
-      <p class="eyebrow">Build something bigger.</p>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Build something bigger.</p>
       <h1>Register / Inquire</h1>
-      <p>Tell us who you are, what you’re interested in and how to reach you. It takes about two minutes. Once we know what you’re looking for, we’ll follow up with the right forms and next steps.</p>
-    </section>
+      <p class="lede">Tell us who you are, what you’re interested in and how to reach you. It takes about two minutes. Once we know what you’re looking for, we’ll follow up with the right forms and next steps.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/2026-racers-group.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div class="q-wrap">
     <div class="q-card" id="qCard">
       <p class="q-note" id="qNote" hidden>Preview: this form isn’t connected to an inbox yet, so answers are not sent anywhere.</p>
       <form id="qForm" novalidate>
@@ -5615,12 +5641,14 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= CALENDAR ======================= -->
 <div class="page dark cal-page" data-page="calendar" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Calendar</span></div></nav>
-  <div class="wrap"><div class="cal-col">
-    <section class="cal-head">
-      <p class="eyebrow">Build something bigger.</p>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Build something bigger.</p>
       <h1>Calendar</h1>
-      <p>Published upcoming events and dates. Times, locations and event files are only shown to signed-in families. <a href="#new-profile">Register with Flint Racing and STEM</a> for details.</p>
-    </section>
+      <p class="lede">Published upcoming events and dates. Times, locations and event files are only shown to signed-in families. <a href="#new-profile">Register with Flint Racing and STEM</a> for details.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/race-day-track-tents.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div class="cal-col">
     <div class="cal-actions"><a class="btn red" href="#plan-event">Plan an Event →</a><a class="btn white-red" href="#cronin-derby-downs">Explore Cronin Derby Downs →</a></div>
     <div class="view-toggle"><div class="seg" role="group" aria-label="Event view"><button type="button" id="vList" aria-pressed="true">List</button><button type="button" id="vCal" aria-pressed="false">Calendar</button></div></div>
     <div class="cal-filters">
@@ -5925,8 +5953,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= DONATE ======================= -->
 <div class="page dark prog-page" data-page="donate" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Donate</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Your gift at work</p><h1>Give directly.</h1><p>Help put tools in young people’s hands and opportunity within reach.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Your gift at work</p><h1>Give directly.</h1><p class="lede">Help put tools in young people’s hands and opportunity within reach.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/racer-with-veteran.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="don-grid">
       <section class="panel">
         <p class="q-note" id="donNote" style="margin:0">Online donations are being connected. Until then, send us your pledge and we’ll follow up with ways to give.</p>
@@ -5957,8 +5989,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= NEWS ======================= -->
 <div class="page dark prog-page" data-page="news-page" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">News &amp; Stories</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">From the garage</p><h1>News &amp; Stories</h1><p>Program news, community stories and approved press releases.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">From the garage</p><h1>News &amp; Stories</h1><p class="lede">Program news, community stories and approved press releases.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/flint-journal-handshake-bw.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <section class="news-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 8h3v9a2 2 0 0 1-2 2"/><path d="M7 9h7M7 12h7M7 15h4"/></svg>
       <h2>Stories are on the way.</h2>
@@ -5970,8 +6006,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= CONTACT ======================= -->
 <div class="page dark prog-page" data-page="contact" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Build something bigger.</p><h1>Contact Flint Racing</h1><p>Send your question to our admin team. We’ll follow up by email.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Build something bigger.</p><h1>Contact Flint Racing</h1><p class="lede">Send your question to our admin team. We’ll follow up by email.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/header-placeholder.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="contact-grid">
       <section class="contact-card">
         <h2>Reach us</h2>
@@ -6000,8 +6040,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= PRIVACY ======================= -->
 <div class="page dark prog-page" data-page="privacy" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Privacy</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Build something bigger.</p><h1>Privacy</h1><p>How information is used on the Flint Racing &amp; STEM website.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Build something bigger.</p><h1>Privacy</h1><p class="lede">How information is used on the Flint Racing &amp; STEM website.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/header-placeholder.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <article class="legal">
       <h2>Information you provide</h2>
       <p>Registration, inquiry and account forms collect the contact and program information requested on each form. Depending on the activity, this can include parent or guardian details, participant names, school, age, emergency contacts, pickup instructions and permissions. Please provide information only through the appropriate form and avoid including private participant details in public messages.</p>
@@ -6024,8 +6068,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= BACKGROUND CHECKS ======================= -->
 <div class="page dark prog-page" data-page="background-check" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Background Checks</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Build something bigger.</p><h1>Background Checks</h1><p>Help us keep Flint Racing safe and welcoming.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Build something bigger.</p><h1>Background Checks</h1><p class="lede">Help us keep Flint Racing safe and welcoming.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/header-placeholder.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="panels">
       <section class="panel"><h2>Who needs a background check?</h2><p>Staff, teachers, coaches and volunteers who supervise or regularly work directly with youth should contact Flint Racing about screening before their assignment begins. Staff will confirm the requirements for your role and whether an existing clearance can be accepted.</p><p>Families attending with their children and participants should check with staff if they are taking on a volunteer or supervisory role.</p></section>
       <section class="panel"><h2>Complete your screening through True Hire</h2><p>Use Flint Racing’s application link once staff has directed you to complete a check.</p>
@@ -6043,8 +6091,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= FLINT RACING GARAGE (Nov 20) ======================= -->
 <div class="page dark prog-page" data-page="garage" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#about">About</a><span aria-hidden="true">/</span><span aria-current="page">Flint Racing Garage</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Our locations</p><h1>Flint Racing Garage</h1><p>Our workshop space in Flint, where young builders design, build and tune their cars before they ever reach the hill.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Our locations</p><h1>Flint Racing Garage</h1><p class="lede">Our workshop space in Flint, where young builders design, build and tune their cars before they ever reach the hill.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/1938-builders-lineup-bw.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="panels">
       <section class="panel"><h2>What happens in the garage</h2><p>Teams build their Soap Box Derby cars here during Building Workshops, try new projects in Seasonal Workshops and STEM programs, and get ready for race day at Cronin Derby Downs.</p>
         <div class="cta-row"><a class="btn deep" href="#building-workshops">Building Workshops</a><a class="btn outline-red" href="#seasonal-workshops">Seasonal Workshops</a></div></section>
@@ -6056,8 +6108,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= MEET STUDENT LEADERS (Nov 20) ======================= -->
 <div class="page dark prog-page" data-page="student-leaders" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#leadership-council">Leadership Council</a><span aria-hidden="true">/</span><span aria-current="page">Meet Student Leaders</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Lead &amp; serve</p><h1>Meet Our Student Leaders</h1><p>Our Student Leadership Council members will be introduced here soon, with their families’ permission.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Lead &amp; serve</p><h1>Meet Our Student Leaders</h1><p class="lede">Our Student Leadership Council members will be introduced here soon, with their families’ permission.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/2026-racers-group.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="panels">
       <section class="panel"><h2>What student leaders do</h2><p>Student leaders help shape our programs, mentor younger racers and represent Flint Racing in the community.</p>
         <div class="cta-row"><a class="btn outline-red" href="#leadership-council">Leadership Council overview</a></div></section>
@@ -6130,8 +6186,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= FLYERS & FORMS (printables) ======================= -->
 <div class="page dark prog-page" data-page="printables" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Flyers &amp; Forms</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Print, fill out, bring along</p><h1>Flyers &amp; Forms</h1><p>Printable flyers, registration forms, waivers, permission slips, order forms and field trip forms. Download, print and share.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Print, fill out, bring along</p><h1>Flyers &amp; Forms</h1><p class="lede">Printable flyers, registration forms, waivers, permission slips, order forms and field trip forms. Download, print and share.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/header-placeholder.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div id="prtBox" class="prt-box"><p class="pd-loading">Loading…</p></div>
   </div></div>
 </div>
@@ -6147,8 +6207,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= REGISTER A PROFILE ======================= -->
 <div class="page dark prog-page reg-page" data-page="new-profile" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span aria-current="page">Register</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Register once</p><h1>Join the Flint Racing roster</h1><p>Create your profile one time. Once Kendall or Kevin approve it, you sign in with just your username and passcode.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Register once</p><h1>Join the Flint Racing roster</h1><p class="lede">Create your profile one time. Once Kendall or Kevin approve it, you sign in with just your username and passcode.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/kevin-nephew-calvin-car.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div id="regBox" class="reg-box"></div>
   </div></div>
 </div>
@@ -6156,8 +6220,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= EMAIL CHOICES (unsubscribe link in every update) ======================= -->
 <div class="page dark prog-page reg-page" data-page="unsubscribe" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Email choices</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Emails from us</p><h1>Email choices</h1><p>Stop a list of emails here. No sign-in needed.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Emails from us</p><h1>Email choices</h1><p class="lede">Stop a list of emails here. No sign-in needed.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/header-placeholder.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div id="unsubBox" class="reg-box"></div>
   </div></div>
 </div>
@@ -6165,8 +6233,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= PROGRAM DASHBOARD (families) ======================= -->
 <div class="page dark prog-page pd-page" data-page="program-signin" hidden>
   <nav class="crumbs" aria-label="Breadcrumb" data-crumbs="program-signin"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span aria-current="page">Program Dashboard</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">For registered families and crew</p><h1>Program Dashboard</h1><p>Where, when and what time. Everything families need for this season in one place.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">For registered families and crew</p><h1>Program Dashboard</h1><p class="lede">Where, when and what time. Everything families need for this season in one place.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/header-placeholder.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div id="pdBox" class="pd-box"><p class="pd-loading">Loading…</p></div>
   </div></div>
 </div>
@@ -6174,31 +6246,47 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= PROGRAM RESOURCES ======================= -->
 <div class="page dark prog-page" data-page="resources" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Programs &amp; Resources</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Programs &amp; resources</p><h1>Find your lane</h1><p>Every Flint Racing program and family resource, sorted into four lanes.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Programs &amp; resources</p><h1>Find your lane</h1><p class="lede">Every Flint Racing program and family resource, sorted into four lanes.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/header-placeholder.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="rlanes" id="resLanes"></div>
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="rules" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Rules &amp; Guidelines</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Family resources</p><h1>Rules &amp; Guidelines</h1><p>Race rules, car specs and how race day works. Official documents are posted here as they’re approved.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Family resources</p><h1>Rules &amp; Guidelines</h1><p class="lede">Race rules, car specs and how race day works. Official documents are posted here as they’re approved.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/flint-journal-starting-ramp-bw.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="res-list" data-res="rules"></div>
     <p class="res-back"><a class="btn outline-red" href="#resources">← All programs &amp; resources</a></p>
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="parent-resources" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Parent Resources</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Family resources</p><h1>Parent Resources</h1><p>Guides and helpful links for parents and guardians of Flint racers.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Family resources</p><h1>Parent Resources</h1><p class="lede">Guides and helpful links for parents and guardians of Flint racers.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/header-placeholder.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="res-list" data-res="parents"></div>
     <p class="res-back"><a class="btn outline-red" href="#resources">← All programs &amp; resources</a></p>
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="forms" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Registration &amp; Forms</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Family resources</p><h1>Registration &amp; Forms</h1><p>Registration, releases and other forms to download, fill out and bring.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Family resources</p><h1>Registration &amp; Forms</h1><p class="lede">Registration, releases and other forms to download, fill out and bring.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/header-placeholder.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="res-list" data-res="forms"></div>
     <p class="res-back"><a class="btn outline-red" href="#resources">← All programs &amp; resources</a></p>
   </div></div>
@@ -6228,16 +6316,24 @@ a.mini{text-decoration:none;display:inline-block}
 </div>
 <div class="page dark prog-page" data-page="fun-runs" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Summer Fun Runs</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Explore & experiment</p><h1>Summer Fun Runs</h1><p>Low-pressure practice runs at Cronin Derby Downs over the summer. Dates are posted here once they’re set.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Explore & experiment</p><h1>Summer Fun Runs</h1><p class="lede">Low-pressure practice runs at Cronin Derby Downs over the summer. Dates are posted here once they’re set.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/racer-down-track.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="res-list" data-res="funruns"></div>
     <p class="res-back"><a class="btn outline-red" href="#resources">← All programs &amp; resources</a></p>
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="leadership-council" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Student Leadership Council</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Lead & serve</p><h1>Student Leadership Council</h1><p>Students who help shape our programs, mentor younger racers and represent Flint Racing in the community.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Lead & serve</p><h1>Student Leadership Council</h1><p class="lede">Students who help shape our programs, mentor younger racers and represent Flint Racing in the community.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/2026-racers-group.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="res-list" data-res="council"></div>
     <p class="res-back"><a class="btn outline-red" href="#resources">← All programs &amp; resources</a></p>
   </div></div>
@@ -6247,8 +6343,12 @@ a.mini{text-decoration:none;display:inline-block}
 <!-- ======================= RACE-DAY VOLUNTEER SIGN-UP ======================= -->
 <div class="page dark prog-page" data-page="race-volunteer" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#get-involved">Get Involved</a><span aria-hidden="true">/</span><span aria-current="page">Volunteer on race day</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Race day crew</p><h1>Volunteer on race day</h1><p>Race day runs on volunteers: greeting families, running the starting ramp, timing, the pits and the finish line. Tell us where you’d like to help.</p></section>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Race day crew</p><h1>Volunteer on race day</h1><p class="lede">Race day runs on volunteers: greeting families, running the starting ramp, timing, the pits and the finish line. Tell us where you’d like to help.</p></div>
+    <div class="pic"><img src="{{IMG:img/web/race-day-track-tents.webp}}" alt=""></div>
+  </div></header>
+  <div class="tape" aria-hidden="true"></div>
+  <div class="wrap"><div>
     <div class="vol-wrap">
       <form id="volForm" class="q-card vol-card" novalidate>
         <div class="vol-row"><label class="f" for="v-first">First name<input type="text" id="v-first" autocomplete="given-name" maxlength="60" required></label><label class="f" for="v-last">Last name<input type="text" id="v-last" autocomplete="family-name" maxlength="60" required></label></div>
