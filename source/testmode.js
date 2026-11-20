@@ -155,6 +155,7 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
   Q.prototype.limit=function(){return this};
   Q.prototype.eq=function(k,v){this.f.push([k,v]);return this};
   Q.prototype.gte=function(k,v){this.f.push([k,v,"gte"]);return this};
+  Q.prototype.not=function(k,op,v){this.f.push([k,v,"not"]);return this};
   if(!Q.prototype.lt)Q.prototype.lt=function(k,v){this.f.push([k,v,"lt"]);return this};
   Q.prototype.lte=function(k,v){this.f.push([k,v,"lte"]);return this};
   Q.prototype.in=function(k,v){this.f.push([k,v,"in"]);return this};
@@ -166,7 +167,7 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
   Q.prototype.delete=function(){this.op="delete";return this};
   Q.prototype.then=function(ok,bad){
     if(!T) seed();
-    var s=this, rows=T[s.t]||(T[s.t]=[]), m=function(r){return s.f.every(function(f){return f[2]==="in"?(f[1]||[]).indexOf(r[f[0]])>=0:f[2]==="gte"?r[f[0]]>=f[1]:f[2]==="lte"?r[f[0]]<=f[1]:f[2]==="lt"?r[f[0]]<f[1]:r[f[0]]===f[1]})}, res;
+    var s=this, rows=T[s.t]||(T[s.t]=[]), m=function(r){return s.f.every(function(f){return f[2]==="in"?(f[1]||[]).indexOf(r[f[0]])>=0:f[2]==="gte"?r[f[0]]>=f[1]:f[2]==="lte"?r[f[0]]<=f[1]:f[2]==="lt"?r[f[0]]<f[1]:f[2]==="not"?(r[f[0]]==null?null:r[f[0]])!==f[1]:r[f[0]]===f[1]})}, res;
     if(s.op==="select"){var d=rows.filter(m).slice();
       if(s.ord){var c=s.ord[0],asc=s.ord[1];d.sort(function(a,b){return (a[c]>b[c]?1:a[c]<b[c]?-1:0)*(asc?1:-1)})}
       res=s.head?{data:null,count:d.length,error:null}:{data:s._one?(d[0]||null):JSON.parse(JSON.stringify(d)),error:null}}
@@ -337,7 +338,7 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
       if(fn==="program_dashboard_member"){var c6=curM();if(!c6&&!(user&&user.id==="test-admin"))return R(null);mlog(c6?c6.id:null,c6?c6.username:user.email,"view:dates");save();
         var t6=new Date().toISOString().slice(0,10),D6={};T.event_details.forEach(function(x){D6[x.event_id]=x});
         T.event_rsvps=T.event_rsvps||[];var RV=T.event_rsvps;
-        return R({kids:c6?(c6.kids||[]).map(function(k){return k.name}).filter(Boolean):[],events:T.events.filter(function(e){return e.published&&(e.end_date||e.start_date)>=t6}).sort(function(a,b){return a.start_date>b.start_date?1:-1}).map(function(e){var d=D6[e.id]||{},mine=c6&&RV.filter(function(r){return r.event_id===e.id&&r.member_id===c6.id})[0],all=RV.filter(function(r){return r.event_id===e.id});return{id:e.id,start_date:e.start_date,end_date:e.end_date,title:e.title,kind:e.kind,tbc:e.to_be_confirmed,description:e.description,start_time:d.start_time,end_time:d.end_time,location:d.location,ages:d.ages,notes:d.notes,
+        return R({kids:c6?(c6.kids||[]).map(function(k){return k.name}).filter(Boolean):[],events:T.events.filter(function(e){return e.published&&(e.end_date||e.start_date)>=t6}).sort(function(a,b){return a.start_date>b.start_date?1:-1}).map(function(e){var d=D6[e.id]||{},mine=c6&&RV.filter(function(r){return r.event_id===e.id&&r.member_id===c6.id})[0],all=RV.filter(function(r){return r.event_id===e.id});return{id:e.id,start_date:e.start_date,end_date:e.end_date,title:e.title,kind:e.kind,tbc:e.to_be_confirmed,description:e.description,start_time:d.start_time,end_time:d.end_time,location:d.location,ages:d.ages,notes:d.notes,files:(T.uploads||[]).filter(function(u){return u.event_id===e.id&&u.family_visible!==false}).map(function(u){return {name:u.name,path:u.path,bucket:u.bucket||"library",url:(u.bucket||"library")==="library"?u.url:null,mime:u.mime}}),
           rsvp:mine?{kids:mine.kids,adults:mine.adults}:null,going:c6?null:{families:all.length,kids:all.reduce(function(n,r){return n+r.kids.length},0),adults:all.reduce(function(n,r){return n+r.adults},0)}}})})}
       if(fn==="rsvp_event"){var c8=curM();if(!c8)return R(null,"Please sign in with your family profile");T.event_rsvps=T.event_rsvps||[];var kn=(c8.kids||[]).map(function(k){return k.name}),k8=(args.p_kids||[]).filter(function(n,i,A){return kn.indexOf(n)>=0&&A.indexOf(n)===i}),a8=Math.max(0,Math.min(20,args.p_adults|0));
         T.event_rsvps=T.event_rsvps.filter(function(r){return!(r.event_id===args.p_event&&r.member_id===c8.id)});

@@ -3299,6 +3299,8 @@ body.rw-app-on .fr-test.reh-chip{bottom:calc(62px + env(safe-area-inset-bottom,0
 .qu-recent li>span,.lib-list li>span:not(.lib-ico):not(.row){flex:1;min-width:0;display:grid;gap:2px}.qu-recent li small,.lib-list li small{color:#5a5d64;font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lib-list .row{margin:0;gap:6px;flex-wrap:nowrap}
 @media (max-width:640px){.lib-list li{flex-wrap:wrap}.lib-list .row{width:100%}}
+.ev-reg{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.lib-priv{display:inline-flex;align-items:center;font:800 .66rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:6px 8px;border-radius:999px;background:#eceef1;color:#3b3e45}
 .lib-ico{flex:none;display:inline-grid;place-items:center;width:34px;height:26px;border-radius:5px;font:800 .62rem/1 var(--body);letter-spacing:.06em;color:#fff;background:#4a4d55}
 .lib-ico.k-photo{background:#0f766e}.lib-ico.k-video{background:#7c3aed}.lib-ico.k-doc{background:var(--red-deep)}
 .lib-pick{margin-top:6px}.lib-pick label{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.88rem;flex-wrap:wrap}.lib-pick select{min-height:36px;border:1.5px solid #c9ccd1;border-radius:4px;padding:4px 8px;max-width:100%}
@@ -4817,7 +4819,7 @@ a.mini{text-decoration:none;display:inline-block}
       </div>
       <section class="panel">
         <h2>2027 build dates</h2>
-        <p>Saturdays, starting the last Saturday of April. Times and locations are emailed to registered participants.</p>
+        <p>Saturdays, starting the last Saturday of April. <a href="#new-profile">Register with Flint Racing and STEM</a> for details.</p>
         <ul class="datelist">
           <li><time datetime="2027-04-24">Sat, Apr 24</time><span>Building Workshop · Week 1</span></li>
           <li><time datetime="2027-05-01">Sat, May 1</time><span>Building Workshop · Week 2</span></li>
@@ -4956,7 +4958,7 @@ a.mini{text-decoration:none;display:inline-block}
     <div class="board" id="race-board" aria-label="2027 fun run and practice run dates">
       <div class="board-head"><b>Fun runs</b><span><i aria-hidden="true"></i>2027 season</span></div>
       <div id="raceBoard"></div>
-      <div class="board-foot">Times and locations are emailed to registered participants.</div>
+      <div class="board-foot"><a href="#new-profile">Register with Flint Racing and STEM</a> for details.</div>
     </div>
     <p class="dr-fine">Fun run sign-ups happen beside the track on the day, and two drivers are at the top of the hill at a time.</p>
 
@@ -5294,7 +5296,7 @@ a.mini{text-decoration:none;display:inline-block}
         <section>
           <h3 id="bulListTitle">This month</h3>
           <ul class="bul-list" id="bulList"></ul>
-          <p class="bul-fine">Times and locations are emailed to registered participants.</p>
+          <p class="bul-fine"><a href="#new-profile">Register with Flint Racing and STEM</a> for details.</p>
         </section>
         <section>
           <h3>Program contact</h3>
@@ -5342,7 +5344,7 @@ a.mini{text-decoration:none;display:inline-block}
 
     <section class="panel wide" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
       <h2>Ready to take the next step?</h2>
-      <p>Send an inquiry and staff will follow up by email about the next workshop, availability and what to bring. Times and locations are emailed to registered participants. Inquiring does not confirm a place.</p>
+      <p>Send an inquiry and staff will follow up by email about the next workshop, availability and what to bring. <a href="#new-profile">Register with Flint Racing and STEM</a> for details. Inquiring does not confirm a place.</p>
       <div class="row"><a class="btn deep" href="#participate" data-interest="steam">Ask about seasonal workshops</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
     </section>
   </div>
@@ -5495,7 +5497,7 @@ a.mini{text-decoration:none;display:inline-block}
     <section class="cal-head">
       <p class="eyebrow">Build something bigger.</p>
       <h1>Calendar</h1>
-      <p>Published upcoming events and dates. Times and locations are emailed to registered participants.</p>
+      <p>Published upcoming events and dates. Times, locations and event files are only shown to signed-in families. <a href="#new-profile">Register with Flint Racing and STEM</a> for details.</p>
     </section>
     <div class="cal-actions"><a class="btn red" href="#plan-event">Plan an Event →</a><a class="btn white-red" href="#cronin-derby-downs">Explore Cronin Derby Downs →</a></div>
     <div class="view-toggle"><div class="seg" role="group" aria-label="Event view"><button type="button" id="vList" aria-pressed="true">List</button><button type="button" id="vCal" aria-pressed="false">Calendar</button></div></div>
@@ -5511,7 +5513,7 @@ a.mini{text-decoration:none;display:inline-block}
       <div class="grid-wrap"><div class="mgrid" id="mGrid"></div></div>
     </div>
     <section class="cal-info">
-      <div><h3>Where we meet</h3><p>Our workshops and events take place in Flint. The confirmed location and time for each event are emailed to registered participants.</p></div>
+      <div><h3>Where we meet</h3><p>Our workshops and events take place in Flint. <a href="#new-profile">Register with Flint Racing and STEM</a> for details.</p></div>
       <div><h3>Ages</h3><p>Our youth programs generally serve ages 8–18. Each workshop’s age requirements depend on the activity.</p></div>
       <div><h3>Guidelines</h3><ul><li>Request a place in advance and wait for staff confirmation.</li><li>Bring the adult support, clothing or materials requested for your session.</li><li>Follow staff instructions for safe use of tools and shared spaces.</li></ul></div>
     </section>
@@ -6055,14 +6057,14 @@ a.mini{text-decoration:none;display:inline-block}
   </div></header>
   <div class="wrap">
     <section class="camp-sessions" aria-labelledby="campSessH">
-      <div class="camp-head"><h2 id="campSessH">Camp sessions</h2><p>Pick the week that works. Times and the location are emailed to registered families.</p></div>
+      <div class="camp-head"><h2 id="campSessH">Camp sessions</h2><p>Pick the week that works. <a href="#new-profile">Register with Flint Racing and STEM</a> for details.</p></div>
       <div class="camp-cards" id="campCards"></div>
     </section>
     <div class="panels">
       <section class="panel"><p class="eyebrow">What campers do</p><h2>Build it, test it, race it</h2><p>Each day mixes a hands-on build with the science behind it: why some cars roll farther, how weight and wheels change speed, and how to make a design better after a test run.</p>
         <ul class="feature-list"><li>Design &amp; build</li><li>Gravity, friction &amp; speed</li><li>Test runs</li><li>Teamwork</li></ul></section>
       <section class="panel"><p class="eyebrow">Good to know</p><h2>Before you sign up</h2>
-        <dl class="camp-facts"><dt>Ages</dt><dd>To be announced</dd><dt>Days</dt><dd>Monday to Friday, one week per session</dd><dt>Times &amp; place</dt><dd>Emailed to registered families</dd><dt>Cost</dt><dd>To be announced</dd><dt>Questions</dt><dd><a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a></dd></dl></section>
+        <dl class="camp-facts"><dt>Ages</dt><dd>To be announced</dd><dt>Days</dt><dd>Monday to Friday, one week per session</dd><dt>Times &amp; place</dt><dd><a href="#new-profile">Register for details</a></dd><dt>Cost</dt><dd>To be announced</dd><dt>Questions</dt><dd><a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a></dd></dl></section>
     </div>
     <section class="camp-files" aria-labelledby="campFilesH" hidden><h2 id="campFilesH">Camp forms &amp; links</h2><div class="res-list" data-res="camps"></div></section>
     <section class="panel wide next-step"><h2>Ready to sign up?</h2><p>Your request goes to Flint Racing admin for review. Staff will follow up by email with the camp details, forms and next steps. Sending a request does not confirm a place.</p>
@@ -6443,7 +6445,7 @@ a.mini{text-decoration:none;display:inline-block}
       var html="",last="";
       evs.forEach(function(e){var mk=e.d.slice(0,7);
         if(mk!==last){if(last)html+='</div>';var p=mk.split("-");html+='<div class="month-group"><h2>'+MON[+p[1]-1]+' '+p[0]+'</h2>';last=mk}
-        html+='<article class="ev">'+dblock(e)+'<div><h3>'+e.t+'</h3><p class="meta"><span class="tag '+e.k+'">'+KIND[e.k]+'</span>'+(e.tbc?'<span class="tag tbc">To be confirmed</span>':'')+'Details emailed to registered participants</p></div><a class="more" href="#participate" data-interest="'+interestOf(e)+'">Event details &amp; registration →</a></article>';
+        html+='<article class="ev">'+dblock(e)+'<div><h3>'+e.t+'</h3><p class="meta"><span class="tag '+e.k+'">'+KIND[e.k]+'</span>'+(e.tbc?'<span class="tag tbc">To be confirmed</span>':'')+'<a class="ev-reg" href="#new-profile">Register with Flint Racing and STEM for details</a></p></div><a class="more" href="#participate" data-interest="'+interestOf(e)+'">Event details &amp; registration →</a></article>';
       });
       $("#listOut").innerHTML=html+'</div>';
     } else {
@@ -9339,7 +9341,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       '<p class="evc-count">'+(pg*per+1)+(show.length>1?'–'+(pg*per+show.length):'')+' of '+items.length+' coming up</p>';
     $$("[data-pg]",box).forEach(function(b){b.onclick=function(){EVUI.page[key]=pg+(+b.getAttribute("data-pg"));evCarousel(box,key,items,cardFn,emptyMsg);var r=$("[data-pg]:not([disabled])",box);if(r)r.focus()}})}
   function tabEvPage(prog){var P=$("#admPanel"),T=ETYPES[prog];
-    Promise.all([db.from("events").select("*").order("start_date"),db.from("event_details").select("*"),db.from("uploads").select("id,name,url,mime,event_id,family_visible,area,dest,created_at").order("created_at",{ascending:false})]).then(function(r){if(r[0].error){P.textContent="Couldn’t load events.";return}
+    Promise.all([db.from("events").select("*").order("start_date"),db.from("event_details").select("*"),db.from("uploads").select("id,name,url,path,bucket,size,mime,event_id,family_visible,area,dest,created_at").order("created_at",{ascending:false})]).then(function(r){if(r[0].error){P.textContent="Couldn’t load events.";return}
       var D={},UP=(r[2]&&r[2].data)||[],filesOf=function(id){return UP.filter(function(u){return u.event_id===id})};(r[1].data||[]).forEach(function(x){D[x.event_id]=x});
       var all=(r[0].data||[]).map(function(e){var g=evGuess(e);e.program=g[0];e.etype=g[1];return e}).filter(function(e){return e.program===prog}),t=todayISO();
       var up=all.filter(function(e){return (e.end_date||e.start_date)>=t}),past=all.filter(function(e){return (e.end_date||e.start_date)<t}).reverse();
@@ -9369,7 +9371,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<label class="w">Note for families <small>(only signed-in families and crew see this)</small><input type="text" id="evN" maxlength="1000" placeholder="Bring safety glasses" value="'+esc(d.notes||"")+'"></label>'+
           '<label class="chk w"><input type="checkbox" id="evP"'+(e.published!==false?' checked':'')+'> Show on the public calendar</label>'+
           '<label class="chk w"><input type="checkbox" id="evC"'+(e.to_be_confirmed?' checked':'')+'> The date isn’t final yet <small>(the calendar says “Date to be confirmed”)</small></label>'+
-          (e.id?'<div class="w evf-files"><p class="evf-k">Files for this event <small>(signed-in families see these on their Program Dashboard)</small></p>'+(filesOf(e.id).length?'<ul>'+filesOf(e.id).map(function(u){return '<li>'+libIco(libKind(u.mime,u.url))+'<a href="'+esc(u.url)+'" target="_blank" rel="noopener">'+esc(u.name)+'</a><button class="mini" type="button" data-unat="'+u.id+'">Remove</button></li>'}).join("")+'</ul>':'<p class="rk-fine">No files attached.</p>')+
+          (e.id?'<div class="w evf-files"><p class="evf-k">Files for this event <small>(private: only signed-in families and crew can open them, on their dashboards)</small></p>'+(filesOf(e.id).length?'<ul>'+filesOf(e.id).map(function(u){return '<li>'+libIco(libKind(u.mime,u.name))+'<a '+fileHref(u)+'>'+esc(u.name)+'</a><button class="mini" type="button" data-unat="'+u.id+'">Remove</button></li>'}).join("")+'</ul>':'<p class="rk-fine">No files attached.</p>')+
             '<div class="row"><select id="evAt" aria-label="Attach a recent upload"><option value="">Attach a recent upload…</option>'+UP.filter(function(u){return u.event_id!==e.id}).slice(0,30).map(function(u){return '<option value="'+u.id+'">'+esc(u.name)+'</option>'}).join("")+'</select><button class="mini" type="button" id="evUp">Upload a new file</button></div></div>':'')+
           (e.id?'<label class="chk w"><input type="checkbox" id="evCopy"> Also use this time, place and note for every later '+esc(evTypeOf(prog,ty)[1].toLowerCase())+'</label>':'')+
           '<div class="row w"><button class="btn deep" type="submit">'+(e.id?"Save changes":"Add event")+'</button><button class="mini" type="button" id="evX">Cancel</button>'+(e.id?'<button class="mini red" type="button" id="evDel">Delete</button>':'')+'</div></form>';
@@ -9377,7 +9379,8 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         $("#evT",box).onchange=function(){var ti=$("#evTi",box),old=T.filter(function(x){return x[3]&&x[3]===ti.value})[0];if(!ti.value.trim()||old)ti.value=evTypeOf(prog,this.value)[3]};
         $("#evX",box).onclick=function(){box.innerHTML="";$("#evNew",P).focus()};
         var at=$("#evAt",box);if(at)at.onchange=function(){var u=UP.filter(function(x){return x.id===at.value})[0];if(!u)return;
-          (u.event_id?db.from("uploads").insert({name:u.name,url:u.url,mime:u.mime,area:"program",dest:"event",event_id:e.id}):db.from("uploads").update({area:"program",dest:"event",event_id:e.id}).eq("id",u.id)).then(function(x){if(okToast(x,"Attached “"+u.name+"”")){UP=null;reopen()}})};
+          toast("Attaching…");(u.bucket==="event-files"?Promise.resolve({path:u.path,size:u.size}):toPrivate(u)).then(function(c){
+            return db.from("uploads").insert({name:u.name,path:c.path,bucket:"event-files",url:null,mime:u.mime,size:c.size||null,area:"program",dest:"event",event_id:e.id})}).then(function(x){if(okToast(x,"Attached “"+u.name+"” (private copy)")){UP=null;reopen()}},function(er){toast("Couldn’t attach: "+(er.message||er))})};
         var eu=$("#evUp",box);if(eu)eu.onclick=function(){var i=document.createElement("input");i.type="file";i.multiple=true;i.accept="image/*,video/mp4,video/quicktime,video/webm,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx";
           i.onchange=function(){var fs=Array.prototype.slice.call(i.files);if(!fs.length)return;toast("Uploading…");fs.reduce(function(pr,f){return pr.then(function(){return libPut(f,"program","event",{row:{event_id:e.id}})})},Promise.resolve()).then(function(){toast("Attached");reopen()},upErr)};i.click()};
         $$("[data-unat]",box).forEach(function(b){b.onclick=function(){db.from("uploads").update({event_id:null,area:"admin",dest:"documents"}).eq("id",b.getAttribute("data-unat")).then(function(x){if(okToast(x,"Removed from this event (still in your uploads)"))reopen()})}});
@@ -10163,7 +10166,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       '<div class="pd-contact"><b>Questions?</b> <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a></div></aside>';
     var tabs='<div class="pd-tabs" role="tablist">'+[["overview","Overview"],["programs","Programs & Resources"]].map(function(x){return '<button type="button" role="tab" data-pdt="'+x[0]+'" aria-selected="'+(PD.tab===x[0])+'">'+x[1]+'</button>'}).join("")+'</div>';
     var body=PD.tab==="programs"?'<div class="rlanes pd-lanes">'+lanesHTML()+'</div>':
-      '<p class="pd-k">Next on the starting line</p>'+(up.length?'<div class="pd-events">'+up.map(function(e,i){return '<article class="pd-ev'+(i===0?' first':'')+'"><div class="pd-date"><b>'+fmtDate(e.start_date,{day:"numeric"})+'</b><span>'+fmtDate(e.start_date,{month:"short"})+'</span></div><div><h3>'+esc(e.title)+'</h3>'+(when(e)?'<p>'+when(e)+'</p>':'')+(e.notes?'<p class="pd-notes">'+esc(e.notes)+'</p>':'')+(e.files&&e.files.length?'<p class="pd-files">'+e.files.map(function(f){return /^https:\/\//.test(f.url)?'<a href="'+esc(f.url)+'" target="_blank" rel="noopener">📎 '+esc(f.name)+'</a>':''}).join("")+'</p>':'')+(e.end_date&&e.end_date!==e.start_date?'<small>Through '+fmtDate(e.end_date)+'</small>':'')+'</div>'+qsSide(e)+'</article>'}).join("")+'</div>':'<p class="pd-empty">No upcoming dates yet. Check back soon.</p>')+
+      '<p class="pd-k">Next on the starting line</p>'+(up.length?'<div class="pd-events">'+up.map(function(e,i){return '<article class="pd-ev'+(i===0?' first':'')+'"><div class="pd-date"><b>'+fmtDate(e.start_date,{day:"numeric"})+'</b><span>'+fmtDate(e.start_date,{month:"short"})+'</span></div><div><h3>'+esc(e.title)+'</h3>'+(when(e)?'<p>'+when(e)+'</p>':'')+(e.notes?'<p class="pd-notes">'+esc(e.notes)+'</p>':'')+(e.files&&e.files.length?'<p class="pd-files">'+e.files.map(function(f){return fileOk(f)?'<a '+fileHref(f)+'>📎 '+esc(f.name)+'</a>':''}).join("")+'</p>':'')+(e.end_date&&e.end_date!==e.start_date?'<small>Through '+fmtDate(e.end_date)+'</small>':'')+'</div>'+qsSide(e)+'</article>'}).join("")+'</div>':'<p class="pd-empty">No upcoming dates yet. Check back soon.</p>')+
       pdGalHTML()+'<div class="pd-short"><a href="#programs"><b>Programs</b><span>Ways to build</span></a><a href="#race-watch"><b>Live Race</b><span>Race day feed</span></a><a href="#calendar"><b>Calendar</b><span>The whole year</span></a><a href="#printables"><b>Flyers &amp; Forms</b><span>Print and bring</span></a></div>'+
       '<div class="pd-new"><p class="pd-k">New this year</p><p>Summer fun runs at Cronin Derby Downs. Dates are posted on <a href="#fun-runs">Summer Fun Runs</a> once they’re set.</p></div>';
     box.innerHTML='<div class="pd-bar"><span>'+(ME?esc(ME.display_name)+' · @'+esc(ME.username):'Admin preview')+'</span><span class="row" style="margin:0">'+(ME?'<a class="mini" href="#my-dashboard">My dashboard</a>':'')+'<button class="mini" type="button" id="pdOut">Sign out</button></span></div><div class="pd-grid">'+bulletin+'<section class="pd-main">'+tabs+body+'</section></div>';
@@ -11747,7 +11750,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
       var ev=((r[0].data||{}).events||[]).filter(function(e){return (e.end_date||e.start_date)>=t}).sort(function(a,b){return a.start_date<b.start_date?-1:1}).slice(0,16);
       var albums=r[1].data||[],gal=(r[2].data||[]).filter(function(p){return p.url}).sort(function(a,b){return (a.sort_order-b.sort_order)});
       var forms=(r[3].data||[]).filter(function(x){return x.published&&x.url}).map(function(x){return {title:x.title,desc:x.description,cat:x.category||"Forms",url:x.url,kind:fileKind(x.file_name||x.url),size:fmtSize(x.file_size),date:x.event_date}});
-      ev.forEach(function(e){(e.files||[]).forEach(function(f){if(/^https:\/\//.test(f.url))forms.push({title:f.name,desc:"For "+e.title,cat:"Event files",url:f.url,kind:fileKind(f.name||f.url),size:"",date:e.start_date})})});
+      ev.forEach(function(e){(e.files||[]).forEach(function(f){if(fileOk(f))forms.push({title:f.name,desc:"For "+e.title,cat:"Event files",url:f.url,path:f.path,bucket:f.bucket,kind:fileKind(f.name||f.path||f.url),size:"",date:e.start_date})})});
       var ids=albums.map(function(a){return a.id});
       return (ids.length&&db.from("album_photos").select("*").in?safe(db.from("album_photos").select("*").in("album_id",ids).order("sort_order")):Promise.resolve({data:[]})).then(function(pr){
         var ph=(pr.data||[]).filter(function(p){return p.url}),list=albums.map(function(a){return {title:a.title,date:a.event_date,desc:a.description,photos:ph.filter(function(p){return p.album_id===a.id}).sort(function(x,y){return (y.pinned?1:0)-(x.pinned?1:0)||(x.sort_order-y.sort_order)})}}).filter(function(a){return a.photos.length});
@@ -11769,14 +11772,14 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
       var big=function(k,v,ic){return '<div class="gs-big"><span class="gs-bi" aria-hidden="true"><svg viewBox="0 0 24 24">'+ic+'</svg></span><div><small>'+k+'</small><b>'+v+'</b></div></div>'};
       return '<div class="gs-spec">'+no+'<div class="gs-bigs">'+big("Time",tm||"Time to be announced",'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>')+big("Location",it.location?esc(it.location):"Place to be announced",'<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>')+
         big("Age groups",it.ages?esc(it.ages):"Ask us about ages",'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9.5" r="2.3"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M14.5 14.6c.8-.4 1.6-.6 2.5-.6 2.2 0 3.7 1.5 4 4"/>')+'</div>'+
-        (it.notes?'<p class="gs-note">'+esc(it.notes)+'</p>':'')+(it.files&&it.files.length?'<p class="gs-files">'+it.files.map(function(f){return /^https:\/\//.test(f.url)?'<a href="'+esc(f.url)+'" target="_blank" rel="noopener">'+esc(f.name)+'</a>':''}).join("")+'</p>':'')+
+        (it.notes?'<p class="gs-note">'+esc(it.notes)+'</p>':'')+(it.files&&it.files.length?'<p class="gs-files">'+it.files.map(function(f){return fileOk(f)?'<a '+fileHref(f)+'>'+esc(f.name)+'</a>':''}).join("")+'</p>':'')+
         (ME?(qsCount(it.rsvp)?'<div class="gs-rsvp ok"><span class="gs-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Confirmed</span><small>'+qsCount(it.rsvp)+' going</small><button type="button" class="gs-chg" data-qs="'+esc(it.id)+'">Change</button></div>':
           '<button type="button" class="gs-rsvp" data-rsvp="'+esc(it.id)+'">RSVP<small>Tap to let us know you’re coming</small></button>'):
           '<div class="gs-go">'+qsSide(it)+'</div>')+'</div>'}
     if(tab==="photos")return '<div class="gs-spec">'+no+'<h3 class="gs-name">'+esc(it.title)+'</h3><div class="gs-rows">'+row("Photos",String(it.photos.length))+row("Taken",it.date?esc(fmtDate(it.date,{month:"long",day:"numeric",year:"numeric"})):"")+'</div>'+(it.desc?'<p class="gs-note">'+esc(it.desc)+'</p>':'')+
       '<div class="gs-go"><a class="gs-btn" href="'+esc((it.photos[((GS.ph%it.photos.length)+it.photos.length)%it.photos.length]||{}).url||"#")+'" target="_blank" rel="noopener">Open full size</a></div></div>';
     return '<div class="gs-spec">'+no+'<h3 class="gs-name">'+esc(it.title)+'</h3><div class="gs-rows">'+row("Type",esc(it.cat))+row("File",esc([it.kind,it.size].filter(Boolean).join(" · ")))+row("For",it.date?esc(fmtDate(it.date,{month:"short",day:"numeric",year:"numeric"})):"")+'</div>'+(it.desc?'<p class="gs-note">'+esc(it.desc)+'</p>':'')+
-      '<div class="gs-go"><a class="gs-btn" href="'+esc(it.url)+'" target="_blank" rel="noopener" download>Download</a><a class="gs-btn ghost" href="'+esc(it.url)+'" target="_blank" rel="noopener">Open to print</a></div></div>'}
+      '<div class="gs-go"><a class="gs-btn" '+fileHref(it)+' download>Download</a><a class="gs-btn ghost" '+fileHref(it)+'>Open to print</a></div></div>'}
   function gsThumb(tab,it,i,sel){var inner=tab==="photos"?'<img src="'+esc(it.photos[0].url)+'" alt="" loading="lazy"><span>'+esc(it.title)+'</span>':
       tab==="events"?'<em>'+esc(fmtDate(it.start_date,{month:"short"}))+'<b>'+esc(fmtDate(it.start_date,{day:"numeric"}))+'</b></em><span>'+esc(it.title)+'</span>':'<em class="k-'+it.kind.toLowerCase()+'">'+esc(it.kind)+'</em><span>'+esc(it.title)+'</span>';
     return '<button type="button" class="gs-th '+tab+'" role="option" aria-selected="'+sel+'" data-gi="'+i+'" aria-label="'+esc((tab==="events"?fmtDate(it.start_date,{month:"short",day:"numeric"})+" · ":"")+it.title)+'">'+inner+'</button>'}
@@ -11973,13 +11976,27 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
     if(u.area==="admin"){var a=LIB_ADMIN.filter(function(x){return x[0]===u.dest})[0];return "Admin · "+(a?a[1]:u.dest)}
     var d=String(u.dest||""),w=LIB_WEB.filter(function(x){return x[0]===d.split(":")[0]})[0];return "Website · "+(w?w[1]:d)+(d.indexOf(":")>0?" · "+d.split(":").slice(1).join(":"):"")}
   function libIco(k){return '<span class="lib-ico k-'+k+'">'+({photo:"IMG",video:"VID",doc:"DOC"})[k]+'</span>'}
+  /* Event files are private (bucket event-files): only signed-in families/crew and admins can open them, through a link that works for 10 minutes. */
+  function fileHref(f){return f&&f.bucket==="event-files"&&f.path?'href="#" data-evf="'+esc(f.path)+'"':'href="'+esc(f&&f.url||"#")+'" target="_blank" rel="noopener"'}
+  function fileOk(f){return !!(f&&((f.bucket==="event-files"&&f.path)||/^https:\/\//.test(f.url||"")))}
+  document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-evf]");if(!a)return;e.preventDefault();var w=window.open("about:blank","_blank");
+    db.storage.from("event-files").createSignedUrl(a.getAttribute("data-evf"),600).then(function(r){if(r.error||!r.data){if(w)w.close();toast("Sign in with your Family or Crew Pass to open event files.");return}if(w)w.location=r.data.signedUrl;else location.href=r.data.signedUrl},function(){if(w)w.close();toast("Couldn’t open that file. Try again.")})});
+  /* copy a file from the public library into private event storage (used when attaching an older upload to an event, and to move older event files) */
+  function toPrivate(u,evId){var path="program/"+new Date().toISOString().slice(0,10)+"/"+Date.now()+"-"+String(u.path||u.name||"file").split("/").pop().slice(-80);
+    return fetch(u.url).then(function(r){if(!r.ok)throw new Error("couldn’t read the original ("+r.status+")");return r.blob()}).then(function(b){
+      return db.storage.from("event-files").upload(path,b,{contentType:u.mime||b.type||undefined,upsert:false}).then(function(x){if(x.error)throw x.error;return {path:path,size:b.size}})})}
+  /* one-time tidy: event files saved before Nov 19 sat in the public library; move them to private storage */
+  var EVF_MOVED=false;
+  function secureEventFiles(){if(EVF_MOVED)return;EVF_MOVED=true;db.from("uploads").select("*").eq("bucket","library").not("event_id","is",null).then(function(r){var L=(r.data||[]).filter(function(u){return u.url});if(!L.length)return;var n=0;
+    L.reduce(function(pr,u){return pr.then(function(){return toPrivate(u).then(function(c){return db.from("uploads").update({bucket:"event-files",path:c.path,url:null}).eq("id",u.id).then(function(x){if(x.error)throw x.error;n++;
+      return u.dest==="event"&&u.path?db.from("uploads").select("id",{count:"exact",head:true}).eq("path",u.path).eq("bucket","library").then(function(c2){return (c2.count||0)===0?db.storage.from("library").remove([u.path]):null}):null})}).catch(function(e){console.warn("event file move",u.name,e)})})},Promise.resolve()).then(function(){if(n)toast(n+" event file"+(n===1?"":"s")+" moved to private storage")})})}
   function libPut(file,area,dest,extra){var big=50*1024*1024,isImg=/^image\/(jpeg|png|webp)$/.test(file.type)||/\.(heic|heif)$/i.test(file.name);
     return (isImg?prepImage(file,8*1024*1024):Promise.resolve(file)).then(function(f){
       if(f.size>big){var e=new Error("big");e.userMsg=f.name+" is over 50 MB. For long videos, upload to YouTube and paste the link instead.";throw e}
-      var path=area+"/"+new Date().toISOString().slice(0,10)+"/"+Date.now()+"-"+f.name.toLowerCase().replace(/[^a-z0-9.]+/g,"-").slice(-80);
-      return db.storage.from("library").upload(path,f,{contentType:f.type||undefined,upsert:false,cacheControl:"31536000"}).then(function(u){
+      var path=area+"/"+new Date().toISOString().slice(0,10)+"/"+Date.now()+"-"+f.name.toLowerCase().replace(/[^a-z0-9.]+/g,"-").slice(-80),bk=area==="program"?"event-files":"library";
+      return db.storage.from(bk).upload(path,f,{contentType:f.type||undefined,upsert:false,cacheControl:"31536000"}).then(function(u){
         if(u.error){var e2=new Error(u.error.message);e2.userMsg=/mime|type/i.test(u.error.message)?"That kind of file can’t be uploaded. Use a photo, video (MP4/MOV), PDF, Word, Excel or PowerPoint file.":"Couldn’t upload "+f.name+": "+u.error.message;throw e2}
-        var url=db.storage.from("library").getPublicUrl(path).data.publicUrl,row=Object.assign({name:(extra&&extra.name)||f.name.replace(/\.[^.]+$/,"").replace(/[-_]+/g," ").slice(0,160)||"File",path:path,url:url,mime:f.type||null,size:f.size,area:area,dest:dest},extra&&extra.row||{});
+        var url=bk==="library"?db.storage.from("library").getPublicUrl(path).data.publicUrl:null,row=Object.assign({name:(extra&&extra.name)||f.name.replace(/\.[^.]+$/,"").replace(/[-_]+/g," ").slice(0,160)||"File",path:path,url:url,bucket:bk,mime:f.type||null,size:f.size,area:area,dest:dest},extra&&extra.row||{});
         return db.from("uploads").insert(row).then(function(x){if(x.error){var e3=new Error(x.error.message);e3.userMsg="Uploaded, but couldn’t save it to your uploads: "+x.error.message;throw e3}return {row:row,file:f}})})})}
   /* send a library file on to where it belongs on the website */
   function libPlace(row,dest,file){var d=dest.split(":"),k=d[0];
@@ -11992,7 +12009,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
   /* "Attach a file" under any message box: inserts a link to a recent upload */
   function addFilePicker(ta){if(!ta||ta.__fp)return;ta.__fp=1;var w=document.createElement("div");w.className="lib-pick";
     w.innerHTML='<label>Attach a file <select><option value="">Choose from your uploads…</option></select></label>';ta.insertAdjacentElement("afterend",w);var sel=$("select",w);["keyup","click","input"].forEach(function(ev){ta.addEventListener(ev,function(){ta.__caret=ta.selectionStart})});
-    db.from("uploads").select("id,name,url,mime,area,dest").order("created_at",{ascending:false}).limit(40).then(function(r){var L=r.data||[];
+    db.from("uploads").select("id,name,url,mime,area,dest").not("url","is",null).order("created_at",{ascending:false}).limit(40).then(function(r){var L=r.data||[];
       sel.innerHTML='<option value="">'+(L.length?"Choose from your uploads…":"No uploads yet (use Quick upload on the Overview)")+'</option>'+L.map(function(u){return '<option value="'+u.id+'">'+esc(u.name)+(u.area==="admin"&&u.dest==="email"?" (email attachments)":"")+'</option>'}).join("");
       sel.onchange=function(){var u=L.filter(function(x){return x.id===sel.value})[0];if(!u)return;var s=(ta.__caret!=null?ta.__caret:ta.value.length),ins="\n"+u.name+": "+u.url+"\n";
         ta.value=ta.value.slice(0,s)+ins+ta.value.slice(s);ta.dispatchEvent(new Event("input",{bubbles:true}));sel.value="";toast("Link to “"+u.name+"” added to the message");ta.focus()}})}
@@ -12034,7 +12051,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
             QU.files=[];QU.area=null;draw();quRecent(P,evs)})}}
     draw();quRecent(P,evs)}
   function quRecent(P,evs){var ul=$("#quRecent",P);if(!ul)return;db.from("uploads").select("*").order("created_at",{ascending:false}).limit(6).then(function(r){var L=r.data||[];
-    ul.innerHTML=L.length?L.map(function(u){return '<li>'+libIco(libKind(u.mime,u.url))+'<span><b>'+esc(u.name)+'</b><small>'+esc(libLabel(u,evs))+'</small></span><button class="mini" type="button" data-cp="'+esc(u.url)+'">Copy link</button></li>'}).join(""):'<li class="rk-fine">Nothing uploaded yet.</li>';
+    ul.innerHTML=L.length?L.map(function(u){return '<li>'+libIco(libKind(u.mime,u.url))+'<span><b>'+esc(u.name)+'</b><small>'+esc(libLabel(u,evs))+'</small></span>'+(u.url?'<button class="mini" type="button" data-cp="'+esc(u.url)+'">Copy link</button>':'<span class="lib-priv" title="Only signed-in families, crew and admins can open this">Private</span>')+'</li>'}).join(""):'<li class="rk-fine">Nothing uploaded yet.</li>';
     $$("[data-cp]",ul).forEach(function(b){b.onclick=function(){var v=b.getAttribute("data-cp");(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(function(){toast("Link copied")},function(){prompt("Copy this link:",v)})}})})}
   /* Admin → Uploads: everything in the library */
   var LIBF="all";
@@ -12044,13 +12061,13 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
       P.innerHTML='<div class="evp-head"><p>Every file uploaded with Quick upload. Pick one from “Attach a file” when you write an email, or attach it to an event in Program events and Racing events.</p><button class="btn deep" type="button" id="libNew">+ Upload</button></div>'+
         '<div class="mb-find"><select id="libF" aria-label="Show">'+[["all","All uploads ("+all.length+")"],["website","Website"],["program","Program events"],["admin","Administration (all)"]].concat(LIB_ADMIN.map(function(a){return ["admin:"+a[0],"· "+a[1]]})).map(function(o){return '<option value="'+o[0]+'"'+(LIBF===o[0]?' selected':'')+'>'+esc(o[1])+'</option>'}).join("")+'</select></div>'+
         (list.length?'<ul class="lib-list">'+list.map(function(u){return '<li data-id="'+u.id+'">'+libIco(libKind(u.mime,u.url))+'<span><b>'+esc(u.name)+'</b><small>'+esc(libLabel(u,evs))+' · '+new Date(u.created_at).toLocaleDateString([],{month:"short",day:"numeric",year:"numeric"})+(u.size?' · '+fmtSize(u.size):'')+'</small></span>'+
-          '<span class="row"><a class="mini" href="'+esc(u.url)+'" target="_blank" rel="noopener">Open</a><button class="mini" type="button" data-cp="'+esc(u.url)+'">Copy link</button><button class="mini red" type="button" data-del>Delete</button></span></li>'}).join("")+'</ul>':'<p class="rk-fine">Nothing here yet.</p>');
+          '<span class="row"><a class="mini" '+fileHref(u)+'>Open</a>'+(u.url?'<button class="mini" type="button" data-cp="'+esc(u.url)+'">Copy link</button>':'<span class="lib-priv" title="Only signed-in families, crew and admins can open this">Private</span>')+'<button class="mini red" type="button" data-del>Delete</button></span></li>'}).join("")+'</ul>':'<p class="rk-fine">Nothing here yet.</p>');
       $("#libNew",P).onclick=function(){goTab("overview");setTimeout(function(){var d=$("#quDrop");if(d){d.scrollIntoView({block:"center"});d.focus()}},400)};
       $("#libF",P).onchange=function(){LIBF=this.value;tabUploads()};
       $$("[data-cp]",P).forEach(function(b){b.onclick=function(){var v=b.getAttribute("data-cp");(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(function(){toast("Link copied")},function(){prompt("Copy this link:",v)})}});
       $$("[data-del]",P).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";toast("Deleting removes the file everywhere it’s linked.");return}
         var u=all.filter(function(x){return x.id===b.closest("li").getAttribute("data-id")})[0];
-        (u.path?db.storage.from("library").remove([u.path]):Promise.resolve()).then(function(){return db.from("uploads").delete().eq("id",u.id)}).then(function(x){if(okToast(x,"Deleted"))tabUploads()})}});
+        var bk=u.bucket||"library";db.from("uploads").delete().eq("id",u.id).then(function(x){if(x.error||!u.path)return x;return db.from("uploads").select("id",{count:"exact",head:true}).eq("path",u.path).eq("bucket",bk).then(function(c){return ((c.count||0)===0?db.storage.from(bk).remove([u.path]):Promise.resolve()).then(function(){return x})})}).then(function(x){if(okToast(x,"Deleted"))tabUploads()})}});
     })}
   /* ---------- Building Workshop: teams, participants & coaches, submissions (designs, team names & logos, waivers, registrations, spirit wear, requests) ---------- */
   var BW_KINDS=[["design","Car design","Drawings, sketches or a photo of the car plan"],["team","Team name & logo","Team name, school or team logo"],["waiver","Waiver","A signed waiver"],["registration","Registration","A registration form"],["spiritwear","Spirit wear","Shirt sizes or an order form"],["request","Request","Anything you need from us"]];
@@ -12324,7 +12341,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
       var gb=$("#gateBtn",P);if(gb){gb.onclick=function(){gb.disabled=true;setGate(true).then(function(){if(TAB==="overview")tabOverview()})};$("#gateNo",P).onclick=function(){$("#gateHint",P).hidden=true}}
       $$("[data-new]",P).forEach(function(b){b.onclick=function(){var k=b.getAttribute("data-new");if(k==="leadership")MTG_EDIT="new";else EVUI.autoNew=true;goTab(k)}});
       $$("[data-csv]",P).forEach(function(b){b.onclick=function(){rosterCSV(b.getAttribute("data-csv"))}});
-      quBind(P,EV);
+      quBind(P,EV);secureEventFiles();
       bwLoad(bwSeason()).then(function(D){if(TAB!=="overview")return;BW_SEASON=BW_SEASON||bwSeason();var api=bwQuBind($("#bwQuOv",P),D,function(){admCounts()});QU.bw=api},function(){});
     });
   }
