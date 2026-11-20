@@ -145,8 +145,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:420px){.hero h1{font-size:clamp(3rem,15vw,3.6rem)}}
 .hero-p{max-width:46ch;font-size:1.1rem;line-height:1.6;color:#eceef1}
 .signals{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:10px}
-.signal{display:flex;align-items:center;gap:12px;text-align:left;min-width:232px;padding:13px 22px 13px 16px;border-radius:999px;background:rgba(20,21,25,.88);border:1px solid rgba(255,255,255,.1);text-decoration:none;color:#fff;transition:transform .15s,border-color .15s}
-.signal:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.35)}
+.signal{--sl-bg:rgba(20,21,25,.88);--sl-bd:rgba(255,255,255,.14);--sl-bw:1px;display:flex;align-items:center;gap:12px;text-align:left;min-width:232px;padding:13px 26px 13px 20px;text-decoration:none;color:#fff;transition:transform .15s}
+.signal:hover{transform:translateY(-2px);--sl-bd:rgba(255,255,255,.4)}
 .signal i{width:14px;height:14px;border-radius:50%;flex:none}
 .signal.red i{background:var(--red2);box-shadow:0 0 10px var(--red2)}
 .signal.amber i{background:var(--amber);box-shadow:0 0 10px var(--amber)}
@@ -880,8 +880,8 @@ dialog.q-dlg{width:min(780px,calc(100vw - 32px))}
 .dr-rd:hover .dr-more,.dr-rd:focus-within .dr-more{max-height:140px;opacity:1;margin:14px 0 2px}
 @media (hover:none){.dr-more{max-height:none;opacity:1;margin:14px 0 2px}}
 .dr-more>span{font:700 .72rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ffb3b6;margin-right:4px}
-.dr-more button{font:700 .9rem/1 var(--body);color:#fff;background:transparent;border:1.5px solid rgba(255,255,255,.45);border-radius:999px;padding:10px 16px;cursor:pointer}
-.dr-more button:hover,.dr-more button:focus-visible{background:#fff;color:var(--ink);border-color:#fff}
+.dr-more button{--sl-bd:rgba(255,255,255,.45);font:700 .9rem/1 var(--body);color:#fff;background:none;border:0;padding:11px 18px;cursor:pointer}
+.dr-more button:hover,.dr-more button:focus-visible{--sl-bg:#fff;--sl-bd:#fff;color:var(--ink)}
 .dr-rd-body{margin-top:14px}
 .dr-rd .dr-lede{margin-bottom:12px}
 .dr-rd .dr-flow li{padding-top:12px;padding-bottom:12px}
@@ -902,9 +902,9 @@ dialog.dr-dlg::backdrop{background:rgba(11,11,14,.5);-webkit-backdrop-filter:blu
 .dr-hero{background:#16171a;border-bottom:4px solid var(--red);color:#fff}
 .dr-hero .wrap{display:grid;gap:18px;padding-block:clamp(2rem,5vw,3.4rem)}
 .dr-hero h1{font-size:clamp(2.6rem,6vw,4.4rem);font-style:italic;color:#fff;transform:skewX(-6deg);transform-origin:left;margin-top:6px}
-.dr-jump{display:flex;flex-wrap:wrap;gap:8px}
-.dr-jump a{color:#fff;text-decoration:none;font:700 .86rem/1 var(--body);border:1.5px solid rgba(255,255,255,.4);border-radius:999px;padding:9px 14px}
-.dr-jump a:hover,.dr-jump a:focus-visible{background:#fff;color:var(--ink)}
+.dr-jump{display:flex;flex-wrap:wrap;gap:10px 12px;padding-left:4px}
+.dr-jump a{--sl-bd:rgba(255,255,255,.4);color:#fff;text-decoration:none;font:700 .86rem/1 var(--body);padding:10px 17px}
+.dr-jump a:hover,.dr-jump a:focus-visible{--sl-bg:#fff;--sl-bd:#fff;color:var(--ink)}
 .dr-sec{margin-top:clamp(2.5rem,5vw,3.6rem);scroll-margin-top:96px}
 .dr-h{font-size:clamp(2rem,4vw,2.7rem);color:#fff;margin:8px 0 10px}
 .dr-h3{font-size:1.45rem;color:#fff;margin:0 0 10px}
@@ -1141,8 +1141,8 @@ a.ycell:hover{background:#fbe2e5}
 /* ===== Content pages (support, spirit, donate, news, contact, privacy, background check) ===== */
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
 .next-step{margin-top:clamp(2rem,4vw,2.8rem)}
-.feature-list{list-style:none;margin:0;padding:0!important;display:flex!important;flex-wrap:wrap;gap:8px!important}
-.feature-list li{border:1.5px solid var(--ink);border-radius:999px;padding:6px 12px;font:600 .82rem/1.2 var(--body);color:var(--ink)}
+.feature-list{list-style:none;margin:0;padding:0!important;display:flex!important;flex-wrap:wrap;gap:10px 12px!important;margin-left:4px}
+.feature-list li{--sl-bd:var(--ink);padding:7px 15px;font:600 .82rem/1.2 var(--body);color:var(--ink)}
 .give-strip{background:var(--red-deep);color:#fff;border-radius:6px;padding:clamp(1.3rem,3vw,1.9rem);display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;margin-top:22px}
 .give-strip h2{font-size:clamp(1.8rem,3.5vw,2.4rem);color:#fff}
 .give-strip p{color:#fde8ea;margin-top:6px}
@@ -1162,8 +1162,8 @@ a.ycell:hover{background:#fbe2e5}
 .sp-note .panel{border-top:4px solid var(--red-deep)}
 .sp-filters{display:flex;flex-wrap:wrap;gap:8px;margin:clamp(2rem,4vw,2.6rem) 0 16px;align-items:center}
 .sp-filters h2{font-size:clamp(2rem,4vw,2.8rem);margin-right:auto;color:var(--ink)}
-.sp-filters button{border:1.5px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:8px 14px;font:600 .86rem/1 var(--body);cursor:pointer}
-.sp-filters button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.sp-filters button{--sl-bg:#fff;--sl-bd:var(--ink);border:0;background:none;color:var(--ink);padding:9px 17px;font:600 .86rem/1 var(--body);cursor:pointer}
+.sp-filters button[aria-pressed="true"]{--sl-bg:var(--ink);color:#fff}
 .sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
 .sp-item{background:#fff;border-radius:6px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;box-shadow:0 8px 20px rgba(17,17,19,.08)}
 .sp-art{aspect-ratio:4/3;display:grid;place-items:center;text-align:center;padding:16px;position:relative}
@@ -2782,10 +2782,10 @@ body.rk-on .fr-pill{display:none!important}
 .rw-meta{font-size:.88rem;color:#a9abb1}
 .rw-time{font:800 clamp(1.7rem,3.6vw,2.5rem)/1 var(--display);color:#fff;font-variant-numeric:tabular-nums;margin-top:4px}
 .rw-badge{display:inline-block;background:var(--red);color:#fff;font:800 .74rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:7px 9px;border-radius:3px}
-.rw-fol{margin-top:6px;border:1px solid #55545b;background:transparent;color:#e3e5e9;border-radius:999px;padding:7px 11px;font:700 .8rem/1 var(--body);cursor:pointer}
-.rw-fol[aria-pressed="true"]{background:var(--pink);border-color:var(--pink);color:#1a0003}
-.rw-fol.lt{border-color:#c9ccd1;color:var(--ink);background:#fff;flex:none}
-.rw-fol.lt[aria-pressed="true"]{background:var(--red-deep);border-color:var(--red-deep);color:#fff}
+.rw-fol{--sl-bd:#55545b;--sl-bw:1px;margin-top:6px;border:0;background:none;color:#e3e5e9;padding:8px 14px;font:700 .8rem/1 var(--body);cursor:pointer}
+.rw-fol[aria-pressed="true"]{--sl-bg:var(--pink);--sl-bd:var(--pink);color:#1a0003}
+.rw-fol.lt{--sl-bd:#c9ccd1;--sl-bg:#fff;color:var(--ink);flex:none}
+.rw-fol.lt[aria-pressed="true"]{--sl-bg:var(--red-deep);--sl-bd:var(--red-deep);color:#fff}
 .rw-vs{width:clamp(50px,7vw,64px);height:clamp(50px,7vw,64px);display:grid;place-items:center;background:var(--red);color:#fff;font:900 1.4rem/1 var(--body);border-radius:6px;transform:rotate(-8deg);box-shadow:0 8px 18px rgba(0,0,0,.4);border:2px solid #fff}
 @media (max-width:620px){.rw-match{grid-template-columns:1fr 1fr;gap:8px}.rw-vs{position:absolute;left:50%;top:30px;transform:translateX(-50%) rotate(-8deg);width:38px;height:38px;font-size:.95rem;z-index:2}.rw-lane{padding:12px 8px}.rw-av{width:50px;height:50px;font-size:1.35rem}.rw-name{font-size:1.3rem}.rw-team{font-size:.9rem}.rw-meta{font-size:.76rem}.rw-head{margin:10px 0 14px}.rw-time{font-size:1.5rem}}
 .rw-lights{display:inline-flex;gap:16px;background:#0b0b0d;border:1px solid #333;border-radius:14px;padding:10px 16px 8px;margin-top:22px;position:relative}
@@ -2831,9 +2831,9 @@ body.rk-on .fr-pill{display:none!important}
 .rw-tabs::-webkit-scrollbar{display:none}
 .rw-tabs button{flex:none;border:0;background:none;font:700 1rem/1 var(--body);padding:12px 12px;border-bottom:3px solid transparent;margin-bottom:-2px;color:#4a4d55;cursor:pointer}
 .rw-tabs button[aria-selected="true"]{color:var(--red-deep);border-bottom-color:var(--red)}
-.rw-divs{display:flex;gap:6px;flex-wrap:wrap;padding:14px 16px 0}
-.rw-divs button{border:1px solid #c9ccd1;background:#fff;color:var(--ink);border-radius:999px;padding:8px 13px;font:700 .88rem/1 var(--body);cursor:pointer}
-.rw-divs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.rw-divs{display:flex;gap:8px 10px;flex-wrap:wrap;padding:14px 20px 0}
+.rw-divs button{--sl-bg:#fff;--sl-bd:#c9ccd1;--sl-bw:1px;border:0;background:none;color:var(--ink);padding:9px 16px;font:700 .88rem/1 var(--body);cursor:pointer}
+.rw-divs button[aria-pressed="true"]{--sl-bg:var(--ink);--sl-bd:var(--ink);color:#fff}
 .rw-view{padding:8px 16px 20px}
 .rw-list{list-style:none;margin:0;padding:0}
 .rw-row{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:12px 8px;border-bottom:1px solid #eef0f2}
@@ -3037,9 +3037,9 @@ body.rw-app-on .fr-pill{bottom:calc(62px + env(safe-area-inset-bottom,0px))}
 .rw-app .rw-tabs button[aria-selected="true"]{color:#fff;border-bottom-color:var(--red);background:rgba(255,255,255,.05)}
 .rw-app .rw-tabs button:hover{color:#fff}
 .rw-x{flex:none;width:46px;background:transparent;border:0;border-left:1px solid #26262c;color:#fff;font:400 1.7rem/1 var(--body);cursor:pointer}.rw-x:hover{background:var(--red-deep)}
-.rw-app .rw-divs{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px 0;margin:0}
-.rw-app .rw-divs button{background:#fff;border:1.5px solid #c9ccd1;color:var(--ink);border-radius:999px;padding:6px 11px;font:700 .8rem/1 var(--body);cursor:pointer}
-.rw-app .rw-divs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.rw-app .rw-divs{display:flex;gap:8px 10px;flex-wrap:wrap;padding:10px 18px 0;margin:0}
+.rw-app .rw-divs button{--sl-bg:#fff;--sl-bd:#c9ccd1;--sl-bw:1.5px;background:none;border:0;color:var(--ink);padding:7px 14px;font:700 .8rem/1 var(--body);cursor:pointer}
+.rw-app .rw-divs button[aria-pressed="true"]{--sl-bg:var(--ink);--sl-bd:var(--ink);color:#fff}
 .rw-app .rw-view{flex:1 1 auto;overflow:auto;padding:12px 14px 18px;min-height:0;scrollbar-width:thin;background:transparent;border:0;margin:0}
 .rw-app .rw-view .rw-k2{font:800 .7rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep);margin:14px 0 8px}
 .rw-app .rw-view .rw-k2:first-child{margin-top:4px}
@@ -4073,10 +4073,34 @@ section.dash{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;ali
 @media (max-width:520px){.sw2 .year-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* ===== Sponsor menu & sponsor pages (Nov 16) ===== */
 .spx .sp-range{color:#3b3e45;font-size:.95rem}.spx .sp-range b{color:var(--red-deep)}.spx .sp-range span{color:#9a9da3;margin-inline:4px}
-.sp-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(1.4rem,3vw,2rem)}
-.sp-tabs a{font:700 .8rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#fff;text-decoration:none;padding:11px 15px;border:1.5px solid rgba(255,255,255,.35);border-radius:999px;transition:border-color .15s,background .15s}
-.sp-tabs a:hover{border-color:#fff}
-.sp-tabs a[aria-current="page"]{background:var(--red-deep);border-color:var(--red-deep)}
+/* Sponsor avenues: a pit board of numbered plates (Nov 20) */
+/* Racing plates: slanted buttons and tags across the public site (Nov 20) */
+.signal,
+.dr-more button,
+.dr-jump a,
+.feature-list li,
+.sp-filters button,
+.rw-fol,
+.rw-divs button,
+.sp-chips a,
+.av-menu .av-chip{position:relative;isolation:isolate;border-radius:0}
+.signal::before,.dr-more button::before,.dr-jump a::before,.feature-list li::before,.sp-filters button::before,.rw-fol::before,.rw-divs button::before,.sp-chips a::before,.av-menu .av-chip::before{content:"";position:absolute;inset:0;z-index:-1;transform:skewX(-14deg);border-radius:3px;background:var(--sl-bg,transparent);border:var(--sl-bw,1.5px) solid var(--sl-bd,currentColor);transition:background .15s,border-color .15s}
+.sp-tabs{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:clamp(1.6rem,3vw,2.4rem);padding:46px 12px 12px;background:#0c0d10;border:1px solid #2b2d34;border-top:4px solid var(--red);border-radius:4px;box-shadow:0 18px 40px rgba(0,0,0,.35);scroll-margin-top:110px}
+.sp-tabs::before{content:"Sponsor avenues";position:absolute;left:14px;top:16px;font:800 .74rem/1 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.sp-tabs::after{content:"";position:absolute;right:12px;top:14px;width:88px;height:16px;background:repeating-conic-gradient(#fff 0 25%,#111 0 50%) 0 0/8px 8px}
+.sp-tabs a{position:relative;display:grid;align-content:start;gap:6px;min-height:112px;padding:14px 16px 20px;color:#fff;text-decoration:none;background:#1c1e24;border:1.5px solid #383a43;border-radius:3px;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);transition:background .15s,border-color .15s,transform .15s}
+.sp-tabs a i{font:italic 900 1.7rem/1 var(--display);color:var(--red2)}
+.sp-tabs a b{font:800 clamp(1.12rem,1.7vw,1.4rem)/1 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.sp-tabs a small{font:700 .66rem/1.35 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#a9adb5}
+.sp-tabs a:hover{border-color:#fff;background:#262830;transform:translateY(-2px)}
+.sp-tabs a:focus-visible{outline:3px solid #fff;outline-offset:-6px}
+.sp-tabs a[aria-current="page"]{background:var(--red-deep);border-color:var(--red-deep);transform:none}
+.sp-tabs a[aria-current="page"] i{color:#fff}
+.sp-tabs a[aria-current="page"] small{color:#ffd9dc}
+.sp-tabs a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/8px 8px}
+@media (max-width:900px){.sp-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.sp-tabs a{min-height:96px}.sp-tabs a:first-child{grid-column:1/-1;min-height:0}}
+@media (max-width:480px){.sp-tabs{grid-template-columns:minmax(0,1fr);gap:8px}.sp-tabs a,.sp-tabs a:first-child{grid-column:auto;min-height:0;grid-template-columns:2.4rem minmax(0,1fr);column-gap:10px;align-items:center;padding:12px 14px 16px}.sp-tabs a i{grid-row:1/3;font-size:1.5rem}.sp-tabs a b{font-size:1.15rem}}
+@media (max-width:360px){.sp-tabs::after{width:56px}.sp-tabs a{padding:12px 12px 18px}}
 .sp-sec{margin-top:clamp(2.2rem,4.5vw,3.4rem)}
 .sp-sec>h2{color:#fff;font-size:clamp(2.1rem,4vw,3rem);margin-top:6px}
 .sp-sec>p.sub{color:#d5d8dd;max-width:62ch;margin-top:10px;line-height:1.6}
@@ -4139,9 +4163,9 @@ section.dash{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;ali
 .sp-inc li{font-size:.84rem;font-weight:600;padding:7px 11px;border:1px solid #d3d5da;border-radius:4px;color:#3b3e45;line-height:1.2}
 @media (max-width:1000px){.sp-tiers.three{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:760px){.sp-tiers{grid-template-columns:minmax(0,1fr)}}
-.sp-chips{display:flex;flex-wrap:wrap;gap:8px}
-.sp-chips a{font-weight:700;font-size:.92rem;color:var(--ink);text-decoration:none;padding:10px 15px;border:1.5px solid var(--ink);border-radius:999px;transition:background .15s,color .15s}
-.sp-chips a:hover{background:var(--red-deep);border-color:var(--red-deep);color:#fff}
+.sp-chips{display:flex;flex-wrap:wrap;gap:10px 12px;padding-left:4px}
+.sp-chips a{--sl-bd:var(--ink);font-weight:700;font-size:.92rem;color:var(--ink);text-decoration:none;padding:11px 18px;transition:color .15s}
+.sp-chips a:hover{--sl-bg:var(--red-deep);--sl-bd:var(--red-deep);color:#fff}
 .sp-seen{list-style:none;padding:0!important;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px!important}
 .sp-seen li{border-left:4px solid var(--red-deep);padding:4px 0 4px 14px;display:grid;gap:6px}
 .sp-seen b{font:800 1.25rem/1.05 var(--display);text-transform:uppercase}
@@ -4235,6 +4259,16 @@ section.dash{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;ali
 .rd-tiers .sp-tier.top{border-left:8px solid var(--red-deep)}
 .rd-tiers h3 .no{display:inline-grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;background:var(--red-deep);color:#fff;font-size:.72em;margin-right:10px;vertical-align:3px}
 .rd-finish{margin-top:clamp(2.2rem,4vw,3rem);background:var(--red-deep);color:#fff;border-radius:10px;padding:calc(clamp(1.4rem,3vw,2rem) + 18px) clamp(1.2rem,3vw,2rem) clamp(1.4rem,3vw,2rem);display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+.rd-beyond{position:relative;margin-top:clamp(1.6rem,3vw,2.2rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;padding:clamp(1.4rem,3vw,2rem) clamp(1.2rem,3vw,2rem) clamp(1.4rem,3vw,2rem) calc(clamp(1.2rem,3vw,2rem) + 18px);background:#0c0d10;border:1px solid #2b2d34;border-top:4px solid var(--red);border-radius:4px;overflow:hidden}
+.rd-beyond::before{content:"";position:absolute;left:0;top:0;bottom:0;width:16px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/16px 16px}
+.rd-beyond-txt{flex:1 1 420px;min-width:0}
+.rd-beyond h2{color:#fff;font:italic 900 clamp(1.7rem,3.4vw,2.5rem)/1 var(--display);text-transform:uppercase;margin-top:8px;max-width:26ch}
+.rd-beyond-txt>p:not(.eyebrow){color:#d5d8dd;margin-top:10px;max-width:58ch;line-height:1.55}
+.rd-beyond-list{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px}
+.rd-beyond-list li{display:flex;align-items:baseline;gap:7px;font:800 1rem/1 var(--display);text-transform:uppercase;letter-spacing:.02em;color:#fff}
+.rd-beyond-list i{font:italic 900 1.05rem/1 var(--display);color:var(--red2)}
+.rd-beyond .btn{flex:none}
+@media (max-width:560px){.rd-beyond .btn{width:100%;white-space:normal;text-align:center}}
 .rd-finish::before{content:"";position:absolute;left:0;right:0;top:0;height:16px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/16px 16px}
 .rd-finish h2{color:#fff;font:italic 900 clamp(2.2rem,4vw,3rem)/1 var(--display);text-transform:uppercase}
 .rd-finish p{color:#ffe3e5;max-width:60ch;margin-top:8px;line-height:1.55}
@@ -4309,9 +4343,11 @@ body.spx-prices-on .spx-noprice{display:none}
 .av-menu .av-tier[aria-pressed="true"]::before{background:repeating-conic-gradient(#111 0 25%,#ffd2d5 0 50%) 0 0/10px 10px}
 .av-menu .av-tier[aria-pressed="true"]::after{border-color:#fff}
 .av-menu>.sp-grid{margin-top:14px}
-.av-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.av-menu .av-chip{min-height:0;display:inline-flex;align-items:center;padding:10px 36px 10px 15px;border-radius:999px;font-weight:700;font-size:.92rem;line-height:1.2}
-.av-menu .av-chip::after{top:50%;transform:translateY(-50%);right:10px;width:14px;height:14px}
+.av-chips{display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:12px;padding-left:4px}
+.av-menu .av-chip{--sl-bd:rgba(255,255,255,.55);min-height:0;display:inline-flex;align-items:center;padding:11px 38px 11px 18px;border:0;border-radius:0;background:none;font-weight:700;font-size:.92rem;line-height:1.2}
+.av-menu .av-chip:hover{background:none;--sl-bd:#fff;--sl-bg:rgba(255,255,255,.07)}
+.av-menu .av-chip[aria-pressed="true"]{background:none;--sl-bg:var(--red-deep);--sl-bd:var(--red-deep)}
+.av-menu .av-chip::after{top:50%;transform:translateY(-50%);right:12px;width:14px;height:14px;border-radius:2px}
 .av-menu .av-chip[aria-pressed="true"]::after{font-size:10px;line-height:12px}
 .av-greater{margin-top:clamp(1.4rem,3vw,2rem);padding:clamp(1rem,2.6vw,1.4rem);border:1.5px dashed rgba(255,176,180,.6);border-radius:10px;background:rgba(210,20,28,.08)}
 .av-greater .av-mh{margin-top:0}
@@ -5566,7 +5602,7 @@ a.mini{text-decoration:none;display:inline-block}
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support" aria-current="page">Become a Sponsor</a><a href="#race-day-sponsors">Race Day</a><a href="#track-development">Track Development</a><a href="#program-facility-development">Program &amp; Facility</a><a href="#park-community-development">Park &amp; Community</a></nav>
+    <nav class="sp-tabs" id="sponsor-avenues" aria-label="Sponsor pages"><a href="#support" aria-current="page"><i>01</i><b>Become a Sponsor</b><small>All the ways to give</small></a><a href="#race-day-sponsors"><i>02</i><b>Race Day</b><small>Sat · June 5, 2027</small></a><a href="#track-development"><i>03</i><b>Track Development</b><small>The track at Cronin Derby Downs</small></a><a href="#program-facility-development"><i>04</i><b>Program &amp; Facility</b><small>Workshops, programs &amp; space</small></a><a href="#park-community-development"><i>05</i><b>Park &amp; Community</b><small>The park &amp; our neighbors</small></a></nav>
     <section class="sp-sec" id="become-a-sponsor" aria-labelledby="avHowH"><p class="eyebrow">How to become a sponsor</p><h2 id="avHowH">Sponsor in three easy steps</h2>
       <ol class="av-steps"><li><span class="n">1</span><b>Choose what to support</b><span>Race day, or one of our three avenues below.</span></li><li><span class="n">2</span><b>Open its sponsor menu</b><span>Tap the tiers, ads, donations or projects that interest you.</span></li><li><span class="n">3</span><b>Send your picks</b><span>Our staff will follow up with details. Sending picks doesn’t commit you to anything.</span></li></ol>
       <p class="sub">Prefer to give without a sponsorship? <a class="av-inline" href="#donate">Make a donation of any size →</a></p></section>
@@ -5619,7 +5655,7 @@ a.mini{text-decoration:none;display:inline-block}
   </header>
   <div class="rd-checkband" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Become a Sponsor</a><a href="#race-day-sponsors" aria-current="page">Race Day</a><a href="#track-development">Track Development</a><a href="#program-facility-development">Program &amp; Facility</a><a href="#park-community-development">Park &amp; Community</a></nav>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support"><i>01</i><b>Become a Sponsor</b><small>All the ways to give</small></a><a href="#race-day-sponsors" aria-current="page"><i>02</i><b>Race Day</b><small>Sat · June 5, 2027</small></a><a href="#track-development"><i>03</i><b>Track Development</b><small>The track at Cronin Derby Downs</small></a><a href="#program-facility-development"><i>04</i><b>Program &amp; Facility</b><small>Workshops, programs &amp; space</small></a><a href="#park-community-development"><i>05</i><b>Park &amp; Community</b><small>The park &amp; our neighbors</small></a></nav>
     <section class="sp-sec" aria-labelledby="rdWkH">
       <p class="eyebrow">Race day 2027</p>
       <h2 id="rdWkH">Race day at a glance</h2>
@@ -5649,6 +5685,9 @@ a.mini{text-decoration:none;display:inline-block}
         <div class="av-chips"><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Race Day · Stock Division Sponsor (greater opportunity)">Stock Division Sponsor</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Race Day · Super Stock Division Sponsor (greater opportunity)">Super Stock Division Sponsor</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Race Day · Masters Division Sponsor (greater opportunity)">Masters Division Sponsor</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Race Day · The Track (greater opportunity)">The Track</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Race Day · Event Experience Partner (greater opportunity)">Event Experience Partner</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Race Day · Guest Tent &amp; Hospitality Zone (greater opportunity)">Guest Tent &amp; Hospitality Zone</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Race Day · Start Line Zone (greater opportunity)">Start Line Zone</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Race Day · Finish Line Zone (greater opportunity)">Finish Line Zone</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Race Day · Family Fun Zone (greater opportunity)">Family Fun Zone</button><button type="button" class="sp-pick av-chip" aria-pressed="false" data-pick="Race Day · Pit Row Zone (greater opportunity)">Pit Row Zone</button></div></div>
         <div class="sp-bar"><p class="spk-count" aria-live="polite">Nothing picked yet. Tap anything above.</p><div class="cta-row"><button type="button" class="btn white-ghost spk-clear" hidden>Clear</button><a class="btn white spk-send" href="#participate" data-interest="sponsor" data-note="Interested in: Race Day sponsorship">Send my picks →</a></div></div>
       </div>
+      <div class="rd-beyond"><div class="rd-beyond-txt"><p class="eyebrow">Beyond race day</p><h2>Explore greater opportunities to support Flint Racing and Cronin Derby Downs</h2><p>Race day is one Saturday. The track, our programs and the park at Cronin Derby Downs need partners all year long.</p>
+        <ul class="rd-beyond-list"><li><i>03</i>Track Development</li><li><i>04</i>Program &amp; Facility</li><li><i>05</i>Park &amp; Community</li></ul></div>
+        <a class="btn white" href="#sponsor-avenues">Explore all sponsor avenues →</a></div>
     </section>
     <section class="panel wide next-step"><h2>Seen on race day</h2><p>Race-day partners show up where families and fans are looking.</p>
       <ul class="sp-seen"><li><b>Live race page</b><span>A rotating sponsor strip on the page fans follow on their phones.</span></li><li><b>“Brought to you by”</b><span>Your logo on a heat as it runs.</span></li><li><b>Intermission spotlight</b><span>A full-screen thank-you between races.</span></li><li><b>On the cars</b><span>Sponsor decals are part of every race car.</span></li></ul></section>
@@ -5667,7 +5706,7 @@ a.mini{text-decoration:none;display:inline-block}
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Become a Sponsor</a><a href="#race-day-sponsors">Race Day</a><a href="#track-development" aria-current="page">Track Development</a><a href="#program-facility-development">Program &amp; Facility</a><a href="#park-community-development">Park &amp; Community</a></nav>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support"><i>01</i><b>Become a Sponsor</b><small>All the ways to give</small></a><a href="#race-day-sponsors"><i>02</i><b>Race Day</b><small>Sat · June 5, 2027</small></a><a href="#track-development" aria-current="page"><i>03</i><b>Track Development</b><small>The track at Cronin Derby Downs</small></a><a href="#program-facility-development"><i>04</i><b>Program &amp; Facility</b><small>Workshops, programs &amp; space</small></a><a href="#park-community-development"><i>05</i><b>Park &amp; Community</b><small>The park &amp; our neighbors</small></a></nav>
     <section class="av-out" aria-labelledby="avTkH">
       <div class="av-photos" aria-hidden="true"><img src="{{IMG:img/web/two-cars-track.webp}}" alt=""><img src="{{IMG:img/web/flint-journal-starting-ramp-bw.webp}}" alt=""><img src="{{IMG:img/web/racer-down-track.webp}}" alt=""></div>
       <div class="av-txt"><p class="eyebrow">What your support builds</p><h2 id="avTkH">Ready for every guest</h2><p>Our track hosts race days, practice runs and community events all season. Track partners help add seating, safe walkways, fencing and lighting, restrooms, wifi and a scoreboard fans can follow from the stands.</p>
@@ -5708,7 +5747,7 @@ a.mini{text-decoration:none;display:inline-block}
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Become a Sponsor</a><a href="#race-day-sponsors">Race Day</a><a href="#track-development">Track Development</a><a href="#program-facility-development" aria-current="page">Program &amp; Facility</a><a href="#park-community-development">Park &amp; Community</a></nav>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support"><i>01</i><b>Become a Sponsor</b><small>All the ways to give</small></a><a href="#race-day-sponsors"><i>02</i><b>Race Day</b><small>Sat · June 5, 2027</small></a><a href="#track-development"><i>03</i><b>Track Development</b><small>The track at Cronin Derby Downs</small></a><a href="#program-facility-development" aria-current="page"><i>04</i><b>Program &amp; Facility</b><small>Workshops, programs &amp; space</small></a><a href="#park-community-development"><i>05</i><b>Park &amp; Community</b><small>The park &amp; our neighbors</small></a></nav>
     <section class="av-out flip" aria-labelledby="avPgH">
       <div class="av-photos" aria-hidden="true"><img src="{{IMG:img/web/1938-builders-lineup-bw.webp}}" alt=""><img src="{{IMG:img/web/coloring-car.webp}}" alt="" class="light"><img src="{{IMG:img/web/kevin-nephew-calvin-car.webp}}" alt=""></div>
       <div class="av-txt"><p class="eyebrow">What your support reaches</p><h2 id="avPgH">Where kids build it</h2><p>Students design, build and test their own cars, learn the science behind them, and grow into volunteers, leaders and mentors. Program partners keep the tools, materials and space ready for every session.</p>
@@ -5750,7 +5789,7 @@ a.mini{text-decoration:none;display:inline-block}
   </div></header>
   <div class="tape" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support">Become a Sponsor</a><a href="#race-day-sponsors">Race Day</a><a href="#track-development">Track Development</a><a href="#program-facility-development">Program &amp; Facility</a><a href="#park-community-development" aria-current="page">Park &amp; Community</a></nav>
+    <nav class="sp-tabs" aria-label="Sponsor pages"><a href="#support"><i>01</i><b>Become a Sponsor</b><small>All the ways to give</small></a><a href="#race-day-sponsors"><i>02</i><b>Race Day</b><small>Sat · June 5, 2027</small></a><a href="#track-development"><i>03</i><b>Track Development</b><small>The track at Cronin Derby Downs</small></a><a href="#program-facility-development"><i>04</i><b>Program &amp; Facility</b><small>Workshops, programs &amp; space</small></a><a href="#park-community-development" aria-current="page"><i>05</i><b>Park &amp; Community</b><small>The park &amp; our neighbors</small></a></nav>
     <section class="av-out" aria-labelledby="avPkH">
       <div class="av-photos" aria-hidden="true"><img src="{{IMG:img/web/2026-racers-group.webp}}" alt=""><img src="{{IMG:img/web/flint-journal-handshake-bw.webp}}" alt=""><img src="{{IMG:img/web/racer-with-veteran.webp}}" alt=""></div>
       <div class="av-txt"><p class="eyebrow">The plan for the park</p><h2 id="avPkH">From race-day hill to year-round destination</h2>
@@ -6286,7 +6325,7 @@ a.mini{text-decoration:none;display:inline-block}
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
-  var PAGE_ANCHORS={"become-a-sponsor":"support","race-day-menu":"race-day-sponsors","track-development-menu":"track-development","program-facility-development-menu":"program-facility-development","park-community-development-menu":"park-community-development","school-practice":"track-schedule","how-racing":"derby-racing","dr-raceday":"derby-racing","dr-terms":"derby-racing","race-board":"track-schedule","sanctioned-racers":"racing","workshop-registration":"race-registration"};
+  var PAGE_ANCHORS={"become-a-sponsor":"support","sponsor-avenues":"support","race-day-menu":"race-day-sponsors","track-development-menu":"track-development","program-facility-development-menu":"program-facility-development","park-community-development-menu":"park-community-development","school-practice":"track-schedule","how-racing":"derby-racing","dr-raceday":"derby-racing","dr-terms":"derby-racing","race-board":"track-schedule","sanctioned-racers":"racing","workshop-registration":"race-registration"};
   var ALIAS={"plan-event":"event","park-support":"park","park-inquiry":"park","register":"building"};
   var pendingInterest=null;
   var pendingNote=null;
