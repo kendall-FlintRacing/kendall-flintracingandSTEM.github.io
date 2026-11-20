@@ -151,8 +151,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:420px){.hero h1{font-size:clamp(3rem,15vw,3.6rem)}}
 .hero-p{max-width:46ch;font-size:1.1rem;line-height:1.6;color:#eceef1}
 .signals{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:10px}
-.signal{--sl-bg:rgba(20,21,25,.88);--sl-bd:rgba(255,255,255,.14);--sl-bw:1px;display:flex;align-items:center;gap:12px;text-align:left;min-width:232px;padding:13px 26px 13px 20px;text-decoration:none;color:#fff;transition:transform .15s}
-.signal:hover{transform:translateY(-2px);--sl-bd:rgba(255,255,255,.4)}
+.signal{display:flex;align-items:center;gap:12px;text-align:left;min-width:232px;padding:13px 22px 13px 16px;border-radius:999px;background:rgba(20,21,25,.88);border:1px solid rgba(255,255,255,.1);text-decoration:none;color:#fff;transition:transform .15s,border-color .15s}
+.signal:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.35)}
 .signal i{width:14px;height:14px;border-radius:50%;flex:none}
 .signal.red i{background:var(--red2);box-shadow:0 0 10px var(--red2)}
 .signal.amber i{background:var(--amber);box-shadow:0 0 10px var(--amber)}
@@ -4081,7 +4081,6 @@ section.dash{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;ali
 .spx .sp-range{color:#3b3e45;font-size:.95rem}.spx .sp-range b{color:var(--red-deep)}.spx .sp-range span{color:#9a9da3;margin-inline:4px}
 /* Sponsor avenues: a pit board of numbered plates (Nov 20) */
 /* Racing plates: slanted buttons and tags across the public site (Nov 20) */
-.signal,
 .dr-more button,
 .dr-jump a,
 .feature-list li,
@@ -4090,7 +4089,7 @@ section.dash{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;ali
 .rw-divs button,
 .sp-chips a,
 .av-menu .av-chip{position:relative;isolation:isolate;border-radius:0}
-.signal::before,.dr-more button::before,.dr-jump a::before,.feature-list li::before,.sp-filters button::before,.rw-fol::before,.rw-divs button::before,.sp-chips a::before,.av-menu .av-chip::before{content:"";position:absolute;inset:0;z-index:-1;transform:skewX(-14deg);border-radius:3px;background:var(--sl-bg,transparent);border:var(--sl-bw,1.5px) solid var(--sl-bd,currentColor);transition:background .15s,border-color .15s}
+.dr-more button::before,.dr-jump a::before,.feature-list li::before,.sp-filters button::before,.rw-fol::before,.rw-divs button::before,.sp-chips a::before,.av-menu .av-chip::before{content:"";position:absolute;inset:0;z-index:-1;transform:skewX(-14deg);border-radius:3px;background:var(--sl-bg,transparent);border:var(--sl-bw,1.5px) solid var(--sl-bd,currentColor);transition:background .15s,border-color .15s}
 .sp-tabs{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:clamp(1.6rem,3vw,2.4rem);padding:46px 12px 12px;background:#0c0d10;border:1px solid #2b2d34;border-top:4px solid var(--red);border-radius:4px;box-shadow:0 18px 40px rgba(0,0,0,.35);scroll-margin-top:110px}
 .sp-tabs::before{content:"Sponsor avenues";position:absolute;left:14px;top:16px;font:800 .74rem/1 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
 .sp-tabs::after{content:"";position:absolute;right:12px;top:14px;width:88px;height:16px;background:repeating-conic-gradient(#fff 0 25%,#111 0 50%) 0 0/8px 8px}
