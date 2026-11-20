@@ -1989,6 +1989,16 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .ck-on .me-prefs{gap:0}
 .ck-on .me-kids span{background:none;padding:0;margin-right:14px}
 .ck-on .me-code{background:none;color:inherit}.ck-on .me-code h2{color:#fff}.ck-on .me-code .me-k{color:#ff6b7a}.ck-on .me-code p{color:#9aa0aa}
+/* hover glow on dashboard cards */
+.ck-on .me-sp a{border-radius:10px;transition:background .18s,box-shadow .18s,border-color .18s}
+.ck-on .me-sp a:hover,.ck-on .me-sp a:focus-visible{background:rgba(255,48,69,.07);border-bottom-color:transparent;box-shadow:0 0 0 1px rgba(255,48,69,.75),0 0 22px rgba(255,48,69,.35)}
+.ck-on .me-sp a.main:hover,.ck-on .me-sp a.main:focus-visible{background:rgba(255,48,69,.1)}
+.ck-on .gs-th{border-radius:10px;transition:background .18s,box-shadow .18s,border-color .18s}
+.ck-on .gs-th:hover,.ck-on .gs-th:focus-visible{background:rgba(255,255,255,.04);border-bottom-color:transparent;box-shadow:0 0 0 1px rgba(255,48,69,.7),0 0 18px rgba(255,48,69,.35)}
+.ck-on .gs-th[aria-selected=true]:hover{border-bottom-color:transparent}
+.ck-on .gs-stage,.ck-on .gs-spec{transition:box-shadow .2s}
+.ck-on .gs-stage:hover{box-shadow:0 0 0 1px rgba(255,48,69,.7),0 0 26px rgba(255,48,69,.35)}
+.ck-on .gs-spec:hover{box-shadow:0 0 0 2px rgba(255,48,69,.75),0 0 28px rgba(255,48,69,.4),0 10px 26px rgba(0,0,0,.25)}
 /* admin → members */
 .mb-sub{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
 .mb-sub button{border:1px solid #c3c6cc;background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer}
