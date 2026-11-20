@@ -31,7 +31,7 @@
 main,.site-foot{overflow-x:clip}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-body{background:var(--mist);color:var(--text);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--mist);color:var(--text);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--red);outline-offset:3px}
 h1,h2,h3{font-family:var(--display);font-weight:800;text-transform:uppercase;line-height:.95;letter-spacing:-.01em;margin:0;text-wrap:balance}
@@ -47,91 +47,131 @@ p{margin:0}
 @media (max-width:760px){.sec-head{grid-template-columns:1fr}}
 .dark{background-color:var(--night);background-image:radial-gradient(rgba(255,255,255,.08) .8px,transparent .8px);background-size:6px 6px;color:#fff}
 .dark h2{color:#fff}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:4px;border:1.5px solid transparent;font:700 1rem/1 var(--body);text-decoration:none;cursor:pointer;transition:background .15s,color .15s,border-color .15s,transform .15s;white-space:nowrap}
-.btn.red{background:var(--red);color:#fff}
-.btn.red:hover{background:var(--red-deep)}
-.btn.black{background:var(--ink);color:#fff}
-.btn.black:hover{background:#000}
-.btn.outline-light{border-color:rgba(255,255,255,.8);color:#fff;background:transparent}
-.btn.outline-light:hover{background:#fff;color:var(--red-deep)}
-.btn.white{background:#fff;color:var(--ink);box-shadow:0 6px 16px rgba(0,0,0,.18)}
-.btn.white:hover{transform:translateY(-2px)}
-.btn.deep{background:var(--red-deep);color:#fff}
-.btn.deep:hover{background:#8f1023}
+/* Page buttons: greyscale chrome (bezel rim + glass face). Menus keep their own styles. Nov 20 */
+.btn,.mini{
+  --rim:linear-gradient(180deg,#ffffff 0%,#c3c7cc 22%,#70757d 50%,#cfd2d6 78%,#ffffff 100%);
+  --face:linear-gradient(180deg,#fdfdfe 0%,#eceef0 44%,#d6d9dd 56%,#eef0f2 100%);
+  --txt:#2c2f35;--tsh:0 1px 0 rgba(255,255,255,.8);
+  --glow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 -2px 5px rgba(0,0,0,.12);
+  background:var(--face) padding-box,var(--rim) border-box;border:2px solid transparent;color:var(--txt);text-shadow:var(--tsh);
+  box-shadow:var(--glow),0 1px 0 rgba(0,0,0,.25),0 6px 14px -6px rgba(0,0,0,.55)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:12px;font:700 .92rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:filter .15s,transform .15s,box-shadow .15s;white-space:nowrap}
+.btn:hover,.mini:hover:not(:disabled){filter:brightness(1.07) contrast(1.03);transform:translateY(-1px)}
+.btn:active,.mini:active:not(:disabled){transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.35),0 1px 0 rgba(0,0,0,.2)}
+.btn:focus-visible,.mini:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+/* dark glass: the main action */
+.btn.red,.btn.deep,.btn.black,.mini.solid{--face:linear-gradient(180deg,#5d6168 0%,#33363c 45%,#17181b 55%,#2b2e33 100%);--txt:#f4f5f7;--tsh:0 -1px 0 rgba(0,0,0,.7);--glow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -2px 6px rgba(0,0,0,.4)}
+/* silver: second action */
+.btn.white,.btn.outline-red,.btn.white-red,.mini.red{--face:linear-gradient(180deg,#fdfdfe 0%,#eceef0 44%,#d6d9dd 56%,#eef0f2 100%)}
+/* smoked glass: on dark or red bands */
+.btn.white-ghost,.btn.outline-light{--face:linear-gradient(180deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,.1) 46%,rgba(0,0,0,.28) 54%,rgba(255,255,255,.08) 100%);--txt:#fff;--tsh:0 1px 2px rgba(0,0,0,.6);--glow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 6px rgba(0,0,0,.25);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.mini.red{--txt:#a10f24}
 .photo-ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:rgba(255,255,255,.75);font:600 .8rem/1.4 var(--body);letter-spacing:.06em;text-transform:uppercase;padding:16px}
 .hero .photo-ph{place-items:end;padding:0 24px 64px}
 .photo-ph b{display:block;font:800 1.2rem/1.1 var(--display);letter-spacing:.06em}
 
-/* Top bar (location + main menu) + header row (logo + actions) */
+/* Site header: utility bar, red main bar, mega menu (category strip + white list panel). Nov 20 */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--ink)}
 .site-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30}
-.topbar{background:var(--ink);color:#c9cbd0;position:relative}
-.top-row,.nav-row{display:flex;align-items:center;gap:16px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
-.top-row{min-height:44px}
-.loc{font:500 .74rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
-.links{display:flex;align-items:center;gap:2px;margin-left:auto}
-.links>a,.more>button{font:500 .9rem/1 var(--body);color:#eceef1;text-decoration:none;padding:9px 12px;border-radius:4px;background:none;border:0;cursor:pointer;white-space:nowrap}
-.links>a:hover,.more>button:hover,.more>button[aria-expanded="true"]{color:#fff;background:rgba(255,255,255,.1)}
-.more{position:relative}
-.more>button{display:inline-flex;align-items:center;gap:6px;font-weight:600}
-.more .tri{font-size:.55rem;transition:transform .15s}
-.more>button[aria-expanded="true"] .tri{transform:rotate(180deg)}
-.more-menu{position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--line);border-top:3px solid var(--red);border-radius:4px;box-shadow:0 12px 28px rgba(17,17,19,.18);padding:6px;min-width:220px;display:grid;z-index:5}
-.more-menu a{padding:10px 12px;text-decoration:none;font-weight:500;border-radius:4px;color:var(--ink)}
-.more-menu a:hover{background:var(--mist);color:var(--red)}
-.menu-btn{display:none;margin-left:auto;align-items:center;gap:9px;min-height:36px;padding:0 12px;border:1px solid rgba(255,255,255,.35);border-radius:4px;background:transparent;color:#fff;font:600 .85rem/1 var(--body);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
-.menu-btn .bars,.menu-btn .bars::before,.menu-btn .bars::after{display:block;width:16px;height:2px;background:currentColor;position:relative;transition:transform .15s}
+.nv-in{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:16px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.ni{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+/* red main bar */
+.nv-main{background:linear-gradient(180deg,#e11d25,#c4121a);color:#fff;box-shadow:0 2px 0 rgba(0,0,0,.25);position:relative}
+.nv-main .nv-in{min-height:72px;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;flex:none;color:#fff}
+.brand img{width:46px;height:auto;flex:none}
+.brand strong{display:block;font:italic 900 1.5rem/1 var(--display);letter-spacing:.01em;white-space:nowrap;color:#fff}
+.brand small{display:block;font:600 .62rem/1 var(--body);letter-spacing:.24em;color:#ffd3d6;margin-top:4px}
+.nv-links{display:flex;align-items:stretch;align-self:stretch;margin-left:auto;min-width:0}
+.nv-end{margin-left:14px;border-left:1px solid rgba(255,255,255,.28)}
+.nv-top>.ni:first-child{width:18px;height:18px;stroke-width:2.1}
+.nv-item{display:flex}
+.nv-top{display:inline-flex;align-items:center;gap:6px;font:800 1.06rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#fff;text-decoration:none;background:none;border:0;padding:0 13px;cursor:pointer;white-space:nowrap;position:relative}
+.nv-top .ni{width:15px;height:15px;stroke-width:2.6;transition:transform .15s}
+.nv-top::after{content:"";position:absolute;left:15px;right:15px;bottom:0;height:4px;background:#fff;transform:scaleX(0);transition:transform .15s}
+.nv-top:hover::after,.nv-top:focus-visible::after,.nv-top[aria-expanded="true"]::after,.nv-top.is-cur::after{transform:scaleX(1)}
+.nv-top[aria-expanded="true"]{background:rgba(0,0,0,.16)}
+.nv-top[aria-expanded="true"] .ni{transform:rotate(180deg)}
+.nv-top:focus-visible{outline:3px solid #fff;outline-offset:-6px}
+.nv-drawer-foot{display:none}
+.nv-icons{display:flex;align-items:center;gap:4px;flex:none;padding-left:14px;border-left:1px solid rgba(255,255,255,.3);align-self:center;min-height:40px}
+.nv-ic,.nv-auth{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;color:#fff;text-decoration:none;border-radius:4px;transition:background .15s}
+.nv-ic{width:40px}
+.nv-ic .ni,.nv-auth .ni{width:21px;height:21px;stroke-width:2}
+.nv-auth{padding:0 12px;margin-left:4px;border:1.5px solid rgba(255,255,255,.7);font:800 .98rem/1 var(--display);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.nv-ic:hover,.nv-ic:focus-visible,.nv-ic[aria-current="page"]{background:rgba(0,0,0,.2)}
+.nv-auth:hover,.nv-auth:focus-visible{background:#fff;color:var(--red-deep)}
+.nv-auth.on{background:rgba(0,0,0,.22);border-color:transparent}
+/* mega menu */
+.nv-mega{position:absolute;left:0;right:0;top:100%;box-shadow:0 22px 40px rgba(0,0,0,.35)}
+.nv-cats{background:#1a1b20;border-top:1px solid #000}
+.nv-cats .nv-in{justify-content:center;gap:4px;min-height:50px;flex-wrap:wrap}
+.nv-cat{font:700 .92rem/1 var(--body);color:#c3c6cc;background:none;border:0;padding:17px 16px;cursor:pointer;position:relative;white-space:nowrap}
+.nv-cat::after{content:"";position:absolute;left:16px;right:16px;bottom:0;height:3px;background:var(--red);transform:scaleX(0);transition:transform .15s}
+.nv-cat:hover,.nv-cat[aria-pressed="true"]{color:#fff}
+.nv-cat[aria-pressed="true"]::after{transform:scaleX(1)}
+.nv-cat:focus-visible{outline:2px solid #fff;outline-offset:-4px}
+.nv-panels{background:#fff;border-bottom:4px solid var(--red)}
+.nv-panels .nv-in{display:block;padding-top:22px;padding-bottom:24px}
+.nv-ph{display:none}
+.nv-list{list-style:none;margin:0 auto;padding:0;max-width:1040px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 28px}
+.nv-list a{display:flex;align-items:center;gap:12px;padding:10px 12px;color:#26282d;text-decoration:none;font:600 .95rem/1.2 var(--body);border-radius:4px;transition:background .12s,color .12s}
+.nv-list .ni{width:20px;height:20px;color:var(--red)}
+.nv-list a:hover,.nv-list a:focus-visible{background:#f3f4f6;color:var(--red-deep)}
+.nv-list a[aria-current="page"]{color:var(--red-deep);font-weight:800}
+.nv-sprite{position:absolute;width:0;height:0;overflow:hidden}
+/* menu button (tablet and phone) */
+.menu-btn{display:none;align-items:center;gap:9px;min-height:40px;padding:0 12px;border:1.5px solid rgba(255,255,255,.6);border-radius:4px;background:transparent;color:#fff;font:700 .85rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;flex:none}
+.menu-btn .bars,.menu-btn .bars::before,.menu-btn .bars::after{display:block;width:16px;height:2px;background:currentColor;position:relative}
 .menu-btn .bars::before,.menu-btn .bars::after{content:"";position:absolute;left:0}
 .menu-btn .bars::before{top:-5px}.menu-btn .bars::after{top:5px}
 .menu-btn[aria-expanded="true"] .bars{display:none}
-.menu-btn[aria-expanded="true"]::before{content:"\2715";font-size:.9rem;line-height:1}
-
-.nav-row{min-height:82px;background:#fff;border-bottom:1px solid #e6e7ea;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0;flex:0 1 auto}
-.brand img{width:50px;height:auto;flex:none}
-.brand strong{display:block;font:800 1.45rem/1 var(--display);color:var(--ink);letter-spacing:.01em;white-space:nowrap}
-.brand small{display:block;font:500 .66rem/1 var(--body);letter-spacing:.2em;color:var(--steel);margin-top:4px}
-.nav-actions{display:flex;align-items:center;gap:12px;flex:none;min-width:0}
-.nav-actions .btn{min-height:50px;font-size:1rem;padding:0 20px}
-.util{display:inline-flex;align-items:center;gap:7px;font:600 .88rem/1 var(--body);color:var(--ink);text-decoration:none;padding:8px 6px;border-radius:4px;white-space:nowrap}
-.util:hover{color:var(--red)}
-.util svg{width:20px;height:20px;flex:none}
-/* Dashboard link: a raised button that sits with Donate and Get Involved */
-.nav-actions .util.dash{min-height:50px;padding:0 16px;gap:8px;border-radius:6px;background:#fff;color:var(--ink);border:1px solid #d9dbe0;border-bottom-width:3px;box-shadow:0 2px 0 rgba(23,26,32,.06),0 6px 14px -6px rgba(23,26,32,.28);transition:transform .15s,box-shadow .15s,border-color .15s,color .15s}
-.nav-actions .util.dash:hover,.nav-actions .util.dash:focus-visible{color:var(--red);border-color:#c9ccd3;border-bottom-color:var(--red);transform:translateY(-2px);box-shadow:0 3px 0 rgba(23,26,32,.06),0 10px 20px -8px rgba(23,26,32,.35)}
-.nav-actions .util.dash:active{transform:translateY(0);box-shadow:0 1px 0 rgba(23,26,32,.06)}
-.nav-actions .util.dash svg{color:var(--red)}
-
-/* Laptop / small desktop: icons drop their labels */
-@media (max-width:1100px){.util span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.util{padding:10px}.nav-actions{gap:8px}}
-/* Tablet and phone: main menu folds into the top bar's Menu button */
-@media (max-width:900px){
+.menu-btn[aria-expanded="true"]::before{content:"\2715";font-size:.95rem;line-height:1}
+@media (max-width:1440px){.brand span{display:none}}
+@media (max-width:1320px){.nv-top{padding:0 9px;font-size:1rem}.nv-top::after{left:9px;right:9px}.nv-main .nv-in{gap:10px}.nv-icons{padding-left:8px}}
+/* Tablet and phone: the menu folds into a drawer with each section's lists */
+@media (max-width:1180px){
   .menu-btn{display:inline-flex}
-  .links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:var(--ink);border-bottom:3px solid var(--red);padding:6px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px));box-shadow:0 14px 28px rgba(0,0,0,.3);max-height:calc(100vh - 44px);overflow-y:auto}
-  .links.open{display:flex}
-  .links>a,.more>button{padding:14px 8px;font-size:1rem;width:100%;text-align:left;border-bottom:1px solid #26282d;border-radius:0}
-  .more>button{justify-content:space-between}
-  .more-menu{position:static;box-shadow:none;border:0;border-left:3px solid var(--red);border-radius:0;margin:4px 0 4px 8px;background:transparent;padding:0}
-  .more-menu a{color:#eceef1}
-  .more-menu a:hover{background:rgba(255,255,255,.08);color:#fff}
-  .nav-row{min-height:70px}
-  .nav-actions .btn{min-height:44px;padding:0 16px;font-size:.95rem}
-  .nav-actions .util.dash{min-height:44px;padding:0 12px}
+  .menu-btn{margin-left:0}
+  .nv-links{order:5}
+  .nv-icons{margin-left:auto;border:0;padding-left:0}
+  .nv-main .nv-in{min-height:62px;gap:10px}
+  .brand span{display:block}
+  .nv-links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;margin:0;background:#111216;border-bottom:4px solid var(--red);box-shadow:0 18px 36px rgba(0,0,0,.4);max-height:calc(100dvh - 62px);overflow-y:auto;overscroll-behavior:contain;padding:4px 0 12px}
+  .nv-links.open{display:flex}
+  .nv-item{display:block}
+  .nv-top{width:100%;justify-content:space-between;padding:17px max(18px,env(safe-area-inset-left,0px));font-size:1.15rem;border-bottom:1px solid #26282e}
+  .nv-top::after{display:none}
+  .nv-top[aria-expanded="true"]{background:#1d1e24}
+  .nv-mega{position:static;box-shadow:none}
+  .nv-cats{display:none}
+  .nv-panels{background:#18191e;border:0}
+  .nv-panels .nv-in{padding-top:6px;padding-bottom:12px;display:grid;gap:6px}
+  .nv-panel,.nv-panel[hidden]{display:block!important}
+  .nv-ph{display:block;font:800 .7rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:#ff6b72;margin:12px 0 4px 12px}
+  .nv-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}
+  .nv-list a{color:#e9ebef;padding:11px 12px}
+  .nv-list a:hover,.nv-list a:focus-visible{background:#24262c;color:#fff}
+  .nv-list .ni{color:#ff5a62}
+  .nv-list a[aria-current="page"]{color:#fff}
+  .nv-drawer-foot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:14px max(18px,env(safe-area-inset-left,0px)) 4px}
+  .nv-drawer-foot a{display:flex;align-items:center;gap:10px;color:#e9ebef;text-decoration:none;font:600 .92rem/1 var(--body);padding:12px;border:1px solid #2e3037;border-radius:4px}
+  .nv-drawer-foot .ni{color:#ff5a62}
 }
-/* Phone */
 @media (max-width:600px){
-  .top-row,.nav-row{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
-  .top-row{min-height:42px}
-  .nav-row{min-height:62px;gap:8px}
-  .brand{gap:8px}
-  .brand img{width:42px}
+  .nv-in{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+  .nv-main .nv-in{min-height:58px}
+  .brand img{width:40px}
+  .brand strong{font-size:1.2rem}
+  .brand small{font-size:.54rem}
+  .nv-list{grid-template-columns:minmax(0,1fr)}
+  .mb-t{display:none}
+  .nv-ic{width:36px}.nv-auth{padding:0 9px;font-size:.9rem}.nv-icons{gap:2px}
   .brand span{display:none}
-  .nav-actions{gap:4px}
-  .nav-actions .btn{min-height:40px;padding:0 11px;font-size:.86rem}
-  .util{padding:8px 6px}
-  .nav-actions .util.dash{min-height:40px;padding:0 9px}
+  .menu-btn{padding:0 11px}
+  .nv-links{max-height:calc(100dvh - 58px)}
 }
-@media (max-width:350px){.nav-actions .btn{padding:0 8px;font-size:.8rem}.brand img{width:36px}.util{padding:8px 4px}}
+@media (max-width:360px){.nv-auth .ni{display:none}.brand img{width:36px}}
 
 /* Hero */
 .hero{position:relative;background:#101114;color:#fff;overflow:hidden;min-height:clamp(620px,82vh,860px);display:grid;align-items:center;isolation:isolate}
@@ -364,8 +404,6 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 .cal-head h1{font-size:clamp(2.8rem,6vw,3.6rem);color:#fff}
 .cal-head p{color:#fbe6e8;max-width:60ch}
 .cal-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-.btn.white-red{background:#fff;color:var(--red-deep);border-color:var(--red-deep)}
-.btn.white-red:hover{background:var(--red-deep);color:#fff}
 .view-toggle{display:flex;justify-content:flex-end;margin:22px 0 14px}
 .view-toggle .seg{display:inline-flex;background:#fff;border-radius:4px;overflow:hidden;border:1px solid #e1e3e6}
 .view-toggle button{border:0;background:#fff;color:var(--ink);font:700 .95rem/1 var(--body);padding:13px 20px;cursor:pointer}
@@ -473,8 +511,6 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 .panel .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
 @media (max-width:760px){.panels{grid-template-columns:1fr}}
 .dark .panel h2{color:var(--ink)}
-.btn.outline-red{background:#fff;color:var(--red-deep);border-color:var(--red-deep)}
-.btn.outline-red:hover{background:var(--red-deep);color:#fff}
 .datelist{list-style:none!important;padding:0!important;gap:0!important}
 .datelist li{display:grid;grid-template-columns:112px 1fr;gap:14px;align-items:center;padding:12px 0;border-bottom:1px dashed #d4d6da}
 .datelist li:last-child{border-bottom:0}
@@ -991,8 +1027,6 @@ dialog.dr-dlg::backdrop{background:rgba(11,11,14,.5);-webkit-backdrop-filter:blu
 .hiw-free p{margin:0}
 .hiw-reg{display:grid;gap:12px;padding-right:20px}
 .hiw-acts{display:flex;gap:10px;flex-wrap:wrap}
-.btn.white-ghost{background:transparent;color:#fff;border:2px solid #fff}
-.btn.white-ghost:hover,.btn.white-ghost:focus-visible{background:#fff;color:var(--red-deep)}
 @media (max-width:900px){
   .hiw-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px}.hiw-steps::before{display:none}
   .hiw-paths{grid-template-columns:minmax(0,1fr)}
@@ -1396,6 +1430,81 @@ a.ycell:hover{background:#fbe2e5}
   .adm-nav button[aria-current=page]::before{display:none}
   .adm-main{border-radius:0 0 12px 12px}
 }
+/* Admin menu: one red bar with dropdown lists, same style as the site header (Nov 20) */
+.adm.adm2{display:block;background:#fff;padding:0;overflow:visible}
+[data-page="admin"] .wrap{max-width:calc(1320px + 2*max(16px,env(safe-area-inset-left,0px)))}
+.adm-nv{position:relative;z-index:6}
+.adm-bar{display:flex;align-items:center;gap:10px;min-height:62px;padding:0 14px;background:linear-gradient(180deg,#e11d25,#c4121a);color:#fff;border-radius:12px 12px 0 0;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.adm-bar .adm-av{width:36px;height:36px;background:#111216;font-size:1.1rem}
+.adm-links{display:flex;align-items:stretch;align-self:stretch;gap:0;min-width:0}
+.adm-item{display:flex}
+.adm-top{display:inline-flex;align-items:center;gap:6px;position:relative;font:800 1rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#fff;background:none;border:0;padding:0 11px;cursor:pointer;white-space:nowrap}
+.adm-top::after{content:"";position:absolute;left:11px;right:11px;bottom:0;height:4px;background:#fff;transform:scaleX(0);transition:transform .15s}
+.adm-top:hover::after,.adm-top[aria-expanded="true"]::after,.adm-top.is-cur::after{transform:scaleX(1)}
+.adm-top[aria-expanded="true"]{background:rgba(0,0,0,.16)}
+.adm-top:focus-visible{outline:3px solid #fff;outline-offset:-6px}
+.adm-caret{width:14px;height:14px;transition:transform .15s}
+.adm-top[aria-expanded="true"] .adm-caret{transform:rotate(180deg)}
+.adm-dot{display:none;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(0,0,0,.2)}
+.adm-item.has-new .adm-dot{display:inline-block}
+.adm-mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:4px solid var(--red);box-shadow:0 22px 40px rgba(0,0,0,.3)}
+.adm-mcat{background:#1a1b20;color:#fff;font:700 .92rem/1 var(--body);text-align:center;padding:17px 16px;position:relative}
+.adm-mcat::after{content:"";position:absolute;left:50%;bottom:0;width:60px;margin-left:-30px;height:3px;background:var(--red)}
+.adm-mlist{list-style:none;margin:0;padding:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 18px}
+.adm-mlist button,.adm-mlist a{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;border:0;background:none;padding:10px 12px;border-radius:4px;cursor:pointer;font:inherit;color:#26282d;text-decoration:none}
+.adm-mlist svg{width:20px;height:20px;flex:none;color:var(--red);margin-top:1px}
+.adm-mlist span{flex:1;min-width:0;display:grid;gap:3px}
+.adm-mlist b{font:700 .95rem/1.2 var(--body)}
+.adm-mlist small{font-size:.8rem;line-height:1.35;color:#6b6e75}
+.adm-mlist em{font-style:normal;background:var(--red);color:#fff;font:800 .72rem/1 var(--body);border-radius:999px;padding:4px 7px;align-self:center}
+.adm-mlist button:hover,.adm-mlist a:hover,.adm-mlist button:focus-visible,.adm-mlist a:focus-visible{background:#f3f4f6}
+.adm-mlist button:hover b,.adm-mlist a:hover b{color:var(--red-deep)}
+.adm-mlist [aria-current="page"] b{color:var(--red-deep)}
+.adm-mlist [aria-current="page"]{background:#fdf0f1}
+.adm-tools{margin-left:auto;display:flex;align-items:center;gap:6px;flex:none}
+.adm-bar .adm-find{width:170px}
+.adm-tl.adm-editbtn span{display:none}
+.adm-bar .adm-q{background:rgba(0,0,0,.22);border-color:rgba(255,255,255,.35)}
+.adm-bar .adm-q svg{color:#fff}
+.adm-bar .adm-q input{padding:9px 0}
+.adm-bar .adm-q input::placeholder{color:#ffd3d6}
+.adm-bar .adm-q kbd{color:#ffd3d6;border-color:rgba(255,255,255,.4)}
+.adm-bar .adm-res{left:auto;right:0;width:min(440px,calc(100vw - 32px))}
+.adm-tl{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 12px;border:1.5px solid rgba(255,255,255,.7);border-radius:4px;background:transparent;color:#fff;font:800 .95rem/1 var(--display);letter-spacing:.05em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.adm-tl svg{width:18px;height:18px}
+.adm-tl:hover,.adm-tl:focus-visible{background:#fff;color:var(--red-deep)}
+.adm-tl.adm-editbtn{background:#111216;border-color:#111216}
+.adm-tl.adm-editbtn:hover{background:#fff;border-color:#fff}
+.adm-menu{display:none}
+.adm-main{border-radius:0 0 12px 12px}
+@media (max-width:1240px){.adm-tl span{display:none}.adm-tl{padding:0 10px}.adm-bar .adm-find{width:170px}.adm-bar .adm-q kbd{display:none}}
+@media (max-width:1100px){.adm-top{padding:0 8px;font-size:.94rem}.adm-top::after{left:8px;right:8px}.adm-bar .adm-av{display:none}.adm-bar .adm-find{width:44px}.adm-bar .adm-q input{width:0;padding:9px 0}.adm-bar .adm-q:focus-within{position:absolute;right:110px;width:260px;z-index:3;background:#8e0b12}.adm-bar .adm-q:focus-within input{width:auto}}
+@media (max-width:900px){
+  .adm-bar{flex-wrap:wrap;padding:10px 12px;gap:8px}
+  .adm-menu{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border:1.5px solid rgba(255,255,255,.7);border-radius:4px;background:transparent;color:#fff;font:800 .95rem/1 var(--display);letter-spacing:.05em;text-transform:uppercase;cursor:pointer;width:auto}
+  .adm-menu svg{width:18px;height:18px}
+  .adm-tools{display:contents}
+  .adm-menu{margin-right:auto}
+  .adm-bar .adm-find{order:8;flex:1 1 100%;width:auto;min-width:0}
+  .adm-bar .adm-q,.adm-bar .adm-q:focus-within{position:static;width:auto;background:rgba(0,0,0,.22)}
+  .adm-bar .adm-q input,.adm-bar .adm-q:focus-within input{width:auto;flex:1}
+  .adm-tl span{display:inline}.adm-tl.adm-editbtn span{display:none}
+  .adm-links{display:none;order:9;flex:1 1 100%;flex-direction:column;margin:2px -12px -10px;background:#111216;border-top:1px solid rgba(0,0,0,.3)}
+  .adm-nv.open .adm-links{display:flex}
+  .adm-item{display:block}
+  .adm-top{width:100%;justify-content:space-between;padding:15px 16px;font-size:1.08rem;border-bottom:1px solid #26282e}
+  .adm-top::after{display:none}
+  .adm-top .adm-dot{margin-left:auto;margin-right:8px}
+  .adm-top.is-cur{color:#ff8a90}
+  .adm-mega{position:static;box-shadow:none;border:0;background:#18191e}
+  .adm-mcat{display:none}
+  .adm-mlist{grid-template-columns:minmax(0,1fr);padding:6px 6px 10px}
+  .adm-mlist button,.adm-mlist a{color:#e9ebef}
+  .adm-mlist small{color:#9a9da4}
+  .adm-mlist svg{color:#ff5a62}
+  .adm-mlist button:hover,.adm-mlist a:hover,.adm-mlist [aria-current="page"]{background:#24262c}
+  .adm-mlist button:hover b,.adm-mlist a:hover b,.adm-mlist [aria-current="page"] b{color:#fff}
+}
 /* overview */
 .ov-cols{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;margin-top:16px}
 @media (max-width:760px){.ov-cols{grid-template-columns:1fr}}
@@ -1454,9 +1563,7 @@ a.ycell:hover{background:#fbe2e5}
 .adm-table td{padding:6px;border-bottom:1px solid #e6e7ea;vertical-align:middle}
 .adm-table td input[type=checkbox]{width:auto;display:inline;margin:0}
 .adm-scroll{overflow-x:auto}
-.mini{border:1.5px solid var(--ink);background:#fff;color:var(--ink);font:600 .8rem/1 var(--body);padding:8px 10px;border-radius:4px;cursor:pointer;white-space:nowrap}
-.mini.red{border-color:var(--red-deep);color:var(--red-deep)}
-.mini.solid{background:var(--ink);color:#fff}
+.mini{border-width:1.5px;font:700 .8rem/1 var(--body);padding:8px 12px;border-radius:9px;cursor:pointer;white-space:nowrap;transition:filter .15s,transform .15s}
 .mini:disabled{opacity:.5;cursor:default}
 .inq{border:1px solid #e1e3e6;border-left:4px solid var(--red-deep);border-radius:4px;padding:14px;display:grid;gap:6px;margin-top:12px}
 .inq.done{border-left-color:#9a9da3;opacity:.75}
@@ -1473,8 +1580,10 @@ a.ycell:hover{background:#fbe2e5}
 .fr-bar b{font:800 1.1rem/1 var(--display);text-transform:uppercase;letter-spacing:.04em}
 .fr-bar .btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .fr-bar select.mini{padding:7px 8px;max-width:200px}
-.fr-bar .mini:not(.solid){background:#fff}
+.fr-bar .mini,.pe-tools .mini,#coBox .cx .mini{border:1.5px solid var(--ink);border-radius:4px;box-shadow:none;text-shadow:none;filter:none;transform:none}
+.fr-bar .mini:not(.solid){background:#fff;color:var(--ink)}
 .fr-bar .mini.solid{background:var(--red);border-color:#fff;color:#fff}
+#coBox .cx .mini{border-radius:8px}
 .fr-pill{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;align-items:center;gap:2px;background:var(--ink);border:2px solid var(--red);border-radius:999px;padding:3px;box-shadow:0 8px 20px rgba(0,0,0,.3);max-width:calc(100vw - 28px)}
 .fr-pill a,.fr-pill button{border:0;border-radius:999px;padding:9px 13px;font:700 .85rem/1 var(--body);color:#fff;background:transparent;text-decoration:none;cursor:pointer;white-space:nowrap}
 .fr-pill a{background:#fff;color:var(--red-deep)}
@@ -1659,7 +1768,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .me-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .me-chips span{font:800 .72rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;border:1px solid #4a4d55;border-radius:999px;padding:6px 10px;color:#e3e5e9}
 .me-hero .row{position:relative;z-index:1;margin:0;display:grid;gap:6px}
-.me-hero .mini{background:transparent;color:#fff;border-color:#55545b}
+.me-hero .mini{--face:linear-gradient(180deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.08) 46%,rgba(0,0,0,.3) 54%,rgba(255,255,255,.06) 100%);--txt:#fff;--tsh:0 1px 2px rgba(0,0,0,.6);--glow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -2px 6px rgba(0,0,0,.25)}
 @media (max-width:700px){.me-hero{grid-template-columns:auto minmax(0,1fr)}.me-hero .row{grid-column:1/-1;display:flex}}
 .me-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 @media (max-width:700px){.me-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -1877,7 +1986,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .pf-dlg .me-prefs{gap:0}.pf-dlg .me-pref{border:0;border-radius:0;border-bottom:1px solid rgba(255,255,255,.07);padding:10px 2px;color:#9aa0aa}.pf-dlg .me-pref b{color:#fff}
 .pf-dlg .me-code{grid-template-columns:minmax(0,1fr) auto auto;align-items:center}.pf-dlg .me-code .me-k,.pf-dlg .me-code h2{grid-column:1}.pf-dlg .me-code p{grid-column:1/-1}
 .pf-dlg .me-digits span{color:#fff}
-.pf-dlg .mini{background:transparent;color:#fff;border-color:#55545b}
+.pf-dlg .mini{--face:linear-gradient(180deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.08) 46%,rgba(0,0,0,.3) 54%,rgba(255,255,255,.06) 100%);--txt:#fff;--tsh:0 1px 2px rgba(0,0,0,.6);--glow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -2px 6px rgba(0,0,0,.25)}
 .ck-code{display:flex;align-items:center;gap:8px;margin-top:6px}
 .ck-code span{font:800 .62rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#9aa0aa}
 .ck-code b{font:800 1.15rem/1 var(--body);letter-spacing:.3em;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 0 12px rgba(255,255,255,.35);min-width:4.4em}
@@ -2240,7 +2349,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .pd-gate input{font:700 1.2rem/1.2 var(--body);border:2px dashed #b6b9bf;border-radius:6px;padding:12px}
 .pd-gate .btn{justify-self:start}
 .pd-bar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;color:#c9cbd0;font-size:.9rem;margin-bottom:12px}
-.pd-bar .mini{background:transparent;color:#fff;border-color:#55545b}
+.pd-bar .mini{--face:linear-gradient(180deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.08) 46%,rgba(0,0,0,.3) 54%,rgba(255,255,255,.06) 100%);--txt:#fff;--tsh:0 1px 2px rgba(0,0,0,.6);--glow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -2px 6px rgba(0,0,0,.25)}
 .pd-grid{display:grid;grid-template-columns:minmax(260px,.85fr) minmax(0,2fr);gap:clamp(16px,3vw,24px);align-items:start}
 @media (max-width:900px){.pd-grid{grid-template-columns:1fr}}
 .pd-bul{background:#fff8e1;color:#2a2200;border-radius:8px;padding:18px;border-top:6px solid #f5b82e;display:grid;gap:10px}
@@ -4489,8 +4598,8 @@ html.fr-gated #frGate{display:grid;place-items:center;min-height:100vh;min-heigh
 .em-newl{border-style:dashed!important}
 .em-undo{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#16171c;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px}
 .em-undo span{flex:1 1 200px}
-.em-undo .mini:not(.solid){background:transparent;color:#fff;border-color:#555}
-.em-undo .mini.solid{background:#fff;color:var(--ink);border-color:#fff}
+.em-undo .mini:not(.solid){--face:linear-gradient(180deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.08) 46%,rgba(0,0,0,.3) 54%,rgba(255,255,255,.06) 100%);--txt:#fff;--tsh:0 1px 2px rgba(0,0,0,.6);--glow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -2px 6px rgba(0,0,0,.25)}
+.em-undo .mini.solid{--face:linear-gradient(180deg,#fdfdfe 0%,#eceef0 44%,#d6d9dd 56%,#eef0f2 100%);--txt:#2c2f35;--tsh:0 1px 0 rgba(255,255,255,.8)}
 .em-lform{margin-bottom:16px}
 .em-about{color:#3b3e45;font-size:.93rem;margin:0 0 8px}
 .em-ck{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:.88rem;cursor:pointer}
@@ -4575,36 +4684,13 @@ a.mini{text-decoration:none;display:inline-block}
   <div id="gateAuth"></div>
 </div></div>
 <header class="site-nav">
-  <div class="topbar">
-    <div class="top-row">
-      <span class="loc">Flint, Michigan</span>
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links"><span class="bars" aria-hidden="true"></span>Menu</button>
-    <nav class="links" id="links" aria-label="Main">
-      <a href="#story">About</a>
-      <a href="#programs">Programs</a>
-      <a href="#calendar">Calendar</a>
-      <a href="#news">News</a>
-      <a href="#cronin-derby-downs">Cronin Derby Downs</a>
-      <div class="more">
-        <button type="button" id="moreBtn" aria-expanded="false" aria-controls="moreMenu">More <span class="tri" aria-hidden="true">▼</span></button>
-        <div class="more-menu" id="moreMenu" hidden>
-          <a href="#plan-event">Plan an Event →</a>
-          <a href="#race-watch">View Race</a>
-          <a href="#access">Sign In</a>
-        </div>
-      </div>
-    </nav>
-    </div>
-  </div>
-  <div class="nav-row">
-    <a class="brand" href="#home"><img src="img/logo-dark.webp" alt="Flint Racing official logo"><span><strong>FLINT RACING</strong><small>AND STEM</small></span></a>
-    <div class="nav-actions">
-      <a class="btn red" href="#donate">Donate</a>
-      <a class="btn red get" href="#programs">Get Involved</a>
-      <a class="util dash" href="#program-signin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4.5 17a8.5 8.5 0 1 1 15 0"/><path d="M12 13l3.5-3.5"/></svg><span>Dashboard</span></a>
-      <a class="util" href="#access"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4 4.3-6 8-6s6.8 2 8 6"/></svg><span>Sign In</span></a>
-    </div>
-  </div>
+<svg class="nv-sprite" aria-hidden="true" width="0" height="0" style="position:absolute"><defs><symbol id="ni-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></symbol><symbol id="ni-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol><symbol id="ni-news" viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 9h3v8a2 2 0 0 1-2 2"/><path d="M7.5 9h6M7.5 12.5h6M7.5 16h4"/></symbol><symbol id="ni-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol><symbol id="ni-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7.5l9 6 9-6"/></symbol><symbol id="ni-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol><symbol id="ni-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol><symbol id="ni-tent" viewBox="0 0 24 24"><path d="M3 20L12 4l9 16z"/><path d="M12 4v16M9 20l3-6 3 6"/></symbol><symbol id="ni-wrench" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5z"/><path d="M14.5 6.5L17 4l3 3-2.5 2.5"/></symbol><symbol id="ni-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 15-14-1 10-6 15-14 15"/><path d="M5 19l7-7"/></symbol><symbol id="ni-clip" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.8h6V4M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="ni-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol><symbol id="ni-flag" viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h13l-2 4 2 4H5"/></symbol><symbol id="ni-car" viewBox="0 0 24 24"><path d="M3 15.5l2-5h11.5l3.5 3v2.5z"/><circle cx="7" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M8 10.5l2-3h4l2 3"/></symbol><symbol id="ni-road" viewBox="0 0 24 24"><path d="M8 3L4 21M16 3l4 18M12 4v3M12 10.5v3M12 17v3"/></symbol><symbol id="ni-question" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17.2v.1"/></symbol><symbol id="ni-rules" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"/><path d="M18 14l2 2-4 4h-2v-2z"/></symbol><symbol id="ni-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5.5 9.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7.5 15h9"/></symbol><symbol id="ni-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol><symbol id="ni-run" viewBox="0 0 24 24"><circle cx="14" cy="4.5" r="2"/><path d="M6 20l3.5-5 3 2 1.5-5.5 3 3h3"/><path d="M8 10l3-3 3 1.5"/></symbol><symbol id="ni-star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol><symbol id="ni-folder" viewBox="0 0 24 24"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v9.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/></symbol><symbol id="ni-family" viewBox="0 0 24 24"><circle cx="8" cy="7" r="2.5"/><circle cx="16.5" cy="8.5" r="2"/><path d="M3.5 20c.5-4 2.2-6.5 4.5-6.5s4 2.5 4.5 6.5M13 20c.4-3 1.6-5 3.5-5s3.1 2 3.5 5"/></symbol><symbol id="ni-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.8-3.8 3.1-6 6-6s5.2 2.2 6 6"/><path d="M15.5 5a3 3 0 0 1 0 6M17.5 14.2c2 .8 3.1 2.8 3.5 5.8"/></symbol><symbol id="ni-hand" viewBox="0 0 24 24"><path d="M3 13h3l3.5-1.5c1-.4 2 .4 1.8 1.4L11 14h4.5l3.4-2.4a1.5 1.5 0 0 1 1.8 2.3L16 19H6.5L3 20z"/><path d="M12 9.5S9 7.6 9 5.6a1.8 1.8 0 0 1 3-1.3 1.8 1.8 0 0 1 3 1.3c0 2-3 3.9-3 3.9z"/></symbol><symbol id="ni-helmet" viewBox="0 0 24 24"><path d="M3.5 15a8.5 8.5 0 0 1 17 0v2h-17z"/><path d="M12 6.5V12h8.3M3.5 17v2.5h7"/></symbol><symbol id="ni-badge" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="2.8"/><path d="M8 17.5c.6-2 2-3 4-3s3.4 1 4 3"/></symbol><symbol id="ni-trophy" viewBox="0 0 24 24"><path d="M8 3.5h8v6a4 4 0 0 1-8 0z"/><path d="M8 5.5H4.5c0 3 1.5 4.8 3.7 5M16 5.5h3.5c0 3-1.5 4.8-3.7 5M12 13.5V17M8.5 20.5h7M9.5 17h5v3.5h-5z"/></symbol><symbol id="ni-build" viewBox="0 0 24 24"><path d="M3 21V9l9-5 9 5v12"/><path d="M8 21v-7h8v7M3 21h18"/></symbol><symbol id="ni-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9-9.5C1.7 6.8 4.3 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c2.9 0 5.5 2.8 4.2 6.5-2 5-9 9.5-9 9.5z"/></symbol><symbol id="ni-shirt" viewBox="0 0 24 24"><path d="M8 3l-5 3 2 4 3-1v12h8V9l3 1 2-4-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z"/></symbol><symbol id="ni-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/></symbol><symbol id="ni-live" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><path d="M7.5 7.5a6.4 6.4 0 0 0 0 9M16.5 7.5a6.4 6.4 0 0 1 0 9M4.7 4.7a10.3 10.3 0 0 0 0 14.6M19.3 4.7a10.3 10.3 0 0 1 0 14.6"/></symbol><symbol id="ni-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol><symbol id="ni-gauge" viewBox="0 0 24 24"><path d="M4.5 17a8.5 8.5 0 1 1 15 0"/><path d="M12 13l3.5-3.5"/></symbol><symbol id="ni-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4 4.3-6 8-6s6.8 2 8 6"/></symbol><symbol id="ni-home" viewBox="0 0 24 24"><path d="M3 11l9-7.5 9 7.5"/><path d="M5.5 9.5V20h5v-6h3v6h5V9.5"/></symbol><symbol id="ni-out" viewBox="0 0 24 24"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></symbol><symbol id="ni-caret" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol></defs></svg>
+  <div class="nv-main"><div class="nv-in">
+    <a class="brand" href="#home"><img src="img/logo-white.webp" alt="Flint Racing official logo"><span><strong>FLINT RACING</strong><small>AND STEM</small></span></a>
+    <nav class="nv-links" id="links" aria-label="Main"><div class="nv-item" data-mega="about"><button type="button" class="nv-top" aria-expanded="false" aria-controls="mega-about">About<svg class="ni" aria-hidden="true"><use href="#ni-caret"/></svg></button><div class="nv-mega" id="mega-about" hidden><div class="nv-cats"><div class="nv-in"><button type="button" class="nv-cat" data-cat="0" aria-pressed="true">Who we are</button><button type="button" class="nv-cat" data-cat="1" aria-pressed="false">Cronin Derby Downs</button><button type="button" class="nv-cat" data-cat="2" aria-pressed="false">Policies</button></div></div><div class="nv-panels"><div class="nv-in"><div class="nv-panel" data-cat="0"><p class="nv-ph">Who we are</p><ul class="nv-list"><li><a href="#about"><svg class="ni" aria-hidden="true"><use href="#ni-book"/></svg><span>Our Story</span></a></li><li><a href="#about-mission"><svg class="ni" aria-hidden="true"><use href="#ni-target"/></svg><span>Our Mission</span></a></li><li><a href="#news-page"><svg class="ni" aria-hidden="true"><use href="#ni-news"/></svg><span>News &amp; Stories</span></a></li><li><a href="#calendar"><svg class="ni" aria-hidden="true"><use href="#ni-cal"/></svg><span>Calendar</span></a></li><li><a href="#join-our-team"><svg class="ni" aria-hidden="true"><use href="#ni-badge"/></svg><span>Join Our Team</span></a></li></ul></div><div class="nv-panel" data-cat="1" hidden><p class="nv-ph">Cronin Derby Downs</p><ul class="nv-list"><li><a href="#cronin-derby-downs"><svg class="ni" aria-hidden="true"><use href="#ni-pin"/></svg><span>Cronin Derby Downs</span></a></li><li><a href="#track-schedule"><svg class="ni" aria-hidden="true"><use href="#ni-road"/></svg><span>Track Schedule</span></a></li><li><a href="#plan-event"><svg class="ni" aria-hidden="true"><use href="#ni-tent"/></svg><span>Plan an Event</span></a></li><li><a href="#spirit"><svg class="ni" aria-hidden="true"><use href="#ni-shirt"/></svg><span>Spirit Shop</span></a></li></ul></div><div class="nv-panel" data-cat="2" hidden><p class="nv-ph">Policies</p><ul class="nv-list"><li><a href="#background-check"><svg class="ni" aria-hidden="true"><use href="#ni-shield"/></svg><span>Background Checks</span></a></li><li><a href="#privacy"><svg class="ni" aria-hidden="true"><use href="#ni-lock"/></svg><span>Privacy</span></a></li></ul></div></div></div></div></div><div class="nv-item" data-mega="programs"><button type="button" class="nv-top" aria-expanded="false" aria-controls="mega-programs">Programs<svg class="ni" aria-hidden="true"><use href="#ni-caret"/></svg></button><div class="nv-mega" id="mega-programs" hidden><div class="nv-cats"><div class="nv-in"><button type="button" class="nv-cat" data-cat="0" aria-pressed="true">Building &amp; Workshops</button><button type="button" class="nv-cat" data-cat="1" aria-pressed="false">STEM Programs</button><button type="button" class="nv-cat" data-cat="2" aria-pressed="false">Resources</button></div></div><div class="nv-panels"><div class="nv-in"><div class="nv-panel" data-cat="0"><p class="nv-ph">Building &amp; Workshops</p><ul class="nv-list"><li><a href="#building-workshops"><svg class="ni" aria-hidden="true"><use href="#ni-wrench"/></svg><span>Building &amp; Workshops</span></a></li><li><a href="#seasonal-workshops"><svg class="ni" aria-hidden="true"><use href="#ni-leaf"/></svg><span>Seasonal Workshops</span></a></li><li><a href="#forms"><svg class="ni" aria-hidden="true"><use href="#ni-clip"/></svg><span>Registration &amp; Forms</span></a></li><li><a href="#printables"><svg class="ni" aria-hidden="true"><use href="#ni-doc"/></svg><span>Flyers &amp; Forms</span></a></li></ul></div><div class="nv-panel" data-cat="1" hidden><p class="nv-ph">STEM Programs</p><ul class="nv-list"><li><a href="#steam-and-beyond"><svg class="ni" aria-hidden="true"><use href="#ni-flask"/></svg><span>STEM Programs</span></a></li><li><a href="#stem-camps"><svg class="ni" aria-hidden="true"><use href="#ni-sun"/></svg><span>STEM Camps</span></a></li><li><a href="#fun-runs"><svg class="ni" aria-hidden="true"><use href="#ni-run"/></svg><span>Summer Fun Runs</span></a></li><li><a href="#calendar"><svg class="ni" aria-hidden="true"><use href="#ni-cal"/></svg><span>Calendar</span></a></li></ul></div><div class="nv-panel" data-cat="2" hidden><p class="nv-ph">Resources</p><ul class="nv-list"><li><a href="#resources"><svg class="ni" aria-hidden="true"><use href="#ni-folder"/></svg><span>Programs &amp; Resources</span></a></li><li><a href="#parent-resources"><svg class="ni" aria-hidden="true"><use href="#ni-family"/></svg><span>Parent Resources</span></a></li><li><a href="#forms"><svg class="ni" aria-hidden="true"><use href="#ni-clip"/></svg><span>Registration &amp; Forms</span></a></li><li><a href="#printables"><svg class="ni" aria-hidden="true"><use href="#ni-doc"/></svg><span>Flyers &amp; Forms</span></a></li></ul></div></div></div></div></div><div class="nv-item" data-mega="racing"><button type="button" class="nv-top" aria-expanded="false" aria-controls="mega-racing">Racing<svg class="ni" aria-hidden="true"><use href="#ni-caret"/></svg></button><div class="nv-mega" id="mega-racing" hidden><div class="nv-cats"><div class="nv-in"><button type="button" class="nv-cat" data-cat="0" aria-pressed="true">Track &amp; racing</button><button type="button" class="nv-cat" data-cat="1" aria-pressed="false">Race day</button><button type="button" class="nv-cat" data-cat="2" aria-pressed="false">The track</button></div></div><div class="nv-panels"><div class="nv-in"><div class="nv-panel" data-cat="0"><p class="nv-ph">Track &amp; racing</p><ul class="nv-list"><li><a href="#racing"><svg class="ni" aria-hidden="true"><use href="#ni-flag"/></svg><span>Track &amp; Racing</span></a></li><li><a href="#derby-racing"><svg class="ni" aria-hidden="true"><use href="#ni-car"/></svg><span>About Derby Racing</span></a></li><li><a href="#racing-get-involved"><svg class="ni" aria-hidden="true"><use href="#ni-question"/></svg><span>How to Get Involved</span></a></li><li><a href="#rules"><svg class="ni" aria-hidden="true"><use href="#ni-rules"/></svg><span>Rules &amp; Guidelines</span></a></li></ul></div><div class="nv-panel" data-cat="1" hidden><p class="nv-ph">Race day</p><ul class="nv-list"><li><a href="#race-registration"><svg class="ni" aria-hidden="true"><use href="#ni-clip"/></svg><span>Race Registration</span></a></li><li><a href="#track-schedule"><svg class="ni" aria-hidden="true"><use href="#ni-road"/></svg><span>Track Schedule</span></a></li><li><a href="#race-watch"><svg class="ni" aria-hidden="true"><use href="#ni-live"/></svg><span>Live Race</span></a></li><li><a href="#race-volunteer"><svg class="ni" aria-hidden="true"><use href="#ni-helmet"/></svg><span>Race-Day Volunteers</span></a></li></ul></div><div class="nv-panel" data-cat="2" hidden><p class="nv-ph">The track</p><ul class="nv-list"><li><a href="#cronin-derby-downs"><svg class="ni" aria-hidden="true"><use href="#ni-pin"/></svg><span>Cronin Derby Downs</span></a></li><li><a href="#race-day-sponsors"><svg class="ni" aria-hidden="true"><use href="#ni-trophy"/></svg><span>Race Day Sponsors</span></a></li><li><a href="#track-development"><svg class="ni" aria-hidden="true"><use href="#ni-road"/></svg><span>Track Development</span></a></li></ul></div></div></div></div></div><div class="nv-item" data-mega="council"><button type="button" class="nv-top" aria-expanded="false" aria-controls="mega-council">Council<svg class="ni" aria-hidden="true"><use href="#ni-caret"/></svg></button><div class="nv-mega" id="mega-council" hidden><div class="nv-cats"><div class="nv-in"><button type="button" class="nv-cat" data-cat="0" aria-pressed="true">Leadership Council</button></div></div><div class="nv-panels"><div class="nv-in"><div class="nv-panel" data-cat="0"><p class="nv-ph">Leadership Council</p><ul class="nv-list"><li><a href="#leadership-council"><svg class="ni" aria-hidden="true"><use href="#ni-star"/></svg><span>Student Leadership Council</span></a></li><li><a href="#leadership"><svg class="ni" aria-hidden="true"><use href="#ni-users"/></svg><span>Student Volunteers</span></a></li><li><a href="#council"><svg class="ni" aria-hidden="true"><use href="#ni-lock"/></svg><span>Council sign-in</span></a></li><li><a href="#calendar"><svg class="ni" aria-hidden="true"><use href="#ni-cal"/></svg><span>Calendar</span></a></li></ul></div></div></div></div></div><div class="nv-item" data-mega="volunteer"><button type="button" class="nv-top" aria-expanded="false" aria-controls="mega-volunteer">Volunteer<svg class="ni" aria-hidden="true"><use href="#ni-caret"/></svg></button><div class="nv-mega" id="mega-volunteer" hidden><div class="nv-cats"><div class="nv-in"><button type="button" class="nv-cat" data-cat="0" aria-pressed="true">Volunteer</button></div></div><div class="nv-panels"><div class="nv-in"><div class="nv-panel" data-cat="0"><p class="nv-ph">Volunteer</p><ul class="nv-list"><li><a href="#leadership"><svg class="ni" aria-hidden="true"><use href="#ni-star"/></svg><span>Student Volunteers</span></a></li><li><a href="#serve"><svg class="ni" aria-hidden="true"><use href="#ni-hand"/></svg><span>Community Volunteers</span></a></li><li><a href="#race-volunteer"><svg class="ni" aria-hidden="true"><use href="#ni-helmet"/></svg><span>Race-Day Volunteers</span></a></li><li><a href="#join-our-team"><svg class="ni" aria-hidden="true"><use href="#ni-badge"/></svg><span>Join Our Team</span></a></li><li><a href="#background-check"><svg class="ni" aria-hidden="true"><use href="#ni-shield"/></svg><span>Background Checks</span></a></li></ul></div></div></div></div></div><div class="nv-item" data-mega="sponsor"><button type="button" class="nv-top" aria-expanded="false" aria-controls="mega-sponsor">Sponsor<svg class="ni" aria-hidden="true"><use href="#ni-caret"/></svg></button><div class="nv-mega" id="mega-sponsor" hidden><div class="nv-cats"><div class="nv-in"><button type="button" class="nv-cat" data-cat="0" aria-pressed="true">Sponsor</button><button type="button" class="nv-cat" data-cat="1" aria-pressed="false">Give</button></div></div><div class="nv-panels"><div class="nv-in"><div class="nv-panel" data-cat="0"><p class="nv-ph">Sponsor</p><ul class="nv-list"><li><a href="#support"><svg class="ni" aria-hidden="true"><use href="#ni-trophy"/></svg><span>Become a Sponsor</span></a></li><li><a href="#race-day-sponsors"><svg class="ni" aria-hidden="true"><use href="#ni-flag"/></svg><span>Race Day Sponsors</span></a></li><li><a href="#track-development"><svg class="ni" aria-hidden="true"><use href="#ni-road"/></svg><span>Track Development</span></a></li><li><a href="#program-facility-development"><svg class="ni" aria-hidden="true"><use href="#ni-build"/></svg><span>Program &amp; Facility</span></a></li><li><a href="#park-community-development"><svg class="ni" aria-hidden="true"><use href="#ni-leaf"/></svg><span>Park &amp; Community</span></a></li></ul></div><div class="nv-panel" data-cat="1" hidden><p class="nv-ph">Give</p><ul class="nv-list"><li><a href="#donate"><svg class="ni" aria-hidden="true"><use href="#ni-heart"/></svg><span>Donate</span></a></li><li><a href="#spirit"><svg class="ni" aria-hidden="true"><use href="#ni-shirt"/></svg><span>Spirit Shop</span></a></li><li><a href="#participate"><svg class="ni" aria-hidden="true"><use href="#ni-pen"/></svg><span>Start a conversation</span></a></li></ul></div></div></div></div></div><div class="nv-item" data-mega="contact"><button type="button" class="nv-top" aria-expanded="false" aria-controls="mega-contact"><svg class="ni" aria-hidden="true"><use href="#ni-mail"/></svg>Contact Us<svg class="ni" aria-hidden="true"><use href="#ni-caret"/></svg></button><div class="nv-mega" id="mega-contact" hidden><div class="nv-cats"><div class="nv-in"><button type="button" class="nv-cat" data-cat="0" aria-pressed="true">Contact us</button></div></div><div class="nv-panels"><div class="nv-in"><div class="nv-panel" data-cat="0"><p class="nv-ph">Contact us</p><ul class="nv-list"><li><a href="#contact"><svg class="ni" aria-hidden="true"><use href="#ni-mail"/></svg><span>Contact</span></a></li><li><a href="#participate"><svg class="ni" aria-hidden="true"><use href="#ni-clip"/></svg><span>Register / Inquire</span></a></li><li><a href="#plan-event"><svg class="ni" aria-hidden="true"><use href="#ni-tent"/></svg><span>Plan an Event</span></a></li><li><a href="#race-watch"><svg class="ni" aria-hidden="true"><use href="#ni-live"/></svg><span>Live Race</span></a></li></ul></div></div></div></div></div></nav>
+    <div class="nv-icons"><a class="nv-ic" href="#home" title="Home" aria-label="Home"><svg class="ni" aria-hidden="true"><use href="#ni-home"/></svg></a><a class="nv-ic" id="nvDash" href="#program-signin" title="Dashboard" aria-label="Dashboard"><svg class="ni" aria-hidden="true"><use href="#ni-gauge"/></svg></a><a class="nv-auth" id="nvAuth" href="#access"><svg class="ni" aria-hidden="true"><use href="#ni-user"/></svg><span>Sign In</span></a></div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="links"><span class="bars" aria-hidden="true"></span><span class="mb-t">Menu</span></button>
+  </div></div>
 </header>
 
 <main>
@@ -4677,7 +4763,7 @@ a.mini{text-decoration:none;display:inline-block}
     </div>
   </section>
 
-  <section class="spirit">
+  <section class="spirit" id="spirit">
     <div class="wrap">
       <div>
         <span class="spirit-tag">Flint Racing Spirit Shop</span>
@@ -6324,11 +6410,16 @@ a.mini{text-decoration:none;display:inline-block}
 <script>
 (function(){
   var $=function(s){return document.querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
   var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","council":"Leadership Council","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","unsubscribe":"Email choices","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","race-day-sponsors":"Race Day Sponsors","track-development":"Track Development","program-facility-development":"Program & Facility Development","park-community-development":"Park & Community Development","join-our-team":"Join Our Team","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
-  var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
+  var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1,"spirit":1};
 
-  function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
+  function megaOpen(item,on){var b=item.querySelector(".nv-top"),m=item.querySelector(".nv-mega");if(on&&m.hidden)item.__at=Date.now();b.setAttribute("aria-expanded",String(on));m.hidden=!on}
+  function closeMegas(except){$$(".nv-item").forEach(function(it){if(it!==except)megaOpen(it,false)})}
+  function closeMenus(){closeMegas();$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
+  function markNav(h){var cur="#"+h;$$(".nv-links a").forEach(function(a){if(a.getAttribute("href")===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+    $$(".nv-top").forEach(function(t){var it=t.closest(".nv-item");t.classList.toggle("is-cur",it?!!it.querySelector('a[href="'+cur+'"]'):t.getAttribute("href")===cur)})}
   var PAGE_ANCHORS={"become-a-sponsor":"support","sponsor-avenues":"support","race-day-menu":"race-day-sponsors","track-development-menu":"track-development","program-facility-development-menu":"program-facility-development","park-community-development-menu":"park-community-development","school-practice":"track-schedule","how-racing":"derby-racing","dr-raceday":"derby-racing","dr-terms":"derby-racing","race-board":"track-schedule","sanctioned-racers":"racing","workshop-registration":"race-registration"};
   var ALIAS={"plan-event":"event","park-support":"park","park-inquiry":"park","register":"building"};
   var pendingInterest=null;
@@ -6340,7 +6431,7 @@ a.mini{text-decoration:none;display:inline-block}
     var anchor=null; if(PAGE_ANCHORS[h]){anchor=h;h=PAGE_ANCHORS[h]}
     var real=document.querySelector('[data-page="'+h+'"]');
     var home=!!HOME_ANCHORS[h]||(!NAMES[h]&&!real);
-    var show=home?"home":(real?h:"stub");
+    var show=home?"home":(real?h:"stub"); markNav(home&&h==="home"?"home":(anchor||h));
     document.querySelectorAll("main > .page").forEach(function(p){p.hidden=p.getAttribute("data-page")!==show});
     if(show==="calendar") renderCal();
     if(show==="participate") openForm(pendingInterest,pendingNote); pendingInterest=null; pendingNote=null;
@@ -6353,10 +6444,21 @@ a.mini{text-decoration:none;display:inline-block}
   }
   addEventListener("hashchange",route);
 
-  $("#moreBtn").addEventListener("click",function(e){e.stopPropagation();var m=$("#moreMenu");m.hidden=!m.hidden;this.setAttribute("aria-expanded",String(!m.hidden))});
-  $("#menuBtn").addEventListener("click",function(e){e.stopPropagation();var o=!$("#links").classList.contains("open");$("#links").classList.toggle("open",o);this.setAttribute("aria-expanded",String(o))});
-  document.addEventListener("click",function(e){if(!e.target.closest(".more")&&!e.target.closest("#links")&&!e.target.closest("#menuBtn"))closeMenus()});
-  document.addEventListener("keydown",function(e){if(e.key==="Escape")closeMenus()});
+  /* Mega menu: click (or hover with a mouse) opens a section; its category strip switches the list below */
+  var wide=matchMedia("(min-width:1181px) and (hover:hover)"),megaT=0;
+  $$(".nv-item").forEach(function(it){var b=it.querySelector(".nv-top");
+    b.addEventListener("click",function(e){e.stopPropagation();clearTimeout(megaT);var open=b.getAttribute("aria-expanded")==="true";var on=!open||(Date.now()-(it.__at||0)<600);closeMegas(it);megaOpen(it,on)});
+    it.addEventListener("mouseenter",function(){if(!wide.matches||document.body.classList.contains("fr-editing"))return;clearTimeout(megaT);megaT=setTimeout(function(){closeMegas(it);megaOpen(it,true)},90)});
+    $$(".nv-cat",it).forEach(function(c){var pick=function(){$$(".nv-cat",it).forEach(function(x){x.setAttribute("aria-pressed",String(x===c))});
+        $$(".nv-panel",it).forEach(function(p){p.hidden=p.getAttribute("data-cat")!==c.getAttribute("data-cat")})};
+      c.addEventListener("click",pick);c.addEventListener("mouseenter",function(){if(wide.matches)pick()});c.addEventListener("focus",pick)});
+  });
+  $(".site-nav").addEventListener("mouseleave",function(){if(!wide.matches)return;clearTimeout(megaT);megaT=setTimeout(function(){closeMegas()},220)});
+  $(".site-nav").addEventListener("mouseenter",function(){clearTimeout(megaT)});
+  $("#menuBtn").addEventListener("click",function(e){e.stopPropagation();var o=!$("#links").classList.contains("open");$("#links").classList.toggle("open",o);this.setAttribute("aria-expanded",String(o));if(!o)closeMegas()});
+  $("#links").addEventListener("click",function(e){if(e.target.closest("a"))closeMenus()});
+  document.addEventListener("click",function(e){if(!e.target.closest(".site-nav"))closeMenus()});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"){var open=$('.nv-top[aria-expanded="true"]');closeMenus();if(open)open.focus()}});
 
   /* ---- Partners carousel (4 per page) ---- */
   var PARTNERS=[[{"name": "Goyette Mechanical", "img": "img/partners/goyette.webp"}, {"name": "Ideal Group", "img": "img/partners/ideal-group.webp"}, {"name": "United Way of Southeastern Michigan", "img": "img/partners/united-way.webp"}, {"name": "Flint Community Schools", "img": "img/partners/flint-community-schools.webp"}], [{"name": "Community Foundation of Greater Flint", "img": "img/partners/community-foundation.webp"}, {"name": "Huntington Bank", "img": "img/partners/huntington.webp"}, {"name": "City of Flint", "img": "img/partners/city-of-flint.webp"}, {"name": "UAW Local 598", "img": "img/partners/uaw-598.webp"}], [{"name": "Keep Genesee County Beautiful", "img": "img/partners/kgcb.webp"}, {"name": "Your Logo Here", "img": ""}], [{"name": "Motor City Sign Works", "img": "img/partners/motor-city.webp"}, {"name": "Graphics Galore", "img": "img/partners/graphics-galore.webp"}, {"name": "Moonwalk Man", "img": "img/partners/moonwalk-man.webp"}, {"name": "Behind Your Design", "img": "img/partners/bd.webp"}]];
@@ -8953,7 +9055,12 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     return db.from("site_content").upsert({key:"data|gate",kind:"text",value:val,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(x.error){toast("Couldn’t change it: "+x.error.message);return false}
       CONTENT["data|gate"]={key:"data|gate",kind:"text",value:val};applyGate();updatePill();toast(on?"The site is now closed to the public. Admins still see everything.":"The site is open to the public again.");return true})}
   /* Signed-in admins always see a way back to the Admin dashboard (every page, both viewing modes); "Edit this page" sits beside it in Admin tools. */
-  function updatePill(){var p=$(".fr-pill");applyGate();
+  /* Header: dashboard icon goes to the right place; Sign In becomes Sign Out when someone is signed in */
+  function updateAuthNav(){var a=$("#nvAuth"),d=$("#nvDash");if(!a)return;var on=!!((USER&&!USER.is_anonymous)||ME);
+    a.classList.toggle("on",on);a.lastChild.textContent=on?"Sign Out":"Sign In";a.setAttribute("href",on?"#":"#access");a.title=on?"Sign out":"Sign in";
+    a.onclick=on?function(e){e.preventDefault();signOut()}:null;
+    if(d)d.setAttribute("href",(IS_ADMIN||ADMIN_REAL)?"#admin":ME?"#my-dashboard":"#program-signin")}
+  function updatePill(){var p=$(".fr-pill");applyGate();updateAuthNav();
     if(ADMIN_REAL&&!EDITING&&location.hash!=="#admin"){if(!p){p=document.createElement("div");p.className="fr-pill";p.setAttribute("role","group");p.setAttribute("aria-label","Admin shortcuts");
         p.innerHTML='<a href="#admin"><span aria-hidden="true">←</span> Admin dashboard</a><button type="button">Edit this page</button><span class="gate-flag" hidden>Closed to the public</span>';$("button",p).onclick=function(){setEditing(true)};document.body.appendChild(p)}
       p.hidden=false;$("button",p).hidden=!IS_ADMIN;$(".gate-flag",p).hidden=!gateOn()}
@@ -9071,7 +9178,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
       db.from("albums").select("id",{count:"exact",head:true}).eq("status","submitted"),db.from("teacher_plans").select("id",{count:"exact",head:true}).eq("status","submitted"),
       db.from("race_volunteers").select("id",{count:"exact",head:true}).eq("status","new"),db.from("shoutouts").select("id",{count:"exact",head:true}).eq("status","pending"),db.from("race_registrations").select("id",{count:"exact",head:true}).eq("status","new"),db.from("bw_submissions").select("id",{count:"exact",head:true}).eq("status","new")]).then(function(r){
       var c=function(i){return (r[i]&&r[i].count)||0};ADMC={mem:c(0),inq:c(1),rev:c(2)+c(3),albums:c(2),plans:c(3),vol:c(4),so:c(5),regs:c(6),bw:c(7)};
-      $$("[data-badge]").forEach(function(el){var n=ADMC[el.getAttribute("data-badge")]||0;el.textContent=n;el.hidden=!n});return ADMC})}
+      $$("[data-badge]").forEach(function(el){var n=ADMC[el.getAttribute("data-badge")]||0;el.textContent=n;el.hidden=!n});$$("#admBox .adm-item").forEach(function(it){it.classList.toggle("has-new",!!it.querySelector("em[data-badge]:not([hidden])"))});return ADMC})}
   function goTab(k,opt){opt=opt||{};if(k==="members:log"){k="members";MSUB="log"}else if(k==="members"&&!opt.keepSub)MSUB="people";
     if(k.indexOf("email:")===0){EMSUB=k.slice(6);k="email"}else if(k==="email")EMSUB="alerts";
     if(opt.q!=null){MFIND.q=opt.q;MFIND.f="all"}TAB=k;ADMNAV=false;renderAdmin(true);var b=$("#admBox");if(b&&b.getBoundingClientRect().top<0)scrollTo(0,b.getBoundingClientRect().top+scrollY-80)}
@@ -9103,18 +9210,34 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     if(!IS_ADMIN){box.classList.remove("adm2");box.innerHTML='<div class="adm-who"><span>Signed in as <b>'+esc(USER.email)+'</b></span><button class="mini" type="button" id="admOut">Sign out</button></div><h2 style="margin-top:14px">Waiting for admin access</h2><p style="margin-top:8px;color:#4a4d55">This account doesn’t have admin access yet. Once the site owner grants it, sign out and back in.</p>';$("#admOut").onclick=signOut;return}
     var cur=sectOf(TAB)||sectOf("overview"),name=((USER.user_metadata&&USER.user_metadata.full_name)||USER.email||"Admin"),first=firstName(name);
     box.classList.add("adm2");
-    box.innerHTML='<aside class="adm-side'+(ADMNAV?' open':'')+'" aria-label="Admin menu">'+
-        '<div class="adm-me"><span class="adm-av" aria-hidden="true">'+esc(first.charAt(0).toUpperCase())+'</span><span><b>'+esc(name)+'</b><small>Admin</small></span></div>'+
-        '<div class="adm-find" role="search"><label class="adm-q">'+ico("search")+'<input type="search" id="admQ" placeholder="Search admin" aria-label="Search admin: sections, people, events and more" autocomplete="off" aria-controls="admRes" aria-expanded="false"><kbd aria-hidden="true">/</kbd></label><div class="adm-res" id="admRes" role="listbox" hidden></div></div>'+
-        '<button class="adm-menu" type="button" id="admMenu" aria-expanded="'+ADMNAV+'">'+ico("menu")+'<span>Menu</span><b>'+esc(cur.t)+'</b></button>'+
-        '<nav class="adm-nav">'+SECT.map(function(g){return '<p class="adm-g">'+esc(g[0])+'</p>'+g[1].map(function(s){return '<button type="button" data-tab="'+s[0]+'"'+(TAB===s[0]?' aria-current="page"':'')+'>'+ico(s[3])+'<span>'+esc(s[1])+'</span>'+(s[4]?'<em data-badge="'+s[4]+'" hidden></em>':'')+'</button>'}).join("")}).join("")+
-          '<p class="adm-g">Building Workshop controls</p>'+BLINKS.map(function(l){return '<a href="'+l[0]+'">'+ico(l[2])+'<span>'+esc(l[1])+'</span></a>'}).join("")+
-          '<p class="adm-g">Race-day controls</p>'+RLINKS.map(function(l){return '<a href="'+l[0]+'"'+(l[0]==="#race-watch"?' class="ext"':'')+'>'+ico(l[2])+'<span>'+esc(l[1])+'</span>'+(l[3]?'<em data-badge="'+l[3]+'" hidden></em>':'')+'</a>'}).join("")+'</nav>'+
-        '</aside>'+
-      '<section class="adm-main"><header class="adm-head"><div><p class="adm-crumb">'+esc(cur.g)+'</p><h2>'+(cur.k==="overview"?'Welcome back, '+esc(first)+'.':esc(cur.t))+'</h2><p>'+esc(cur.d)+'</p></div><div class="adm-acts"><button type="button" class="adm-editbtn" id="admEdit">'+ico("edit")+'Edit the site</button><button type="button" id="admOut">'+ico("out")+'Sign out</button></div></header><div class="adm-panel" id="admPanel"><p class="adm-loading">Loading…</p></div></section>';
+    var caret='<svg class="adm-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg>';
+    var secBtn=function(s){return '<li><button type="button" data-tab="'+s[0]+'"'+(TAB===s[0]?' aria-current="page"':'')+'>'+ico(s[3])+'<span><b>'+esc(s[1])+'</b><small>'+esc(s[2])+'</small></span>'+(s[4]?'<em data-badge="'+s[4]+'" hidden></em>':'')+'</button></li>'};
+    var lnk=function(l,d){return '<li><a href="'+l[0]+'">'+ico(l[2])+'<span><b>'+esc(l[1])+'</b><small>'+d+'</small></span>'+(l[3]?'<em data-badge="'+l[3]+'" hidden></em>':'')+'</a></li>'};
+    var tops=SECT.map(function(g,gi){var label=g[0]==="Home"?"Overview":g[0]==="Building Workshop"?"Workshop":g[0]==="Race day"?"Race Day":g[0],extra="";
+        if(g[0]==="Building Workshop")extra=BLINKS.map(function(l){return lnk(l,"Opens the workshop control screen")}).join("");
+        if(g[0]==="Race day")extra=RLINKS.map(function(l){return lnk(l,l[0]==="#race-watch"?"What fans see, in a new view":"Opens the race-day control screen")}).join("");
+        var curIn=g[1].some(function(x){return x[0]===TAB});
+        if(g[1].length===1&&!extra)return '<button type="button" class="adm-top'+(curIn?' is-cur':'')+'" data-tab="'+g[1][0][0]+'"'+(curIn?' aria-current="page"':'')+'>'+esc(label)+'</button>';
+        return '<div class="adm-item"><button type="button" class="adm-top'+(curIn?' is-cur':'')+'" aria-expanded="false" aria-controls="admMega'+gi+'">'+esc(label)+'<i class="adm-dot" aria-hidden="true"></i>'+caret+'</button>'+
+          '<div class="adm-mega" id="admMega'+gi+'" hidden><p class="adm-mcat">'+esc(g[0])+'</p><ul class="adm-mlist">'+g[1].map(secBtn).join("")+extra+'</ul></div></div>'}).join("");
+    box.innerHTML='<div class="adm-nv'+(ADMNAV?' open':'')+'">'+
+        '<div class="adm-bar"><span class="adm-av" title="'+esc(name)+'" aria-hidden="true">'+esc(first.charAt(0).toUpperCase())+'</span>'+
+        '<button class="adm-menu" type="button" id="admMenu" aria-expanded="'+ADMNAV+'">'+ico("menu")+'<span>Menu</span></button>'+
+        '<nav class="adm-links" aria-label="Admin menu">'+tops+'</nav>'+
+        '<div class="adm-tools"><div class="adm-find" role="search"><label class="adm-q">'+ico("search")+'<input type="search" id="admQ" placeholder="Search admin" aria-label="Search admin: sections, people, events and more" autocomplete="off" aria-controls="admRes" aria-expanded="false"><kbd aria-hidden="true">/</kbd></label><div class="adm-res" id="admRes" role="listbox" hidden></div></div>'+
+          '<button type="button" class="adm-tl adm-editbtn" id="admEdit" title="Edit the site">'+ico("edit")+'<span>Edit the site</span></button><button type="button" class="adm-tl" id="admOut" title="Sign out">'+ico("out")+'<span>Sign Out</span></button></div>'+
+        '</div></div>'+
+      '<section class="adm-main"><header class="adm-head"><div><p class="adm-crumb">'+esc(cur.g==="Home"?"Admin":cur.g)+'</p><h2>'+(cur.k==="overview"?'Welcome back, '+esc(first)+'.':esc(cur.t))+'</h2><p>'+esc(cur.d)+'</p></div></header><div class="adm-panel" id="admPanel"><p class="adm-loading">Loading…</p></div></section>';
     $("#admOut").onclick=signOut; $("#admEdit").onclick=function(){location.hash="#home";setTimeout(function(){setEditing(true)},50)};
-    $("#admMenu").onclick=function(){ADMNAV=!ADMNAV;$(".adm-side",box).classList.toggle("open",ADMNAV);this.setAttribute("aria-expanded",String(ADMNAV))};
-    $$(".adm-nav button[data-tab]",box).forEach(function(b){b.onclick=function(){goTab(b.getAttribute("data-tab"))}});
+    var nv=$(".adm-nv",box),wideA=matchMedia("(min-width:901px)");
+    var closeAll=function(ex){$$(".adm-item",box).forEach(function(it){if(it!==ex){$(".adm-top",it).setAttribute("aria-expanded","false");$(".adm-mega",it).hidden=true}})};
+    $("#admMenu").onclick=function(){ADMNAV=!ADMNAV;nv.classList.toggle("open",ADMNAV);this.setAttribute("aria-expanded",String(ADMNAV));if(!ADMNAV)closeAll()};
+    $$(".adm-item",box).forEach(function(it){var b=$(".adm-top",it),m=$(".adm-mega",it);
+      b.onclick=function(e){e.stopPropagation();var on=b.getAttribute("aria-expanded")!=="true";closeAll(it);b.setAttribute("aria-expanded",String(on));m.hidden=!on}});
+    nv.addEventListener("click",function(e){e.stopPropagation()});
+    if(!window.__admNvDoc){window.__admNvDoc=1;document.addEventListener("click",function(){$$("#admBox .adm-item").forEach(function(it){$(".adm-top",it).setAttribute("aria-expanded","false");$(".adm-mega",it).hidden=true})});
+      document.addEventListener("keydown",function(e){if(e.key==="Escape"){var o=$('#admBox .adm-top[aria-expanded="true"]');$$("#admBox .adm-item").forEach(function(it){$(".adm-top",it).setAttribute("aria-expanded","false");$(".adm-mega",it).hidden=true});if(o)o.focus()}})}
+    $$(".adm-nv button[data-tab]",box).forEach(function(b){b.onclick=function(){goTab(b.getAttribute("data-tab"))}});
     bindAdmSearch();admCounts();
     ({overview:tabOverview,members:tabMembers,team:tabTeam,events:tabEvents,racingev:tabRacingEv,leadership:tabLeadership,uploads:tabUploads,families:tabEvents,notes:tabNotes,inq:tabInq,regs:tabRegs,news:tabNews,resources:tabResources,home:tabHome,spirit:tabSpirit,partners:tabPartners,reviews:tabReviews,edits:tabEdits,race:tabRace,bwsubs:tabBwSubs,bwteams:tabBwTeams,bwpeople:tabBwPeople,donate:tabDonate,sprice:tabSprice,printables:tabPrintables,email:tabEmail})[TAB]();
   }
