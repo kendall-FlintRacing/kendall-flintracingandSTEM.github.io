@@ -228,6 +228,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mission-card p.eyebrow{color:var(--red-deep)}
 .mission-card .m-right{border-left:2px solid var(--red);padding-left:clamp(1rem,2vw,1.4rem)}
 .mission-card h3{font-size:1.9rem;margin-bottom:14px}
+/* Centered layout (Nov 20): one column, headings and text centered, red divider between the two parts */
+.mission-card{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:0;max-width:920px;margin-inline:auto;padding:clamp(2rem,5vw,3.4rem) clamp(1.4rem,5vw,4rem)}
+.mission-card>div{max-width:64ch}
+.mission-card h2{margin:10px 0 16px}
+.mission-card .m-right{border-left:0;padding-left:0;margin-top:clamp(1.6rem,3.5vw,2.4rem)}
+.mission-card .m-right::before{content:"";display:block;width:64px;height:3px;background:var(--red);margin:0 auto clamp(1.4rem,3vw,2rem)}
+.mission-band::before{left:50%;right:auto;width:140px;margin-left:-70px;clip-path:none;height:6px}
 @media (max-width:760px){.mission-card{grid-template-columns:1fr}}
 
 /* Track pathways */
