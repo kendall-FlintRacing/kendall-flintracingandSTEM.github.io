@@ -233,7 +233,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mission-card>div{max-width:64ch}
 .mission-card h2{margin:10px 0 16px}
 .mission-card .m-right{border-left:0;padding-left:0;margin-top:clamp(1.6rem,3.5vw,2.4rem)}
-.mission-card .m-right::before{content:"";display:block;width:64px;height:3px;background:var(--red);margin:0 auto clamp(1.4rem,3vw,2rem)}
+.mission-card{position:relative;overflow:hidden;padding-bottom:calc(clamp(2rem,5vw,3.4rem) + 10px)}
+.mission-card>.m-flags{max-width:none;margin:clamp(1.4rem,3vw,2rem) 0 clamp(.8rem,2vw,1.2rem);line-height:0}
+.m-flags svg{width:clamp(130px,16vw,170px);height:auto;display:block;filter:drop-shadow(0 3px 4px rgba(0,0,0,.15))}
+.mission-card .m-right{margin-top:0}
+/* checkered strip along the bottom edge, and faint checks fading in from two corners */
+.mission-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:repeating-conic-gradient(#141519 0 25%,#fff 0 50%) 0 0/10px 10px}
+.mission-card::before,.mission-card .m-right::after{content:"";position:absolute;width:clamp(120px,22vw,220px);height:clamp(120px,22vw,220px);background:repeating-conic-gradient(#141519 0 25%,transparent 0 50%) 0 0/18px 18px;opacity:.07;pointer-events:none}
+.mission-card::before{left:0;top:0;-webkit-mask-image:linear-gradient(135deg,#000 0%,transparent 70%);mask-image:linear-gradient(135deg,#000 0%,transparent 70%)}
+.mission-card .m-right::after{right:0;bottom:10px;-webkit-mask-image:linear-gradient(315deg,#000 0%,transparent 70%);mask-image:linear-gradient(315deg,#000 0%,transparent 70%)}
 .mission-band::before{left:50%;right:auto;width:140px;margin-left:-70px;clip-path:none;height:6px}
 @media (max-width:760px){.mission-card{grid-template-columns:1fr}}
 
@@ -4809,6 +4817,12 @@ main .topic,main .cal-filters input,main .cal-filters select,main .q-card input,
           <h2>Build something bigger!</h2>
           <p>Beginning with our building workshops, and continuing with our annual race, the Flint Soap Box Derby renewed a community tradition in an exciting (and fast!) way. Join us as we transform our program into a year-round community hub for anyone who dares to think a little bigger—a place to build, explore, race and grow together.</p>
         </div>
+        <div class="m-flags" aria-hidden="true"><svg viewBox="0 0 132 78" width="132" height="78" focusable="false"><defs>
+          <pattern id="mfChk" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#fff"/><rect width="4" height="4" fill="#141519"/><rect x="4" y="4" width="4" height="4" fill="#141519"/></pattern>
+          <g id="mfFlag"><path d="M2 4 C12 -1 24 8 38 3 C40 10 40 20 40 27 C27 32 14 23 2 28 Z" fill="url(#mfChk)" stroke="#141519" stroke-width="1.6" stroke-linejoin="round"/><line x1="1" y1="0" x2="1" y2="66" stroke="#141519" stroke-width="3.2" stroke-linecap="round"/><circle cx="1" cy="0" r="3.4" fill="var(--red)"/></g></defs>
+          <use href="#mfFlag" transform="translate(50 74) rotate(30) translate(-1 -66)"/>
+          <use href="#mfFlag" transform="translate(82 74) scale(-1 1) rotate(30) translate(-1 -66)"/>
+        </svg></div>
         <div class="m-right">
           <h3>Our Mission</h3>
           <p>The Flint Soap Box Derby’s mission is to provide hands-on STEM learning in a collaborative environment that builds community partnership. Through workshops, racing and year-round learning, we bring young people, families, schools and neighbors together to turn ideas into skills, friendships and opportunities for our community.</p>
