@@ -235,7 +235,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mission-card .m-right{border-left:0;padding-left:0;margin-top:clamp(1.6rem,3.5vw,2.4rem)}
 .mission-card{position:relative;overflow:hidden;padding-bottom:calc(clamp(2rem,5vw,3.4rem) + 10px)}
 .mission-card>.m-flags{max-width:none;margin:clamp(1.4rem,3vw,2rem) 0 clamp(.8rem,2vw,1.2rem);line-height:0}
-.m-flags svg{width:clamp(130px,16vw,170px);height:auto;display:block;filter:drop-shadow(0 3px 4px rgba(0,0,0,.15))}
+.m-flags svg{width:clamp(190px,24vw,250px);height:auto;display:block;filter:drop-shadow(0 3px 4px rgba(0,0,0,.15))}
 .mission-card .m-right{margin-top:0}
 /* checkered strip along the bottom edge, and faint checks fading in from two corners */
 .mission-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:repeating-conic-gradient(#141519 0 25%,#fff 0 50%) 0 0/10px 10px}
@@ -4817,11 +4817,22 @@ main .topic,main .cal-filters input,main .cal-filters select,main .q-card input,
           <h2>Build something bigger!</h2>
           <p>Beginning with our building workshops, and continuing with our annual race, the Flint Soap Box Derby renewed a community tradition in an exciting (and fast!) way. Join us as we transform our program into a year-round community hub for anyone who dares to think a little bigger—a place to build, explore, race and grow together.</p>
         </div>
-        <div class="m-flags" aria-hidden="true"><svg viewBox="0 0 132 78" width="132" height="78" focusable="false"><defs>
-          <pattern id="mfChk" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#fff"/><rect width="4" height="4" fill="#141519"/><rect x="4" y="4" width="4" height="4" fill="#141519"/></pattern>
-          <g id="mfFlag"><path d="M2 4 C12 -1 24 8 38 3 C40 10 40 20 40 27 C27 32 14 23 2 28 Z" fill="url(#mfChk)" stroke="#141519" stroke-width="1.6" stroke-linejoin="round"/><line x1="1" y1="0" x2="1" y2="66" stroke="#141519" stroke-width="3.2" stroke-linecap="round"/><circle cx="1" cy="0" r="3.4" fill="var(--red)"/></g></defs>
-          <use href="#mfFlag" transform="translate(50 74) rotate(30) translate(-1 -66)"/>
-          <use href="#mfFlag" transform="translate(82 74) scale(-1 1) rotate(30) translate(-1 -66)"/>
+        <div class="m-flags" aria-hidden="true"><svg viewBox="0 0 240 142" width="240" height="142" focusable="false"><defs>
+          <pattern id="mfChk" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="skewY(10)"><rect width="18" height="18" fill="#f7f8fa"/><rect width="9" height="9" fill="#141519"/><rect x="9" y="9" width="9" height="9" fill="#141519"/></pattern>
+          <linearGradient id="mfFold" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset=".22" stop-color="#fff" stop-opacity=".32"/><stop offset=".45" stop-color="#000" stop-opacity=".34"/><stop offset=".7" stop-color="#fff" stop-opacity=".26"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>
+          <linearGradient id="mfPole" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#3a3d44"/><stop offset=".35" stop-color="#f4f5f7"/><stop offset=".6" stop-color="#8d9299"/><stop offset="1" stop-color="#26282d"/></linearGradient>
+          <radialGradient id="mfBall" cx=".35" cy=".35" r=".7"><stop offset="0" stop-color="#ff8a90"/><stop offset=".45" stop-color="#e11d25"/><stop offset="1" stop-color="#7d0a10"/></radialGradient>
+          <g id="mfFlag">
+            <path d="M2 6 C18 -6 34 18 52 6 S76 0 80 6 L82 46 C66 56 50 32 32 46 S8 52 2 48 Z" fill="url(#mfChk)"/>
+            <path d="M2 6 C18 -6 34 18 52 6 S76 0 80 6 L82 46 C66 56 50 32 32 46 S8 52 2 48 Z" fill="url(#mfFold)" stroke="#141519" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="-3" y="0" width="6" height="116" rx="3" fill="url(#mfPole)" stroke="#141519" stroke-width=".8"/>
+            <circle cx="0" cy="-2" r="6.2" fill="url(#mfBall)" stroke="#5c070c" stroke-width=".8"/>
+          </g></defs>
+          <g stroke-linecap="round" fill="none"><path d="M6 96 H58" stroke="#c4c7cc" stroke-width="3"/><path d="M18 106 H70" stroke="var(--red)" stroke-width="3.4"/><path d="M2 116 H50" stroke="#c4c7cc" stroke-width="2.4"/>
+            <path d="M182 96 H234" stroke="#c4c7cc" stroke-width="3"/><path d="M170 106 H222" stroke="var(--red)" stroke-width="3.4"/><path d="M190 116 H238" stroke="#c4c7cc" stroke-width="2.4"/></g>
+          <ellipse cx="120" cy="136" rx="34" ry="4" fill="#000" opacity=".12"/>
+          <use href="#mfFlag" transform="translate(92 136) rotate(30) translate(0 -116)"/>
+          <use href="#mfFlag" transform="translate(148 136) scale(-1 1) rotate(30) translate(0 -116)"/>
         </svg></div>
         <div class="m-right">
           <h3>Our Mission</h3>
