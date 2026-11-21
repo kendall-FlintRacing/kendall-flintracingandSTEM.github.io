@@ -5405,7 +5405,7 @@ main .topic,main .cal-filters input,main .cal-filters select,main .q-card input,
 
 <!-- Program Register / Inquire questionnaire, shown as a pop-up (the form moves in here while open) -->
 <dialog class="sbd-dlg q-dlg" id="qDlg" aria-labelledby="qDlgH">
-  <div class="sbd-top"><img src="img/logo-dark.webp" alt=""><div><h2 id="qDlgH">Register / Inquire</h2><p id="qDlgSub">About two minutes. We’ll follow up with the right forms and next steps.</p></div><button class="sbd-x" type="button" id="qDlgClose" aria-label="Close">×</button></div>
+  <div class="sbd-top"><img src="img/logo-dark.webp" alt=""><div><h2 id="qDlgH">Register / Inquire</h2><p id="qDlgSub">We’ll get back to you within a day or two with the right forms and next steps.</p></div><button class="sbd-x" type="button" id="qDlgClose" aria-label="Close">×</button></div>
   <div id="qDlgSlot"></div>
 </dialog>
 
@@ -5621,7 +5621,7 @@ main .topic,main .cal-filters input,main .cal-filters select,main .q-card input,
   <header class="prog-hero"><div class="wrap">
     <div class="txt"><p class="eyebrow">Build something bigger.</p>
       <h1>Register / Inquire</h1>
-      <p class="lede">Tell us who you are, what you’re interested in and how to reach you. It takes about two minutes. Once we know what you’re looking for, we’ll follow up with the right forms and next steps.</p></div>
+      <p class="lede">Tell us who you are, what you’re interested in and how to reach you. We’ll get back to you within a day or two with the right forms and next steps.</p></div>
     <div class="pic"><img src="img/web/2026-racers-group.webp" alt=""></div>
   </div></header>
   <div class="tape" aria-hidden="true"></div>
@@ -7163,14 +7163,14 @@ main .topic,main .cal-filters input,main .cal-filters select,main .q-card input,
       topics:["Race day schedule & what to expect","How heats, phases & brackets work","Divisions: Stock, Super Stock & Masters","Sanctioned racing & the path to Akron","Community & school racing","Rally & track experiences","Racing as a family or individual racer","Scheduling a practice for your school","Fees & race day registration","Volunteering on race day"]},
     building:{interest:"building",label:"Building workshop inquiry",title:"Building workshop inquiry",sub:"Questions about building workshops. To sign up, use the building workshop registration form.",
       topics:["Workshop dates, times & location","What participants build and learn","School teams & chaperones","Out-of-town schools & groups (3-visit program)","Building a car as a family","Car kits & costs","Registration, forms & shirts"]},
-    camps:{hide:["building","racing"],title:"Summer camp sign-up",sub:"About two minutes. We’ll follow up with camp details and next steps."},
-    seasonal:{hide:["building","racing"],title:"Workshop inquiry",sub:"About two minutes. We’ll follow up with workshop details and next steps."}};
+    camps:{hide:["building","racing"],title:"Summer camp sign-up",sub:"We’ll get back to you within a day or two with camp details and next steps."},
+    seasonal:{hide:["building","racing"],title:"Workshop inquiry",sub:"We’ll get back to you within a day or two with workshop details and next steps."}};
   var SCOPE=null;
   function applyScope(sc,topic){SCOPE=sc&&SCOPES[sc]?SCOPES[sc]:null;
     var picks=document.getElementById("q-picks"),tp=document.getElementById("q-topics"),l2=document.getElementById("qL2");if(!picks)return;
     picks.querySelectorAll("label.pick").forEach(function(l){l.hidden=false});picks.hidden=false;tp.hidden=true;tp.innerHTML="";l2.textContent="What are you interested in?";
     var H=document.getElementById("qDlgH"),S2=document.getElementById("qDlgSub");
-    if(H){H.textContent=SCOPE?SCOPE.title:"Register / Inquire";S2.textContent=SCOPE?SCOPE.sub:"About two minutes. We’ll follow up with the right forms and next steps."}
+    if(H){H.textContent=SCOPE?SCOPE.title:"Register / Inquire";S2.textContent=SCOPE?SCOPE.sub:"We’ll get back to you within a day or two with the right forms and next steps."}
     if(!SCOPE)return;
     if(SCOPE.topics){picks.hidden=true;tp.hidden=false;l2.textContent="What would you like to know?";
       picks.querySelectorAll("input").forEach(function(i){i.checked=i.value===SCOPE.interest});
