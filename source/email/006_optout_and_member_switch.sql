@@ -1,0 +1,7 @@
+-- Applied Nov 20, 2026 as migration "email_optout_and_member_switch".
+-- Footer "Unsubscribe" pop-up (email_unsubscribe_any) and the My dashboard email on/off switch (member_email).
+-- private.email_optout blocks every list update to an address (also future lists);
+-- unsubscribing also turns each current list off ('unsubscribed'), so Admin's "They asked again" check still applies.
+-- Turning the switch back on lifts the opt-out, clears 'unsubscribed' list rows and ticks every member list if none were ticked.
+-- email_audience() skips opted-out addresses; admin_list_add() treats them like unsubscribed people (needs "They asked again", which lifts the opt-out).
+-- Full SQL: see the migration in Supabase (supabase_migrations.schema_migrations, name email_optout_and_member_switch).

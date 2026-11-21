@@ -4611,6 +4611,29 @@ html.fr-gated #frGate{display:grid;place-items:center;min-height:100vh;min-heigh
 .em-ck input{width:18px;height:18px;margin:0;accent-color:var(--red-deep);flex:none}
 .em-auto{font-size:.86rem;color:#5a5d64}
 a.mini{text-decoration:none;display:inline-block}
+.un-dlg{width:min(480px,calc(100vw - 28px))}
+.un-form,.un-done{display:grid;gap:14px}
+.un-form p,.un-done p{line-height:1.55;color:#d5d8dd}
+.un-form b,.un-done b{color:#fff;word-break:break-all}
+.un-f{display:grid;gap:6px;font:700 .82rem/1 var(--body);letter-spacing:.04em;color:#c9ccd1}
+.un-f input{font:500 1rem/1.2 var(--body);padding:12px 14px;border-radius:var(--r-sm,4px);border:1.5px solid #44474f;background:#0f1014;color:#fff}
+.un-f input:focus{outline:2px solid var(--red2);outline-offset:1px;border-color:transparent}
+.un-go{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.un-keep{background:none;border:0;color:#c9ccd1;font:600 .9rem/1 var(--body);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:8px 2px}
+.un-keep:hover{color:#fff}
+.un-fine{font-size:.88rem;color:#9aa0aa!important}
+.un-dlg .t-msg{color:#ff8a90;min-height:1em}
+.me-sw{display:flex;align-items:center;gap:14px;padding:12px 14px;border:1px solid rgba(255,255,255,.12);border-radius:var(--r,8px);background:rgba(255,255,255,.04);cursor:pointer;margin-bottom:6px}
+.me-sw span{flex:1;display:grid;gap:3px}
+.me-sw b{color:#fff;font-size:1rem}
+.me-sw small{color:#9aa0aa;font-size:.84rem;line-height:1.35}
+.me-sw input{position:absolute;opacity:0;width:1px;height:1px}
+.me-sw i{flex:none;width:50px;height:28px;border-radius:999px;background:#4a4d55;position:relative;transition:background .15s}
+.me-sw i::after{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.4);transition:transform .15s}
+.me-sw input:checked+i{background:var(--red)}
+.me-sw input:checked+i::after{transform:translateX(22px)}
+.me-sw input:focus-visible+i{outline:2px solid #fff;outline-offset:2px}
+.me-sw input:disabled+i{opacity:.5}
 .un-card{max-width:560px}
 .un-card p{line-height:1.55}
 .un-card a:not(.btn){color:var(--red-deep);font-weight:600}
@@ -6228,18 +6251,6 @@ main .topic,main .cal-filters input,main .cal-filters select,main .q-card input,
 </div>
 
 <!-- ======================= EMAIL CHOICES (unsubscribe link in every update) ======================= -->
-<div class="page dark prog-page reg-page" data-page="unsubscribe" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Email choices</span></div></nav>
-  <header class="prog-hero"><div class="wrap">
-    <div class="txt"><p class="eyebrow">Emails from us</p><h1>Email choices</h1><p class="lede">Stop a list of emails here. No sign-in needed.</p></div>
-    <div class="pic"><img src="img/web/header-placeholder.webp" alt=""></div>
-  </div></header>
-  <div class="tape" aria-hidden="true"></div>
-  <div class="wrap"><div>
-    <div id="unsubBox" class="reg-box"></div>
-  </div></div>
-</div>
-
 <!-- ======================= PROGRAM DASHBOARD (families) ======================= -->
 <div class="page dark prog-page pd-page" data-page="program-signin" hidden>
   <nav class="crumbs" aria-label="Breadcrumb" data-crumbs="program-signin"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span aria-current="page">Program Dashboard</span></div></nav>
@@ -6523,11 +6534,12 @@ main .topic,main .cal-filters input,main .cal-filters select,main .q-card input,
       <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#programs">Programs</a></li><li><a href="#resources">Resources</a></li></ul></div>
       <a class="f-logo" href="#home"><img src="img/logo-white.webp" alt="Flint Racing home"></a>
       <div><h4>Take part</h4><ul><li><a href="#donate">Donate</a></li><li><a href="#participate">Get Involved</a></li><li><a href="#serve">Volunteer</a></li><li><a href="#background-check">Background Check</a></li></ul></div>
-      <div><h4>Connect</h4><ul><li><a href="#news-page">News &amp; Stories</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>Connect</h4><ul><li><a href="#news-page">News &amp; Stories</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#contact">Contact</a></li><li><a href="#" data-unsub>Unsubscribe</a></li></ul></div>
     </div>
     <div class="f-base"><span>© <span id="yr">2026</span> Flint Racing and STEM</span><span>Build Something Bigger.</span></div>
   </div>
 </footer>
+<dialog class="tb-dlg un-dlg" id="unsubDlg" aria-labelledby="unH"><div class="tb-top"><div><p class="tb-k">Emails from us</p><h2 id="unH">Unsubscribe</h2></div><button class="tb-x" type="button" data-unx aria-label="Close">×</button></div><div id="unsubBox"></div></dialog>
 
 <script>
 /* Square Point of Sale hands back here after a kiosk donation (?data=… on iPad/iPhone, ?com.squareup.pos.… on Android).
@@ -6543,7 +6555,7 @@ main .topic,main .cal-filters input,main .cal-filters select,main .q-card input,
   var $=function(s){return document.querySelector(s)};
   var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"garage":"Flint Racing Garage","student-leaders":"Meet Student Leaders","kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","council":"Leadership Council","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","unsubscribe":"Email choices","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","race-day-sponsors":"Race Day Sponsors","track-development":"Track Development","program-facility-development":"Program & Facility Development","park-community-development":"Park & Community Development","join-our-team":"Join Our Team","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"garage":"Flint Racing Garage","student-leaders":"Meet Student Leaders","kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","council":"Leadership Council","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","race-day-sponsors":"Race Day Sponsors","track-development":"Track Development","program-facility-development":"Program & Facility Development","park-community-development":"Park & Community Development","join-our-team":"Join Our Team","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1,"spirit":1};
 
   function megaOpen(item,on){var b=item.querySelector(".nv-top"),m=item.querySelector(".nv-mega");if(on&&m.hidden)item.__at=Date.now();b.setAttribute("aria-expanded",String(on));m.hidden=!on}
@@ -9267,6 +9279,11 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
       if(fn==="member_set_code"){var c9=curM();if(!c9)return R(null,"Sign in first.");if(!proof(c9,args.p_current))return R(null,"Your current code or password isn’t right.");
         if(wcode(args.p_new))return R(null,"Pick a 4-digit code that isn’t easy to guess (not 1234 or 1111).");if(T.members.some(function(m){return m.family_code===args.p_new&&m.id!==c9.id}))return R(null,"That code is already in use. Pick a different 4 digits.");
         c9.family_code=args.p_new;mlog(c9.id,c9.username,"code_changed");save();return R(null)}
+      if(fn==="email_unsubscribe_any"){var e7=String(args.p_email||"").trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,24}$/.test(e7))return R(null,"Enter a full email address, like name@example.com.");window.__optout=window.__optout||{};window.__optout[e7]=1;return R(true)}
+      if(fn==="member_email"){var c11=curM();if(!c11)return R(null,"Sign in first.");window.__optout=window.__optout||{};var e8=String(c11.email||"").toLowerCase();
+        if(args.p_on===false)window.__optout[e8]=1;
+        if(args.p_on===true){delete window.__optout[e8];if(!(c11.email_prefs||[]).some(function(x){return x!=="account"}))c11.email_prefs=(c11.email_prefs||[]).concat(["building","workshops","volunteers","council"])}
+        return R({on:!window.__optout[e8],prefs:c11.email_prefs||[]})}
       if(fn==="member_set_prefs"){var c10=curM();if(!c10)return R(null,"Sign in first.");c10.email_prefs=(args.p_prefs||[]).filter(function(x){return x==="account"||["building","workshops","volunteers","council"].indexOf(x)>=0||((T.email||{}).defs||[]).some(function(d){return d.key===x&&d.member_choice})});save();return R(c10.email_prefs)}
       if(fn==="member_signout"){var c0=curM();if(c0)mlog(c0.id,c0.username,"sign_out");if(user)delete T.msess[user.id];save();return R(null)}
       if(fn==="admin_member_session"){if(!user||user.id!=="test-admin")return R(null,"Admins only");var am=T.members.filter(function(m){return (m.email||"")==="test-admin@flintracing.org"})[0];
@@ -12161,7 +12178,7 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
 
   /* ---------- Route the new pages ---------- */
   function renderPortals(){var h=hashBase();
-    if(h==="program-signin")renderPD(); if(h==="printables")renderPrintables(); if(h==="my-dashboard")renderMe(); if(h==="new-profile")renderReg(); if(RES_MAP[h])renderRes(); if(h==="crew")renderCrew(); if(h==="news-page")renderNews(); if(h==="unsubscribe")renderUnsub();
+    if(h==="unsubscribe")renderUnsub(); if(h==="program-signin")renderPD(); if(h==="printables")renderPrintables(); if(h==="my-dashboard")renderMe(); if(h==="new-profile")renderReg(); if(RES_MAP[h])renderRes(); if(h==="crew")renderCrew(); if(h==="news-page")renderNews(); if(h==="unsubscribe")renderUnsub();
     renderKiosk();renderCamps();renderWS();renderVol();renderPH();renderTE();renderCO();}
   window.addEventListener("hashchange",renderPortals);
   /* ---------- Admin → Families: private times and places ---------- */
@@ -12488,7 +12505,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
       '<div class="reg-sec"><h3><i>3</i>Your 4-digit code</h3><p class="reg-hint">This is how you sign in here, with your email. Families also use it to check in and out at workshops. Pick 4 digits you’ll remember that aren’t easy to guess.</p>'+
         '<div class="reg-2"><label class="f" for="rg-code">Choose your code<input type="password" id="rg-code" inputmode="numeric" pattern="[0-9]*" autocomplete="new-password" maxlength="4" class="reg-pin"></label><label class="f" for="rg-code2">Type it again<input type="password" id="rg-code2" inputmode="numeric" pattern="[0-9]*" autocomplete="new-password" maxlength="4" class="reg-pin"></label></div>'+
         '<details class="reg-pwd"><summary>Prefer a password too? <small>(optional)</small></summary><p class="reg-hint">You can sign in with either one. At least 6 characters.</p><div class="reg-2"><label class="f" for="rg-pass">Password<input type="password" id="rg-pass" autocomplete="new-password" maxlength="64"></label><label class="f" for="rg-pass2">Type it again<input type="password" id="rg-pass2" autocomplete="new-password" maxlength="64"></label></div></details></div>'+
-      '<div class="reg-sec"><h3><i>4</i>Emails from us</h3><p class="reg-hint">Pick what you’d like to hear about. You can change this any time on your dashboard.</p><div class="reg-checks">'+prefsHTML("",["account"])+'</div></div>'+
+      '<div class="reg-sec"><h3><i>4</i>Emails from us</h3><p class="reg-hint">Emails start on. Untick anything you don’t want, or turn emails off any time in your dashboard settings.</p><div class="reg-checks">'+prefsHTML("",PREFS.map(function(x){return x[0]}))+'</div></div>'+
       '<label class="f" for="rg-about">Anything we should know? <small>(optional)</small><textarea id="rg-about" maxlength="600" placeholder="Team name, school, allergies or how you heard about us"></textarea></label>'+
       '<label class="reg-ok"><input type="checkbox" id="rg-ok"><span>I understand an admin reviews every profile before it can see program dates, times and places, and that Flint Racing logs sign-ins to keep families safe.</span></label>'+
       '<div class="reg-go"><button class="btn deep" type="submit" id="rgGo">Register</button><span class="reg-hint">Already registered? <a href="#access">Sign in</a></span></div><p class="t-msg" id="rgMsg" role="status"></p></form>';
@@ -12667,7 +12684,7 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
             '<details><summary>Change my 4-digit code</summary><form class="me-pw" id="meCode" novalidate><label class="f">Current code or password<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New 4-digit code<input type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label><label class="f">Type the new code again<input type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label><button class="btn deep" type="submit" style="justify-self:start">Save new code</button><p class="t-msg" role="status"></p></form></details>'+
             '<details><summary>'+(P.member.has_password?'Change my password':'Add a password (optional)')+'</summary><form class="me-pw" id="mePw" novalidate><label class="f">Current code or password<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New password <small>(6+ characters)</small><input type="password" autocomplete="new-password" maxlength="64"></label><label class="f">Type it again<input type="password" autocomplete="new-password" maxlength="64"></label><button class="btn deep" type="submit" style="justify-self:start">Save password</button><p class="t-msg" role="status"></p></form></details>'+
             '<p class="me-fine">To change your name, email or roles, email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>'+
-          '<div class="me-card"><p class="me-k">Emails from us</p><h2>Email notifications</h2><p class="me-fine">Tick what you’d like in your inbox. Changes save right away, and every update has an unsubscribe link.</p><form id="mePrefs" class="me-prefs">'+prefsHTML("me-pref",m.email_prefs||[])+'</form><p class="t-msg" id="mePrefMsg" role="status"></p></div></dialog>';
+          '<div class="me-card"><p class="me-k">Emails from us</p><h2>Email notifications</h2><label class="me-sw"><span><b>Emails from Flint Racing</b><small id="meEmailTxt">On. You’ll get the updates ticked below.</small></span><input type="checkbox" role="switch" id="meEmailOn" checked><i aria-hidden="true"></i></label><form id="mePrefs" class="me-prefs"><p class="me-fine">Choose what you’d like in your inbox. Changes save right away.</p>'+prefsHTML("me-pref",m.email_prefs||[])+'</form><p class="t-msg" id="mePrefMsg" role="status"></p></div></dialog>';
     box.classList.add("ck-on");ckAnimate(box);if(!P.open)ckFill(box,P,preview);Promise.resolve().then(gsDraw);$("#meTools",box).onclick=tbOpen;
     var cb=$("#ckCodeBtn",box);if(cb)cb.onclick=function(){var on=cb.getAttribute("aria-pressed")!=="true",c=$("#ckCode",box);c.textContent=on?c.getAttribute("data-c"):"••••";cb.setAttribute("aria-pressed",String(on));cb.textContent=on?"Hide":"Show";cb.setAttribute("aria-label",on?"Hide my 4-digit code":"Show my 4-digit code")};
     var pd=$("#meProfDlg",box);$("#meProf",box).onclick=function(){if(pd&&!pd.open)pd.showModal()};if(pd)pd.addEventListener("click",function(e){if(e.target===pd||e.target.closest("[data-pfx]"))pd.close()});
@@ -12686,6 +12703,11 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
         db.rpc("member_set_code",{p_current:i[0].value,p_new:i[1].value}).then(function(x){if(x.error){msg.textContent=x.error.message;return}i.forEach(function(n){n.value=""});msg.textContent="";if(ME)ME.family_code=null;toast("New code saved. Use it next time you sign in"+(fam?" or check in":"")+".");renderMe()})}}
     var sh=$("#meShow");if(sh)sh.onclick=function(){var d=$("#meDigits"),on=sh.getAttribute("aria-pressed")!=="true",c=d.getAttribute("data-c");
       d.innerHTML=c.split("").map(function(n){return '<span aria-hidden="true">'+(on?esc(n):"•")+'</span>'}).join("");d.setAttribute("aria-label",on?"Your code: "+c.split("").join(" "):"");sh.setAttribute("aria-pressed",String(on));sh.textContent=on?"Hide":"Show"};
+    var esw=$("#meEmailOn"),pr0=$("#mePrefs"),eset=function(on,prefs){esw.checked=on;pr0.hidden=!on;$("#meEmailTxt").textContent=on?"On. You’ll get the updates ticked below.":"Off. You won’t get any Flint Racing updates. Turn this on any time.";
+        if(prefs)$$('input[name="pref"]',pr0).forEach(function(i){i.checked=prefs.indexOf(i.value)>=0})};
+    if(esw){db.rpc("member_email",{}).then(function(x){if(!x.error&&x.data)eset(!!x.data.on,null)},function(){});
+      esw.onchange=function(){var on=esw.checked,msg=$("#mePrefMsg");esw.disabled=true;
+        db.rpc("member_email",{p_on:on}).then(function(x){esw.disabled=false;if(x.error){eset(!on,null);msg.textContent=x.error.message;return}eset(!!x.data.on,x.data.prefs||null);toast(on?"Emails are on.":"Emails are off.")},function(){esw.disabled=false;eset(!on,null);msg.textContent="Couldn’t save. Check your connection."})}}
     var pr=$("#mePrefs");if(pr)pr.onchange=function(){var msg=$("#mePrefMsg");db.rpc("member_set_prefs",{p_prefs:prefsOf(pr)}).then(function(x){if(x.error){msg.textContent=x.error.message;return}msg.textContent="Saved.";setTimeout(function(){msg.textContent=""},2000)})};
   }
 
@@ -13445,18 +13467,35 @@ var PRT_SLUG={flyers:"Flyers",registration:"Registration forms",waivers:"Waivers
           if(x.error){m.textContent=x.error.message;return}toast((ready?"Email on its way to ":"Email queued for ")+d.to+(table==="inquiries"&&INQ_FILTER==="new"?". The inquiry moved to In progress.":"."));box.remove();if(after)after()})};
       body.focus()})}
 
-  /* ---------- Unsubscribe page (#unsubscribe/…): the link at the bottom of every update ---------- */
-  function renderUnsub(){var box=$("#unsubBox");if(!box||hashBase()!=="unsubscribe")return;
+  /* ---------- Unsubscribe pop-up: footer link (type an email) and the link at the bottom of every update (#unsubscribe/…) ---------- */
+  function unsubOpen(){var d=$("#unsubDlg");if(d&&!d.open){try{d.showModal()}catch(e){d.setAttribute("open","")}}return d}
+  function unsubClose(){var d=$("#unsubDlg");if(d&&d.open)d.close()}
+  function unsubForm(){var box=$("#unsubBox");if(!box)return;
+    box.innerHTML='<form class="un-form" id="unForm" novalidate><p>Type the email address you’d like to take off every Flint Racing &amp; STEM email list. Replies to your own questions and emails about your account aren’t affected.</p>'+
+      '<label class="un-f">Email address<input type="email" id="unEmail" autocomplete="email" required maxlength="254" placeholder="name@example.com"></label>'+
+      '<div class="un-go"><button class="btn deep" type="submit">Unsubscribe</button><button class="un-keep" type="button" data-unx>Keep my emails</button></div><p class="t-msg" id="unMsg" role="status"></p></form>';
+    var f=$("#unForm");setTimeout(function(){var i=$("#unEmail");if(i)i.focus()},60);
+    f.onsubmit=function(e){e.preventDefault();var em=$("#unEmail").value.trim(),msg=$("#unMsg"),b=$("button[type=submit]",f);
+      if(!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,24}$/.test(em)){msg.textContent="Enter a full email address, like name@example.com.";return}
+      if(!window.FR_DB){msg.textContent="Couldn’t reach our system. Email info@flintsoapbox.org and we’ll take you off.";return}
+      b.disabled=true;msg.textContent="";
+      db.rpc("email_unsubscribe_any",{p_email:em}).then(function(x){b.disabled=false;if(x.error){msg.textContent=x.error.message;return}
+        box.innerHTML='<div class="un-done"><p><b>'+esc(em)+'</b> is off our email lists. You won’t get updates from Flint Racing &amp; STEM at that address.</p><p class="un-fine">Have an account? You can turn emails back on any time from your dashboard settings.</p><div class="un-go"><button class="btn deep" type="button" data-unx>Done</button></div></div>'},
+        function(){b.disabled=false;msg.textContent="Couldn’t reach our system. Try again in a minute."})}}
+  function renderUnsub(){if(hashBase()!=="unsubscribe")return;var box=$("#unsubBox");if(!box)return;unsubOpen();
     var p=(location.hash||"").split("/"),a={p_e:p[1]||"",p_topic:p[2]||"",p_sig:p[3]||""};
-    var card=function(h){box.innerHTML='<div class="reg-card un-card">'+h+'</div>'},bad='<p class="me-k">Email choices</p><h2>This link didn’t work</h2><p>The unsubscribe link may be incomplete. Try the link in a newer email, or write to <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a> and we’ll take you off the list.</p>';
-    if(!window.FR_DB){card(bad);return}
-    card('<p class="reg-hint">Checking your link…</p>');
-    db.rpc("email_unsubscribe",Object.assign({p_go:false},a)).then(function(r){if(r.error||!r.data){card(bad);return}var d=r.data,ns=d.names||[],nm=ns.length?(ns.length>1?ns.slice(0,-1).join(", ")+" and "+ns[ns.length-1]:ns[0]):"these";
-      card('<p class="me-k">Email choices</p><h2>Stop these emails?</h2><p><b>'+esc(d.email)+'</b> will stop getting <b>'+esc(nm)+'</b> emails from Flint Racing &amp; STEM. Replies to your own questions and emails about your account aren’t affected.</p>'+
-        '<div class="reg-go"><button class="btn deep" type="button" id="unGo">Unsubscribe</button><a class="reg-hint" href="#home">Keep my emails</a></div><p class="t-msg" id="unMsg" role="status"></p>');
+    var bad=function(){box.innerHTML='<div class="un-done"><p>That unsubscribe link didn’t work. It may be incomplete. Type your email below instead.</p></div>';var keep=box.innerHTML;unsubForm();box.insertAdjacentHTML("afterbegin",keep)};
+    if(!window.FR_DB){bad();return}
+    box.innerHTML='<p class="un-fine">Checking your link…</p>';
+    db.rpc("email_unsubscribe",Object.assign({p_go:false},a)).then(function(r){if(r.error||!r.data){bad();return}var d=r.data,ns=d.names||[],nm=ns.length?(ns.length>1?ns.slice(0,-1).join(", ")+" and "+ns[ns.length-1]:ns[0]):"these";
+      box.innerHTML='<div class="un-form"><p><b>'+esc(d.email)+'</b> will stop getting <b>'+esc(nm)+'</b> emails from Flint Racing &amp; STEM. Replies to your own questions and emails about your account aren’t affected.</p>'+
+        '<div class="un-go"><button class="btn deep" type="button" id="unGo">Unsubscribe</button><button class="un-keep" type="button" data-unx>Keep my emails</button></div><p class="t-msg" id="unMsg" role="status"></p></div>';
       $("#unGo").onclick=function(){var b=this;b.disabled=true;db.rpc("email_unsubscribe",Object.assign({p_go:true},a)).then(function(x){
         if(x.error){b.disabled=false;$("#unMsg").textContent=x.error.message;return}
-        card('<p class="me-k">Done</p><h2>You’re unsubscribed</h2><p>'+esc(d.email)+' won’t get '+esc(nm)+' emails anymore. Changed your mind? Sign in and turn them back on from My dashboard.</p><div class="reg-go"><a class="btn deep" href="#home">Back to the site</a></div>')})}},function(){card(bad)})}
+        box.innerHTML='<div class="un-done"><p><b>'+esc(d.email)+'</b> won’t get '+esc(nm)+' emails anymore.</p><p class="un-fine">Changed your mind? Sign in and turn emails back on from your dashboard settings.</p><div class="un-go"><button class="btn deep" type="button" data-unx>Done</button></div></div>'})}},bad)}
+  document.addEventListener("click",function(e){var o=e.target.closest("[data-unsub]");if(o){e.preventDefault();unsubForm();unsubOpen();return}
+    if(e.target.closest("[data-unx]")||e.target.id==="unsubDlg")unsubClose()});
+  (function(){var d=$("#unsubDlg");if(d)d.addEventListener("close",function(){if(hashBase()==="unsubscribe")history.replaceState(null,"","#home")})})();
   function emApproveHTML(m){var d=EMR.members||{},t=emTpl("members","account_approved");if(!t||!d.on||!m.email)return "";
     return t.auto?'<small class="em-auto">Sign-in instructions are emailed automatically when you approve.</small>':'<label class="em-ck"><input type="checkbox" data-emok checked>Email them sign-in instructions</label>'}
 

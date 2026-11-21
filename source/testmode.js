@@ -257,6 +257,11 @@ T.race_slides=[{id:"sl1",name:"National Anthem",kind:"anthem",bg:"#0b1f4d",effec
       if(fn==="member_set_code"){var c9=curM();if(!c9)return R(null,"Sign in first.");if(!proof(c9,args.p_current))return R(null,"Your current code or password isn’t right.");
         if(wcode(args.p_new))return R(null,"Pick a 4-digit code that isn’t easy to guess (not 1234 or 1111).");if(T.members.some(function(m){return m.family_code===args.p_new&&m.id!==c9.id}))return R(null,"That code is already in use. Pick a different 4 digits.");
         c9.family_code=args.p_new;mlog(c9.id,c9.username,"code_changed");save();return R(null)}
+      if(fn==="email_unsubscribe_any"){var e7=String(args.p_email||"").trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,24}$/.test(e7))return R(null,"Enter a full email address, like name@example.com.");window.__optout=window.__optout||{};window.__optout[e7]=1;return R(true)}
+      if(fn==="member_email"){var c11=curM();if(!c11)return R(null,"Sign in first.");window.__optout=window.__optout||{};var e8=String(c11.email||"").toLowerCase();
+        if(args.p_on===false)window.__optout[e8]=1;
+        if(args.p_on===true){delete window.__optout[e8];if(!(c11.email_prefs||[]).some(function(x){return x!=="account"}))c11.email_prefs=(c11.email_prefs||[]).concat(["building","workshops","volunteers","council"])}
+        return R({on:!window.__optout[e8],prefs:c11.email_prefs||[]})}
       if(fn==="member_set_prefs"){var c10=curM();if(!c10)return R(null,"Sign in first.");c10.email_prefs=(args.p_prefs||[]).filter(function(x){return x==="account"||["building","workshops","volunteers","council"].indexOf(x)>=0||((T.email||{}).defs||[]).some(function(d){return d.key===x&&d.member_choice})});save();return R(c10.email_prefs)}
       if(fn==="member_signout"){var c0=curM();if(c0)mlog(c0.id,c0.username,"sign_out");if(user)delete T.msess[user.id];save();return R(null)}
       if(fn==="admin_member_session"){if(!user||user.id!=="test-admin")return R(null,"Admins only");var am=T.members.filter(function(m){return (m.email||"")==="test-admin@flintracing.org"})[0];
