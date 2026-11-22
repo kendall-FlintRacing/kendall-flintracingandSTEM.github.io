@@ -3361,6 +3361,20 @@ body.sle-open{overflow:hidden}
 .fr-test.reh-chip{max-width:min(440px,calc(100vw - 28px));display:grid;gap:6px}.reh-chip span{display:block!important}
 .reh-warn{background:#fde3e6;color:#8a0f1f;border-radius:4px;padding:6px 8px;font-weight:700}.reh-warn[hidden]{display:none!important}
 .reh-nav,.reh-btns{display:flex;gap:6px;flex-wrap:wrap}
+.tmr-card h3{display:flex;align-items:center;gap:8px}
+.tmr-st{display:flex;align-items:center;gap:8px;font-size:.95rem}
+.tmr-st i{width:10px;height:10px;border-radius:50%;background:#9aa0aa;flex:none}
+.tmr-st.on i{background:#16a34a;box-shadow:0 0 0 4px rgba(22,163,74,.18)}
+.tmr-note{margin:8px 0 0;font-size:.88rem;color:#3f424a;background:#f4f5f7;border-radius:4px;padding:8px 10px}
+.tmr-last{display:grid;gap:4px;margin:10px 0 0;padding:10px 12px;border:1px solid #e1e3e6;border-left:4px solid var(--red);border-radius:4px}
+.tmr-last small{color:#6b6e75;font-size:.78rem}
+.tmr-last b{font-size:1.02rem}
+.tmr-last .mini{justify-self:start;margin-top:4px}
+.tmr-card .row{margin-top:10px}
+.tmr-more{margin-top:12px;border-top:1px solid #e1e3e6;padding-top:10px}
+.tmr-more summary{cursor:pointer;font-weight:700;font-size:.9rem}
+.tmr-more>*+*{margin-top:10px}
+.tmr-log{max-height:220px;overflow:auto;background:#0f1014;color:#d5d8dd;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;padding:10px;border-radius:4px;white-space:pre-wrap;word-break:break-all;min-height:60px}
 .reh-ov{position:fixed;inset:0;z-index:500;background:rgba(10,10,12,.8);display:grid;place-items:center;padding:20px}
 .reh-ovin{background:#fff;border-radius:10px;padding:22px;max-width:440px;display:grid;gap:8px}
 .reh-ovin:has(.reh-form){max-width:560px;max-height:calc(100dvh - 40px);overflow:auto}
@@ -10189,11 +10203,91 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
         db.from("race_heats").update({a_time1:a,b_time1:b,diff1:Math.round((b-a)*1000)/1000,run:2,status:"staging",started_at:cur.started_at||now(),updated_at:now()}).eq("id",cur.id).then(function(x){if(rkOk(x,"Phase 1 posted. "+(SW==="Wheel Bank"?"Swap lanes.":"Swap lanes and wheels.")))delete RK.draft[key2]});return}
       finish({a1:cur.a_time1,b1:cur.b_time1,a2:b,b2:a,note:note()});};
   }
+  /* ---------- Finish-line timer (Web Serial): read the timer's output and fill the current run's times ----------
+     The controller still checks the numbers and taps Post. Listen mode keeps everything the timer sends so the
+     exact format can be matched. A pretend timer feeds sample readings through the same steps for practice. */
+  var TMR=window.__TMR||(window.__TMR={port:null,reader:null,on:false,buf:"",timer:0,last:null,log:[],note:"",open:false,
+    cfg:(function(){try{return Object.assign({baud:9600,swap:false,auto:true},JSON.parse(localStorage.getItem("fr-timer-cfg")||"{}"))}catch(e){return{baud:9600,swap:false,auto:true}}})()});
+  try{TMR.log=JSON.parse(localStorage.getItem("fr-timer-log")||"[]")}catch(e){}
+  function tmrSaveCfg(){try{localStorage.setItem("fr-timer-cfg",JSON.stringify(TMR.cfg))}catch(e){}}
+  function tmrLog(kind,text){TMR.log.push({at:new Date().toISOString(),kind:kind,text:String(text).slice(0,2000)});if(TMR.log.length>600)TMR.log=TMR.log.slice(-600);
+    try{localStorage.setItem("fr-timer-log",JSON.stringify(TMR.log))}catch(e){}var pre=$("#tmrLog");if(pre)pre.textContent=tmrLogText(40)}
+  function vis(t){return String(t).replace(/\r/g,"⏎").replace(/\n/g,"↵\n").replace(/\t/g,"⇥").replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g,function(c){return "<"+c.charCodeAt(0).toString(16).padStart(2,"0")+">"})}
+  function tmrLogText(n){var L=n?TMR.log.slice(-n):TMR.log;return L.map(function(x){return x.at.slice(11,23)+"  "+(x.kind==="in"?"TIMER ":x.kind==="sim"?"PRETEND ":"NOTE  ")+(x.kind==="note"?x.text:vis(x.text))}).join("\n")}
+  /* Work out lane times (or winner + margin) from one block of timer text. Handles common shapes:
+     "Lane 1 28.412  Lane 2 28.977", "L1=28.412 L2=28.977", "A 28.412 B 28.977", two times in a row,
+     and winner + differential like "LANE-2  0.062". */
+  function tmrParse(raw){var t=String(raw||"").replace(/\r/g,"\n"),num="(\\d{1,3}[.,]\\d{2,5})",out={};
+    var re=new RegExp("(?:lane|ln|trk|track|l)\\s*[-#:]?\\s*([12ab])\\b[^0-9\\n]{0,14}?"+num,"gi"),m;
+    while((m=re.exec(t))){var k=/[1a]/i.test(m[1])?1:2,v=+m[2].replace(",",".");if(v>=5&&v<200&&out["t"+k]==null)out["t"+k]=v}
+    if(out.t1==null||out.t2==null){var re2=new RegExp("(?:^|[\\s,;|])([12ab])\\s*[=:)\\-]?\\s*"+num,"gim");while((m=re2.exec(t))){var k2=/[1a]/i.test(m[1])?1:2,v2=+m[2].replace(",",".");if(v2>=5&&v2<200&&out["t"+k2]==null)out["t"+k2]=v2}}
+    if(out.t1!=null&&out.t2!=null)return {t1:out.t1,t2:out.t2};
+    var all=(t.match(/\d{1,3}[.,]\d{2,5}/g)||[]).map(function(x){return +x.replace(",",".")});
+    var big=all.filter(function(v){return v>=5&&v<200});
+    if(big.length>=2)return {t1:big[0],t2:big[1],guess:true};
+    var w=t.match(/(?:lane|ln|l)\s*[-#:]?\s*([12])\b/i),small=all.filter(function(v){return v<5});
+    if(w&&small.length)return {win:+w[1],margin:small[0]};
+    return null}
+  function tmrNice(r){if(!r)return "";return r.t1!=null?"Lane 1 "+r.t1.toFixed(3)+" · Lane 2 "+r.t2.toFixed(3):"Lane "+r.win+" wins by "+r.margin.toFixed(3)+"s"}
+  function tmrSet(el,v){if(!el)return;el.value=v;el.dispatchEvent(new Event("input",{bubbles:true}))}
+  function tmrApply(r){if(!r)return false;var x=r;if(TMR.cfg.swap)x=x.t1!=null?{t1:x.t2,t2:x.t1}:{win:x.win===1?2:1,margin:x.margin};
+    var t1=$("#rk-t1"),t2=$("#rk-t2"),mg=$("#rk-m");
+    if(t1&&t2){if(x.t1==null){TMR.note="The timer sent a winner and margin, but this bracket uses each lane’s time. Type the times, or set the bracket to differential timing.";return false}
+      tmrSet(t1,x.t1.toFixed(3));tmrSet(t2,x.t2.toFixed(3));TMR.note="Filled from the timer. Check them, then tap Post.";return true}
+    if(mg){var win=x.win,mar=x.margin;if(x.t1!=null){win=x.t1<=x.t2?1:2;mar=Math.abs(x.t1-x.t2)}
+      var rd=document.querySelector('input[name="rkpw"][value="'+win+'"]');if(rd){rd.checked=true;rd.dispatchEvent(new Event("change",{bubbles:true}))}
+      tmrSet(mg,mar.toFixed(3));TMR.note="Filled from the timer. Check them, then tap Post.";return true}
+    TMR.note="Got a reading, but no heat is waiting for times. It’s kept below: tap “Use these times” once the heat is on the ramp.";return false}
+  function tmrBlock(text,kind){var r=tmrParse(text);TMR.last={at:new Date().toISOString(),text:text,r:r,used:false};
+    if(!r){TMR.note="The timer sent something we couldn’t read as times. It’s saved in the listen log.";tmrDraw();return}
+    if(TMR.cfg.auto)TMR.last.used=tmrApply(r);else TMR.note="New reading. Tap “Use these times” to fill them in.";
+    tmrDraw();if(TMR.last.used)toast("Times from the timer: "+tmrNice(TMR.cfg.swap&&r.t1!=null?{t1:r.t2,t2:r.t1}:r))}
+  function tmrFeed(chunk,kind){tmrLog(kind||"in",chunk);TMR.buf+=chunk;clearTimeout(TMR.timer);
+    TMR.timer=setTimeout(function(){var b=TMR.buf;TMR.buf="";if(b.trim())tmrBlock(b,kind)},kind==="sim"?50:700)}
+  function tmrConnect(){if(!("serial" in navigator)){toast("Use Chrome or Edge on a laptop to connect a timer.");return}
+    navigator.serial.requestPort().then(function(port){TMR.port=port;return port.open({baudRate:+TMR.cfg.baud||9600,dataBits:8,stopBits:1,parity:"none",flowControl:"none"}).then(function(){
+      TMR.on=true;TMR.note="Connected. Times will fill in after each run.";tmrLog("note","Connected at "+TMR.cfg.baud+" baud");tmrDraw();tmrRead()})}).catch(function(e){
+      if(e&&e.name==="NotFoundError")return;TMR.note="Couldn’t open the timer: "+(e&&e.message||e)+". Check the cable and the speed setting.";tmrLog("note",TMR.note);tmrDraw()})}
+  function tmrRead(){var port=TMR.port;if(!port||!port.readable)return;var dec=new TextDecoder();TMR.reader=port.readable.getReader();
+    (function pump(){TMR.reader.read().then(function(x){if(x.done){TMR.reader.releaseLock();return}if(x.value)tmrFeed(dec.decode(x.value,{stream:true}),"in");pump()}).catch(function(e){
+      tmrLog("note","Connection lost: "+(e&&e.message||e));TMR.on=false;TMR.note="The timer disconnected. Check the cable, then Connect again.";tmrDraw()})})()}
+  function tmrDisconnect(){var p=TMR.port;TMR.on=false;var done=function(){if(p)p.close().catch(function(){});TMR.port=null;TMR.note="Disconnected.";tmrLog("note","Disconnected");tmrDraw()};
+    if(TMR.reader)TMR.reader.cancel().then(done,done);else done()}
+  if("serial" in navigator&&!window.__tmrDisc){window.__tmrDisc=1;navigator.serial.addEventListener("disconnect",function(e){if(TMR.port&&e.target===TMR.port){TMR.on=false;TMR.port=null;TMR.note="The timer was unplugged.";tmrLog("note","Unplugged");tmrDraw()}})}
+  function tmrPretend(){var a=27+Math.random()*2.5,b=a+(Math.random()-.5)*0.9,fmt=Math.floor(Math.random()*3);
+    var txt=fmt===0?"LANE 1  "+a.toFixed(3)+"\r\nLANE 2  "+b.toFixed(3)+"\r\n":fmt===1?"L1="+a.toFixed(3)+" L2="+b.toFixed(3)+"\r\n":"RUN  A "+a.toFixed(3)+"  B "+b.toFixed(3)+"\r\n";tmrFeed(txt,"sim")}
+  function tmrDraw(){var box=$("#tmrBox");if(!box)return;var sup="serial" in navigator,L=TMR.last;
+    box.innerHTML='<div class="tmr-st'+(TMR.on?' on':'')+'"><i aria-hidden="true"></i><b>'+(TMR.on?'Timer connected':'Timer not connected')+'</b></div>'+
+      (TMR.note?'<p class="tmr-note" role="status">'+esc(TMR.note)+'</p>':'')+
+      (L?'<div class="tmr-last"><small>Last reading · '+esc(new Date(L.at).toLocaleTimeString([], {hour:"numeric",minute:"2-digit",second:"2-digit"}))+'</small><b>'+(L.r?esc(tmrNice(TMR.cfg.swap&&L.r.t1!=null?{t1:L.r.t2,t2:L.r.t1}:L.r)):'Couldn’t read times')+'</b>'+(L.r&&L.r.guess?'<small>Guessed from the first two times in the message. Check the lane order.</small>':'')+(L.r?'<button class="mini" type="button" id="tmrUse">Use these times</button>':'')+'</div>':'')+
+      '<div class="row">'+(sup?(TMR.on?'<button class="mini" type="button" id="tmrOff">Disconnect</button>':'<button class="mini solid" type="button" id="tmrOn">Connect timer</button>'):'')+((window.FR_REHEARSAL||window.FR_TEST)?'<button class="mini" type="button" id="tmrSim">Pretend run</button>':'')+'</div>'+
+      (sup?'':'<p class="rk-fine">To connect the real timer, open Race control in Chrome or Edge on a Windows, Mac or Chromebook laptop. Phones and iPads can’t connect to it.</p>')+
+      '<details class="tmr-more"'+(TMR.open?' open':'')+'><summary>Timer settings and listen log</summary>'+
+        '<label class="f">Connection speed (baud)<select id="tmrBaud">'+[1200,2400,4800,9600,19200,38400,57600,115200].map(function(b){return '<option'+(+TMR.cfg.baud===b?' selected':'')+'>'+b+'</option>'}).join("")+'</select></label>'+
+        '<label class="rk-radio"><input type="checkbox" id="tmrAuto"'+(TMR.cfg.auto?' checked':'')+'> Fill the times in automatically</label>'+
+        '<label class="rk-radio"><input type="checkbox" id="tmrSwap"'+(TMR.cfg.swap?' checked':'')+'> The timer’s lanes are wired the other way round</label>'+
+        '<p class="rk-fine"><b>Listen log:</b> everything the timer sends is saved here, on this laptop. Run a few test cars, then download it and send it to us so the format can be matched exactly.</p>'+
+        '<pre class="tmr-log" id="tmrLog">'+esc(tmrLogText(40))+'</pre>'+
+        '<div class="row"><button class="mini" type="button" id="tmrDl">Download log</button><button class="mini" type="button" id="tmrCp">Copy log</button><button class="mini red" type="button" id="tmrClr">Clear log</button></div>'+
+        '<label class="f">Try a reading<textarea id="tmrTry" rows="2" placeholder="Paste a line the timer sent, e.g. L1 28.412 L2 28.977"></textarea></label><button class="mini" type="button" id="tmrTryGo">Read it</button><p class="rk-fine" id="tmrTryOut"></p>'+
+      '</details>';
+    var b=function(id,fn){var e=$("#"+id);if(e)e.onclick=fn};
+    b("tmrOn",tmrConnect);b("tmrOff",tmrDisconnect);b("tmrSim",tmrPretend);
+    b("tmrUse",function(){if(TMR.last&&TMR.last.r){TMR.last.used=tmrApply(TMR.last.r);tmrDraw()}});
+    b("tmrDl",function(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([tmrLogText(0)||"(empty)"],{type:"text/plain"}));a.download="timer-log-"+new Date().toISOString().slice(0,16).replace(/[:T]/g,"-")+".txt";document.body.appendChild(a);a.click();setTimeout(function(){a.remove()},500)});
+    b("tmrCp",function(){var t=tmrLogText(0);(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){toast("Listen log copied")},function(){toast("Couldn’t copy. Use Download log.")})});
+    b("tmrClr",function(){if(this.textContent!=="Click again to clear"){this.textContent="Click again to clear";return}TMR.log=[];try{localStorage.removeItem("fr-timer-log")}catch(e){}tmrDraw()});
+    b("tmrTryGo",function(){var r=tmrParse($("#tmrTry").value);$("#tmrTryOut").textContent=r?"Read as: "+tmrNice(r)+(r.guess?" (guessed from the first two times)":""):"Couldn’t find times in that."});
+    var d=$(".tmr-more",box);if(d)d.ontoggle=function(){TMR.open=d.open};
+    var bd=$("#tmrBaud");if(bd)bd.onchange=function(){TMR.cfg.baud=+bd.value;tmrSaveCfg();if(TMR.on)TMR.note="Speed saved. Disconnect and connect again to use it.";tmrDraw()};
+    var au=$("#tmrAuto");if(au)au.onchange=function(){TMR.cfg.auto=au.checked;tmrSaveCfg()};
+    var sw=$("#tmrSwap");if(sw)sw.onchange=function(){TMR.cfg.swap=sw.checked;tmrSaveCfg();tmrDraw()}}
+  window.FR_TIMER={parse:tmrParse,feed:tmrFeed};
   /* Side column: coming up + announcement (under the live preview) */
   function rkSide(C){var S2=$("#rkSide"),n=rkNames(C),FRB=window.FRB,st=C.st,cur=C.cur;
     var up=C.heats.filter(function(h){return !FRB.isBye(h)&&h.status!=="finished"&&h!==cur}),i0=cur?C.heats.indexOf(cur):-1;
     up=up.filter(function(h){return C.heats.indexOf(h)>i0}).concat(up.filter(function(h){return C.heats.indexOf(h)<i0})).slice(0,4);
-    S2.innerHTML='<section class="rk-card"><h3>Coming up</h3>'+(up.length?'<ol class="rk-list">'+up.map(function(h){return '<li><div><b>Heat '+C.N[h.id]+'</b> <small>'+n.title(h)+'</small><br>'+n.who(h,"a")+' vs '+n.who(h,"b")+'</div>'+(rkReady(h)?'<button class="mini" type="button" data-pick="'+h.id+'">Run now</button>':'')+'</li>'}).join("")+'</ol><button class="rk-link" type="button" data-tab2="order">Change the running order</button>':'<p class="rk-fine">Nothing left in the running order.</p>')+'</section>'+
+    S2.innerHTML='<section class="rk-card tmr-card"><h3>Finish-line timer</h3><div id="tmrBox"></div></section><section class="rk-card"><h3>Coming up</h3>'+(up.length?'<ol class="rk-list">'+up.map(function(h){return '<li><div><b>Heat '+C.N[h.id]+'</b> <small>'+n.title(h)+'</small><br>'+n.who(h,"a")+' vs '+n.who(h,"b")+'</div>'+(rkReady(h)?'<button class="mini" type="button" data-pick="'+h.id+'">Run now</button>':'')+'</li>'}).join("")+'</ol><button class="rk-link" type="button" data-tab2="order">Change the running order</button>':'<p class="rk-fine">Nothing left in the running order.</p>')+'</section>'+
       '<section class="rk-card"><h3>Announcement</h3><label class="f" for="rk-ban">Banner on the live page<input type="text" id="rk-ban" maxlength="160" value="'+esc(st.banner||"")+'"></label>'+
         '<div class="rk-chips">'+[["Short break","Short break. Racing resumes soon."],["Lunch","Lunch break. Racing resumes at 12:30."],["Track check","Track check in progress."],["Awards","Awards at the finish line after the last heat."]].map(function(t){return '<button class="mini" type="button" data-ban="'+esc(t[1])+'">'+t[0]+'</button>'}).join("")+'</div>'+
         '<div class="row"><button class="mini solid" type="button" id="rkBan">Post</button><button class="mini" type="button" id="rkBanX">Clear</button></div></section>';
@@ -10201,7 +10295,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     $$("[data-tab2]",S2).forEach(function(b){b.onclick=function(){RK.tab=b.getAttribute("data-tab2");renderRK(true)}});
     $$("[data-ban]",S2).forEach(function(b){b.onclick=function(){$("#rk-ban").value=b.getAttribute("data-ban");$("#rk-ban").focus()}});
     $("#rkBan").onclick=function(){rkState({banner:$("#rk-ban").value.trim()||null},"Banner posted")};
-    $("#rkBanX").onclick=function(){rkState({banner:null},"Banner cleared")};
+    $("#rkBanX").onclick=function(){rkState({banner:null},"Banner cleared")};;tmrDraw()
   }
   /* Brackets tab: built on race morning with the bingo roller */
   function rkBrackets(C){var FRB=window.FRB,M=$("#rkMain"),R=C.R,racers=C.racers,D=RK.bd,h="";
