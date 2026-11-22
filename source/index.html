@@ -10230,14 +10230,16 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
     var all=(t.match(/\d{1,3}[.,]\d{2,5}/g)||[]).map(function(x){return +x.replace(",",".")});
     var big=all.filter(function(v){return v>=5&&v<200});
     if(big.length>=2)return {t1:big[0],t2:big[1],guess:true};
-    var w=t.match(/(?:lane|ln|l)\s*[-#:]?\s*([12])\b/i),small=all.filter(function(v){return v<5});
-    if(w&&small.length)return {win:+w[1],margin:small[0]};
+    var smalls=(t.match(/(?:^|[^\d])(\d?[.,]\d{2,5})(?!\d)/g)||[]).map(function(x){return +x.replace(/^[^\d.,]*/,"").replace(",",".")}).filter(function(v){return v<5});
+    var w=t.match(/(?:lane|ln|win(?:ner|s)?|trk|track|l)\s*[-#:]?\s*([12ab])\b/i);
+    if(/\b(tie|dead\s*heat|even)\b/i.test(t)&&!w)return {win:1,margin:0};
+    if(w&&smalls.length)return {win:/[1a]/i.test(w[1])?1:2,margin:smalls[0]};
     return null}
   function tmrNice(r){if(!r)return "";return r.t1!=null?"Lane 1 "+r.t1.toFixed(3)+" · Lane 2 "+r.t2.toFixed(3):"Lane "+r.win+" wins by "+r.margin.toFixed(3)+"s"}
   function tmrSet(el,v){if(!el)return;el.value=v;el.dispatchEvent(new Event("input",{bubbles:true}))}
   function tmrApply(r){if(!r)return false;var x=r;if(TMR.cfg.swap)x=x.t1!=null?{t1:x.t2,t2:x.t1}:{win:x.win===1?2:1,margin:x.margin};
     var t1=$("#rk-t1"),t2=$("#rk-t2"),mg=$("#rk-m");
-    if(t1&&t2){if(x.t1==null){TMR.note="The timer sent a winner and margin, but this bracket uses each lane’s time. Type the times, or set the bracket to differential timing.";return false}
+    if(t1&&t2){if(x.t1==null){TMR.note="The timer sent a winner and margin, but this bracket is set to elapsed times. Change it to Differential in Race control → Brackets → Timing.";return false}
       tmrSet(t1,x.t1.toFixed(3));tmrSet(t2,x.t2.toFixed(3));TMR.note="Filled from the timer. Check them, then tap Post.";return true}
     if(mg){var win=x.win,mar=x.margin;if(x.t1!=null){win=x.t1<=x.t2?1:2;mar=Math.abs(x.t1-x.t2)}
       var rd=document.querySelector('input[name="rkpw"][value="'+win+'"]');if(rd){rd.checked=true;rd.dispatchEvent(new Event("change",{bubbles:true}))}
@@ -10259,7 +10261,9 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
   function tmrDisconnect(){var p=TMR.port;TMR.on=false;var done=function(){if(p)p.close().catch(function(){});TMR.port=null;TMR.note="Disconnected.";tmrLog("note","Disconnected");tmrDraw()};
     if(TMR.reader)TMR.reader.cancel().then(done,done);else done()}
   if("serial" in navigator&&!window.__tmrDisc){window.__tmrDisc=1;navigator.serial.addEventListener("disconnect",function(e){if(TMR.port&&e.target===TMR.port){TMR.on=false;TMR.port=null;TMR.note="The timer was unplugged.";tmrLog("note","Unplugged");tmrDraw()}})}
-  function tmrPretend(){var a=27+Math.random()*2.5,b=a+(Math.random()-.5)*0.9,fmt=Math.floor(Math.random()*3);
+  function tmrPretend(){if($("#rk-m")){var w=Math.random()<.5?1:2,m=(Math.random()*0.3+0.002).toFixed(3),f2=Math.floor(Math.random()*3);
+      tmrFeed(f2===0?"LANE-"+w+"\r\n  "+m+"\r\n":f2===1?"WIN "+w+"  ."+m.split(".")[1]+"\r\n":"L"+w+" +"+m+"\r\n","sim");return}
+    var a=27+Math.random()*2.5,b=a+(Math.random()-.5)*0.9,fmt=Math.floor(Math.random()*3);
     var txt=fmt===0?"LANE 1  "+a.toFixed(3)+"\r\nLANE 2  "+b.toFixed(3)+"\r\n":fmt===1?"L1="+a.toFixed(3)+" L2="+b.toFixed(3)+"\r\n":"RUN  A "+a.toFixed(3)+"  B "+b.toFixed(3)+"\r\n";tmrFeed(txt,"sim")}
   function tmrDraw(){var box=$("#tmrBox");if(!box)return;var sup="serial" in navigator,L=TMR.last;
     box.innerHTML='<div class="tmr-st'+(TMR.on?' on':'')+'"><i aria-hidden="true"></i><b>'+(TMR.on?'Timer connected':'Timer not connected')+'</b></div>'+
@@ -10317,7 +10321,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<label class="f" for="bk-kind">Type<select id="bk-kind"><option value="double">Double elimination (out after 2 losses)</option><option value="single">Single elimination (out after 1 loss)</option></select></label>'+
           '<label class="f" for="bk-cars">Cars racing<input type="number" id="bk-cars" min="2" max="64" value="8"></label><label class="f" for="bk-byes">Byes<input type="number" id="bk-byes" min="0" max="32" value="0"></label>'+
           '<label class="f" for="bk-swap">Wheel swap (Rule A-12.01)<select id="bk-swap">'+SWAPS.map(function(w){return '<option>'+w+'</option>'}).join("")+'</select></label>'+
-          '<label class="f" for="bk-timing">Timer<select id="bk-timing"><option value="elapsed">Elapsed times for each car</option><option value="differential">Differential (winner and margin only)</option></select></label>'+
+          '<label class="f" for="bk-timing">Timer<select id="bk-timing"><option value="differential" selected>Differential (winner and margin only)</option><option value="elapsed">Elapsed times for each car</option></select></label>'+
           '<label class="f" for="bk-date">Race date<input type="date" id="bk-date" value="'+new Date().toISOString().slice(0,10)+'"></label></div>'+
           '<p id="bkCheck" class="rk-check"></p><button class="rk-go" type="button" id="bkNext">Next: draw the cars</button></section>';
       M.innerHTML=h;
