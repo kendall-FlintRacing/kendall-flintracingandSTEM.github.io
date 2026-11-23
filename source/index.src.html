@@ -10219,7 +10219,7 @@ var Q=M.index,L=M.QRErrorCorrectLevel;return function(text){var q=new Q(-1,L.M);
           '<label class="f" for="bk-kind">Type<select id="bk-kind"><option value="double">Double elimination (out after 2 losses)</option><option value="single">Single elimination (out after 1 loss)</option></select></label>'+
           '<label class="f" for="bk-cars">Cars racing<input type="number" id="bk-cars" min="2" max="64" value="8"></label><label class="f" for="bk-byes">Byes<input type="number" id="bk-byes" min="0" max="32" value="0"></label>'+
           '<label class="f" for="bk-swap">Wheel swap (Rule A-12.01)<select id="bk-swap">'+SWAPS.map(function(w){return '<option>'+w+'</option>'}).join("")+'</select></label>'+
-          '<label class="f" for="bk-timing">Timer<select id="bk-timing"><option value="elapsed">Elapsed times for each car</option><option value="differential">Differential (winner and margin only)</option></select></label>'+
+          '<label class="f" for="bk-timing">Timer<select id="bk-timing"><option value="differential" selected>Differential (winner and margin only)</option><option value="elapsed">Elapsed times for each car</option></select></label>'+
           '<label class="f" for="bk-date">Race date<input type="date" id="bk-date" value="'+new Date().toISOString().slice(0,10)+'"></label></div>'+
           '<p id="bkCheck" class="rk-check"></p><button class="rk-go" type="button" id="bkNext">Next: draw the cars</button></section>';
       M.innerHTML=h;

@@ -62,7 +62,7 @@
         if(!o.draw)return;
         var n=ids.length,size=n<=4?4:n<=8?8:n<=16?16:n<=32?32:64,pairs=[];for(var j=0;j<size/2;j++)pairs.push([ids[j]||null,null]);
         ids.slice(size/2).forEach(function(id,j){pairs[j][1]=id});
-        var b=F.build({name:d.name,kind:d.kind,cars:n,byes:size-n,wheel_swap:"2/4/2 Progressive",timing:"elapsed",race_date:day,pairs:pairs});b.bracket.sort_order=B.length+1;B.push(b.bracket);H=H.concat(b.heats)});
+        var b=F.build({name:d.name,kind:d.kind,cars:n,byes:size-n,wheel_swap:"2/4/2 Progressive",timing:o.timing||"differential",race_date:day,pairs:pairs});b.bracket.sort_order=B.length+1;B.push(b.bracket);H=H.concat(b.heats)});
       if(H.length){F.order(H,B,"alt");H.sort(function(x,y){return x.sort_order-y.sort_order});H.forEach(function(h){h.updated_at=now})}
       T.race_racers=R;T.race_ads=A;T.race_brackets=B;T.race_heats=H;T.shoutouts=[];
       T.race_heat_ads=A.length?H.filter(function(h){return !F.isBye(h)}).map(function(h,i){return{heat_id:h.id,ad_id:A[i%A.length].id}}):[];
@@ -79,6 +79,7 @@
         '<label><select data-k="'+i+'"><option value="single"'+(d[2]==="single"?" selected":"")+'>Single elimination</option><option value="double"'+(d[2]==="double"?" selected":"")+'>Double elimination</option></select></label></fieldset>'}).join("")+
       '<fieldset class="reh-div"><legend>Sponsors &amp; ads</legend><label class="reh-r"><input type="radio" name="rsp" value="sample" checked> Sample sponsors <input type="number" min="0" max="10" value="6" id="rehNS"></label>'+
       '<label class="reh-r"><input type="radio" name="rsp" value="mine"> Use my Sponsors &amp; ads library</label></fieldset>'+
+      '<label class="reh-r">Timer <select id="rehTiming"><option value="differential" selected>Differential (winner and margin only)</option><option value="elapsed">Elapsed times for each car</option></select></label>'+
       '<label class="reh-r"><input type="checkbox" id="rehDraw" checked> Draw the brackets for me (untick to practice the bingo draw in Race control)</label>'+
       '<p class="reh-msg" role="status"></p><div class="row"><button class="btn deep" type="submit">Fill with fake racers</button><button class="btn" type="button" id="rehReal">Use my real racers instead</button></div></form>');
     row.appendChild(f);
@@ -86,7 +87,7 @@
     f.onsubmit=function(e){e.preventDefault();var divs=["Stock","Super Stock","Masters"].map(function(nm,i){var n=Math.max(0,Math.min(32,parseInt(f.querySelector('[data-n="'+i+'"]').value,10)||0));return{name:nm,n:n,kind:f.querySelector('[data-k="'+i+'"]').value}});
       var tot=divs.reduce(function(t,d){return t+(d.n>=2?d.n:0)},0);
       if(!tot){f.querySelector(".reh-msg").textContent="Give at least one division 2 or more cars.";return}
-      fillSample({divs:divs,sponsors:f.querySelector('input[name=rsp]:checked').value,nSpons:Math.max(0,Math.min(10,parseInt(f.querySelector("#rehNS").value,10)||0)),draw:f.querySelector("#rehDraw").checked})}}
+      fillSample({divs:divs,sponsors:f.querySelector('input[name=rsp]:checked').value,nSpons:Math.max(0,Math.min(10,parseInt(f.querySelector("#rehNS").value,10)||0)),draw:f.querySelector("#rehDraw").checked,timing:f.querySelector("#rehTiming").value})}}
   function choose(){showForm()}
   function start(){
     var T=null;try{T=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
@@ -118,7 +119,7 @@
   function stopAuto(msg){clearInterval(AUTO);AUTO=null;var b=document.getElementById("rehRun");if(b)b.textContent="▶ Auto-run the race";if(msg)say(msg)}
   function rnd(){return Math.round((27+Math.random()*3)*1000)/1000}
   function tick(){var db=window.FR_DB,FRB=window.FRB,FRSL=window.FRSL;if(!db||!FRB||!FRSL)return;
-    Promise.all([db.from("race_state").select("*").eq("id",1).maybeSingle(),db.from("race_heats").select("*").order("sort_order"),db.from("race_show").select("*").eq("id",1).maybeSingle(),db.from("race_lineup").select("*").order("position")]).then(function(r){
+    Promise.all([db.from("race_state").select("*").eq("id",1).maybeSingle(),db.from("race_heats").select("*").order("sort_order"),db.from("race_show").select("*").eq("id",1).maybeSingle(),db.from("race_lineup").select("*").order("position"),db.from("race_brackets").select("*")]).then(function(r){
       var st=r[0].data||{},H=r[1].data||[],sh=r[2].data||{},L=r[3].data||[],now=new Date().toISOString();
       var real=H.filter(function(h){return !FRB.isBye(h)});
       if(!real.length){stopAuto("Build the brackets first: Race control → Brackets, then do the bingo draw.");return}
@@ -131,12 +132,13 @@
       if(!cur||cur.status==="finished"){var ready=real.filter(function(h){return h.status!=="finished"&&h.lane1&&h.lane2});
         if(!ready.length){if(!real.some(function(h){return h.status!=="finished"}))stopAuto("That’s the whole race. Press Start over to run it again.");return}
         var nx=ready[0];up(nx.id,{status:"staging",run:1}).then(function(){return db.from("race_state").update({current_heat:nx.id,updated_at:now}).eq("id",1).then(noop)});return}
-      var s=cur.status||"upcoming";
+      var s=cur.status||"upcoming",BK=(r[4].data||[]).filter(function(b){return b.id===cur.bracket_id})[0],DIFF=!!(BK&&BK.timing==="differential"),dif=function(){var d=Math.round((Math.random()-.5)*600)/1000;return d===0?0.004:d};
       if(s==="upcoming"){up(cur.id,{status:"staging"});return}
       if(s==="staging"){up(cur.id,{status:"set"});return}
       if(s==="set"){up(cur.id,{status:"racing"});return}
+      if((cur.run||1)===1&&DIFF){up(cur.id,{diff1:dif(),run:2,status:"staging",started_at:cur.started_at||now});return}
       if((cur.run||1)===1){var a=rnd(),b=rnd();up(cur.id,{a_time1:a,b_time1:b,diff1:Math.round((b-a)*1000)/1000,run:2,status:"staging",started_at:cur.started_at||now});return}
-      var trial=JSON.parse(JSON.stringify(H)),res=FRB.post(trial,cur.id,{a1:cur.a_time1,b1:cur.b_time1,a2:rnd(),b2:rnd()});
+      var trial=JSON.parse(JSON.stringify(H)),res=FRB.post(trial,cur.id,DIFF?{d1:cur.diff1,d2:dif()}:{a1:cur.a_time1,b1:cur.b_time1,a2:rnd(),b2:rnd()});
       if(res.error){stopAuto("Auto-run stopped: "+res.error);return}
       Promise.all(res.changed.map(function(h){var row=FRB.row(h);row.updated_at=now;return db.from("race_heats").update(row).eq("id",h.id)})).then(function(){
         var N=FRB.numbers(trial),hn=N[cur.id],left=trial.some(function(x){return !FRB.isBye(x)&&x.status!=="finished"});
